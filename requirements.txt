@@ -1,0 +1,13 @@
+pydantic>=2.0.0
+pyyaml
+httpx
+beautifulsoup4
+fastapi
+uvicorn
+rich
+langchain
+langchain-core
+langchain-openai
+langchain-anthropic
+langchain-community
+langgraph

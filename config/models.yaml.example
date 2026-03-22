@@ -1,0 +1,38 @@
+llm_providers:
+  primary-provider:
+    base_url: https://api.example.com/v1
+    api_key_env: YOUR_API_KEY_ENV_VAR
+  # anthropic:
+  #   base_url: https://api.anthropic.com
+  #   api_key_env: ANTHROPIC_API_KEY
+  # deepseek:
+  #   base_url: https://api.deepseek.com
+  #   api_key_env: DEEPSEEK_API_KEY
+
+llm_models:
+  planner_default:
+    provider: primary-provider
+    model: your-planner-model-name
+  coder_default:
+    provider: primary-provider
+    model: your-coder-model-name
+  research_default:
+    provider: primary-provider
+    model: your-research-model-name
+
+agent_model_bindings:
+  zhongshu_planner:
+    primary: planner_default
+    fallbacks: [coder_default]
+  shangshu_orchestrator:
+    primary: planner_default
+    fallbacks: [coder_default]
+  hubu_research:
+    primary: research_default
+    fallbacks: [planner_default]
+  bingbu_coder:
+    primary: coder_default
+    fallbacks: [planner_default]
+  xingbu_reviewer:
+    primary: planner_default
+    fallbacks: [coder_default]
