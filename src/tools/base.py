@@ -142,45 +142,28 @@ def run_baidu_search_skill(query: str) -> str:
 
 def run_agent_browser(command: str) -> str:
     """Execute agent-browser CLI command for advanced browser automation.
-    If not installed, it will automatically attempt to install it.
+
+    This function now uses the safe command executor to prevent shell injection.
+    The command string is parsed into arguments using shlex.split().
+
+    Args:
+        command: Command string to pass to agent-browser (e.g., "--help")
+
+    Returns:
+        Output from agent-browser execution
+
+    Security:
+        - Uses whitelist-based command execution
+        - Never uses shell=True
+        - Shell injection characters are treated as literal text
     """
-    import subprocess
-    import shutil
     import shlex
+    from .command_executor import run_agent_browser_safe
 
-    # Check if agent-browser is installed
-    if not shutil.which("agent-browser"):
-        if not shutil.which("npm"):
-            return "Error: npm is not installed. Please install Node.js and npm first to use agent-browser."
-        
-        # Install globally
-        try:
-            subprocess.run(["npm", "install", "-g", "agent-browser"], check=True, capture_output=True, text=True)
-            # Run the post-install setup to download Chromium
-            subprocess.run(["agent-browser", "install"], check=True, capture_output=True, text=True)
-        except subprocess.CalledProcessError as e:
-            # Installation failed, fallback to npx will be used below
-            pass
-
-    # Determine executable (fallback to npx if global install failed)
-    executable = "agent-browser" if shutil.which("agent-browser") else "npx agent-browser"
-    
-    # We must run via shell to support command chaining (&&)
-    # Also fix permission issues by redirecting HOME to /tmp and symlinking playwright cache
-    full_cmd = f"mkdir -p /tmp/Library/Caches && ln -sf /Users/wuliang/Library/Caches/ms-playwright /tmp/Library/Caches/ms-playwright && export HOME=/tmp && {executable} {command}"
-        
-    try:
-        result = subprocess.run(full_cmd, shell=True, capture_output=True, text=True, timeout=60)
-        output = result.stdout
-        if result.stderr:
-            output += "\n" + result.stderr
-        
-        # Limit output size to prevent context overflow
-        if len(output) > 5000:
-            return output[:5000] + "\n... [TRUNCATED]"
-        return output if output else "Command executed successfully with no output."
-    except Exception as e:
-        return f"Error executing agent-browser: {str(e)}"
+    # Parse command string into args safely
+    # shlex.split handles quoting correctly
+    command_args = shlex.split(command) if command else []
+    return run_agent_browser_safe(command_args)
 
 # 3.4.5 Content Compression
 def summarize_content(text: str, max_length: int = 1000) -> str:
