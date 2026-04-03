@@ -10,9 +10,10 @@
 
 **Phase 1: 安全漏洞修复 (CRITICAL)**
 
-- Status: Not Started
+- Status: In Progress
 - Goal: 修复所有 CRITICAL 安全漏洞，确保系统基础安全
-- Next Step: `/gsd:plan-phase 1`
+- Wave 0: Test Infrastructure - COMPLETE
+- Next Step: Plan 01 - 修复 Shell 注入漏洞 (SEC-01)
 
 ---
 
@@ -29,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
-| 1 | 安全漏洞修复 | ○ Pending | 0/5 |
+| 1 | 安全漏洞修复 | ◆ In Progress | 1/6 |
 | 2 | 预算系统实现 | ○ Pending | 0/4 |
 | 3 | Human-in-the-loop | ○ Pending | 0/5 |
 | 4 | 六部 Agent 完善 | ○ Pending | 0/5 |
@@ -51,6 +52,9 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 | 优先修复安全漏洞 | CRITICAL 问题阻塞生产部署 | Phase 1 |
 | 预算系统先于六部 | 防止资源失控是基础能力 | Phase 2 |
 | 兵部 Agent 与 HIL 同阶段 | 审批流程需要执行 Agent 验证 | Phase 3 |
+| 使用 pytest 作为测试框架 | 成熟的 Python 测试框架，支持 fixtures | Phase 1 Plan 00 |
+| 测试按安全需求组织 | 便于追踪 SEC-01 到 SEC-05 的测试覆盖 | Phase 1 Plan 00 |
+| Fixtures 使用 skip 处理缺失模块 | 允许在模块实现前创建测试基础设施 | Phase 1 Plan 00 |
 
 ### Learnings
 
@@ -72,3 +76,11 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 ---
 
 *Last updated: 2026-04-03*
+
+---
+
+## Session History
+
+| Session | Date | Completed |
+|---------|------|-----------|
+| Phase 1 Plan 00 | 2026-04-03 | Test infrastructure setup |
