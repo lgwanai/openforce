@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Security (CRITICAL)
 
-- [ ] **SEC-01**: Shell 注入漏洞修复 - 移除 shell=True，使用参数列表和白名单校验
-- [x] **SEC-02**: 审批令牌安全 - 使用 HMAC + 密钥生成签名令牌
+- [x] **SEC-01**: Shell 注入漏洞修复 - 移除 shell=True，使用参数列表和白名单校验
+- [ ] **SEC-02**: 审批令牌安全 - 使用 HMAC + 密钥生成签名令牌
 - [ ] **SEC-03**: 移除硬编码路径 - 外部工具路径使用配置文件或环境变量
 - [ ] **SEC-04**: SSRF 防护 - fetch_webpage 添加 URL 协议和主机名校验
 - [ ] **SEC-05**: 污点追踪实现 - TaintEngine 实现真正的污点传播和校验逻辑
@@ -85,8 +85,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SEC-01 | Phase 1 | Pending |
-| SEC-02 | Phase 1 | Complete |
+| SEC-01 | Phase 1 | Complete |
+| SEC-02 | Phase 1 | Pending |
 | SEC-03 | Phase 1 | Pending |
 | SEC-04 | Phase 1 | Pending |
 | SEC-05 | Phase 1 | Pending |
