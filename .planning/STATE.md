@@ -13,7 +13,8 @@
 - Status: In Progress
 - Goal: 修复所有 CRITICAL 安全漏洞，确保系统基础安全
 - Wave 0: Test Infrastructure - COMPLETE
-- Next Step: Plan 01 - 修复 Shell 注入漏洞 (SEC-01)
+- Wave 1: In Progress
+- Next Step: Plan 03 - 移除硬编码路径 (SEC-03)
 
 ---
 
@@ -30,11 +31,11 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
-| 1 | 安全漏洞修复 | ◆ In Progress | 1/6 |
+| 1 | 安全漏洞修复 | ◆ In Progress | 2/6 |
 | 2 | 预算系统实现 | ○ Pending | 0/4 |
 | 3 | Human-in-the-loop | ○ Pending | 0/5 |
 | 4 | 六部 Agent 完善 | ○ Pending | 0/5 |
-| 5 | 编排机制完善 | ○ Pending | 0/4 |
+| 5 | 编编机制完善 | ○ Pending | 0/4 |
 | 6 | 代码质量提升 | ○ Pending | 0/4 |
 
 ---
@@ -55,6 +56,8 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 | 使用 pytest 作为测试框架 | 成熟的 Python 测试框架，支持 fixtures | Phase 1 Plan 00 |
 | 测试按安全需求组织 | 便于追踪 SEC-01 到 SEC-05 的测试覆盖 | Phase 1 Plan 00 |
 | Fixtures 使用 skip 处理缺失模块 | 允许在模块实现前创建测试基础设施 | Phase 1 Plan 00 |
+| HMAC-SHA256 用于审批令牌签名 | 防止令牌伪造，使用密钥签名 | Phase 1 Plan 02 |
+| hmac.compare_digest 用于令牌验证 | 防止时序攻击 | Phase 1 Plan 02 |
 
 ### Learnings
 
@@ -84,3 +87,4 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 | Session | Date | Completed |
 |---------|------|-----------|
 | Phase 1 Plan 00 | 2026-04-03 | Test infrastructure setup |
+| Phase 1 Plan 02 | 2026-04-03 | HMAC approval token security fix |
