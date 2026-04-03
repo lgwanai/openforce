@@ -20,7 +20,8 @@ openforce.db
 
 # Test files and directories
 test/
-test_*.py
+# Note: test_*.py pattern removed to allow tests/ directory to be tracked
+# Individual test cache directories can be added if needed
 
 # Documentation drafts
 idea.md
