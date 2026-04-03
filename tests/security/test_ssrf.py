@@ -269,3 +269,52 @@ class TestFetchWebpageSafe:
             fetch_webpage_safe('https://example.com')
             call_kwargs = mock_get.call_args[1]
             assert call_kwargs['follow_redirects'] is False
+
+
+class TestFetchWebpageIntegration:
+    """Tests for fetch_webpage function in src.tools.base using SSRF protection."""
+
+    def test_fetch_webpage_uses_ssrf_protection(self):
+        """Verify fetch_webpage uses SSRF protection via fetch_webpage_safe."""
+        from src.tools.base import fetch_webpage
+
+        # Localhost should be blocked
+        result = fetch_webpage('http://localhost:8080/admin')
+        assert 'SSRF blocked' in result
+
+    def test_fetch_webpage_file_scheme_blocked(self):
+        """Verify fetch_webpage blocks file:// scheme."""
+        from src.tools.base import fetch_webpage
+
+        result = fetch_webpage('file:///etc/passwd')
+        assert 'SSRF blocked' in result
+
+    def test_fetch_webpage_valid_url_works(self):
+        """Verify fetch_webpage works for valid public URLs."""
+        from src.tools.base import fetch_webpage
+
+        mock_response = MagicMock()
+        mock_response.text = '<html><body>Test Content</body></html>'
+        mock_response.raise_for_status = MagicMock()
+
+        with patch('socket.getaddrinfo') as mock_getaddrinfo, \
+             patch('httpx.get') as mock_get:
+            mock_getaddrinfo.return_value = [
+                (2, 1, 6, '', ('8.8.8.8', 443))
+            ]
+            mock_get.return_value = mock_response
+
+            result = fetch_webpage('https://example.com')
+            assert 'Test Content' in result
+
+    def test_fetch_webpage_backward_compatible_signature(self):
+        """Verify fetch_webpage maintains backward compatible signature."""
+        from src.tools.base import fetch_webpage
+        import inspect
+
+        # Check function signature accepts a single URL parameter
+        sig = inspect.signature(fetch_webpage)
+        params = list(sig.parameters.keys())
+        assert 'url' in params
+        # Function should have only one required parameter (url)
+        assert len(params) == 1

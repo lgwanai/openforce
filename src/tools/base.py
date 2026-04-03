@@ -101,16 +101,25 @@ def web_search(query: str) -> str:
     return f"Search results for: {query}"
 
 def fetch_webpage(url: str) -> str:
-    """抓取网页并提取正文文本"""
-    import httpx
-    from bs4 import BeautifulSoup
-    try:
-        resp = httpx.get(url, timeout=10.0)
-        resp.raise_for_status()
-        soup = BeautifulSoup(resp.text, "html.parser")
-        return soup.get_text(separator="\n", strip=True)[:5000] # Limit size
-    except Exception as e:
-        return f"Failed to fetch webpage: {str(e)}"
+    """Fetch and extract text content from a webpage (SSRF-protected).
+
+    This function now uses SSRF protection to prevent access to internal
+    network resources like localhost, private IPs, and AWS metadata endpoints.
+
+    Args:
+        url: The URL to fetch
+
+    Returns:
+        The extracted text content, or an error message if blocked or failed
+
+    Security:
+        - Blocks private IP ranges (RFC 1918, loopback, link-local)
+        - Blocks non-HTTP schemes (file://, ftp://, etc.)
+        - Blocks localhost hostname variants
+        - Does not follow redirects
+    """
+    from ..security.ssrf import fetch_webpage_safe
+    return fetch_webpage_safe(url, timeout=10.0, max_length=5000)
 
 def run_baidu_search_skill(query: str) -> str:
     """使用百度千帆 AI 搜索 API 进行 Web 搜索"""
