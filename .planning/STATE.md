@@ -14,7 +14,7 @@
 - Goal: 修复所有 CRITICAL 安全漏洞，确保系统基础安全
 - Wave 0: Test Infrastructure - COMPLETE
 - Wave 1: In Progress
-- Next Step: Plan 02 - 审批令牌安全修复 (SEC-02)
+- Next Step: Plan 05 - 污点追踪实现 (SEC-05)
 
 ---
 
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
-| 1 | 安全漏洞修复 | ◆ In Progress | 1/6 |
+| 1 | 安全漏洞修复 | ◆ In Progress | 4/6 |
 | 2 | 预算系统实现 | ○ Pending | 0/4 |
 | 3 | Human-in-the-loop | ○ Pending | 0/5 |
 | 4 | 六部 Agent 完善 | ○ Pending | 0/5 |
@@ -59,6 +59,9 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 | CommandWhitelist 集中管理命令白名单 | 便于审计和扩展，防止命令注入 | Phase 1 Plan 01 |
 | shlex.split 解析命令字符串 | 保持向后兼容性，安全解析参数 | Phase 1 Plan 01 |
 | Python 环境设置替代 shell 链式命令 | 避免安全风险，提高代码可读性 | Phase 1 Plan 01 |
+| Block localhost hostname before DNS resolution | 更高效，避免不必要的 DNS 查询 | Phase 1 Plan 04 |
+| Return error messages instead of raising exceptions | 用户友好的错误处理 | Phase 1 Plan 04 |
+| Disable redirect following by default | 防止基于重定向的 SSRF 攻击 | Phase 1 Plan 04 |
 
 ### Learnings
 
@@ -89,3 +92,5 @@ See: .planning/PROJECT.md (updated 2026-04-03)
 |---------|------|-----------|
 | Phase 1 Plan 00 | 2026-04-03 | Test infrastructure setup |
 | Phase 1 Plan 01 | 2026-04-03 | Shell injection fix (SEC-01) |
+| Phase 1 Plan 02 | 2026-04-03 | HMAC approval token security (SEC-02) |
+| Phase 1 Plan 04 | 2026-04-03 | SSRF protection (SEC-04) |
