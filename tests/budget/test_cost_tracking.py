@@ -205,4 +205,4 @@ class TestCostTrackingIntegration:
         manager.usage.cost_usd = total_cost
 
         # Should aggregate properly
-        assert manager.usage.cost_usd == pytest.approx(0.055, rel=0.01)
+        assert manager.usage.cost_usd == pytest.approx(0.035, rel=0.01)

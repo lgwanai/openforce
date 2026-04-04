@@ -82,7 +82,7 @@ class TestRunWithTimeout:
     @pytest.mark.asyncio
     async def test_run_with_timeout_success(self, budget_manager):
         """Verify successful completion within timeout."""
-        from src.budget.trackers import run_with_timeout
+        from src.budget.timeouts import run_with_timeout
 
         async def quick_task():
             await asyncio.sleep(0.1)
@@ -100,7 +100,7 @@ class TestRunWithTimeout:
     async def test_run_with_timeout_cancellation(self, budget_limits):
         """Verify proper cleanup on timeout."""
         from src.budget.manager import BudgetManager
-        from src.budget.trackers import run_with_timeout, BudgetExhaustedError
+        from src.budget.timeouts import run_with_timeout, BudgetExhaustedError
 
         limits = budget_limits(max_time_seconds=10)
         manager = BudgetManager(limits=limits)
@@ -122,7 +122,7 @@ class TestRunWithTimeout:
     @pytest.mark.asyncio
     async def test_run_with_timeout_propagates_exceptions(self, budget_manager):
         """Verify exceptions from task are propagated."""
-        from src.budget.trackers import run_with_timeout
+        from src.budget.timeouts import run_with_timeout
 
         async def failing_task():
             raise ValueError("Task failed")
