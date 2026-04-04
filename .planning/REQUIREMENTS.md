@@ -17,11 +17,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Budget System
 
-- [ ] **BUD-01**: Token 预算限制 - 实现 token_budget 消耗追踪
-- [ ] **BUD-02**: Time 预算限制 - 实现 time_budget 超时熔断
-- [ ] **BUD-03**: Cost 预算限制 - 实现 cost_budget 成本控制
-- [ ] **BUD-04**: 全局熔断机制 - 预算耗尽时强制终止任务
-- [ ] **BUD-05**: 并发 Agent 预算隔离 - 子 Agent 独立预算，防止饿死
+- [x] **BUD-01**: Token 预算限制 - 实现 token_budget 消耗追踪
+- [x] **BUD-02**: Time 预算限制 - 实现 time_budget 超时熔断
+- [x] **BUD-03**: Cost 预算限制 - 实现 cost_budget 成本控制
+- [x] **BUD-04**: 全局熔断机制 - 预算耗尽时强制终止任务
+- [x] **BUD-05**: 并发 Agent 预算隔离 - 子 Agent 独立预算，防止饿死
 
 ### Agent System
 
@@ -90,11 +90,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEC-03 | Phase 1 | Pending |
 | SEC-04 | Phase 1 | Complete |
 | SEC-05 | Phase 1 | Pending |
-| BUD-01 | Phase 2 | Pending |
-| BUD-02 | Phase 2 | Pending |
-| BUD-03 | Phase 2 | Pending |
-| BUD-04 | Phase 2 | Pending |
-| BUD-05 | Phase 2 | Pending |
+| BUD-01 | Phase 2 | Complete |
+| BUD-02 | Phase 2 | Complete |
+| BUD-03 | Phase 2 | Complete |
+| BUD-04 | Phase 2 | Complete |
+| BUD-05 | Phase 2 | Complete |
 | AGT-01 | Phase 3 | Pending |
 | AGT-02 | Phase 4 | Pending |
 | AGT-03 | Phase 4 | Pending |

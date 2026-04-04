@@ -59,7 +59,7 @@
 5. 并发 Agent 预算隔离，无饿死问题
 
 **Plans:** 6 plans in 4 waves
-- [ ] 02-00-PLAN.md — Wave 0: Test Infrastructure
+- [x] 02-00-PLAN.md — Wave 0: Test Infrastructure
 - [ ] 02-01-PLAN.md — Wave 1: Token Budget Tracking (BUD-01)
 - [ ] 02-02-PLAN.md — Wave 1: Time Budget Enforcement (BUD-02)
 - [ ] 02-03-PLAN.md — Wave 2: Cost Budget Tracking (BUD-03)
@@ -190,8 +190,8 @@
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
-| 1 | ✓ | 5/5 | 100% |
-| 2 | ○ | 0/6 | 0% |
+| 1 | ✓ | 6/6 | 100% |
+| 2 | ◆ | 1/6 | 17% |
 | 3 | ○ | 0/5 | 0% |
 | 4 | ○ | 0/5 | 0% |
 | 5 | ○ | 0/4 | 0% |
