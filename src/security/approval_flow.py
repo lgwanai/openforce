@@ -7,6 +7,10 @@ This module provides:
 - verify_action_hash: Verify action matches approved hash
 - generate_approval_for_request: Generate approval token and update task
 - consume_approval_token: Atomic token consumption with replay protection
+- serialize_state: Serialize agent state for persistence
+- deserialize_state: Deserialize agent state from persistence
+- save_pending_state: Save state to checkpoint
+- restore_state: Restore state from checkpoint
 
 Security properties:
 - Action hashes use canonical JSON to prevent hash collisions
@@ -20,7 +24,7 @@ import json
 import secrets
 import hmac
 from dataclasses import dataclass
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 from src.security.approval import ApprovalTokenManager
 from src.core.db import get_task, save_task, consume_nonce
@@ -257,3 +261,192 @@ def consume_approval_token(
             return checkpoint
 
     raise ValueError(f"Approval {approval_id} not found in task {task_id}")
+
+
+def serialize_state(state: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Serialize agent state for persistence.
+
+    Converts LangChain message objects to JSON-serializable dicts.
+
+    Args:
+        state: Agent state dictionary with messages
+
+    Returns:
+        JSON-serializable state dictionary
+    """
+    serialized = {
+        "task_id": state.get("task_id", ""),
+        "owner_user_id": state.get("owner_user_id", ""),
+        "intent": state.get("intent", ""),
+        "plan": state.get("plan", {}),
+        "pending_delegate_state": state.get("pending_delegate_state"),
+        "messages": []
+    }
+
+    # Serialize messages
+    for msg in state.get("messages", []):
+        msg_dict = {
+            "type": type(msg).__name__,
+            "content": getattr(msg, "content", ""),
+        }
+
+        # Preserve tool_calls for AIMessage
+        if hasattr(msg, "tool_calls") and msg.tool_calls:
+            msg_dict["tool_calls"] = [
+                {
+                    "id": tc.get("id"),
+                    "name": tc.get("name"),
+                    "args": tc.get("args")
+                }
+                for tc in msg.tool_calls
+            ]
+
+        # Preserve tool_call_id for ToolMessage
+        if hasattr(msg, "tool_call_id"):
+            msg_dict["tool_call_id"] = msg.tool_call_id
+
+        # Preserve name for ToolMessage
+        if hasattr(msg, "name"):
+            msg_dict["name"] = msg.name
+
+        serialized["messages"].append(msg_dict)
+
+    return serialized
+
+
+def deserialize_state(serialized: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Deserialize agent state from persistence.
+
+    Converts JSON dicts back to LangChain message objects.
+
+    Args:
+        serialized: JSON-serialized state dictionary
+
+    Returns:
+        Agent state dictionary with message objects
+    """
+    from langchain_core.messages import HumanMessage, AIMessage, ToolMessage, SystemMessage
+
+    state = {
+        "task_id": serialized.get("task_id", ""),
+        "owner_user_id": serialized.get("owner_user_id", ""),
+        "intent": serialized.get("intent", ""),
+        "plan": serialized.get("plan", {}),
+        "pending_delegate_state": serialized.get("pending_delegate_state"),
+        "messages": []
+    }
+
+    # Deserialize messages
+    for msg_dict in serialized.get("messages", []):
+        msg_type = msg_dict.get("type", "HumanMessage")
+        content = msg_dict.get("content", "")
+
+        if msg_type == "HumanMessage":
+            msg = HumanMessage(content=content)
+        elif msg_type == "AIMessage":
+            msg = AIMessage(content=content)
+            if "tool_calls" in msg_dict:
+                msg.tool_calls = msg_dict["tool_calls"]
+        elif msg_type == "ToolMessage":
+            msg = ToolMessage(
+                content=content,
+                tool_call_id=msg_dict.get("tool_call_id", ""),
+                name=msg_dict.get("name", "")
+            )
+        elif msg_type == "SystemMessage":
+            msg = SystemMessage(content=content)
+        else:
+            # Fallback to HumanMessage
+            msg = HumanMessage(content=content)
+
+        state["messages"].append(msg)
+
+    return state
+
+
+def save_pending_state(
+    state: Dict[str, Any],
+    approval_request: ApprovalRequest
+) -> str:
+    """
+    Save agent state for later resumption after approval.
+
+    Args:
+        state: Current agent state
+        approval_request: The approval request needing state persistence
+
+    Returns:
+        Snapshot ID for the saved state
+    """
+    snapshot_id = f"snapshot_{approval_request.approval_id}"
+    serialized_state = serialize_state(state)
+
+    task = get_task(approval_request.task_id)
+    if task:
+        task.pending_approval_id = approval_request.approval_id
+        task.approval_action_hash = approval_request.action_hash
+        task.approval_snapshot_id = snapshot_id
+        task.status = "WaitingApproval"
+
+        # Find and update existing checkpoint or add new one
+        checkpoint = {
+            "type": "approval_pending",
+            "snapshot_id": snapshot_id,
+            "approval_id": approval_request.approval_id,
+            "tool_name": approval_request.tool_name,
+            "tool_args": approval_request.tool_args,
+            "tool_call_id": approval_request.tool_call_id,
+            "action_hash": approval_request.action_hash,
+            "state_snapshot": serialized_state
+        }
+
+        # Update or append checkpoint
+        updated = False
+        for i, cp in enumerate(task.checkpoints):
+            if (cp.get("type") == "approval_pending" and
+                cp.get("approval_id") == approval_request.approval_id):
+                task.checkpoints[i] = checkpoint
+                updated = True
+                break
+
+        if not updated:
+            task.checkpoints.append(checkpoint)
+
+        save_task(task)
+
+    return snapshot_id
+
+
+def restore_state(task_id: str, approval_id: str) -> Optional[Dict[str, Any]]:
+    """
+    Restore agent state from saved checkpoint.
+
+    Args:
+        task_id: Task ID to restore
+        approval_id: Approval ID to find checkpoint
+
+    Returns:
+        Restored state dictionary, or None if not found
+    """
+    task = get_task(task_id)
+    if not task:
+        return None
+
+    # Find checkpoint by approval_id
+    for checkpoint in reversed(task.checkpoints):
+        if (checkpoint.get("type") == "approval_pending" and
+            checkpoint.get("approval_id") == approval_id):
+
+            serialized_state = checkpoint.get("state_snapshot")
+            if serialized_state:
+                restored = deserialize_state(serialized_state)
+
+                # Update task status
+                task.status = "Running"
+                save_task(task)
+
+                return restored
+
+    return None
