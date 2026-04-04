@@ -58,13 +58,13 @@
 4. 全局熔断机制工作正常
 5. 并发 Agent 预算隔离，无饿死问题
 
-**Plans:** 6 plans in 4 waves
+**Plans:** 6/6 plans complete
 - [x] 02-00-PLAN.md — Wave 0: Test Infrastructure
-- [ ] 02-01-PLAN.md — Wave 1: Token Budget Tracking (BUD-01)
-- [ ] 02-02-PLAN.md — Wave 1: Time Budget Enforcement (BUD-02)
-- [ ] 02-03-PLAN.md — Wave 2: Cost Budget Tracking (BUD-03)
-- [ ] 02-04-PLAN.md — Wave 2: Global Circuit Breaker (BUD-04)
-- [ ] 02-05-PLAN.md — Wave 3: Concurrent Agent Budget Isolation (BUD-05)
+- [x] 02-01-PLAN.md — Wave 1: Token Budget Tracking (BUD-01)
+- [x] 02-02-PLAN.md — Wave 1: Time Budget Enforcement (BUD-02)
+- [x] 02-03-PLAN.md — Wave 2: Cost Budget Tracking (BUD-03)
+- [x] 02-04-PLAN.md — Wave 2: Global Circuit Breaker (BUD-04)
+- [x] 02-05-PLAN.md — Wave 3: Concurrent Agent Budget Isolation (BUD-05)
 
 ---
 
@@ -83,12 +83,13 @@
 4. 审批通过后任务正确恢复
 5. 兵部 Agent 可执行代码任务
 
-**Plans:**
-- [ ] Plan 3.1: 审批阻断集成
-- [ ] Plan 3.2: 快照生成与校验
-- [ ] Plan 3.3: 令牌消费机制
-- [ ] Plan 3.4: 审批恢复流程
-- [ ] Plan 3.5: 兵部 Agent 实现
+**Plans:** 6 plans
+- [ ] 03-00-PLAN.md — Wave 0: Test Infrastructure
+- [ ] 03-01-PLAN.md — Wave 1: Approval Flow Integration (HIL-01)
+- [ ] 03-02-PLAN.md — Wave 1: Snapshot Generation (HIL-02)
+- [ ] 03-03-PLAN.md — Wave 2: Token Consumption (HIL-03)
+- [ ] 03-04-PLAN.md — Wave 2: Approval Resumption (HIL-04)
+- [ ] 03-05-PLAN.md — Wave 3: Bingbu Agent (AGT-01)
 
 ---
 
@@ -190,9 +191,9 @@
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
-| 1 | ✓ | 6/6 | 100% |
-| 2 | ◆ | 1/6 | 17% |
-| 3 | ○ | 0/5 | 0% |
+| 1 | ✓ | 5/5 | 100% |
+| 2 | ✓ | 6/6 | 100% |
+| 3 | ○ | 0/6 | 0% |
 | 4 | ○ | 0/5 | 0% |
 | 5 | ○ | 0/4 | 0% |
 | 6 | ○ | 0/4 | 0% |
