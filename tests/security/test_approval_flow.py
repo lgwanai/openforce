@@ -227,20 +227,150 @@ class TestTokenConsumption:
 
     def test_valid_token_consumed_once(self, mock_settings, temp_db):
         """Valid token can be consumed exactly once."""
-        pytest.skip("consume_approval_token not yet implemented (Plan 03)")
+        from src.security.approval_flow import (
+            ApprovalRequest,
+            generate_approval_for_request,
+            consume_approval_token
+        )
+        from src.core.db import TaskRecord, save_task
+
+        # Setup: Create task and approval request
+        task = TaskRecord(
+            task_id="task-consume-test",
+            owner_user_id="user-123",
+            conversation_id="conv-1",
+            thread_id="thread-1",
+            original_req="test",
+            status="WaitingApproval"
+        )
+        save_task(task)
+
+        request = ApprovalRequest.from_tool_call(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            task_id="task-consume-test",
+            owner_user_id="user-123"
+        )
+
+        approval_data = generate_approval_for_request(request)
+
+        # First consumption should succeed
+        result = consume_approval_token(
+            token=approval_data["token"],
+            approval_id=approval_data["approval_id"],
+            task_id="task-consume-test",
+            owner_user_id="user-123",
+            action_hash=approval_data["action_hash"]
+        )
+
+        assert result is not None
+        assert result.get("type") == "approval_pending"
+        assert result.get("tool_name") == "execute_command"
 
     def test_replay_attack_blocked(self, mock_settings, temp_db):
         """Same token cannot be used twice (replay attack blocked)."""
-        pytest.skip("consume_approval_token not yet implemented (Plan 03)")
+        from src.security.approval_flow import (
+            ApprovalRequest,
+            generate_approval_for_request,
+            consume_approval_token
+        )
+        from src.core.db import TaskRecord, save_task
+
+        task = TaskRecord(
+            task_id="task-replay-test",
+            owner_user_id="user-123",
+            conversation_id="conv-1",
+            thread_id="thread-1",
+            original_req="test",
+            status="WaitingApproval"
+        )
+        save_task(task)
+
+        request = ApprovalRequest.from_tool_call(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            task_id="task-replay-test",
+            owner_user_id="user-123"
+        )
+
+        approval_data = generate_approval_for_request(request)
+
+        # First consumption should succeed
+        result = consume_approval_token(
+            token=approval_data["token"],
+            approval_id=approval_data["approval_id"],
+            task_id="task-replay-test",
+            owner_user_id="user-123",
+            action_hash=approval_data["action_hash"]
+        )
+        assert result is not None
+
+        # Second consumption should fail (replay attack)
+        with pytest.raises(ValueError, match="already used"):
+            consume_approval_token(
+                token=approval_data["token"],
+                approval_id=approval_data["approval_id"],
+                task_id="task-replay-test",
+                owner_user_id="user-123",
+                action_hash=approval_data["action_hash"]
+            )
 
     def test_invalid_token_rejected(self, mock_settings, temp_db):
         """Invalid token signature is rejected."""
-        pytest.skip("consume_approval_token not yet implemented (Plan 03)")
+        from src.security.approval_flow import consume_approval_token
+
+        with pytest.raises(ValueError, match="Invalid token"):
+            consume_approval_token(
+                token="invalid:token:format",
+                approval_id="apr_test",
+                task_id="task-test",
+                owner_user_id="user-123",
+                action_hash="wrong_hash"
+            )
 
     def test_expired_token_rejected(self, mock_settings, temp_db):
         """Expired token is rejected."""
-        pytest.skip("consume_approval_token not yet implemented (Plan 03)")
+        # This test would require mocking time or creating an already-expired token
+        # For now, we skip this as it requires more complex setup
+        pytest.skip("Expired token test requires time mocking")
 
     def test_wrong_action_hash_rejected(self, mock_settings, temp_db):
         """Token with wrong action_hash is rejected."""
-        pytest.skip("consume_approval_token not yet implemented (Plan 03)")
+        from src.security.approval_flow import (
+            ApprovalRequest,
+            generate_approval_for_request,
+            consume_approval_token
+        )
+        from src.core.db import TaskRecord, save_task
+
+        task = TaskRecord(
+            task_id="task-hash-test",
+            owner_user_id="user-123",
+            conversation_id="conv-1",
+            thread_id="thread-1",
+            original_req="test",
+            status="WaitingApproval"
+        )
+        save_task(task)
+
+        request = ApprovalRequest.from_tool_call(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            task_id="task-hash-test",
+            owner_user_id="user-123"
+        )
+
+        approval_data = generate_approval_for_request(request)
+
+        # Wrong action_hash should be rejected
+        with pytest.raises(ValueError, match="Invalid token"):
+            consume_approval_token(
+                token=approval_data["token"],
+                approval_id=approval_data["approval_id"],
+                task_id="task-hash-test",
+                owner_user_id="user-123",
+                action_hash="wrong_hash_12345"
+            )

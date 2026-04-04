@@ -12,9 +12,9 @@ from src.agents.zhongshu import build_zhongshu_graph
 from src.tools.base import set_approval_callback, SecurityError
 from src.security.approval_flow import (
     ApprovalRequest,
-    generate_approval_for_request
+    generate_approval_for_request,
+    consume_approval_token
 )
-# Note: consume_approval_token will be added in Plan 03
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 
 console = Console()
@@ -196,15 +196,31 @@ def run_cli():
                 approved = Confirm.ask("[bold]是否批准此操作?[/bold]", default=False)
 
                 if approved:
-                    console.print("[green]批准已接收。继续执行...[/green]")
+                    try:
+                        # Consume the approval token atomically
+                        checkpoint = consume_approval_token(
+                            token=approval_data["token"],
+                            approval_id=approval_data["approval_id"],
+                            task_id=approval_req.task_id,
+                            owner_user_id=approval_req.owner_user_id,
+                            action_hash=approval_data["action_hash"]
+                        )
 
-                    # Note: Token consumption will be implemented in Plan 03
-                    # State persistence and resume will be implemented in Plan 04
-                    # For now, just update task status
-                    task.status = "WaitingApproval"
-                    save_task(task)
+                        console.print("[green]批准验证成功。继续执行...[/green]")
 
-                    console.print("[dim]批准已记录。令牌消费和状态恢复将在后续计划中实现。[/dim]")
+                        # Update task status
+                        task.status = "Approved"
+                        save_task(task)
+
+                        # Note: Full resume with tool execution will be implemented in Plan 04
+                        # For now, just inform the user that approval was recorded
+                        console.print("[dim]批准已记录。状态持久化和恢复将在 Plan 04 中实现。[/dim]")
+
+                    except ValueError as e:
+                        console.print(f"[bold red]批准验证失败: {e}[/bold red]")
+                        task.status = "ApprovalFailed"
+                        save_task(task)
+                        log_audit_event(task_id, "APPROVAL_FAILED", str(e))
 
                 else:
                     console.print("[yellow]操作已拒绝。[/yellow]")

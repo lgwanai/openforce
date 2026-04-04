@@ -127,7 +127,7 @@ def temp_sandbox():
 def mock_settings(monkeypatch):
     """Mock external tools configuration."""
     monkeypatch.setenv('OPENFORCE_BAIDU_SEARCH_SCRIPT', '/tmp/test_search.py')
-    monkeypatch.setenv('OPENFORCE_SECURITY_APPROVAL_SECRET_KEY', 'test-secret-key-12345')
+    monkeypatch.setenv('OPENFORCE_APPROVAL_SECRET_KEY', 'test-secret-key-12345')
     yield
 
 

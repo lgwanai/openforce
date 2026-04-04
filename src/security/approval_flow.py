@@ -6,11 +6,13 @@ This module provides:
 - compute_action_hash: Canonical hash for TOCTOU protection
 - verify_action_hash: Verify action matches approved hash
 - generate_approval_for_request: Generate approval token and update task
+- consume_approval_token: Atomic token consumption with replay protection
 
 Security properties:
 - Action hashes use canonical JSON to prevent hash collisions
 - HMAC-SHA256 tokens for approval authentication
 - Timing-attack resistant hash comparison
+- Atomic nonce consumption prevents replay attacks
 """
 
 import hashlib
@@ -21,7 +23,7 @@ from dataclasses import dataclass
 from typing import Dict, Any, Optional
 
 from src.security.approval import ApprovalTokenManager
-from src.core.db import get_task, save_task
+from src.core.db import get_task, save_task, consume_nonce
 
 
 @dataclass
@@ -190,3 +192,68 @@ def generate_approval_for_request(request: ApprovalRequest) -> Dict[str, Any]:
         "action_hash": request.action_hash,
         "expires_in": 3600
     }
+
+
+def consume_approval_token(
+    token: str,
+    approval_id: str,
+    task_id: str,
+    owner_user_id: str,
+    action_hash: str,
+    channel_binding_hash: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Verify approval token and consume it atomically.
+
+    This function combines token verification and nonce consumption
+    into a single atomic operation to prevent replay attacks.
+
+    Args:
+        token: Token string to verify and consume
+        approval_id: Expected approval ID
+        task_id: Expected task ID
+        owner_user_id: Expected owner user ID
+        action_hash: Expected action hash
+        channel_binding_hash: Optional channel binding hash
+
+    Returns:
+        Approval checkpoint data if token is valid
+
+    Raises:
+        ValueError: If token is invalid, expired, or already consumed
+    """
+    manager = ApprovalTokenManager()
+
+    # Extract nonce from token (format: <exp>:<nonce>:<signature>)
+    parts = token.split(':')
+    if len(parts) != 3:
+        raise ValueError("Invalid token format")
+
+    exp_str, nonce, signature = parts
+
+    # Verify token signature FIRST (before any database operations)
+    if not manager.verify_token(
+        token=token,
+        owner_user_id=owner_user_id,
+        task_id=task_id,
+        approval_id=approval_id,
+        action_hash=action_hash,
+        channel_binding_hash=channel_binding_hash
+    ):
+        raise ValueError("Invalid token signature or expired token")
+
+    # Atomic nonce consumption (prevents replay)
+    if not consume_nonce(nonce):
+        raise ValueError("Token already used (replay attack detected)")
+
+    # Load and return pending approval data
+    task = get_task(task_id)
+    if not task:
+        raise ValueError(f"Task {task_id} not found")
+
+    for checkpoint in reversed(task.checkpoints):
+        if (checkpoint.get("type") == "approval_pending" and
+            checkpoint.get("approval_id") == approval_id):
+            return checkpoint
+
+    raise ValueError(f"Approval {approval_id} not found in task {task_id}")
