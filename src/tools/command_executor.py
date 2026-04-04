@@ -43,8 +43,13 @@ def _setup_playwright_environment() -> dict:
     Returns:
         Environment dict for subprocess
     """
+    from ..core.config import get_external_tools_config
+
+    config = get_external_tools_config()
+
     # Target cache location (user's playwright cache)
-    user_cache = Path('/Users/wuliang/Library/Caches/ms-playwright')
+    # Use config for the playwright cache path
+    user_cache = config.playwright_cache_dir
 
     # Temporary cache location (for sandboxed access)
     tmp_cache = Path('/tmp/Library/Caches/ms-playwright')

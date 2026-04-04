@@ -3,7 +3,7 @@ import sys
 from src.core.db import init_db
 
 def main():
-    parser = argparse.ArgumentParser(description="OpenClaw Agent V6.5")
+    parser = argparse.ArgumentParser(description="OpenForce Agent V6.5")
     parser.add_argument("--channel", type=str, choices=["cli", "api"], default="cli", help="Start the agent with specific channel")
     args = parser.parse_args()
     

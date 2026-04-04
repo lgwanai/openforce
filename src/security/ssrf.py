@@ -127,37 +127,38 @@ def fetch_webpage_safe(
 ) -> str:
     """
     Safely fetch webpage content with SSRF protection.
-
-    This function validates the URL before fetching and returns
-    error messages instead of raising exceptions for SSRF attempts.
-
-    Args:
-        url: The URL to fetch
-        timeout: Maximum time to wait for response (seconds)
-        max_length: Maximum length of returned text (characters)
-
-    Returns:
-        The extracted text content from the webpage, or an error message
-        if the fetch failed or was blocked
-
-    Security:
-        - Uses validate_url_for_ssrf() to block SSRF attempts
-        - Does not follow redirects (prevents redirect-based SSRF)
-        - Limits response size to prevent memory exhaustion
     """
     try:
         # Validate URL first
         validated_url = validate_url_for_ssrf(url)
 
-        # Fetch with no redirect following
-        resp = httpx.get(validated_url, timeout=timeout, follow_redirects=False)
+        # Fetch with redirect handling - validate each redirect
+        current_url = validated_url
+        max_redirects = 5
+        redirect_count = 0
+
+        while redirect_count < max_redirects:
+            resp = httpx.get(current_url, timeout=timeout, follow_redirects=False)
+
+            if resp.status_code in (301, 302, 303, 307, 308):
+                redirect_url = resp.headers.get("location")
+                if not redirect_url:
+                    break
+                try:
+                    validated_redirect = validate_url_for_ssrf(redirect_url)
+                    current_url = validated_redirect
+                    redirect_count += 1
+                except SSRFError:
+                    return f"SSRF blocked in redirect: {redirect_url}"
+            else:
+                break
+
         resp.raise_for_status()
 
         # Parse and extract text
         soup = BeautifulSoup(resp.text, "html.parser")
         text = soup.get_text(separator="\n", strip=True)
 
-        # Limit size
         return text[:max_length] if len(text) > max_length else text
 
     except SSRFError as e:

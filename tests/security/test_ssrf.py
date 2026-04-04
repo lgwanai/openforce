@@ -277,21 +277,27 @@ class TestFetchWebpageIntegration:
     def test_fetch_webpage_uses_ssrf_protection(self):
         """Verify fetch_webpage uses SSRF protection via fetch_webpage_safe."""
         from src.tools.base import fetch_webpage
+        from src.security.taint_engine import TaintedValue
 
         # Localhost should be blocked
         result = fetch_webpage('http://localhost:8080/admin')
-        assert 'SSRF blocked' in result
+        # fetch_webpage now returns TaintedValue
+        assert isinstance(result, TaintedValue)
+        assert 'SSRF blocked' in result.value
 
     def test_fetch_webpage_file_scheme_blocked(self):
         """Verify fetch_webpage blocks file:// scheme."""
         from src.tools.base import fetch_webpage
+        from src.security.taint_engine import TaintedValue
 
         result = fetch_webpage('file:///etc/passwd')
-        assert 'SSRF blocked' in result
+        assert isinstance(result, TaintedValue)
+        assert 'SSRF blocked' in result.value
 
     def test_fetch_webpage_valid_url_works(self):
         """Verify fetch_webpage works for valid public URLs."""
         from src.tools.base import fetch_webpage
+        from src.security.taint_engine import TaintedValue
 
         mock_response = MagicMock()
         mock_response.text = '<html><body>Test Content</body></html>'
@@ -305,7 +311,8 @@ class TestFetchWebpageIntegration:
             mock_get.return_value = mock_response
 
             result = fetch_webpage('https://example.com')
-            assert 'Test Content' in result
+            assert isinstance(result, TaintedValue)
+            assert 'Test Content' in result.value
 
     def test_fetch_webpage_backward_compatible_signature(self):
         """Verify fetch_webpage maintains backward compatible signature."""

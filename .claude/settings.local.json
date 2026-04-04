@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(gsd:map-codebase)",
+      "WebSearch",
+      "Skill(gsd:execute-phase)",
+      "Bash(pytest:*)",
+      "Bash(PYTHONPATH=/Users/wuliang/workspace/openforce pytest:*)",
+      "Bash(grep -r \"/Users/wuliang\" /Users/wuliang/workspace/openforce/src/*.py /Users/wuliang/workspace/openforce/src/**/*.py)",
+      "Bash(ls -la /Users/wuliang/workspace/openforce/.planning/phases/01-security-fixes/*.md)",
+      "Skill(gsd:plan-phase)",
+      "WebFetch(domain:python.langchain.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pypi.org)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(grep -n \"^wave:\" .planning/phases/02-budget-system/02-*.md)",
+      "Bash(grep:*)",
+      "Bash(ls /Users/wuliang/workspace/openforce/.planning/phases/02-budget-system/*-VALIDATION.md)"
+    ]
+  }
+}
