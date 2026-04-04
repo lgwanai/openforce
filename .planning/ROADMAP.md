@@ -2,7 +2,7 @@
 
 **Created:** 2026-04-03
 **Milestone:** v1.0 - 安全加固与核心功能完善
-**Total Phases:** 6
+**Total Phases:** 7
 **Granularity:** Standard
 
 ---
@@ -36,10 +36,10 @@
 
 **Plans:**
 - [x] Plan 1.1: 修复 Shell 注入漏洞
-- [ ] Plan 1.2: 实现安全令牌生成
-- [ ] Plan 1.3: 配置外部化
-- [ ] Plan 1.4: SSRF 防护
-- [ ] Plan 1.5: TaintEngine 基础实现
+- [x] Plan 1.2: 实现安全令牌生成
+- [x] Plan 1.3: 配置外部化
+- [x] Plan 1.4: SSRF 防护
+- [x] Plan 1.5: TaintEngine 基础实现
 
 ---
 
@@ -58,11 +58,13 @@
 4. 全局熔断机制工作正常
 5. 并发 Agent 预算隔离，无饿死问题
 
-**Plans:**
-- [ ] Plan 2.1: Token 预算追踪
-- [ ] Plan 2.2: Time/Cost 预算
-- [ ] Plan 2.3: 全局熔断
-- [ ] Plan 2.4: 预算隔离
+**Plans:** 6 plans in 4 waves
+- [ ] 02-00-PLAN.md — Wave 0: Test Infrastructure
+- [ ] 02-01-PLAN.md — Wave 1: Token Budget Tracking (BUD-01)
+- [ ] 02-02-PLAN.md — Wave 1: Time Budget Enforcement (BUD-02)
+- [ ] 02-03-PLAN.md — Wave 2: Cost Budget Tracking (BUD-03)
+- [ ] 02-04-PLAN.md — Wave 2: Global Circuit Breaker (BUD-04)
+- [ ] 02-05-PLAN.md — Wave 3: Concurrent Agent Budget Isolation (BUD-05)
 
 ---
 
@@ -160,19 +162,45 @@
 
 ---
 
+## Phase 7: 三层记忆系统设计
+
+**Goal:** 设计并实现三层记忆系统，包括用户信息收集工具、短期记忆管理、长期知识图谱存储与检索
+
+**Depends on:** Phase 6
+
+**Requirements:** MEM-01, MEM-02, MEM-03, MEM-04, MEM-05
+
+**Success Criteria:**
+1. 用户信息收集作为独立 tool，户部直接收集不再绕行中书省
+2. 短期记忆管理 session 上下文，支持压缩和检索
+3. 长期记忆使用图数据库存储知识点，支持语义检索
+4. /dream 指令触发原文整理和知识提取
+5. 信息检索支持权重排序和时效标记
+
+**Plans:**
+- [ ] Plan 7.1: 用户信息收集 Tool
+- [ ] Plan 7.2: 短期记忆管理
+- [ ] Plan 7.3: 长期知识图谱
+- [ ] Plan 7.4: /dream 整理机制
+- [ ] Plan 7.5: 检索与权重系统
+
+---
+
 ## Progress Summary
 
 | Phase | Status | Plans | Progress |
 |-------|--------|-------|----------|
-| 1 | ◆ | 1/6 | 17% |
-| 2 | ○ | 0/4 | 0% |
+| 1 | ✓ | 5/5 | 100% |
+| 2 | ○ | 0/6 | 0% |
 | 3 | ○ | 0/5 | 0% |
 | 4 | ○ | 0/5 | 0% |
 | 5 | ○ | 0/4 | 0% |
 | 6 | ○ | 0/4 | 0% |
+| 7 | ○ | 0/5 | 0% |
 
 **Legend:** ✓ Complete | ◆ In Progress | ○ Pending | ✗ Blocked
 
 ---
 
 *Roadmap created: 2026-04-03*
+*Last updated: 2026-04-04*
