@@ -11,6 +11,8 @@ from src.core.utils import invoke_llm_with_tools
 from src.tools.base import get_current_time, get_system_info, read_file, write_file, list_directory, get_current_path
 from src.agents.shangshu import build_shangshu_graph
 from src.agents.hubu import build_hubu_graph
+from src.security.approval_flow import ApprovalRequest
+from src.security.taint_engine import TaintEngine
 
 class ZhongshuState(TypedDict):
     messages: Annotated[List[BaseMessage], add_messages]
@@ -233,23 +235,61 @@ def tool_node(state: ZhongshuState):
         return {"messages": []}
 
     for tool_call in last_message.tool_calls:
+        tool_name = tool_call["name"]
+        tool_args = tool_call["args"]
+
+        # Check if high-risk tool requires approval
+        if tool_name in TaintEngine.HIGH_RISK_TOOLS:
+            raise ApprovalRequest.from_tool_call(
+                tool_name=tool_name,
+                tool_args=tool_args,
+                tool_call_id=tool_call["id"],
+                task_id=state.get("task_id", ""),
+                owner_user_id=state.get("owner_user_id", ""),
+                state_snapshot={
+                    "task_id": state.get("task_id", ""),
+                    "owner_user_id": state.get("owner_user_id", ""),
+                    "messages": state.get("messages", []),
+                    "intent": state.get("intent", ""),
+                    "plan": state.get("plan", {})
+                }
+            )
+
+        # Check medium-risk tools - for now, also require approval
+        # This can be refined later with taint checking
+        if tool_name in TaintEngine.MEDIUM_RISK_TOOLS:
+            raise ApprovalRequest.from_tool_call(
+                tool_name=tool_name,
+                tool_args=tool_args,
+                tool_call_id=tool_call["id"],
+                task_id=state.get("task_id", ""),
+                owner_user_id=state.get("owner_user_id", ""),
+                state_snapshot={
+                    "task_id": state.get("task_id", ""),
+                    "owner_user_id": state.get("owner_user_id", ""),
+                    "messages": state.get("messages", []),
+                    "intent": state.get("intent", ""),
+                    "plan": state.get("plan", {})
+                }
+            )
+
         try:
-            if tool_call["name"] == "tool_read_file":
-                res = tool_read_file.invoke(tool_call["args"])
-            elif tool_call["name"] == "tool_write_file":
-                res = tool_write_file.invoke(tool_call["args"])
-            elif tool_call["name"] == "tool_list_directory":
-                res = tool_list_directory.invoke(tool_call["args"])
-            elif tool_call["name"] == "tool_get_current_path":
-                res = tool_get_current_path.invoke(tool_call["args"])
+            if tool_name == "tool_read_file":
+                res = tool_read_file.invoke(tool_args)
+            elif tool_name == "tool_write_file":
+                res = tool_write_file.invoke(tool_args)
+            elif tool_name == "tool_list_directory":
+                res = tool_list_directory.invoke(tool_args)
+            elif tool_name == "tool_get_current_path":
+                res = tool_get_current_path.invoke(tool_args)
             else:
-                res = f"Tool {tool_call['name']} not found"
+                res = f"Tool {tool_name} not found"
         except Exception as e:
-            res = f"Error executing tool {tool_call['name']}: {str(e)}"
+            res = f"Error executing tool {tool_name}: {str(e)}"
 
         results.append(ToolMessage(
             content=str(res),
-            name=tool_call["name"],
+            name=tool_name,
             tool_call_id=tool_call["id"]
         ))
 

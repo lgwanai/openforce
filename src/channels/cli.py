@@ -10,6 +10,11 @@ from src.core.db import init_db, set_active_task, get_active_task, TaskRecord, s
 from src.core.logger import log_audit_event
 from src.agents.zhongshu import build_zhongshu_graph
 from src.tools.base import set_approval_callback, SecurityError
+from src.security.approval_flow import (
+    ApprovalRequest,
+    generate_approval_for_request
+)
+# Note: consume_approval_token will be added in Plan 03
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 
 console = Console()
@@ -173,6 +178,39 @@ def run_cli():
 
                 task.status = "Succeeded"
                 save_task(task)
+
+            except ApprovalRequest as approval_req:
+                # Handle approval request for high-risk operations
+                approval_data = generate_approval_for_request(approval_req)
+
+                console.print()
+                console.print(Panel(
+                    f"[bold yellow]需要批准[/bold yellow]\n\n"
+                    f"工具: [bold]{approval_data['tool_name']}[/bold]\n"
+                    f"参数: [bold]{json.dumps(approval_data['tool_args'], ensure_ascii=False)}[/bold]\n"
+                    f"批准ID: [bold]{approval_data['approval_id']}[/bold]",
+                    title="[bold red]高风险操作[/bold red]",
+                    border_style="yellow"
+                ))
+
+                approved = Confirm.ask("[bold]是否批准此操作?[/bold]", default=False)
+
+                if approved:
+                    console.print("[green]批准已接收。继续执行...[/green]")
+
+                    # Note: Token consumption will be implemented in Plan 03
+                    # State persistence and resume will be implemented in Plan 04
+                    # For now, just update task status
+                    task.status = "WaitingApproval"
+                    save_task(task)
+
+                    console.print("[dim]批准已记录。令牌消费和状态恢复将在后续计划中实现。[/dim]")
+
+                else:
+                    console.print("[yellow]操作已拒绝。[/yellow]")
+                    task.status = "Rejected"
+                    save_task(task)
+                    log_audit_event(task_id, "APPROVAL_REJECTED", approval_data['tool_name'])
 
             except SecurityError as e:
                 console.print(f"[bold red]安全错误: {e}[/bold red]")

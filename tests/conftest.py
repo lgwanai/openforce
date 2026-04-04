@@ -64,16 +64,23 @@ def mock_task_record():
 
 @pytest.fixture
 def temp_db(monkeypatch):
-    """Create an isolated in-memory SQLite database for each test."""
+    """Create an isolated in-memory SQLite database for each test.
+
+    Uses SQLite shared-cache mode to ensure all connections to the same
+    in-memory database share the same data.
+    """
     import sqlite3
     from src.core import db as db_module
 
-    # Create in-memory connection
-    conn = sqlite3.connect(":memory:", isolation_level="EXCLUSIVE")
-    c = conn.cursor()
+    # Use shared-cache in-memory database
+    # "file::memory:?cache=shared" allows multiple connections to share data
+    shared_db_path = "file::memory:?cache=shared"
+
+    # Create the shared connection and initialize tables
+    conn = sqlite3.connect(shared_db_path, uri=True, check_same_thread=False)
 
     # Create tables
-    c.execute('''
+    conn.execute('''
         CREATE TABLE IF NOT EXISTS tasks (
             task_id TEXT PRIMARY KEY,
             owner_user_id TEXT,
@@ -86,14 +93,14 @@ def temp_db(monkeypatch):
         )
     ''')
 
-    c.execute('''
+    conn.execute('''
         CREATE TABLE IF NOT EXISTS active_tasks (
             owner_user_id TEXT PRIMARY KEY,
             task_id TEXT
         )
     ''')
 
-    c.execute('''
+    conn.execute('''
         CREATE TABLE IF NOT EXISTS used_nonces (
             nonce TEXT PRIMARY KEY,
             consumed_at TEXT
@@ -101,16 +108,8 @@ def temp_db(monkeypatch):
     ''')
     conn.commit()
 
-    # Monkeypatch the DB_PATH to use in-memory database
-    original_connect = sqlite3.connect
-    original_db_path = db_module.DB_PATH
-
-    def mock_connect(path, *args, **kwargs):
-        if path == original_db_path:
-            return conn
-        return original_connect(path, *args, **kwargs)
-
-    monkeypatch.setattr(sqlite3, 'connect', mock_connect)
+    # Monkeypatch the DB_PATH to use shared in-memory database
+    monkeypatch.setattr(db_module, 'DB_PATH', shared_db_path)
 
     yield conn
 

@@ -2,6 +2,8 @@
 Tests for Human-in-the-loop approval workflow.
 
 Phase 3 Plan 00: Test infrastructure for HIL requirements.
+Phase 3 Plan 01: Tests for HIL-01 approval flow integration.
+Phase 3 Plan 02: Tests for HIL-02 action hash.
 
 Tests cover:
 - HIL-01: High-risk tool approval integration
@@ -18,25 +20,121 @@ from typing import Dict, Any
 class TestApprovalFlow:
     """Tests for HIL-01: High-risk tool approval integration."""
 
-    def test_high_risk_tool_raises_approval(self, mock_settings, temp_db):
-        """High-risk tools must raise ApprovalRequest."""
-        pytest.skip("ApprovalRequest not yet implemented (Plan 01)")
+    def test_approval_request_is_exception(self):
+        """ApprovalRequest must be an Exception subclass."""
+        from src.security.approval_flow import ApprovalRequest
 
-    def test_approval_request_has_required_fields(self, mock_settings, temp_db):
+        assert issubclass(ApprovalRequest, Exception)
+
+    def test_approval_request_has_required_fields(self):
         """ApprovalRequest must contain all required fields."""
-        pytest.skip("ApprovalRequest not yet implemented (Plan 01)")
+        from src.security.approval_flow import ApprovalRequest
 
-    def test_approval_request_from_tool_call(self, mock_settings, temp_db):
+        request = ApprovalRequest(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            action_hash="hash123",
+            approval_id="apr_123",
+            task_id="task-1",
+            owner_user_id="user-1"
+        )
+
+        assert request.tool_name == "execute_command"
+        assert request.tool_args == {"command": "ls"}
+        assert request.tool_call_id == "call-1"
+        assert request.action_hash == "hash123"
+        assert request.approval_id == "apr_123"
+        assert request.task_id == "task-1"
+        assert request.owner_user_id == "user-1"
+
+    def test_approval_request_from_tool_call(self):
         """ApprovalRequest.from_tool_call creates valid request with canonical hash."""
-        pytest.skip("ApprovalRequest not yet implemented (Plan 01)")
+        from src.security.approval_flow import ApprovalRequest, compute_action_hash
 
-    def test_medium_risk_tool_with_untrusted_data_raises_approval(self, mock_settings, temp_db):
-        """Medium-risk tools with untrusted data require approval."""
-        pytest.skip("ApprovalRequest not yet implemented (Plan 01)")
+        request = ApprovalRequest.from_tool_call(
+            tool_name="execute_command",
+            tool_args={"command": "ls -la"},
+            tool_call_id="call-1",
+            task_id="task-1",
+            owner_user_id="user-1"
+        )
 
-    def test_low_risk_tool_executes_without_approval(self, mock_settings, temp_db):
-        """Low-risk tools execute without approval."""
-        pytest.skip("ApprovalRequest not yet implemented (Plan 01)")
+        assert request.tool_name == "execute_command"
+        assert request.tool_args == {"command": "ls -la"}
+        assert request.tool_call_id == "call-1"
+        assert request.task_id == "task-1"
+        assert request.owner_user_id == "user-1"
+        assert request.approval_id.startswith("apr_")
+        assert len(request.action_hash) == 64  # SHA256 hex digest
+
+        # Verify action hash is computed correctly
+        expected_hash = compute_action_hash("execute_command", {"command": "ls -la"}, "task-1")
+        assert request.action_hash == expected_hash
+
+    def test_approval_request_to_dict(self):
+        """ApprovalRequest.to_dict serializes correctly."""
+        from src.security.approval_flow import ApprovalRequest
+
+        request = ApprovalRequest(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            action_hash="hash123",
+            approval_id="apr_123",
+            task_id="task-1",
+            owner_user_id="user-1"
+        )
+
+        data = request.to_dict()
+
+        assert data["tool_name"] == "execute_command"
+        assert data["tool_args"] == {"command": "ls"}
+        assert data["tool_call_id"] == "call-1"
+        assert data["action_hash"] == "hash123"
+        assert data["approval_id"] == "apr_123"
+        assert data["task_id"] == "task-1"
+        assert data["owner_user_id"] == "user-1"
+
+    def test_generate_approval_for_request(self, mock_settings, temp_db):
+        """generate_approval_for_request generates token and updates task."""
+        from src.security.approval_flow import (
+            ApprovalRequest,
+            generate_approval_for_request
+        )
+        from src.core.db import TaskRecord, save_task, get_task
+
+        # Create and save a task
+        task = TaskRecord(
+            task_id="task-gen-test",
+            owner_user_id="user-123",
+            conversation_id="conv-1",
+            thread_id="thread-1",
+            original_req="test",
+            status="Running"
+        )
+        save_task(task)
+
+        request = ApprovalRequest.from_tool_call(
+            tool_name="execute_command",
+            tool_args={"command": "ls"},
+            tool_call_id="call-1",
+            task_id="task-gen-test",
+            owner_user_id="user-123"
+        )
+
+        approval_data = generate_approval_for_request(request)
+
+        assert "approval_id" in approval_data
+        assert "token" in approval_data
+        assert approval_data["tool_name"] == "execute_command"
+        assert approval_data["tool_args"] == {"command": "ls"}
+        assert approval_data["expires_in"] == 3600
+
+        # Verify task was updated
+        updated_task = get_task("task-gen-test")
+        assert updated_task.status == "WaitingApproval"
+        assert updated_task.pending_approval_id == request.approval_id
 
 
 class TestActionHash:
@@ -44,31 +142,84 @@ class TestActionHash:
 
     def test_same_call_same_hash(self):
         """Same tool call must produce same hash."""
-        pytest.skip("compute_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash
+
+        hash1 = compute_action_hash("execute_command", {"command": "ls"}, "task-1")
+        hash2 = compute_action_hash("execute_command", {"command": "ls"}, "task-1")
+
+        assert hash1 == hash2
 
     def test_different_args_different_hash(self):
         """Different tool args must produce different hash."""
-        pytest.skip("compute_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash
+
+        hash1 = compute_action_hash("execute_command", {"command": "ls"}, "task-1")
+        hash2 = compute_action_hash("execute_command", {"command": "rm -rf /"}, "task-1")
+
+        assert hash1 != hash2
 
     def test_canonical_json_key_order(self):
         """Key order must not affect hash."""
-        pytest.skip("compute_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash
+
+        # Different key order should produce same hash
+        hash1 = compute_action_hash("tool", {"a": 1, "b": 2}, "task-1")
+        hash2 = compute_action_hash("tool", {"b": 2, "a": 1}, "task-1")
+
+        assert hash1 == hash2
 
     def test_hash_is_sha256_hex(self):
         """Hash must be SHA256 hex digest (64 characters)."""
-        pytest.skip("compute_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash
+
+        action_hash = compute_action_hash("tool", {"arg": "value"}, "task-1")
+
+        assert len(action_hash) == 64
+        assert all(c in '0123456789abcdef' for c in action_hash)
 
     def test_hash_includes_all_components(self):
         """Hash must include tool_name, args, and task_id."""
-        pytest.skip("compute_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash
+
+        hash1 = compute_action_hash("tool_a", {"arg": "value"}, "task-1")
+        hash2 = compute_action_hash("tool_b", {"arg": "value"}, "task-1")
+        hash3 = compute_action_hash("tool_a", {"arg": "different"}, "task-1")
+        hash4 = compute_action_hash("tool_a", {"arg": "value"}, "task-2")
+
+        # All hashes should be different
+        hashes = [hash1, hash2, hash3, hash4]
+        assert len(set(hashes)) == 4
 
     def test_verify_action_hash_valid(self):
         """verify_action_hash returns True for valid hash."""
-        pytest.skip("verify_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import compute_action_hash, verify_action_hash
+
+        tool_name = "execute_command"
+        tool_args = {"command": "ls -la"}
+        task_id = "task-123"
+
+        expected_hash = compute_action_hash(tool_name, tool_args, task_id)
+        assert verify_action_hash(expected_hash, tool_name, tool_args, task_id) is True
 
     def test_verify_action_hash_invalid(self):
         """verify_action_hash returns False for invalid hash."""
-        pytest.skip("verify_action_hash not yet implemented (Plan 02)")
+        from src.security.approval_flow import verify_action_hash
+
+        assert verify_action_hash("wrong_hash", "tool", {}, "task") is False
+
+    def test_verify_action_hash_different_tool_name(self):
+        """verify_action_hash returns False when tool_name differs."""
+        from src.security.approval_flow import compute_action_hash, verify_action_hash
+
+        expected_hash = compute_action_hash("tool_a", {"arg": "value"}, "task-1")
+        assert verify_action_hash(expected_hash, "tool_b", {"arg": "value"}, "task-1") is False
+
+    def test_verify_action_hash_different_args(self):
+        """verify_action_hash returns False when args differ."""
+        from src.security.approval_flow import compute_action_hash, verify_action_hash
+
+        expected_hash = compute_action_hash("tool", {"arg": "value1"}, "task-1")
+        assert verify_action_hash(expected_hash, "tool", {"arg": "value2"}, "task-1") is False
 
 
 class TestTokenConsumption:
