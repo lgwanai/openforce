@@ -129,9 +129,16 @@ class BudgetManager:
             tokens: Number of tokens to consume.
 
         Raises:
-            BudgetExhaustedError: If consumption would exceed limits.
+            BudgetExhaustedError: If budget is already exhausted or consumption would exceed limits.
         """
         async with self._lock:
+            # Check if already exhausted
+            if self._exhausted:
+                raise BudgetExhaustedError(
+                    "Budget already exhausted",
+                    self.usage
+                )
+
             self.usage.tokens_used += tokens
 
             # Propagate to parent if exists

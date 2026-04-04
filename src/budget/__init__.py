@@ -12,6 +12,12 @@ from src.budget.manager import (
 from src.budget.callbacks import BudgetCallbackHandler
 from src.budget.trackers import estimate_tokens_from_response, estimate_tokens_from_messages
 from src.budget.timeouts import run_with_timeout, invoke_agent_with_budget
+from src.budget.circuit_breaker import CircuitBreaker, check_budget_before_invoke
+from src.budget.persistence import (
+    persist_budget_usage,
+    load_budget_from_task,
+    create_budget_manager_from_task,
+)
 
 __all__ = [
     "BudgetLimits",
@@ -23,4 +29,9 @@ __all__ = [
     "estimate_tokens_from_messages",
     "run_with_timeout",
     "invoke_agent_with_budget",
+    "CircuitBreaker",
+    "check_budget_before_invoke",
+    "persist_budget_usage",
+    "load_budget_from_task",
+    "create_budget_manager_from_task",
 ]

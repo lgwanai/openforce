@@ -95,8 +95,9 @@ class TestCircuitBreakerIntegration:
         assert partial_state["tokens_used"] == 50
         assert partial_state["exhausted"] is False
 
-        # Now exhaust
-        await manager.consume_tokens(50)
+        # Now exhaust (consume more than limit)
+        with pytest.raises(BudgetExhaustedError):
+            await manager.consume_tokens(51)
         assert manager.is_exhausted() is True
 
 
