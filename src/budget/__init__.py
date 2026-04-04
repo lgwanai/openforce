@@ -18,6 +18,10 @@ from src.budget.persistence import (
     load_budget_from_task,
     create_budget_manager_from_task,
 )
+from src.budget.isolation import (
+    BudgetAllocationStrategy,
+    allocate_child_budgets,
+)
 
 __all__ = [
     "BudgetLimits",
@@ -34,4 +38,6 @@ __all__ = [
     "persist_budget_usage",
     "load_budget_from_task",
     "create_budget_manager_from_task",
+    "BudgetAllocationStrategy",
+    "allocate_child_budgets",
 ]

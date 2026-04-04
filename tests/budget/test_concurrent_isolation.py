@@ -110,7 +110,8 @@ class TestChildIsolation:
         child2 = parent.allocate_child("agent-2", budget_limits(max_tokens=100))
 
         # Child1 exhausts its budget
-        await child1.consume_tokens(50)
+        with pytest.raises(BudgetExhaustedError):
+            await child1.consume_tokens(51)
 
         # Child1 should be exhausted
         assert child1.is_exhausted() is True
@@ -135,7 +136,8 @@ class TestChildIsolation:
         child = parent.allocate_child("agent-1", child_limits)
 
         # Try to consume more than child limit
-        await child.consume_tokens(50)
+        with pytest.raises(BudgetExhaustedError):
+            await child.consume_tokens(51)
 
         # Should be exhausted
         assert child.is_exhausted() is True

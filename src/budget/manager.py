@@ -165,3 +165,26 @@ class BudgetManager:
             self._exhausted = True
 
         return self._exhausted
+
+    def get_child(self, agent_id: str) -> Optional["BudgetManager"]:
+        """Get child budget manager by agent ID.
+
+        Args:
+            agent_id: ID of the child agent.
+
+        Returns:
+            Child BudgetManager or None if not found.
+        """
+        return self._children.get(agent_id)
+
+    def get_children(self) -> Dict[str, "BudgetManager"]:
+        """Get all child budget managers.
+
+        Returns:
+            Copy of children dictionary.
+        """
+        return self._children.copy()
+
+
+# Re-export allocate_child_budgets for backward compatibility
+from .isolation import allocate_child_budgets, BudgetAllocationStrategy
