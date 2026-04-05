@@ -151,7 +151,20 @@ def run_cli():
                                 log_audit_event(task_id, f"AGENT_OUTPUT_{msg_type}", msg_content)
 
                             if isinstance(last_msg, AIMessage):
-                                if last_msg.tool_calls:
+                                # Check for intermediate status from delegate agents
+                                additional_kwargs = getattr(last_msg, "additional_kwargs", {})
+                                if additional_kwargs.get("intermediate_status"):
+                                    agent = additional_kwargs.get("agent", "unknown")
+                                    if additional_kwargs.get("tool_result"):
+                                        tool_name = additional_kwargs.get("tool_name", "unknown")
+                                        console.print(f"[dim]✓ [{agent}] 工具 [bold]{tool_name}[/bold] 执行完成[/dim]")
+                                    else:
+                                        tool_name = additional_kwargs.get("tool_name", "unknown")
+                                        tool_args = additional_kwargs.get("tool_args", {})
+                                        console.print(f"[dim]├── [{agent}] 调用工具: [bold]{tool_name}[/bold][/dim]")
+                                        args_display = json.dumps(tool_args, ensure_ascii=False, indent=2)
+                                        console.print(f"[dim]└── 参数: {args_display}[/dim]")
+                                elif last_msg.tool_calls:
                                     console.print()
                                     console.print(Panel(
                                         "[bold yellow]思考中...[/bold yellow]",

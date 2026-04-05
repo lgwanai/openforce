@@ -11,6 +11,7 @@ from src.core.utils import invoke_llm_with_tools
 from src.tools.base import get_current_time, get_system_info, read_file, write_file, list_directory, get_current_path
 from src.agents.shangshu import build_shangshu_graph
 from src.agents.hubu import build_hubu_graph
+from src.agents.bingbu import build_bingbu_graph
 from src.security.approval_flow import ApprovalRequest
 from src.security.taint_engine import TaintEngine
 
@@ -22,6 +23,8 @@ class ZhongshuState(TypedDict):
     plan: Dict[str, Any]
     # For context continuation
     pending_delegate_state: Optional[Dict[str, Any]]
+    # For intermediate feedback from delegates
+    intermediate_status: Optional[Dict[str, Any]]
 
 def load_prompt(template_name: str, **kwargs) -> str:
     path = os.path.join(os.path.dirname(__file__), f"../../prompts/{template_name}.md")
@@ -62,7 +65,12 @@ def delegate_to_hubu(research_goal: str) -> str:
     """Delegate deep research, web search, or complex knowledge QA to Hubu."""
     return "Delegated"
 
-tools = [tool_read_file, tool_write_file, tool_list_directory, tool_get_current_path, delegate_to_shangshu, delegate_to_hubu]
+@tool
+def delegate_to_bingbu(code_task: str) -> str:
+    """Delegate code writing, file creation, or script execution tasks to Bingbu."""
+    return "Delegated"
+
+tools = [tool_read_file, tool_write_file, tool_list_directory, tool_get_current_path, delegate_to_shangshu, delegate_to_hubu, delegate_to_bingbu]
 
 def router_node(state: ZhongshuState):
     llm = get_llm("zhongshu_planner")
@@ -223,6 +231,8 @@ def router_node(state: ZhongshuState):
                 return {"messages": [response], "intent": "Task"}
             elif tc["name"] == "delegate_to_hubu":
                 return {"messages": [response], "intent": "QA"}
+            elif tc["name"] == "delegate_to_bingbu":
+                return {"messages": [response], "intent": "Code"}
         return {"messages": [response], "intent": "Basic Tool"}
     else:
         return {"messages": [response], "intent": "Chat"}
@@ -308,11 +318,59 @@ def delegate_node(state: ZhongshuState):
             hubu_graph = build_hubu_graph()
             # Get the stored state and update with user's answer
             hubu_state = pending_delegate_state.get("state", {}).copy()
-            # Only add the user's answer, not the whole conversation
-            hubu_state["messages"] = [last_message]  # User's answer
+            previous_question = pending_delegate_state.get("question", "")
+
+            # Add context about the Q&A exchange so LLM understands what to do
+            context_msg = HumanMessage(content=(
+                f"用户回答了问题「{previous_question}」\n"
+                f"用户的回答：{last_message.content}\n\n"
+                f"请继续执行任务，使用工具收集所需信息。"
+            ))
+            hubu_state["messages"] = [context_msg]
             hubu_state["pending_question"] = None  # Clear the pending question
 
-            res = hubu_graph.invoke(hubu_state)
+            # Use stream to get intermediate states
+            intermediate_messages = []
+            res = None
+
+            for output in hubu_graph.stream(hubu_state, {"recursion_limit": 10}):
+                for key, value in output.items():
+                    if "messages" in value and value["messages"]:
+                        last_msg = value["messages"][-1]
+
+                        # Track tool calls from hubu for intermediate feedback
+                        if isinstance(last_msg, AIMessage) and last_msg.tool_calls:
+                            for tc in last_msg.tool_calls:
+                                # Create an intermediate status message for CLI
+                                status_msg = AIMessage(
+                                    content="",
+                                    additional_kwargs={
+                                        "intermediate_status": True,
+                                        "agent": "hubu",
+                                        "tool_name": tc["name"],
+                                        "tool_args": tc["args"]
+                                    }
+                                )
+                                intermediate_messages.append(status_msg)
+
+                        # Track tool results
+                        elif isinstance(last_msg, ToolMessage):
+                            status_msg = AIMessage(
+                                content="",
+                                additional_kwargs={
+                                    "intermediate_status": True,
+                                    "agent": "hubu",
+                                    "tool_result": True,
+                                    "tool_name": last_msg.name
+                                }
+                            )
+                            intermediate_messages.append(status_msg)
+
+                # Get the final state from the last output
+                res = list(output.values())[0] if output else None
+
+            if res is None:
+                return {"messages": [AIMessage(content="Hubu执行失败")]}
 
             # Check if hubu needs more user input
             new_pending_question = res.get("pending_question")
@@ -320,14 +378,14 @@ def delegate_node(state: ZhongshuState):
                 hubu_state["messages"] = []
                 hubu_state["pending_question"] = new_pending_question
                 return {
-                    "messages": [AIMessage(content=new_pending_question, additional_kwargs={"is_question": True})],
+                    "messages": intermediate_messages + [AIMessage(content=new_pending_question, additional_kwargs={"is_question": True})],
                     "pending_delegate_state": {"type": "hubu", "state": hubu_state}
                 }
 
             # Hubu completed, return result to router for formatting
-            final_msg = res["messages"][-1].content
+            final_msg = res.get("messages", [AIMessage(content="无结果")])[-1].content
             return {
-                "messages": [AIMessage(content=final_msg, additional_kwargs={"is_hubu_result": True})],
+                "messages": intermediate_messages + [AIMessage(content=final_msg, additional_kwargs={"is_hubu_result": True})],
                 "pending_delegate_state": None
             }
 
@@ -339,6 +397,8 @@ def delegate_node(state: ZhongshuState):
                 goal_text = tc["args"].get("plan", "")
             elif tc["name"] == "delegate_to_hubu":
                 goal_text = tc["args"].get("research_goal", "")
+            elif tc["name"] == "delegate_to_bingbu":
+                goal_text = tc["args"].get("code_task", "")
 
     # Fallback to human message if extraction failed
     if not goal_text:
@@ -376,7 +436,49 @@ def delegate_node(state: ZhongshuState):
             "context": {},
             "pending_question": None
         }
-        res = hubu_graph.invoke(hubu_state)
+
+        # Use stream to get intermediate states
+        intermediate_messages = []
+        res = None
+
+        for output in hubu_graph.stream(hubu_state, {"recursion_limit": 10}):
+            for key, value in output.items():
+                if "messages" in value and value["messages"]:
+                    last_msg = value["messages"][-1]
+
+                    # Track tool calls from hubu for intermediate feedback
+                    if isinstance(last_msg, AIMessage) and last_msg.tool_calls:
+                        for tc in last_msg.tool_calls:
+                            # Create an intermediate status message for CLI
+                            status_msg = AIMessage(
+                                content="",
+                                additional_kwargs={
+                                    "intermediate_status": True,
+                                    "agent": "hubu",
+                                    "tool_name": tc["name"],
+                                    "tool_args": tc["args"]
+                                }
+                            )
+                            intermediate_messages.append(status_msg)
+
+                    # Track tool results
+                    elif isinstance(last_msg, ToolMessage):
+                        status_msg = AIMessage(
+                            content="",
+                            additional_kwargs={
+                                "intermediate_status": True,
+                                "agent": "hubu",
+                                "tool_result": True,
+                                "tool_name": last_msg.name
+                            }
+                        )
+                        intermediate_messages.append(status_msg)
+
+            # Get the final state from the last output
+            res = list(output.values())[0] if output else None
+
+        if res is None:
+            return {"messages": [AIMessage(content="Hubu执行失败")]}
 
         # Check if hubu needs user input
         pending_question = res.get("pending_question")
@@ -385,16 +487,35 @@ def delegate_node(state: ZhongshuState):
             tool_call_id = last_message.tool_calls[0]["id"] if getattr(last_message, "tool_calls", None) else "call_1"
             tool_msg = ToolMessage(content="Need user input", name="delegate_to_hubu", tool_call_id=tool_call_id)
             return {
-                "messages": [tool_msg],
+                "messages": intermediate_messages + [tool_msg],
                 "pending_delegate_state": {"type": "hubu", "state": hubu_state, "question": pending_question}
             }
 
         # Hubu completed, return result to router for formatting
-        final_msg = res["messages"][-1].content
+        final_msg = res.get("messages", [AIMessage(content="无结果")])[-1].content
         tool_call_id = last_message.tool_calls[0]["id"] if getattr(last_message, "tool_calls", None) else "call_1"
         tool_msg = ToolMessage(content=final_msg, name="delegate_to_hubu", tool_call_id=tool_call_id)
 
-        return {"messages": [tool_msg]}
+        return {"messages": intermediate_messages + [tool_msg]}
+
+    elif intent == "Code":
+        bingbu_graph = build_bingbu_graph()
+        bingbu_state = {
+            "messages": [HumanMessage(content=goal_text)],
+            "task_id": state.get("task_id", ""),
+            "goal": goal_text,
+            "files_created": [],
+            "files_modified": [],
+            "commands_executed": [],
+            "errors": []
+        }
+        res = bingbu_graph.invoke(bingbu_state)
+        final_msg = res["messages"][-1].content
+
+        tool_call_id = last_message.tool_calls[0]["id"] if getattr(last_message, "tool_calls", None) else "call_1"
+        tool_msg = ToolMessage(content=final_msg, name="delegate_to_bingbu", tool_call_id=tool_call_id)
+
+        return {"messages": [tool_msg, AIMessage(content=final_msg)]}
 
     return {"messages": []}
 
@@ -410,7 +531,7 @@ def build_zhongshu_graph():
     def should_continue(state: ZhongshuState):
         intent = state.get("intent")
 
-        if intent in ["Task", "QA", "Continue"]:
+        if intent in ["Task", "QA", "Code", "Continue"]:
             return "delegate"
 
         last_message = state["messages"][-1]
