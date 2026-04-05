@@ -5,6 +5,7 @@ from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, System
 from langchain_core.tools import tool
 import json
 import os
+import datetime
 
 from src.core.config import get_llm
 from src.core.utils import invoke_llm_with_tools
@@ -66,11 +67,101 @@ def delegate_to_hubu(research_goal: str) -> str:
     return "Delegated"
 
 @tool
+def resolve_relative_time(time_expression: str) -> str:
+    """Convert relative time expressions to absolute date/time.
+
+    Args:
+        time_expression: Natural language time expression like "明天", "后天", "下周三", "去年", "上周一"
+
+    Returns:
+        JSON string with resolved absolute date and original expression
+    """
+    import re
+
+    now = datetime.datetime.now()
+    result = {
+        "original": time_expression,
+        "current_time": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "resolved_date": None,
+        "resolved_datetime": None
+    }
+
+    expr = time_expression.strip()
+
+    # Handle common patterns
+    if expr in ["今天", "今日"]:
+        result["resolved_date"] = now.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = now.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr in ["明天", "明日"]:
+        target = now + datetime.timedelta(days=1)
+        result["resolved_date"] = target.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr in ["后天"]:
+        target = now + datetime.timedelta(days=2)
+        result["resolved_date"] = target.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr in ["大后天"]:
+        target = now + datetime.timedelta(days=3)
+        result["resolved_date"] = target.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr in ["昨天", "昨日"]:
+        target = now - datetime.timedelta(days=1)
+        result["resolved_date"] = target.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr in ["前天"]:
+        target = now - datetime.timedelta(days=2)
+        result["resolved_date"] = target.strftime("%Y-%m-%d")
+        result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+    elif expr == "去年":
+        result["resolved_date"] = f"{now.year - 1}年"
+        result["resolved_datetime"] = None
+    elif expr == "今年":
+        result["resolved_date"] = f"{now.year}年"
+        result["resolved_datetime"] = None
+    elif expr == "上个月":
+        if now.month == 1:
+            result["resolved_date"] = f"{now.year - 1}年12月"
+        else:
+            result["resolved_date"] = f"{now.year}年{now.month - 1}月"
+    elif expr == "下个月":
+        if now.month == 12:
+            result["resolved_date"] = f"{now.year + 1}年1月"
+        else:
+            result["resolved_date"] = f"{now.year}年{now.month + 1}月"
+    else:
+        # Try to match patterns like "下周三", "上周一"
+        weekdays = ["一", "二", "三", "四", "五", "六", "日"]
+        week_match = re.match(r"下周([一二三四五六日天])", expr)
+        if week_match:
+            target_day = weekdays.index(week_match.group(1)) if week_match.group(1) != "天" else 6
+            days_ahead = target_day - now.weekday()
+            if days_ahead <= 0:
+                days_ahead += 7
+            target = now + datetime.timedelta(days=days_ahead)
+            result["resolved_date"] = target.strftime("%Y-%m-%d")
+            result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            week_match = re.match(r"上周([一二三四五六日天])", expr)
+            if week_match:
+                target_day = weekdays.index(week_match.group(1)) if week_match.group(1) != "天" else 6
+                days_behind = now.weekday() - target_day
+                if days_behind < 0:
+                    days_behind += 7
+                target = now - datetime.timedelta(days=days_behind)
+                result["resolved_date"] = target.strftime("%Y-%m-%d")
+                result["resolved_datetime"] = target.strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                result["resolved_date"] = "无法解析"
+                result["resolved_datetime"] = None
+
+    return json.dumps(result, ensure_ascii=False)
+
+@tool
 def delegate_to_bingbu(code_task: str) -> str:
     """Delegate code writing, file creation, or script execution tasks to Bingbu."""
     return "Delegated"
 
-tools = [tool_read_file, tool_write_file, tool_list_directory, tool_get_current_path, delegate_to_shangshu, delegate_to_hubu, delegate_to_bingbu]
+tools = [tool_read_file, tool_write_file, tool_list_directory, tool_get_current_path, resolve_relative_time, delegate_to_shangshu, delegate_to_hubu, delegate_to_bingbu]
 
 def router_node(state: ZhongshuState):
     llm = get_llm("zhongshu_planner")
@@ -427,13 +518,24 @@ def delegate_node(state: ZhongshuState):
 
     elif intent == "QA":
         hubu_graph = build_hubu_graph()
+
+        # Extract context from conversation history
+        # Collect previous AI responses that might contain relevant info
+        existing_context = {}
+        for msg in state.get("messages", []):
+            if isinstance(msg, AIMessage) and msg.content:
+                # Store AI responses as potential context
+                content = msg.content
+                if len(content) > 50:  # Only substantial responses
+                    existing_context[f"prior_info_{len(existing_context)}"] = content[:500]
+
         hubu_state = {
             "messages": [HumanMessage(content=goal_text)],
             "task_id": state.get("task_id", ""),
             "goal": goal_text,
             "searched_queries": [],
             "visited_urls": [],
-            "context": {},
+            "context": existing_context,
             "pending_question": None
         }
 
