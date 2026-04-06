@@ -17,7 +17,20 @@
       "Bash(git commit -m ':*)",
       "Bash(grep -n \"^wave:\" .planning/phases/02-budget-system/02-*.md)",
       "Bash(grep:*)",
-      "Bash(ls /Users/wuliang/workspace/openforce/.planning/phases/02-budget-system/*-VALIDATION.md)"
+      "Bash(ls /Users/wuliang/workspace/openforce/.planning/phases/02-budget-system/*-VALIDATION.md)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(pkill -f \"pytest.*test_xingbu\")",
+      "Bash(pkill -f \"pytest.*test_check_coverage\")",
+      "Bash(git push:*)",
+      "Bash(env)",
+      "Bash(export DASHSCOPE_API_KEY=\"sk-lagqdouhviczgattajahmktmltpsaqdzstmpqnhelpwgchsy\")",
+      "Bash(python3 /Users/wuliang/workspace/openforce/scripts/baidu_search.py '{\"query\": \"北京今天天气\"}')",
+      "Bash(pip show:*)",
+      "Bash(python3:*)",
+      "Bash(pip list:*)",
+      "Bash(pip install:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

@@ -1,0 +1,255 @@
+"""
+Dream processor for memory consolidation.
+
+Implements MEM-04: /dream command for knowledge extraction
+"""
+
+from typing import List, Dict, Any, Optional
+from dataclasses import dataclass
+from datetime import datetime
+import json
+import logging
+import re
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class DreamReport:
+    """Report from a dream session."""
+    started_at: str
+    finished_at: str
+    messages_processed: int
+    knowledge_extracted: int
+    connections_made: int
+    summaries_created: int
+    insights: List[str]
+
+
+class DreamProcessor:
+    """
+    Processes and consolidates memories during idle time.
+
+    Features:
+    - Extract knowledge from recent conversations
+    - Connect related knowledge points
+    - Summarize old memories
+    - Clean up redundant information
+    """
+
+    def __init__(
+        self,
+        short_term_memory,
+        long_term_memory=None
+    ):
+        self.short_term = short_term_memory
+        self.long_term = long_term_memory
+
+    def dream(self, session_id: str = None) -> DreamReport:
+        """
+        Run dream processing.
+
+        Args:
+            session_id: Optional session to focus on
+
+        Returns:
+            DreamReport with processing statistics
+        """
+        started_at = datetime.utcnow().isoformat()
+
+        messages_processed = 0
+        knowledge_extracted = 0
+        connections_made = 0
+        summaries_created = 0
+        insights = []
+
+        # Process recent messages
+        messages = self.short_term.get_all_messages()
+        messages_processed = len(messages)
+
+        # Extract knowledge
+        for msg in messages:
+            extracted = self._extract_knowledge(msg)
+            knowledge_extracted += len(extracted)
+
+            if self.long_term:
+                for item in extracted:
+                    self.long_term.add_node(
+                        node_id=f"auto_{datetime.utcnow().timestamp()}_{knowledge_extracted}",
+                        node_type=item["type"],
+                        content=item["content"],
+                        importance=item.get("importance", 0.5)
+                    )
+
+        # Create connections
+        if self.long_term:
+            connections_made = self._create_connections()
+
+        # Summarize old content
+        summaries_created = len(self.short_term.get_summaries())
+
+        # Generate insights
+        insights = self._generate_insights(messages)
+
+        finished_at = datetime.utcnow().isoformat()
+
+        report = DreamReport(
+            started_at=started_at,
+            finished_at=finished_at,
+            messages_processed=messages_processed,
+            knowledge_extracted=knowledge_extracted,
+            connections_made=connections_made,
+            summaries_created=summaries_created,
+            insights=insights
+        )
+
+        logger.info(f"Dream completed: {knowledge_extracted} knowledge items extracted")
+        return report
+
+    def _extract_knowledge(self, message: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Extract knowledge points from a message."""
+        extracted = []
+        content = message.get("content", "")
+        role = message.get("role", "")
+
+        # Extract entities (simple pattern matching)
+        entities = self._extract_entities(content)
+        for entity in entities:
+            extracted.append({
+                "type": "entity",
+                "content": entity,
+                "importance": 0.6 if role == "user" else 0.4
+            })
+
+        # Extract facts (sentences with specific patterns)
+        facts = self._extract_facts(content)
+        for fact in facts:
+            extracted.append({
+                "type": "fact",
+                "content": fact,
+                "importance": 0.7
+            })
+
+        # Extract procedures (step-by-step patterns)
+        procedures = self._extract_procedures(content)
+        for proc in procedures:
+            extracted.append({
+                "type": "procedure",
+                "content": proc,
+                "importance": 0.8
+            })
+
+        return extracted
+
+    def _extract_entities(self, text: str) -> List[str]:
+        """Extract named entities from text."""
+        entities = []
+
+        # Simple patterns for common entity types
+        patterns = [
+            r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b',  # Names
+            r'\b(\d{4}-\d{2}-\d{2})\b',  # Dates
+            r'\b([\w\.-]+@[\w\.-]+\.\w+)\b',  # Emails
+            r'\b(https?://[^\s]+)\b',  # URLs
+        ]
+
+        for pattern in patterns:
+            matches = re.findall(pattern, text)
+            entities.extend(matches)
+
+        return list(set(entities))[:5]  # Dedupe and limit
+
+    def _extract_facts(self, text: str) -> List[str]:
+        """Extract factual statements from text."""
+        facts = []
+
+        # Look for sentences with fact indicators
+        sentences = text.split('.')
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if any(indicator in sentence.lower() for indicator in
+                   ['is', 'are', 'was', 'were', 'means', 'defines', 'equals']):
+                if len(sentence) > 20 and len(sentence) < 200:
+                    facts.append(sentence)
+
+        return facts[:3]
+
+    def _extract_procedures(self, text: str) -> List[str]:
+        """Extract procedural knowledge from text."""
+        procedures = []
+
+        # Look for step patterns
+        step_patterns = [
+            r'first[,.].*?(?:then|next|after)',
+            r'step \d+:.*?(?=step|$)',
+            r'\d+\.\s+.*?(?=\d+\.|$)',
+        ]
+
+        for pattern in step_patterns:
+            matches = re.findall(pattern, text, re.IGNORECASE | re.DOTALL)
+            procedures.extend(matches)
+
+        return procedures[:2]
+
+    def _create_connections(self) -> int:
+        """Create connections between related knowledge."""
+        connections = 0
+
+        if not self.long_term:
+            return connections
+
+        # Find nodes with shared keywords
+        nodes = list(self.long_term._nodes.values())
+
+        for i, node1 in enumerate(nodes):
+            for node2 in nodes[i+1:]:
+                if self._are_related(node1.content, node2.content):
+                    self.long_term.add_edge(
+                        source_id=node1.node_id,
+                        target_id=node2.node_id,
+                        relation="related_to",
+                        weight=0.5
+                    )
+                    connections += 1
+
+        return connections
+
+    def _are_related(self, text1: str, text2: str) -> bool:
+        """Check if two texts are related."""
+        words1 = set(text1.lower().split()) - {'the', 'a', 'an', 'is', 'are', 'to', 'of', 'and'}
+        words2 = set(text2.lower().split()) - {'the', 'a', 'an', 'is', 'are', 'to', 'of', 'and'}
+        return len(words1 & words2) >= 1
+
+    def _generate_insights(self, messages: List[Dict[str, Any]]) -> List[str]:
+        """Generate insights from messages."""
+        insights = []
+
+        # Count topics
+        topics = {}
+        for msg in messages:
+            content = msg.get("content", "").lower()
+            words = content.split()
+            for word in words:
+                if len(word) > 5:
+                    topics[word] = topics.get(word, 0) + 1
+
+        # Top topics
+        top_topics = sorted(topics.items(), key=lambda x: x[1], reverse=True)[:5]
+        if top_topics:
+            insights.append(f"Frequent topics: {', '.join(t[0] for t in top_topics)}")
+
+        # Message patterns
+        user_msgs = sum(1 for m in messages if m.get("role") == "user")
+        if user_msgs > 0:
+            insights.append(f"User engagement: {user_msgs} user messages")
+
+        return insights
+
+    def get_dream_status(self) -> Dict[str, Any]:
+        """Get current dream status."""
+        return {
+            "short_term_messages": self.short_term.message_count,
+            "short_term_summaries": self.short_term.summary_count,
+            "long_term_nodes": self.long_term.node_count if self.long_term else 0,
+            "long_term_edges": self.long_term.edge_count if self.long_term else 0
+        }

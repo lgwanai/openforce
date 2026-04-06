@@ -1,0 +1,247 @@
+"""
+Memory retrieval with weighted scoring.
+
+Implements MEM-05: Retrieval with importance weighting and time decay
+"""
+
+from typing import List, Dict, Any, Optional, Tuple
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
+import math
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class RetrievalResult:
+    """Result from memory retrieval."""
+    item: Dict[str, Any]
+    score: float
+    components: Dict[str, float]
+
+
+@dataclass
+class RetrievalConfig:
+    """Configuration for retrieval scoring."""
+    importance_weight: float = 0.4
+    recency_weight: float = 0.3
+    relevance_weight: float = 0.2
+    access_weight: float = 0.1
+    time_decay_hours: float = 24.0  # Half-life for time decay
+
+
+class MemoryRetriever:
+    """
+    Weighted memory retrieval system.
+
+    Features:
+    - Importance-weighted scoring
+    - Time decay for recency
+    - Relevance matching
+    - Access frequency bonus
+    """
+
+    def __init__(
+        self,
+        short_term_memory=None,
+        long_term_memory=None,
+        config: RetrievalConfig = None
+    ):
+        self.short_term = short_term_memory
+        self.long_term = long_term_memory
+        self.config = config or RetrievalConfig()
+
+    def retrieve(
+        self,
+        query: str,
+        limit: int = 10,
+        memory_types: List[str] = None
+    ) -> List[RetrievalResult]:
+        """
+        Retrieve relevant memories.
+
+        Args:
+            query: Search query
+            limit: Maximum results
+            memory_types: Types to search (short_term, long_term)
+
+        Returns:
+            List of RetrievalResult sorted by score
+        """
+        memory_types = memory_types or ["short_term", "long_term"]
+        candidates = []
+
+        # Get candidates from short-term memory
+        if "short_term" in memory_types and self.short_term:
+            st_results = self.short_term.search(query, limit=limit * 2)
+            for item in st_results:
+                candidates.append(("short_term", item))
+
+        # Get candidates from long-term memory
+        if "long_term" in memory_types and self.long_term:
+            lt_results = self.long_term.search(query, limit=limit * 2)
+            for item in lt_results:
+                candidates.append(("long_term", item))
+
+        # Score candidates
+        scored_results = []
+        for memory_type, item in candidates:
+            result = self._score_item(query, item, memory_type)
+            scored_results.append(result)
+
+        # Sort by score and return top results
+        scored_results.sort(key=lambda x: x.score, reverse=True)
+        return scored_results[:limit]
+
+    def _score_item(
+        self,
+        query: str,
+        item: Dict[str, Any],
+        memory_type: str
+    ) -> RetrievalResult:
+        """Calculate weighted score for an item."""
+        components = {}
+
+        # Importance score (0-1)
+        importance = item.get("importance", 0.5)
+        components["importance"] = importance
+
+        # Recency score with time decay
+        timestamp = item.get("timestamp") or item.get("created_at") or ""
+        components["recency"] = self._calculate_recency_score(timestamp)
+
+        # Relevance score (text matching)
+        content = item.get("content", "")
+        components["relevance"] = self._calculate_relevance_score(query, content)
+
+        # Access score
+        access_count = item.get("access_count", 0)
+        components["access"] = min(1.0, access_count / 10.0)
+
+        # Calculate weighted score
+        score = (
+            self.config.importance_weight * components["importance"] +
+            self.config.recency_weight * components["recency"] +
+            self.config.relevance_weight * components["relevance"] +
+            self.config.access_weight * components["access"]
+        )
+
+        return RetrievalResult(
+            item=item,
+            score=score,
+            components=components
+        )
+
+    def _calculate_recency_score(self, timestamp: str) -> float:
+        """Calculate recency score with exponential decay."""
+        if not timestamp:
+            return 0.0
+
+        try:
+            # Handle both timezone-aware (with Z) and naive timestamps
+            if timestamp.endswith("Z"):
+                item_time = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+                now = datetime.now(timezone.utc)
+            else:
+                item_time = datetime.fromisoformat(timestamp)
+                now = datetime.utcnow()
+
+            age_hours = (now - item_time).total_seconds() / 3600
+
+            # Exponential decay: score = 0.5^(age / half_life)
+            decay_rate = math.log(2) / self.config.time_decay_hours
+            score = math.exp(-decay_rate * age_hours)
+
+            return max(0.0, min(1.0, score))
+
+        except (ValueError, TypeError):
+            return 0.5
+
+    def _calculate_relevance_score(self, query: str, content: str) -> float:
+        """Calculate relevance score based on text matching."""
+        if not query or not content:
+            return 0.0
+
+        query_words = set(query.lower().split())
+        content_words = set(content.lower().split())
+
+        # Jaccard similarity
+        intersection = len(query_words & content_words)
+        union = len(query_words | content_words)
+
+        if union == 0:
+            return 0.0
+
+        return intersection / union
+
+    def retrieve_by_importance(
+        self,
+        limit: int = 10,
+        min_importance: float = 0.0
+    ) -> List[RetrievalResult]:
+        """Retrieve items sorted by importance."""
+        candidates = []
+
+        if self.long_term:
+            for node in self.long_term._nodes.values():
+                if node.importance >= min_importance:
+                    candidates.append(RetrievalResult(
+                        item={
+                            "node_id": node.node_id,
+                            "content": node.content,
+                            "importance": node.importance
+                        },
+                        score=node.importance,
+                        components={"importance": node.importance}
+                    ))
+
+        candidates.sort(key=lambda x: x.score, reverse=True)
+        return candidates[:limit]
+
+    def retrieve_recent(
+        self,
+        hours: int = 24,
+        limit: int = 10
+    ) -> List[RetrievalResult]:
+        """Retrieve items from recent time period."""
+        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        candidates = []
+
+        if self.short_term:
+            for msg in self.short_term._messages:
+                try:
+                    msg_time = datetime.fromisoformat(msg.timestamp.replace("Z", "+00:00"))
+                    if msg_time.replace(tzinfo=None) >= cutoff:
+                        candidates.append(RetrievalResult(
+                            item=msg.to_dict(),
+                            score=1.0,
+                            components={"recency": 1.0}
+                        ))
+                except (ValueError, TypeError):
+                    pass
+
+        return candidates[:limit]
+
+    def get_context_for_query(
+        self,
+        query: str,
+        max_tokens: int = 2000
+    ) -> str:
+        """Get relevant context for a query, fitting within token limit."""
+        results = self.retrieve(query, limit=20)
+
+        context_parts = []
+        current_length = 0
+
+        for result in results:
+            content = result.item.get("content", "")
+            estimated_tokens = len(content.split())
+
+            if current_length + estimated_tokens <= max_tokens:
+                context_parts.append(content)
+                current_length += estimated_tokens
+            else:
+                break
+
+        return "\n\n".join(context_parts)
