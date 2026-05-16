@@ -229,6 +229,32 @@ Worker 提交敏感 Patch
 | Worker 生命周期 | 持久存在 | 瞬时创建，用完即焚 |
 | 部署 | 单机 Python | 跨物理机 Rust 二进制 |
 
+## 对比：OpenForce vs Claude Code
+
+Claude Code 是优秀的单智能体编程助手，但受限于单进程架构。OpenForce 是为**复杂工程任务**设计的多智能体编排系统。
+
+| 维度 | Claude Code | OpenForce |
+|------|------------|-----------|
+| 架构模型 | 单 Agent，一体式 | 多 Agent，蜂群式 |
+| 任务分解 | 一次性理解，隐含 | Planner 显式分解为带类型的子任务 |
+| Worker | 自身 (单向) | N 个独立 Worker，每个独立进程/沙箱 |
+| 角色系统 | 固定 System Prompt | 动态 Role Profile + Prompt Bundle，按任务匹配 |
+| 模型选择 | 单一模型 | 按角色分配不同模型 (opus/sonnet/haiku/deepseek) |
+| 物理执行 | 单机单进程 | 跨物理机，Node Daemon 管理 Worker 生命周期 |
+| 状态持久化 | 会话结束时丢失 | Event-Sourced Session (26 种事件类型，完整审计) |
+| 并发模式 | 串行 | 真正并行 — N 个 Worker 同时执行 |
+| 可靠性 | 依赖进程存活 | CAS + Lease + Fencing Token，Worker 崩溃不污染状态 |
+| 副作用控制 | 无 | Effect Gateway 统一入口，幂等 + 审批 + Outbox |
+| 安全审批 | 无 | HITL 审批流，Patch 风险分级 (9 PCR)，签名 Token |
+| 经验学习 | 会话内上下文 | Observer → Evaluator → Evolver 版本化旁路进化 |
+| 空间隔离 | 本地文件系统 | 三层隔离 (Agent/Workspace/Execution) |
+| 多租户 | 不适用 | 租户级策略、配额、BYOK、Kill Switch |
+| 适用场景 | 对话式编程辅助 | 企业级 AI 编排生产平台 |
+
+**本质区别**：Claude Code 是一个"人" — 聪明但有限。OpenForce 是一个"组织" — Planner 像 CEO 分配任务，Scheduler 像 COO 确保执行，多个 Worker 像不同部门的专家各司其职。一个人再强也不可能同时写前端、写后端、做安全审计、跑集成测试；但一个好的组织可以。
+
+**互补关系**：你可以用 Claude Code 来开发 OpenForce，然后用 OpenForce 来编排成百上千个 Claude Code 完成任务。Claude Code 是锤子，OpenForce 是工厂。
+
 ## 服务拓扑
 
 ```
