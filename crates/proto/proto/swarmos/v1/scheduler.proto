@@ -1,0 +1,140 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "swarmos/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+// Scheduler — deterministic task dispatching with lease/fencing control
+service Scheduler {
+  rpc CompilePlan(CompilePlanRequest) returns (CompilePlanResponse);
+  rpc LeaseTask(LeaseTaskRequest) returns (LeaseTaskResponse);
+  rpc RenewLease(RenewLeaseRequest) returns (RenewLeaseResponse);
+  rpc SubmitArtifact(SubmitArtifactRequest) returns (SubmitArtifactResponse);
+  rpc SubmitPatch(SubmitPatchRequest) returns (SubmitPatchResponse);
+  rpc SubmitFinding(SubmitFindingRequest) returns (SubmitFindingResponse);
+  rpc MarkTaskSucceeded(MarkTaskSucceededRequest) returns (MarkTaskSucceededResponse);
+  rpc MarkTaskTimedOut(MarkTaskTimedOutRequest) returns (MarkTaskTimedOutResponse);
+  rpc ReplanSession(ReplanSessionRequest) returns (ReplanSessionResponse);
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
+  rpc SendHeartbeat(SendHeartbeatRequest) returns (SendHeartbeatResponse);
+}
+
+message CompilePlanRequest {
+  Command command = 1;
+}
+message CompilePlanResponse {
+  int32 plan_version = 1;
+  int32 plan_epoch = 2;
+}
+
+message LeaseTaskRequest {
+  Command command = 1;
+}
+message LeaseTaskResponse {
+  string lease_id = 1;
+  uint64 fencing_token = 2;
+  string worker_spec_id = 3;
+  int32 task_attempt = 4;
+  google.protobuf.Timestamp lease_expire_at = 5;
+}
+
+message RenewLeaseRequest {
+  Command command = 1;
+  string lease_id = 2;
+  uint64 fencing_token = 3;
+}
+message RenewLeaseResponse {
+  google.protobuf.Timestamp new_expire_at = 1;
+}
+
+message SubmitArtifactRequest {
+  Command command = 1;
+  string task_id = 2;
+  int32 task_attempt = 3;
+  string lease_id = 4;
+  uint64 fencing_token = 5;
+  string artifact_type = 6;
+  string storage_uri = 7;
+  string content_sha256 = 8;
+  string worker_spec_id = 9;
+  string base_snapshot_id = 10;
+  bytes validation_summary = 11;
+}
+message SubmitArtifactResponse {
+  string artifact_id = 1;
+  string formal_uri = 2;
+}
+
+message SubmitPatchRequest {
+  Command command = 1;
+  string task_id = 2;
+  int32 task_attempt = 3;
+  string lease_id = 4;
+  uint64 fencing_token = 5;
+  string patch_ref = 6;
+  string patch_sha256 = 7;
+  repeated string target_paths = 8;
+  string base_snapshot_id = 9;
+  string worker_spec_id = 10;
+  string approval_token = 11;
+}
+message SubmitPatchResponse {
+  string merge_commit_id = 1;
+  string new_snapshot_id = 2;
+}
+
+message SubmitFindingRequest {
+  Command command = 1;
+  string task_id = 2;
+  int32 task_attempt = 3;
+  string lease_id = 4;
+  uint64 fencing_token = 5;
+  string finding_type = 6;
+  bytes finding_data = 7;
+}
+message SubmitFindingResponse {
+  string finding_id = 1;
+}
+
+message MarkTaskSucceededRequest {
+  Command command = 1;
+  string task_id = 2;
+  string lease_id = 3;
+}
+message MarkTaskSucceededResponse {}
+
+message MarkTaskTimedOutRequest {
+  Command command = 1;
+  string task_id = 2;
+  string lease_id = 3;
+  string reason = 4;
+}
+message MarkTaskTimedOutResponse {}
+
+message ReplanSessionRequest {
+  Command command = 1;
+}
+message ReplanSessionResponse {
+  int32 new_plan_version = 1;
+  int32 new_plan_epoch = 2;
+}
+
+message CancelTaskRequest {
+  Command command = 1;
+  string task_id = 2;
+  string reason = 3;
+}
+message CancelTaskResponse {}
+
+message SendHeartbeatRequest {
+  string session_id = 1;
+  string task_id = 2;
+  int32 task_attempt = 3;
+  string lease_id = 4;
+  uint64 fencing_token = 5;
+  google.protobuf.Timestamp sent_at = 6;
+}
+message SendHeartbeatResponse {
+  google.protobuf.Timestamp lease_expire_at = 1;
+  bool lease_valid = 2;
+}

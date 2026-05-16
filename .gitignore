@@ -1,0 +1,91 @@
+# ============================================================
+# OpenForce .gitignore
+# ============================================================
+
+# === Rust Build Artifacts ===
+/target/
+**/*.rs.bk
+*.pdb
+
+# === Sensitive Information (绝对不上传) ===
+*.env
+*.env.*
+.env.*
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.credentials
+credentials.*
+secret*
+*secret*
+*_secret_*
+*.token
+token*
+
+# 配置文件含 API base URL
+openforce.toml
+
+# 临时文件
+/tmp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# === Design Documents (设计文档，不上传) ===
+architecture_v5.0_dynamic_orchestration.md
+swarmos_v5.1_gateway_implementation.md
+swarmos_v5.1_gateway_mapping.md
+swarmos_v5.1_launch_validation_red_team_plan.md
+swarmos_v5.1_project_tools_hitl_implementation.md
+swarmos_v5.1_test_case_registry.md
+
+# Planning 目录
+.planning/
+
+# Claude Code 配置
+.claude/
+
+# === Test Files (测试文件，不上传) ===
+**/tests/
+**/test/
+*_test.rs
+*_test.rs.bk
+test_*.rs
+**/test_*.rs
+**/testdata/
+**/test_data/
+**/fixtures/
+*.test.json
+*.test.toml
+**/test-output/
+**/test-results/
+*.test.log
+
+# === Archived Code ===
+/version1.0/
+
+# === IDE & Editor ===
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# === Misc ===
+*.log
+*.pid
+*.dump
+core.*
+node_modules/
+Cargo.lock

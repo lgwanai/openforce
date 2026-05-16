@@ -1,0 +1,11 @@
+[package]
+name = "openforce-path-acl"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+tracing = { workspace = true }
+openforce-domain = { path = "../domain" }
+glob = { workspace = true }
+thiserror = { workspace = true }
+[dev-dependencies]
+rstest = { workspace = true }

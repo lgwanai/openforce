@@ -1,0 +1,25 @@
+pub mod error;
+pub mod event;
+pub mod tenant;
+pub mod session;
+pub mod task;
+pub mod lease;
+pub mod worker_spec;
+pub mod plan;
+pub mod command;
+pub mod approval;
+pub mod patch;
+pub mod effect;
+
+pub use error::DomainError;
+pub use event::{EventEnvelope, EventPayload, ProducerIdentity};
+pub use tenant::{TenantId, TenantPolicy};
+pub use session::{Session, SessionState};
+pub use task::{Task, TaskId, TaskState, TaskTransitionCondition};
+pub use lease::{Lease, LeaseState, FencingToken};
+pub use worker_spec::{WorkerSpec, WorkerSpecBuilder, WorkerSpecId};
+pub use plan::{Plan, PlanVersion, PlanEpoch, EpochMapping, DagNode};
+pub use command::{Command, CommandType, CommandHandler, CommandDedupStore};
+pub use approval::{ApprovalRequest, ApprovalToken, ApprovalBinding, ApprovalStatus};
+pub use patch::{PatchClassification, PatchRiskLevel, PatchReasonCode};
+pub use effect::{EffectType, EffectId, IdempotencyKey, EffectState};

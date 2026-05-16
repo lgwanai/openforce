@@ -1,0 +1,13 @@
+[package]
+name = "openforce-patch-classifier"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+openforce-domain = { path = "../domain" }
+openforce-path-acl = { path = "../path-acl" }
+glob = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+[dev-dependencies]
+rstest = { workspace = true }

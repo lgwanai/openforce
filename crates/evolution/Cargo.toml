@@ -1,0 +1,12 @@
+[package]
+name = "openforce-evolution"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+openforce-domain = { path = "../domain" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

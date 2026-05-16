@@ -1,0 +1,30 @@
+[package]
+name = "openforce-project-tools"
+version = "0.1.0"
+edition = "2021"
+[[bin]]
+name = "project-tools"
+path = "src/main.rs"
+[dependencies]
+openforce-proto = { path = "../proto" }
+openforce-domain = { path = "../domain" }
+openforce-path-acl = { path = "../path-acl" }
+openforce-patch-classifier = { path = "../patch-classifier" }
+tokio = { workspace = true }
+tokio-stream = "0.1"
+tonic = { workspace = true }
+tonic-health = { workspace = true }
+tonic-reflection = { workspace = true }
+sqlx = { workspace = true, features = ["runtime-tokio", "tls-rustls", "postgres"] }
+prost-types = "0.13"
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+sha2 = { workspace = true }
+digest = "0.10"
+ring = { workspace = true }
+hex = "0.4"

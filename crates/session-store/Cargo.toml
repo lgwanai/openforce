@@ -1,0 +1,32 @@
+[package]
+name = "openforce-session-store"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "session-store"
+path = "src/main.rs"
+
+[dependencies]
+openforce-proto = { path = "../proto" }
+openforce-domain = { path = "../domain" }
+tokio = { workspace = true }
+tokio-stream = "0.1"
+tonic = { workspace = true }
+tonic-health = { workspace = true }
+tonic-reflection = { workspace = true }
+sqlx = { workspace = true }
+prost-types = "0.13"
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

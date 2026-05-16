@@ -1,0 +1,87 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Unified event envelope (architecture doc section 16)
+message Event {
+  string event_id = 1;
+  string event_type = 2;
+  string session_id = 3;
+  string tenant_id = 4;
+  int64 plan_version = 5;
+  int32 plan_epoch = 6;
+  string task_id = 7;
+  int32 task_attempt = 8;
+  ProducerIdentity producer = 9;
+  string causation_id = 10;
+  string correlation_id = 11;
+  google.protobuf.Timestamp occurred_at = 12;
+  int64 session_version = 13;
+  bytes payload = 14;
+}
+
+message ProducerIdentity {
+  string component = 1;
+  string instance_id = 2;
+  string region = 3;
+}
+
+// Command envelope (architecture doc section 21)
+message Command {
+  string command_id = 1;
+  string command_type = 2;
+  string tenant_id = 3;
+  string session_id = 4;
+  string task_id = 5;
+  int64 expected_version = 6;
+  ProducerIdentity requested_by = 7;
+  google.protobuf.Timestamp requested_at = 8;
+  bytes payload = 9;
+}
+
+// Event type enum (section 16.3)
+enum EventType {
+  EVENT_TYPE_UNSPECIFIED = 0;
+  EVENT_TYPE_SESSION_CREATED = 1;
+  EVENT_TYPE_PLAN_PROPOSED = 2;
+  EVENT_TYPE_PLAN_COMPILED = 3;
+  EVENT_TYPE_TASK_READIED = 4;
+  EVENT_TYPE_TASK_LEASED = 5;
+  EVENT_TYPE_TASK_STARTED = 6;
+  EVENT_TYPE_HEARTBEAT_RECEIVED = 7;
+  EVENT_TYPE_ARTIFACT_SUBMITTED = 8;
+  EVENT_TYPE_PATCH_SUBMITTED = 9;
+  EVENT_TYPE_FINDING_SUBMITTED = 10;
+  EVENT_TYPE_EFFECT_REQUESTED = 11;
+  EVENT_TYPE_EFFECT_APPROVED = 12;
+  EVENT_TYPE_EFFECT_REJECTED = 13;
+  EVENT_TYPE_EFFECT_COMMITTED = 14;
+  EVENT_TYPE_TASK_SUCCEEDED = 15;
+  EVENT_TYPE_TASK_FAILED = 16;
+  EVENT_TYPE_TASK_TIMED_OUT = 17;
+  EVENT_TYPE_TASK_CANCELLED = 18;
+  EVENT_TYPE_TASK_REASSIGNED = 19;
+  EVENT_TYPE_SESSION_COMPLETED = 20;
+  EVENT_TYPE_SESSION_ABORTED = 21;
+  EVENT_TYPE_PLAN_EPOCH_STARTED = 22;
+  EVENT_TYPE_TASK_INHERITED_TO_EPOCH = 23;
+  EVENT_TYPE_TASK_FROZEN_BY_REPLAN = 24;
+  EVENT_TYPE_TASK_INVALIDATED_BY_REPLAN = 25;
+  EVENT_TYPE_EPOCH_CLOSED = 26;
+}
+
+// Control plane error codes
+enum ControlPlaneErrorCode {
+  CONTROL_PLANE_ERROR_UNSPECIFIED = 0;
+  VERSION_CONFLICT = 1;
+  COMMAND_REPLAYED = 2;
+  INVALID_TRANSITION = 3;
+  LEASE_EXPIRED = 4;
+  FENCING_TOKEN_STALE = 5;
+  TASK_NOT_READY = 6;
+  SESSION_NOT_FOUND = 7;
+  TASK_NOT_FOUND = 8;
+  TENANT_NOT_FOUND = 9;
+  QUOTA_EXCEEDED = 10;
+}

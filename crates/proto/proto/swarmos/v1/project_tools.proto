@@ -1,0 +1,317 @@
+syntax = "proto3";
+
+package swarmos.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service ProjectToolService {
+  rpc ReadProjectFile(ReadProjectFileRequest) returns (ReadProjectFileResponse);
+  rpc ReadProjectTree(ReadProjectTreeRequest) returns (ReadProjectTreeResponse);
+  rpc SubmitProjectPatch(SubmitProjectPatchRequest) returns (SubmitProjectPatchResponse);
+  rpc DeleteProjectFile(DeleteProjectFileRequest) returns (DeleteProjectFileResponse);
+}
+
+service ApprovalService {
+  rpc CreateApprovalRequest(CreateApprovalRequestRequest) returns (CreateApprovalRequestResponse);
+  rpc GetApprovalRequest(GetApprovalRequestRequest) returns (GetApprovalRequestResponse);
+  rpc ApproveApprovalRequest(ApproveApprovalRequestRequest) returns (ApproveApprovalRequestResponse);
+  rpc RejectApprovalRequest(RejectApprovalRequestRequest) returns (RejectApprovalRequestResponse);
+  rpc ConsumeApprovalToken(ConsumeApprovalTokenRequest) returns (ConsumeApprovalTokenResponse);
+}
+
+enum ToolName {
+  TOOL_NAME_UNSPECIFIED = 0;
+  TOOL_NAME_READ_PROJECT_FILE = 1;
+  TOOL_NAME_READ_PROJECT_TREE = 2;
+  TOOL_NAME_WRITE_PROJECT_PATCH = 3;
+  TOOL_NAME_DELETE_PROJECT_FILE = 4;
+}
+
+enum PatchRiskLevel {
+  PATCH_RISK_LEVEL_UNSPECIFIED = 0;
+  PATCH_RISK_LEVEL_SAFE = 1;
+  PATCH_RISK_LEVEL_MODERATE = 2;
+  PATCH_RISK_LEVEL_SENSITIVE = 3;
+  PATCH_RISK_LEVEL_REJECT = 4;
+}
+
+enum ApprovalStatus {
+  APPROVAL_STATUS_UNSPECIFIED = 0;
+  APPROVAL_STATUS_PENDING_HUMAN = 1;
+  APPROVAL_STATUS_APPROVED = 2;
+  APPROVAL_STATUS_REJECTED = 3;
+  APPROVAL_STATUS_EXPIRED = 4;
+  APPROVAL_STATUS_REVOKED = 5;
+  APPROVAL_STATUS_CONSUMED = 6;
+}
+
+enum ApprovalDecision {
+  APPROVAL_DECISION_UNSPECIFIED = 0;
+  APPROVAL_DECISION_APPROVE = 1;
+  APPROVAL_DECISION_REJECT = 2;
+}
+
+enum ToolErrorCode {
+  TOOL_ERROR_CODE_UNSPECIFIED = 0;
+  TOOL_ERROR_CODE_LEASE_INVALID = 1;
+  TOOL_ERROR_CODE_FENCING_TOKEN_STALE = 2;
+  TOOL_ERROR_CODE_PATH_NOT_ALLOWED = 3;
+  TOOL_ERROR_CODE_SNAPSHOT_MISMATCH = 4;
+  TOOL_ERROR_CODE_APPROVAL_REQUIRED = 5;
+  TOOL_ERROR_CODE_APPROVAL_TOKEN_INVALID = 6;
+  TOOL_ERROR_CODE_APPROVAL_TOKEN_EXPIRED = 7;
+  TOOL_ERROR_CODE_APPROVAL_TOKEN_ALREADY_USED = 8;
+  TOOL_ERROR_CODE_SENSITIVE_PATCH_DETECTED = 9;
+  TOOL_ERROR_CODE_PATCH_REJECTED = 10;
+  TOOL_ERROR_CODE_COMMAND_ID_REPLAYED = 11;
+}
+
+enum PatchReasonCode {
+  PATCH_REASON_CODE_UNSPECIFIED = 0;
+  PATCH_REASON_CODE_DELETE_EQUIVALENT_PATCH = 1;
+  PATCH_REASON_CODE_TOUCHES_CORE_ROUTE = 2;
+  PATCH_REASON_CODE_TOUCHES_AUTH_LOGIC = 3;
+  PATCH_REASON_CODE_TOUCHES_MIGRATION = 4;
+  PATCH_REASON_CODE_TOUCHES_PROD_CONFIG = 5;
+  PATCH_REASON_CODE_BATCH_DELETE = 6;
+  PATCH_REASON_CODE_FILE_TRUNCATION = 7;
+  PATCH_REASON_CODE_CROSS_SCOPE_WRITE = 8;
+  PATCH_REASON_CODE_RENAME_WITH_WIDE_IMPACT = 9;
+}
+
+message WorkerIdentity {
+  string session_id = 1;
+  string task_id = 2;
+  uint32 task_attempt = 3;
+  string lease_id = 4;
+  uint64 fencing_token = 5;
+  string worker_spec_id = 6;
+  string command_id = 7;
+}
+
+message PathCapabilities {
+  repeated string allowed_read_paths = 1;
+  repeated string allowed_write_paths = 2;
+  repeated string forbidden_paths = 3;
+}
+
+message PatchRef {
+  string patch_ref = 1;
+  string patch_sha256 = 2;
+  repeated string target_paths = 3;
+  string base_snapshot_id = 4;
+}
+
+message ApprovalBinding {
+  string approval_request_id = 1;
+  string approval_token_id = 2;
+  string session_id = 3;
+  string task_id = 4;
+  uint32 task_attempt = 5;
+  string lease_id = 6;
+  uint64 fencing_token = 7;
+  string worker_spec_id = 8;
+  ToolName tool_name = 9;
+  repeated string target_paths = 10;
+  string base_snapshot_id = 11;
+  string payload_sha256 = 12;
+  google.protobuf.Timestamp issued_at = 13;
+  google.protobuf.Timestamp expires_at = 14;
+  string approved_by = 15;
+  uint32 usage_limit = 16;
+  uint32 usage_count = 17;
+  ApprovalStatus status = 18;
+  bytes signature = 19;
+}
+
+message PatchClassification {
+  PatchRiskLevel risk_level = 1;
+  repeated PatchReasonCode reason_codes = 2;
+  bool requires_approval = 3;
+}
+
+message ToolError {
+  ToolErrorCode code = 1;
+  string message = 2;
+  repeated string details = 3;
+}
+
+message ProjectFile {
+  string path = 1;
+  bytes content = 2;
+  string sha256 = 3;
+  string snapshot_id = 4;
+}
+
+message ProjectTreeNode {
+  string path = 1;
+  bool is_dir = 2;
+  string sha256 = 3;
+}
+
+message ApprovalRequestView {
+  string approval_request_id = 1;
+  WorkerIdentity worker = 2;
+  ToolName tool_name = 3;
+  PatchRiskLevel patch_risk_level = 4;
+  repeated PatchReasonCode reason_codes = 5;
+  repeated string target_paths = 6;
+  string base_snapshot_id = 7;
+  string payload_sha256 = 8;
+  ApprovalStatus status = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp expires_at = 11;
+  google.protobuf.Timestamp resolved_at = 12;
+  string approved_by = 13;
+  string rejected_by = 14;
+  string rejected_reason = 15;
+}
+
+message ReadProjectFileRequest {
+  WorkerIdentity worker = 1;
+  PathCapabilities capabilities = 2;
+  string path = 3;
+}
+
+message ReadProjectFileResponse {
+  oneof result {
+    ProjectFile file = 1;
+    ToolError error = 2;
+  }
+}
+
+message ReadProjectTreeRequest {
+  WorkerIdentity worker = 1;
+  PathCapabilities capabilities = 2;
+  string root_path = 3;
+  uint32 max_depth = 4;
+}
+
+message ReadProjectTreeResponse {
+  oneof result {
+    ReadProjectTreeSuccess success = 1;
+    ToolError error = 2;
+  }
+}
+
+message ReadProjectTreeSuccess {
+  repeated ProjectTreeNode nodes = 1;
+  string snapshot_id = 2;
+}
+
+message SubmitProjectPatchRequest {
+  WorkerIdentity worker = 1;
+  PathCapabilities capabilities = 2;
+  PatchRef patch = 3;
+  string approval_token = 4;
+}
+
+message SubmitProjectPatchResponse {
+  oneof result {
+    SubmitProjectPatchSuccess success = 1;
+    PendingHumanApproval pending_human_approval = 2;
+    ToolError error = 3;
+  }
+}
+
+message SubmitProjectPatchSuccess {
+  string merge_commit_id = 1;
+  string new_snapshot_id = 2;
+  PatchClassification classification = 3;
+}
+
+message PendingHumanApproval {
+  ApprovalRequestView approval_request = 1;
+}
+
+message DeleteProjectFileRequest {
+  WorkerIdentity worker = 1;
+  PathCapabilities capabilities = 2;
+  string target_path = 3;
+  string base_snapshot_id = 4;
+  string approval_token = 5;
+}
+
+message DeleteProjectFileResponse {
+  oneof result {
+    DeleteProjectFileSuccess success = 1;
+    PendingHumanApproval pending_human_approval = 2;
+    ToolError error = 3;
+  }
+}
+
+message DeleteProjectFileSuccess {
+  string deleted_path = 1;
+  string new_snapshot_id = 2;
+}
+
+message CreateApprovalRequestRequest {
+  WorkerIdentity worker = 1;
+  ToolName tool_name = 2;
+  repeated string target_paths = 3;
+  string base_snapshot_id = 4;
+  string payload_sha256 = 5;
+  PatchClassification classification = 6;
+}
+
+message CreateApprovalRequestResponse {
+  oneof result {
+    ApprovalRequestView approval_request = 1;
+    ToolError error = 2;
+  }
+}
+
+message GetApprovalRequestRequest {
+  string approval_request_id = 1;
+}
+
+message GetApprovalRequestResponse {
+  oneof result {
+    ApprovalRequestView approval_request = 1;
+    ToolError error = 2;
+  }
+}
+
+message ApproveApprovalRequestRequest {
+  string approval_request_id = 1;
+  string approver_id = 2;
+  google.protobuf.Timestamp approved_at = 3;
+  uint32 usage_limit = 4;
+}
+
+message ApproveApprovalRequestResponse {
+  oneof result {
+    ApprovalBinding approval_token = 1;
+    ToolError error = 2;
+  }
+}
+
+message RejectApprovalRequestRequest {
+  string approval_request_id = 1;
+  string approver_id = 2;
+  string reason = 3;
+  google.protobuf.Timestamp rejected_at = 4;
+}
+
+message RejectApprovalRequestResponse {
+  oneof result {
+    ApprovalRequestView approval_request = 1;
+    ToolError error = 2;
+  }
+}
+
+message ConsumeApprovalTokenRequest {
+  string approval_token = 1;
+  WorkerIdentity worker = 2;
+  ToolName tool_name = 3;
+  repeated string target_paths = 4;
+  string base_snapshot_id = 5;
+  string payload_sha256 = 6;
+}
+
+message ConsumeApprovalTokenResponse {
+  oneof result {
+    ApprovalBinding approval_binding = 1;
+    ToolError error = 2;
+  }
+}

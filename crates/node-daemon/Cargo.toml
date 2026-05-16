@@ -1,0 +1,23 @@
+[package]
+name = "openforce-node-daemon"
+version = "0.1.0"
+edition = "2021"
+[[bin]]
+name = "node-daemon"
+path = "src/main.rs"
+[dependencies]
+openforce-proto = { path = "../proto" }
+openforce-domain = { path = "../domain" }
+openforce-llm-client = { path = "../llm-client" }
+tokio = { workspace = true }
+tonic = { workspace = true }
+tonic-health = { workspace = true }
+tonic-reflection = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+dashmap = { workspace = true }

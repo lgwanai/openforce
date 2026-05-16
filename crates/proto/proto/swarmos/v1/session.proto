@@ -1,0 +1,99 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "swarmos/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+// SessionStore — sole writer to the Event Log
+service SessionStore {
+  rpc AppendEvents(AppendEventsRequest) returns (AppendEventsResponse);
+  rpc ExecuteCommand(ExecuteCommandRequest) returns (ExecuteCommandResponse);
+  rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+  rpc ReadEventLog(ReadEventLogRequest) returns (stream Event);
+  rpc RebuildProjection(RebuildProjectionRequest) returns (RebuildProjectionResponse);
+}
+
+message AppendEventsRequest {
+  string session_id = 1;
+  string tenant_id = 2;
+  int64 expected_version = 3;
+  repeated Event events = 4;
+}
+
+message AppendEventsResponse {
+  int64 new_session_version = 1;
+}
+
+message ExecuteCommandRequest {
+  Command command = 1;
+}
+
+message ExecuteCommandResponse {
+  bytes result = 1;
+  int64 new_session_version = 2;
+}
+
+message GetSessionRequest {
+  string session_id = 1;
+}
+
+message GetSessionResponse {
+  string session_id = 1;
+  string tenant_id = 2;
+  string goal = 3;
+  int32 current_plan_version = 4;
+  int32 current_plan_epoch = 5;
+  string state = 6;
+  int64 session_version = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  bytes policy_profile = 10;
+}
+
+message GetTaskRequest {
+  string session_id = 1;
+  string task_id = 2;
+}
+
+message GetTaskResponse {
+  string session_id = 1;
+  string task_id = 2;
+  string task_type = 3;
+  string state = 4;
+  int32 task_attempt = 5;
+  string current_lease_id = 6;
+  uint64 current_fencing_token = 7;
+  string current_worker_spec_id = 8;
+  int32 plan_epoch = 9;
+  string replan_disposition = 10;
+  repeated string upstream_task_ids = 11;
+  repeated string downstream_task_ids = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message ListTasksRequest {
+  string session_id = 1;
+  string state_filter = 2;
+}
+
+message ListTasksResponse {
+  repeated GetTaskResponse tasks = 1;
+}
+
+message ReadEventLogRequest {
+  string session_id = 1;
+  int64 from_session_version = 2;
+  int32 max_events = 3;
+}
+
+message RebuildProjectionRequest {
+  string session_id = 1;
+}
+
+message RebuildProjectionResponse {
+  bool success = 1;
+  int64 rebuilt_to_version = 2;
+}

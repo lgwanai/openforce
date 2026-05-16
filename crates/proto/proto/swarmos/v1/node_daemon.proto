@@ -1,0 +1,49 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "swarmos/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+service NodeDaemon {
+  rpc SpawnWorker(SpawnWorkerRequest) returns (SpawnWorkerResponse);
+  rpc GetWorkerStatus(GetWorkerStatusRequest) returns (GetWorkerStatusResponse);
+  rpc TerminateWorker(TerminateWorkerRequest) returns (TerminateWorkerResponse);
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message SpawnWorkerRequest {
+  string worker_spec_id = 1;
+  string session_id = 2;
+  string task_id = 3;
+  string task_type = 4;
+  int32 task_attempt = 5;
+  string lease_id = 6;
+  uint64 fencing_token = 7;
+  string sandbox_image = 8;
+  string model_provider = 9;
+  string model_name = 10;
+  int32 max_tokens = 11;
+  double temperature = 12;
+  string system_prompt = 13;
+  int32 max_wall_clock_sec = 14;
+  int32 max_tool_calls = 15;
+  repeated string input_artifacts = 16;
+}
+
+message SpawnWorkerResponse {
+  string worker_id = 1;
+  string status = 2;
+}
+
+message GetWorkerStatusRequest { string worker_id = 1; }
+message GetWorkerStatusResponse {
+  string worker_id = 1;
+  string status = 2;
+  string current_step = 3;
+  int32 tool_calls_made = 4;
+  int32 elapsed_sec = 5;
+}
+message TerminateWorkerRequest { string worker_id = 1; }
+message TerminateWorkerResponse { bool success = 1; }
+message HealthCheckRequest {}
+message HealthCheckResponse { bool healthy = 1; int32 active_workers = 2; }

@@ -1,0 +1,45 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/proto",
+    "crates/domain",
+    "crates/session-store",
+    "crates/scheduler",
+    "crates/policy-engine",
+    "crates/path-acl",
+    "crates/patch-classifier",
+    "crates/project-tools",
+    "crates/effect-gateway",
+    "crates/gateway",
+    "crates/space-manager",
+    "crates/tenant-governance",
+    "crates/evolution",
+    "crates/launch-checker",
+    "crates/tui-dashboard",
+    "crates/llm-client",
+    "crates/openforce-cli",
+    "crates/node-daemon",
+]
+
+[workspace.dependencies]
+tokio = { version = "1.42", features = ["full"] }
+tonic = "0.12"
+tonic-health = "0.12"
+tonic-reflection = "0.12"
+prost = "0.13"
+sqlx = { version = "0.8", features = ["runtime-tokio", "tls-rustls", "postgres", "uuid", "chrono", "json", "migrate"] }
+axum = "0.7"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+uuid = { version = "1.11", features = ["v7", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "2.0"
+anyhow = "1.0"
+dashmap = "6.0"
+sha2 = "0.10"
+ring = "0.17"
+rand = "0.8"
+rstest = "0.23"
+glob = "0.3"
