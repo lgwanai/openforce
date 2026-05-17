@@ -3,64 +3,284 @@
   "description": "OpenForce Expert Library — Planner knowledge retrieval index",
   "categories": {
     "backend": {
-      "keywords": ["API", "CRUD", "数据库", "database", "后端", "backend", "服务端", "REST", "gRPC", "microservice"],
+      "keywords": [
+        "API",
+        "CRUD",
+        "数据库",
+        "database",
+        "后端",
+        "backend",
+        "服务端",
+        "REST",
+        "gRPC",
+        "microservice"
+      ],
       "default_role": "backend_expert",
       "sop": "backend_crud_delivery",
-      "profiles": ["backend_expert", "rust_developer", "go_developer"]
+      "profiles": [
+        "backend_expert",
+        "rust_developer",
+        "go_developer",
+        "python_developer",
+        "go_developer",
+        "sql_specialist",
+        "api_designer"
+      ]
     },
     "frontend": {
-      "keywords": ["UI", "页面", "前端", "frontend", "Vue", "React", "component", "组件", "界面", "CSS"],
+      "keywords": [
+        "UI",
+        "页面",
+        "前端",
+        "frontend",
+        "Vue",
+        "React",
+        "component",
+        "组件",
+        "界面",
+        "CSS"
+      ],
       "default_role": "frontend_expert",
       "sop": "frontend_component_delivery",
-      "profiles": ["frontend_expert", "vue_developer", "react_developer"]
+      "profiles": [
+        "frontend_expert",
+        "vue_developer",
+        "react_developer",
+        "react_developer"
+      ]
     },
     "architecture": {
-      "keywords": ["架构", "architecture", "设计", "design", "系统设计", "数据库设计", "API设计", "schema", "技术选型"],
+      "keywords": [
+        "架构",
+        "architecture",
+        "设计",
+        "design",
+        "系统设计",
+        "数据库设计",
+        "API设计",
+        "schema",
+        "技术选型"
+      ],
       "default_role": "architect",
       "sop": "architecture_design",
-      "profiles": ["architect", "system_designer", "db_architect"]
+      "profiles": [
+        "architect",
+        "system_designer",
+        "db_architect"
+      ]
     },
     "security": {
-      "keywords": ["安全", "security", "审计", "audit", "漏洞", "vulnerability", "SQL注入", "XSS", "权限", "认证", "auth"],
+      "keywords": [
+        "安全",
+        "security",
+        "审计",
+        "audit",
+        "漏洞",
+        "vulnerability",
+        "SQL注入",
+        "XSS",
+        "权限",
+        "认证",
+        "auth"
+      ],
       "default_role": "security_auditor",
       "sop": "security_audit",
-      "profiles": ["security_auditor", "pentester", "compliance_checker"]
+      "profiles": [
+        "security_auditor",
+        "pentester",
+        "compliance_checker"
+      ]
     },
     "testing": {
-      "keywords": ["测试", "test", "单元测试", "集成测试", "E2E", "覆盖率", "coverage", "QA"],
+      "keywords": [
+        "测试",
+        "test",
+        "单元测试",
+        "集成测试",
+        "E2E",
+        "覆盖率",
+        "coverage",
+        "QA"
+      ],
       "default_role": "test_engineer",
       "sop": "test_suite_delivery",
-      "profiles": ["test_engineer", "e2e_specialist", "perf_tester"]
+      "profiles": [
+        "test_engineer",
+        "e2e_specialist",
+        "perf_tester"
+      ]
     },
     "devops": {
-      "keywords": ["部署", "deploy", "CI/CD", "Docker", "Kubernetes", "k8s", "容器", "container", "运维", "监控"],
+      "keywords": [
+        "部署",
+        "deploy",
+        "CI/CD",
+        "Docker",
+        "Kubernetes",
+        "k8s",
+        "容器",
+        "container",
+        "运维",
+        "监控"
+      ],
       "default_role": "devops_engineer",
       "sop": "deployment_pipeline",
-      "profiles": ["devops_engineer", "k8s_operator", "ci_cd_specialist"]
+      "profiles": [
+        "devops_engineer",
+        "k8s_operator",
+        "ci_cd_specialist"
+      ]
     },
     "data": {
-      "keywords": ["数据", "data", "SQL", "migration", "迁移", "ETL", "数据分析", "报告", "report", "分析"],
+      "keywords": [
+        "数据",
+        "data",
+        "SQL",
+        "migration",
+        "迁移",
+        "ETL",
+        "数据分析",
+        "报告",
+        "report",
+        "分析"
+      ],
       "default_role": "data_engineer",
       "sop": "data_pipeline",
-      "profiles": ["data_engineer", "sql_specialist", "data_analyst"]
+      "profiles": [
+        "data_engineer",
+        "sql_specialist",
+        "data_analyst"
+      ]
     },
     "documentation": {
-      "keywords": ["文档", "documentation", "README", "doc", "说明", "注释", "comment", "API文档"],
+      "keywords": [
+        "文档",
+        "documentation",
+        "README",
+        "doc",
+        "说明",
+        "注释",
+        "comment",
+        "API文档"
+      ],
       "default_role": "doc_writer",
       "sop": "documentation_writing",
-      "profiles": ["doc_writer", "api_doc_specialist", "tutorial_writer"]
+      "profiles": [
+        "doc_writer",
+        "api_doc_specialist",
+        "tutorial_writer"
+      ]
     },
     "code_review": {
-      "keywords": ["审查", "review", "代码审查", "code review", "检查", "重构", "refactor", "优化", "optimize"],
+      "keywords": [
+        "审查",
+        "review",
+        "代码审查",
+        "code review",
+        "检查",
+        "重构",
+        "refactor",
+        "优化",
+        "optimize"
+      ],
       "default_role": "code_reviewer",
       "sop": "code_review",
-      "profiles": ["code_reviewer", "rust_reviewer", "performance_optimizer"]
+      "profiles": [
+        "code_reviewer",
+        "rust_reviewer",
+        "performance_optimizer"
+      ]
+    },
+    "python": {
+      "keywords": [
+        "Python",
+        "FastAPI",
+        "Django",
+        "Flask",
+        "python",
+        "pip",
+        "pytest"
+      ],
+      "default_role": "python_developer",
+      "sop": "python_fastapi_delivery",
+      "profiles": [
+        "python_developer",
+        "api_designer",
+        "sql_specialist"
+      ]
+    },
+    "golang": {
+      "keywords": [
+        "Go",
+        "Golang",
+        "golang",
+        "goroutine",
+        "gRPC",
+        "go mod"
+      ],
+      "default_role": "go_developer",
+      "sop": "go_microservice_delivery",
+      "profiles": [
+        "go_developer",
+        "api_designer"
+      ]
+    },
+    "react": {
+      "keywords": [
+        "React",
+        "react",
+        "Next.js",
+        "TypeScript",
+        "JSX",
+        "Tailwind"
+      ],
+      "default_role": "react_developer",
+      "sop": "frontend_component_delivery",
+      "profiles": [
+        "react_developer",
+        "frontend_expert"
+      ]
+    },
+    "database": {
+      "keywords": [
+        "SQL",
+        "数据库",
+        "Index",
+        "Schema",
+        "Migration",
+        "DDL",
+        "PostgreSQL"
+      ],
+      "default_role": "sql_specialist",
+      "sop": "backend_crud_delivery",
+      "profiles": [
+        "sql_specialist",
+        "backend_expert"
+      ]
     }
   },
   "model_tiers": {
-    "reasoning": { "models": ["claude-opus-4-7", "deepseek-v4-pro"], "for": "架构设计、安全审计、复杂推理" },
-    "coding": { "models": ["claude-sonnet-4-6", "deepseek-v4-flash"], "for": "代码生成、CRUD开发、前端组件" },
-    "fast": { "models": ["claude-haiku-4-5", "deepseek-v4-flash"], "for": "文档编写、简单测试、格式化" }
+    "reasoning": {
+      "models": [
+        "claude-opus-4-7",
+        "deepseek-v4-pro"
+      ],
+      "for": "架构设计、安全审计、复杂推理"
+    },
+    "coding": {
+      "models": [
+        "claude-sonnet-4-6",
+        "deepseek-v4-flash"
+      ],
+      "for": "代码生成、CRUD开发、前端组件"
+    },
+    "fast": {
+      "models": [
+        "claude-haiku-4-5",
+        "deepseek-v4-flash"
+      ],
+      "for": "文档编写、简单测试、格式化"
+    }
   },
   "expansion_guide": {
     "add_role": "在 experts/profiles/ 下创建新的角色 JSON 文件",
