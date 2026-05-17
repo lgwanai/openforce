@@ -288,6 +288,39 @@ swarmos:gates         Pub/Sub — 实时 Gate 变更通知
 | Capability Token | Ed25519 签名、租约绑定、最小 scope、立即吊销 |
 | Path ACL 路径规范化 | 防御 `../` 遍历攻击 — 规范化后匹配，逃逸路径自动拒绝 |
 
+### Session 身份权限模型（2026-05）
+
+Session 是任务的全息档案 — 原始指令、Planner 分解、Scheduler 状态、每个 Worker 的 task/进度/输入/输出/artifact 指针。任意 Worker 在任何时间都能查询到任务相关的所有信息。
+
+**数据结构**：
+
+```
+session:{id}:planner          Hash — classification, decomposition, roles
+session:{id}:worker:{wid}     Hash — subtasks, acceptance_criteria, progress, I/O
+session:{id}:artifacts        List — artifact ID, type, location, creator
+session:{id}:instructions     List — 原始用户指令历史
+```
+
+**权限矩阵**：
+
+| 操作 | Worker | Planner | Scheduler |
+|------|:---:|:---:|:---:|
+| 读自己 snapshot | ✓ | ✓ | ✓ |
+| 读其他 Worker snapshot | ✓ | ✓ | ✓ |
+| 写自己 snapshot | ✓ | ✗ | ✗ |
+| 写其他 Worker | ✗ | ✗ | ✗ |
+| 添加 Artifact | ✓(own) | ✗ | ✗ |
+| 创建/解决 Gate | ✗ | ✓ | ✗ |
+| 终止 Worker | ✗ | ✓ | ✓ |
+
+**Worker 上下文注入**：每个 Worker 启动时收到 Session Map（目录，非全文），可通过查询工具按需获取：
+- `get_planner_output()` — Planner 完整分解
+- `get_worker_output(id)` — 其他 Worker 的输出
+- `get_artifact(id)` — Artifact 位置 + 元数据
+- `search_session(query)` — 全文搜索 Session 数据
+
+**Worker 专家工作流**：接收任务 → Phase 0 分解 subtasks + 定义验收标准 → Phase 1 TaskManager 追踪逐个完成 → Phase 2 逐条验证验收标准 → PASS/FAIL。
+
 ### 智能任务理解（语义分类，非关键词匹配）
 
 Planner 使用 LLM 对任务进行语义理解，而非传统的字符串关键词匹配。关键词匹配对中文极不友好，"图书管理系统" 无法命中任何关键词；LLM 语义理解准确率 > 95%。
