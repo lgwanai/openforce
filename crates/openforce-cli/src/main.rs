@@ -9,6 +9,7 @@ mod session_state;
 mod session_manager;
 mod gate_handler;
 mod repl;
+mod planner_roundtable;
 use session_manager::SessionManager;
 use repl::SessionRepl;
 
@@ -236,88 +237,58 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             .filter(|r| seen.insert(r.to_string()))
             .cloned().collect()
     };
-    let roles_str = available_roles.join(", ");
 
-    let plan_prompt = format!(
-        "You are a task decomposition planner. Your job is to break down a task into specific, actionable subtasks.\n\n\
-         USER TASK: {task}\n\
-         COMPLEXITY: {}\n\
-         AVAILABLE ROLES (use EXACTLY these names): [{roles_str}]\n\
-         PROJECT STRUCTURE:\n{dir_summary}\n\n\
-         {{\"categories\": {:?}, \"suggested_roles\": {:?}}}\n\n\
-         INSTRUCTIONS:\n\
-         1. Break the task into 2-8 specific subtasks, each assigned to a role from the list above.\n\
-         2. Each subtask must reference specific files/directories from the project structure when relevant.\n\
-         3. Output EXACTLY in this format (one per line, no other text):\n\
-            N. [role_name] Task Title: specific description referencing concrete files\n\
-         Example:\n\
-            1. [rust_reviewer] Lease Lifecycle Audit: check crates/domain/src/lease.rs for state machine bugs and race conditions\n\
-            2. [security_auditor] FencingToken Security: audit crates/domain/src/lease.rs FencingToken monotonicity\n\
-         4. OUTPUT ONLY THE NUMBERED LIST. No introduction, no summary.",
-        classification.complexity, classification.categories, classification.suggested_roles
-    );
-    let (plan_text, _) = planner.chat(&config.planner.system_prompt, &plan_prompt).await?;
-
-    // Parse decomposition with flexible format matching
+    // ── Planner RoundTable: MECE-validated task decomposition ──
+    println!("[Planner] RoundTable: 3 agents × 3 rounds...");
     let mut subtasks: Vec<(String, String, String)> = vec![];
-    for line in plan_text.lines() {
-        let t = line.trim();
-        if t.is_empty() { continue; }
-        // Match: "N. [role] title" or "N. [role] title: desc" or "[role] title"
-        let stripped = t.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ' ' || c == '-' || c == '*');
-        let (pf, rest) = if let Some(idx) = stripped.find(']') {
-            if stripped.starts_with('[') {
-                let role = stripped[1..idx].to_string();
-                let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
-                (role, desc)
-            } else {
-                (String::new(), stripped.to_string())
-            }
-        } else {
-            (String::new(), stripped.to_string())
-        };
-        if !pf.is_empty() && !rest.is_empty() {
-            let parts: Vec<&str> = rest.splitn(2, ": ").collect();
-            subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
-        }
-    }
 
-    // LLM Planner must decompose — if it fails, re-prompt with stricter instructions
-    if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
-        let retry_prompt = format!(
-            "You MUST decompose this task into specific subtasks. DO NOT output empty or generic responses.\n\
-             Task: {task}\nAvailable roles: {roles}\n\n\
-             Output EXACTLY in this format, one per line:\n\
-             1. [role_name] Task title: detailed description\n\
-             2. [role_name] Task title: detailed description\n\n\
-             Rules:\n\
-             - Use role names from the available roles list EXACTLY\n\
-             - Each task must be specific and actionable\n\
-             - Output AT LEAST one task per available role\n\
-             - DO NOT output anything except the numbered list",
-            task = task,
-            roles = classification.suggested_roles.iter().map(|r| r.as_str()).collect::<Vec<_>>().join(", ")
-        );
-        if let Ok((retry_text, _)) = planner.chat(&config.planner.system_prompt, &retry_prompt).await {
-            for line in retry_text.lines() {
-                let t = line.trim();
-                if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) { continue; }
-                let c = t.splitn(2, ". ").nth(1).unwrap_or(t);
-                let (pf, rest) = if c.starts_with('[') {
-                    c[1..].split(']').next().map(|p| (p.to_string(), c[p.len()+2..].trim().to_string())).unwrap_or_default()
-                } else { (String::new(), c.to_string()) };
-                if !pf.is_empty() && !rest.is_empty() {
-                    let parts: Vec<&str> = rest.splitn(2, ": ").collect();
-                    subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
+    match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles, &dir_summary).await {
+        Ok(tree) => {
+            println!("  MECE validated: {}, confidence: {}", tree.mece_validated, tree.confidence);
+            if !tree.goal.specific.is_empty() {
+                println!("  SMART: {}", tree.goal.specific.chars().take(100).collect::<String>());
+            }
+            for t in &tree.tasks {
+                let desc = if t.acceptance_criteria.is_empty() {
+                    t.objective.clone()
+                } else {
+                    format!("{} | 验收: {}", t.objective, t.acceptance_criteria.first().unwrap_or(&String::new()))
+                };
+                subtasks.push((t.role.clone(), t.title.clone(), desc));
+            }
+        }
+        Err(e) => {
+            println!("  RoundTable failed: {e} — falling back to direct decomposition");
+            // Fallback: direct LLM decomposition
+            let plan_prompt = format!(
+                "Task: {task}\nRoles: [{roles}]\nDirs:\n{dir_summary}\n\n\
+                 Decompose into specific subtasks. Format:\n1. [role] Title: description",
+                roles = available_roles.join(", ")
+            );
+            if let Ok((plan_text, _)) = planner.chat(&config.planner.system_prompt, &plan_prompt).await {
+                for line in plan_text.lines() {
+                    let t = line.trim();
+                    if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) { continue; }
+                    let stripped = t.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ' ' || c == '-' || c == '*');
+                    if let Some(idx) = stripped.find(']') {
+                        if stripped.starts_with('[') {
+                            let role = stripped[1..idx].to_string();
+                            let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
+                            if !role.is_empty() && !desc.is_empty() {
+                                subtasks.push((role, desc, String::new()));
+                            }
+                        }
+                    }
                 }
             }
         }
-        // Last resort: one task per role with full task context
-        if subtasks.is_empty() {
-            for (i, role) in classification.suggested_roles.iter().enumerate() {
-                let desc = if i == 0 { task.clone() } else { format!("{task} (verify from independent perspective)") };
-                subtasks.push((role.clone(), desc, String::new()));
-            }
+    }
+
+    // Last resort: one task per role
+    if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
+        for (i, role) in classification.suggested_roles.iter().enumerate() {
+            let desc = if i == 0 { task.clone() } else { format!("{task} (independent verification)") };
+            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new()));
         }
     }
 
