@@ -1,0 +1,16 @@
+[package]
+name = "openforce-worker"
+version = "0.1.0"
+edition = "2021"
+[[bin]]
+name = "worker"
+path = "src/main.rs"
+[dependencies]
+openforce-llm-client = { path = "../llm-client" }
+openforce-knowledge-base = { path = "../knowledge-base" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+anyhow = { workspace = true }

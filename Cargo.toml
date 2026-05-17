@@ -18,6 +18,7 @@ members = [
     "crates/tui-dashboard",
     "crates/llm-client",
     "crates/knowledge-base",
+    "crates/worker",
     "crates/openforce-cli",
     "crates/node-daemon",
 ]
