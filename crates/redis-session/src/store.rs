@@ -6,6 +6,25 @@ use tracing::info;
 use openforce_domain::session::SessionState;
 use openforce_domain::session_phase::{SessionPhase, ConfirmationGate, GateStatus};
 
+/// Who is making the session operation — used for access control.
+#[derive(Debug, Clone)]
+pub enum Caller {
+    Worker { worker_id: String, session_id: Uuid },
+    Planner { session_id: Uuid },
+    Scheduler { session_id: Uuid },
+}
+
+impl Caller {
+    pub fn id(&self) -> &str {
+        match self { Self::Worker { worker_id, .. } => worker_id, Self::Planner { .. } => "planner", Self::Scheduler { .. } => "scheduler" }
+    }
+    pub fn session_id(&self) -> Uuid {
+        match self { Self::Worker { session_id, .. } | Self::Planner { session_id } | Self::Scheduler { session_id } => *session_id }
+    }
+    pub fn is_worker(&self) -> bool { matches!(self, Self::Worker { .. }) }
+    pub fn is_planner(&self) -> bool { matches!(self, Self::Planner { .. }) }
+}
+
 pub struct RedisSessionStore {
     conn: MultiplexedConnection,
     ttl_seconds: usize,
@@ -141,10 +160,13 @@ impl RedisSessionStore {
 
     // ── Gate ──
 
+    /// Only Planner can create confirmation gates.
     pub async fn create_gate(
-        &mut self, sid: Uuid, phase: SessionPhase,
+        &mut self, caller: &Caller, phase: SessionPhase,
         summary: &str, plan_epoch: i32,
     ) -> Result<ConfirmationGate, String> {
+        if !caller.is_planner() { return Err("access denied: only planner can create gates".into()); }
+        let sid = caller.session_id();
         let gate = ConfirmationGate::new(sid, phase, summary.into(), plan_epoch);
         let f: Vec<(&str, String)> = vec![
             ("session_id", sid.to_string()), ("phase", phase.as_str().into()),
@@ -160,9 +182,11 @@ impl RedisSessionStore {
         Ok(gate)
     }
 
+    /// Only Planner can resolve gates.
     pub async fn resolve_gate(
-        &mut self, gid: &Uuid, approved: bool, feedback: Option<&str>,
+        &mut self, caller: &Caller, gid: &Uuid, approved: bool, feedback: Option<&str>,
     ) -> Result<ConfirmationGate, String> {
+        if !caller.is_planner() { return Err("access denied: only planner can resolve gates".into()); }
         let f: Vec<(String, String)> = self.conn.hgetall(Self::gk(gid)).await.map_err(|e| format!("hgetall: {e}"))?;
         if f.is_empty() { return Err("gate not found".into()); }
         let v = |k: &str| f.iter().find(|(x,_)| x==k).map(|(_,v)| v.clone());
@@ -227,15 +251,21 @@ impl RedisSessionStore {
         Ok(())
     }
 
-    // ── Worker Snapshot ──
+    // ── Worker Snapshot (ACL: worker writes own data, all can read) ──
 
-    pub async fn set_worker_snapshot(&mut self, sid: &Uuid, wid: &str, sn: &WorkerSnapshot) -> Result<(), String> {
-        let key = format!("session:{sid}:worker:{wid}");
-        let j = serde_json::to_string(sn).map_err(|e| format!("json: {e}"))?;
-        let _: bool = self.conn.hset(&key, "snapshot", j).await.map_err(|e| format!("{e}")).unwrap_or(false);
-        Ok(())
+    /// Worker updates its OWN snapshot. Fails if caller is not the worker itself.
+    pub async fn set_worker_snapshot(&mut self, caller: &Caller, sn: &WorkerSnapshot) -> Result<(), String> {
+        if !caller.is_worker() { return Err("access denied: only the worker can update its own data".into()); }
+        if let Caller::Worker { worker_id, session_id } = caller {
+            if &sn.worker_id != worker_id { return Err(format!("access denied: worker {worker_id} cannot write as {}", sn.worker_id)); }
+            let key = format!("session:{session_id}:worker:{worker_id}");
+            let j = serde_json::to_string(sn).map_err(|e| format!("json: {e}"))?;
+            let _: bool = self.conn.hset(&key, "snapshot", j).await.map_err(|e| format!("{e}")).unwrap_or(false);
+            Ok(())
+        } else { Err("access denied".into()) }
     }
 
+    /// Read any worker's snapshot (no restriction).
     pub async fn get_worker_snapshot(&mut self, sid: &Uuid, wid: &str) -> Result<Option<WorkerSnapshot>, String> {
         let key = format!("session:{sid}:worker:{wid}");
         let j: Option<String> = self.conn.hget(&key, "snapshot").await.map_err(|e| format!("hget: {e}"))?;
@@ -248,13 +278,31 @@ impl RedisSessionStore {
         Ok(keys.iter().filter_map(|k| k.rsplit(':').next().map(String::from)).collect())
     }
 
+    /// Planner/Scheduler: terminate a worker (sets status to "terminated").
+    /// Workers cannot terminate themselves or others.
+    pub async fn terminate_worker(&mut self, caller: &Caller, target_wid: &str) -> Result<(), String> {
+        if caller.is_worker() { return Err("access denied: workers cannot terminate".into()); }
+        let sid = caller.session_id();
+        let key = format!("session:{sid}:worker:{target_wid}");
+        let _: bool = self.conn.hset(&key, "status", "terminated").await.map_err(|e| format!("{e}")).unwrap_or(false);
+        let _: bool = self.conn.hset(&key, "terminated_by", caller.id()).await.map_err(|e| format!("{e}")).unwrap_or(false);
+        let _: bool = self.conn.hset(&key, "terminated_at", chrono::Utc::now().to_rfc3339()).await.map_err(|e| format!("{e}")).unwrap_or(false);
+        tracing::warn!("worker {target_wid} terminated by {}", caller.id());
+        Ok(())
+    }
+
     // ── Artifact Registry ──
 
-    pub async fn add_artifact(&mut self, sid: &Uuid, a: &ArtifactRef) -> Result<(), String> {
-        let key = format!("session:{sid}:artifacts");
-        let j = serde_json::to_string(a).map_err(|e| format!("json: {e}"))?;
-        let _ =self.conn.rpush(&key, j).await.map_err(|e| format!("rpush: {e}"))?;
-        Ok(())
+    /// Only workers can add artifacts, and only under their own ID.
+    pub async fn add_artifact(&mut self, caller: &Caller, a: &ArtifactRef) -> Result<(), String> {
+        if !caller.is_worker() { return Err("access denied: only workers can add artifacts".into()); }
+        if let Caller::Worker { worker_id, session_id } = caller {
+            if &a.created_by != worker_id { return Err(format!("access denied: {worker_id} cannot create as {}", a.created_by)); }
+            let key = format!("session:{session_id}:artifacts");
+            let j = serde_json::to_string(a).map_err(|e| format!("json: {e}"))?;
+            let _ =self.conn.rpush(&key, j).await.map_err(|e| format!("rpush: {e}"))?;
+            Ok(())
+        } else { Err("access denied".into()) }
     }
 
     pub async fn list_artifacts(&mut self, sid: &Uuid) -> Result<Vec<ArtifactRef>, String> {

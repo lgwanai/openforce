@@ -106,7 +106,7 @@ impl SessionManager {
                     }
                 };
                 let gid = s.pending_gate_id.ok_or("no pending gate")?;
-                redis.resolve_gate(&gid, true, None).await?;
+                redis.resolve_gate(&openforce_redis_session::store::Caller::Planner { session_id: s.session_id }, &gid, true, None).await?;
                 println!("Gate approved. Phase → {}", s.current_phase.next_phase().map(|p| p.as_str().to_string()).unwrap_or_default());
                 let r = redis.load(&s.session_id).await?.ok_or("session lost")?;
                 Ok(self.to_local(&r))
@@ -127,7 +127,7 @@ impl SessionManager {
                     }
                 };
                 let gid = s.pending_gate_id.ok_or("no pending gate")?;
-                redis.resolve_gate(&gid, false, Some(feedback)).await?;
+                redis.resolve_gate(&openforce_redis_session::store::Caller::Planner { session_id: s.session_id }, &gid, false, Some(feedback)).await?;
                 println!("Gate rejected. Epoch {} — replanning.", s.plan_epoch + 1);
                 let r = redis.load(&s.session_id).await?.ok_or("session lost")?;
                 Ok(self.to_local(&r))
