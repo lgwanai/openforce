@@ -180,9 +180,10 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     let mut source_snapshot = String::new();
     let mut total = 0usize;
-    for f in files.iter().filter(|f| matches!(f.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(100) {
+    // Read ALL source files (model has 1M context — no need to truncate early)
+    for f in files.iter().filter(|f| matches!(f.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")) {
         if let Ok(c) = std::fs::read_to_string(workspace.join(&f.path)) {
-            if total + c.len() < 250_000 { source_snapshot.push_str(&format!("\n=== {} ===\n{}", f.path, c)); total += c.len(); }
+            if total + c.len() < 500_000 { source_snapshot.push_str(&format!("\n=== {} ===\n{}", f.path, c)); total += c.len(); }
         }
     }
 
@@ -226,7 +227,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let dir_summary: String = by_dir.iter()
         .filter(|(_, fs)| fs.iter().any(|f| f.ext == "rs"))
         .map(|(d, fs)| format!("  {d}/")).collect::<Vec<_>>().join("\n");
-    let src_display: String = source_snapshot.chars().take(60000).collect();
+    let src_display: String = source_snapshot; // full source — model has 1M context
 
     let plan_prompt = format!(
         "Task: {task}\nComplexity: {}\nRoles:{profile_ctx}\nSOPs:{sop_ctx}\nDirs:\n{dir_summary}\nSource:\n{src_display}\n\n\
@@ -323,17 +324,24 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     .stdout(std::process::Stdio::piped()).stderr(std::process::Stdio::piped()).spawn()
                 {
                     Ok(mut child) => match child.wait() {
-                        Ok(status) if status.success() => {
+                        Ok(_) => {
                             let out_file = format!("/tmp/worker_{idx}_output.json");
                             if let Ok(data) = std::fs::read_to_string(&out_file) {
                                 if let Ok(v) = serde_json::from_str::<serde_json::Value>(&data) {
-                                    let text = v["output"].as_str().unwrap_or("").to_string();
-                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), true, text);
+                                    let success = v["success"].as_bool().unwrap_or(false);
+                                    let action = v["action"].as_str().unwrap_or("");
+                                    let text = match action {
+                                        "reject" => format!("REJECTED: {}", v["reason"].as_str().unwrap_or("unknown")),
+                                        "exhausted" => format!("EXHAUSTED: {}", v["reason"].as_str().unwrap_or("max cycles")),
+                                        _ => v["output"].as_str().unwrap_or("").to_string(),
+                                    };
+                                    let cycles = v["cycles"].as_u64().unwrap_or(1);
+                                    let label = format!("{} ({} cycle{})", action, cycles, if cycles > 1 {"s"} else {""});
+                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), success, text);
                                 }
                             }
-                            (idx, pnc, true, format!("Worker-{idx} completed"))
+                            (idx, pnc, false, format!("Worker-{idx} no output"))
                         }
-                        Ok(status) => (idx, pnc, false, format!("Worker-{idx} exit: {status}")),
                         Err(e) => (idx, pnc, false, format!("Worker-{idx} wait error: {e}")),
                     },
                     Err(e) => (idx, pnc, false, format!("Worker-{idx} spawn error: {e}")),
