@@ -68,6 +68,9 @@ struct WorkerTask {
     output_file: Option<String>,
     review_paths: Vec<String>,
     project_tools_addr: Option<String>,
+    session_id: Option<String>,
+    session_map: Option<String>,
+    redis_url: Option<String>,
 }
 
 // ── Tools ──
@@ -117,25 +120,32 @@ async fn main() -> Result<()> {
     // ── Phase 0: Decompose — Plan subtasks and define acceptance criteria ──
 
     let files_list = task.review_paths.join("\n  ");
+    let session_context = task.session_map.as_deref().unwrap_or("");
+    let has_session = !session_context.is_empty();
+
     let system = if task.system_prompt.is_empty() {
-        format!("You are a {}. You work methodically like a senior professional. \
+        format!("You are a {}. Work methodically like a senior professional. \
                  Decompose tasks, track progress, verify against criteria, deliver complete results.", task.profile_name)
     } else {
         task.system_prompt.clone()
     };
 
+    let session_block = if has_session { format!("\n\nSESSION CONTEXT (other workers' progress):\n{session_context}") } else { String::new() };
+
     let decompose_prompt = format!(
         "You are a {role}. Your mission:\n\n\
          TASK: {task}\nSUBTASK: {subtask}\n\n\
-         FILES TO REVIEW: {files}\n\n\
+         FILES TO REVIEW: {files}{session}\n\n\
          Before executing, you MUST:\n\
          1. Define 2-4 specific ACCEPTANCE CRITERIA (what 'done' means)\n\
-         2. Decompose into 2-6 SUBTASKS (concrete steps to complete)\n\n\
+         2. Decompose into 2-6 SUBTASKS (concrete steps to complete)\n\
+         3. If session context shows other workers' work, consider it\n\n\
          Output as JSON:\n\
          {{\"acceptance_criteria\": [\"criterion 1\", ...], \
            \"subtasks\": [{{\"id\":1, \"description\":\"step 1\"}}, ...]}}\n\n\
          Only output valid JSON, no other text.",
-        role = task.profile_name, task = task.task, subtask = task.subtask, files = files_list
+        role = task.profile_name, task = task.task, subtask = task.subtask,
+        files = files_list, session = session_block
     );
 
     let (plan_text, plan_tokens) = client.chat(&system, &decompose_prompt).await?;
@@ -202,6 +212,10 @@ async fn main() -> Result<()> {
 
         fs::write(&state_file, serde_json::to_string_pretty(&state).unwrap_or_default())?;
 
+        let session_tools = if has_session {
+            "\n  SESSION TOOLS:\n  - get_worker_output(id) → read another worker's results\n  - get_artifact(id) → access artifact by ID\n  - get_instructions() → read original user instructions\n  - search_session(query) → find relevant info across session\n"
+        } else { "" };
+
         let execute_prompt = format!(
             "CYCLE {cycle}\n\n{state_summary}\n\n\
              TOOLS AVAILABLE:\n\
@@ -209,7 +223,7 @@ async fn main() -> Result<()> {
              - list_dir(path) — list files in directory\n\
              - complete_task(id, output) — mark task as done with result\n\
              - update_context(info) — add findings to shared context\n\
-             - add_task(description) — add new subtask if discovered\n\n\
+             - add_task(description) — add new subtask if discovered{session_tools}\n\
              RULES:\n\
              1. Review the TASK LIST above — focus on current in_progress task [▶]\n\
              2. Execute the current task: use tools to read files, gather information\n\
@@ -217,9 +231,10 @@ async fn main() -> Result<()> {
              4. If you discover a new task is needed, output: ADD_TASK: <description>\n\
              5. If ALL tasks are done, output: ALL_DONE: <final verification against criteria>\n\
              6. NEVER output 'DONE' unless ALL subtasks are complete\n\
-             7. Reference specific file paths and line numbers\n\n\
+             7. Reference specific file paths and line numbers\n\
+             8. Use session query tools to leverage other workers' findings\n\n\
              What is your next action?",
-            cycle = cycles, state_summary = state.summary()
+            cycle = cycles, state_summary = state.summary(), session_tools = session_tools
         );
 
         match client.chat(&system, &execute_prompt).await {

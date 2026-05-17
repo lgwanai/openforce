@@ -27,6 +27,30 @@ pub struct PhaseResultEntry {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkerSubTask {
+    pub id: usize, pub description: String, pub status: String, pub output: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkerSnapshot {
+    pub worker_id: String, pub role: String, pub task: String,
+    pub subtasks: Vec<WorkerSubTask>,
+    pub acceptance_criteria: Vec<String>,
+    pub progress: String, pub inputs: Vec<String>, pub outputs: Vec<String>,
+    pub intermediate_artifacts: Vec<String>,
+    pub created_at: chrono::DateTime<chrono::Utc>,
+    pub updated_at: chrono::DateTime<chrono::Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ArtifactRef {
+    pub artifact_id: String, pub artifact_type: String,
+    pub location: String, pub created_by: String,
+    pub metadata: String,
+    pub created_at: chrono::DateTime<chrono::Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SessionSummary {
     pub session_id: Uuid, pub goal: String, pub state: String,
     pub current_phase: String, pub updated_at: chrono::DateTime<chrono::Utc>,
@@ -189,6 +213,111 @@ impl RedisSessionStore {
         let j = serde_json::to_string(r).map_err(|e| format!("json: {e}"))?;
         let _ =self.conn.rpush(Self::rk(sid), j).await.map_err(|e| format!("rpush: {e}"))?;
         Ok(())
+    }
+
+    // ── Planner Snapshot ──
+
+    pub async fn set_planner(&mut self, sid: &Uuid, classification: &str, decomposition: &str, roles: &[String]) -> Result<(), String> {
+        let key = format!("session:{sid}:planner");
+        let f: Vec<(&str, String)> = vec![
+            ("classification", classification.into()), ("decomposition", decomposition.into()),
+            ("roles", roles.join(",")), ("epoch", chrono::Utc::now().to_rfc3339()),
+        ];
+        let _ =self.conn.hset_multiple(&key, &f).await.map_err(|e| format!("hset: {e}"))?;
+        Ok(())
+    }
+
+    // ── Worker Snapshot ──
+
+    pub async fn set_worker_snapshot(&mut self, sid: &Uuid, wid: &str, sn: &WorkerSnapshot) -> Result<(), String> {
+        let key = format!("session:{sid}:worker:{wid}");
+        let j = serde_json::to_string(sn).map_err(|e| format!("json: {e}"))?;
+        let _: bool = self.conn.hset(&key, "snapshot", j).await.map_err(|e| format!("{e}")).unwrap_or(false);
+        Ok(())
+    }
+
+    pub async fn get_worker_snapshot(&mut self, sid: &Uuid, wid: &str) -> Result<Option<WorkerSnapshot>, String> {
+        let key = format!("session:{sid}:worker:{wid}");
+        let j: Option<String> = self.conn.hget(&key, "snapshot").await.map_err(|e| format!("hget: {e}"))?;
+        j.map(|x| serde_json::from_str(&x).map_err(|e| format!("parse: {e}"))).transpose()
+    }
+
+    pub async fn list_workers(&mut self, sid: &Uuid) -> Result<Vec<String>, String> {
+        let pattern = format!("session:{sid}:worker:*");
+        let keys: Vec<String> = self.conn.keys(&pattern).await.map_err(|e| format!("keys: {e}"))?;
+        Ok(keys.iter().filter_map(|k| k.rsplit(':').next().map(String::from)).collect())
+    }
+
+    // ── Artifact Registry ──
+
+    pub async fn add_artifact(&mut self, sid: &Uuid, a: &ArtifactRef) -> Result<(), String> {
+        let key = format!("session:{sid}:artifacts");
+        let j = serde_json::to_string(a).map_err(|e| format!("json: {e}"))?;
+        let _ =self.conn.rpush(&key, j).await.map_err(|e| format!("rpush: {e}"))?;
+        Ok(())
+    }
+
+    pub async fn list_artifacts(&mut self, sid: &Uuid) -> Result<Vec<ArtifactRef>, String> {
+        let key = format!("session:{sid}:artifacts");
+        let js: Vec<String> = self.conn.lrange(&key, 0, -1).await.map_err(|e| format!("lrange: {e}"))?;
+        js.iter().map(|j| serde_json::from_str(j).map_err(|e| format!("parse: {e}"))).collect()
+    }
+
+    // ── Session Map (Worker context injection) ──
+
+    pub async fn get_session_map(&mut self, sid: &Uuid, wid: &str) -> Result<String, String> {
+        let state = self.load(sid).await?.ok_or("session not found")?;
+        let short = sid.to_string().chars().take(8).collect::<String>();
+        let mut map = format!("SESSION {short}: goal={goal} phase={phase} epoch={epoch}\n",
+            goal=state.goal, phase=state.current_phase.as_str(), epoch=state.plan_epoch);
+
+        let pkey = format!("session:{sid}:planner");
+        let p: Vec<(String, String)> = self.conn.hgetall(&pkey).await.unwrap_or_default();
+        if !p.is_empty() {
+            let v = |k: &str| p.iter().find(|(x,_)| x==k).map(|(_,v)| v.clone());
+            map.push_str(&format!("  PLANNER: classification={} roles=[{}]\n    Query: get_planner_output()\n",
+                v("classification").unwrap_or_default(), v("roles").unwrap_or_default()));
+        }
+
+        let ws = self.list_workers(sid).await.unwrap_or_default();
+        let others: Vec<_> = ws.iter().filter(|w| *w != wid).collect();
+        if !others.is_empty() {
+            map.push_str(&format!("  WORKERS ({}):", others.len()));
+            for w in &others {
+                if let Ok(Some(sn)) = self.get_worker_snapshot(sid, w).await {
+                    let d = sn.subtasks.iter().filter(|t| t.status=="done").count();
+                    map.push_str(&format!("\n    {w}: {}/{} done → get_worker_output(\"{w}\")", d, sn.subtasks.len()));
+                }
+            }
+            map.push('\n');
+        }
+
+        if let Ok(arts) = self.list_artifacts(sid).await {
+            if !arts.is_empty() {
+                map.push_str(&format!("  ARTIFACTS ({}):", arts.len()));
+                for a in &arts { map.push_str(&format!("\n    {} ({}) → {}", a.artifact_id, a.artifact_type, a.location)); }
+                map.push_str("\n    Query: get_artifact(id)\n");
+            }
+        }
+
+        map.push_str(
+            "  TOOLS: get_planner_output() | get_worker_output(id) | get_artifact(id) | get_instructions() | search_session(q)"
+        );
+        Ok(map)
+    }
+
+    // ── Instructions ──
+
+    pub async fn add_instruction(&mut self, sid: &Uuid, text: &str) -> Result<(), String> {
+        let key = format!("session:{sid}:instructions");
+        let entry = format!("{}|{}", chrono::Utc::now().to_rfc3339(), text);
+        let _ =self.conn.rpush(&key, entry).await.map_err(|e| format!("rpush: {e}"))?;
+        Ok(())
+    }
+
+    pub async fn get_instructions(&mut self, sid: &Uuid) -> Result<Vec<String>, String> {
+        let key = format!("session:{sid}:instructions");
+        self.conn.lrange(&key, 0, -1).await.map_err(|e| format!("lrange: {e}"))
     }
 
     // ── Internal ──

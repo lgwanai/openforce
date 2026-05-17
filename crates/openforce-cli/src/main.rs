@@ -299,15 +299,31 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let base_url_c = base_url.clone();
         let wb = worker_bin.clone();
         let tools_addr = std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
+        let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
+        let session_id = session.as_ref().map(|s| s.session_id.to_string());
+        let session_id_c = session_id.clone();
 
         // Assign specific files/directories to this worker (not inline source text)
-        // Worker will use read_file/list_dir tools to access them
         let review_paths: Vec<String> = by_dir.iter()
             .filter(|(k,_)| name.contains(k.as_str()) || k.contains(name.as_str()))
             .flat_map(|(d, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
             .take(30)
             .collect();
         let review_paths_c = review_paths.clone();
+
+        // Build session map for worker context
+        let session_map = if let Some(ref sid) = session_id_c {
+            if !redis_url.is_empty() {
+                match openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                    Ok(mut store) => store.get_session_map(
+                        &uuid::Uuid::parse_str(sid).unwrap_or(uuid::Uuid::nil()),
+                        &format!("worker-{idx}")
+                    ).await.unwrap_or_default(),
+                    Err(_) => String::new(),
+                }
+            } else { String::new() }
+        } else { String::new() };
+        let session_map_c = session_map.clone();
 
         if use_process {
             // Spawn as independent OS process
@@ -319,6 +335,9 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     "output_file": format!("/tmp/worker_{idx}_output.json"),
                     "review_paths": review_paths_c,
                     "project_tools_addr": tools_addr,
+                    "session_id": session_id_c,
+                    "session_map": session_map_c,
+                    "redis_url": redis_url,
                 });
                 let task_file = format!("/tmp/openforce_worker_{idx}.json");
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
@@ -350,11 +369,12 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 }
             }));
         } else {
-            // Fallback: in-process LLM call (same tool-based approach)
+            // Fallback: in-process LLM call (same tool-based approach with session context)
             let worker = build_client(&config, &model);
             let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
             let paths_list = review_paths.iter().map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n");
-            let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
+            let session_block = if !session_map.is_empty() { format!("\n\nSESSION CONTEXT:\n{session_map}") } else { String::new() };
+            let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}{session_block}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
             handles.push(tokio::spawn(async move {
                 match worker.chat(&system, &prompt).await {
                     Ok((text,_)) => (idx, pnc, true, text),
