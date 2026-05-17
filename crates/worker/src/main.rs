@@ -18,6 +18,7 @@ struct WorkerTask {
     api_key: Option<String>,
     base_url: Option<String>,
     output_file: Option<String>,
+    files_text: Option<String>,
 }
 
 #[tokio::main]
@@ -47,9 +48,10 @@ async fn main() -> Result<()> {
 
     let client = LlmClient::openai(api_key, base_url, task.model.clone());
 
+    let files_section = task.files_text.as_deref().unwrap_or("");
     let prompt = format!(
-        "Task: {}\nSubtask: {}\nProfile: {}\n\nComplete the subtask and output results.",
-        task.task, task.subtask, task.profile_name
+        "Task: {}\nSubtask: {}\nProfile: {}\n\nSource Code:\n{}\n\nComplete the subtask and output results. Reference specific files and line numbers.",
+        task.task, task.subtask, task.profile_name, files_section
     );
 
     let system = if task.system_prompt.is_empty() {

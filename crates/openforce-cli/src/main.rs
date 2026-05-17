@@ -298,6 +298,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let base_url_c = base_url.clone();
         let wb = worker_bin.clone();
 
+        // Match worker to relevant source files by crate/subtask name
+        let files_text: String = dir_files.iter()
+            .filter(|(k,_)| name.contains(k.as_str()) || k.contains(name.as_str()))
+            .flat_map(|(_,e)| e.split('\n'))
+            .take(3000)
+            .collect::<Vec<_>>().join("\n");
+        let files_text_c = if files_text.len() > 100000 { files_text[..100000].to_string() } else { files_text };
+
         if use_process {
             // Spawn as independent OS process
             handles.push(tokio::spawn(async move {
@@ -307,6 +315,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     "workspace": workspace_c.to_string_lossy(),
                     "api_key": api_key_c, "base_url": base_url_c,
                     "output_file": format!("/tmp/worker_{idx}_output.json"),
+                    "files_text": files_text_c,
                 });
                 let task_file = format!("/tmp/openforce_worker_{idx}.json");
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
