@@ -1,0 +1,9 @@
+[package]
+name = "openforce-knowledge-base"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+openforce-llm-client = { path = "../llm-client" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }

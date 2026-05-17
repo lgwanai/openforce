@@ -17,6 +17,7 @@ members = [
     "crates/launch-checker",
     "crates/tui-dashboard",
     "crates/llm-client",
+    "crates/knowledge-base",
     "crates/openforce-cli",
     "crates/node-daemon",
 ]

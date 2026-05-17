@@ -10,6 +10,7 @@ walkdir = "2"
 toml = "0.8"
 openforce-domain = { path = "../domain" }
 openforce-llm-client = { path = "../llm-client" }
+openforce-knowledge-base = { path = "../knowledge-base" }
 openforce-session-store = { path = "../session-store" }
 tokio = { workspace = true }
 sqlx = { workspace = true }
