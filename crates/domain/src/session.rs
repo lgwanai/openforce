@@ -4,6 +4,7 @@ use uuid::Uuid;
 
 use crate::error::DomainError;
 use crate::tenant::TenantPolicy;
+use crate::session_phase::SessionPhase;
 
 /// Session aggregate root (architecture doc section 3)
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -16,6 +17,9 @@ pub struct Session {
     pub current_plan_epoch: i32,
     pub session_version: i64,
     pub policy_profile: TenantPolicy,
+    #[serde(default)]
+    pub current_phase: SessionPhase,
+    pub pending_gate_id: Option<Uuid>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
@@ -63,6 +67,8 @@ impl Session {
             current_plan_epoch: 0,
             session_version: 0,
             policy_profile,
+            current_phase: SessionPhase::default(),
+            pending_gate_id: None,
             created_at: now,
             updated_at: now,
         }
@@ -115,5 +121,28 @@ impl Session {
         self.current_plan_version = version;
         self.current_plan_epoch = epoch;
         self.updated_at = Utc::now();
+    }
+
+    pub fn advance_phase(&mut self, next: SessionPhase) -> Result<(), DomainError> {
+        if next == self.current_phase {
+            return Err(DomainError::ValidationFailed { detail: "phase unchanged".into() });
+        }
+        self.current_phase = next;
+        self.updated_at = Utc::now();
+        Ok(())
+    }
+
+    pub fn set_pending_gate(&mut self, gate_id: Uuid) {
+        self.pending_gate_id = Some(gate_id);
+        self.updated_at = Utc::now();
+    }
+
+    pub fn clear_pending_gate(&mut self) {
+        self.pending_gate_id = None;
+        self.updated_at = Utc::now();
+    }
+
+    pub fn is_at_gate(&self) -> bool {
+        self.pending_gate_id.is_some() && self.current_phase.is_gate()
     }
 }

@@ -1,0 +1,15 @@
+[package]
+name = "openforce-redis-session"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openforce-domain = { path = "../domain" }
+tokio = { workspace = true }
+redis = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }

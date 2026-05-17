@@ -1,3 +1,4 @@
+use std::sync::Arc;
 use tonic::{Request, Response, Status};
 use uuid::Uuid;
 use openforce_proto::swarmos::v1::{
@@ -15,11 +16,13 @@ use openforce_proto::swarmos::v1::{
     SendHeartbeatRequest, SendHeartbeatResponse,
     ExecuteCommandRequest, ExecuteCommandResponse, Command as ProtoCommand,
 };
+use crate::capability_token::CapabilityTokenIssuer;
 
 #[derive(Clone)]
 pub struct SchedulerService {
     pub session_store_addr: String,
     pub instance_id: String,
+    pub token_issuer: Option<Arc<CapabilityTokenIssuer>>,
 }
 
 impl SchedulerService {
@@ -46,14 +49,39 @@ impl SchedulerTrait for SchedulerService {
 
     async fn lease_task(&self, r: Request<LeaseTaskRequest>) -> Result<Response<LeaseTaskResponse>, Status> {
         let cmd = r.into_inner().command.ok_or(Status::invalid_argument("command required"))?;
+        let tenant_id = cmd.tenant_id.parse::<Uuid>().unwrap_or(Uuid::nil());
+        let session_id = cmd.session_id.parse::<Uuid>().unwrap_or(Uuid::nil());
+        let task_id = cmd.task_id.parse::<Uuid>().unwrap_or(Uuid::nil());
         let resp = self.delegate_command(cmd).await?;
         let r: serde_json::Value = serde_json::from_slice(&resp.result).unwrap_or_default();
+        let lease_id: Uuid = r.get("lease_id").and_then(|v| v.as_str()).and_then(|s| Uuid::parse_str(s).ok()).unwrap_or(Uuid::nil());
+        let fencing_token = r.get("fencing_token").and_then(|v| v.as_u64()).unwrap_or(0);
+        let task_attempt = r.get("task_attempt").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+        let plan_epoch = r.get("plan_epoch").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
+
+        // Issue capability token if issuer configured
+        let capability_token = match &self.token_issuer {
+            Some(issuer) => issuer.issue(
+                tenant_id, session_id, task_id, task_attempt,
+                lease_id, fencing_token, plan_epoch,
+                vec![
+                    openforce_domain::token::TokenScope::ArtifactSubmit,
+                    openforce_domain::token::TokenScope::PatchSubmit,
+                    openforce_domain::token::TokenScope::FindingSubmit,
+                    openforce_domain::token::TokenScope::EffectRequest,
+                    openforce_domain::token::TokenScope::HeartbeatWrite,
+                ],
+            ).unwrap_or_default(),
+            None => String::new(),
+        };
+
         Ok(Response::new(LeaseTaskResponse {
-            lease_id: r.get("lease_id").and_then(|v| v.as_str()).unwrap_or("").into(),
-            fencing_token: r.get("fencing_token").and_then(|v| v.as_u64()).unwrap_or(0),
+            lease_id: lease_id.to_string(),
+            fencing_token,
             worker_spec_id: r.get("worker_spec_id").and_then(|v| v.as_str()).unwrap_or("").into(),
-            task_attempt: r.get("task_attempt").and_then(|v| v.as_i64()).unwrap_or(0) as i32,
+            task_attempt,
             lease_expire_at: None,
+            capability_token,
         }))
     }
 

@@ -109,6 +109,37 @@ pub enum EventPayload {
     TaskInvalidatedByReplan(TaskInvalidatedByReplanPayload),
     SessionCompleted(SessionCompletedPayload),
     SessionAborted(SessionAbortedPayload),
+    PhaseAdvanced(PhaseAdvancedPayload),
+    GateCreated(GateCreatedPayload),
+    GateResolved(GateResolvedPayload),
+    UserFeedbackReceived(UserFeedbackPayload),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PhaseAdvancedPayload {
+    pub from_phase: String,
+    pub to_phase: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GateCreatedPayload {
+    pub gate_id: String,
+    pub phase: String,
+    pub artifact_summary: Option<String>,
+    pub plan_epoch: i32,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GateResolvedPayload {
+    pub gate_id: String,
+    pub resolution: String,
+    pub user_feedback: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UserFeedbackPayload {
+    pub feedback: String,
+    pub plan_epoch: i32,
 }
 
 // --- Payload structs ---

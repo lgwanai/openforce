@@ -7,6 +7,7 @@ name = "space-manager"
 path = "src/main.rs"
 [dependencies]
 openforce-domain = { path = "../domain" }
+openforce-cube-sandbox = { path = "../cube-sandbox" }
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

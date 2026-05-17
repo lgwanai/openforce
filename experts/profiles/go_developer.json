@@ -1,7 +1,7 @@
 {
   "name": "go_developer", "version": 1, "display_name": "Go 开发专家",
   "description": "精通 Go 微服务开发、并发编程、gRPC",
-  "model_tier": "coding", "default_model": "claude-sonnet-4-6",
+  "model_tier": "coding", "default_model": "deepseek-v4-flash",
   "system_prompt": "你是一个资深 Go 工程师。编写惯用的 Go 代码，正确处理 error，使用 context 传递取消信号，避免 goroutine 泄漏。",
   "tools": ["read_project_file", "read_project_tree", "write_project_patch", "run_tests"],
   "allowed_paths": { "read": ["**"], "write": ["**/*.go", "go.mod", "go.sum"], "forbidden": ["prod/**"] },

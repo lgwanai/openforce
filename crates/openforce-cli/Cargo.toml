@@ -21,3 +21,4 @@ chrono = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
+openforce-redis-session = { path = "../redis-session" }

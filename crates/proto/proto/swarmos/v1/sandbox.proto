@@ -1,0 +1,78 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// SandboxService manages Firecracker MicroVM lifecycle.
+service SandboxService {
+  rpc CreateSandbox(CreateSandboxRequest) returns (CreateSandboxResponse);
+  rpc StartSandbox(StartSandboxRequest) returns (StartSandboxResponse);
+  rpc StopSandbox(StopSandboxRequest) returns (StopSandboxResponse);
+  rpc SnapshotSandbox(SnapshotSandboxRequest) returns (SnapshotSandboxResponse);
+  rpc DestroySandbox(DestroySandboxRequest) returns (DestroySandboxResponse);
+  rpc GetSandboxStatus(GetSandboxStatusRequest) returns (GetSandboxStatusResponse);
+}
+
+message VmConfig {
+  string sandbox_class = 1;
+  int32 vcpu_count = 2;
+  int32 memory_mb = 3;
+  string kernel_path = 4;
+  string rootfs_path = 5;
+  bool read_only_rootfs = 6;
+}
+
+message NetworkConfig {
+  string host_dev_name = 1;
+  string mac_address = 2;
+  string network_mode = 3;
+  repeated string allowlist = 4;
+}
+
+message CredentialEntry {
+  string key = 1;
+  string value = 2;
+}
+
+message CreateSandboxRequest {
+  string session_id = 1;
+  string task_id = 2;
+  string sandbox_class = 3;
+  VmConfig vm_config = 4;
+  NetworkConfig network_config = 5;
+  repeated CredentialEntry credentials = 6;
+}
+
+message CreateSandboxResponse {
+  string sandbox_id = 1;
+  string state = 2;
+}
+
+message StartSandboxRequest { string sandbox_id = 1; }
+message StartSandboxResponse { string state = 1; }
+message StopSandboxRequest { string sandbox_id = 1; }
+message StopSandboxResponse { string state = 1; }
+
+message SnapshotSandboxRequest {
+  string sandbox_id = 1;
+  string snapshot_path = 2;
+}
+message SnapshotSandboxResponse {
+  string snapshot_id = 1;
+  string state = 2;
+}
+
+message DestroySandboxRequest { string sandbox_id = 1; }
+message DestroySandboxResponse { string state = 1; }
+
+message GetSandboxStatusRequest { string sandbox_id = 1; }
+message GetSandboxStatusResponse {
+  string sandbox_id = 1;
+  string state = 2;
+  string session_id = 3;
+  string task_id = 4;
+  string sandbox_class = 5;
+  string image_digest = 6;
+  int32 pid = 7;
+  google.protobuf.Timestamp created_at = 8;
+}

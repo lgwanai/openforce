@@ -1,0 +1,24 @@
+[package]
+name = "openforce-mtls"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openforce-domain = { path = "../domain" }
+tokio = { workspace = true }
+rustls = { workspace = true }
+rustls-pemfile = { workspace = true }
+rcgen = { workspace = true }
+x509-parser = { workspace = true }
+ring = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+dashmap = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+tonic = { workspace = true }
+hex = "0.4"
+time = "0.3"
+libc = "0.2"

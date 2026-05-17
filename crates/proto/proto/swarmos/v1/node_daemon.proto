@@ -28,6 +28,7 @@ message SpawnWorkerRequest {
   int32 max_wall_clock_sec = 14;
   int32 max_tool_calls = 15;
   repeated string input_artifacts = 16;
+  string capability_token = 17;
 }
 
 message SpawnWorkerResponse {

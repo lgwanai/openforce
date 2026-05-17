@@ -1,7 +1,7 @@
 {
   "name": "sql_specialist", "version": 1, "display_name": "SQL 数据库专家",
   "description": "精通 PostgreSQL/MySQL 查询优化、Schema 设计、迁移管理",
-  "model_tier": "coding", "default_model": "claude-sonnet-4-6",
+  "model_tier": "coding", "default_model": "deepseek-v4-flash",
   "system_prompt": "你是一个资深 DBA。编写高性能 SQL，设计合理的索引策略，使用 EXPLAIN ANALYZE 验证查询计划。所有 DDL 必须可回滚。",
   "tools": ["read_project_file", "read_project_tree", "write_project_patch"],
   "allowed_paths": { "read": ["**"], "write": ["migrations/**", "**/*.sql"], "forbidden": ["prod/**"] },

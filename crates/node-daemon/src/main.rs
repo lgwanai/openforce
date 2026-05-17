@@ -32,8 +32,34 @@ struct DaemonService {
 impl NodeDaemon for DaemonService {
     async fn spawn_worker(&self, r: Request<SpawnWorkerRequest>) -> Result<Response<SpawnWorkerResponse>, Status> {
         let req = r.into_inner();
-        let worker_id = Uuid::now_v7();
 
+        // Verify capability token (supports base64-encoded and raw JSON)
+        if !req.capability_token.is_empty() {
+            let token: openforce_domain::token::CapabilityToken = {
+                let raw = &req.capability_token;
+                // Try raw JSON first, then base64
+                serde_json::from_str(raw)
+                    .or_else(|_| {
+                        use base64::Engine;
+                        let bytes = base64::engine::general_purpose::URL_SAFE_NO_PAD
+                            .decode(raw.as_bytes())
+                            .or_else(|_| base64::engine::general_purpose::STANDARD.decode(raw.as_bytes()))
+                            .map_err(|e| serde_json::Error::io(std::io::Error::new(std::io::ErrorKind::InvalidData, format!("base64: {e}"))))?;
+                        serde_json::from_slice(&bytes)
+                    })
+                    .map_err(|e| Status::unauthenticated(format!("invalid token: {e}")))?
+            };
+            if token.is_expired() {
+                return Err(Status::unauthenticated("token expired"));
+            }
+            if let Ok(tid) = Uuid::parse_str(&req.task_id) {
+                if token.task_id != tid {
+                    return Err(Status::permission_denied("token task mismatch"));
+                }
+            }
+        }
+
+        let worker_id = Uuid::now_v7();
         let state = WorkerState {
             worker_id,
             status: "spawned".into(),
@@ -43,7 +69,6 @@ impl NodeDaemon for DaemonService {
         };
         self.workers.insert(worker_id, state);
 
-        // Spawn async worker task
         let workers = self.workers.clone();
         let api_key = self.api_key.clone();
         let base_url = self.base_url.clone();
@@ -139,6 +164,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let api_key = std::env::var("OPENAI_API_KEY").unwrap_or_default();
     let base_url = std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.deepseek.com".into());
 
+    let instance_id = uuid::Uuid::now_v7().to_string();
     let svc = DaemonService {
         workers: Arc::new(DashMap::new()),
         api_key,
@@ -152,8 +178,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET)
         .build_v1()?;
 
+    let mut server = Server::builder();
+    if let Some(bundle) = openforce_mtls::load_bundle_from_env("node-daemon", &instance_id) {
+        let cert_pem = String::from_utf8_lossy(&bundle.cert_pem).to_string();
+        let key_pem = String::from_utf8_lossy(&bundle.key_pem).to_string();
+        let ca_pem = String::from_utf8_lossy(&bundle.ca_cert_pem).to_string();
+        let identity = tonic::transport::Identity::from_pem(&cert_pem, &key_pem);
+        let client_ca = tonic::transport::Certificate::from_pem(&ca_pem);
+        let tls = tonic::transport::server::ServerTlsConfig::new()
+            .identity(identity)
+            .client_ca_root(client_ca);
+        tracing::info!("Node Daemon mTLS enabled");
+        server = server.tls_config(tls).map_err(|e| format!("tls: {e}"))?;
+    }
+
     tracing::info!("Node Daemon listening on {grpc_addr}");
-    Server::builder().add_service(health).add_service(reflection)
+    server.add_service(health).add_service(reflection)
         .add_service(NodeDaemonServer::new(svc)).serve(grpc_addr).await?;
     Ok(())
 }

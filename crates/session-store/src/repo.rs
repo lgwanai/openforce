@@ -19,6 +19,8 @@ impl ProjectionRepo {
             current_plan_version: r.current_plan_version, current_plan_epoch: r.current_plan_epoch,
             session_version: r.session_version,
             policy_profile: serde_json::from_value(r.policy_profile).unwrap_or_default(),
+            current_phase: openforce_domain::session_phase::SessionPhase::default(),
+            pending_gate_id: None,
             created_at: r.created_at, updated_at: r.updated_at,
         }).ok_or_else(|| DomainError::SessionNotFound { session_id: session_id.to_string() })
     }

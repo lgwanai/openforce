@@ -5,6 +5,13 @@ use serde::Deserialize;
 use std::collections::HashMap;
 use std::path::PathBuf;
 
+mod session_state;
+mod session_manager;
+mod gate_handler;
+mod repl;
+use session_manager::SessionManager;
+use repl::SessionRepl;
+
 #[derive(Debug, Deserialize)]
 struct Config { llm: LlmConfig, planner: PlannerConfig, workers: WorkersConfig }
 #[derive(Debug, Deserialize)]
@@ -27,6 +34,10 @@ fn build_client(config: &Config, model: &str) -> LlmClient {
     }
 }
 
+fn truncate_at_char(s: &str, max_chars: usize) -> String {
+    s.char_indices().nth(max_chars).map(|(i, _)| s[..i].to_string()).unwrap_or_else(|| s.to_string())
+}
+
 fn read_directory(root: &PathBuf, max_depth: usize) -> Vec<DirEntry> {
     let mut entries = vec![];
     for e in walkdir::WalkDir::new(root).max_depth(max_depth).into_iter().filter_map(|r| r.ok())
@@ -45,13 +56,105 @@ fn read_directory(root: &PathBuf, max_depth: usize) -> Vec<DirEntry> {
 #[tokio::main]
 async fn main() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() < 2 { eprintln!("Usage: openforce [--workspace <path>] <task>"); std::process::exit(1); }
-    let (workspace, task) = if (args[1] == "--workspace" || args[1] == "-w") && args.len() >= 4 {
-        (PathBuf::from(&args[2]), args[3].clone())
-    } else { (std::env::current_dir().unwrap_or_default(), args[1].clone()) };
+    if args.len() < 2 { print_usage(); std::process::exit(1); }
 
+    // Subcommand routing for multi-turn session support
+    let subcmd = args[1].as_str();
+    match subcmd {
+        "sessions" => {
+            let ws = resolve_workspace(&args);
+            return SessionManager::new(ws).await.list().await.map_err(|e| anyhow::anyhow!("{e}"));
+        }
+        "continue" => {
+            let ws = resolve_workspace(&args);
+            let sid = args.get(2).map(|s| s.as_str());
+            let mut mgr = SessionManager::new(ws.clone()).await;
+            let session = mgr.resume(sid).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            let interactive = args.iter().any(|a| a == "--interactive" || a == "-i");
+            let phase_str = session.current_phase.as_str().to_string();
+            let goal = session.goal.clone();
+            println!("Resumed session — phase: {phase_str}");
+            if interactive {
+                let mut repl = SessionRepl::new(session, ws, true);
+                return repl.run().await.map_err(|e| anyhow::anyhow!("{e}"));
+            }
+            return run_pipeline(ws, goal, Some(session)).await;
+        }
+        "approve" => {
+            let ws = resolve_workspace(&args);
+            let sid = args.get(2).map(|s| s.as_str());
+            let mut mgr = SessionManager::new(ws.clone()).await;
+            let session = mgr.approve(sid).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            let goal = session.goal.clone();
+            println!("Continuing from {} phase...", session.current_phase.as_str());
+            return run_pipeline(ws, goal, Some(session)).await;
+        }
+        "reject" => {
+            let ws = resolve_workspace(&args);
+            let feedback = args.get(2).cloned().unwrap_or_default();
+            let sid = args.get(3).map(|s| s.as_str());
+            let mut mgr = SessionManager::new(ws.clone()).await;
+            let session = mgr.reject(sid, &feedback).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            let goal = format!("{}. User feedback: {feedback}", session.goal);
+            return run_pipeline(ws, goal, Some(session)).await;
+        }
+        "cancel" => {
+            if args.len() < 3 { eprintln!("Usage: openforce cancel <session-id>"); std::process::exit(1); }
+            let ws = resolve_workspace(&args);
+            return SessionManager::new(ws).await.cancel(&args[2]).await.map_err(|e| anyhow::anyhow!("{e}"));
+        }
+        _ => {} // fall through to "new" (default pipeline)
+    }
+
+    // Default: "openforce new <task>" or legacy "openforce <task>"
+    let (workspace, task) = if (args[1] == "new" || args[1] == "--workspace" || args[1] == "-w") {
+        parse_new_args(&args)
+    } else {
+        (std::env::current_dir().unwrap_or_default(), args[1..].join(" "))
+    };
+
+    let mut mgr = SessionManager::new(workspace.clone()).await;
+    let session = mgr.create(&task).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+    run_pipeline(workspace, task, Some(session)).await
+}
+
+fn resolve_workspace(args: &[String]) -> PathBuf {
+    for i in 1..args.len() {
+        if (args[i] == "--workspace" || args[i] == "-w") && i + 1 < args.len() {
+            return PathBuf::from(&args[i + 1]);
+        }
+    }
+    std::env::current_dir().unwrap_or_default()
+}
+
+fn parse_new_args(args: &[String]) -> (PathBuf, String) {
+    let mut ws = std::env::current_dir().unwrap_or_default();
+    let mut task = String::new();
+    let mut i = 1;
+    while i < args.len() {
+        match args[i].as_str() {
+            "new" => { i += 1; continue; }
+            "--workspace" | "-w" => { if i + 1 < args.len() { ws = PathBuf::from(&args[i + 1]); i += 2; } else { i += 1; } }
+            _ => { task = args[i..].join(" "); break; }
+        }
+    }
+    if task.is_empty() { eprintln!("Usage: openforce new <task> [--workspace <path>]"); std::process::exit(1); }
+    (ws, task)
+}
+
+fn print_usage() {
+    eprintln!("OpenForce v5.2 — Multi-turn Session CLI");
+    eprintln!("  openforce new <task> [--workspace <path>]   Create a new session");
+    eprintln!("  openforce continue [<session-id>]            Resume latest/specific session");
+    eprintln!("  openforce approve [<session-id>]             Approve pending gate");
+    eprintln!("  openforce reject \"<feedback>\" [<session-id>]  Reject with feedback");
+    eprintln!("  openforce sessions                           List active sessions");
+    eprintln!("  openforce cancel <session-id>                Cancel a session");
+}
+
+async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
     let api_key = std::env::var("OPENAI_API_KEY").unwrap_or_default();
-    if api_key.len() < 5 { eprintln!("FATAL: OPENAI_API_KEY not set"); std::process::exit(1); }
+    if api_key.len() < 5 { return Err(anyhow::anyhow!("OPENAI_API_KEY not set")); }
     let base_url = std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.deepseek.com".into());
 
     let config: Config = toml::from_str(&std::fs::read_to_string("openforce.toml").unwrap_or_default())
@@ -144,6 +247,13 @@ async fn main() -> Result<()> {
         subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
     }
 
+    // Fallback: if planner produced no subtasks, use classification roles
+    if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
+        for role in &classification.suggested_roles {
+            subtasks.push((role.clone(), format!("Review: {role}"), String::new()));
+        }
+    }
+
     let mut ri = 0usize;
     println!("\n  Workers:");
     for (pf, name, _) in &subtasks {
@@ -162,7 +272,7 @@ async fn main() -> Result<()> {
         let t: String = ents.iter().filter(|e| matches!(e.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(25)
             .map(|e| {
                 let c = std::fs::read_to_string(workspace.join(&e.path)).unwrap_or_default();
-                format!("\n=== {} ===\n{}", e.path, if c.len()>15000 {c[..15000].to_string()+"\n..."} else {c})
+                format!("\n=== {} ===\n{}", e.path, if c.len()>15000 {truncate_at_char(&c, 15000)+"\n..."} else {c})
             }).collect::<Vec<_>>().join("\n");
         dir_files.insert(dn.clone(), t);
     }
@@ -274,6 +384,45 @@ async fn main() -> Result<()> {
         });
         let ep = format!("experts/experience/session_{}.json", uuid::Uuid::now_v7().to_string().chars().take(8).collect::<String>());
         let _ = std::fs::write(&ep, serde_json::to_string_pretty(&exp).unwrap_or_default());
+    }
+
+    // Persist session state for multi-turn support
+    if let Some(mut sess) = session {
+        sess.add_phase_result(session_state::PhaseResult {
+            phase: sess.current_phase,
+            tasks_total: results.len(),
+            tasks_ok: ok,
+            worker_outputs: results.iter().map(|(i, pf, success, text)| session_state::WorkerOutput {
+                worker_id: format!("worker-{i}"),
+                role: pf.clone(),
+                status: if *success { "ok".into() } else { "failed".into() },
+                output: text.chars().take(500).collect(),
+            }).collect(),
+            plan_epoch: sess.plan_epoch,
+        });
+        sess.last_summary = Some(format!("{}/{} workers completed", ok, results.len()));
+
+        // Check if we're at a gate-requiring phase
+        let next = sess.current_phase.next_phase();
+        if let Some(n) = next {
+            if n.is_gate() {
+                sess.advance_phase(n);
+                let gate = openforce_domain::session_phase::ConfirmationGate::new(
+                    sess.session_id, n,
+                    format!("Phase {} completed: {}/{} tasks OK", sess.current_phase.as_str(), ok, results.len()),
+                    sess.plan_epoch,
+                );
+                sess.set_gate(&gate);
+                println!("\n[Gate: {}] {} tasks completed.", n.as_str(), ok);
+                println!("  Review the results above, then:");
+                println!("    openforce approve   — to continue");
+                println!("    openforce reject \"<feedback>\" — to modify");
+            } else {
+                sess.advance_phase(n);
+                println!("\n[Phase → {}] Auto-advancing. Continue with: openforce continue", n.as_str());
+            }
+        }
+        sess.save().map_err(|e| anyhow::anyhow!("session save: {e}"))?;
     }
 
     let rp = format!("/tmp/openforce_report_{}.md", uuid::Uuid::now_v7());

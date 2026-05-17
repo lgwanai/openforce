@@ -20,6 +20,9 @@ pub enum CommandType {
     MarkTaskTimedOut,
     ReplanSession,
     CancelTask,
+    AdvancePhase,
+    CreateGate,
+    ResolveGate,
 }
 
 impl CommandType {
@@ -37,6 +40,9 @@ impl CommandType {
             Self::MarkTaskTimedOut => "MarkTaskTimedOut",
             Self::ReplanSession => "ReplanSession",
             Self::CancelTask => "CancelTask",
+            Self::AdvancePhase => "AdvancePhase",
+            Self::CreateGate => "CreateGate",
+            Self::ResolveGate => "ResolveGate",
         }
     }
 
@@ -54,6 +60,9 @@ impl CommandType {
             "MarkTaskTimedOut" => Some(Self::MarkTaskTimedOut),
             "ReplanSession" => Some(Self::ReplanSession),
             "CancelTask" => Some(Self::CancelTask),
+            "AdvancePhase" => Some(Self::AdvancePhase),
+            "CreateGate" => Some(Self::CreateGate),
+            "ResolveGate" => Some(Self::ResolveGate),
             _ => None,
         }
     }

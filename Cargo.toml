@@ -21,11 +21,14 @@ members = [
     "crates/worker",
     "crates/openforce-cli",
     "crates/node-daemon",
+    "crates/mtls",
+    "crates/cube-sandbox",
+    "crates/redis-session",
 ]
 
 [workspace.dependencies]
 tokio = { version = "1.42", features = ["full"] }
-tonic = "0.12"
+tonic = { version = "0.12", features = ["tls", "tls-roots"] }
 tonic-health = "0.12"
 tonic-reflection = "0.12"
 prost = "0.13"
@@ -45,3 +48,10 @@ ring = "0.17"
 rand = "0.8"
 rstest = "0.23"
 glob = "0.3"
+redis = { version = "0.25", features = ["tokio-comp", "tokio-native-tls-comp"] }
+rustls = { version = "0.23", features = ["ring"] }
+rustls-pemfile = "2"
+rcgen = "0.13"
+x509-parser = "0.16"
+hyper = { version = "1", features = ["client", "http1"] }
+hyperlocal = "0.9"

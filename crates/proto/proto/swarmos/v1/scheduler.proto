@@ -36,6 +36,7 @@ message LeaseTaskResponse {
   string worker_spec_id = 3;
   int32 task_attempt = 4;
   google.protobuf.Timestamp lease_expire_at = 5;
+  string capability_token = 6;
 }
 
 message RenewLeaseRequest {

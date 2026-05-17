@@ -1,0 +1,56 @@
+syntax = "proto3";
+package swarmos.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Internal CA service for mTLS certificate issuance, rotation, and revocation.
+service CertificateAuthority {
+  rpc IssueCertificate(IssueCertRequest) returns (IssueCertResponse);
+  rpc RotateCertificate(RotateCertRequest) returns (RotateCertResponse);
+  rpc RevokeCertificate(RevokeCertRequest) returns (RevokeCertResponse);
+  rpc GetCACertificate(GetCACertRequest) returns (GetCACertResponse);
+}
+
+message IssueCertRequest {
+  string role = 1;
+  string instance_id = 2;
+  string region = 3;
+}
+
+message IssueCertResponse {
+  bytes cert_pem = 1;
+  bytes key_pem = 2;
+  bytes ca_cert_pem = 3;
+  string serial_number = 4;
+  google.protobuf.Timestamp not_before = 5;
+  google.protobuf.Timestamp not_after = 6;
+}
+
+message RotateCertRequest {
+  string role = 1;
+  string instance_id = 2;
+  bytes old_cert_pem = 3;
+}
+
+message RotateCertResponse {
+  bytes cert_pem = 1;
+  bytes key_pem = 2;
+  string serial_number = 3;
+  google.protobuf.Timestamp not_before = 4;
+  google.protobuf.Timestamp not_after = 5;
+}
+
+message RevokeCertRequest {
+  string serial_number = 1;
+  string reason = 2;
+}
+
+message RevokeCertResponse { bool revoked = 1; }
+
+message GetCACertRequest {}
+
+message GetCACertResponse {
+  bytes ca_cert_pem = 1;
+  google.protobuf.Timestamp not_before = 2;
+  google.protobuf.Timestamp not_after = 3;
+}

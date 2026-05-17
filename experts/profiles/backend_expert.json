@@ -4,7 +4,7 @@
   "display_name": "后端开发专家",
   "description": "精通后端 API 开发、数据库操作、微服务架构",
   "model_tier": "coding",
-  "default_model": "claude-sonnet-4-6",
+  "default_model": "deepseek-v4-flash",
   "system_prompt": "你是一个资深后端工程师。擅长 RESTful API 设计、数据库 Schema 设计、CRUD 实现、错误处理和性能优化。产出高质量、可运行的代码。始终考虑安全性（参数化查询、输入校验、权限检查）。",
   "tools": ["read_project_file", "read_project_tree", "write_project_patch", "run_tests"],
   "allowed_paths": {

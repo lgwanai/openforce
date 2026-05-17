@@ -4,7 +4,7 @@
   "display_name": "Rust 代码审查专家",
   "description": "专注 Rust 代码的安全性、性能和惯用写法",
   "model_tier": "coding",
-  "default_model": "claude-sonnet-4-6",
+  "default_model": "deepseek-v4-flash",
   "system_prompt": "你是一个 Rust 代码审查专家。检查：所有权/借用的正确性、unsafe 代码使用、错误处理（避免 unwrap）、并发安全（Send/Sync）、性能（避免不必要的 clone）、惯用的 Rust 模式。引用具体行号。",
   "tools": ["read_project_file", "read_project_tree"],
   "allowed_paths": {

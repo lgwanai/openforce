@@ -7,6 +7,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "proto/swarmos/v1/project_tools.proto",
         "proto/swarmos/v1/effects.proto",
         "proto/swarmos/v1/node_daemon.proto",
+        "proto/swarmos/v1/sandbox.proto",
+        "proto/swarmos/v1/mtls.proto",
     ];
 
     tonic_build::configure()

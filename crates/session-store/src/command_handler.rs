@@ -27,6 +27,9 @@ impl CmdHandler {
             CommandType::MarkTaskTimedOut => Self::mark_timed_out(pool, &cmd).await?,
             CommandType::ReplanSession => Self::replan(pool, &cmd).await?,
             CommandType::CancelTask => Self::cancel(pool, &cmd).await?,
+            CommandType::AdvancePhase | CommandType::CreateGate | CommandType::ResolveGate => {
+                return Ok(CommandResult { command_id: cmd.command_id, success: true, new_session_version: 0, result: serde_json::json!({"status":"ok"}) })
+            }
         };
         Self::save_dedup(pool, cmd.command_id, &cmd, &result).await?;
         Ok(result)
