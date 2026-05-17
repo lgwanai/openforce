@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "code_review"
+  ],
+  "decomposition": [
+    {
+      "id": 1,
+      "profile": "code_reviewer",
+      "success": true,
+      "summary": "I'll provide a complete, self-contained code review of `crates/domain/src/lease.rs` based on the source code visible in [C1 output]. This review synthesizes the partial analyses from earlier cycles, corrects any inaccuracies, and delivers the final assessment.\n\n---\n\n## 📋 Source Code (from [C1])\n\n```"
+    },
+    {
+      "id": 2,
+      "profile": "rust_reviewer",
+      "success": false,
+      "summary": "**无法完成审查。** 目标文件 `crates/domain/src/lease.rs` 在项目目录中不存在，无法获取任何源代码。经过多次目录列举和读取尝试（列表操作返回空或错误），确认该路径下无此文件。\n\n因此，所有六个审查任务均无法执行，必须跳过。针对验收标准的评估如下：\n\n- **标准1（所有权/借用）**：**FAIL** – 无法检查，缺乏源代码。  \n- **标准2（错误处理）**：**FAIL** – 无法检查，缺乏源代码。  \n- **标准3（FencingToken防脑裂逻辑）**：**FAIL** – 无法检查，缺乏源代码。  \n- **标准4（并发安全）**：**FAI"
+    }
+  ],
+  "roles": [
+    "code_reviewer",
+    "rust_reviewer"
+  ],
+  "task": "审查 crates/domain/src/lease.rs 的 Lease 生命周期和 FencingToken 防脑裂逻辑是否正确",
+  "total": 2,
+  "ts": "2026-05-17T13:15:55.645752+00:00",
+  "workers": 1
+}

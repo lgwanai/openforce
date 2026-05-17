@@ -1,0 +1,22 @@
+{
+  "session_id": "019e3517-9544-7091-804b-75fcdc82d0a9",
+  "goal": "review crates/mtls/ 模块的安全性",
+  "state": "Active",
+  "current_phase": "Design",
+  "plan_version": 0,
+  "plan_epoch": 1,
+  "workspace": "/Users/wuliang/workspace/openforce",
+  "pending_gate": null,
+  "phase_results": [
+    {
+      "phase": "Understand",
+      "tasks_total": 0,
+      "tasks_ok": 0,
+      "worker_outputs": [],
+      "plan_epoch": 1
+    }
+  ],
+  "last_summary": "0/0 workers completed",
+  "created_at": "2026-05-17T08:39:58.532759Z",
+  "updated_at": "2026-05-17T08:40:16.449224Z"
+}

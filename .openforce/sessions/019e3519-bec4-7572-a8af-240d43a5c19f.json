@@ -1,0 +1,22 @@
+{
+  "session_id": "019e3519-bec4-7572-a8af-240d43a5c19f",
+  "goal": "review crates/mtls/src/ca.rs 证书管理安全性",
+  "state": "Active",
+  "current_phase": "Design",
+  "plan_version": 0,
+  "plan_epoch": 1,
+  "workspace": "/Users/wuliang/workspace/openforce",
+  "pending_gate": null,
+  "phase_results": [
+    {
+      "phase": "Understand",
+      "tasks_total": 0,
+      "tasks_ok": 0,
+      "worker_outputs": [],
+      "plan_epoch": 1
+    }
+  ],
+  "last_summary": "0/0 workers completed",
+  "created_at": "2026-05-17T08:42:20.228691Z",
+  "updated_at": "2026-05-17T08:42:53.719273Z"
+}

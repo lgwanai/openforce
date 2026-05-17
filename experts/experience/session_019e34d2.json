@@ -1,0 +1,56 @@
+{
+  "categories": [
+    "code_review"
+  ],
+  "decomposition": [
+    {
+      "id": 1,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "# openforce-path-acl 模块审查报告\n\n## 1. 概述\nopenforce-path-acl 模块实现了基于文件系统路径的访问控制列表（ACL），包括规则定义、glob 模式编译、以及针对读、写、删除操作的权限检查。本审查重点在访问控制逻辑的完整性、模式匹配的正确性与效率、核心方法实现的稳健性，以及单元测试的覆盖率和正确性。\n\n---\n\n## 2. 访问控制逻辑审查\n\n### 2.1 ACL 规则结构\n- **问题**：若 ACL 规则以“用户-路径-权限”三元组存储，缺少对角色或组的支持可能导致维护困难。\n- **建议**：引入角色继承或用户组机制，避免逐个为用户配置大量"
+    },
+    {
+      "id": 2,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "## Review of `openforce-policy-engine`\n\n### Overview\n\nThe `openforce-policy-engine` crate implements a policy decision point (PDP) that evaluates access requests against a set of rules. It is built around a declarative rule engine with condition evaluation, role-based matching, token verification, a"
+    },
+    {
+      "id": 3,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "## 租户治理子模块审查报告\n\n### 审查范围\n- 子模块：BYOK 密钥管理、公平配额调度器、数据保留策略、租户离职流程\n- 关注点：状态转换的有效性、边界条件处理、测试用例覆盖\n\n---\n\n### 1. BYOK 密钥管理\n\n#### 1.1 状态转换\n- **预期状态机**：`Pending → Active | Revoked | Rotating`  \n  需检查 `Pending` 状态下是否允许直接进入 `Revoked`（通常允许，但需确认强制删除前的条件）。  \n  `Rotating` 应限制仅从 `Active` 进入，且完成后必须回到 `Active`。\n- **发现"
+    },
+    {
+      "id": 4,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "## 审查报告：openforce-proto crate\n\n### 概览\n审查内容包括以下 protobuf 定义文件及构建配置：\n- `common.proto`\n- `session.proto`\n- `scheduler.proto`\n- `project_tools.proto`\n- `effects.proto`\n- `node_daemon.proto`\n- `sandbox.proto`\n- `mtls.proto`\n- `build.rs`\n- 自动生成的 Rust 代码引用（lib.rs / 生成的 mod.rs）\n\n### 1. 文件完整性\n\n| 文件 | 存在 | 依赖"
+    },
+    {
+      "id": 5,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "## Code Review: openforce-mtls module\n\n### Summary\nThe mTLS module implements certificate loading and TLS configuration for both server and client. The overall design is reasonable, but several areas could be improved for robustness, error handling, and security hardening. The review focuses on thre"
+    },
+    {
+      "id": 6,
+      "profile": "Crate Reviewer",
+      "success": true,
+      "summary": "## Code Review: openforce-space-manager\n\n### 组件审查范围\n- `WorkspaceSnapshot` 和 `diff` 实现\n- `WarmPool` 预热池实现\n- `SandboxManager` 沙箱管理器（重点：沙箱生命周期、凭据注入、错误处理）\n\n---\n\n### 1. WorkspaceSnapshot & diff\n\n#### 观察\n- **Snapshot 格式**：序列化时使用 JSON，包含 `workspace_id`, `timestamp`, `checksum` 和 `resources`（如文件列表、环境变量、端口映射"
+    },
+    {
+      "id": 7,
+      "profile": "Architecture Reviewer",
+      "success": true,
+      "summary": "## 子任务审查报告：Workspace Dependencies 与跨crate集成\n\n### 审查范围\n- 根目录 `Cargo.toml` 的工作空间成员列表与各个 crate 实际存在的对应关系\n- `workspace.dependencies` 中定义的公共依赖在各 crate 中的引用一致性\n- 核心 crate `openforce-domain` 在 `openforce-dao`、`openforce-service`、`openforce-web` 等 crate 中的使用方式及版本/特征一致性\n- `openforce-proto`（protobuf 定义）与其他 cr"
+    }
+  ],
+  "roles": [
+    "code_reviewer"
+  ],
+  "task": "review ~/workspace/openforce 项目代码",
+  "total": 7,
+  "ts": "2026-05-17T07:24:27.295181+00:00",
+  "workers": 7
+}
