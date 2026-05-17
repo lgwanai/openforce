@@ -244,7 +244,10 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles, &dir_summary).await {
         Ok(tree) => {
-            println!("  MECE validated: {}, confidence: {}", tree.mece_validated, tree.confidence);
+            println!("  MECE: {}, confidence: {}", tree.mece_validated, tree.confidence);
+            if !tree.needs_info.is_empty() {
+                println!("  ⚠ 信息缺口 ({} 项): 运行 'openforce research' 补充", tree.needs_info.len());
+            }
             if !tree.goal.specific.is_empty() {
                 println!("  SMART: {}", tree.goal.specific.chars().take(100).collect::<String>());
             }

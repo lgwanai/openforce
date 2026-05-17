@@ -4,11 +4,9 @@ use serde::Deserialize;
 
 #[derive(Debug, Clone)]
 pub struct TaskTree {
-    pub goal: SmartGoal,
-    pub data_sources: Vec<String>,
-    pub tasks: Vec<DecomposedTask>,
-    pub mece_validated: bool,
-    pub confidence: String,
+    pub goal: SmartGoal, pub data_sources: Vec<String>,
+    pub tasks: Vec<DecomposedTask>, pub mece_validated: bool,
+    pub confidence: String, pub needs_info: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -24,45 +22,107 @@ pub struct DecomposedTask {
     pub acceptance_criteria: Vec<String>, pub dependencies: Vec<String>,
 }
 
-/// RoundTable: 3 agents (交互/数据/实施) × 3 rounds (提案/交叉审查/合成) → MECE 验证的任务树
+/// Shared thinking framework injected into every agent prompt.
+const THINKING_FRAMEWORK: &str = "\
+你必须严格遵循以下三步思考法，不得跳过任何一步:\n\n\
+## 步骤1: 了解现状 — 信息缺口检测\n\
+- 列出你已经知道的信息(从任务描述和项目结构中)\n\
+- 列出你缺少的关键信息(文件内容? 外部知识? 用户意图?)\n\
+- 对每个缺口判断: [需询问用户: 具体问题] 或 [需网络检索: 搜索关键词]\n\
+- 如果信息充分，标注 [信息充足，可继续]\n\n\
+## 步骤2: 分解探讨 — 坚定立场，充分展开\n\
+- 基于现有信息，提出你的拆解方案\n\
+- 从你的维度(交互/数据/实施)深入分析每个子任务\n\
+- 自检: 这个拆解是否 MECE (相互独立、完全穷尽)?\n\
+- 标注 [MECE验证通过] 或 [MECE问题: 具体描述]\n\n\
+## 步骤3: 输出最优解\n\
+- 综合考虑所有信息，输出当前最优的子任务列表\n\
+- 每个子任务必须: 有角色分配、有文件路径(如适用)、有验收标准\n\
+- 如果步骤1发现信息缺口且无法立即解决，标注 [待补充: 内容]\n\
+- 格式: [角色名] 任务标题: 任务描述 | 验收: 标准";
+
+/// Run a web search for planning context. Stub — real impl uses external search API.
+async fn web_search(query: &str) -> String {
+    // TODO: integrate with real search API (DuckDuckGo, SerpAPI, etc.)
+    // For now, returns a flag indicating search is needed but unavailable.
+    format!("[检索建议: {query}] — 网络检索功能待集成。建议: 1) 用户手动提供信息 2) 安装 search skill 扩展")
+}
+
+/// RoundTable: 3 agents × 3 rounds → MECE-validated task tree.
 pub async fn run_roundtable(
     planner: &LlmClient, task: &str,
     classification: &ClassificationResult,
     available_roles: &[String], dir_summary: &str,
 ) -> Result<TaskTree, String> {
     let roles_str = available_roles.join(", ");
+    let mut needs_info: Vec<String> = vec![];
 
-    // ── Round 1: 3-way independent proposals ──
+    // ── Round 1: 3 independent proposals with THINKING_FRAMEWORK ──
     let (i_text, d_text, imp_text) = {
-        let i_prompt = format!("你是交互/用户体验架构师。从用户交互维度分析任务拆解。\n目标: {task}\n可用角色: [{roles_str}]\n项目结构:\n{dir_summary}\n\n请输出:\n1. 交互维度的子任务列表 (每个标注 [角色] 任务描述)\n2. 验收标准\n3. 自检: 你的拆解是否 MECE? 如有遗漏请说明。不确定时标注 [需确认]");
-        let d_prompt = format!("你是数据/系统架构师。从数据流和系统集成维度分析任务拆解。\n目标: {task}\n可用角色: [{roles_str}]\n项目结构:\n{dir_summary}\n\n请输出:\n1. 所需数据源和文件路径\n2. 数据维度的子任务列表 (每个标注 [角色] 任务描述)\n3. 处理步骤\n4. 自检: MECE? 与交互维度是否重叠或遗漏? 不确定标注 [需确认]");
-        let imp_prompt = format!("你是实施/工程架构师。从执行可行性和顺序维度分析任务拆解。\n目标: {task}\n可用角色: [{roles_str}]\n项目结构:\n{dir_summary}\n\n请输出:\n1. 按逻辑顺序的执行计划\n2. 实施维度的子任务列表 (每个标注 [角色] 任务描述)\n3. 依赖关系\n4. 自检: MECE? 有致命缺陷或遗漏? 不确定标注 [需确认]");
+        let i_prompt = format!(
+            "{framework}\n\n---\n你现在的角色: 交互/用户体验架构师\n分析维度: 用户交互流程、体验一致性、端到端可用性\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
+            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
+        );
+        let d_prompt = format!(
+            "{framework}\n\n---\n你现在的角色: 数据/系统架构师\n分析维度: 数据流、API、文件系统、数据库、状态管理\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
+            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
+        );
+        let imp_prompt = format!(
+            "{framework}\n\n---\n你现在的角色: 实施/工程架构师\n分析维度: 执行可行性、时间顺序、依赖关系、技术约束\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
+            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
+        );
 
         let (i, d, imp) = tokio::join!(
-            planner.chat("你是交互架构师，从UX和交互流程维度拆解任务。必须引用具体文件路径。不确定标注[需确认]。", &i_prompt),
-            planner.chat("你是数据架构师，从数据流/API/文件系统维度拆解任务。必须引用具体文件路径。不确定标注[需确认]。", &d_prompt),
-            planner.chat("你是实施架构师，从执行可行性/时间顺序/依赖维度拆解任务。不确定标注[需确认]。", &imp_prompt),
+            planner.chat("你是交互架构师。遵循三步思考法。", &i_prompt),
+            planner.chat("你是数据架构师。遵循三步思考法。", &d_prompt),
+            planner.chat("你是实施架构师。遵循三步思考法。", &imp_prompt),
         );
-        (i.map(|(t,_)|t).unwrap_or_default(), d.map(|(t,_)|t).unwrap_or_default(), imp.map(|(t,_)|t).unwrap_or_default())
+        (i.map(|(t,_)| t).unwrap_or_default(), d.map(|(t,_)| t).unwrap_or_default(), imp.map(|(t,_)| t).unwrap_or_default())
     };
     if i_text.is_empty() || d_text.is_empty() || imp_text.is_empty() {
         return Err("RoundTable: agent proposal failed".into());
     }
 
-    // ── Round 2: Cross-Review ──
+    // Collect information needs from Round 1
+    for text in [&i_text, &d_text, &imp_text] {
+        for line in text.lines() {
+            if line.contains("[需询问用户:") || line.contains("[需网络检索:") {
+                needs_info.push(line.trim().to_string());
+            }
+        }
+    }
+
+    // Execute web searches for flagged queries
+    let mut search_results = String::new();
+    for info in &needs_info {
+        if info.contains("[需网络检索:") {
+            if let Some(q) = info.split("[需网络检索:").nth(1).and_then(|s| s.split(']').next()) {
+                let result = web_search(q).await;
+                search_results.push_str(&format!("\n检索 '{q}': {result}\n"));
+            }
+        }
+    }
+
+    // ── Round 2: Cross-Review (with THINKING_FRAMEWORK) ──
     let review_prompt = format!(
-        "你是任务拆解审查员。以下是三位架构师的拆解方案。请交叉审查:\n\n=== 交互维度 ===\n{i_text}\n\n=== 数据维度 ===\n{d_text}\n\n=== 实施维度 ===\n{imp_text}\n\n检查:\n1. MECE: 是否有重叠? 是否有遗漏?\n2. 致命缺陷: 是否有不可执行或逻辑矛盾的子任务?\n3. 输出合并后的子任务列表 (格式: [角色] 任务名: 描述: 验收标准)\n不确定时标注 [需确认: 具体问题]。不要猜测。"
+        "{framework}\n\n---\n你现在的角色: 任务拆解审查员\n\n=== 交互维度方案 ===\n{i}\n\n=== 数据维度方案 ===\n{d}\n\n=== 实施维度方案 ===\n{imp}\n\n=== 信息缺口汇总 ===\n{gaps}\n\n=== 检索结果 ===\n{search}\n\n开始你的三步思考:\n步骤1: 三个方案中哪些信息缺口需要优先解决?\n步骤2: 交叉审查 — MECE 重叠? 遗漏? 致命缺陷?\n步骤3: 输出合并后的最优子任务列表(格式: [角色] 任务名: 描述: 验收标准)",
+        framework = THINKING_FRAMEWORK, i = i_text, d = d_text, imp = imp_text,
+        gaps = needs_info.join("\n"), search = search_results
     );
-    let (review_text, _) = planner.chat("你是资深项目审查员，交叉验证任务拆解。不确定标注[需确认]。不要自作主张。", &review_prompt)
+    let (review_text, _) = planner.chat("你是资深项目审查员。遵循三步思考法。不确定标注[需确认]。", &review_prompt)
         .await.map_err(|e| format!("cross-review: {e}"))?;
 
-    // ── Round 3: Synthesize ──
+    // ── Round 3: Final Synthesis ──
     let synth_prompt = format!(
-        "你是最终决策者。基于审查结果生成JSON任务树。\n原始任务: {task}\n审查结果:\n{review_text}\n\n输出严格JSON:\n{{\"goal\":{{\"specific\":\"...\",\"measurable\":\"...\",\"achievable\":\"...\",\"relevant\":\"...\",\"time_bound\":\"...\"}},\"data_sources\":[\"路径\"],\"tasks\":[{{\"role\":\"角色\",\"title\":\"标题\",\"objective\":\"目标\",\"files\":[\"路径\"],\"steps\":[\"步骤\"],\"acceptance_criteria\":[\"标准\"],\"dependencies\":[]}}],\"mece_validated\":true,\"confidence\":\"high|medium|low\"}}\nrole从[{roles_str}]选。files必须真实存在。不确定设confidence=low。仅JSON，无其他文字。"
+        "{framework}\n\n---\n你现在的角色: 最终决策者\n\n原始任务: {task}\n审查结果:\n{review}\n\n步骤3 — 输出最优解。输出严格JSON:\n{{\"goal\":{{\"specific\":\"...\",\"measurable\":\"...\",\"achievable\":\"...\",\"relevant\":\"...\",\"time_bound\":\"...\"}},\"data_sources\":[\"路径\"],\"tasks\":[{{\"role\":\"角色\",\"title\":\"标题\",\"objective\":\"目标\",\"files\":[\"路径\"],\"steps\":[\"步骤\"],\"acceptance_criteria\":[\"标准\"],\"dependencies\":[]}}],\"mece_validated\":true,\"confidence\":\"high|medium|low\"}}\n\nrole从[{roles}]选。files必须真实存在。不确定设confidence=low。仅JSON。",
+        framework = THINKING_FRAMEWORK, review = review_text, roles = roles_str
     );
     let (final_json, _) = planner.chat("你是任务拆解决策者。仅输出JSON。", &synth_prompt)
         .await.map_err(|e| format!("synthesize: {e}"))?;
-    parse_task_tree(&final_json)
+
+    let mut tree = parse_task_tree(&final_json)?;
+    tree.needs_info = needs_info;
+    Ok(tree)
 }
 
 fn parse_task_tree(json_str: &str) -> Result<TaskTree, String> {
@@ -76,5 +136,6 @@ fn parse_task_tree(json_str: &str) -> Result<TaskTree, String> {
         data_sources: r.data_sources,
         tasks: r.tasks.into_iter().map(|t| DecomposedTask { role: t.role, title: t.title, objective: t.objective, files: t.files, steps: t.steps, acceptance_criteria: t.acceptance_criteria, dependencies: t.dependencies }).collect(),
         mece_validated: r.mece_validated, confidence: r.confidence,
+        needs_info: vec![],
     })
 }
