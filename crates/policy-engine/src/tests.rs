@@ -113,4 +113,28 @@ mod tests {
         };
         assert!(matches!(engine.evaluate(&ctx), PolicyEffect::Allow { .. }));
     }
+
+    #[test] fn test_empty_rules_returns_deny() {
+        let engine = PolicyEngine::new(vec![]);
+        let ctx = AuthzContext {
+            mTLS_identity: None, capability_token: None,
+            requested_action: "any".into(), resource_type: "any".into(),
+            tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
+        };
+        assert!(matches!(engine.evaluate(&ctx), PolicyEffect::Deny { .. }));
+    }
+
+    #[test] fn test_equal_priority_first_match_wins() {
+        let allow_first = PolicyRule::new("allow", 100, RuleCondition::Always,
+            PolicyEffect::Allow { reason: "first".into() }, "first");
+        let deny_second = PolicyRule::new("deny", 100, RuleCondition::Always,
+            PolicyEffect::Deny { reason: "second".into() }, "second");
+        let engine = PolicyEngine::new(vec![allow_first, deny_second]);
+        let ctx = AuthzContext {
+            mTLS_identity: None, capability_token: None,
+            requested_action: "".into(), resource_type: "".into(),
+            tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
+        };
+        assert!(matches!(engine.evaluate(&ctx), PolicyEffect::Allow { .. }));
+    }
 }
