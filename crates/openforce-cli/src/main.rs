@@ -229,29 +229,95 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         .map(|(d, fs)| format!("  {d}/")).collect::<Vec<_>>().join("\n");
     let src_display: String = source_snapshot; // full source — model has 1M context
 
+    let available_roles: Vec<String> = {
+        let mut seen = std::collections::HashSet::new();
+        classification.suggested_roles.iter()
+            .chain(matched_profiles.iter().map(|p| &p.name))
+            .filter(|r| seen.insert(r.to_string()))
+            .cloned().collect()
+    };
+    let roles_str = available_roles.join(", ");
+
     let plan_prompt = format!(
-        "Task: {task}\nComplexity: {}\nRoles:{profile_ctx}\nSOPs:{sop_ctx}\nDirs:\n{dir_summary}\nSource:\n{src_display}\n\n\
-         Decompose. Assign roles from list. Format: N. [role] Name: desc",
-        classification.complexity
+        "You are a task decomposition planner. Your job is to break down a task into specific, actionable subtasks.\n\n\
+         USER TASK: {task}\n\
+         COMPLEXITY: {}\n\
+         AVAILABLE ROLES (use EXACTLY these names): [{roles_str}]\n\
+         PROJECT STRUCTURE:\n{dir_summary}\n\n\
+         {{\"categories\": {:?}, \"suggested_roles\": {:?}}}\n\n\
+         INSTRUCTIONS:\n\
+         1. Break the task into 2-8 specific subtasks, each assigned to a role from the list above.\n\
+         2. Each subtask must reference specific files/directories from the project structure when relevant.\n\
+         3. Output EXACTLY in this format (one per line, no other text):\n\
+            N. [role_name] Task Title: specific description referencing concrete files\n\
+         Example:\n\
+            1. [rust_reviewer] Lease Lifecycle Audit: check crates/domain/src/lease.rs for state machine bugs and race conditions\n\
+            2. [security_auditor] FencingToken Security: audit crates/domain/src/lease.rs FencingToken monotonicity\n\
+         4. OUTPUT ONLY THE NUMBERED LIST. No introduction, no summary.",
+        classification.complexity, classification.categories, classification.suggested_roles
     );
     let (plan_text, _) = planner.chat(&config.planner.system_prompt, &plan_prompt).await?;
 
+    // Parse decomposition with flexible format matching
     let mut subtasks: Vec<(String, String, String)> = vec![];
     for line in plan_text.lines() {
         let t = line.trim();
-        if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) { continue; }
-        let c = t.splitn(2, ". ").nth(1).unwrap_or(t);
-        let (pf, rest) = if c.starts_with('[') {
-            c[1..].split(']').next().map(|p| (p.to_string(), c[p.len()+2..].trim().to_string())).unwrap_or(("default".into(), c.to_string()))
-        } else { ("default".into(), c.to_string()) };
-        let parts: Vec<&str> = rest.splitn(2, ": ").collect();
-        subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
+        if t.is_empty() { continue; }
+        // Match: "N. [role] title" or "N. [role] title: desc" or "[role] title"
+        let stripped = t.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ' ' || c == '-' || c == '*');
+        let (pf, rest) = if let Some(idx) = stripped.find(']') {
+            if stripped.starts_with('[') {
+                let role = stripped[1..idx].to_string();
+                let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
+                (role, desc)
+            } else {
+                (String::new(), stripped.to_string())
+            }
+        } else {
+            (String::new(), stripped.to_string())
+        };
+        if !pf.is_empty() && !rest.is_empty() {
+            let parts: Vec<&str> = rest.splitn(2, ": ").collect();
+            subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
+        }
     }
 
-    // Fallback: if planner produced no subtasks, use classification roles
+    // LLM Planner must decompose — if it fails, re-prompt with stricter instructions
     if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
-        for role in &classification.suggested_roles {
-            subtasks.push((role.clone(), format!("Review: {role}"), String::new()));
+        let retry_prompt = format!(
+            "You MUST decompose this task into specific subtasks. DO NOT output empty or generic responses.\n\
+             Task: {task}\nAvailable roles: {roles}\n\n\
+             Output EXACTLY in this format, one per line:\n\
+             1. [role_name] Task title: detailed description\n\
+             2. [role_name] Task title: detailed description\n\n\
+             Rules:\n\
+             - Use role names from the available roles list EXACTLY\n\
+             - Each task must be specific and actionable\n\
+             - Output AT LEAST one task per available role\n\
+             - DO NOT output anything except the numbered list",
+            task = task,
+            roles = classification.suggested_roles.iter().map(|r| r.as_str()).collect::<Vec<_>>().join(", ")
+        );
+        if let Ok((retry_text, _)) = planner.chat(&config.planner.system_prompt, &retry_prompt).await {
+            for line in retry_text.lines() {
+                let t = line.trim();
+                if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) { continue; }
+                let c = t.splitn(2, ". ").nth(1).unwrap_or(t);
+                let (pf, rest) = if c.starts_with('[') {
+                    c[1..].split(']').next().map(|p| (p.to_string(), c[p.len()+2..].trim().to_string())).unwrap_or_default()
+                } else { (String::new(), c.to_string()) };
+                if !pf.is_empty() && !rest.is_empty() {
+                    let parts: Vec<&str> = rest.splitn(2, ": ").collect();
+                    subtasks.push((pf, parts[0].to_string(), parts.get(1).map(|s| s.to_string()).unwrap_or_default()));
+                }
+            }
+        }
+        // Last resort: one task per role with full task context
+        if subtasks.is_empty() {
+            for (i, role) in classification.suggested_roles.iter().enumerate() {
+                let desc = if i == 0 { task.clone() } else { format!("{task} (verify from independent perspective)") };
+                subtasks.push((role.clone(), desc, String::new()));
+            }
         }
     }
 
@@ -303,12 +369,25 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_id = session.as_ref().map(|s| s.session_id.to_string());
         let session_id_c = session_id.clone();
 
-        // Assign specific files/directories to this worker (not inline source text)
+        // Assign specific files/directories by matching task description keywords against crate names
+        let task_lower = task.to_lowercase();
+        let name_lower = name.to_lowercase();
         let review_paths: Vec<String> = by_dir.iter()
-            .filter(|(k,_)| name.contains(k.as_str()) || k.contains(name.as_str()))
+            .filter(|(k,_)| {
+                let k_lower = k.to_lowercase();
+                name_lower.contains(&k_lower) || k_lower.split('/').any(|seg| name_lower.contains(seg))
+                    || task_lower.contains(&k_lower)
+            })
             .flat_map(|(d, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
-            .take(30)
+            .take(50)
             .collect();
+        // If still no matches, use all source files up to limit
+        let review_paths: Vec<String> = if review_paths.is_empty() {
+            by_dir.iter()
+                .flat_map(|(_, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
+                .take(50)
+                .collect()
+        } else { review_paths };
         let review_paths_c = review_paths.clone();
 
         // Build session map for worker context
