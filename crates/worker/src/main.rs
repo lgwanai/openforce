@@ -115,7 +115,7 @@ async fn main() -> Result<()> {
     let start = Instant::now();
     let max_duration = Duration::from_secs(std::env::var("WORKER_MAX_SECS").ok().and_then(|s| s.parse().ok()).unwrap_or(600));
     let mut tokens_used: usize = 0;
-    let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(50000);
+    let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(150000);
 
     // ── Phase 0: Decompose — Plan subtasks and define acceptance criteria ──
 
