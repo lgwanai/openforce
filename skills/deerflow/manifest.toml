@@ -1,0 +1,13 @@
+[skill]
+name = "deerflow"
+version = "1.0"
+description = "DeerFlow agent — web search (Tavily), web fetch (Jina AI), multi-step reasoning"
+source = "~/workspace/deerflow-skill"
+
+[skill.provides]
+tools = ["web_search", "web_fetch"]
+config_keys = ["TAVILY_API_KEY", "JINA_API_KEY"]
+
+[skill.integration]
+type = "native"
+config_source = "~/workspace/deerflow-skill/config.yaml"

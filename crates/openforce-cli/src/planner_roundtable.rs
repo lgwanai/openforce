@@ -41,13 +41,6 @@ const THINKING_FRAMEWORK: &str = "\
 - 如果步骤1发现信息缺口且无法立即解决，标注 [待补充: 内容]\n\
 - 格式: [角色名] 任务标题: 任务描述 | 验收: 标准";
 
-/// Run a web search for planning context. Stub — real impl uses external search API.
-async fn web_search(query: &str) -> String {
-    // TODO: integrate with real search API (DuckDuckGo, SerpAPI, etc.)
-    // For now, returns a flag indicating search is needed but unavailable.
-    format!("[检索建议: {query}] — 网络检索功能待集成。建议: 1) 用户手动提供信息 2) 安装 search skill 扩展")
-}
-
 /// RoundTable: 3 agents × 3 rounds → MECE-validated task tree.
 pub async fn run_roundtable(
     planner: &LlmClient, task: &str,
@@ -92,13 +85,13 @@ pub async fn run_roundtable(
         }
     }
 
-    // Execute web searches for flagged queries
+    // Execute REAL web searches for flagged queries (via deerflow-skill Tavily API)
     let mut search_results = String::new();
     for info in &needs_info {
         if info.contains("[需网络检索:") {
             if let Some(q) = info.split("[需网络检索:").nth(1).and_then(|s| s.split(']').next()) {
-                let result = web_search(q).await;
-                search_results.push_str(&format!("\n检索 '{q}': {result}\n"));
+                let result = crate::web_search::web_search(q).await;
+                search_results.push_str(&format!("\n🔍 '{q}':\n{result}\n"));
             }
         }
     }
