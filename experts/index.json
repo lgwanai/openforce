@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "description": "OpenForce Expert Library — Planner knowledge retrieval index",
+  "categories": {
+    "backend": {
+      "keywords": ["API", "CRUD", "数据库", "database", "后端", "backend", "服务端", "REST", "gRPC", "microservice"],
+      "default_role": "backend_expert",
+      "sop": "backend_crud_delivery",
+      "profiles": ["backend_expert", "rust_developer", "go_developer"]
+    },
+    "frontend": {
+      "keywords": ["UI", "页面", "前端", "frontend", "Vue", "React", "component", "组件", "界面", "CSS"],
+      "default_role": "frontend_expert",
+      "sop": "frontend_component_delivery",
+      "profiles": ["frontend_expert", "vue_developer", "react_developer"]
+    },
+    "architecture": {
+      "keywords": ["架构", "architecture", "设计", "design", "系统设计", "数据库设计", "API设计", "schema", "技术选型"],
+      "default_role": "architect",
+      "sop": "architecture_design",
+      "profiles": ["architect", "system_designer", "db_architect"]
+    },
+    "security": {
+      "keywords": ["安全", "security", "审计", "audit", "漏洞", "vulnerability", "SQL注入", "XSS", "权限", "认证", "auth"],
+      "default_role": "security_auditor",
+      "sop": "security_audit",
+      "profiles": ["security_auditor", "pentester", "compliance_checker"]
+    },
+    "testing": {
+      "keywords": ["测试", "test", "单元测试", "集成测试", "E2E", "覆盖率", "coverage", "QA"],
+      "default_role": "test_engineer",
+      "sop": "test_suite_delivery",
+      "profiles": ["test_engineer", "e2e_specialist", "perf_tester"]
+    },
+    "devops": {
+      "keywords": ["部署", "deploy", "CI/CD", "Docker", "Kubernetes", "k8s", "容器", "container", "运维", "监控"],
+      "default_role": "devops_engineer",
+      "sop": "deployment_pipeline",
+      "profiles": ["devops_engineer", "k8s_operator", "ci_cd_specialist"]
+    },
+    "data": {
+      "keywords": ["数据", "data", "SQL", "migration", "迁移", "ETL", "数据分析", "报告", "report", "分析"],
+      "default_role": "data_engineer",
+      "sop": "data_pipeline",
+      "profiles": ["data_engineer", "sql_specialist", "data_analyst"]
+    },
+    "documentation": {
+      "keywords": ["文档", "documentation", "README", "doc", "说明", "注释", "comment", "API文档"],
+      "default_role": "doc_writer",
+      "sop": "documentation_writing",
+      "profiles": ["doc_writer", "api_doc_specialist", "tutorial_writer"]
+    },
+    "code_review": {
+      "keywords": ["审查", "review", "代码审查", "code review", "检查", "重构", "refactor", "优化", "optimize"],
+      "default_role": "code_reviewer",
+      "sop": "code_review",
+      "profiles": ["code_reviewer", "rust_reviewer", "performance_optimizer"]
+    }
+  },
+  "model_tiers": {
+    "reasoning": { "models": ["claude-opus-4-7", "deepseek-v4-pro"], "for": "架构设计、安全审计、复杂推理" },
+    "coding": { "models": ["claude-sonnet-4-6", "deepseek-v4-flash"], "for": "代码生成、CRUD开发、前端组件" },
+    "fast": { "models": ["claude-haiku-4-5", "deepseek-v4-flash"], "for": "文档编写、简单测试、格式化" }
+  },
+  "expansion_guide": {
+    "add_role": "在 experts/profiles/ 下创建新的角色 JSON 文件",
+    "add_sop": "在 experts/sop/ 下创建新的 SOP markdown 文件",
+    "update_index": "在本文件中添加新的 category 或扩展现有 category 的 keywords 和 profiles",
+    "add_experience": "每次成功执行后，将任务分解模式写入 experts/experience/ 目录"
+  }
+}
