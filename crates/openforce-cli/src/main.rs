@@ -105,6 +105,20 @@ async fn main() -> Result<()> {
             let ws = resolve_workspace(&args);
             return SessionManager::new(ws).await.cancel(&args[2]).await.map_err(|e| anyhow::anyhow!("{e}"));
         }
+        "terminate" => {
+            if args.len() < 4 { eprintln!("Usage: openforce terminate <session-id> <worker-id>"); std::process::exit(1); }
+            let ws = resolve_workspace(&args);
+            let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
+            if redis_url.is_empty() { return Err(anyhow::anyhow!("REDIS_URL required for terminate")); }
+            let sid = uuid::Uuid::parse_str(&args[2]).map_err(|e| anyhow::anyhow!("invalid session id: {e}"))?;
+            let wid = &args[3];
+            let mut store = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await
+                .map_err(|e| anyhow::anyhow!("redis: {e}"))?;
+            let caller = openforce_redis_session::store::Caller::Scheduler { session_id: sid };
+            store.terminate_worker(&caller, wid).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            println!("Worker {wid} terminated in session {sid}");
+            return Ok(());
+        }
         _ => {} // fall through to "new" (default pipeline)
     }
 
@@ -152,6 +166,7 @@ fn print_usage() {
     eprintln!("  openforce reject \"<feedback>\" [<session-id>]  Reject with feedback");
     eprintln!("  openforce sessions                           List active sessions");
     eprintln!("  openforce cancel <session-id>                Cancel a session");
+    eprintln!("  openforce terminate <session-id> <worker-id>  Terminate a worker (Scheduler/Planner only)");
 }
 
 async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
@@ -470,6 +485,40 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         });
         let ep = format!("experts/experience/session_{}.json", uuid::Uuid::now_v7().to_string().chars().take(8).collect::<String>());
         let _ = std::fs::write(&ep, serde_json::to_string_pretty(&exp).unwrap_or_default());
+    }
+
+    // Persist to Redis (planner + worker snapshots) if available
+    if let Some(ref sess) = session {
+        let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
+        if !redis_url.is_empty() {
+            if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                // Save planner decomposition
+                let _ = store.set_planner(&sess.session_id,
+                    &format!("{:?}", classification.categories),
+                    &subtasks.iter().map(|(r,n,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
+                    &classification.suggested_roles,
+                ).await;
+                // Save worker snapshots
+                for (i, pf, success, text) in &results {
+                    let wid = format!("worker-{i}");
+                    let caller = openforce_redis_session::store::Caller::Worker {
+                        worker_id: wid.clone(), session_id: sess.session_id,
+                    };
+                    let _ = store.set_worker_snapshot(&caller,
+                        &openforce_redis_session::store::WorkerSnapshot {
+                            worker_id: wid,
+                            role: pf.clone(), task: task.clone(),
+                            subtasks: vec![],
+                            acceptance_criteria: vec![],
+                            progress: if *success { "done" } else { "failed" }.into(),
+                            inputs: vec![], outputs: vec![text.chars().take(500).collect()],
+                            intermediate_artifacts: vec![],
+                            created_at: chrono::Utc::now(), updated_at: chrono::Utc::now(),
+                        },
+                    ).await;
+                }
+            }
+        }
     }
 
     // Persist session state for multi-turn support
