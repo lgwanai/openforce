@@ -298,14 +298,16 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let api_key_c = api_key.clone();
         let base_url_c = base_url.clone();
         let wb = worker_bin.clone();
+        let tools_addr = std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
 
-        // Match worker to relevant source files by crate/subtask name
-        let files_text: String = dir_files.iter()
+        // Assign specific files/directories to this worker (not inline source text)
+        // Worker will use read_file/list_dir tools to access them
+        let review_paths: Vec<String> = by_dir.iter()
             .filter(|(k,_)| name.contains(k.as_str()) || k.contains(name.as_str()))
-            .flat_map(|(_,e)| e.split('\n'))
-            .take(3000)
-            .collect::<Vec<_>>().join("\n");
-        let files_text_c = if files_text.len() > 100000 { files_text[..100000].to_string() } else { files_text };
+            .flat_map(|(d, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
+            .take(30)
+            .collect();
+        let review_paths_c = review_paths.clone();
 
         if use_process {
             // Spawn as independent OS process
@@ -313,10 +315,10 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
                     "model": model, "system_prompt": sp,
-                    "workspace": workspace_c.to_string_lossy(),
                     "api_key": api_key_c, "base_url": base_url_c,
                     "output_file": format!("/tmp/worker_{idx}_output.json"),
-                    "files_text": files_text_c,
+                    "review_paths": review_paths_c,
+                    "project_tools_addr": tools_addr,
                 });
                 let task_file = format!("/tmp/openforce_worker_{idx}.json");
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
@@ -348,18 +350,11 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 }
             }));
         } else {
-            // Fallback: in-process LLM call
+            // Fallback: in-process LLM call (same tool-based approach)
             let worker = build_client(&config, &model);
             let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
-            let files_text = dir_files.get(name).cloned().unwrap_or_else(|| {
-                by_dir.iter().filter(|(k,_)| k.contains(name)||name.contains(k.as_str()))
-                    .flat_map(|(_,e)| e.iter()).filter(|e| matches!(e.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(20)
-                    .map(|e| {
-                        let c = std::fs::read_to_string(workspace.join(&e.path)).unwrap_or_default();
-                        format!("\n=== {} ===\n{}", e.path, if c.len()>10000 {c[..10000].to_string()+"\n..."} else {c})
-                    }).collect::<Vec<_>>().join("\n")
-            });
-            let prompt = format!("Task: {task}\nSubtask: {name}\n\nSource:\n{files_text}\n\nReview and report.");
+            let paths_list = review_paths.iter().map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n");
+            let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
             handles.push(tokio::spawn(async move {
                 match worker.chat(&system, &prompt).await {
                     Ok((text,_)) => (idx, pnc, true, text),
