@@ -167,7 +167,13 @@ async fn main() -> Result<()> {
         dir_files.insert(dn.clone(), t);
     }
 
-    // Phase 3: Workers
+    // Phase 3: Workers (独立进程 or in-process fallback)
+    let worker_bin = std::env::current_exe().unwrap_or_else(|_| PathBuf::from("target/debug/openforce"))
+        .parent().map(|p| p.join("worker")).unwrap_or_else(|| PathBuf::from("target/debug/worker"));
+    let use_process = worker_bin.exists();
+    if use_process { println!("[Workers] Independent OS processes: {worker_bin:?}"); }
+    else { println!("[Workers] In-process fallback (build worker binary for process isolation)"); }
+
     let mut handles = vec![];
     for (i, (pn, name, _)) in subtasks.iter().enumerate() {
         let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
@@ -175,26 +181,65 @@ async fn main() -> Result<()> {
         } else if let Some(cp) = config.workers.profiles.get(pn) {
             (cp.model.clone(), cp.system_prompt.clone())
         } else { (config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
-        let worker = build_client(&config, &model);
-        let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
-
-        let files_text = dir_files.get(name).cloned().unwrap_or_else(|| {
-            by_dir.iter().filter(|(k,_)| k.contains(name)||name.contains(k.as_str()))
-                .flat_map(|(_,e)| e.iter()).filter(|e| matches!(e.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(20)
-                .map(|e| {
-                    let c = std::fs::read_to_string(workspace.join(&e.path)).unwrap_or_default();
-                    format!("\n=== {} ===\n{}", e.path, if c.len()>10000 {c[..10000].to_string()+"\n..."} else {c})
-                }).collect::<Vec<_>>().join("\n")
-        });
-
-        let prompt = format!("Task: {task}\nSubtask: {name}\n\nSource:\n{files_text}\n\nReview and report.");
         let idx = i+1; let pnc = pn.clone();
-        handles.push(tokio::spawn(async move {
-            match worker.chat(&system, &prompt).await {
-                Ok((text,_)) => (idx, pnc, true, text),
-                Err(e) => (idx, pnc, false, format!("Error: {e}")),
-            }
-        }));
+        let task_c = task.clone(); let name_c = name.clone();
+        let workspace_c = workspace.clone();
+        let api_key_c = api_key.clone();
+        let base_url_c = base_url.clone();
+        let wb = worker_bin.clone();
+
+        if use_process {
+            // Spawn as independent OS process
+            handles.push(tokio::spawn(async move {
+                let task_json = serde_json::json!({
+                    "task": task_c, "subtask": name_c, "profile_name": pnc,
+                    "model": model, "system_prompt": sp,
+                    "workspace": workspace_c.to_string_lossy(),
+                    "api_key": api_key_c, "base_url": base_url_c,
+                    "output_file": format!("/tmp/worker_{idx}_output.json"),
+                });
+                let task_file = format!("/tmp/openforce_worker_{idx}.json");
+                let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
+                match std::process::Command::new(&wb).arg("--task-file").arg(&task_file)
+                    .stdout(std::process::Stdio::piped()).stderr(std::process::Stdio::piped()).spawn()
+                {
+                    Ok(mut child) => match child.wait() {
+                        Ok(status) if status.success() => {
+                            let out_file = format!("/tmp/worker_{idx}_output.json");
+                            if let Ok(data) = std::fs::read_to_string(&out_file) {
+                                if let Ok(v) = serde_json::from_str::<serde_json::Value>(&data) {
+                                    let text = v["output"].as_str().unwrap_or("").to_string();
+                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), true, text);
+                                }
+                            }
+                            (idx, pnc, true, format!("Worker-{idx} completed"))
+                        }
+                        Ok(status) => (idx, pnc, false, format!("Worker-{idx} exit: {status}")),
+                        Err(e) => (idx, pnc, false, format!("Worker-{idx} wait error: {e}")),
+                    },
+                    Err(e) => (idx, pnc, false, format!("Worker-{idx} spawn error: {e}")),
+                }
+            }));
+        } else {
+            // Fallback: in-process LLM call
+            let worker = build_client(&config, &model);
+            let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
+            let files_text = dir_files.get(name).cloned().unwrap_or_else(|| {
+                by_dir.iter().filter(|(k,_)| k.contains(name)||name.contains(k.as_str()))
+                    .flat_map(|(_,e)| e.iter()).filter(|e| matches!(e.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(20)
+                    .map(|e| {
+                        let c = std::fs::read_to_string(workspace.join(&e.path)).unwrap_or_default();
+                        format!("\n=== {} ===\n{}", e.path, if c.len()>10000 {c[..10000].to_string()+"\n..."} else {c})
+                    }).collect::<Vec<_>>().join("\n")
+            });
+            let prompt = format!("Task: {task}\nSubtask: {name}\n\nSource:\n{files_text}\n\nReview and report.");
+            handles.push(tokio::spawn(async move {
+                match worker.chat(&system, &prompt).await {
+                    Ok((text,_)) => (idx, pnc, true, text),
+                    Err(e) => (idx, pnc, false, format!("Error: {e}")),
+                }
+            }));
+        }
     }
 
     let mut results: Vec<(usize,String,bool,String)> = vec![];
