@@ -1,0 +1,84 @@
+# DeerFlow Skill Configuration
+# Copy this file to config.yaml and configure your models and tools
+
+config_version: 8
+
+log_level: info
+
+token_usage:
+  enabled: false
+
+# ============================================================================
+# Models Configuration
+# ============================================================================
+models:
+  # DeepSeek V4 Flash - Anthropic compatible API
+  - name: deepseek-v4-flash
+    display_name: DeepSeek V4 Flash
+    use: langchain_anthropic:ChatAnthropic
+    model: deepseek-v4-flash
+    api_key: $DEEPSEEK_API_KEY
+    base_url: https://api.deepseek.com/anthropic
+
+  # OpenAI model example
+  - name: gpt-4
+    display_name: GPT-4
+    use: langchain_openai:ChatOpenAI
+    model: gpt-4
+    api_key: $OPENAI_API_KEY
+
+  # Anthropic Claude model example
+  - name: claude-3-sonnet
+    display_name: Claude 3.5 Sonnet
+    use: langchain_anthropic:ChatAnthropic
+    model: claude-sonnet-4-20250514
+    api_key: $ANTHROPIC_API_KEY
+
+  # Ollama local model example
+  - name: llama3
+    display_name: Llama 3 (Ollama)
+    use: langchain_ollama:ChatOllama
+    model: llama3
+    base_url: http://localhost:11434
+    supports_thinking: false
+    supports_vision: false
+
+# ============================================================================
+# Tools Configuration
+# ============================================================================
+tools:
+  # Web search tool (requires Tavily API key)
+  - name: web_search
+    group: web
+    use: deerflow.community.tavily.tools:web_search_tool
+    max_results: 5
+    api_key: $TAVILY_API_KEY
+
+  # Web fetch tool (uses Jina AI reader)
+  - name: web_fetch
+    group: web
+    use: deerflow.community.jina_ai.tools:web_fetch_tool
+    timeout: 10
+    api_key: $JINA_API_KEY
+
+# ============================================================================
+# Sandbox Configuration
+# ============================================================================
+sandbox:
+  use: deerflow.sandbox.local:LocalSandboxProvider
+
+# ============================================================================
+# Environment Variables
+# ============================================================================
+# Set these environment variables before running the skill:
+#
+# Required for model access:
+#   DEEPSEEK_API_KEY=sk-xxx           # DeepSeek API key
+#   OPENAI_API_KEY=sk-xxx              # OpenAI API key
+#   ANTHROPIC_API_KEY=sk-ant-xxx       # Anthropic API key
+#
+# Required for web tools:
+#   TAVILY_API_KEY=tvly-xxx            # Tavily API key (https://tavily.com)
+#   JINA_API_KEY=jina_xxx              # Jina AI API key (https://jina.ai/reader)
+#
+# Or create a .env file and use python-dotenv

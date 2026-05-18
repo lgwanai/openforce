@@ -1,0 +1,70 @@
+# Configuration with secrets
+config.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Benchmarks
+.benchmarks/
+
+# Ruff
+.ruff_cache/
+
+# Planning
+.planning/
+
+# Logs
+*.log
+logs/
+
+# Local environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# DeerFlow runtime
+checkpoints.db
+memory.json
+uploads/
