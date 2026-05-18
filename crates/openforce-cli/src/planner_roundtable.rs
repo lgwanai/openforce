@@ -90,10 +90,7 @@ pub async fn run_roundtable(
     for info in &needs_info {
         if info.contains("[需网络检索:") {
             if let Some(q) = info.split("[需网络检索:").nth(1).and_then(|s| s.split(']').next()) {
-                let runner = crate::skill_runner::SkillRunner::discover("skills");
-                let result = if runner.has_tool("web_search") {
-                    runner.invoke("web_search", &serde_json::json!({"query": q, "max_results": 3})).await
-                } else { format!("[需网络检索]") };
+                let result = crate::skill_runner::SkillRunner::discover("skills").resolve_search(q).await;
                 search_results.push_str(&format!("\n🔍 '{q}':\n{result}\n"));
             }
         }
