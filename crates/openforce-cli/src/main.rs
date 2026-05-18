@@ -395,7 +395,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_map_c = session_map.clone();
 
         if use_process {
-            // Spawn as independent OS process
+            // Spawn as independent OS process — truly parallel via tokio::process
             handles.push(tokio::spawn(async move {
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
@@ -410,11 +410,13 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 });
                 let task_file = format!("/tmp/openforce_worker_{idx}.json");
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
-                match std::process::Command::new(&wb).arg("--task-file").arg(&task_file)
+                let start = std::time::Instant::now();
+                match tokio::process::Command::new(&wb).arg("--task-file").arg(&task_file)
                     .stdout(std::process::Stdio::piped()).stderr(std::process::Stdio::piped()).spawn()
                 {
-                    Ok(mut child) => match child.wait() {
+                    Ok(mut child) => match child.wait().await {
                         Ok(_) => {
+                            let elapsed = start.elapsed().as_secs();
                             let out_file = format!("/tmp/worker_{idx}_output.json");
                             if let Ok(data) = std::fs::read_to_string(&out_file) {
                                 if let Ok(v) = serde_json::from_str::<serde_json::Value>(&data) {
@@ -425,12 +427,10 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                                         "exhausted" => format!("EXHAUSTED: {}", v["reason"].as_str().unwrap_or("max cycles")),
                                         _ => v["output"].as_str().unwrap_or("").to_string(),
                                     };
-                                    let cycles = v["cycles"].as_u64().unwrap_or(1);
-                                    let label = format!("{} ({} cycle{})", action, cycles, if cycles > 1 {"s"} else {""});
-                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), success, text);
+                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), success, format!("[{elapsed}s] {text}"));
                                 }
                             }
-                            (idx, pnc, false, format!("Worker-{idx} no output"))
+                            (idx, pnc, false, format!("[{elapsed}s] Worker-{idx} no output"))
                         }
                         Err(e) => (idx, pnc, false, format!("Worker-{idx} wait error: {e}")),
                     },
@@ -453,8 +453,9 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         }
     }
 
-    let mut results: Vec<(usize,String,bool,String)> = vec![];
-    for h in handles { if let Ok(r) = h.await { results.push(r); } }
+    // Collect all worker results in parallel (not sequential await)
+    let mut results: Vec<(usize,String,bool,String)> = futures::future::join_all(handles).await
+        .into_iter().filter_map(|r| r.ok()).collect();
     results.sort_by_key(|r| r.0);
 
     let ok = results.iter().filter(|r| r.2).count();
