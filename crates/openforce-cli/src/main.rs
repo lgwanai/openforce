@@ -11,6 +11,7 @@ mod gate_handler;
 mod repl;
 mod planner_roundtable;
 mod skill_runner;
+mod dag_executor;
 use session_manager::SessionManager;
 use repl::SessionRepl;
 
@@ -334,15 +335,32 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         dir_files.insert(dn.clone(), t);
     }
 
-    // Phase 3: Workers (独立进程 or in-process fallback)
+    // Phase 3: Workers — DAG wave execution (Scheduler-style)
     let worker_bin = std::env::current_exe().unwrap_or_else(|_| PathBuf::from("target/debug/openforce"))
         .parent().map(|p| p.join("worker")).unwrap_or_else(|| PathBuf::from("target/debug/worker"));
     let use_process = worker_bin.exists();
-    if use_process { println!("[Workers] Independent OS processes: {worker_bin:?}"); }
-    else { println!("[Workers] In-process fallback (build worker binary for process isolation)"); }
+    if use_process { println!("[Workers] DAG waves (独立进程): {worker_bin:?}"); }
+    else { println!("[Workers] In-process fallback"); }
 
-    let mut handles = vec![];
-    for (i, (pn, name, _)) in subtasks.iter().enumerate() {
+    // Build DAG and compute execution waves
+    let dag_tasks = dag_executor::infer_dependencies(&subtasks);
+    let waves = dag_executor::compute_waves(&dag_tasks);
+    if waves.len() > 1 { println!("[DAG] {} waves: {}", waves.len(), waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
+
+    let mut results: Vec<(usize,String,bool,String)> = vec![];
+    for (wave_num, wave) in waves.iter().enumerate() {
+        if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers", wave_num+1, waves.len(), wave.len()); }
+        let mut wave_handles = vec![];
+
+        for &task_idx in wave {
+            let (pn, name, desc) = &subtasks[task_idx];
+            let i = task_idx;
+            let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
+                (kp.default_model.clone(), kp.system_prompt.clone())
+            } else if let Some(cp) = config.workers.profiles.get(pn) {
+                (cp.model.clone(), cp.system_prompt.clone())
+            } else { (config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
+            let idx = i+1; let pnc = pn.clone();
         let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
             (kp.default_model.clone(), kp.system_prompt.clone())
         } else if let Some(cp) = config.workers.profiles.get(pn) {
@@ -395,8 +413,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_map_c = session_map.clone();
 
         if use_process {
-            // Spawn as independent OS process — truly parallel via tokio::process
-            handles.push(tokio::spawn(async move {
+            wave_handles.push(tokio::spawn(async move {
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
                     "model": model, "system_prompt": sp,
@@ -444,18 +461,23 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             let paths_list = review_paths.iter().map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n");
             let session_block = if !session_map.is_empty() { format!("\n\nSESSION CONTEXT:\n{session_map}") } else { String::new() };
             let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}{session_block}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
-            handles.push(tokio::spawn(async move {
+            wave_handles.push(tokio::spawn(async move {
                 match worker.chat(&system, &prompt).await {
                     Ok((text,_)) => (idx, pnc, true, text),
                     Err(e) => (idx, pnc, false, format!("Error: {e}")),
                 }
             }));
         }
-    }
+    } // end for task_idx in wave
 
-    // Collect all worker results in parallel (not sequential await)
-    let mut results: Vec<(usize,String,bool,String)> = futures::future::join_all(handles).await
-        .into_iter().filter_map(|r| r.ok()).collect();
+        // Wait for all workers in this wave to complete (parallel within wave)
+        let wave_results: Vec<(usize,String,bool,String)> = futures::future::join_all(wave_handles).await
+            .into_iter().filter_map(|r| r.ok()).collect();
+        results.extend(wave_results);
+    } // end for wave in waves
+
+    // Sort results by original task index for consistent display
+    results.sort_by_key(|r| r.0);
     results.sort_by_key(|r| r.0);
 
     let ok = results.iter().filter(|r| r.2).count();
