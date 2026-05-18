@@ -10,7 +10,7 @@ mod session_manager;
 mod gate_handler;
 mod repl;
 mod planner_roundtable;
-mod web_search;
+mod skill_runner;
 use session_manager::SessionManager;
 use repl::SessionRepl;
 
