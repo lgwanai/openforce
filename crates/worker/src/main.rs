@@ -113,7 +113,7 @@ async fn main() -> Result<()> {
 
     let client = LlmClient::openai(api_key, base_url, task.model.clone());
     let start = Instant::now();
-    let max_duration = Duration::from_secs(std::env::var("WORKER_MAX_SECS").ok().and_then(|s| s.parse().ok()).unwrap_or(600));
+    let max_duration = Duration::from_secs(std::env::var("WORKER_MAX_SECS").ok().and_then(|s| s.parse().ok()).unwrap_or(1200));
     let mut tokens_used: usize = 0;
     let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(150000);
 
@@ -133,17 +133,9 @@ async fn main() -> Result<()> {
     let session_block = if has_session { format!("\n\nSESSION CONTEXT (other workers' progress):\n{session_context}") } else { String::new() };
 
     let decompose_prompt = format!(
-        "You are a {role}. Your mission:\n\n\
-         TASK: {task}\nSUBTASK: {subtask}\n\n\
-         FILES TO REVIEW: {files}{session}\n\n\
-         Before executing, you MUST:\n\
-         1. Define 2-4 specific ACCEPTANCE CRITERIA (what 'done' means)\n\
-         2. Decompose into 2-6 SUBTASKS (concrete steps to complete)\n\
-         3. If session context shows other workers' work, consider it\n\n\
-         Output as JSON:\n\
-         {{\"acceptance_criteria\": [\"criterion 1\", ...], \
-           \"subtasks\": [{{\"id\":1, \"description\":\"step 1\"}}, ...]}}\n\n\
-         Only output valid JSON, no other text.",
+        "Role: {role}\nTask: {task}\nSubtask: {subtask}\nFiles: {files}{session}\n\n\
+         Define 2-4 acceptance criteria + 2-6 subtasks. Output JSON:\n\
+         {{\"acceptance_criteria\":[\"criteria\"],\"subtasks\":[{{\"id\":1,\"description\":\"step\"}}]}}",
         role = task.profile_name, task = task.task, subtask = task.subtask,
         files = files_list, session = session_block
     );
@@ -217,24 +209,10 @@ async fn main() -> Result<()> {
         } else { "" };
 
         let execute_prompt = format!(
-            "CYCLE {cycle}\n\n{state_summary}\n\n\
-             TOOLS AVAILABLE:\n\
-             - read_file(path) — read source file contents\n\
-             - list_dir(path) — list files in directory\n\
-             - complete_task(id, output) — mark task as done with result\n\
-             - update_context(info) — add findings to shared context\n\
-             - add_task(description) — add new subtask if discovered{session_tools}\n\
-             RULES:\n\
-             1. Review the TASK LIST above — focus on current in_progress task [▶]\n\
-             2. Execute the current task: use tools to read files, gather information\n\
-             3. When a task is complete, output: COMPLETE_TASK: <id>: <result>\n\
-             4. If you discover a new task is needed, output: ADD_TASK: <description>\n\
-             5. If ALL tasks are done, output: ALL_DONE: <final verification against criteria>\n\
-             6. NEVER output 'DONE' unless ALL subtasks are complete\n\
-             7. Reference specific file paths and line numbers\n\
-             8. Use session query tools to leverage other workers' findings\n\n\
-             What is your next action?",
-            cycle = cycles, state_summary = state.summary(), session_tools = session_tools
+            "CYCLE {cycle}\n{summary}\n\n\
+             Tools: read_file|list_dir|COMPLETE_TASK:id:result|ADD_TASK:desc|UPDATE_CONTEXT:info{session_tools}\n\
+             Focus on [▶] task. When done: COMPLETE_TASK. All done: ALL_DONE. Action:",
+            cycle = cycles, summary = state.summary(), session_tools = session_tools
         );
 
         match client.chat(&system, &execute_prompt).await {
@@ -301,15 +279,8 @@ async fn main() -> Result<()> {
     // ── Phase 2: Final Verification ──
 
     let verify_prompt = format!(
-        "{state_summary}\n\n\
-         ALL TASKS COMPLETE. Verify against ACCEPTANCE CRITERIA:\n\
-         {criteria}\n\n\
-         For each criterion, state: PASS: <evidence> or FAIL: <reason>.\n\
-         Then: FINAL: PASS (all criteria met) or FINAL: FAIL <remaining issues>.\n\
-         Include a comprehensive summary of findings.",
-        state_summary = state.summary(),
-        criteria = state.acceptance_criteria.iter().enumerate()
-            .map(|(i,c)| format!("  {}. {c}", i+1)).collect::<Vec<_>>().join("\n")
+        "{summary}\n\nVerify each criterion: PASS/FAIL + evidence. Then FINAL: PASS|FAIL.",
+        summary = state.summary()
     );
 
     match client.chat(&system, &verify_prompt).await {
