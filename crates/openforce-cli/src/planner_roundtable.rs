@@ -48,22 +48,16 @@ pub async fn run_roundtable(
     available_roles: &[String], dir_summary: &str,
 ) -> Result<TaskTree, String> {
     let roles_str = available_roles.join(", ");
+    let skill_summary = crate::skill_runner::SkillRunner::discover("skills").skill_summary();
     let mut needs_info: Vec<String> = vec![];
 
     // ── Round 1: 3 independent proposals with THINKING_FRAMEWORK ──
     let (i_text, d_text, imp_text) = {
-        let i_prompt = format!(
-            "{framework}\n\n---\n你现在的角色: 交互/用户体验架构师\n分析维度: 用户交互流程、体验一致性、端到端可用性\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
-            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
-        );
-        let d_prompt = format!(
-            "{framework}\n\n---\n你现在的角色: 数据/系统架构师\n分析维度: 数据流、API、文件系统、数据库、状态管理\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
-            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
-        );
-        let imp_prompt = format!(
-            "{framework}\n\n---\n你现在的角色: 实施/工程架构师\n分析维度: 执行可行性、时间顺序、依赖关系、技术约束\n\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
-            framework = THINKING_FRAMEWORK, roles = roles_str, dir = dir_summary
-        );
+        let base = format!("{framework}\n\n{skills}\n任务: {task}\n可用角色: [{roles}]\n项目结构:\n{dir}\n\n开始你的三步思考:",
+            framework = THINKING_FRAMEWORK, skills = skill_summary, roles = roles_str, dir = dir_summary);
+        let i_prompt = format!("{base}\n(从交互/用户体验维度分析)");
+        let d_prompt = format!("{base}\n(从数据/系统集成维度分析)");
+        let imp_prompt = format!("{base}\n(从实施可行性/时间顺序维度分析)");
 
         let (i, d, imp) = tokio::join!(
             planner.chat("你是交互架构师。遵循三步思考法。", &i_prompt),
