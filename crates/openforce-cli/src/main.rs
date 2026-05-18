@@ -257,7 +257,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     // ── Planner RoundTable: MECE-validated task decomposition ──
     println!("[Planner] RoundTable: 3 agents × 3 rounds...");
-    let mut subtasks: Vec<(String, String, String)> = vec![];
+    let mut subtasks: Vec<(String, String, String, Vec<String>)> = vec![]; // (role, title, desc, dependencies)
 
     match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles, &dir_summary).await {
         Ok(tree) => {
@@ -274,7 +274,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 } else {
                     format!("{} | 验收: {}", t.objective, t.acceptance_criteria.first().unwrap_or(&String::new()))
                 };
-                subtasks.push((t.role.clone(), t.title.clone(), desc));
+                subtasks.push((t.role.clone(), t.title.clone(), desc, t.dependencies.clone()));
             }
         }
         Err(e) => {
@@ -295,7 +295,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                             let role = stripped[1..idx].to_string();
                             let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
                             if !role.is_empty() && !desc.is_empty() {
-                                subtasks.push((role, desc, String::new()));
+                                subtasks.push((role, desc, String::new(), vec![]));
                             }
                         }
                     }
@@ -308,13 +308,13 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
         for (i, role) in classification.suggested_roles.iter().enumerate() {
             let desc = if i == 0 { task.clone() } else { format!("{task} (independent verification)") };
-            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new()));
+            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new(), vec![]));
         }
     }
 
     let mut ri = 0usize;
     println!("\n  Workers:");
-    for (pf, name, _) in &subtasks {
+    for (pf, name, _, _) in &subtasks {
         let ef = if pf == "default" && ri < classification.suggested_roles.len() {
             let r = classification.suggested_roles[ri].clone(); ri += 1; r
         } else if pf == "default" && ri < matched_profiles.len() {
@@ -353,7 +353,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let mut wave_handles = vec![];
 
         for &task_idx in wave {
-            let (pn, name, desc) = &subtasks[task_idx];
+            let (pn, name, _desc, _deps) = &subtasks[task_idx];
             let i = task_idx;
             let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
                 (kp.default_model.clone(), kp.system_prompt.clone())
@@ -518,7 +518,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 // Save planner decomposition
                 let _ = store.set_planner(&sess.session_id,
                     &format!("{:?}", classification.categories),
-                    &subtasks.iter().map(|(r,n,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
+                    &subtasks.iter().map(|(r,n,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
                     &classification.suggested_roles,
                 ).await;
                 // Save worker snapshots

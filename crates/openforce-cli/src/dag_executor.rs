@@ -39,20 +39,24 @@ pub fn compute_waves(tasks: &[DagTask]) -> Vec<Vec<usize>> {
     waves
 }
 
-/// Heuristic dependency inference from task descriptions.
-pub fn infer_dependencies(tasks: &[(String, String, String)]) -> Vec<DagTask> {
-    let mut out: Vec<DagTask> = tasks.iter().enumerate().map(|(i, (role, title, desc))| {
-        DagTask { id: format!("task-{}", i+1), role: role.clone(), title: title.clone(), description: desc.clone(), depends_on: vec![] }
-    }).collect();
-    let kw = ["integration", "验证", "测试", "test", "verify", "合并", "综合", "覆盖", "覆盖检查", "最终"];
-    for i in 1..out.len() {
-        let dl = out[i].description.to_lowercase();
-        if kw.iter().any(|k| dl.contains(k)) {
-            let deps: Vec<String> = (0..i).map(|j| out[j].title.clone()).collect();
-            out[i].depends_on = deps;
+/// Build DAG tasks from RoundTable output, using explicit dependencies when available.
+pub fn infer_dependencies(tasks: &[(String, String, String, Vec<String>)]) -> Vec<DagTask> {
+    tasks.iter().enumerate().map(|(i, (role, title, desc, deps))| {
+        DagTask {
+            id: format!("task-{}", i+1),
+            role: role.clone(),
+            title: title.clone(),
+            description: desc.clone(),
+            depends_on: if deps.is_empty() {
+                // Fallback heuristic: test/verify/integration tasks depend on earlier tasks
+                let dl = desc.to_lowercase();
+                let kw = ["验证", "测试", "test", "verify", "合并", "综合", "覆盖", "最终"];
+                if i > 0 && kw.iter().any(|k| dl.contains(k)) {
+                    tasks[..i].iter().map(|(_, t, _, _)| t.clone()).collect()
+                } else { vec![] }
+            } else { deps.clone() },
         }
-    }
-    out
+    }).collect()
 }
 
 #[cfg(test)]
