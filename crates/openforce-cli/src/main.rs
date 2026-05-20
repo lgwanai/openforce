@@ -371,12 +371,32 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_id = session.as_ref().map(|s| s.session_id.to_string());
         let session_id_c = session_id.clone();
 
-        // Use RoundTable's file list if provided, otherwise keyword match
+        // Use RoundTable's file list if provided, validate existence, fallback to matching
         let review_paths: Vec<String> = if !rt_files.is_empty() {
+            let all_files: Vec<String> = by_dir.iter()
+                .flat_map(|(_, ents)| ents.iter().map(|e| workspace_c.join(&e.path).display().to_string()))
+                .collect();
             rt_files.iter().map(|f| {
                 let p = std::path::Path::new(f);
-                if p.is_absolute() { f.clone() }
-                else { workspace_c.join(f).display().to_string() }
+                let resolved = if p.is_absolute() { f.clone() } else { workspace_c.join(f).display().to_string() };
+                // If file exists, use it directly
+                if std::path::Path::new(&resolved).exists() {
+                    return resolved;
+                }
+                // Try matching by filename in available files
+                let file_name = p.file_name().and_then(|n| n.to_str()).unwrap_or(f);
+                if let Some(matched) = all_files.iter().find(|af| af.ends_with(file_name)) {
+                    return matched.clone();
+                }
+                // Try matching by parent dir
+                let parent = p.parent().and_then(|d| d.file_name()).and_then(|n| n.to_str()).unwrap_or("");
+                if !parent.is_empty() {
+                    if let Some(matched) = all_files.iter().find(|af| af.contains(parent)) {
+                        return matched.clone();
+                    }
+                }
+                // Last resort: return original (worker will try its own fallback)
+                resolved
             }).collect()
         } else {
             // Fallback: keyword matching

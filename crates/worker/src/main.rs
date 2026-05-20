@@ -415,9 +415,15 @@ async fn main() -> Result<()> {
                     break;
                 } else if upper.starts_with("READ:") || upper.starts_with("READ ") {
                     let path = last_line.strip_prefix("READ:").or(last_line.strip_prefix("READ ")).unwrap_or("").trim();
-                    // Try matching against available files (partial match)
+                    // Multi-level fuzzy match against available files
+                    let file_name = std::path::Path::new(path).file_name()
+                        .and_then(|n| n.to_str()).unwrap_or(path);
                     let matched = memory.files_available.iter()
-                        .find(|f| f.ends_with(path) || f.contains(path))
+                        .find(|f| f.ends_with(path))                              // exact suffix
+                        .or_else(|| memory.files_available.iter()
+                            .find(|f| f.ends_with(file_name)))                    // same filename
+                        .or_else(|| memory.files_available.iter()
+                            .find(|f| f.contains(path) || f.contains(file_name))) // partial match
                         .cloned()
                         .unwrap_or_else(|| path.to_string());
                     match read_file(&matched).await {
@@ -427,8 +433,30 @@ async fn main() -> Result<()> {
                             eprintln!("  [read] {matched}");
                         }
                         Err(e) => {
-                            memory.add_decision(cycles, "READ_ERR", &format!("{matched}: {e}"));
-                            eprintln!("  [err] {e}");
+                            // Retry with broader matching
+                            let parent_dir = std::path::Path::new(path).parent()
+                                .and_then(|p| p.file_name()).and_then(|n| n.to_str()).unwrap_or("");
+                            let fallback = memory.files_available.iter()
+                                .find(|f| f.contains(parent_dir))
+                                .or_else(|| memory.files_available.iter()
+                                    .find(|f| f.to_lowercase().contains(&file_name.to_lowercase())))
+                                .cloned();
+                            if let Some(ref fb) = fallback {
+                                match read_file(fb).await {
+                                    Ok(content) => {
+                                        memory.add_decision(cycles, "READ", &format!("{fb} (fallback, {} chars)", content.len()));
+                                        active_file_content = Some((fb.clone(), content));
+                                        eprintln!("  [read] {fb} (fallback)");
+                                    }
+                                    Err(e2) => {
+                                        memory.add_decision(cycles, "READ_ERR", &format!("{fb}: {e2}"));
+                                        eprintln!("  [err] {matched}: {e} | fallback {fb}: {e2}");
+                                    }
+                                }
+                            } else {
+                                memory.add_decision(cycles, "READ_ERR", &format!("{matched}: {e}"));
+                                eprintln!("  [err] {matched}: {e}");
+                            }
                         }
                     }
                 } else if upper.starts_with("FINDING:") {
