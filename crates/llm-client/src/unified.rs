@@ -9,7 +9,9 @@ pub enum LlmClient {
 }
 
 impl LlmClient {
-    pub fn anthropic(api_key: String) -> Self { Self::Anthropic(AnthropicClient::new(api_key)) }
+    pub fn anthropic(api_key: String, base_url: Option<String>) -> Self {
+        Self::Anthropic(AnthropicClient::new(api_key, base_url))
+    }
     pub fn openai(api_key: String, base_url: String, model: String) -> Self {
         Self::OpenAI(OpenAiClient::new(api_key, base_url, model))
     }

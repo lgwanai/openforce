@@ -5,6 +5,7 @@ use ratatui::{
     widgets::{Block, Borders, Paragraph, Row, Table, TableState, Cell},
     Frame,
 };
+use crate::client::SessionSummary;
 
 #[derive(Clone)]
 pub struct TaskInfo {
@@ -18,6 +19,7 @@ pub struct TaskInfo {
 
 pub struct StatusPanel {
     pub tasks: Vec<TaskInfo>,
+    pub sessions: Vec<SessionSummary>,
     pub session_goal: String,
     pub session_state: String,
     pub plan_version: i32,
@@ -30,6 +32,7 @@ impl StatusPanel {
     pub fn new() -> Self {
         Self {
             tasks: vec![],
+            sessions: vec![],
             session_goal: String::new(),
             session_state: "active".into(),
             plan_version: 0,
@@ -50,8 +53,14 @@ impl StatusPanel {
             .split(area);
 
         // Session header
+        let status_style = match self.session_state.as_str() {
+            "active" | "Active" => Style::default().fg(Color::Green),
+            "completed" | "Completed" => Style::default().fg(Color::Blue),
+            "aborted" | "Aborted" => Style::default().fg(Color::Red),
+            _ => Style::default().fg(Color::Yellow),
+        };
         let header = Paragraph::new(Line::from(vec![
-            Span::styled(format!("  Session: {}  ", &self.session_state), Style::default().fg(Color::Green)),
+            Span::styled(format!("  {}  ", self.session_state), status_style),
             Span::styled(format!("Plan v{}  ", self.plan_version), Style::default().fg(Color::Cyan)),
             Span::raw(&self.session_goal),
         ]))
@@ -79,7 +88,7 @@ impl StatusPanel {
                 Style::default().fg(color)
             };
             Row::new(vec![
-                Cell::from(t.task_id.clone()),
+                Cell::from(t.task_id.chars().take(12).collect::<String>()),
                 Cell::from(t.task_type.clone()),
                 Cell::from(t.state.clone()),
                 Cell::from(t.attempt.to_string()),

@@ -161,7 +161,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let grpc_addr: SocketAddr = std::env::var("GRPC_ADDR")
         .unwrap_or_else(|_| "0.0.0.0:50060".into()).parse()?;
-    let api_key = std::env::var("OPENAI_API_KEY").unwrap_or_default();
+    let api_key = std::env::var("API_KEY").unwrap_or_default();
     let base_url = std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.deepseek.com".into());
 
     let instance_id = uuid::Uuid::now_v7().to_string();

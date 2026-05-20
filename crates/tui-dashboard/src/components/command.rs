@@ -43,8 +43,8 @@ impl CommandPanel {
             .split(area);
 
         // Input area
-        let input_text = format!("> {}", self.input);
-        let cursor = if self.input.len() < self.cursor_pos {
+        let _input_text = format!("> {}", self.input);
+        let _cursor = if self.input.len() < self.cursor_pos {
             self.input.len()
         } else {
             self.cursor_pos

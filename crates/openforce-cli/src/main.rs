@@ -29,11 +29,12 @@ struct WorkerProfile { provider: String, model: String, max_tokens: u32, tempera
 #[derive(Debug, Clone)]
 struct DirEntry { path: String, is_dir: bool, size: u64, ext: String }
 
-fn build_client(config: &Config, model: &str) -> LlmClient {
-    let key = std::env::var("OPENAI_API_KEY").unwrap_or_default();
-    match config.llm.provider.as_str() {
-        "anthropic" => LlmClient::anthropic(std::env::var("ANTHROPIC_API_KEY").unwrap_or(key)).with_model(model),
-        _ => LlmClient::openai(key, config.llm.api_base.clone().unwrap_or("https://api.openai.com/v1".into()), model.to_string())
+fn build_client(config: &Config, provider: &str, model: &str) -> LlmClient {
+    let api_key = std::env::var("API_KEY").unwrap_or_default();
+    let api_base = config.llm.api_base.clone();
+    match provider {
+        "anthropic" => LlmClient::anthropic(api_key, api_base).with_model(model),
+        _ => LlmClient::openai(api_key, api_base.unwrap_or("https://api.openai.com/v1".into()), model.to_string())
     }
 }
 
@@ -171,13 +172,12 @@ fn print_usage() {
 }
 
 async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
-    let api_key = std::env::var("OPENAI_API_KEY").unwrap_or_default();
-    if api_key.len() < 5 { return Err(anyhow::anyhow!("OPENAI_API_KEY not set")); }
-    let base_url = std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.deepseek.com".into());
+    let api_key = std::env::var("API_KEY").unwrap_or_default();
+    if api_key.len() < 5 { return Err(anyhow::anyhow!("API_KEY not set")); }
 
     let config: Config = toml::from_str(&std::fs::read_to_string("openforce.toml").unwrap_or_default())
         .unwrap_or_else(|_| Config {
-            llm: LlmConfig { provider: "openai".into(), api_base: Some(base_url.clone()) },
+            llm: LlmConfig { provider: "openai".into(), api_base: Some("https://api.deepseek.com".into()) },
             planner: PlannerConfig { provider: "openai".into(), model: "deepseek-v4-flash".into(), max_tokens: 16000, temperature: 0.2, system_prompt: "Planner".into() },
             workers: WorkersConfig { default: WorkerProfile { provider: "openai".into(), model: "deepseek-v4-flash".into(), max_tokens: 8000, temperature: 0.1, system_prompt: String::new() }, profiles: HashMap::new() },
         });
@@ -212,7 +212,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     println!("  {} files, {}B source\n", files.len(), total);
 
     // Phase 1: Semantic classification (LLM-powered, NOT keyword matching)
-    let planner = build_client(&config, &config.planner.model);
+    let planner = build_client(&config, &config.planner.provider, &config.planner.model);
     println!("[Planner] Semantic classification...");
 
     let kb = KnowledgeBase::load("experts").unwrap_or_else(|_| KnowledgeBase {
@@ -347,7 +347,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let waves = dag_executor::compute_waves(&dag_tasks);
     if waves.len() > 1 { println!("[DAG] {} waves: {}", waves.len(), waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
 
-    let mut results: Vec<(usize,String,bool,String)> = vec![];
+    let mut results: Vec<(usize,String,bool,String,String)> = vec![];
     for (wave_num, wave) in waves.iter().enumerate() {
         if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers", wave_num+1, waves.len(), wave.len()); }
         let mut wave_handles = vec![];
@@ -355,22 +355,16 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         for &task_idx in wave {
             let (pn, name, _desc, _deps) = &subtasks[task_idx];
             let i = task_idx;
-            let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
-                (kp.default_model.clone(), kp.system_prompt.clone())
+            let (provider, model, sp) = if let Some(kp) = kb.profiles.get(pn) {
+                ("openai".to_string(), kp.default_model.clone(), kp.system_prompt.clone())
             } else if let Some(cp) = config.workers.profiles.get(pn) {
-                (cp.model.clone(), cp.system_prompt.clone())
-            } else { (config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
-            let idx = i+1; let pnc = pn.clone();
-        let (model, sp) = if let Some(kp) = kb.profiles.get(pn) {
-            (kp.default_model.clone(), kp.system_prompt.clone())
-        } else if let Some(cp) = config.workers.profiles.get(pn) {
-            (cp.model.clone(), cp.system_prompt.clone())
-        } else { (config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
-        let idx = i+1; let pnc = pn.clone();
+                (cp.provider.clone(), cp.model.clone(), cp.system_prompt.clone())
+            } else { (config.workers.default.provider.clone(), config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
+            let idx = i+1; let pnc = pn.clone(); let provider_c = provider.clone();
         let task_c = task.clone(); let name_c = name.clone();
         let workspace_c = workspace.clone();
         let api_key_c = api_key.clone();
-        let base_url_c = base_url.clone();
+        let base_url_c = config.llm.api_base.clone().unwrap_or_else(|| "https://api.deepseek.com".into());
         let wb = worker_bin.clone();
         let tools_addr = std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
         let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
@@ -416,7 +410,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             wave_handles.push(tokio::spawn(async move {
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
-                    "model": model, "system_prompt": sp,
+                    "provider": provider_c, "model": model, "system_prompt": sp,
                     "api_key": api_key_c, "base_url": base_url_c,
                     "output_file": format!("/tmp/worker_{idx}_output.json"),
                     "review_paths": review_paths_c,
@@ -438,47 +432,48 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                             if let Ok(data) = std::fs::read_to_string(&out_file) {
                                 if let Ok(v) = serde_json::from_str::<serde_json::Value>(&data) {
                                     let success = v["success"].as_bool().unwrap_or(false);
-                                    let action = v["action"].as_str().unwrap_or("");
-                                    let text = match action {
-                                        "reject" => format!("REJECTED: {}", v["reason"].as_str().unwrap_or("unknown")),
-                                        "exhausted" => format!("EXHAUSTED: {}", v["reason"].as_str().unwrap_or("max cycles")),
+                                    let action = v["action"].as_str().unwrap_or("").to_string();
+                                    let text = match action.as_str() {
+                                        "stalled" => format!("STALLED: {}", v["detail"].as_str().unwrap_or("no progress")),
+                                        "timeout" => format!("TIMEOUT: {}", v["detail"].as_str().unwrap_or("exceeded limit")),
+                                        "error" => format!("ERROR: {}", v["reason"].as_str().unwrap_or("unknown")),
                                         _ => v["output"].as_str().unwrap_or("").to_string(),
                                     };
-                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), success, format!("[{elapsed}s] {text}"));
+                                    return (idx, v["profile"].as_str().unwrap_or(&pnc).to_string(), success, action, format!("[{elapsed}s] {text}"));
                                 }
                             }
-                            (idx, pnc, false, format!("[{elapsed}s] Worker-{idx} no output"))
+                            (idx, pnc, false, "error".into(), format!("[{elapsed}s] Worker-{idx} no output"))
                         }
-                        Err(e) => (idx, pnc, false, format!("Worker-{idx} wait error: {e}")),
+                        Err(e) => (idx, pnc, false, "error".into(), format!("Worker-{idx} wait error: {e}")),
                     },
-                    Err(e) => (idx, pnc, false, format!("Worker-{idx} spawn error: {e}")),
+                    Err(e) => (idx, pnc, false, "error".into(), format!("Worker-{idx} spawn error: {e}")),
                 }
             }));
         } else {
             // Fallback: in-process LLM call (same tool-based approach with session context)
-            let worker = build_client(&config, &model);
+            let worker = build_client(&config, &provider, &model);
             let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
             let paths_list = review_paths.iter().map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n");
             let session_block = if !session_map.is_empty() { format!("\n\nSESSION CONTEXT:\n{session_map}") } else { String::new() };
             let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}{session_block}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
             wave_handles.push(tokio::spawn(async move {
                 match worker.chat(&system, &prompt).await {
-                    Ok((text,_)) => (idx, pnc, true, text),
-                    Err(e) => (idx, pnc, false, format!("Error: {e}")),
+                    Ok((text,_)) => (idx, pnc, true, "completed".into(), text),
+                    Err(e) => (idx, pnc, false, "error".into(), format!("Error: {e}")),
                 }
             }));
         }
     } // end for task_idx in wave
 
         // Wait for all workers in this wave to complete (parallel within wave)
-        let wave_results: Vec<(usize,String,bool,String)> = futures::future::join_all(wave_handles).await
+        let wave_results: Vec<(usize,String,bool,String,String)> = futures::future::join_all(wave_handles).await
             .into_iter().filter_map(|r| r.ok()).collect();
         results.extend(wave_results);
     } // end for wave in waves
 
     // Sort results by original task index for consistent display
     results.sort_by_key(|r| r.0);
-    results.sort_by_key(|r| r.0);
+    let stalled_count = results.iter().filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error").count();
 
     let ok = results.iter().filter(|r| r.2).count();
     println!("\n===== Results: {}/{} =====\n", ok, results.len());
@@ -486,12 +481,28 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let mut report = format!("# OpenForce Report\n\nTask: {task}\nRoles: {:?}\nWorkers: {}/{}\n",
         classification.suggested_roles, ok, results.len());
 
-    for (idx, pf, success, text) in &results {
+    for (idx, pf, success, action, text) in &results {
         let s = if *success { "OK" } else { "FAIL" };
         println!("Worker-{idx} [{pf}] [{s}]:");
         report.push_str(&format!("\n## Worker-{idx} [{pf}]\n"));
         for line in text.lines().take(10) { println!("  {line}"); report.push_str(line); report.push('\n'); }
         report.push('\n'); println!();
+    }
+
+    // ── Re-plan if too many workers stalled ──
+    if stalled_count > 0 && stalled_count * 2 > results.len() {
+        println!("
+[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
+        let failed_summary: String = results.iter()
+            .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
+            .map(|(i, pf, _, action, text)| {
+                format!("Worker-{i} [{pf}] {action}: {}", text.chars().take(100).collect::<String>())
+            })
+            .collect::<Vec<_>>().join(" | ");
+        println!("  Reason: {failed_summary}");
+        report.push_str(&format!("\n## Re-plan Required\n{}/{} workers stalled: {}\n",
+            stalled_count, results.len(), failed_summary));
+        report.push_str("\nRun: openforce continue <session-id> to re-plan and re-execute\n");
     }
 
     // Auto-record experience
@@ -502,7 +513,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             "categories": classification.categories,
             "roles": classification.suggested_roles,
             "workers": ok, "total": results.len(),
-            "decomposition": results.iter().map(|(i,p,s,t)| serde_json::json!({
+            "decomposition": results.iter().map(|(i,p,s,_a,t)| serde_json::json!({
                 "id":i,"profile":p,"success":s,"summary":t.chars().take(300).collect::<String>()
             })).collect::<Vec<_>>()
         });
@@ -522,7 +533,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     &classification.suggested_roles,
                 ).await;
                 // Save worker snapshots
-                for (i, pf, success, text) in &results {
+                for (i, pf, success, _action, text) in &results {
                     let wid = format!("worker-{i}");
                     let caller = openforce_redis_session::store::Caller::Worker {
                         worker_id: wid.clone(), session_id: sess.session_id,
@@ -550,7 +561,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             phase: sess.current_phase,
             tasks_total: results.len(),
             tasks_ok: ok,
-            worker_outputs: results.iter().map(|(i, pf, success, text)| session_state::WorkerOutput {
+            worker_outputs: results.iter().map(|(i, pf, success, _action, text)| session_state::WorkerOutput {
                 worker_id: format!("worker-{i}"),
                 role: pf.clone(),
                 status: if *success { "ok".into() } else { "failed".into() },

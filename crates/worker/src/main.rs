@@ -4,53 +4,132 @@ use serde::{Deserialize, Serialize};
 use std::fs;
 use std::time::{Duration, Instant};
 
-// ── Task State (persistent task tracking) ──
+// ── Agent Memory Model ──
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct SubTask {
     id: usize,
     description: String,
-    status: String,  // pending | in_progress | done | blocked
+    status: String,
     output: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct TaskState {
-    goal: String,
-    role: String,
-    acceptance_criteria: Vec<String>,
-    subtasks: Vec<SubTask>,
-    context: String,
-    started_at: String,
+struct Decision {
+    cycle: usize,
+    action: String,
+    detail: String,
 }
 
-impl TaskState {
-    fn summary(&self) -> String {
-        let mut s = format!("GOAL: {}\nROLE: {}\n\nACCEPTANCE CRITERIA:\n", self.goal, self.role);
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct AgentMemory {
+    // LAYER 1: IDENTITY
+    role: String,
+    goal: String,
+    acceptance_criteria: Vec<String>,
+
+    // LAYER 2: WORKING MEMORY
+    subtasks: Vec<SubTask>,
+    recent_decisions: Vec<Decision>,
+    key_findings: Vec<String>,
+
+    // Track state
+    started_at: String,
+    files_available: Vec<String>,
+}
+
+impl AgentMemory {
+    fn build_context(&self) -> String {
+        let mut ctx = String::new();
+
+        // LAYER 1: IDENTITY
+        ctx.push_str(&format!("ROLE: {}\nGOAL: {}\n\n", self.role, self.goal));
+        ctx.push_str("ACCEPTANCE CRITERIA:\n");
         for (i, c) in self.acceptance_criteria.iter().enumerate() {
-            s.push_str(&format!("  {}. {c}\n", i + 1));
+            ctx.push_str(&format!("  {}. {}\n", i + 1, c));
         }
-        s.push_str("\nTASK LIST:\n");
+
+        // LAYER 2: WORKING MEMORY
+        ctx.push_str("\n── SUBTASKS ──\n");
         for t in &self.subtasks {
             let icon = match t.status.as_str() {
-                "done" => "[✓]", "in_progress" => "[▶]", "blocked" => "[✗]", _ => "[ ]"
+                "done" => "✓", "in_progress" => "▶", "blocked" => "✗", _ => "○"
             };
-            s.push_str(&format!("  {icon} {}. {}\n", t.id, t.description));
-            if !t.output.is_empty() { s.push_str(&format!("       → {}\n", t.output)); }
+            ctx.push_str(&format!("  [{icon}] {}. {}\n", t.id, t.description));
+            if !t.output.is_empty() {
+                ctx.push_str(&format!("       → {}\n", t.output.chars().take(120).collect::<String>()));
+            }
         }
         let done = self.subtasks.iter().filter(|t| t.status == "done").count();
-        let total = self.subtasks.len();
-        s.push_str(&format!("\nProgress: {done}/{total} tasks complete\n"));
-        if !self.context.is_empty() { s.push_str(&format!("\nCONTEXT:\n{}\n", self.context)); }
-        s
+        ctx.push_str(&format!("\nProgress: {}/{}\n", done, self.subtasks.len()));
+
+        ctx.push_str("\n── KEY FINDINGS ──\n");
+        for f in &self.key_findings {
+            ctx.push_str(&format!("  • {}\n", f));
+        }
+        if self.key_findings.is_empty() {
+            ctx.push_str("  (none yet)\n");
+        }
+
+        ctx.push_str("\n── RECENT DECISIONS ──\n");
+        for d in self.recent_decisions.iter().rev().take(5) {
+            ctx.push_str(&format!("  [C{}] {}: {}\n", d.cycle, d.action, d.detail));
+        }
+
+        // LAYER 3: Available files (paths only, not content)
+        if !self.files_available.is_empty() {
+            ctx.push_str(&format!("\n── AVAILABLE FILES ({} total) ──\n", self.files_available.len()));
+            for f in self.files_available.iter().take(30) {
+                ctx.push_str(&format!("  {}\n", f));
+            }
+            if self.files_available.len() > 30 {
+                ctx.push_str(&format!("  ... and {} more\n", self.files_available.len() - 30));
+            }
+        }
+
+        ctx
+    }
+
+    fn estimate_tokens(&self) -> usize {
+        self.build_context().len() / 4
+    }
+
+    /// Compress LAYER 2: merge old decisions, dedup findings
+    fn compress_if_needed(&mut self) {
+        let tokens = self.estimate_tokens();
+        if tokens < 700_000 { return; }
+
+        // Merge decisions older than 10 cycles into summary
+        let recent: Vec<Decision> = self.recent_decisions.iter()
+            .rev().take(5).cloned().collect::<Vec<_>>().into_iter().rev().collect();
+        let old_summary = format!("[Earlier: {} decisions completed]", self.recent_decisions.len().saturating_sub(5));
+        self.recent_decisions = recent;
+        if !old_summary.contains("0 decisions") {
+            self.recent_decisions.insert(0, Decision { cycle: 0, action: "SUMMARY".into(), detail: old_summary });
+        }
+
+        // Keep only top 5 findings by recency
+        if self.key_findings.len() > 5 {
+            self.key_findings = self.key_findings.iter().rev().take(5).cloned().collect::<Vec<_>>().into_iter().rev().collect();
+        }
+    }
+
+    fn add_decision(&mut self, cycle: usize, action: &str, detail: &str) {
+        self.recent_decisions.push(Decision { cycle, action: action.into(), detail: detail.into() });
+        if self.recent_decisions.len() > 20 {
+            self.recent_decisions.remove(0);
+        }
+    }
+
+    fn add_finding(&mut self, finding: &str) {
+        let summary: String = finding.chars().take(200).collect();
+        if !self.key_findings.contains(&summary) {
+            self.key_findings.push(summary);
+        }
     }
 
     fn all_done(&self) -> bool {
         self.subtasks.iter().all(|t| t.status == "done")
-    }
-
-    fn pending_count(&self) -> usize {
-        self.subtasks.iter().filter(|t| t.status == "pending").count()
     }
 }
 
@@ -61,6 +140,8 @@ struct WorkerTask {
     task: String,
     subtask: String,
     profile_name: String,
+    #[serde(default)]
+    provider: String,
     model: String,
     system_prompt: String,
     api_key: Option<String>,
@@ -79,13 +160,11 @@ async fn read_file(path: &str) -> Result<String, String> {
     fs::read_to_string(path).map_err(|e| format!("read {path}: {e}"))
 }
 
-async fn list_dir(dir: &str) -> Result<Vec<String>, String> {
-    let mut files = vec![];
-    for entry in std::fs::read_dir(dir).map_err(|e| format!("readdir {dir}: {e}"))? {
-        let e = entry.map_err(|e| format!("entry: {e}"))?;
-        if e.path().is_file() { files.push(e.path().display().to_string()); }
-    }
-    Ok(files)
+fn extract_json(s: &str) -> Option<&str> {
+    if let Some(start) = s.find('{') {
+        let end = s.rfind('}')?;
+        Some(&s[start..=end])
+    } else { None }
 }
 
 // ── Main ──
@@ -104,50 +183,53 @@ async fn main() -> Result<()> {
     let task: WorkerTask = serde_json::from_str(&task_json)?;
 
     let api_key = task.api_key.as_deref().unwrap_or(
-        &std::env::var("OPENAI_API_KEY").unwrap_or_default()
+        &std::env::var("API_KEY").unwrap_or_default()
     ).to_string();
     let base_url = task.base_url.as_deref().unwrap_or(
-        &std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.deepseek.com".into())
+        &std::env::var("LLM_BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".into())
     ).to_string();
     if api_key.len() < 5 { eprintln!("FATAL: no API key"); std::process::exit(1); }
 
-    let client = LlmClient::openai(api_key, base_url, task.model.clone());
+    let provider = if task.provider.is_empty() { "openai" } else { &task.provider };
+    let client = match provider {
+        "anthropic" => LlmClient::anthropic(api_key, Some(base_url)).with_model(&task.model),
+        _ => LlmClient::openai(api_key, base_url, task.model.clone())
+    };
+
     let start = Instant::now();
     let max_duration = Duration::from_secs(std::env::var("WORKER_MAX_SECS").ok().and_then(|s| s.parse().ok()).unwrap_or(1200));
+    let max_cycles: usize = std::env::var("WORKER_MAX_CYCLES").ok().and_then(|s| s.parse().ok()).unwrap_or(40);
+    let max_no_progress: usize = std::env::var("WORKER_MAX_NO_PROGRESS").ok().and_then(|s| s.parse().ok()).unwrap_or(8);
     let mut tokens_used: usize = 0;
     let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(150000);
 
-    // ── Phase 0: Decompose — Plan subtasks and define acceptance criteria ──
-
-    let files_list = task.review_paths.join("\n  ");
-    let session_context = task.session_map.as_deref().unwrap_or("");
-    let has_session = !session_context.is_empty();
-
     let system = if task.system_prompt.is_empty() {
-        format!("You are a {}. Work methodically like a senior professional. \
-                 Decompose tasks, track progress, verify against criteria, deliver complete results.", task.profile_name)
+        format!("You are a {}. You are an autonomous agent. Manage your own context: request files when needed via READ, declare completion via DONE, declare all done via ALL_DONE.", task.profile_name)
     } else {
         task.system_prompt.clone()
     };
 
-    let session_block = if has_session { format!("\n\nSESSION CONTEXT (other workers' progress):\n{session_context}") } else { String::new() };
+    // ── Phase 0: Decompose ──
 
     let decompose_prompt = format!(
-        "Role: {role}\nTask: {task}\nSubtask: {subtask}\nFiles: {files}{session}\n\n\
-         Define 2-4 acceptance criteria + 2-6 subtasks. Output JSON:\n\
-         {{\"acceptance_criteria\":[\"criteria\"],\"subtasks\":[{{\"id\":1,\"description\":\"step\"}}]}}",
+        "Role: {role}\nTask: {task}\nSubtask: {subtask}\n\n\
+         Available files ({n} total):\n{files}\n\n\
+         Define 2-4 acceptance criteria + 2-4 subtasks. Output JSON only:\n\
+         {{\"acceptance_criteria\":[\"...\"],\"subtasks\":[{{\"id\":1,\"description\":\"...\"}}]}}",
         role = task.profile_name, task = task.task, subtask = task.subtask,
-        files = files_list, session = session_block
+        n = task.review_paths.len(),
+        files = task.review_paths.iter().take(40).map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n")
     );
 
     let (plan_text, plan_tokens) = client.chat(&system, &decompose_prompt).await?;
     tokens_used += plan_tokens as usize;
 
-    // Parse decomposition
     let plan: serde_json::Value = serde_json::from_str(&plan_text).unwrap_or_else(|_| {
-        serde_json::json!({
-            "acceptance_criteria": ["Complete the assigned review"],
-            "subtasks": [{"id": 1, "description": task.subtask.clone()}]
+        serde_json::from_str(extract_json(&plan_text).unwrap_or("{}")).unwrap_or_else(|_| {
+            serde_json::json!({
+                "acceptance_criteria": ["Complete the review"],
+                "subtasks": [{"id": 1, "description": task.subtask.clone()}]
+            })
         })
     });
 
@@ -165,112 +247,241 @@ async fn main() -> Result<()> {
         .unwrap_or_else(|| vec![SubTask { id: 1, description: task.subtask.clone(), status: "pending".into(), output: String::new() }]);
 
     let state_file = format!("/tmp/worker_state_{}.json", uuid::Uuid::now_v7().simple().to_string().chars().take(8).collect::<String>());
-    let mut state = TaskState {
-        goal: format!("{}: {}", task.task, task.subtask),
+    let mut memory = AgentMemory {
         role: task.profile_name.clone(),
+        goal: format!("{}: {}", task.task, task.subtask),
         acceptance_criteria,
         subtasks,
-        context: format!("Files available: {files_list}"),
+        recent_decisions: vec![],
+        key_findings: vec![],
         started_at: chrono::Utc::now().to_rfc3339(),
+        files_available: task.review_paths.clone(),
     };
-    fs::write(&state_file, serde_json::to_string_pretty(&state).unwrap_or_default())?;
 
-    eprintln!("[Plan] {} subtasks, {} criteria → {state_file}", state.subtasks.len(), state.acceptance_criteria.len());
+    eprintln!("[Agent] {} subtasks, {} criteria, {} files available",
+        memory.subtasks.len(), memory.acceptance_criteria.len(), memory.files_available.len());
 
-    // ── Phase 1: Expert Execution Loop ──
+    // ── Phase 1: Agent Execution Loop ──
 
     let mut cycles = 0;
+    let mut last_progress = 0usize;
+    let mut active_file_content: Option<(String, String)> = None; // (path, content)
+
     loop {
         let elapsed = start.elapsed();
+        let done_count = memory.subtasks.iter().filter(|t| t.status == "done").count();
+
         if elapsed > max_duration {
-            write_reject(&task, "timeout", &format!("exceeded {}s", max_duration.as_secs()), &state);
+            let out = serde_json::json!({
+                "success": false, "action": "timeout", "reason": "max_duration",
+                "detail": format!("exceeded {}s, {}/{} done", max_duration.as_secs(), done_count, memory.subtasks.len()),
+                "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
+            });
+            write_output(&task, &out);
             return Ok(());
         }
         if tokens_used >= max_tokens {
-            write_reject(&task, "token_budget", &format!("exceeded {max_tokens} tokens"), &state);
+            let out = serde_json::json!({
+                "success": false, "action": "timeout", "reason": "token_budget",
+                "detail": format!("exceeded {max_tokens} tokens"),
+                "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
+            });
+            write_output(&task, &out);
+            return Ok(());
+        }
+        if cycles >= max_cycles {
+            if done_count > 0 {
+                eprintln!("  [Agent] {} cycles, {}/{} done — finalizing", cycles, done_count, memory.subtasks.len());
+                break;
+            }
+            let out = serde_json::json!({
+                "success": false, "action": "stalled", "reason": "max_cycles",
+                "detail": format!("exceeded {max_cycles} cycles, 0 progress"),
+                "subtasks_done": 0, "subtasks_total": memory.subtasks.len(),
+            });
+            write_output(&task, &out);
             return Ok(());
         }
 
         cycles += 1;
 
-        // Pick next subtask
-        let next = state.subtasks.iter().position(|t| t.status == "pending");
-        if next.is_none() && state.all_done() {
-            break; // All done — proceed to final verification
+        // Pick next pending subtask
+        if let Some(idx) = memory.subtasks.iter().position(|t| t.status == "pending") {
+            memory.subtasks[idx].status = "in_progress".into();
         }
-        if let Some(idx) = next {
-            state.subtasks[idx].status = "in_progress".into();
+        if memory.all_done() { break; }
+
+        // Check for no-progress stall
+        if done_count > last_progress {
+            last_progress = done_count;
+        }
+        if cycles.saturating_sub(last_progress * 3) > max_no_progress && last_progress < memory.subtasks.len() {
+            // Force conclusion — ask LLM to wrap up NOW
+            let force_prompt = format!(
+                "{ctx}\n\n── FORCE CONCLUSION ──\n\
+                 You have NOT marked any task DONE in {stall} cycles.\n\
+                 Give your FINAL conclusion NOW.\n\
+                 Format: DONE <id>: <result>\n\
+                 If you truly cannot complete: STALLED: <reason>",
+                ctx = memory.build_context(), stall = cycles.saturating_sub(last_progress * 3)
+            );
+            match client.chat(&system, &force_prompt).await {
+                Ok((text, tks)) => {
+                    tokens_used += tks as usize;
+                    let t = text.trim();
+                    if t.to_uppercase().starts_with("DONE") {
+                        let forced_id = {
+                            let st = memory.subtasks.iter_mut().find(|s| s.status == "in_progress");
+                            st.map(|s| { s.status = "done".into(); s.output = t.chars().take(300).collect(); s.id })
+                        };
+                        if let Some(fid) = forced_id {
+                            memory.add_decision(cycles, "FORCED_DONE", &format!("Task {} completed after stall", fid));
+                            eprintln!("  [✓] Task {fid} done (forced)");
+                            last_progress = memory.subtasks.iter().filter(|t| t.status == "done").count();
+                            continue;
+                        }
+                    } else if t.to_uppercase().starts_with("STALLED") {
+                        let out = serde_json::json!({
+                            "success": false, "action": "stalled", "reason": "agent_declared_stalled",
+                            "detail": t.chars().take(500).collect::<String>(),
+                            "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
+                        });
+                        write_output(&task, &out);
+                        return Ok(());
+                    }
+                }
+                Err(e) => {
+                    let out = serde_json::json!({
+                        "success": false, "action": "stalled", "reason": "llm_error",
+                        "detail": format!("{e}"),
+                        "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
+                    });
+                    write_output(&task, &out);
+                    return Ok(());
+                }
+            }
         }
 
-        fs::write(&state_file, serde_json::to_string_pretty(&state).unwrap_or_default())?;
+        memory.compress_if_needed();
 
-        let session_tools = if has_session {
-            "\n  SESSION TOOLS:\n  - get_worker_output(id) → read another worker's results\n  - get_artifact(id) → access artifact by ID\n  - get_instructions() → read original user instructions\n  - search_session(query) → find relevant info across session\n"
-        } else { "" };
+        // Assemble context: build from memory (files are paths only, no content loaded)
+        let mut ctx = memory.build_context();
+
+        // Add active file content if any
+        if let Some((ref path, ref content)) = active_file_content {
+            let truncated: String = content.chars().take(8000).collect();
+            ctx.push_str(&format!("\n── READING: {path} ──\n{truncated}\n"));
+        }
 
         let execute_prompt = format!(
-            "CYCLE {cycle}\n{summary}\n\n\
-             Tools: read_file|list_dir|COMPLETE_TASK:id:result|ADD_TASK:desc|UPDATE_CONTEXT:info{session_tools}\n\
-             Focus on [▶] task. When done: COMPLETE_TASK. All done: ALL_DONE. Action:",
-            cycle = cycles, summary = state.summary(), session_tools = session_tools
+            "{ctx}\n\n── CYCLE {cycle}/{max_cycles} ──\n\
+             Actions (put ONE on the LAST line):\n\
+               DONE <id>: <result>    — mark subtask complete\n\
+               READ: <file_path>      — read a file from AVAILABLE FILES\n\
+               FINDING: <text>        — record a key finding\n\
+               ALL_DONE               — all subtasks complete\n\
+               CONTINUE: <next step>  — still working\n\
+             \nYOUR RESPONSE:",
+            cycle = cycles, max_cycles = max_cycles
         );
 
         match client.chat(&system, &execute_prompt).await {
             Ok((text, tks)) => {
                 tokens_used += tks as usize;
                 let t = text.trim();
+                let last_line = t.lines().last().unwrap_or("").trim();
+                let body = t.lines().rev().skip(1).collect::<Vec<_>>().into_iter().rev().collect::<Vec<_>>().join("\n");
+                let upper = last_line.to_uppercase();
 
-                if t.to_uppercase().starts_with("COMPLETE_TASK") || t.to_uppercase().starts_with("COMPLETE TASK") {
-                    let rest = t.strip_prefix("COMPLETE_TASK:").or(t.strip_prefix("COMPLETE TASK:")).unwrap_or(t);
-                    let parts: Vec<&str> = rest.trim().splitn(2, ':').collect();
-                    if let Ok(id) = parts[0].trim().parse::<usize>() {
-                        let result = parts.get(1).map(|s| s.trim().to_string()).unwrap_or_default();
-                        if let Some(st) = state.subtasks.iter_mut().find(|s| s.id == id) {
-                            st.status = "done".into();
-                            st.output = result;
-                            eprintln!("  [✓] Task {id} complete");
-                        }
+                if upper.starts_with("DONE ") || upper.starts_with("DONE:") {
+                    let rest = last_line.strip_prefix("DONE ").or(last_line.strip_prefix("DONE:")).unwrap_or("");
+                    let task_id = rest.trim().split(|c: char| c == ':' || c == ' ').next().and_then(|s| s.parse::<usize>().ok()).unwrap_or(0);
+                    let result = rest.trim().splitn(2, |c: char| c == ':' || c == ' ').nth(1).map(|s| s.trim().to_string()).unwrap_or_else(|| body.chars().rev().take(200).collect::<String>().chars().rev().collect());
+                    if let Some(st) = memory.subtasks.iter_mut().find(|s| s.id == task_id) {
+                        st.status = "done".into();
+                        st.output = result.clone();
+                    } else if let Some(st) = memory.subtasks.iter_mut().find(|s| s.status == "in_progress") {
+                        st.status = "done".into();
+                        st.output = result.clone();
                     }
-                } else if t.to_uppercase().starts_with("ADD_TASK") || t.to_uppercase().starts_with("ADD TASK") {
-                    let desc = t.strip_prefix("ADD_TASK:").or(t.strip_prefix("ADD TASK:")).unwrap_or(t).trim();
-                    let new_id = state.subtasks.len() + 1;
-                    state.subtasks.push(SubTask { id: new_id, description: desc.into(), status: "pending".into(), output: String::new() });
-                    eprintln!("  [+] Task {new_id}: {desc}");
-                } else if t.to_uppercase().starts_with("UPDATE_CONTEXT") || t.to_uppercase().starts_with("UPDATE CONTEXT") {
-                    let ctx = t.strip_prefix("UPDATE_CONTEXT:").or(t.strip_prefix("UPDATE CONTEXT:")).unwrap_or(t).trim();
-                    state.context.push_str(&format!("\n[C{cycles}]: {ctx}\n"));
-                } else if t.to_uppercase().starts_with("ALL_DONE") || t.to_uppercase().starts_with("ALL DONE") {
-                    eprintln!("  [Done] Worker declares all tasks complete");
+                    memory.add_decision(cycles, "DONE", &format!("Task {}: {}", task_id, result.chars().take(100).collect::<String>()));
+                    eprintln!("  [✓] Task {task_id} done");
+                    last_progress = memory.subtasks.iter().filter(|t| t.status == "done").count();
+                    active_file_content = None; // Clear file focus after completing a task
+                } else if upper.starts_with("ALL_DONE") || upper.starts_with("ALL DONE") {
+                    eprintln!("  [Done] Agent declares all tasks complete");
                     break;
-                } else if t.contains("NEED_FILE:") || t.contains("read_file(") {
-                    // Extract file path and read it
-                    let path = t.split("NEED_FILE:").nth(1)
-                        .or_else(|| t.split("read_file(").nth(1).and_then(|s| s.split(')').next()))
-                        .map(|s| s.trim().trim_matches('"').trim_matches('\''))
-                        .unwrap_or("");
-                    if !path.is_empty() {
-                        match read_file(path).await {
-                            Ok(content) => {
-                                let truncated = truncate_at_char(&content, 6000);
-                                state.context.push_str(&format!("\n=== {path} ===\n{truncated}\n"));
-                                eprintln!("  [read] {path} ({} chars)", content.len());
-                            }
-                            Err(e) => {
-                                state.context.push_str(&format!("\n[Read error: {path}: {e}]\n"));
+                } else if upper.starts_with("READ:") || upper.starts_with("READ ") {
+                    let path = last_line.strip_prefix("READ:").or(last_line.strip_prefix("READ ")).unwrap_or("").trim();
+                    // Try matching against available files (partial match)
+                    let matched = memory.files_available.iter()
+                        .find(|f| f.ends_with(path) || f.contains(path))
+                        .cloned()
+                        .unwrap_or_else(|| path.to_string());
+                    match read_file(&matched).await {
+                        Ok(content) => {
+                            memory.add_decision(cycles, "READ", &format!("{} ({} chars)", matched, content.len()));
+                            active_file_content = Some((matched.clone(), content));
+                            eprintln!("  [read] {matched}");
+                        }
+                        Err(e) => {
+                            memory.add_decision(cycles, "READ_ERR", &format!("{matched}: {e}"));
+                            eprintln!("  [err] {e}");
+                        }
+                    }
+                } else if upper.starts_with("FINDING:") {
+                    let finding = last_line.strip_prefix("FINDING:").unwrap_or("").trim();
+                    memory.add_finding(finding);
+                    memory.add_decision(cycles, "FINDING", finding);
+                    eprintln!("  [!] Finding recorded");
+                } else if upper.starts_with("CONTINUE:") || upper.starts_with("CONTINUE ") {
+                    let step = last_line.strip_prefix("CONTINUE:").or(last_line.strip_prefix("CONTINUE ")).unwrap_or("").trim();
+                    memory.add_decision(cycles, "CONTINUE", step);
+                    eprintln!("  [→] {step}");
+                } else {
+                    // No action keyword found — check body for DONE
+                    let mut handled = false;
+                    for bline in t.lines() {
+                        let bu = bline.trim().to_uppercase();
+                        if bu.starts_with("DONE ") {
+                            let rest = bline.trim().strip_prefix("DONE ").unwrap_or("");
+                            let done_id = {
+                                let st = memory.subtasks.iter_mut().find(|s| s.status == "in_progress");
+                                st.map(|s| { s.status = "done".into(); s.output = rest.to_string(); s.id })
+                            };
+                            if let Some(did) = done_id {
+                                let summary: String = rest.chars().take(100).collect();
+                                memory.add_decision(cycles, "DONE", &format!("Task {did}: {summary}"));
+                                eprintln!("  [✓] Task {did} done (from body)");
+                                last_progress = memory.subtasks.iter().filter(|t| t.status == "done").count();
+                                handled = true;
+                                break;
                             }
                         }
                     }
-                } else {
-                    // Treat as general output — may contain multiple actions
-                    // Append to context for next cycle
-                    state.context.push_str(&format!("\n[C{cycles} output]: {}\n", t.chars().take(2000).collect::<String>()));
+                    if !handled {
+                        // LLM wrote analysis without action — treat as working
+                        let excerpt: String = t.chars().take(500).collect();
+                        memory.add_decision(cycles, "ANALYSIS", &excerpt);
+                        // Auto-extract findings from analysis text
+                        if t.len() > 300 {
+                            memory.add_finding(&t.chars().take(200).collect::<String>());
+                        }
+                        eprintln!("  [~] Analysis ({} chars)", t.len());
+                    }
                 }
 
-                fs::write(&state_file, serde_json::to_string_pretty(&state).unwrap_or_default())?;
+                fs::write(&state_file, serde_json::to_string_pretty(&memory).unwrap_or_default())?;
             }
             Err(e) => {
                 eprintln!("[LLM error cycle {cycles}]: {e}");
-                write_reject(&task, "error", &format!("LLM error: {e}"), &state);
+                let out = serde_json::json!({
+                    "success": false, "action": "error", "reason": "llm_error",
+                    "detail": format!("{e}"),
+                    "subtasks_done": memory.subtasks.iter().filter(|t| t.status == "done").count(),
+                    "subtasks_total": memory.subtasks.len(),
+                });
+                write_output(&task, &out);
                 std::process::exit(1);
             }
         }
@@ -279,51 +490,45 @@ async fn main() -> Result<()> {
     // ── Phase 2: Final Verification ──
 
     let verify_prompt = format!(
-        "{summary}\n\nVerify each criterion: PASS/FAIL + evidence. Then FINAL: PASS|FAIL.",
-        summary = state.summary()
+        "{ctx}\n\nFINAL VERIFICATION: Evaluate each criterion. Output: PASS/FAIL + evidence. End with: FINAL: PASS|FAIL",
+        ctx = memory.build_context()
     );
 
     match client.chat(&system, &verify_prompt).await {
         Ok((text, _)) => {
             let passed = text.to_uppercase().contains("FINAL: PASS");
             let summary = if text.len() > 15000 { format!("{}...", &text[..15000]) } else { text.clone() };
+            let done_count = memory.subtasks.iter().filter(|t| t.status == "done").count();
             let out = serde_json::json!({
                 "success": passed,
-                "action": if passed { "done" } else { "failed_criteria" },
+                "action": if passed { "completed" } else { "failed_criteria" },
                 "profile": task.profile_name,
                 "model": task.model,
                 "cycles": cycles,
                 "tokens": tokens_used,
                 "output": summary,
-                "subtasks_completed": state.subtasks.iter().filter(|t| t.status == "done").count(),
-                "subtasks_total": state.subtasks.len(),
-                "acceptance_criteria": state.acceptance_criteria,
+                "subtasks_completed": done_count,
+                "subtasks_total": memory.subtasks.len(),
+                "acceptance_criteria": memory.acceptance_criteria,
             });
             write_output(&task, &out);
         }
         Err(e) => {
-            write_reject(&task, "error", &format!("Verification failed: {e}"), &state);
+            let out = serde_json::json!({
+                "success": false, "action": "error", "reason": "verification_failed",
+                "detail": format!("{e}"),
+                "subtasks_done": memory.subtasks.iter().filter(|t| t.status == "done").count(),
+                "subtasks_total": memory.subtasks.len(),
+            });
+            write_output(&task, &out);
         }
     }
 
     Ok(())
 }
 
-fn truncate_at_char(s: &str, max: usize) -> String {
-    s.char_indices().nth(max).map(|(i, _)| s[..i].to_string()).unwrap_or_else(|| s.to_string())
-}
-
 fn write_output(task: &WorkerTask, output: &serde_json::Value) {
     let out_path = task.output_file.clone().unwrap_or_else(|| format!("/tmp/worker_output_{}.json", uuid::Uuid::now_v7()));
     let _ = fs::write(&out_path, serde_json::to_string_pretty(output).unwrap_or_default());
     println!("DONE: {out_path}");
-}
-
-fn write_reject(task: &WorkerTask, reason: &str, detail: &str, state: &TaskState) {
-    let out = serde_json::json!({
-        "success": false, "action": "reject", "reason": reason, "detail": detail,
-        "subtasks_done": state.subtasks.iter().filter(|t| t.status == "done").count(),
-        "subtasks_total": state.subtasks.len(),
-    });
-    write_output(task, &out);
 }
