@@ -413,8 +413,10 @@ async fn main() -> Result<()> {
                 } else if upper.starts_with("ALL_DONE") || upper.starts_with("ALL DONE") {
                     eprintln!("  [Done] Agent declares all tasks complete");
                     break;
-                } else if upper.starts_with("READ:") || upper.starts_with("READ ") {
-                    let path = last_line.strip_prefix("READ:").or(last_line.strip_prefix("READ ")).unwrap_or("").trim();
+                } else if upper.starts_with("READ:") || upper.starts_with("READ ") || upper.starts_with("```READ") {
+                    let path = last_line.strip_prefix("READ:").or(last_line.strip_prefix("READ "))
+                        .or(last_line.strip_prefix("```READ")).or(last_line.strip_prefix("```read"))
+                        .unwrap_or("").trim().trim_end_matches("```").trim();
                     // Multi-level fuzzy match against available files
                     let file_name = std::path::Path::new(path).file_name()
                         .and_then(|n| n.to_str()).unwrap_or(path);
@@ -469,8 +471,35 @@ async fn main() -> Result<()> {
                     memory.add_decision(cycles, "CONTINUE", step);
                     eprintln!("  [→] {step}");
                 } else {
-                    // No action keyword found — check body for DONE
+                    // No action keyword found — check body for DONE or READ
                     let mut handled = false;
+                    // First: check if LLM is trying to read a file
+                    for bline in t.lines() {
+                        let b = bline.trim();
+                        let bu = b.to_uppercase();
+                        // Match: READ /path, ```read /path```, "需要读取 /path", "read_file(/path)"
+                        if bu.starts_with("READ ") || bu.starts_with("READ:") || bu.starts_with("```READ") || bu.contains("READ_FILE(") {
+                            let path = b.strip_prefix("READ:").or(b.strip_prefix("READ "))
+                                .or(b.strip_prefix("```READ")).or(b.strip_prefix("```read"))
+                                .unwrap_or(b).trim().trim_end_matches("```").trim();
+                            // If it contains a file path from available files, extract it
+                            let matched_file = memory.files_available.iter().find(|f| path.contains(&f[f.rfind('/').unwrap_or(0)..]) || f.contains(path)).cloned();
+                            if let Some(ref af) = matched_file {
+                                match read_file(af).await {
+                                    Ok(content) => {
+                                        memory.add_decision(cycles, "READ", &format!("{af} (body detect, {} chars)", content.len()));
+                                        active_file_content = Some((af.clone(), content));
+                                        eprintln!("  [read] {af} (from body)");
+                                        handled = true;
+                                    }
+                                    Err(_) => {}
+                                }
+                            }
+                            if handled { break; }
+                        }
+                    }
+                    // Second: check for DONE
+                    if !handled {
                     for bline in t.lines() {
                         let bu = bline.trim().to_uppercase();
                         if bu.starts_with("DONE ") {
@@ -493,12 +522,12 @@ async fn main() -> Result<()> {
                         // LLM wrote analysis without action — treat as working
                         let excerpt: String = t.to_string();
                         memory.add_decision(cycles, "ANALYSIS", &excerpt);
-                        // Auto-extract findings from analysis text
                         if t.len() > 300 {
                             memory.add_finding(t);
                         }
                         eprintln!("  [~] Analysis ({} chars)", t.len());
                     }
+                    } // close if !handled from DONE check
                 }
 
                 // Agent memory persisted to output JSON at completion
