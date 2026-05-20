@@ -555,6 +555,8 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         }
     }
 
+    let report_prefix = session.as_ref().map(|s| s.session_id.to_string().chars().take(8).collect::<String>()).unwrap_or_else(|| "latest".into());
+
     // Persist session state for multi-turn support
     if let Some(mut sess) = session {
         sess.add_phase_result(session_state::PhaseResult {
@@ -594,8 +596,13 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         sess.save().map_err(|e| anyhow::anyhow!("session save: {e}"))?;
     }
 
-    let rp = format!("/tmp/openforce_report_{}.md", uuid::Uuid::now_v7());
+    let rp = format!("/tmp/openforce_report_{report_prefix}.md");
     std::fs::write(&rp, &report)?;
-    println!("Report: {rp}");
+    println!("
+
+╔══════════════════════════════════════╗");
+    println!("║  Report: {}", rp);
+    println!("╚══════════════════════════════════════╝
+");
     Ok(())
 }
