@@ -316,14 +316,19 @@ async fn main() -> Result<()> {
             last_progress = done_count;
         }
         if cycles.saturating_sub(last_progress * 3) > max_no_progress && last_progress < memory.subtasks.len() {
-            // Force conclusion — ask LLM to wrap up NOW
+            // Force conclusion — build fresh context including active file
+            let mut force_ctx = memory.build_context();
+            if let Some((ref path, ref content)) = active_file_content {
+                let truncated: String = content.chars().take(8000).collect();
+                force_ctx.push_str(&format!("\n── READING: {path} ──\n{truncated}\n"));
+            }
             let force_prompt = format!(
-                "{ctx}\n\n── FORCE CONCLUSION ──\n\
+                "{force_ctx}\n\n── FORCE CONCLUSION ──\n\
                  You have NOT marked any task DONE in {stall} cycles.\n\
                  Give your FINAL conclusion NOW.\n\
                  Format: DONE <id>: <result>\n\
                  If you truly cannot complete: STALLED: <reason>",
-                ctx = memory.build_context(), stall = cycles.saturating_sub(last_progress * 3)
+                force_ctx = force_ctx, stall = cycles.saturating_sub(last_progress * 3)
             );
             match client.chat(&system, &force_prompt).await {
                 Ok((text, tks)) => {
