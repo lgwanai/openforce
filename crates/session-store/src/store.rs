@@ -15,8 +15,9 @@ impl EventStore {
             detail: format!("begin tx: {e}")
         })?;
         let lock_key = session_id.as_u64_pair();
-        sqlx::query("SELECT pg_advisory_xact_lock($1, $2)")
-            .bind(lock_key.0 as i32).bind(lock_key.1 as i32)
+        // Use i64 to avoid truncation — pg_advisory_xact_lock accepts bigint args
+        sqlx::query("SELECT pg_advisory_xact_lock($1::bigint, $2::bigint)")
+            .bind(lock_key.0 as i64).bind(lock_key.1 as i64)
             .execute(&mut *tx).await.map_err(|e| DomainError::ValidationFailed {
                 detail: format!("lock: {e}")
             })?;

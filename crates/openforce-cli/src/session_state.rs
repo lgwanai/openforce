@@ -41,7 +41,7 @@ impl LocalSessionState {
     pub fn create(goal: String, workspace: PathBuf) -> Self {
         let now = chrono::Utc::now();
         Self { session_id: Uuid::now_v7(), goal, state: SessionState::Active,
-            current_phase: SessionPhase::Understand, plan_version: 0, plan_epoch: 1,
+            current_phase: SessionPhase::understand(), plan_version: 0, plan_epoch: 1,
             workspace, pending_gate: None, phase_results: vec![], last_summary: None,
             created_at: now, updated_at: now }
     }
@@ -95,8 +95,8 @@ impl LocalSessionState {
     }
 
     pub fn set_gate(&mut self, gate: &ConfirmationGate) {
-        self.current_phase = gate.phase;
-        self.pending_gate = Some(PendingGate { gate_id: gate.gate_id, phase: gate.phase,
+        self.current_phase = gate.phase.clone();
+        self.pending_gate = Some(PendingGate { gate_id: gate.gate_id, phase: gate.phase.clone(),
             artifact_summary: gate.artifact_summary.clone().unwrap_or_default(),
             created_at: gate.created_at });
         self.updated_at = chrono::Utc::now();
@@ -107,7 +107,7 @@ impl LocalSessionState {
     pub fn advance_phase(&mut self, next: SessionPhase) { self.current_phase = next; self.updated_at = chrono::Utc::now(); }
 
     pub fn complete(&mut self) {
-        self.state = SessionState::Completed; self.current_phase = SessionPhase::Complete;
+        self.state = SessionState::Completed; self.current_phase = SessionPhase::complete();
         self.updated_at = chrono::Utc::now();
     }
 

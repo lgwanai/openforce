@@ -126,7 +126,7 @@ message ApprovalBinding {
 
 message PatchClassification {
   PatchRiskLevel risk_level = 1;
-  repeated PatchReasonCode reason_codes = 2;
+  repeated string reason_codes = 2;
   bool requires_approval = 3;
 }
 
@@ -154,7 +154,7 @@ message ApprovalRequestView {
   WorkerIdentity worker = 2;
   ToolName tool_name = 3;
   PatchRiskLevel patch_risk_level = 4;
-  repeated PatchReasonCode reason_codes = 5;
+  repeated string reason_codes = 5;
   repeated string target_paths = 6;
   string base_snapshot_id = 7;
   string payload_sha256 = 8;

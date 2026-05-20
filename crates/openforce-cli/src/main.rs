@@ -589,7 +589,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     // Persist session state for multi-turn support
     if let Some(mut sess) = session {
         sess.add_phase_result(session_state::PhaseResult {
-            phase: sess.current_phase,
+            phase: sess.current_phase.clone(),
             tasks_total: results.len(),
             tasks_ok: ok,
             worker_outputs: results.iter().map(|(i, pf, success, _action, text)| session_state::WorkerOutput {
@@ -606,9 +606,9 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let next = sess.current_phase.next_phase();
         if let Some(n) = next {
             if n.is_gate() {
-                sess.advance_phase(n);
+                sess.advance_phase(n.clone());
                 let gate = openforce_domain::session_phase::ConfirmationGate::new(
-                    sess.session_id, n,
+                    sess.session_id, n.clone(),
                     format!("Phase {} completed: {}/{} tasks OK", sess.current_phase.as_str(), ok, results.len()),
                     sess.plan_epoch,
                 );
@@ -618,7 +618,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 println!("    openforce approve   — to continue");
                 println!("    openforce reject \"<feedback>\" — to modify");
             } else {
-                sess.advance_phase(n);
+                sess.advance_phase(n.clone());
                 println!("\n[Phase → {}] Auto-advancing. Continue with: openforce continue", n.as_str());
             }
         }

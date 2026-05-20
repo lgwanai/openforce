@@ -81,7 +81,7 @@ impl RedisSessionStore {
         let conn = client.get_multiplexed_async_connection().await
             .map_err(|e| format!("redis: {e}"))?;
         info!("Redis session store connected");
-        Ok(Self { conn, ttl_seconds: 86400 })
+        Ok(Self { conn, ttl_seconds: std::env::var("REDIS_SESSION_TTL").ok().and_then(|v| v.parse().ok()).unwrap_or(86400) })
     }
 
     pub fn with_ttl(mut self, t: usize) -> Self { self.ttl_seconds = t; self }
@@ -96,7 +96,7 @@ impl RedisSessionStore {
     pub async fn create(&mut self, ws: &str, goal: &str) -> Result<RedisSessionState, String> {
         let id = Uuid::now_v7(); let now = chrono::Utc::now();
         let s = RedisSessionState { session_id: id, goal: goal.into(), state: SessionState::Active,
-            current_phase: SessionPhase::Understand, plan_version: 0, plan_epoch: 1,
+            current_phase: SessionPhase::understand(), plan_version: 0, plan_epoch: 1,
             workspace: ws.into(), pending_gate_id: None, created_at: now, updated_at: now };
         self.write(&s).await?;
         let _ =self.conn.sadd(Self::AK, id.to_string()).await.map_err(|e| format!("sadd: {e}"))?;
@@ -132,7 +132,7 @@ impl RedisSessionStore {
 
     pub async fn complete(&mut self, id: &Uuid) -> Result<(), String> {
         if let Some(mut s) = self.load(id).await? {
-            s.state = SessionState::Completed; s.current_phase = SessionPhase::Complete;
+            s.state = SessionState::Completed; s.current_phase = SessionPhase::complete();
             s.updated_at = chrono::Utc::now(); self.write(&s).await?;
             let _: bool = self.conn.srem(Self::AK, id.to_string()).await.map_err(|e| format!("{e}")).unwrap_or(false);
         }
@@ -167,9 +167,10 @@ impl RedisSessionStore {
     ) -> Result<ConfirmationGate, String> {
         if !caller.is_planner() { return Err("access denied: only planner can create gates".into()); }
         let sid = caller.session_id();
+        let phase_str = phase.as_str().to_string();
         let gate = ConfirmationGate::new(sid, phase, summary.into(), plan_epoch);
         let f: Vec<(&str, String)> = vec![
-            ("session_id", sid.to_string()), ("phase", phase.as_str().into()),
+            ("session_id", sid.to_string()), ("phase", phase_str),
             ("status", "pending".into()), ("artifact_summary", summary.into()),
             ("plan_epoch", plan_epoch.to_string()), ("created_at", gate.created_at.to_rfc3339()),
         ];
@@ -206,7 +207,7 @@ impl RedisSessionStore {
 
         if let Some(mut s) = self.load(&sid).await? {
             s.pending_gate_id = None;
-            if approved { if let Some(next) = phase.next_phase() { s.current_phase = next; } }
+            if approved { if let Some(next) = gate.phase.next_phase() { s.current_phase = next; } }
             else { s.plan_epoch += 1; }
             s.updated_at = chrono::Utc::now(); self.write(&s).await?;
         }
@@ -274,7 +275,18 @@ impl RedisSessionStore {
 
     pub async fn list_workers(&mut self, sid: &Uuid) -> Result<Vec<String>, String> {
         let pattern = format!("session:{sid}:worker:*");
-        let keys: Vec<String> = self.conn.keys(&pattern).await.map_err(|e| format!("keys: {e}"))?;
+        // Use SCAN instead of KEYS to avoid blocking Redis in production
+        let mut keys = Vec::new();
+        let mut cursor: u64 = 0;
+        loop {
+            let (new_cursor, batch): (u64, Vec<String>) = redis::cmd("SCAN")
+                .arg(cursor).arg("MATCH").arg(&pattern).arg("COUNT").arg(100)
+                .query_async(&mut self.conn).await
+                .map_err(|e| format!("scan: {e}"))?;
+            keys.extend(batch);
+            cursor = new_cursor;
+            if cursor == 0 { break; }
+        }
         Ok(keys.iter().filter_map(|k| k.rsplit(':').next().map(String::from)).collect())
     }
 

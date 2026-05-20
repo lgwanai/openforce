@@ -7,6 +7,7 @@ service EffectGateway {
   rpc RequestEffect(RequestEffectRequest) returns (RequestEffectResponse);
   rpc GetEffect(GetEffectRequest) returns (GetEffectResponse);
   rpc ApproveEffect(ApproveEffectRequest) returns (ApproveEffectResponse);
+  rpc RejectEffect(RejectEffectRequest) returns (RejectEffectResponse);
 }
 
 message RequestEffectRequest {
@@ -39,6 +40,17 @@ message ApproveEffectRequest {
 }
 
 message ApproveEffectResponse {
+  string effect_id = 1;
+  string status = 2;
+}
+
+message RejectEffectRequest {
+  string effect_id = 1;
+  string rejected_by = 2;
+  string reason = 3;
+}
+
+message RejectEffectResponse {
   string effect_id = 1;
   string status = 2;
 }

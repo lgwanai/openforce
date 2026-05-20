@@ -1,96 +1,82 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-pub enum SessionPhase {
-    Understand,
-    Design,
-    ConfirmDesign,
-    Architecture,
-    Development,
-    ConfirmDev,
-    Test,
-    Fix,
-    ConfirmFinal,
-    Report,
-    Complete,
-}
+/// SessionPhase is now a string-based type so that pipeline authors can define
+/// arbitrary phases beyond the built-in software-engineering lifecycle.
+/// The built-in phases are provided as constants for backward compatibility,
+/// but `SessionPhase::from_str()` accepts any string.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct SessionPhase(String);
 
+// Built-in phase constants for the default software-engineering pipeline
 impl SessionPhase {
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            Self::Understand => "understand",
-            Self::Design => "design",
-            Self::ConfirmDesign => "confirm_design",
-            Self::Architecture => "architecture",
-            Self::Development => "development",
-            Self::ConfirmDev => "confirm_dev",
-            Self::Test => "test",
-            Self::Fix => "fix",
-            Self::ConfirmFinal => "confirm_final",
-            Self::Report => "report",
-            Self::Complete => "complete",
+    pub fn understand() -> Self { Self("understand".into()) }
+    pub fn design() -> Self { Self("design".into()) }
+    pub fn confirm_design() -> Self { Self("confirm_design".into()) }
+    pub fn architecture() -> Self { Self("architecture".into()) }
+    pub fn development() -> Self { Self("development".into()) }
+    pub fn confirm_dev() -> Self { Self("confirm_dev".into()) }
+    pub fn test() -> Self { Self("test".into()) }
+    pub fn fix() -> Self { Self("fix".into()) }
+    pub fn confirm_final() -> Self { Self("confirm_final".into()) }
+    pub fn report() -> Self { Self("report".into()) }
+    pub fn complete() -> Self { Self("complete".into()) }
+
+    /// Create a custom phase from any string
+    pub fn custom(name: &str) -> Self { Self(name.to_lowercase()) }
+
+    pub fn as_str(&self) -> &str { &self.0 }
+
+    pub fn from_str(s: &str) -> Option<Self> { Some(Self(s.to_lowercase())) }
+
+    /// Whether this phase is a confirmation gate (starts with "confirm_")
+    pub fn is_gate(&self) -> bool { self.0.starts_with("confirm_") || self.0 == "gate" }
+
+    pub fn is_terminal(&self) -> bool { self.0 == "complete" }
+
+    /// Returns the next phase in the default built-in pipeline.
+    /// Returns `None` for custom phases or terminal phases — the pipeline
+    /// configuration must supply the transition in those cases.
+    pub fn next_phase(&self) -> Option<Self> {
+        match self.0.as_str() {
+            "understand"     => Some(Self::design()),
+            "design"         => Some(Self::confirm_design()),
+            "confirm_design" => Some(Self::architecture()),
+            "architecture"   => Some(Self::development()),
+            "development"    => Some(Self::confirm_dev()),
+            "confirm_dev"    => Some(Self::test()),
+            "test"           => Some(Self::fix()),
+            "fix"            => Some(Self::confirm_final()),
+            "confirm_final"  => Some(Self::report()),
+            "report"         => Some(Self::complete()),
+            _ => None, // custom or terminal phases
         }
     }
 
-    pub fn from_str(s: &str) -> Option<Self> {
-        match s {
-            "understand" => Some(Self::Understand),
-            "design" => Some(Self::Design),
-            "confirm_design" => Some(Self::ConfirmDesign),
-            "architecture" => Some(Self::Architecture),
-            "development" => Some(Self::Development),
-            "confirm_dev" => Some(Self::ConfirmDev),
-            "test" => Some(Self::Test),
-            "fix" => Some(Self::Fix),
-            "confirm_final" => Some(Self::ConfirmFinal),
-            "report" => Some(Self::Report),
-            "complete" => Some(Self::Complete),
-            _ => None,
-        }
-    }
-
-    pub fn next_phase(&self) -> Option<SessionPhase> {
-        match self {
-            Self::Understand => Some(Self::Design),
-            Self::Design => Some(Self::ConfirmDesign),
-            Self::ConfirmDesign => Some(Self::Architecture),
-            Self::Architecture => Some(Self::Development),
-            Self::Development => Some(Self::ConfirmDev),
-            Self::ConfirmDev => Some(Self::Test),
-            Self::Test => Some(Self::Fix),
-            Self::Fix => Some(Self::Test),
-            Self::ConfirmFinal => Some(Self::Report),
-            Self::Report => Some(Self::Complete),
-            Self::Complete => None,
-        }
-    }
-
-    pub fn is_gate(&self) -> bool {
-        matches!(self, Self::ConfirmDesign | Self::ConfirmDev | Self::ConfirmFinal)
-    }
-
-    pub fn is_terminal(&self) -> bool { matches!(self, Self::Complete) }
-
-    pub fn description(&self) -> &'static str {
-        match self {
-            Self::Understand => "Reading and analyzing project structure",
-            Self::Design => "Creating design specifications",
-            Self::ConfirmDesign => "Reviewing design — user confirmation required",
-            Self::Architecture => "Designing system architecture",
-            Self::Development => "Implementing code",
-            Self::ConfirmDev => "Reviewing implementation — user confirmation required",
-            Self::Test => "Running tests",
-            Self::Fix => "Fixing issues found during testing",
-            Self::ConfirmFinal => "Final review — user confirmation required",
-            Self::Report => "Generating final report",
-            Self::Complete => "Session complete",
+    pub fn description(&self) -> &str {
+        match self.0.as_str() {
+            "understand" => "Reading and analyzing project structure",
+            "design" => "Creating design specifications",
+            "confirm_design" => "Reviewing design — user confirmation required",
+            "architecture" => "Designing system architecture",
+            "development" => "Implementing code",
+            "confirm_dev" => "Reviewing implementation — user confirmation required",
+            "test" => "Running tests",
+            "fix" => "Fixing issues found during testing",
+            "confirm_final" => "Final review — user confirmation required",
+            "report" => "Generating final report",
+            "complete" => "Session complete",
+            other => other,
         }
     }
 }
 
 impl Default for SessionPhase {
-    fn default() -> Self { Self::Understand }
+    fn default() -> Self { Self::understand() }
+}
+
+impl std::fmt::Display for SessionPhase {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { write!(f, "{}", self.0) }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]

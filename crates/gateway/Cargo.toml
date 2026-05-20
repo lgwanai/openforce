@@ -9,6 +9,7 @@ path = "src/main.rs"
 
 [dependencies]
 openforce-proto = { path = "../proto" }
+openforce-domain = { path = "../domain" }
 tokio = { workspace = true }
 tokio-stream = "0.1"
 tonic = { workspace = true }
@@ -23,3 +24,4 @@ tracing-subscriber = { workspace = true }
 tower = "0.5"
 tower-http = { version = "0.5", features = ["cors", "trace", "request-id"] }
 base64 = "0.22"
+ring = { workspace = true }

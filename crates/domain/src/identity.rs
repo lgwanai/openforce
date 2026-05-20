@@ -1,47 +1,42 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-/// Every control-plane entity gets an independent identity (architecture doc 22.2).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub enum ServiceRole {
-    Scheduler,
-    NodeDaemon,
-    Worker,
-    EffectGateway,
-    ProjectionBuilder,
-    ObserverEvolver,
-    HumanApprover,
-}
+/// Service role identity — now a string-based type so that platform operators can
+/// register custom service roles beyond the built-in control-plane roles.
+/// Built-in roles are provided as factory methods for backward compatibility.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ServiceRole(String);
 
 impl ServiceRole {
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            Self::Scheduler => "scheduler",
-            Self::NodeDaemon => "node-daemon",
-            Self::Worker => "worker",
-            Self::EffectGateway => "effect-gateway",
-            Self::ProjectionBuilder => "projection-builder",
-            Self::ObserverEvolver => "observer-evolver",
-            Self::HumanApprover => "human-approver",
-        }
-    }
+    // Built-in control-plane roles
+    pub fn scheduler() -> Self { Self("scheduler".into()) }
+    pub fn node_daemon() -> Self { Self("node-daemon".into()) }
+    pub fn worker() -> Self { Self("worker".into()) }
+    pub fn effect_gateway() -> Self { Self("effect-gateway".into()) }
+    pub fn projection_builder() -> Self { Self("projection-builder".into()) }
+    pub fn observer_evolver() -> Self { Self("observer-evolver".into()) }
+    pub fn human_approver() -> Self { Self("human-approver".into()) }
 
-    pub fn from_str(s: &str) -> Option<Self> {
-        match s {
-            "scheduler" => Some(Self::Scheduler),
-            "node-daemon" => Some(Self::NodeDaemon),
-            "worker" => Some(Self::Worker),
-            "effect-gateway" => Some(Self::EffectGateway),
-            "projection-builder" => Some(Self::ProjectionBuilder),
-            "observer-evolver" => Some(Self::ObserverEvolver),
-            "human-approver" => Some(Self::HumanApprover),
-            _ => None,
-        }
-    }
+    /// Create a custom role from any string
+    pub fn custom(name: &str) -> Self { Self(name.to_lowercase()) }
+
+    pub fn as_str(&self) -> &str { &self.0 }
+
+    pub fn from_str(s: &str) -> Option<Self> { Some(Self(s.to_lowercase())) }
 
     pub fn spiffe_id(&self, instance_id: &str) -> String {
-        format!("spiffe://swarmos.internal/{}/{}", self.as_str(), instance_id)
+        let trust_domain = std::env::var("SPIFFE_TRUST_DOMAIN")
+            .unwrap_or_else(|_| "swarmos.internal".into());
+        format!("spiffe://{}/{}/{}", trust_domain, self.0, instance_id)
     }
+}
+
+impl Default for ServiceRole {
+    fn default() -> Self { Self::worker() }
+}
+
+impl std::fmt::Display for ServiceRole {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { write!(f, "{}", self.0) }
 }
 
 /// Extracted from a peer's X.509 certificate after mTLS handshake.

@@ -31,7 +31,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .expect("invalid SCHEDULER_SIGNING_KEY")))
     };
 
-    let service = SchedulerService { session_store_addr, instance_id: instance_id.clone(), token_issuer };
+    let service = SchedulerService::new(session_store_addr, instance_id.clone(), token_issuer);
 
     let (mut hr, health) = tonic_health::server::health_reporter();
     hr.set_serving::<SchedulerServer<SchedulerService>>().await;

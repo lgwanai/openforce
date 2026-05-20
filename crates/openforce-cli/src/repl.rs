@@ -22,9 +22,9 @@ impl SessionRepl {
             };
 
             if next.is_gate() {
-                self.session.advance_phase(next);
+                self.session.advance_phase(next.clone());
                 let gate = ConfirmationGate::new(
-                    self.session.session_id, next,
+                    self.session.session_id, next.clone(),
                     format!("Phase {} completed", self.session.current_phase.as_str()),
                     self.session.plan_epoch,
                 );
@@ -49,7 +49,7 @@ impl SessionRepl {
                     GateResult::Cancel => { self.session.abort(); self.session.save()?; break; }
                 }
             } else {
-                self.session.advance_phase(next);
+                self.session.advance_phase(next.clone());
                 self.session.save()?;
                 println!("Phase → {} | continue with: openforce continue", next.as_str());
                 if next.is_terminal() { self.session.complete(); self.session.save()?; break; }

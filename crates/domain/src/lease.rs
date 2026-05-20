@@ -97,9 +97,10 @@ impl Lease {
         Utc::now() >= self.expire_at
     }
 
-    /// Check if the given fencing token is still valid
+    /// Check if the given fencing token matches the current token.
+    /// Strict equality — only the current lease holder is authorized.
     pub fn verify_fencing(&self, provided: u64) -> DomainResult<()> {
-        if provided < self.fencing_token {
+        if provided != self.fencing_token {
             return Err(DomainError::FencingTokenStale {
                 provided,
                 current: self.fencing_token,
@@ -175,7 +176,8 @@ mod tests {
         let lease = test_lease();
         assert!(lease.verify_fencing(4).is_err());
         assert!(lease.verify_fencing(5).is_ok());
-        assert!(lease.verify_fencing(6).is_ok());
+        // Strict equality: different fencing token must be rejected
+        assert!(lease.verify_fencing(6).is_err());
     }
 
     #[test]

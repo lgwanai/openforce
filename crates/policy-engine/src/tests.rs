@@ -20,7 +20,7 @@ mod tests {
 
     fn ct_identity(role: ServiceRole) -> CertificateIdentity {
         CertificateIdentity {
-            role, instance_id: "test-01".into(), region: "us-east-1".into(),
+            role: role.clone(), instance_id: "test-01".into(), region: "us-east-1".into(),
             spiffe_id: format!("spiffe://swarmos.internal/{}/test-01", role.as_str()),
             not_before: chrono::Utc::now(), not_after: chrono::Utc::now() + chrono::Duration::days(30),
         }
@@ -39,7 +39,7 @@ mod tests {
     #[test] fn test_scheduler_lease_allowed() {
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::Scheduler)), capability_token: None,
+            mTLS_identity: Some(ct_identity(ServiceRole::scheduler())), capability_token: None,
             requested_action: "LeaseTask".into(), resource_type: "Task".into(),
             tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
         };
@@ -50,8 +50,8 @@ mod tests {
         let tid = Uuid::now_v7(); let sid = Uuid::now_v7(); let tid2 = Uuid::now_v7(); let lid = Uuid::now_v7();
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::Worker)),
-            capability_token: Some(test_token(tid, sid, tid2, lid, 5, vec![TokenScope::ArtifactSubmit])),
+            mTLS_identity: Some(ct_identity(ServiceRole::worker())),
+            capability_token: Some(test_token(tid, sid, tid2, lid, 5, vec![TokenScope::artifact_submit()])),
             requested_action: "SubmitArtifact".into(), resource_type: "Artifact".into(),
             tenant_id: Some(tid), session_id: Some(sid), task_id: Some(tid2),
             lease_id: Some(lid), current_fencing_token: Some(5),
@@ -62,7 +62,7 @@ mod tests {
     #[test] fn test_worker_without_token_denied() {
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::Worker)), capability_token: None,
+            mTLS_identity: Some(ct_identity(ServiceRole::worker())), capability_token: None,
             requested_action: "SubmitArtifact".into(), resource_type: "Artifact".into(),
             tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
         };
@@ -73,8 +73,8 @@ mod tests {
         let tid = Uuid::now_v7(); let sid = Uuid::now_v7(); let tid2 = Uuid::now_v7(); let lid = Uuid::now_v7();
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::Worker)),
-            capability_token: Some(test_token(tid, sid, tid2, lid, 3, vec![TokenScope::ArtifactSubmit])),
+            mTLS_identity: Some(ct_identity(ServiceRole::worker())),
+            capability_token: Some(test_token(tid, sid, tid2, lid, 3, vec![TokenScope::artifact_submit()])),
             requested_action: "SubmitArtifact".into(), resource_type: "Artifact".into(),
             tenant_id: Some(tid), session_id: Some(sid), task_id: Some(tid2),
             lease_id: Some(lid), current_fencing_token: Some(5),
@@ -85,7 +85,7 @@ mod tests {
     #[test] fn test_node_daemon_spawn_allowed() {
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::NodeDaemon)), capability_token: None,
+            mTLS_identity: Some(ct_identity(ServiceRole::node_daemon())), capability_token: None,
             requested_action: "SpawnWorker".into(), resource_type: "Resource".into(),
             tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
         };
@@ -95,7 +95,7 @@ mod tests {
     #[test] fn test_wrong_role_for_action_denied() {
         let engine = PolicyEngine::with_defaults();
         let ctx = AuthzContext {
-            mTLS_identity: Some(ct_identity(ServiceRole::Worker)), capability_token: None,
+            mTLS_identity: Some(ct_identity(ServiceRole::worker())), capability_token: None,
             requested_action: "LeaseTask".into(), resource_type: "Task".into(),
             tenant_id: None, session_id: None, task_id: None, lease_id: None, current_fencing_token: None,
         };

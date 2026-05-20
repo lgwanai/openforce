@@ -57,7 +57,7 @@ impl CertificateAuthority {
         params.distinguished_name = {
             let mut dn = DistinguishedName::new();
             dn.push(DnType::CommonName, &spiffe_id);
-            dn.push(DnType::OrganizationName, "swarmos.internal");
+            dn.push(DnType::OrganizationName, std::env::var("SPIFFE_TRUST_DOMAIN").unwrap_or_else(|_| "swarmos.internal".into()).as_str());
             dn
         };
         let now = OffsetDateTime::now_utc();
@@ -71,7 +71,7 @@ impl CertificateAuthority {
             .map_err(|e| MTLSError::CaError { detail: e.to_string() })?;
 
         self.issued.insert(serial.clone(), IssuedCertificate {
-            serial: serial.clone(), role, instance_id: instance_id.into(),
+            serial: serial.clone(), role: role.clone(), instance_id: instance_id.into(),
             not_after,
         });
         info!("cert issued: role={role:?} instance={instance_id} serial={serial}");
@@ -87,6 +87,41 @@ impl CertificateAuthority {
         let (_, cert) = x509_parser::parse_x509_certificate(peer_cert_der)
             .map_err(|e| MTLSError::VerificationFailed { detail: e.to_string() })?;
 
+        // 1. Verify certificate validity period
+        let now = OffsetDateTime::now_utc();
+        let not_before = cert.validity().not_before.to_datetime();
+        let not_after = cert.validity().not_after.to_datetime();
+        if now < not_before {
+            return Err(MTLSError::VerificationFailed {
+                detail: format!("certificate not yet valid (not_before={not_before})")
+            });
+        }
+        if now > not_after {
+            return Err(MTLSError::CertificateExpired {
+                serial: cert.raw_serial_as_string(),
+            });
+        }
+
+        // 2. Verify the certificate was signed by our CA
+        let ca_pem = self.ca_cert.pem();
+        let ca_parsed = x509_parser::parse_x509_certificate(ca_pem.as_bytes())
+            .map_err(|e| MTLSError::VerificationFailed { detail: format!("CA cert parse: {e}") })?
+            .1;
+        let ca_spki = ca_parsed.public_key();
+        // Verify the peer cert's signature using the CA's public key
+        let peer_tbs = cert.tbs_certificate.as_ref();
+        let peer_sig = cert.signature_value.as_ref();
+        // Use ring to verify Ed25519 signature
+        let ca_pk_bytes = ca_spki.subject_public_key.data.as_ref().to_vec();
+        let ca_pk = ring::signature::UnparsedPublicKey::new(
+            &ring::signature::ED25519, ca_pk_bytes.to_vec(),
+        );
+        ca_pk.verify(peer_tbs, peer_sig)
+            .map_err(|_| MTLSError::VerificationFailed {
+                detail: "certificate not signed by this CA".into()
+            })?;
+
+        // 3. Extract SPIFFE identity
         let spiffe_id = cert.subject_alternative_name()
             .map_err(|e| MTLSError::IdentityExtractionFailed { detail: e.to_string() })?
             .and_then(|san| {
@@ -104,7 +139,9 @@ impl CertificateAuthority {
             })
             .ok_or_else(|| MTLSError::VerificationFailed { detail: "no SPIFFE SAN".into() })?;
 
-        let path = spiffe_id.strip_prefix("spiffe://swarmos.internal/").unwrap_or(&spiffe_id);
+        let trust_domain = std::env::var("SPIFFE_TRUST_DOMAIN")
+            .unwrap_or_else(|_| "swarmos.internal".into());
+        let path = spiffe_id.strip_prefix(&format!("spiffe://{trust_domain}/")).unwrap_or(&spiffe_id);
         let parts: Vec<&str> = path.split('/').collect();
         let role = parts.first().and_then(|r| ServiceRole::from_str(r))
             .ok_or_else(|| MTLSError::RoleMismatch {
@@ -113,16 +150,16 @@ impl CertificateAuthority {
             })?;
         let instance_id = parts.get(1).map(|s| s.to_string()).unwrap_or_default();
 
+        // 4. Check revocation
         let serial = cert.raw_serial_as_string();
         if self.revoked.contains_key(&serial) {
             return Err(MTLSError::CertificateRevoked { serial });
         }
-        let nb = cert.validity().not_before.to_datetime();
-        let na = cert.validity().not_after.to_datetime();
+
         Ok(CertificateIdentity {
             role, instance_id, region: String::new(), spiffe_id,
-            not_before: chrono::DateTime::from_timestamp(nb.unix_timestamp(), 0).unwrap_or_default(),
-            not_after: chrono::DateTime::from_timestamp(na.unix_timestamp(), 0).unwrap_or_default(),
+            not_before: chrono::DateTime::from_timestamp(not_before.unix_timestamp(), 0).unwrap_or_default(),
+            not_after: chrono::DateTime::from_timestamp(not_after.unix_timestamp(), 0).unwrap_or_default(),
         })
     }
 

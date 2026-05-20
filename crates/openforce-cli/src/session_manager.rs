@@ -141,7 +141,7 @@ impl SessionManager {
             Backend::Redis(redis) => {
                 let r = openforce_redis_session::store::RedisSessionState {
                     session_id: s.session_id, goal: s.goal.clone(),
-                    state: s.state, current_phase: s.current_phase,
+                    state: s.state, current_phase: s.current_phase.clone(),
                     plan_version: s.plan_version, plan_epoch: s.plan_epoch,
                     workspace: self.workspace.display().to_string(),
                     pending_gate_id: s.pending_gate.as_ref().map(|g| g.gate_id),
@@ -170,7 +170,7 @@ impl SessionManager {
         let mut s = self.resume_local(id)?;
         if !s.is_at_gate() { return Err("no pending gate".into()); }
         let next = s.current_phase.next_phase().ok_or("session complete")?;
-        s.clear_gate(); s.advance_phase(next); s.save()?;
+        s.clear_gate(); s.advance_phase(next.clone()); s.save()?;
         println!("Gate approved. Phase → {}", next.as_str());
         Ok(s)
     }
@@ -188,7 +188,7 @@ impl SessionManager {
     fn to_local(&self, r: &openforce_redis_session::store::RedisSessionState) -> LocalSessionState {
         LocalSessionState {
             session_id: r.session_id, goal: r.goal.clone(),
-            state: r.state, current_phase: r.current_phase,
+            state: r.state, current_phase: r.current_phase.clone(),
             plan_version: r.plan_version, plan_epoch: r.plan_epoch,
             workspace: self.workspace.clone(),
             pending_gate: None, phase_results: vec![], last_summary: None,

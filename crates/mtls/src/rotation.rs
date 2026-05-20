@@ -24,8 +24,8 @@ impl RotatingCertificateManager {
     }
 
     pub async fn rotate(&self) -> MTLSResult<CertificateBundle> {
-        let role = self.current.read().await.role;
-        let new_bundle = self.ca.issue(role, &self.instance_id, "")?;
+        let role = self.current.read().await.role.clone();
+        let new_bundle = self.ca.issue(role.clone(), &self.instance_id, "")?;
         *self.current.write().await = new_bundle.clone();
         info!("certificate rotated for {:?}/{}", role, self.instance_id);
         Ok(new_bundle)

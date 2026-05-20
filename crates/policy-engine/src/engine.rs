@@ -48,7 +48,7 @@ impl PolicyEngine {
             RuleCondition::ActionOn(action, res) =>
                 ctx.requested_action == *action && ctx.resource_type == *res,
             RuleCondition::TokenHasScope(scope) => ctx.capability_token.as_ref()
-                .map(|t| t.verify_scope(*scope)).unwrap_or(false),
+                .map(|t| t.verify_scope(scope.clone())).unwrap_or(false),
             RuleCondition::FencingTokenValid => match (&ctx.capability_token, ctx.current_fencing_token) {
                 (Some(token), Some(current)) => token.fencing_token >= current,
                 _ => false,

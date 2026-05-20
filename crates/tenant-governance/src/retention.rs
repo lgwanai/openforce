@@ -37,7 +37,7 @@ impl RetentionPolicy {
             "observer" => self.observer_sample_retention_days,
             "debug" => self.debug_log_retention_days,
             "backup" => self.backup_retention_days,
-            _ => 30,
+            _ => self.observer_sample_retention_days, // fallback to observer retention
         };
         created_at + Duration::days(days as i64)
     }

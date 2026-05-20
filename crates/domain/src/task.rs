@@ -173,9 +173,10 @@ impl Task {
         Ok(())
     }
 
-    /// Verify that a given fencing_token is current for this task
+    /// Verify that a given fencing_token matches the current token for this task.
+    /// Strict equality check — only the current lease holder can submit.
     pub fn verify_fencing(&self, provided: u64) -> DomainResult<()> {
-        if provided < self.current_fencing_token {
+        if provided != self.current_fencing_token {
             return Err(DomainError::FencingTokenStale {
                 provided,
                 current: self.current_fencing_token,
@@ -264,7 +265,8 @@ mod tests {
         task.current_fencing_token = 5;
         assert!(task.verify_fencing(4).is_err());
         assert!(task.verify_fencing(5).is_ok());
-        assert!(task.verify_fencing(6).is_ok());
+        // Strict equality: different fencing token must be rejected
+        assert!(task.verify_fencing(6).is_err());
     }
 
     #[test]

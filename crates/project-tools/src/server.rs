@@ -145,7 +145,7 @@ impl ProjectToolService for ProjectToolServiceImpl {
                             approval_request_id: Uuid::now_v7().to_string(),
                             tool_name: 3, // write_project_patch
                             patch_risk_level: classification.risk_level as i32,
-                            reason_codes: classification.reason_codes.iter().map(|r| *r as i32).collect(),
+                            reason_codes: classification.reason_codes.iter().map(|r| r.as_str().to_string()).collect(),
                             target_paths: patch.target_paths.clone(),
                             base_snapshot_id: patch.base_snapshot_id.clone(),
                             payload_sha256: patch.patch_sha256.clone(),
@@ -164,7 +164,7 @@ impl ProjectToolService for ProjectToolServiceImpl {
                     new_snapshot_id: Uuid::now_v7().to_string(),
                     classification: Some(ProtoClassification {
                         risk_level: classification.risk_level as i32,
-                        reason_codes: classification.reason_codes.iter().map(|r| *r as i32).collect(),
+                        reason_codes: classification.reason_codes.iter().map(|r| r.as_str().to_string()).collect(),
                         requires_approval: classification.requires_approval,
                     }),
                 },

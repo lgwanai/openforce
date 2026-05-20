@@ -1,4 +1,5 @@
 use std::sync::Arc;
+use tokio::sync::Mutex;
 use tonic::{Request, Response, Status};
 use uuid::Uuid;
 use openforce_proto::swarmos::v1::{
@@ -23,12 +24,35 @@ pub struct SchedulerService {
     pub session_store_addr: String,
     pub instance_id: String,
     pub token_issuer: Option<Arc<CapabilityTokenIssuer>>,
+    /// Reused gRPC connection — established once, shared across requests.
+    client: Arc<Mutex<Option<SessionStoreClient<tonic::transport::Channel>>>>,
 }
 
 impl SchedulerService {
+    pub fn new(session_store_addr: String, instance_id: String, token_issuer: Option<Arc<CapabilityTokenIssuer>>) -> Self {
+        Self {
+            session_store_addr,
+            instance_id,
+            token_issuer,
+            client: Arc::new(Mutex::new(None)),
+        }
+    }
+
+    /// Get or lazily create a persistent gRPC client connection.
+    async fn get_client(&self) -> Result<SessionStoreClient<tonic::transport::Channel>, Status> {
+        let mut guard = self.client.lock().await;
+        if guard.is_none() {
+            let addr = format!("http://{}", self.session_store_addr);
+            let client = SessionStoreClient::connect(addr).await
+                .map_err(|e| Status::unavailable(format!("session store connect: {e}")))?;
+            *guard = Some(client);
+        }
+        // Clone the client — tonic Channel is multiplexed and cheap to clone
+        Ok(guard.as_ref().unwrap().clone())
+    }
+
     async fn delegate_command(&self, cmd: ProtoCommand) -> Result<ExecuteCommandResponse, Status> {
-        let mut client = SessionStoreClient::connect(format!("http://{}", self.session_store_addr))
-            .await.map_err(|e| Status::unavailable(format!("session store: {e}")))?;
+        let mut client = self.get_client().await?;
         client.execute_command(ExecuteCommandRequest { command: Some(cmd) })
             .await.map(|r| r.into_inner())
             .map_err(|e| Status::internal(format!("execute: {e}")))
@@ -65,11 +89,11 @@ impl SchedulerTrait for SchedulerService {
                 tenant_id, session_id, task_id, task_attempt,
                 lease_id, fencing_token, plan_epoch,
                 vec![
-                    openforce_domain::token::TokenScope::ArtifactSubmit,
-                    openforce_domain::token::TokenScope::PatchSubmit,
-                    openforce_domain::token::TokenScope::FindingSubmit,
-                    openforce_domain::token::TokenScope::EffectRequest,
-                    openforce_domain::token::TokenScope::HeartbeatWrite,
+                    openforce_domain::token::TokenScope::artifact_submit(),
+                    openforce_domain::token::TokenScope::patch_submit(),
+                    openforce_domain::token::TokenScope::finding_submit(),
+                    openforce_domain::token::TokenScope::effect_request(),
+                    openforce_domain::token::TokenScope::heartbeat_write(),
                 ],
             ).unwrap_or_default(),
             None => String::new(),
@@ -149,7 +173,34 @@ impl SchedulerTrait for SchedulerService {
     }
 
     async fn send_heartbeat(&self, r: Request<SendHeartbeatRequest>) -> Result<Response<SendHeartbeatResponse>, Status> {
-        let _req = r.into_inner();
-        Ok(Response::new(SendHeartbeatResponse { lease_expire_at: None, lease_valid: true }))
+        let req = r.into_inner();
+        let lease_id = req.lease_id;
+        let session_id = req.session_id;
+        let task_id = req.task_id;
+
+        // Delegate heartbeat to session-store which verifies the lease is active
+        let cmd = ProtoCommand {
+            command_id: Uuid::now_v7().to_string(),
+            command_type: "RenewLease".into(),
+            tenant_id: Uuid::nil().to_string(),
+            session_id,
+            task_id,
+            expected_version: 0,
+            ..Default::default()
+        };
+
+        match self.delegate_command(cmd).await {
+            Ok(_) => Ok(Response::new(SendHeartbeatResponse {
+                lease_valid: true,
+                lease_expire_at: None,
+            })),
+            Err(e) => {
+                tracing::warn!("heartbeat rejected: {e}");
+                Ok(Response::new(SendHeartbeatResponse {
+                    lease_valid: false,
+                    lease_expire_at: None,
+                }))
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ use openforce_proto::swarmos::v1::{
     RequestEffectRequest, RequestEffectResponse,
     GetEffectRequest, GetEffectResponse,
     ApproveEffectRequest, ApproveEffectResponse,
+    RejectEffectRequest, RejectEffectResponse,
 };
 use crate::store::EffectStore;
 
@@ -39,5 +40,12 @@ impl EffectGatewayTrait for EffectGatewayService {
         let eid = Uuid::parse_str(&req.effect_id).map_err(|_| Status::invalid_argument("invalid effect_id"))?;
         let status = self.store.approve_effect(eid, &req.approved_by).await.map_err(|e| Status::internal(e.to_string()))?;
         Ok(Response::new(ApproveEffectResponse { effect_id: eid.to_string(), status: status.as_str().into() }))
+    }
+
+    async fn reject_effect(&self, r: Request<RejectEffectRequest>) -> Result<Response<RejectEffectResponse>, Status> {
+        let req = r.into_inner();
+        let eid = Uuid::parse_str(&req.effect_id).map_err(|_| Status::invalid_argument("invalid effect_id"))?;
+        let status = self.store.reject_effect(eid, &req.rejected_by, &req.reason).await.map_err(|e| Status::internal(e.to_string()))?;
+        Ok(Response::new(RejectEffectResponse { effect_id: eid.to_string(), status: status.as_str().into() }))
     }
 }

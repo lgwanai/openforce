@@ -43,7 +43,7 @@ impl PatchClassifier {
         // PCR-001: Cross-scope write detection
         for path in target_paths {
             if !Self::path_in_scope(path, allowed_write_paths) && !allowed_write_paths.is_empty() {
-                reasons.push(PatchReasonCode::CrossScopeWrite);
+                reasons.push(PatchReasonCode::cross_scope_write());
                 break;
             }
         }
@@ -51,54 +51,54 @@ impl PatchClassifier {
         // PCR-002: Forbidden path touches
         for path in target_paths {
             if Self::path_matches_any(path, forbidden_paths) {
-                reasons.push(PatchReasonCode::CrossScopeWrite);
-                return PatchClassification::rejected(PatchReasonCode::CrossScopeWrite);
+                reasons.push(PatchReasonCode::cross_scope_write());
+                return PatchClassification::rejected(PatchReasonCode::cross_scope_write());
             }
         }
 
         // PCR-003: Delete equivalent (mass removal)
         if files_deleted > 0 || (lines_removed > 0 && lines_added == 0) {
-            reasons.push(PatchReasonCode::DeleteEquivalentPatch);
+            reasons.push(PatchReasonCode::delete_equivalent_patch());
         }
 
         // PCR-004: Batch delete detection
         if files_deleted >= 3 {
-            reasons.push(PatchReasonCode::BatchDelete);
+            reasons.push(PatchReasonCode::batch_delete());
         }
 
         // PCR-005: Touches sensitive areas
         for path in target_paths {
             if self.is_sensitive_path(path) {
-                reasons.push(PatchReasonCode::TouchesProdConfig);
+                reasons.push(PatchReasonCode::touches_prod_config());
                 break;
             }
         }
 
         // PCR-006: File truncation (lots of removal, no adds)
         if lines_removed > 50 && lines_added == 0 {
-            reasons.push(PatchReasonCode::FileTruncation);
+            reasons.push(PatchReasonCode::file_truncation());
         }
 
         // PCR-007: Touches auth/migration
         for path in target_paths {
             if path.contains("auth/") || path.contains("authenticate") {
-                reasons.push(PatchReasonCode::TouchesAuthLogic);
+                reasons.push(PatchReasonCode::touches_auth_logic());
             }
             if path.contains("migration") || path.contains("migrate") {
-                reasons.push(PatchReasonCode::TouchesMigration);
+                reasons.push(PatchReasonCode::touches_migration());
             }
         }
 
         // PCR-008: Core route modification
         for path in target_paths {
             if path.contains("route") || path.contains("router") {
-                reasons.push(PatchReasonCode::TouchesCoreRoute);
+                reasons.push(PatchReasonCode::touches_core_route());
             }
         }
 
         // PCR-009: Rename with wide impact (proxied by file count)
         if target_paths.len() >= 5 {
-            reasons.push(PatchReasonCode::RenameWithWideImpact);
+            reasons.push(PatchReasonCode::rename_with_wide_impact());
         }
 
         // Determine overall risk level
@@ -107,23 +107,23 @@ impl PatchClassifier {
     }
 
     fn determine_risk(reasons: &[PatchReasonCode]) -> PatchRiskLevel {
-        let has_reject = reasons.iter().any(|r| matches!(r, PatchReasonCode::CrossScopeWrite));
+        let has_reject = reasons.iter().any(|r| *r == PatchReasonCode::cross_scope_write());
         if has_reject { return PatchRiskLevel::Reject; }
 
-        let has_sensitive = reasons.iter().any(|r| matches!(r,
-            PatchReasonCode::DeleteEquivalentPatch
-            | PatchReasonCode::TouchesAuthLogic
-            | PatchReasonCode::TouchesMigration
-            | PatchReasonCode::BatchDelete
-            | PatchReasonCode::TouchesProdConfig
-        ));
+        let has_sensitive = reasons.iter().any(|r|
+            *r == PatchReasonCode::delete_equivalent_patch()
+            || *r == PatchReasonCode::touches_auth_logic()
+            || *r == PatchReasonCode::touches_migration()
+            || *r == PatchReasonCode::batch_delete()
+            || *r == PatchReasonCode::touches_prod_config()
+        );
         if has_sensitive { return PatchRiskLevel::Sensitive; }
 
-        let has_moderate = reasons.iter().any(|r| matches!(r,
-            PatchReasonCode::TouchesCoreRoute
-            | PatchReasonCode::FileTruncation
-            | PatchReasonCode::RenameWithWideImpact
-        ));
+        let has_moderate = reasons.iter().any(|r|
+            *r == PatchReasonCode::touches_core_route()
+            || *r == PatchReasonCode::file_truncation()
+            || *r == PatchReasonCode::rename_with_wide_impact()
+        );
         if has_moderate { return PatchRiskLevel::Moderate; }
 
         PatchRiskLevel::Safe
@@ -171,7 +171,7 @@ mod tests {
             &[], &[], &[], 100, 0, 0,
         );
         assert_eq!(result.risk_level, PatchRiskLevel::Sensitive);
-        assert!(result.reason_codes.contains(&PatchReasonCode::DeleteEquivalentPatch));
+        assert!(result.reason_codes.contains(&PatchReasonCode::delete_equivalent_patch()));
     }
 
     #[test]
@@ -182,7 +182,7 @@ mod tests {
             &[], &[], &[], 5, 10, 0,
         );
         assert_eq!(result.risk_level, PatchRiskLevel::Sensitive);
-        assert!(result.reason_codes.contains(&PatchReasonCode::TouchesAuthLogic));
+        assert!(result.reason_codes.contains(&PatchReasonCode::touches_auth_logic()));
     }
 
     #[test]

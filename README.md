@@ -313,13 +313,39 @@ session:{id}:instructions     List — 原始用户指令历史
 | 创建/解决 Gate | ✗ | ✓ | ✗ |
 | 终止 Worker | ✗ | ✓ | ✓ |
 
-**Worker 上下文注入**：每个 Worker 启动时收到 Session Map（目录，非全文），可通过查询工具按需获取：
-- `get_planner_output()` — Planner 完整分解
-- `get_worker_output(id)` — 其他 Worker 的输出
-- `get_artifact(id)` — Artifact 位置 + 元数据
-- `search_session(query)` — 全文搜索 Session 数据
+**Worker Agent Memory 三层上下文模型**：
 
-**Worker 专家工作流**：接收任务 → Phase 0 分解 subtasks + 定义验收标准 → Phase 1 TaskManager 追踪逐个完成 → Phase 2 逐条验证验收标准 → PASS/FAIL。
+Worker 是自主 Agent，动态管理自己的上下文，而非被动接收 dump：
+
+```
+LAYER 1: IDENTITY (tiny, always)     LAYER 2: WORKING MEMORY (compact)    LAYER 3: ACTIVE FOCUS (on-demand)
+  - Role                              - Completed subtask summaries        - Current file content
+  - Goal                              - Recent decisions (last 5)          - Previous cycle analysis
+  - Acceptance Criteria               - Key findings (top 5)
+```
+
+- **READ on demand**：Worker 收到文件路径列表（不含内容），按需 `READ: <path>` 读取
+- **Context 压缩**：Token 超 700K 时自动合并旧决策为摘要，不硬截断
+- **Agent 自主决策**：Worker 自己决定读哪个文件、何时标记 DONE、何时 ALL_DONE
+
+**Worker 故障恢复**：
+- 卡住（stalled）→ 返回原因 → Scheduler 收集失败信息 → Planner 分析根因 → 重新分解 → 启动新 Worker
+- 超时（timeout）→ 记录已完成子任务 → 标记为 TIMEOUT
+- 非正常退出率 >40% 时触发 re-plan 流程
+
+**Worker 专家工作流**：接收任务 → Phase 0 分解 subtasks + 定义验收标准 → Phase 1 Agent Loop（READ → 分析 → DONE）→ Phase 2 逐条验证验收标准 → PASS/FAIL/STALLED。
+
+### RoundTable 渐进式披露 + SkillRunner
+
+Planner 使用 3 agents × 3 rounds 的 RoundTable 机制进行 MECE-validated 分解：
+- Round 1：交互/数据/实施三维度独立提案
+- Round 2：交叉审查，检测 MECE 缺陷
+- Round 3：最终合成，输出 SMART 目标 + 子任务列表
+
+SkillRunner 实现渐进式披露：
+1. 扫描 `skills/*/SKILL.md` → 只提取 frontmatter（name, description）
+2. 注入 Planner prompt → LLM 决定是否需要
+3. 需要时才加载完整 SKILL.md body（按需执行工具调用）
 
 ### 智能任务理解（语义分类，非关键词匹配）
 
@@ -409,6 +435,26 @@ Claude Code 是优秀的单智能体编程助手，但受限于单进程架构�
 | 文档生成 | `"生成 API 文档"` | doc_writer × 3 | 并行 |
 | Go 微服务 | `"Go gRPC 用户服务"` | api_designer → go_developer → test_engineer | 链式 |
 | K8s 部署 | `"部署到 K8s"` | devops_engineer → k8s_operator → security_auditor | 链式 |
+
+### LLM 配置
+
+统一使用 `API_KEY` 环境变量，provider 区分供应商：
+
+```toml
+[llm]
+provider = "anthropic"                           # 或 "openai"
+api_base = "https://api.deepseek.com/anthropic"  # 自定义 endpoint
+
+[planner]
+provider = "anthropic"
+model = "deepseek-v4-flash"
+
+[workers.default]
+provider = "anthropic"
+model = "deepseek-v4-flash"
+```
+
+每个 Worker profile 可使用独立 provider + model，不再限制为单一供应商。
 
 ### 关键指标
 
@@ -512,8 +558,14 @@ openforce sessions                       # 列出活动 Session
 openforce continue --interactive         # REPL 模式
 openforce cancel <session-id>            # 取消 Session
 
-# TUI 监控
-cargo run -p openforce-tui-dashboard
+# TUI 管理端
+cargo run -p openforce-tui-dashboard         # 启动 TUI
+
+# TUI 功能：
+# - 实时查看 Agent 状态和任务分解过程
+# - 发布指令（status / session / lease / cancel / plan）
+# - 确认权限（approve / reject 审批 requests）
+# - 3 秒自动刷新，Tab 切换面板
 ```
 
 ## 技术栈

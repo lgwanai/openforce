@@ -10,7 +10,14 @@ pub struct Evaluator {
 
 impl Default for Evaluator {
     fn default() -> Self {
-        Self { latency_p50_threshold_ms: 5000.0, latency_p95_threshold_ms: 30000.0, success_rate_threshold: 0.95 }
+        Self {
+            latency_p50_threshold_ms: std::env::var("EVAL_P50_THRESHOLD_MS")
+                .ok().and_then(|v| v.parse().ok()).unwrap_or(5000.0),
+            latency_p95_threshold_ms: std::env::var("EVAL_P95_THRESHOLD_MS")
+                .ok().and_then(|v| v.parse().ok()).unwrap_or(30000.0),
+            success_rate_threshold: std::env::var("EVAL_SUCCESS_RATE_THRESHOLD")
+                .ok().and_then(|v| v.parse().ok()).unwrap_or(0.95),
+        }
     }
 }
 

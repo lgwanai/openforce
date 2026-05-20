@@ -11,7 +11,12 @@ impl GateHandler {
     }
 
     fn print_summary(gate: &ConfirmationGate, ok: usize, total: usize) {
-        let name = match gate.phase { SessionPhase::ConfirmDesign => "Design", SessionPhase::ConfirmDev => "Development", SessionPhase::ConfirmFinal => "Final", _ => "" };
+        let name = match &gate.phase {
+            p if *p == SessionPhase::confirm_design() => "Design",
+            p if *p == SessionPhase::confirm_dev() => "Development",
+            p if *p == SessionPhase::confirm_final() => "Final",
+            _ => gate.phase.as_str(),
+        };
         println!("\n  [Gate: {name}] {}/{} tasks OK.", ok, total);
     }
 

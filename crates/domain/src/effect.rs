@@ -1,30 +1,35 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-/// Effect types that must go through Effect Gateway (architecture doc section 7)
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub enum EffectType {
-    Deploy,
-    Migration,
-    Notification,
-    Webhook,
-    IamChange,
-    BillingResource,
-    DataDelete,
-}
+/// Effect type — now a string-based type so that platform operators can register
+/// custom effect types beyond the built-in set.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct EffectType(String);
 
 impl EffectType {
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            Self::Deploy => "deploy",
-            Self::Migration => "migration",
-            Self::Notification => "notification",
-            Self::Webhook => "webhook",
-            Self::IamChange => "iam_change",
-            Self::BillingResource => "billing_resource",
-            Self::DataDelete => "data_delete",
-        }
-    }
+    // Built-in effect types (architecture doc section 7)
+    pub fn deploy() -> Self { Self("deploy".into()) }
+    pub fn migration() -> Self { Self("migration".into()) }
+    pub fn notification() -> Self { Self("notification".into()) }
+    pub fn webhook() -> Self { Self("webhook".into()) }
+    pub fn iam_change() -> Self { Self("iam_change".into()) }
+    pub fn billing_resource() -> Self { Self("billing_resource".into()) }
+    pub fn data_delete() -> Self { Self("data_delete".into()) }
+
+    /// Create a custom effect type from any string
+    pub fn custom(name: &str) -> Self { Self(name.to_lowercase()) }
+
+    pub fn as_str(&self) -> &str { &self.0 }
+
+    pub fn from_str(s: &str) -> Option<Self> { Some(Self(s.into())) }
+}
+
+impl Default for EffectType {
+    fn default() -> Self { Self::deploy() }
+}
+
+impl std::fmt::Display for EffectType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { write!(f, "{}", self.0) }
 }
 
 /// Unique effect identifier

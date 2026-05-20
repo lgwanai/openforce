@@ -143,9 +143,9 @@ impl CmdHandler {
         let tid = cmd.task_id.ok_or(DomainError::ValidationFailed { detail: "task_id required".into() })?;
         let t = ProjectionRepo::get_task(pool, cmd.session_id, tid).await?;
         t.verify_submissible()?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
+        let fencing_token = cmd.payload.get("fencing_token").and_then(|v| v.as_u64())
+            .ok_or(DomainError::ValidationFailed { detail: "fencing_token required in payload".into() })?;
+        t.verify_fencing(fencing_token)?;
         let evt = EventEnvelope::new("ArtifactSubmitted", cmd.session_id, cmd.tenant_id,
             cmd.requested_by.clone(),
             EventPayload::ArtifactSubmitted(openforce_domain::event::ArtifactSubmittedPayload {
@@ -163,9 +163,9 @@ impl CmdHandler {
         let tid = cmd.task_id.ok_or(DomainError::ValidationFailed { detail: "task_id required".into() })?;
         let t = ProjectionRepo::get_task(pool, cmd.session_id, tid).await?;
         t.verify_submissible()?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
+        let fencing_token = cmd.payload.get("fencing_token").and_then(|v| v.as_u64())
+            .ok_or(DomainError::ValidationFailed { detail: "fencing_token required in payload".into() })?;
+        t.verify_fencing(fencing_token)?;
         let evt = EventEnvelope::new("PatchSubmitted", cmd.session_id, cmd.tenant_id,
             cmd.requested_by.clone(),
             EventPayload::PatchSubmitted(openforce_domain::event::PatchSubmittedPayload {
@@ -181,9 +181,9 @@ impl CmdHandler {
         let tid = cmd.task_id.ok_or(DomainError::ValidationFailed { detail: "task_id required".into() })?;
         let t = ProjectionRepo::get_task(pool, cmd.session_id, tid).await?;
         t.verify_submissible()?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
-        t.verify_fencing(t.current_fencing_token)?;
+        let fencing_token = cmd.payload.get("fencing_token").and_then(|v| v.as_u64())
+            .ok_or(DomainError::ValidationFailed { detail: "fencing_token required in payload".into() })?;
+        t.verify_fencing(fencing_token)?;
         let evt = EventEnvelope::new("FindingSubmitted", cmd.session_id, cmd.tenant_id,
             cmd.requested_by.clone(),
             EventPayload::FindingSubmitted(openforce_domain::event::FindingSubmittedPayload {
