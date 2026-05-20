@@ -485,7 +485,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let s = if *success { "OK" } else { "FAIL" };
         println!("Worker-{idx} [{pf}] [{s}]:");
         report.push_str(&format!("\n## Worker-{idx} [{pf}]\n"));
-        for line in text.lines().take(60) { println!("  {line}"); report.push_str(line); report.push('\n'); }
+        for line in text.lines() { println!("  {line}"); report.push_str(line); report.push('\n'); }
         report.push('\n'); println!();
     }
 
@@ -496,7 +496,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let failed_summary: String = results.iter()
             .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
             .map(|(i, pf, _, action, text)| {
-                format!("Worker-{i} [{pf}] {action}: {}", text.chars().take(100).collect::<String>())
+                format!("Worker-{i} [{pf}] {action}: {}", text.to_string())
             })
             .collect::<Vec<_>>().join(" | ");
         println!("  Reason: {failed_summary}");
@@ -514,7 +514,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             "roles": classification.suggested_roles,
             "workers": ok, "total": results.len(),
             "decomposition": results.iter().map(|(i,p,s,_a,t)| serde_json::json!({
-                "id":i,"profile":p,"success":s,"summary":t.chars().take(300).collect::<String>()
+                "id":i,"profile":p,"success":s,"summary":t.chars().take(500).collect::<String>()
             })).collect::<Vec<_>>()
         });
         let ep = format!("experts/experience/session_{}.json", uuid::Uuid::now_v7().to_string().chars().take(8).collect::<String>());
@@ -545,7 +545,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                             subtasks: vec![],
                             acceptance_criteria: vec![],
                             progress: if *success { "done" } else { "failed" }.into(),
-                            inputs: vec![], outputs: vec![text.chars().take(500).collect()],
+                            inputs: vec![], outputs: vec![text.to_string()],
                             intermediate_artifacts: vec![],
                             created_at: chrono::Utc::now(), updated_at: chrono::Utc::now(),
                         },
@@ -567,7 +567,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 worker_id: format!("worker-{i}"),
                 role: pf.clone(),
                 status: if *success { "ok".into() } else { "failed".into() },
-                output: text.chars().take(500).collect(),
+                output: text.to_string(),
             }).collect(),
             plan_epoch: sess.plan_epoch,
         });

@@ -57,7 +57,7 @@ impl AgentMemory {
             };
             ctx.push_str(&format!("  [{icon}] {}. {}\n", t.id, t.description));
             if !t.output.is_empty() {
-                ctx.push_str(&format!("       → {}\n", t.output.chars().take(120).collect::<String>()));
+                ctx.push_str(&format!("       → {}\n", t.output));
             }
         }
         let done = self.subtasks.iter().filter(|t| t.status == "done").count();
@@ -122,7 +122,7 @@ impl AgentMemory {
     }
 
     fn add_finding(&mut self, finding: &str) {
-        let summary: String = finding.chars().take(200).collect();
+        let summary: String = finding.to_string();
         if !self.key_findings.contains(&summary) {
             self.key_findings.push(summary);
         }
@@ -319,8 +319,7 @@ async fn main() -> Result<()> {
             // Force conclusion — build fresh context including active file
             let mut force_ctx = memory.build_context();
             if let Some((ref path, ref content)) = active_file_content {
-                let truncated: String = content.chars().take(8000).collect();
-                force_ctx.push_str(&format!("\n── READING: {path} ──\n{truncated}\n"));
+                force_ctx.push_str(&format!("\n── READING: {path} ──\n{content}\n"));
             }
             let force_prompt = format!(
                 "{force_ctx}\n\n── FORCE CONCLUSION ──\n\
@@ -337,7 +336,7 @@ async fn main() -> Result<()> {
                     if t.to_uppercase().starts_with("DONE") {
                         let forced_id = {
                             let st = memory.subtasks.iter_mut().find(|s| s.status == "in_progress");
-                            st.map(|s| { s.status = "done".into(); s.output = t.chars().take(300).collect(); s.id })
+                            st.map(|s| { s.status = "done".into(); s.output = t.to_string(); s.id })
                         };
                         if let Some(fid) = forced_id {
                             memory.add_decision(cycles, "FORCED_DONE", &format!("Task {} completed after stall", fid));
@@ -348,7 +347,7 @@ async fn main() -> Result<()> {
                     } else if t.to_uppercase().starts_with("STALLED") {
                         let out = serde_json::json!({
                             "success": false, "action": "stalled", "reason": "agent_declared_stalled",
-                            "detail": t.chars().take(3000).collect::<String>(),
+                            "detail": t.to_string(),
                             "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
                         });
                         write_output(&task, &out);
@@ -374,8 +373,7 @@ async fn main() -> Result<()> {
 
         // Add active file content if any
         if let Some((ref path, ref content)) = active_file_content {
-            let truncated: String = content.chars().take(8000).collect();
-            ctx.push_str(&format!("\n── READING: {path} ──\n{truncated}\n"));
+            ctx.push_str(&format!("\n── READING: {path} ──\n{content}\n"));
         }
 
         let execute_prompt = format!(
@@ -401,7 +399,7 @@ async fn main() -> Result<()> {
                 if upper.starts_with("DONE ") || upper.starts_with("DONE:") {
                     let rest = last_line.strip_prefix("DONE ").or(last_line.strip_prefix("DONE:")).unwrap_or("");
                     let task_id = rest.trim().split(|c: char| c == ':' || c == ' ').next().and_then(|s| s.parse::<usize>().ok()).unwrap_or(0);
-                    let result = rest.trim().splitn(2, |c: char| c == ':' || c == ' ').nth(1).map(|s| s.trim().to_string()).unwrap_or_else(|| body.chars().rev().take(200).collect::<String>().chars().rev().collect());
+                    let result = rest.trim().splitn(2, |c: char| c == ':' || c == ' ').nth(1).map(|s| s.trim().to_string()).unwrap_or_else(|| body.to_string());
                     if let Some(st) = memory.subtasks.iter_mut().find(|s| s.id == task_id) {
                         st.status = "done".into();
                         st.output = result.clone();
@@ -409,7 +407,7 @@ async fn main() -> Result<()> {
                         st.status = "done".into();
                         st.output = result.clone();
                     }
-                    memory.add_decision(cycles, "DONE", &format!("Task {}: {}", task_id, result.chars().take(100).collect::<String>()));
+                    memory.add_decision(cycles, "DONE", &format!("Task {}: {}", task_id, result));
                     eprintln!("  [✓] Task {task_id} done");
                     last_progress = memory.subtasks.iter().filter(|t| t.status == "done").count();
                     active_file_content = None; // Clear file focus after completing a task
@@ -455,7 +453,7 @@ async fn main() -> Result<()> {
                                 st.map(|s| { s.status = "done".into(); s.output = rest.to_string(); s.id })
                             };
                             if let Some(did) = done_id {
-                                let summary: String = rest.chars().take(100).collect();
+                                let summary: String = rest.to_string();
                                 memory.add_decision(cycles, "DONE", &format!("Task {did}: {summary}"));
                                 eprintln!("  [✓] Task {did} done (from body)");
                                 last_progress = memory.subtasks.iter().filter(|t| t.status == "done").count();
@@ -466,11 +464,11 @@ async fn main() -> Result<()> {
                     }
                     if !handled {
                         // LLM wrote analysis without action — treat as working
-                        let excerpt: String = t.chars().take(500).collect();
+                        let excerpt: String = t.to_string();
                         memory.add_decision(cycles, "ANALYSIS", &excerpt);
                         // Auto-extract findings from analysis text
                         if t.len() > 300 {
-                            memory.add_finding(&t.chars().take(200).collect::<String>());
+                            memory.add_finding(t);
                         }
                         eprintln!("  [~] Analysis ({} chars)", t.len());
                     }
@@ -502,7 +500,7 @@ async fn main() -> Result<()> {
     match client.chat(&system, &verify_prompt).await {
         Ok((text, _)) => {
             let passed = text.to_uppercase().contains("FINAL: PASS");
-            let summary = if text.len() > 15000 { format!("{}...", &text[..15000]) } else { text.clone() };
+            let summary = text.clone();
             let done_count = memory.subtasks.iter().filter(|t| t.status == "done").count();
             let out = serde_json::json!({
                 "success": passed,
