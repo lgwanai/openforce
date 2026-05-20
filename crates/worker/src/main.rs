@@ -246,7 +246,6 @@ async fn main() -> Result<()> {
         }).collect())
         .unwrap_or_else(|| vec![SubTask { id: 1, description: task.subtask.clone(), status: "pending".into(), output: String::new() }]);
 
-    let state_file = format!("/tmp/worker_state_{}.json", uuid::Uuid::now_v7().simple().to_string().chars().take(8).collect::<String>());
     let mut memory = AgentMemory {
         role: task.profile_name.clone(),
         goal: format!("{}: {}", task.task, task.subtask),
@@ -474,7 +473,7 @@ async fn main() -> Result<()> {
                     }
                 }
 
-                fs::write(&state_file, serde_json::to_string_pretty(&memory).unwrap_or_default())?;
+                // Agent memory persisted to output JSON at completion
             }
             Err(e) => {
                 eprintln!("[LLM error cycle {cycles}]: {e}");

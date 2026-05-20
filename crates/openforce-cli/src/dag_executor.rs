@@ -40,8 +40,8 @@ pub fn compute_waves(tasks: &[DagTask]) -> Vec<Vec<usize>> {
 }
 
 /// Build DAG tasks from RoundTable output, using explicit dependencies when available.
-pub fn infer_dependencies(tasks: &[(String, String, String, Vec<String>)]) -> Vec<DagTask> {
-    tasks.iter().enumerate().map(|(i, (role, title, desc, deps))| {
+pub fn infer_dependencies(tasks: &[(String, String, String, Vec<String>, Vec<String>)]) -> Vec<DagTask> {
+    tasks.iter().enumerate().map(|(i, (role, title, desc, deps, _files))| {
         DagTask {
             id: format!("task-{}", i+1),
             role: role.clone(),
@@ -52,7 +52,7 @@ pub fn infer_dependencies(tasks: &[(String, String, String, Vec<String>)]) -> Ve
                 let dl = desc.to_lowercase();
                 let kw = ["验证", "测试", "test", "verify", "合并", "综合", "覆盖", "最终"];
                 if i > 0 && kw.iter().any(|k| dl.contains(k)) {
-                    tasks[..i].iter().map(|(_, t, _, _)| t.clone()).collect()
+                    tasks[..i].iter().map(|(_, t, _, _, _)| t.clone()).collect()
                 } else { vec![] }
             } else { deps.clone() },
         }

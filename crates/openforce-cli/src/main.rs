@@ -257,7 +257,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     // ── Planner RoundTable: MECE-validated task decomposition ──
     println!("[Planner] RoundTable: 3 agents × 3 rounds...");
-    let mut subtasks: Vec<(String, String, String, Vec<String>)> = vec![]; // (role, title, desc, dependencies)
+    let mut subtasks: Vec<(String, String, String, Vec<String>, Vec<String>)> = vec![]; // (role, title, desc, dependencies, files)
 
     match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles, &dir_summary).await {
         Ok(tree) => {
@@ -274,7 +274,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 } else {
                     format!("{} | 验收: {}", t.objective, t.acceptance_criteria.first().unwrap_or(&String::new()))
                 };
-                subtasks.push((t.role.clone(), t.title.clone(), desc, t.dependencies.clone()));
+                subtasks.push((t.role.clone(), t.title.clone(), desc, t.dependencies.clone(), t.files.clone()));
             }
         }
         Err(e) => {
@@ -295,7 +295,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                             let role = stripped[1..idx].to_string();
                             let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
                             if !role.is_empty() && !desc.is_empty() {
-                                subtasks.push((role, desc, String::new(), vec![]));
+                                subtasks.push((role, desc, String::new(), vec![], vec![]));
                             }
                         }
                     }
@@ -308,13 +308,13 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
         for (i, role) in classification.suggested_roles.iter().enumerate() {
             let desc = if i == 0 { task.clone() } else { format!("{task} (independent verification)") };
-            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new(), vec![]));
+            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new(), vec![], vec![]));
         }
     }
 
     let mut ri = 0usize;
     println!("\n  Workers:");
-    for (pf, name, _, _) in &subtasks {
+    for (pf, name, _, _, _) in &subtasks {
         let ef = if pf == "default" && ri < classification.suggested_roles.len() {
             let r = classification.suggested_roles[ri].clone(); ri += 1; r
         } else if pf == "default" && ri < matched_profiles.len() {
@@ -353,7 +353,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let mut wave_handles = vec![];
 
         for &task_idx in wave {
-            let (pn, name, _desc, _deps) = &subtasks[task_idx];
+            let (pn, name, _desc, _deps, rt_files) = &subtasks[task_idx];
             let i = task_idx;
             let (provider, model, sp) = if let Some(kp) = kb.profiles.get(pn) {
                 ("openai".to_string(), kp.default_model.clone(), kp.system_prompt.clone())
@@ -371,25 +371,34 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_id = session.as_ref().map(|s| s.session_id.to_string());
         let session_id_c = session_id.clone();
 
-        // Assign specific files/directories by matching task description keywords against crate names
-        let task_lower = task.to_lowercase();
-        let name_lower = name.to_lowercase();
-        let review_paths: Vec<String> = by_dir.iter()
-            .filter(|(k,_)| {
-                let k_lower = k.to_lowercase();
-                name_lower.contains(&k_lower) || k_lower.split('/').any(|seg| name_lower.contains(seg))
-                    || task_lower.contains(&k_lower)
-            })
-            .flat_map(|(d, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
-            .take(50)
-            .collect();
-        // If still no matches, use all source files up to limit
-        let review_paths: Vec<String> = if review_paths.is_empty() {
-            by_dir.iter()
+        // Use RoundTable's file list if provided, otherwise keyword match
+        let review_paths: Vec<String> = if !rt_files.is_empty() {
+            rt_files.iter().map(|f| {
+                let p = std::path::Path::new(f);
+                if p.is_absolute() { f.clone() }
+                else { workspace_c.join(f).display().to_string() }
+            }).collect()
+        } else {
+            // Fallback: keyword matching
+            let task_lower = task.to_lowercase();
+            let name_lower = name.to_lowercase();
+            let mut paths: Vec<String> = by_dir.iter()
+                .filter(|(k,_)| {
+                    let k_lower = k.to_lowercase();
+                    name_lower.contains(&k_lower) || k_lower.split('/').any(|seg| name_lower.contains(seg))
+                        || task_lower.contains(&k_lower)
+                })
                 .flat_map(|(_, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
                 .take(50)
-                .collect()
-        } else { review_paths };
+                .collect();
+            if paths.is_empty() {
+                paths = by_dir.iter()
+                    .flat_map(|(_, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
+                    .take(50)
+                    .collect();
+            }
+            paths
+        };
         let review_paths_c = review_paths.clone();
 
         // Build session map for worker context
@@ -529,7 +538,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 // Save planner decomposition
                 let _ = store.set_planner(&sess.session_id,
                     &format!("{:?}", classification.categories),
-                    &subtasks.iter().map(|(r,n,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
+                    &subtasks.iter().map(|(r,n,_,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
                     &classification.suggested_roles,
                 ).await;
                 // Save worker snapshots
