@@ -348,7 +348,7 @@ async fn main() -> Result<()> {
                     } else if t.to_uppercase().starts_with("STALLED") {
                         let out = serde_json::json!({
                             "success": false, "action": "stalled", "reason": "agent_declared_stalled",
-                            "detail": t.chars().take(500).collect::<String>(),
+                            "detail": t.chars().take(3000).collect::<String>(),
                             "subtasks_done": done_count, "subtasks_total": memory.subtasks.len(),
                         });
                         write_output(&task, &out);

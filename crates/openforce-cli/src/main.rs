@@ -485,7 +485,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let s = if *success { "OK" } else { "FAIL" };
         println!("Worker-{idx} [{pf}] [{s}]:");
         report.push_str(&format!("\n## Worker-{idx} [{pf}]\n"));
-        for line in text.lines().take(10) { println!("  {line}"); report.push_str(line); report.push('\n'); }
+        for line in text.lines().take(60) { println!("  {line}"); report.push_str(line); report.push('\n'); }
         report.push('\n'); println!();
     }
 
