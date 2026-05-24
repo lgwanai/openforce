@@ -469,7 +469,7 @@ async fn main() -> Result<()> {
         let criterion = criteria_list.get(st_idx).cloned().unwrap_or_else(|| "Complete".into());
         eprintln!("[Subtask {}/{}] {}", st_idx+1, subtask_count, truncate_str(&st_desc, 100));
 
-        let max_st = (max_cycles / subtask_count.max(1)).min(8);
+        let max_st = (max_cycles / subtask_count.max(1)).clamp(5, 20);
 
         for st_cycle in 0..max_st {
             cycles += 1;

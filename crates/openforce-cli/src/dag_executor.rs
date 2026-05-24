@@ -491,7 +491,7 @@ pub fn retry_delay(
     let max_ns = max_delay.as_nanos() as u64;
 
     // 2^attempt, saturating at u64::MAX to avoid overflow
-    let multiplier = 1u64.saturating_shl(attempt.min(63));
+    let multiplier = (1u64).checked_shl(attempt.min(63) as u32).unwrap_or(u64::MAX);
     let raw = base_ns.saturating_mul(multiplier);
     let clamped = raw.min(max_ns);
 

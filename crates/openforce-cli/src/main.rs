@@ -523,8 +523,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     else { println!("[Workers] In-process fallback"); }
 
     // Build DAG and compute execution waves
-    let dag_tasks = dag_executor::build_dag(&subtasks);
-    let plan = dag_executor::compute_waves(&dag_tasks);
+    let dag_tasks = dag_executor::build_dag(&subtasks, &Default::default(), None).unwrap_or_else(|e| {
+        eprintln!("[DAG] build_dag failed: {e:?} — empty DAG");
+        vec![]
+    });
+    let plan = dag_executor::compute_waves(&dag_tasks, &Default::default(), None).unwrap_or_else(|e| {
+        eprintln!("[DAG] compute_waves failed: {e:?} — falling back to single wave");
+        dag_executor::ExecutionPlan { waves: vec![(0..dag_tasks.len()).collect()], max_concurrent: 1 }
+    });
     let waves = &plan.waves;
     if waves.len() > 1 { println!("[DAG] {} waves (max concurrent: {}): {}", waves.len(), plan.max_concurrent, waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
 
@@ -548,6 +554,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let max_concurrent = plan.max_concurrent;
 
     let mut results: Vec<(usize,String,bool,String,String)> = vec![];
+    let mut failed_titles: std::collections::HashSet<String> = std::collections::HashSet::new();
     for (wave_num, wave) in waves.iter().enumerate() {
         if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers (max concurrent: {max_concurrent})", wave_num+1, waves.len(), wave.len()); }
         let mut wave_handles = vec![];
@@ -557,6 +564,15 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         for &task_idx in chunk {
             let bound_skill_for_task = bound_skill_for_worker.clone();
             let redis_url_c = redis_url.clone();
+            // ── Skip if upstream dependency failed ──
+            let deps_blocked = dag_tasks.get(task_idx).map(|dt| dt.depends_on.iter().any(|d| failed_titles.contains(d.as_str()))).unwrap_or(false);
+            if deps_blocked {
+                let (pn, name, _, _, _) = &subtasks[task_idx];
+                println!("  [DAG] task-{} '[{}] {}' BLOCKED — upstream failed", task_idx+1, pn, name);
+                results.push((task_idx+1, pn.clone(), false, "blocked".into(), "Upstream dependency failed".into()));
+                failed_titles.insert(name.clone()); // cascade: downstream-of-blocked also blocked
+                continue;
+            }
             // ── Resume: skip already-completed tasks ──
             if let Some(ref tl) = todo_list {
                 if let Some(item) = tl.items.get(task_idx) {
@@ -718,6 +734,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         // Wait for all workers in this chunk to complete (parallel within chunk)
         let chunk_results: Vec<(usize,String,bool,String,String)> = futures::future::join_all(wave_handles).await
             .into_iter().filter_map(|r| r.ok()).collect();
+        // Track failed task titles so downstream tasks get blocked
+        for (ri, _, success, _, _) in &chunk_results {
+            if !success {
+                if let Some((_, title, _, _, _)) = subtasks.get(ri.saturating_sub(1)) {
+                    failed_titles.insert(title.clone());
+                }
+            }
+        }
         results.extend(chunk_results);
         wave_handles = vec![]; // reset for next chunk
         } // end for chunk in wave.chunks
