@@ -481,13 +481,13 @@ async fn main() -> Result<()> {
 
             let ctx = build_context_string(&executor);
             let um = if st_cycle == 0 {
-                format!("{skill}TASK: {td}\nSUBTASK #{n}/{t}: {st}\nCRITERION: {crit}\n\nFiles ({fc}):\n{files}\n\nFulfill THIS subtask only. When done, self-verify against the criterion.\nPASS → respond: VERIFIED: <brief evidence>\nFAIL → respond: FAILED: <reason>",
+                format!("{skill}Goal: {role} — {goal}\nSUBTASK #{n}/{t}: {st}\nCRITERION: {crit}\n\nFiles ({fc}):\n{files}\n\nComplete this subtask. When done, verify against the criterion above.\nIf criterion is met → respond: VERIFIED\nIf not met → respond: FAILED: <reason>, then retry.",
                     skill=task.skill_metadata.as_deref().unwrap_or(""),
-                    td=task.subtask, n=st_idx+1, t=subtask_count, st=st_desc, crit=criterion,
+                    role=executor.memory.role, goal=executor.memory.goal, n=st_idx+1, t=subtask_count, st=st_desc, crit=criterion,
                     fc=executor.memory.files_available.len(),
                     files=executor.memory.files_available.iter().take(20).map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n"))
             } else {
-                format!("SUBTASK #{n}: {st}\nCriterion: {crit}\nRetry {rc}/{m}\nRespond VERIFIED or FAILED.",
+                format!("SUBTASK #{n}: {st}\nCriterion: {crit}\nRetry {rc}/{m}\nUse tools, fulfill the criterion, respond VERIFIED or FAILED.",
                     n=st_idx+1, st=st_desc, crit=criterion, rc=st_cycle+1, m=max_st)
             };
 
