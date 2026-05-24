@@ -12,8 +12,10 @@ mod repl;
 mod planner_roundtable;
 mod skill_runner;
 mod dag_executor;
+mod agent_registry;
 use session_manager::SessionManager;
 use repl::SessionRepl;
+use agent_registry::AgentRegistry;
 
 #[derive(Debug, Deserialize)]
 struct Config { llm: LlmConfig, planner: PlannerConfig, workers: WorkersConfig }
@@ -36,6 +38,26 @@ fn build_client(config: &Config, provider: &str, model: &str) -> LlmClient {
         "anthropic" => LlmClient::anthropic(api_key, api_base).with_model(model),
         _ => LlmClient::openai(api_key, api_base.unwrap_or("https://api.openai.com/v1".into()), model.to_string())
     }
+}
+
+/// Scan for [DONE:n] markers in worker output text.
+/// Returns Some(step_number) if found.
+fn scan_done_marker(line: &str) -> Option<usize> {
+    let t = line.trim();
+    if let Some(idx) = t.find("[DONE:") {
+        let rest = &t[idx + 6..];
+        if let Some(end) = rest.find(']') {
+            return rest[..end].parse::<usize>().ok();
+        }
+    }
+    // Also match [done:n] (lowercase) and [Done:n]
+    if let Some(idx) = t.to_lowercase().find("[done:") {
+        let rest = &t[idx + 6..];
+        if let Some(end) = rest.find(']') {
+            return rest[..end].parse::<usize>().ok();
+        }
+    }
+    None
 }
 
 fn truncate_at_char(s: &str, max_chars: usize) -> String {
@@ -64,7 +86,85 @@ async fn main() -> Result<()> {
 
     // Subcommand routing for multi-turn session support
     let subcmd = args[1].as_str();
+
+    // ── Slash Command: /skill:name <task> or /name <task> ──
+    // Semantically classifies the task FIRST, then injects skill as available tool.
+    // Skill body is loaded on-demand by Worker (progressive disclosure Level 2).
+    if subcmd.starts_with('/') {
+        let raw = subcmd.trim_start_matches('/');
+        let (skill_name, user_task): (String, String) = {
+            let mut parts = raw.splitn(2, |c: char| c == ' ' || c == ':');
+            let name = parts.next().unwrap_or(raw).to_string();
+            // Also collect remaining args (args[2..]) as part of the task
+            let from_split = parts.next().unwrap_or("").trim().to_string();
+            let from_args = args.get(2..).map(|a| a.join(" ")).unwrap_or_default();
+            let task = if from_args.is_empty() { from_split } else { from_args };
+            (name, task)
+        };
+        let workspace = resolve_workspace(&args);
+        let skills_dir = workspace.join("skills");
+        let registry = openforce_skill::SkillRegistry::discover_with_config(
+            skills_dir.to_str().unwrap_or("skills"), None,
+        );
+
+        // Resolve skill name (exact or fuzzy)
+        let resolved_name: Option<String> = if registry.load_skill_body(&skill_name).is_some() {
+            Some(skill_name.clone())
+        } else {
+            let names = registry.enabled_skill_names();
+            let matches: Vec<&String> = names.iter()
+                .filter(|n| n.contains(&skill_name) || n.to_lowercase().contains(&skill_name.to_lowercase()))
+                .collect();
+            if matches.len() == 1 {
+                Some(matches[0].clone())
+            } else if matches.is_empty() {
+                eprintln!("Skill '{skill_name}' not found. Available: {}", names.join(", "));
+                std::process::exit(1);
+            } else {
+                eprintln!("Multiple matches for '{skill_name}': {:?}. Be more specific.", matches);
+                std::process::exit(1);
+            }
+        };
+
+        if let Some(ref name) = resolved_name {
+            // Task goes through semantic classification + Planner normally.
+            // The skill is injected as metadata — Worker loads body on-demand.
+            let task = if user_task.is_empty() {
+                format!("Execute the '{}' skill workflow on the current project", name)
+            } else {
+                user_task.clone()
+            };
+            println!("[/{name}] skill bound — task will be semantically classified first");
+            let mut mgr = SessionManager::new(workspace.clone()).await;
+            let mut session = mgr.create(&task).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            session.bound_skill = Some(name.clone());
+            session.save().map_err(|e| anyhow::anyhow!("{e}"))?;
+            return run_pipeline(workspace, task, Some(session)).await;
+        }
+    }
+
     match subcmd {
+        "skills" => {
+            let ws = resolve_workspace(&args);
+            let skills_dir = ws.join("skills");
+            let registry = openforce_skill::SkillRegistry::discover_with_config(
+                skills_dir.to_str().unwrap_or("skills"), None,
+            );
+            let names = registry.enabled_skill_names();
+            println!("Available skills ({} total):", names.len());
+            for name in &names {
+                if let Some(body) = registry.load_skill_body(name) {
+                    let first_line = body.lines().next().unwrap_or("");
+                    let desc = if let Some(skill) = registry.get(name) {
+                        skill.frontmatter.description.chars().take(100).collect::<String>()
+                    } else { first_line.chars().take(80).collect::<String>() };
+                    println!("  /{name} — {desc}");
+                } else {
+                    println!("  /{name}");
+                }
+            }
+            return Ok(());
+        }
         "sessions" => {
             let ws = resolve_workspace(&args);
             return SessionManager::new(ws).await.list().await.map_err(|e| anyhow::anyhow!("{e}"));
@@ -78,6 +178,23 @@ async fn main() -> Result<()> {
             let phase_str = session.current_phase.as_str().to_string();
             let goal = session.goal.clone();
             println!("Resumed session — phase: {phase_str}");
+            // Load and show todo progress
+            let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
+            if !redis_url.is_empty() {
+                if let Ok(sid_uuid) = uuid::Uuid::parse_str(&session.session_id.to_string()) {
+                    if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                        if let Ok(Some(tl)) = store.get_todo_list(&sid_uuid).await {
+                            println!("[Todo] {}", tl.progress_str());
+                            for item in &tl.items {
+                                let icon = match item.status.as_str() {
+                                    "completed" => "✓", "in_progress" => "▶", "failed" => "✗", _ => "○"
+                                };
+                                println!("  [{icon}] #{:02} {}", item.id, item.content.chars().take(80).collect::<String>());
+                            }
+                        }
+                    }
+                }
+            }
             if interactive {
                 let mut repl = SessionRepl::new(session, ws, true);
                 return repl.run().await.map_err(|e| anyhow::anyhow!("{e}"));
@@ -109,7 +226,7 @@ async fn main() -> Result<()> {
         }
         "terminate" => {
             if args.len() < 4 { eprintln!("Usage: openforce terminate <session-id> <worker-id>"); std::process::exit(1); }
-            let ws = resolve_workspace(&args);
+            let _ws = resolve_workspace(&args);
             let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
             if redis_url.is_empty() { return Err(anyhow::anyhow!("REDIS_URL required for terminate")); }
             let sid = uuid::Uuid::parse_str(&args[2]).map_err(|e| anyhow::anyhow!("invalid session id: {e}"))?;
@@ -166,14 +283,20 @@ fn print_usage() {
     eprintln!("  openforce continue [<session-id>]            Resume latest/specific session");
     eprintln!("  openforce approve [<session-id>]             Approve pending gate");
     eprintln!("  openforce reject \"<feedback>\" [<session-id>]  Reject with feedback");
+    eprintln!("  openforce skills                             List available skills");
     eprintln!("  openforce sessions                           List active sessions");
     eprintln!("  openforce cancel <session-id>                Cancel a session");
-    eprintln!("  openforce terminate <session-id> <worker-id>  Terminate a worker (Scheduler/Planner only)");
+    eprintln!("  openforce terminate <session-id> <worker-id>  Terminate a worker");
+    eprintln!("  openforce /skill:name [<task>]               Activate a skill by name");
+    eprintln!("  openforce /name [<task>]                     Shorthand for skill activation");
+    eprintln!("  openforce /<partial-name> [<task>]           Fuzzy match skill name");
 }
 
 async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
     let api_key = std::env::var("API_KEY").unwrap_or_default();
     if api_key.len() < 5 { return Err(anyhow::anyhow!("API_KEY not set")); }
+    let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
+    let session_id = session.as_ref().map(|s| s.session_id.to_string());
 
     let config: Config = toml::from_str(&std::fs::read_to_string("openforce.toml").unwrap_or_default())
         .unwrap_or_else(|_| Config {
@@ -220,6 +343,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         profiles: HashMap::new(), base_dir: String::new(),
     });
 
+    // Load Agent Registry (~184 agent roles from agency-agents)
+    let agents_path = workspace.join("crates/openforce-cli/agents");
+    let agent_registry = AgentRegistry::load(&if agents_path.exists() { agents_path } else { PathBuf::from("crates/openforce-cli/agents") })
+        .unwrap_or_else(|e| { eprintln!("  [AgentRegistry] {e} — continuing without"); AgentRegistry::empty() });
+    if !agent_registry.is_empty() {
+        println!("[AgentRegistry] {} agents in {} domains", agent_registry.len(), agent_registry.domains().len());
+    }
+
     let classification = semantic_classify(&planner, &task, &kb).await?;
     let matched_profiles = kb.get_profiles(&classification.suggested_roles);
     println!("  categories: {:?}", classification.categories);
@@ -255,11 +386,28 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             .cloned().collect()
     };
 
+    // Build bound skill hint for Planner context
+    let bound_skill_hint = if let Some(ref bs) = session.as_ref().and_then(|s| s.bound_skill.as_ref()) {
+        format!(
+            "<bound_skill name=\"{bs}\">The user activated this skill via /{bs}. Use skill_load to get its full instructions when relevant to the task.</bound_skill>\n\n"
+        )
+    } else { String::new() };
+
+    // Build agent registry metadata for Planner context (progressive disclosure Level 1)
+    let agent_catalog = if !agent_registry.is_empty() {
+        agent_registry.metadata_for_planner()
+    } else { String::new() };
+
     // ── Planner RoundTable: MECE-validated task decomposition ──
-    println!("[Planner] RoundTable: 3 agents × 3 rounds...");
+    println!("[Planner] RoundTable...");
     let mut subtasks: Vec<(String, String, String, Vec<String>, Vec<String>)> = vec![]; // (role, title, desc, dependencies, files)
 
-    match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles, &dir_summary).await {
+    let skills_dir_path = workspace.join("skills");
+    let skills_dir_str = skills_dir_path.to_str().unwrap_or("skills").to_string();
+    match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles,
+        &agent_catalog,
+        &skills_dir_str,
+        &format!("{bound_skill_hint}--- Project Structure ---\n{dir_summary}")).await {
         Ok(tree) => {
             println!("  MECE: {}, confidence: {}", tree.mece_validated, tree.confidence);
             if !tree.needs_info.is_empty() {
@@ -324,6 +472,38 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     }
     println!();
 
+    // ── Create Session Todo List in Redis ──
+    let mut todo_list: Option<openforce_redis_session::store::SessionTodoList> = None;
+    if !redis_url.is_empty() {
+        if let Some(ref sid) = session_id {
+            if let Ok(sid_uuid) = uuid::Uuid::parse_str(sid) {
+                match openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                    Ok(mut store) => {
+                        // Try to load existing todo list (for resume)
+                        let existing = store.get_todo_list(&sid_uuid).await.unwrap_or(None);
+                        if let Some(ref existing_list) = existing {
+                            println!("[Todo] Loaded existing: {}", existing_list.progress_str());
+                            todo_list = existing;
+                        } else {
+                            // Build fresh todo list from subtasks
+                            let todos: Vec<(String, String, String, Vec<String>)> = subtasks.iter()
+                                .map(|(role, title, desc, deps, _files)| (role.clone(), title.clone(), desc.clone(), deps.clone()))
+                                .collect();
+                            let tl = openforce_redis_session::store::SessionTodoList::from_task_tree(sid, &todos);
+                            if let Err(e) = store.set_todo_list(&sid_uuid, &tl).await {
+                                eprintln!("  [Todo] save failed: {e}");
+                            } else {
+                                println!("[Todo] {} tasks persisted to Redis", tl.total);
+                            }
+                            todo_list = Some(tl);
+                        }
+                    }
+                    Err(e) => eprintln!("  [Todo] Redis connect failed: {e}"),
+                }
+            }
+        }
+    }
+
     // Phase 2: Build dir→files map
     let mut dir_files: HashMap<String, String> = HashMap::new();
     for (dn, ents) in &by_dir {
@@ -343,19 +523,60 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     else { println!("[Workers] In-process fallback"); }
 
     // Build DAG and compute execution waves
-    let dag_tasks = dag_executor::infer_dependencies(&subtasks);
-    let waves = dag_executor::compute_waves(&dag_tasks);
-    if waves.len() > 1 { println!("[DAG] {} waves: {}", waves.len(), waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
+    let dag_tasks = dag_executor::build_dag(&subtasks);
+    let plan = dag_executor::compute_waves(&dag_tasks);
+    let waves = &plan.waves;
+    if waves.len() > 1 { println!("[DAG] {} waves (max concurrent: {}): {}", waves.len(), plan.max_concurrent, waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
+
+    // Collect all role names from subtasks and resolve against agent registry
+    let planner_roles: Vec<&str> = subtasks.iter().map(|(pn, _, _, _, _)| pn.as_str()).collect();
+    let (found_agents, missing_roles) = agent_registry.resolve_exact(
+        &planner_roles.iter().map(|s| s.to_string()).collect::<Vec<_>>()
+    );
+    if !found_agents.is_empty() {
+        println!("[Agents] {} roles resolved: {}",
+            found_agents.len(),
+            found_agents.iter().map(|a| format!("{}{}", a.emoji.as_deref().unwrap_or(""), a.name)).collect::<Vec<_>>().join(", ")
+        );
+    }
+    for m in &missing_roles {
+        println!("  ⚠ role '{}' not in agent registry — using default config", m);
+    }
+
+    let bound_skill_for_worker = session.as_ref().and_then(|s| s.bound_skill.clone());
+
+    let max_concurrent = plan.max_concurrent;
 
     let mut results: Vec<(usize,String,bool,String,String)> = vec![];
     for (wave_num, wave) in waves.iter().enumerate() {
-        if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers", wave_num+1, waves.len(), wave.len()); }
+        if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers (max concurrent: {max_concurrent})", wave_num+1, waves.len(), wave.len()); }
         let mut wave_handles = vec![];
 
-        for &task_idx in wave {
+        // Chunk wave into batches of max_concurrent to avoid resource exhaustion
+        for chunk in wave.chunks(max_concurrent) {
+        for &task_idx in chunk {
+            let bound_skill_for_task = bound_skill_for_worker.clone();
+            let redis_url_c = redis_url.clone();
+            // ── Resume: skip already-completed tasks ──
+            if let Some(ref tl) = todo_list {
+                if let Some(item) = tl.items.get(task_idx) {
+                    if item.is_done() {
+                        println!("  [Todo] task-{} '{}' already done — skipped", item.id, item.content.chars().take(60).collect::<String>());
+                        results.push((task_idx + 1, item.agent.clone(), true, "completed".into(), format!("(resumed) {}", item.content)));
+                        continue;
+                    }
+                }
+            }
+
             let (pn, name, _desc, _deps, rt_files) = &subtasks[task_idx];
             let i = task_idx;
-            let (provider, model, sp) = if let Some(kp) = kb.profiles.get(pn) {
+            // Resolve agent system prompt: registry > knowledge base > config profiles > default
+            let (provider, model, sp) = if let Some(ap) = agent_registry.get(pn) {
+                // Agent registry: use full agent personality as system prompt
+                (config.workers.default.provider.clone(),
+                 config.workers.default.model.clone(),
+                 ap.system_prompt.clone())
+            } else if let Some(kp) = kb.profiles.get(pn) {
                 ("openai".to_string(), kp.default_model.clone(), kp.system_prompt.clone())
             } else if let Some(cp) = config.workers.profiles.get(pn) {
                 (cp.provider.clone(), cp.model.clone(), cp.system_prompt.clone())
@@ -367,8 +588,6 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let base_url_c = config.llm.api_base.clone().unwrap_or_else(|| "https://api.deepseek.com".into());
         let wb = worker_bin.clone();
         let tools_addr = std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
-        let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
-        let session_id = session.as_ref().map(|s| s.session_id.to_string());
         let session_id_c = session_id.clone();
 
         // Use RoundTable's file list if provided, validate existence, fallback to matching
@@ -446,7 +665,9 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     "project_tools_addr": tools_addr,
                     "session_id": session_id_c,
                     "session_map": session_map_c,
-                    "redis_url": redis_url,
+                    "redis_url": redis_url_c,
+                    "skills_dir": workspace_c.join("skills").to_str().unwrap_or("skills").to_string(),
+                    "bound_skill": bound_skill_for_task,
                 });
                 let task_file = format!("/tmp/openforce_worker_{idx}.json");
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
@@ -494,18 +715,129 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         }
     } // end for task_idx in wave
 
-        // Wait for all workers in this wave to complete (parallel within wave)
-        let wave_results: Vec<(usize,String,bool,String,String)> = futures::future::join_all(wave_handles).await
+        // Wait for all workers in this chunk to complete (parallel within chunk)
+        let chunk_results: Vec<(usize,String,bool,String,String)> = futures::future::join_all(wave_handles).await
             .into_iter().filter_map(|r| r.ok()).collect();
-        results.extend(wave_results);
+        results.extend(chunk_results);
+        wave_handles = vec![]; // reset for next chunk
+        } // end for chunk in wave.chunks
     } // end for wave in waves
 
     // Sort results by original task index for consistent display
     results.sort_by_key(|r| r.0);
+
+    // ── Update Todo & Persist worker snapshots to Redis ──
+    let mut todo_updated = false;
+    if let Some(ref mut tl) = todo_list {
+        for (idx, _pf, success, _action, _text) in &results {
+            if *success {
+                tl.mark_done(*idx, None);  // idx is already 1-based (task_idx+1)
+            } else {
+                tl.mark_failed(*idx);
+            }
+        }
+        todo_updated = true;
+    }
+
+    // ── Persist worker snapshots to Redis Session ──
+    if !redis_url.is_empty() {
+        if let Some(ref sid) = session_id {
+            if let Ok(sid_uuid) = uuid::Uuid::parse_str(sid) {
+                match openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                    Ok(mut store) => {
+                        let caller = openforce_redis_session::store::Caller::Scheduler { session_id: sid_uuid };
+                        for (idx, pf, success, _, text) in &results {
+                            let (memory_subs, _memory_findings) = {
+                                let of = format!("/tmp/worker_{idx}_output.json");
+                                std::fs::read_to_string(&of).ok()
+                                    .and_then(|d| serde_json::from_str::<serde_json::Value>(&d).ok())
+                                    .and_then(|v| {
+                                        let ms = &v["memory_snapshot"];
+                                        let st: Vec<openforce_redis_session::store::WorkerSubTask> = ms["subtasks"].as_array()
+                                            .map(|a| a.iter().filter_map(|t| Some(openforce_redis_session::store::WorkerSubTask {
+                                                id: t["id"].as_u64().unwrap_or(0) as usize,
+                                                description: t["description"].as_str().unwrap_or("").into(),
+                                                status: t["status"].as_str().unwrap_or("pending").into(),
+                                                output: t["output"].as_str().unwrap_or("").into(),
+                                            })).collect()).unwrap_or_default();
+                                        Some((st, vec![] as Vec<String>))
+                                    }).unwrap_or_default()
+                            };
+                            let snapshot = openforce_redis_session::store::WorkerSnapshot {
+                                worker_id: format!("worker-{idx}"),
+                                role: pf.clone(),
+                                task: subtasks.get(*idx).map(|(_,t,_,_,_)| t.clone()).unwrap_or_default(),
+                                subtasks: memory_subs,
+                                acceptance_criteria: vec![],
+                                progress: if *success { "completed".into() } else { "failed".into() },
+                                inputs: vec![],
+                                outputs: vec![text.clone()],
+                                intermediate_artifacts: vec![],
+                                created_at: chrono::Utc::now(),
+                                updated_at: chrono::Utc::now(),
+                            };
+                            if let Err(e) = store.set_worker_snapshot(&caller, &snapshot).await {
+                                eprintln!("  [redis] snapshot save failed for worker-{idx}: {e}");
+                            } else {
+                                eprintln!("  [redis] worker-{idx} snapshot saved");
+                            }
+                        }
+                        // Persist phase result
+                        let phase_summary = results.iter().map(|(i, pf, ok, action, text)| {
+                            format!("Worker-{} [{}] {}: {}", i, pf, if *ok {"OK"} else {action}, text)
+                        }).collect::<Vec<_>>().join(" | ");
+                        let phase_result = openforce_redis_session::store::PhaseResultEntry {
+                            phase: session.as_ref().map(|s| s.current_phase.as_str().to_string()).unwrap_or_default(),
+                            tasks_total: results.len(),
+                            tasks_ok: results.iter().filter(|r| r.2).count(),
+                            plan_epoch: session.as_ref().map(|s| s.plan_epoch).unwrap_or(1),
+                            summary: phase_summary,
+                            timestamp: chrono::Utc::now(),
+                        };
+                        let _ = store.add_result(&sid_uuid, &phase_result).await;
+                        // Save updated todo list
+                        if let Some(ref tl) = todo_list {
+                            if todo_updated {
+                                let _ = store.set_todo_list(&sid_uuid, tl).await;
+                                println!("  [Todo] {} — saved to Redis", tl.progress_str());
+                            }
+                        }
+                        eprintln!("  [redis] session {sid} phase results saved");
+                    }
+                    Err(e) => eprintln!("  [redis] connect failed: {e}"),
+                }
+            }
+        }
+    }
+
     let stalled_count = results.iter().filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error").count();
 
     let ok = results.iter().filter(|r| r.2).count();
     println!("\n===== Results: {}/{} =====\n", ok, results.len());
+
+    // ── [DONE:n] Detection ──
+    let mut done_markers: Vec<(String, usize)> = vec![];
+    for (idx, _, _, _, text) in &results {
+        for line in text.lines() {
+            if let Some(n) = scan_done_marker(line) {
+                done_markers.push((format!("Worker-{idx}"), n));
+            }
+        }
+    }
+    if !done_markers.is_empty() {
+        println!("  [DONE markers]: {}", done_markers.iter().map(|(w,n)| format!("{w}→#{n}")).collect::<Vec<_>>().join(", "));
+    }
+
+    // ── Progress visualization ──
+    if let Some(ref tl) = todo_list {
+        println!("  [Progress] {}", tl.progress_str());
+        for item in &tl.items {
+            let icon = match item.status.as_str() {
+                "completed" => "✓", "in_progress" => "▶", "failed" => "✗", _ => "○"
+            };
+            println!("    [{icon}] #{:02} [{}] {}", item.id, item.priority, item.content.chars().take(80).collect::<String>());
+        }
+    }
 
     let mut report = format!("# OpenForce Report\n\nTask: {task}\nRoles: {:?}\nWorkers: {}/{}\n",
         classification.suggested_roles, ok, results.len());
@@ -550,36 +882,15 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let _ = std::fs::write(&ep, serde_json::to_string_pretty(&exp).unwrap_or_default());
     }
 
-    // Persist to Redis (planner + worker snapshots) if available
+    // Persist planner decomposition to Redis
     if let Some(ref sess) = session {
-        let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
         if !redis_url.is_empty() {
             if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
-                // Save planner decomposition
                 let _ = store.set_planner(&sess.session_id,
                     &format!("{:?}", classification.categories),
                     &subtasks.iter().map(|(r,n,_,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
                     &classification.suggested_roles,
                 ).await;
-                // Save worker snapshots
-                for (i, pf, success, _action, text) in &results {
-                    let wid = format!("worker-{i}");
-                    let caller = openforce_redis_session::store::Caller::Worker {
-                        worker_id: wid.clone(), session_id: sess.session_id,
-                    };
-                    let _ = store.set_worker_snapshot(&caller,
-                        &openforce_redis_session::store::WorkerSnapshot {
-                            worker_id: wid,
-                            role: pf.clone(), task: task.clone(),
-                            subtasks: vec![],
-                            acceptance_criteria: vec![],
-                            progress: if *success { "done" } else { "failed" }.into(),
-                            inputs: vec![], outputs: vec![text.to_string()],
-                            intermediate_artifacts: vec![],
-                            created_at: chrono::Utc::now(), updated_at: chrono::Utc::now(),
-                        },
-                    ).await;
-                }
             }
         }
     }

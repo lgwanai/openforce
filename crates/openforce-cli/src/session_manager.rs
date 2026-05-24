@@ -191,7 +191,7 @@ impl SessionManager {
             state: r.state, current_phase: r.current_phase.clone(),
             plan_version: r.plan_version, plan_epoch: r.plan_epoch,
             workspace: self.workspace.clone(),
-            pending_gate: None, phase_results: vec![], last_summary: None,
+            pending_gate: None, phase_results: vec![], last_summary: None, bound_skill: None,
             created_at: r.created_at, updated_at: r.updated_at,
         }
     }

@@ -27,6 +27,7 @@ pub struct LocalSessionState {
     pub current_phase: SessionPhase, pub plan_version: i32, pub plan_epoch: i32,
     pub workspace: PathBuf, pub pending_gate: Option<PendingGate>,
     pub phase_results: Vec<PhaseResult>, pub last_summary: Option<String>,
+    pub bound_skill: Option<String>,
     pub created_at: chrono::DateTime<chrono::Utc>, pub updated_at: chrono::DateTime<chrono::Utc>,
 }
 
@@ -43,7 +44,7 @@ impl LocalSessionState {
         Self { session_id: Uuid::now_v7(), goal, state: SessionState::Active,
             current_phase: SessionPhase::understand(), plan_version: 0, plan_epoch: 1,
             workspace, pending_gate: None, phase_results: vec![], last_summary: None,
-            created_at: now, updated_at: now }
+            bound_skill: None, created_at: now, updated_at: now }
     }
 
     fn state_dir(workspace: &PathBuf) -> PathBuf { workspace.join(".openforce").join("sessions") }

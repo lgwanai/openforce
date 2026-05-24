@@ -61,6 +61,79 @@ pub struct WorkerSnapshot {
     pub updated_at: chrono::DateTime<chrono::Utc>,
 }
 
+// ── Todo Tracking ──
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionTodoItem {
+    pub id: usize,
+    pub content: String,
+    pub status: String,  // pending | in_progress | completed | cancelled | failed
+    pub priority: String,
+    pub agent: String,
+    pub worker_id: Option<String>,
+    pub started_at: Option<chrono::DateTime<chrono::Utc>>,
+    pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
+    pub output_ref: Option<String>,
+    pub acceptance_criteria: Vec<String>,
+    pub depends_on: Vec<usize>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionTodoList {
+    pub session_id: String,
+    pub items: Vec<SessionTodoItem>,
+    pub total: usize,
+    pub done: usize,
+    pub updated_at: chrono::DateTime<chrono::Utc>,
+}
+
+impl SessionTodoItem {
+    pub fn is_ready(&self, all: &[SessionTodoItem]) -> bool {
+        self.status == "pending" && self.depends_on.iter().all(|d| all.iter().any(|t| t.id == *d && t.status == "completed"))
+    }
+    pub fn is_active(&self) -> bool { self.status == "in_progress" }
+    pub fn is_done(&self) -> bool { self.status == "completed" }
+}
+
+impl SessionTodoList {
+    pub fn from_task_tree(sid: &str, tasks: &[(String, String, String, Vec<String>)]) -> Self {
+        let items: Vec<SessionTodoItem> = tasks.iter().enumerate().map(|(i, (role, title, desc, deps))| {
+            let dep_ids: Vec<usize> = deps.iter().filter_map(|d| tasks.iter().position(|(_, t, _, _)| t == d).map(|idx| idx+1)).collect();
+            SessionTodoItem { id: i+1, content: format!("[{role}] {title}: {desc}"), status: "pending".into(), priority: "medium".into(), agent: role.clone(), worker_id: None, started_at: None, completed_at: None, output_ref: None, acceptance_criteria: vec![], depends_on: dep_ids }
+        }).collect();
+        let t = items.len();
+        Self { session_id: sid.into(), items, total: t, done: 0, updated_at: chrono::Utc::now() }
+    }
+
+    pub fn mark_in_progress(&mut self, id: usize, wid: &str) -> bool {
+        if let Some(item) = self.items.iter_mut().find(|t| t.id == id) {
+            item.status = "in_progress".into(); item.worker_id = Some(wid.into()); item.started_at = Some(chrono::Utc::now()); self.updated_at = chrono::Utc::now(); return true;
+        }
+        false
+    }
+
+    pub fn mark_done(&mut self, id: usize, out: Option<&str>) -> bool {
+        if let Some(item) = self.items.iter_mut().find(|t| t.id == id) {
+            item.status = "completed".into(); item.completed_at = Some(chrono::Utc::now()); item.output_ref = out.map(String::from); self.done = self.items.iter().filter(|t| t.is_done()).count(); self.updated_at = chrono::Utc::now(); return true;
+        }
+        false
+    }
+
+    pub fn mark_failed(&mut self, id: usize) {
+        if let Some(item) = self.items.iter_mut().find(|t| t.id == id) { item.status = "failed".into(); self.updated_at = chrono::Utc::now(); }
+    }
+
+    pub fn next_pending(&self) -> Option<&SessionTodoItem> {
+        self.items.iter().filter(|t| t.status == "pending").filter(|t| t.is_ready(&self.items)).min_by_key(|t| match t.priority.as_str() { "high"=>0u8,"medium"=>1,"low"=>2,_=>1 })
+    }
+
+    pub fn progress_str(&self) -> String {
+        let d = self.items.iter().filter(|t| t.is_done()).count();
+        let a = self.items.iter().filter(|t| t.is_active()).count();
+        format!("{}/{} ({} active)", d, self.total, a)
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ArtifactRef {
     pub artifact_id: String, pub artifact_type: String,
@@ -88,6 +161,8 @@ impl RedisSessionStore {
 
     fn sk(id: &Uuid) -> String { format!("session:{id}") }
     fn rk(id: &Uuid) -> String { format!("session:{id}:results") }
+    fn tk(id: &Uuid) -> String { format!("session:{id}:todos") }
+    fn wk(sid: &Uuid, wid: &str) -> String { format!("session:{sid}:worker:{wid}") }
     fn gk(id: &Uuid) -> String { format!("gate:{id}") }
     const AK: &'static str = "sessions:active";
 
@@ -292,6 +367,35 @@ impl RedisSessionStore {
 
     /// Planner/Scheduler: terminate a worker (sets status to "terminated").
     /// Workers cannot terminate themselves or others.
+    // ── Todo List ──
+
+    pub async fn set_todo_list(&mut self, sid: &Uuid, todos: &SessionTodoList) -> Result<(), String> {
+        let json = serde_json::to_string(todos).map_err(|e| format!("json: {e}"))?;
+        let _ = self.conn.set(Self::tk(sid), &json).await.map_err(|e| format!("set todos: {e}"))?;
+        self.ttl_key(&Self::tk(sid)).await
+    }
+
+    pub async fn get_todo_list(&mut self, sid: &Uuid) -> Result<Option<SessionTodoList>, String> {
+        let data: Option<String> = self.conn.get(Self::tk(sid)).await.map_err(|e| format!("get todos: {e}"))?;
+        match data {
+            Some(json) => serde_json::from_str(&json).map(Some).map_err(|e| format!("parse todos: {e}")),
+            None => Ok(None),
+        }
+    }
+
+    pub async fn update_todo_status(&mut self, sid: &Uuid, todo_id: usize, status: &str, wid: &str, output: Option<&str>) -> Result<(), String> {
+        if let Some(mut todos) = self.get_todo_list(sid).await? {
+            match status {
+                "in_progress" => { todos.mark_in_progress(todo_id, wid); }
+                "completed" => { todos.mark_done(todo_id, output); }
+                "failed" => { todos.mark_failed(todo_id); }
+                _ => {}
+            }
+            self.set_todo_list(sid, &todos).await?;
+        }
+        Ok(())
+    }
+
     pub async fn terminate_worker(&mut self, caller: &Caller, target_wid: &str) -> Result<(), String> {
         if caller.is_worker() { return Err("access denied: workers cannot terminate".into()); }
         let sid = caller.session_id();
@@ -397,6 +501,11 @@ impl RedisSessionStore {
 
     async fn ttl(&mut self, id: &Uuid) -> Result<(), String> {
         let _: bool = self.conn.expire(Self::sk(id), self.ttl_seconds as i64).await.map_err(|e| format!("{e}")).unwrap_or(false);
+        Ok(())
+    }
+
+    async fn ttl_key(&mut self, key: &str) -> Result<(), String> {
+        let _: bool = self.conn.expire(key, self.ttl_seconds as i64).await.map_err(|e| format!("{e}")).unwrap_or(false);
         Ok(())
     }
 

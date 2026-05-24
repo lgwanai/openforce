@@ -2,583 +2,173 @@
 
 [![License](https://img.shields.io/badge/license-OpenForce%20Learning%20v1.0-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.85+-orange.svg)](https://rust-lang.org)
-[![Tests](https://img.shields.io/badge/tests-54%20passed-green.svg)](#测试)
 
-> **道生一，一生二，二生三，三生万物。**
-> *— 道德经·第四十二章*
+> **道生一，一生二，二生三，三生万物。** — 道德经·第四十二章
 
-新一代 **Agent OS** — 蜂群式 AI Agent 编排平台。一个任务进入，分解为千百个子任务，每个子任务由不同角色、不同模型的 Worker 独立执行，跨物理机动态创建，完成后瞬间销毁。
-
-## 实际案例：从一行指令到完整交付
-
-假设你输入：
-
-```
-"帮我做一个图书管理系统，包含前端借阅界面、后端 API、数据库设计和安全审计"
-```
-
-OpenForce 的执行过程：
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│ 用户: "帮我做一个图书管理系统..."                                   │
-└──────────────────────────┬───────────────────────────────────────┘
-                           │
-┌──────────────────────────▼───────────────────────────────────────┐
-│                    Planner (claude-opus)                         │
-│                                                                  │
-│  检索知识库 → 匹配 SOP → 生成执行计划:                             │
-│                                                                  │
-│  Task 1: [架构师角色] 设计数据库 Schema 和 API 契约                │
-│  Task 2: [后端专家]   实现图书 CRUD + 借阅逻辑                     │
-│  Task 3: [前端专家]   实现 Vue 借阅界面 + 读者管理                  │
-│  Task 4: [安全专家]   审计认证模块 + SQL 注入检查                   │
-│  Task 5: [测试专家]   编写集成测试 + E2E 用例                       │
-│                                                                  │
-│  每个 Task 动态分配: 角色 Profile + 模型 + 工具策略                 │
-└──────────────────────────┬───────────────────────────────────────┘
-                           │
-┌──────────────────────────▼───────────────────────────────────────┐
-│                       Scheduler (确定性)                          │
-│                                                                  │
-│  编译 DAG:                                                        │
-│    Task1 ──┬──→ Task2 ──→ Task5                                  │
-│            └──→ Task3 ──→ Task5                                   │
-│            └──→ Task4 ──→ Task5                                   │
-│                                                                  │
-│  发放 5 个独立 Lease (Fencing Token: 1~5)                         │
-│  分发到 3 台物理机的 Node Daemon                                  │
-└──────────────────────────┬───────────────────────────────────────┘
-                           │
-     ┌─────────────────────┼─────────────────────┐
-     │                     │                     │
-┌────▼─────┐  ┌───────▼────┐  ┌───────▼────┐
-│ 物理机 A  │  │  物理机 B   │  │  物理机 C   │
-│           │  │            │  │            │
-│ Worker-1  │  │  Worker-2  │  │  Worker-4  │
-│ 架构师    │  │  后端专家   │  │  安全专家   │
-│ claude-   │  │  claude-   │  │  claude-   │
-│ opus      │  │  sonnet    │  │  sonnet    │
-│           │  │            │  │            │
-│ Worker-3  │  │  Worker-5  │  │            │
-│ 前端专家   │  │  测试专家   │  │            │
-│ deepseek  │  │  deepseek  │  │            │
-└────┬─────┘  └───────┬────┘  └───────┬────┘
-     │                │               │
-     └────────────────┼───────────────┘
-                      │
-┌─────────────────────▼────────────────────────────────────────────┐
-│                         产出 (万物)                               │
-│                                                                  │
-│  Worker-1 → Artifact: api-schema.json + db-schema.sql            │
-│  Worker-2 → Artifact: book-service.rs + borrow-handler.rs        │
-│  Worker-3 → Artifact: BookList.vue + ReaderManage.vue            │
-│  Worker-4 → Finding:  安全审计报告 (发现 3 个问题，建议修复)       │
-│  Worker-5 → Finding:  测试报告 (42 unit + 8 E2E, 覆盖 87%)       │
-│                                                                  │
-│  Merge Agent 合并所有 Patch → 完整项目交付                         │
-│  Event Log: 47 个事件，完整审计链可回放                            │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-**关键特征**：
-
-| 特征 | 体现 |
-|------|------|
-| **不同角色** | 架构师 / 后端 / 前端 / 安全 / 测试 — 5 个 Worker 5 种角色 |
-| **不同模型** | claude-opus 做架构设计, claude-sonnet 做代码生成, deepseek 做前端和测试 |
-| **跨物理机** | 3 台机器并行执行，Worker 之间通过 Project Workspace 共享产物 |
-| **动态创建销毁** | 每个 Worker 用完即焚，临时凭证任务结束后立即失效 |
-| **Session 独立** | 本次项目的 47 个事件仅属于此 Session，不污染其他项目 |
-| **经验解耦** | Observer 采集执行数据进入进化面，但不会反向影响正在运行的任务 |
-
-## 核心设计原则：四层解耦
-
-OpenForce 的理论基础是**四层递进解耦**，每一层解决一个特定的耦合问题。层层递进，构建出可调度、可复用的 Agent 编排系统。
-
-### 第一层：大脑与双手解耦
-
-**解决的问题**：模型（大脑）的规划决策与代码执行（双手）的环境耦合在一起。一次执行失败污染整个上下文，环境问题影响全局决策。
-
-```
-┌────────────────────────────┐      ┌────────────────────────────┐
-│      大脑 (Planner)         │      │      双手 (Sandbox)         │
-│                            │      │                            │
-│  LLM 模型                  │──①──▶│  独立沙箱 (Docker/进程)     │
-│  生成指令序列               │  指令 │  执行代码                   │
-│  不执行任何代码             │      │  运行测试                   │
-│                            │◀──②──│                            │
-│  上下文安全                 │  结果 │  无状态                    │
-│  不受执行环境影响           │      │  崩溃即销毁，新建即干净     │
-│                            │      │  不同任务绝对隔离           │
-└────────────────────────────┘      └────────────────────────────┘
-```
-
-**设计要点**：
-- Planner 只生成指令和计划，不执行任何代码
-- 代码执行在完全隔离的沙盒中进行
-- 沙盒是无状态的——崩溃即销毁，新建即干净
-- 不同的子任务跑在不同的沙盒中，绝不复用
-
-### 第二层：协调者与执行者分离
-
-**解决的问题**：单个 Agent 处理长程复杂任务时，上下文窗口被无限拉长、记忆不断压缩，导致智能退化。一个人不可能同时精通后端、前端、安全、测试——一个 Agent 也不行。
-
-```
-┌─────────────────────────────────────────────────────┐
-│           协调者 (Orchestrator / Planner)            │
-│                                                     │
-│  • 拆解复杂任务                                     │
-│  • 分派给专业子 Agent                                │
-│  • 不执行具体工作                                    │
-│  • 上下文窗口保持精简                                │
-└────────┬──────────────┬──────────────┬──────────────┘
-         │              │              │
-┌────────▼────┐  ┌───────▼─────┐  ┌───▼──────────┐
-│ Worker-1    │  │  Worker-2   │  │  Worker-3     │
-│ 后端专家    │  │  前端专家    │  │  安全审计     │
-│             │  │             │  │               │
-│ 独立 Prompt │  │ 独立 Prompt  │  │ 独立 Prompt   │
-│ 独立工具集  │  │ 独立工具集   │  │ 独立工具集    │
-│ 独立 MCP    │  │ 独立 MCP     │  │ 独立 MCP      │
-│             │  │             │  │               │
-│ 只做 CRUD   │  │ 只写 Vue    │  │ 只做审计      │
-└─────────────┘  └─────────────┘  └───────────────┘
-```
-
-**设计要点**：
-- 协调者只拆任务、分任务，不干具体活
-- 每个 Worker 有独立的提示词、工具集和 MCP 服务器
-- 每个 Worker 只专注于被分配的子任务，职责单一
-- 避免了单一 Agent 上下文爆炸和注意力分散
-
-### 第三层：状态与会话解耦
-
-**解决的问题**：Agent 的身份定义与它的运行时状态耦合在一起，使得 Agent 无法被灵活管理和复用。同一个"角色"应该能同时执行多个不同的具体任务。
-
-```
-┌─────────────────────────────────┐     ┌─────────────────────────────┐
-│   Agent 定义 (静态模板)           │     │   Session (动态实例)          │
-│                                 │     │                             │
-│   "我是谁"                      │     │   "我此刻在干什么"            │
-│                                 │     │                             │
-│   • 模型 (claude-sonnet)        │     │   • 对话历史                  │
-│   • 系统提示词                   │     │   • 执行线程                  │
-│   • 可用工具集                   │     │   • 挂载的文件系统             │
-│   • 权限边界                     │     │   • 当前上下文快照             │
-│   • 角色 Profile                 │     │   • 租约/Fencing Token       │
-│                                 │     │                             │
-│   = 配置文件, 不变               │     │   = 运行时数据, 不断变化       │
-│   一份模板可启动 N 个 Session     │     │   每个 Session 完全独立        │
-└─────────────────────────────────┘     └─────────────────────────────┘
-
-  同一份 "后端专家 v9" Agent 模板
-      │
-      ├──→ Session A: 正在写图书 CRUD
-      ├──→ Session B: 正在写订单 CRUD  
-      └──→ Session C: 正在修 API bug
-```
-
-**设计要点**：
-- Agent 定义是静态配置文件，Session 是动态运行实例
-- 同一 Agent 模板可同时启动多个独立的 Session
-- Session 之间完全隔离，一个崩溃不影响其他
-- 实现了 **Worker 的池化和复用**——不需要为每个任务"造一个新的 Agent"
-
-### 第四层：上下文与运行环境解耦
-
-**解决的问题**：Agent 的"记忆"依赖本地进程。如果 Worker 崩溃，记忆丢失，只能重来。而且无法把"最聪明的状态"复制给其他 Worker。
-
-```
-┌──────────────────────────────────────────────────┐
-│              上下文外置存储                        │
-│                                                  │
-│  Session 完整上下文 (对话历史 + 执行轨迹)           │
-│  存储于外部高速存储 (PostgreSQL / Redis)           │
-│  不依赖本地进程内存                               │
-└──────────────────────┬───────────────────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-   ┌────▼────┐   ┌─────▼─────┐  ┌────▼────┐
-   │快照     │   │克隆       │  │回滚     │
-   │         │   │           │  │         │
-   │保存当前 │   │复制一份    │  │退回到   │
-   │最优状态 │   │给新 Worker │  │之前的   │
-   │         │   │           │  │检查点   │
-   └─────────┘   └───────────┘  └─────────┘
-```
-
-**实际场景**：一个 Worker 刚刚完成了"搜索并理解整个代码库"的高成本操作，处于最聪明状态。协调者将这个状态**快照克隆 10 份**，分派 10 个不同的编码任务——每个 Worker 都从"已理解代码库"的状态开始，不用重复搜索。
-
-**设计要点**：
-- Session 完整上下文存储于外部，不依赖本地
-- 协调者可对 Session 进行**快照、克隆、回滚**
-- 克隆"最聪明状态" → 并行分派不同任务
-- 回滚到检查点 → 从失败中快速恢复
+**Agent OS** — 蜂群式 AI Agent 编排平台。一个任务进入，Planner 语义理解 → RoundTable 分解 → DAG 调度 → 198 个角色中匹配 N 个 Worker 并行执行。
 
 ---
 
-### 四层递进总结
+## 快速开始
 
-```
-第四层  上下文与运行环境解耦  →  快照、克隆、回滚、调度到最优状态
-  ↑
-第三层  状态与会话解耦        →  同一 Agent 模板，N 个独立 Session
-  ↑
-第二层  协调者与执行者分离    →  一人拆任务，多人各司其职
-  ↑
-第一层  大脑与双手解耦        →  大脑出主意，双手在沙箱执行
-```
+```bash
+export API_KEY="sk-..."
+export REDIS_URL="redis://localhost:6379"  # 可选
 
-这套解耦体系使得 OpenForce 不仅是"多个 Agent 一起工作"，而是**一个可调度、可复用、可回滚的 Agent 编排系统**。
+# 普通语义输入
+openforce new "分析项目架构并找出安全问题"
 
-### 其他核心机制
+# 斜杠指令激活 Skill
+openforce /graphify 分析 src 目录
+openforce /code-review
+openforce /tdd
 
-**事件溯源** — 所有状态变更以 append-only Event Log 持久化，26 种事件类型覆盖完整生命周期。
-
-**确定性调度** — CAS 版本控制 + Lease + Fencing Token，杜绝脑裂和双写。
-
-**HITL 审批** — PatchClassifier (9 PCR 规则) → ApprovalRequest → ApprovalToken (7 字段强绑定)。
-
-**Effect Gateway** — 所有副作用（部署、迁移、通知）统一入口，幂等 + 审批 + Outbox。
-
-### v5.2 多轮动态 Session 管理（2026-05）
-
-**核心变更**：用户指令不再与 Session 一一对应。多个指令可映射到同一个 Session，支持确认门控和迭代优化。
-
-```
-用户: "开发用户登录模块"
-  → Session 创建 → Understand → Design → [Gate: 请求用户确认]
-用户: "a功能不做，b功能加强"
-  → Epoch 递增，重规划 Design → [Gate: 再次确认]
-用户: "同意"
-  → Architecture → Development → Test → Fix → [Gate: 最终确认]
-用户: "通过"
-  → Report → Session 完成
+# 多轮 Session
+openforce approve                        # 通过 Gate
+openforce reject "加强认证模块"          # 拒绝 + 重规划
+openforce continue                       # 恢复最新 Session
+openforce skills                         # 列出 83 个 Skill
+openforce sessions                       # 列出所有 Session
 ```
 
-**新增能力**：
+---
+
+## 核心架构
+
+```
+用户输入 (语义 or /skill:name)
+    │
+    ▼
+┌──────────────────────────────────────────┐
+│  Planner — 语义分类 + RoundTable 分解      │
+│  ├── Semantic Classification (LLM)        │
+│  ├── Agent Catalog: 198 角色渐进式披露      │
+│  ├── Skill Catalog: 83 Skill Level 1 XML   │
+│  ├── Round 1: N 维度并行分析               │
+│  ├── Round 2: 交叉审查 MECE                │
+│  └── Round 3: JSON 合成 → TaskTree         │
+└──────────────┬───────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────┐
+│  Scheduler — DAG 构建 + Wave 调度          │
+│  ├── build_dag(): 依赖推断 + 优先级        │
+│  ├── compute_waves(): 拓扑分层             │
+│  └── max_concurrent=8: 分片执行            │
+└──────────────┬───────────────────────────┘
+               │
+     ┌─────────┼─────────┐
+     ▼         ▼         ▼
+┌─────────┐┌─────────┐┌─────────┐
+│Worker-1 ││Worker-2 ││Worker-3 │
+│Agent:   ││Agent:   ││Agent:   │
+│Backend  ││Frontend ││Security │
+│Architect││Designer ││Auditor  │
+│         ││         ││         │
+│Native   ││Native   ││Native   │
+│Tool Call││Tool Call││Tool Call│
+│Loop     ││Loop     ││Loop     │
+└────┬────┘└────┬────┘└────┬────┘
+     │         │         │
+     └─────────┼─────────┘
+               ▼
+┌──────────────────────────────────────────┐
+│  Redis Session — Todo + Worker Snapshot   │
+│  session:{id}:todos — 任务进度追踪         │
+│  session:{id}:worker:{wid} — Worker 状态   │
+└──────────────────────────────────────────┘
+```
+
+## 关键能力
 
 | 能力 | 实现 |
 |------|------|
-| 多轮 Session | `openforce new` / `continue` / `approve` / `reject` / `sessions` / `cancel` |
-| 并行 Session | 多个 Session 独立并行，Redis 共享状态 |
-| 确认门控 | Planner 侧 Gate — 阶段间用户确认后才继续 |
-| REPL 模式 | `openforce continue --interactive` — 实时交互 |
-| 阶段工作流 | Understand → Design → [Gate] → Arch → Dev → [Gate] → Test ⇄ Fix → [Gate] → Report |
+| **Agent 角色库** | 198 角色 (来自 agency-agents)，20 领域，渐进式 XML 披露 |
+| **Skill 系统** | 83 Skills，Level 1 XML → Level 2 on-demand |
+| **斜杠指令** | `/graphify` `/code-review` `/tdd` 等，精确+模糊匹配 |
+| **原生 Tool Calling** | OpenAI Function Calling + Anthropic Tool Use，8 工具 |
+| **对话历史** | Worker 多轮累积 user→assistant(tool_calls)→tool_results |
+| **RoundTable 规划** | N 维度分析 → 交叉审查 → JSON 合成 |
+| **DAG 调度** | 拓扑分层 + 优先级 + max_concurrent=8 |
+| **Todo 追踪** | Redis 持久化，[DONE:n] 标记，Resume 支持 |
+| **上下文管理** | AgentMemory + Conversation 双重溢出检测 + 结构化压缩 |
+| **渐进式披露** | Agent: name+desc → full profile; Skill: name+desc → body+scripts |
 
-**Redis 分布式 Session 存储**：
+## Agent 角色 (198)
 
-```
-session:{id}          Hash   — 目标、状态、阶段、epoch
-session:{id}:results  List   — 每阶段执行结果
-gate:{id}             Hash   — 确认门控状态、反馈
-sessions:active       Set    — 活动 Session 索引
-swarmos:gates         Pub/Sub — 实时 Gate 变更通知
-```
+| 领域 | 数量 | 示例 |
+|------|------|------|
+| engineering | 29 | Backend Architect, AI Engineer, Code Reviewer, DevOps Automator |
+| marketing | 30 | Content Creator, SEO Specialist, Bilibili Content Strategist |
+| specialized | 41 | Blockchain Security Auditor, Compliance Auditor, Customer Service |
+| design | 8 | UI Designer, UX Architect, Brand Guardian |
+| testing | 8 | API Tester, Accessibility Auditor, Performance Benchmarker |
+| sales | 8 | Account Strategist, Sales Engineer, Pipeline Analyst |
+| paid-media | 7 | PPC Strategist, Programmatic Buyer, Creative Strategist |
+| support | 6 | Legal Compliance Checker, Support Responder |
+| spatial-computing | 6 | visionOS Spatial Engineer, XR Immersive Developer |
+| project-management | 6 | Project Shepherd, Experiment Tracker |
+| product | 5 | Product Manager, Behavioral Nudge Engineer |
+| finance | 5 | Financial Analyst, Investment Researcher |
+| game-development | 5 | Game Designer, Technical Artist, Narrative Designer |
+| academic | 5 | Anthropologist, Historian, Psychologist |
 
-### v5.1 生产安全基础设施（2026-05）
+## Worker Tool Calling
 
-| 组件 | 功能 |
+每个 Worker 使用 LLM 原生 Function Calling，8 个工具：
+
+| 工具 | 用途 |
 |------|------|
-| `crates/mtls/` | mTLS 证书管理 — Ed25519 CA、SPIFFE SAN、TLS 配置构建、证书轮换 |
-| `crates/cube-sandbox/` | Firecracker MicroVM 沙箱 — VM 生命周期、镜像缓存、网络隔离、凭证注入 |
-| `crates/policy-engine/` | 三层授权引擎 — mTLS 身份 + Capability Token + 业务条件，5 条默认规则 |
-| Capability Token | Ed25519 签名、租约绑定、最小 scope、立即吊销 |
-| Path ACL 路径规范化 | 防御 `../` 遍历攻击 — 规范化后匹配，逃逸路径自动拒绝 |
+| `read_file` | 读取文件 (16K 截断) |
+| `write_file` | 写入文件 |
+| `shell_exec` | 执行 Shell (30s 超时，危险命令拦截) |
+| `mark_all_done` | 标记所有子任务完成 |
+| `record_finding` | 记录关键发现 |
+| `skill_load` | 渐进式加载 Skill body |
+| `skill_load_ref` | 加载 Skill 参考文件 |
+| `skill_exec_script` | 执行 Skill 脚本 |
 
-### Session 身份权限模型（2026-05）
+Worker 维护完整对话历史（user → assistant(tool_calls) → tool_results → ...），LLM 每次调用都能看到之前的工具执行结果。
 
-Session 是任务的全息档案 — 原始指令、Planner 分解、Scheduler 状态、每个 Worker 的 task/进度/输入/输出/artifact 指针。任意 Worker 在任何时间都能查询到任务相关的所有信息。
-
-**数据结构**：
-
-```
-session:{id}:planner          Hash — classification, decomposition, roles
-session:{id}:worker:{wid}     Hash — subtasks, acceptance_criteria, progress, I/O
-session:{id}:artifacts        List — artifact ID, type, location, creator
-session:{id}:instructions     List — 原始用户指令历史
-```
-
-**权限矩阵**：
-
-| 操作 | Worker | Planner | Scheduler |
-|------|:---:|:---:|:---:|
-| 读自己 snapshot | ✓ | ✓ | ✓ |
-| 读其他 Worker snapshot | ✓ | ✓ | ✓ |
-| 写自己 snapshot | ✓ | ✗ | ✗ |
-| 写其他 Worker | ✗ | ✗ | ✗ |
-| 添加 Artifact | ✓(own) | ✗ | ✗ |
-| 创建/解决 Gate | ✗ | ✓ | ✗ |
-| 终止 Worker | ✗ | ✓ | ✓ |
-
-**Worker Agent Memory 三层上下文模型**：
-
-Worker 是自主 Agent，动态管理自己的上下文，而非被动接收 dump：
+## Todo 追踪
 
 ```
-LAYER 1: IDENTITY (tiny, always)     LAYER 2: WORKING MEMORY (compact)    LAYER 3: ACTIVE FOCUS (on-demand)
-  - Role                              - Completed subtask summaries        - Current file content
-  - Goal                              - Recent decisions (last 5)          - Previous cycle analysis
-  - Acceptance Criteria               - Key findings (top 5)
-```
+session:{id}:todos → Redis JSON:
+  items[] → {id, content, status, priority, agent,
+             started_at, completed_at, output_ref}
 
-- **READ on demand**：Worker 收到文件路径列表（不含内容），按需 `READ: <path>` 读取
-- **Context 压缩**：Token 超 700K 时自动合并旧决策为摘要，不硬截断
-- **Agent 自主决策**：Worker 自己决定读哪个文件、何时标记 DONE、何时 ALL_DONE
-
-**Worker 故障恢复**：
-- 卡住（stalled）→ 返回原因 → Scheduler 收集失败信息 → Planner 分析根因 → 重新分解 → 启动新 Worker
-- 超时（timeout）→ 记录已完成子任务 → 标记为 TIMEOUT
-- 非正常退出率 >40% 时触发 re-plan 流程
-
-**Worker 专家工作流**：接收任务 → Phase 0 分解 subtasks + 定义验收标准 → Phase 1 Agent Loop（READ → 分析 → DONE）→ Phase 2 逐条验证验收标准 → PASS/FAIL/STALLED。
-
-### RoundTable 渐进式披露 + SkillRunner
-
-Planner 使用 3 agents × 3 rounds 的 RoundTable 机制进行 MECE-validated 分解：
-- Round 1：交互/数据/实施三维度独立提案
-- Round 2：交叉审查，检测 MECE 缺陷
-- Round 3：最终合成，输出 SMART 目标 + 子任务列表
-
-SkillRunner 实现渐进式披露：
-1. 扫描 `skills/*/SKILL.md` → 只提取 frontmatter（name, description）
-2. 注入 Planner prompt → LLM 决定是否需要
-3. 需要时才加载完整 SKILL.md body（按需执行工具调用）
-
-### 智能任务理解（语义分类，非关键词匹配）
-
-Planner 使用 LLM 对任务进行语义理解，而非传统的字符串关键词匹配。关键词匹配对中文极不友好，"图书管理系统" 无法命中任何关键词；LLM 语义理解准确率 > 95%。
-
-### 专家库与经验库
-
-```
-experts/
-├── index.json          ← 13 类别中英双语索引
-├── profiles/           ← 11 角色 (System Prompt + 模型 + 工具 + 路径权限)
-├── sop/                ← 7 个 SOP 拆解模板 (含 DAG 依赖结构)
-└── experience/         ← 每次成功执行后自动沉淀
-```
-
-**角色可动态扩充**：添加 JSON → 更新 index.json → Planner 即可分配；Evolver 可从成功经验中自动派生新角色。
-
-### DAG 依赖强制执行
-
-Worker 执行时序由 DAG 严格控制。测试 Worker 必须等待后端 Worker Succeeded 后才启动，**绝不允许有依赖关系的任务同时执行**。上游 Failed 时下游 Blocked，触发人工介入。
-
-## 对比：v1.0 三省六部 vs v5.1 蜂群式
-
-| 维度 | v1.0 三省六部制 | v5.1 蜂群式 |
-|------|----------------|------------|
-| 架构理念 | 模拟古代官制，固定角色 | 道家哲学，动态蜂群 |
-| 角色分配 | 六部各司其职，硬编码 | Planner 根据任务类型动态匹配 Role Profile |
-| 模型选择 | 单一模型 | 按角色动态分配不同模型 |
-| 并发模型 | 六部串行协作 | 千百 Worker 跨物理机并行 |
-| 空间模型 | 单体 | 三层隔离 (Agent/Workspace/Execution) |
-| 状态管理 | 黑板模式 | Event-Sourced Session |
-| 经验系统 | 无 | 旁路进化面，Session 与经验解码 |
-| 可靠性 | 单点脆弱 | CAS + Lease + Fencing Token |
-| Worker 生命周期 | 持久存在 | 瞬时创建，用完即焚 |
-| 部署 | 单机 Python | 跨物理机 Rust 二进制 |
-
-## 对比：OpenForce vs Claude Code
-
-Claude Code 是优秀的单智能体编程助手，但受限于单进程架构。OpenForce 是为**复杂工程任务**设计的多智能体编排系统。
-
-| 维度 | Claude Code | OpenForce |
-|------|------------|-----------|
-| 架构模型 | 单 Agent，一体式 | 多 Agent，蜂群式 |
-| 任务分解 | 一次性理解，隐含 | Planner 显式分解为带类型的子任务 |
-| Worker | 自身 (单向) | N 个独立 Worker，每个独立进程/沙箱 |
-| 角色系统 | 固定 System Prompt | 动态 Role Profile + Prompt Bundle，按任务匹配 |
-| 模型选择 | 单一模型 | 按角色分配不同模型 (opus/sonnet/haiku/deepseek) |
-| 物理执行 | 单机单进程 | 跨物理机，Node Daemon 管理 Worker 生命周期 |
-| 状态持久化 | 会话结束时丢失 | Event-Sourced Session (26 种事件类型，完整审计) |
-| 并发模式 | 串行 | 真正并行 — N 个 Worker 同时执行 |
-| 可靠性 | 依赖进程存活 | CAS + Lease + Fencing Token，Worker 崩溃不污染状态 |
-| 副作用控制 | 无 | Effect Gateway 统一入口，幂等 + 审批 + Outbox |
-| 安全审批 | 无 | HITL 审批流，Patch 风险分级 (9 PCR)，签名 Token |
-| 经验学习 | 会话内上下文 | Observer → Evaluator → Evolver 版本化旁路进化 |
-| 空间隔离 | 本地文件系统 | 三层隔离 (Agent/Workspace/Execution) |
-| 多租户 | 不适用 | 租户级策略、配额、BYOK、Kill Switch |
-| 适用场景 | 对话式编程辅助 | 企业级 AI 编排生产平台 |
-
-**本质区别**：Claude Code 是一个"人" — 聪明但有限。OpenForce 是一个"组织" — Planner 像 CEO 分配任务，Scheduler 像 COO 确保执行，多个 Worker 像不同部门的专家各司其职。一个人再强也不可能同时写前端、写后端、做安全审计、跑集成测试；但一个好的组织可以。
-
-**互补关系**：你可以用 Claude Code 来开发 OpenForce，然后用 OpenForce 来编排成百上千个 Claude Code 完成任务。Claude Code 是锤子，OpenForce 是工厂。
-
-## 系统全貌
-
-### 专家库：11 角色、7 SOP、13 类别
-
-| 类别 | 可用角色 | 模型档位 |
-|------|---------|---------|
-| 后端 | backend_expert, python_developer, go_developer, sql_specialist, rust_developer | coding |
-| 前端 | frontend_expert, react_developer | coding / fast |
-| 架构 | architect, api_designer | reasoning |
-| 安全 | security_auditor, rust_reviewer | reasoning / coding |
-| 测试 | test_engineer | fast |
-| 运维 | devops_engineer, k8s_operator | coding |
-| 文档 | doc_writer | fast |
-
-### 当前可完成的作业类型
-
-| 作业类型 | 示例 | Worker 组合 | DAG |
-|---------|------|------------|-----|
-| 安全审查 | `"审查项目安全"` | security_auditor × 3 | 并行 |
-| 代码规范 | `"检查 Rust 代码"` | rust_reviewer × 3 | 并行 |
-| 后端 CRUD | `"开发用户登录模块"` | architect → backend_expert → test_engineer | 链式 |
-| 全栈项目 | `"构建图书管理系统"` | architect → (backend + frontend) → (security + test) | 树形 |
-| Python API | `"FastAPI 订单服务"` | api_designer → python_developer → test_engineer | 链式 |
-| 数据库优化 | `"优化查询性能"` | sql_specialist → test_engineer | 链式 |
-| 文档生成 | `"生成 API 文档"` | doc_writer × 3 | 并行 |
-| Go 微服务 | `"Go gRPC 用户服务"` | api_designer → go_developer → test_engineer | 链式 |
-| K8s 部署 | `"部署到 K8s"` | devops_engineer → k8s_operator → security_auditor | 链式 |
-
-### LLM 配置
-
-统一使用 `API_KEY` 环境变量，provider 区分供应商：
-
-```toml
-[llm]
-provider = "anthropic"                           # 或 "openai"
-api_base = "https://api.deepseek.com/anthropic"  # 自定义 endpoint
-
-[planner]
-provider = "anthropic"
-model = "deepseek-v4-flash"
-
-[workers.default]
-provider = "anthropic"
-model = "deepseek-v4-flash"
-```
-
-每个 Worker profile 可使用独立 provider + model，不再限制为单一供应商。
-
-### 关键指标
-
-| 指标 | 数值 |
-|------|------|
-| Crates | 22 |
-| gRPC 服务 | 8 |
-| SQL 迁移 | 6 |
-| Proto 文件 | 8 |
-| 事件类型 | 30 |
-| 命令类型 | 15 |
-| PCR 规则 | 9 |
-| 测试 | 54 (domain + policy-engine + path-acl + lifecycle + classifier + PostgreSQL) |
-
-## 服务拓扑
-
-```
-                    ┌─────────────┐     ┌──────────────┐
-                    │ REST Gateway │     │    Redis     │
-                    │   :8080      │     │  :6379       │
-                    └──────┬───────┘     │ Session/Gate │
-                           │             └──────┬───────┘
-        ┌──────────────────┼──────────────────┐ │
-        ▼                  ▼                   ▼▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│Scheduler     │  │Project Tools │  │Effect Gateway│
-│   :50052     │  │   :50053     │  │   :50054     │
-│ +Token Issuer│  └──────────────┘  └──────────────┘
-└──────┬───────┘
-       │ mTLS
-       ▼
-┌──────────────┐     ┌──────────────┐
-│Session Store │────▶│ PostgreSQL   │
-│   :50051     │     │ Event Log    │
-└──────┬───────┘     └──────────────┘
-       │
-       ▼
-┌──────────────┐     ┌──────────────┐
-│Node Daemon   │────▶│Cube Sandbox  │
-│   :50060     │     │Firecracker VM│
-│ +Token Verify│     └──────────────┘
-└──────────────┘
+[DONE:n] 标记: LLM 输出 "[DONE:3]" → 自动标记 todo#3 completed
+Resume:     openforce continue → 加载 Redis Todo → 跳过已完成
 ```
 
 ## 项目结构
 
 ```
 openforce/
-├── openforce.toml              # 角色/模型配置
-├── experts/                    # 专家库 + 经验库
-│   ├── index.json              #   13 类别索引
-│   ├── profiles/               #   11 角色模板
-│   ├── sop/                    #   7 个 SOP
-│   └── experience/             #   自动沉淀
+├── skills/                          # 83 Skills (渐进式披露)
+├── experts/                         # 专家库 (SOP+Profile)
 ├── crates/
-│   ├── proto/                  # Protobuf 定义 (8 文件)
-│   ├── domain/                 # 领域类型 (30 EventPayload, 15 CommandType)
-│   ├── session-store/          # Event Store (CAS + 命令处理器 + 投影)
-│   ├── redis-session/          # Redis 分布式 Session 存储 (v5.2)
-│   ├── knowledge-base/         # 语义分类 + 专家库检索
-│   ├── scheduler/              # 确定性调度 (DAG + Lease + Fencing + Token)
-│   ├── policy-engine/          # 三层授权引擎 (mTLS+Token+业务)
-│   ├── path-acl/               # 路径 ACL (glob + 规范化防遍历)
-│   ├── patch-classifier/       # Patch 风险分级 (9 PCR 规则)
-│   ├── project-tools/          # Project Tools + HITL 审批
-│   ├── effect-gateway/         # 副作用网关 (幂等 + Outbox)
-│   ├── gateway/                # REST → gRPC 代理 + Token Auth MW
-│   ├── mtls/                   # mTLS 证书管理 (Ed25519 CA, SPIFFE)
-│   ├── cube-sandbox/           # Firecracker MicroVM 沙箱
-│   ├── space-manager/          # 三层隔离 + 热池 (真实 VM 后端)
-│   ├── tenant-governance/      # 多租户治理
-│   ├── evolution/              # 进化面 (Observer/Evaluator/Canary)
-│   ├── launch-checker/         # 上线验证 (8 Gate + 5 Red-Team)
-│   ├── node-daemon/            # Worker 生命周期 (Token 验证)
-│   ├── llm-client/             # LLM 客户端 (Anthropic + OpenAI)
-│   ├── tui-dashboard/          # 终端监控面板
-│   ├── openforce-cli/          # CLI 入口 (多轮 Session + 子命令)
-│   └── worker/                 # Worker 独立进程二进制
-└── version1.0/                 # 旧版归档
-```
-
-## 快速开始
-
-> 📖 详细部署: [DEPLOYMENT.md](DEPLOYMENT.md)
-
-```bash
-export OPENAI_API_KEY="sk-..."
-export REDIS_URL="redis://localhost:6379"  # 可选，分布式 Session
-
-# 启动服务
-cargo run -p openforce-session-store   # :50051
-cargo run -p openforce-scheduler       # :50052
-
-# 多轮 Session 工作流
-openforce new "审查项目安全性"           # 创建 Session
-openforce approve                        # 通过 Gate 继续
-openforce reject "a功能不做"             # 拒绝 + 重规划
-openforce continue                       # 恢复最新 Session
-openforce continue <session-id>          # 恢复指定 Session
-openforce sessions                       # 列出活动 Session
-openforce continue --interactive         # REPL 模式
-openforce cancel <session-id>            # 取消 Session
-
-# TUI 管理端
-cargo run -p openforce-tui-dashboard         # 启动 TUI
-
-# TUI 功能：
-# - 实时查看 Agent 状态和任务分解过程
-# - 发布指令（status / session / lease / cancel / plan）
-# - 确认权限（approve / reject 审批 requests）
-# - 3 秒自动刷新，Tab 切换面板
+│   ├── openforce-cli/               # CLI + Planner
+│   │   ├── agents/                  # 198 Agent 角色
+│   │   └── src/
+│   │       ├── agent_registry.rs    # Agent 渐进式披露
+│   │       ├── planner_roundtable.rs # RoundTable
+│   │       ├── dag_executor.rs      # DAG+Wave
+│   │       └── skill_runner.rs      # Skill 发现
+│   ├── llm-client/                  # LLM: OpenAI+Anthropic
+│   │   └── src/ {tool,openai,anthropic,unified}.rs
+│   ├── worker/                      # Worker 独立 binary
+│   ├── skill/                       # Skill 系统
+│   ├── redis-session/               # Redis Session+Todo
+│   ├── knowledge-base/              # 语义分类
+│   └── ...                          # 基础设施
 ```
 
 ## 技术栈
 
 | 组件 | 技术 |
 |------|------|
-| 语言 | Rust 2024 Edition |
-| 传输 | gRPC (tonic) + REST (axum) |
-| 存储 | PostgreSQL (Event Sourcing + JSONB) |
-| LLM | Anthropic / OpenAI-compatible (DeepSeek) |
-| TUI | Ratatui + Crossterm |
-
----
-
-> **夫物芸芸，各复归其根。**
-> 千百 Worker，不同角色，不同模型，完成使命，归于虚无。唯有 Event Log，永存不灭。
+| 语言 | Rust 2024 |
+| LLM | OpenAI / Anthropic Native Function Calling |
+| 存储 | Redis (Session + Todo) |
+| 传输 | gRPC (tonic) + HTTP (reqwest) |
