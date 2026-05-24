@@ -1,0 +1,28 @@
+{
+  "message_id": "<1646024140.2.1776787851478@localhost>",
+  "imap_uid": "3133",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "您的就业能力评估报告已生成",
+  "sender": "fescoedu@163.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-22T00:10:51+08:00",
+  "body_text": "您好，\n\n您的就业能力评估报告已生成，请查看附件。\n\n如有问题请联系客服。",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "就业能力评估报告.pdf",
+      "content_type": "application/pdf",
+      "size": 493179,
+      "local_path": "./mail_data/attachments/<1646024140.2.1776787851478@localhost>/就业能力评估报告.pdf"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/1646024140.2.1776787851478localhost.eml"
+}

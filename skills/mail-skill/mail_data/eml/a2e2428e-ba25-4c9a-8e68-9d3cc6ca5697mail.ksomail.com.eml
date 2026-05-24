@@ -1,0 +1,207 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:120.92.55.47)
+ smtp.mailfrom=developer@wps.cn; dkim=pass header.b=YbpwP2J185
+ header.i=@wps.cn header.s=wps.cn; dmarc=pass (p=quarantine sp=quarantine
+ dis=none) header.from=wps.cn; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:content-type:message-id:dkim-signature;
+ bh=/aXJc83Lj8KE/BCb0RWKfezfd6Pb+Yl4opDsdJoIHtA=;
+ b=OaTKSIrvlfeqvivRklLJqQNWxCsU/EG3Hr0VFotpfA5cDEY2kh88W4mm16RORS0WdldJYUv
+ 1eZJC4W5UAPQ4RImgyr4hox5Dui8GSwEab/OfChfH9sj17EVrsutrQh8ISr6zpR7wSgQcjb6N
+ 7R1ROlHaSH3PR+9nRAaQJVj0DrkPKhYFfQpHrxJpJNEUvj2xLqFPp1/ToiyWDmXlNIj/PQD7C
+ msGvhr25m+s8At2TxAZbytD4ujXahDQUirhiAUUuqh73cXxRds02DeTfhVCM92/zDbg1LUQ41
+ ZY38YCmzWnrUSTQ+CAkqUF0jlQksYCb7Hj5EnvlniD4sKsxE5JWw==
+Arc-Seal: i=1; a=rsa-sha256; t=1774926269; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=UK70/BeFvQwgsBmEPVieEfx6doUkiQUsPAPWWuwNrnoa8Kcu6iHKb5LxEW/hjOsDmY8kLBk
+ LfbfsXZto5eo+Z0IQJ+QYMgTXHchVHEk5Frk4eWRGxDacF0/WoRCUFYZNzEROhBripqqrUru7
+ XLL0wcztTFGzX5T3DUTjoEWo9Y66cznqzgnLYGNgkWrphg5YhXJC2yW4JEBJGGnihoJWStBCE
+ H6SY6ZUE3OwfNvG9It1GxzdxFKjNjiIzcvE0yTgwMSbJOew1EPSLbWSg5GwZkkMcb4t6xy9rp
+ XZiW0wjbFZ5An1oQ5idnEu3qHqbFavi8DvOCKdx0eaolB2B2emaQ==
+Authentication-Results: lms; spf=pass (client-ip:120.92.55.47)
+ smtp.mailfrom=developer@wps.cn; dkim=pass header.b=YbpwP2J185
+ header.i=@wps.cn header.s=wps.cn; dmarc=pass (p=quarantine sp=quarantine
+ dis=none) header.from=wps.cn; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="UTF-8"
+Date: Tue, 31 Mar 2026 11:04:26 +0800 (add by lms)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wps.cn; s=wps.cn;
+ t=1774926265; bh=tAhaLXk7a5jxiul5DgSNHQi64fefSPOQ6/RtLI/P9iA=;
+ h=To:From:Subject:From;
+ b=YbpwP2J185dA2wdLlFJosPtGkDUTYFR5pdT4sQxUNO+IUpqiFA6y4uXVEMXJse3Gw
+ VnjEPqb7ybeY7qqzI3LB89e8GT5BIQ4SkQLc4Pr+0w5nJ0xO+r0idI3DtUgsKaIr2R
+ wH1xMUPdx1mDHrsli7CsJArS9P3euCWcugzwOVj0=
+From: =?utf-8?q?WebOffice=E5=BC=80=E6=94=BE=E5=B9=B3=E5=8F=B0?=
+ <developer@wps.cn>
+Message-Id: <a2e2428e-ba25-4c9a-8e68-9d3cc6ca5697@mail.ksomail.com>
+Received: from localhost (unknown [10.7.164.12]) (using TLSv1.2 with cipher
+ ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits)) (No client certificate
+ requested) by mail.ksomail.com (Ksmtpd) with ESMTPS id
+ a2e2428e-ba25-4c9a-8e68-9d3cc6ca5697 for <wuliang@xiangzizai.com>; Tue, 31
+ Mar 2026 11:04:25 +0800 (CST)
+Received: from localhost (unknown [120.92.55.139]) (using TLSv1.3 with
+ cipher TLS_AES_128_GCM_SHA256 (128/128 bits) key-exchange x25519
+ server-signature RSA-PSS (2048 bits) server-digest SHA256) (No client
+ certificate requested) (Authenticated sender: developer@wps.cn) by
+ gateway-yxy-ksomail.com (Postfix) with ESMTPSA id 4flCdP04w1z1YH78d for
+ <wuliang@xiangzizai.com>; Tue, 31 Mar 2026 11:04:24 +0800 (CST)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=120.92.55.47;
+ helo=mail-01.365work.cn; envelope-from=developer@wps.cn;
+ receiver=<UNKNOWN>;
+Sender: developer@wps.cn
+Subject: 
+ =?UTF-8?b?44CQV1BTIFdlYk9mZmljZeOAkeacgOWQjuS4gOWkqe+8geW8gOW3peiKgg==?=
+ =?UTF-8?b?56aP5Yip5LuK5pma5oiq5q2i77yM5YWF5YC85Yqg6LWg5YCS6K6h5pe277yB?=
+To: 
+ =?utf-8?q?=E5=8C=97=E4=BA=AC=E5=A1=94=E6=AD=8C=E7=A7=91=E6=8A=80=E6=9C=89?=
+ =?utf-8?q?=E9=99=90=E5=85=AC=E5=8F=B8?= <wuliang@xiangzizai.com>
+X-Bulk: YES
+X-Envelope-Sender: developer@wps.cn
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Bounce-Flag: 1774926265.69CB39B8.001
+X-Fangmail-Bounce-Flag: 1774926265.69CB39B8.001
+X-Fangmail-Envelope: 
+ 1774926266/4flCdQ4sKFzZhL6B/69CB39BA.000/120.92.55.47/mail-01.365work.cn/localhost/<developer@wps.cn>
+X-Fangmail-Envelope: 
+ 1774926265/4flCdP04w1z1YH78d/69CB39B8.001/120.92.55.139/[120.92.55.139]/localhost/<developer@wps.cn>
+X-Fangmail-Gw-Spam-Type: 0
+X-Fangmail-Mainwhy: contabuse
+X-Fangmail-Mid-Qid: 69CB39BA.000/4flCdQ4sKFzZhL6B
+X-Fangmail-Mid-Qid: 69CB39B8.001/4flCdP04w1z1YH78d
+X-Fangmail-Miltered: at n151-171-211 with ID 69CB39BA.000 by FangMail
+ milter!
+X-Fangmail-Miltered: at vm192-168-4-114.ksc.com with ID 69CB39B8.001 by
+ FangMail milter!
+X-Fangmail-Outinfo: 
+ 1774926265/69CB39B8.001/4flCdP04w1z1YH78d/developer@wps.cn/1
+X-Fangmail-Outinfo: 
+ 1774926265/69CB39B8.001/4flCdP04w1z1YH78d/developer@wps.cn/1
+X-Fangmail-Score: MSGID : 69CB39B8.001 on gateway-yxy-ksomail.com : fmilter
+ score : XXXXXX : R=. U=. O=. B=0.975 -> S=0.975
+X-Fangmail-Spf: pass
+X-Kso-Auxiliary: 
+ YWRkcjoxMjAuOTIuNTUuMTM5DQptYWlsX2Zyb206ZGV2ZWxvcGVyQHdwcy5jbg==
+X-Lms-Client-Ip: 120.92.55.47
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: developer@wps.cn
+X-Lms-Pvf: 
+ MnwyfDF8fC253BuaWb57SqYLbmq02rPb2vE6VDz4ffIMjRnCRqetgDotey/dBP4SkANYEDbAtzAyzyrs9Rr3fP3u39907I5MpSbB1aS+SxfcHAQPWBeBpmW7gwzoGv9tdJG+3w/MOw==
+X-Source-Ip: 120.92.55.139 unknown Tue, 31 Mar 2026 11:04:25 +0800
+X-Spam-Rank: MED
+X-Std-Gw-Spam: YES
+X-Std-Tid: a2e2428e-ba25-4c9a-8e68-9d3cc6ca5697
+X-Tls: YES
+X_fmilter_status: Ham
+
+<html lang=3D"en"><head><meta charset=3D"UTF-8"><meta name=3D"viewport" con=
+tent=3D"width=3Ddevice-width, initial-scale=3D1, shrink-to-fit=3Dno"><style=
+>.eml-w .eml-w-phase-normal-16 {          }          .eml-w-sys-layout {   =
+          background: #fff;             box-shadow: 0 2px 8px 0 rgba(0, 0, =
+0, 0.2);             border-radius: 4px;             margin: 50px auto;    =
+         max-width: 700px;             overflow: hidden;             backgr=
+ound-image: url(https://qn.cache.wpscdn.cn/public_open_weboffice/mail-sale-=
+notice-20240527.png);             background-size: cover;         }        =
+  .eml-w-sys-line {             overflow: hidden;         }          .eml-w=
+-sys-line-left {             display: inline-block;             width: 88%;=
+             background: #417ff9;             height: 3px;         }       =
+   .eml-w-sys-line-right {             display: inline-block;             w=
+idth: 11.5%;             height: 3px;             background: #ff5d29;     =
+        margin-left: 1px;         }          .eml-w-sys-logo {             =
+text-align: right;         }          .eml-w-sys-logo img {             dis=
+play: inline-block;             margin: 30px 50px 0 0;         }          .=
+eml-w-sys-content {             position: relative;             padding: 20=
+px 50px 0;             min-height: 160px;             word-break: break-all=
+;         }          .eml-w-sys-footer {             font-weight: 500;     =
+        font-size: 12px;             color: #666;             letter-spacin=
+g: 0.5px;             padding: 30px 50px;             margin-top: 10px;    =
+         line-height: 24px;             text-align: right;             font=
+-style: italic;         }          .eml-w {             font-family: Helvet=
+ica Neue, Arial, PingFang SC, Hiragino Sans GB, STHeiti, Microsoft YaHei,  =
+           sans-serif;             -webkit-font-smoothing: antialiased;    =
+         color: #2b2b2b;             font-size: 14px;             line-heig=
+ht: 1.75;         }          .eml-w a {             text-decoration: none; =
+        }          .eml-w a,         .eml-w a:active {             color: #=
+417ff9;         }          .eml-w h1,         .eml-w h2,         .eml-w h3,=
+         .eml-w h4,         .eml-w h5,         .eml-w h6,         .eml-w li=
+,         .eml-w p,         .eml-w ul {             margin: 0;             =
+padding: 0;         }          /* .eml-w-item-block {             margin-bo=
+ttom: 10px;         } */         .eml-w-sale-text {           display: flex=
+;           flex-direction: column;           align-items: flex-start;     =
+      align-content: space-around;           flex-wrap: wrap;         }</st=
+yle></head><body><div><div style=3D"color: #333"><div style=3D"position: re=
+lative"><div class=3D"eml-w eml-w-sys-layout"><div style=3D"font-size: 0px"=
+><div class=3D"eml-w-sys-line"><div class=3D"eml-w-sys-line-left"></div><di=
+v class=3D"eml-w-sys-line-right"></div></div><div class=3D"eml-w-sys-logo">=
+<img src=3D"https://qn.cache.wpscdn.cn/open_kdocs/pro/assets/libs/webOffice=
+_logo_n.png" style=3D"width: 24px; height: 24px" /></div></div><div class=
+=3D"eml-w-sys-content"><div class=3D"gen-group-list"><div class=3D"gen-item=
+"><div class=3D"eml-w-item-block" style=3D"padding: 0"><div class=3D"eml-w-=
+phase-normal-16"> =E5=B0=8A=E6=95=AC=E7=9A=84=E5=BC=80=E5=8F=91=E8=80=85=EF=
+=BC=9A </div><div class=3D"eml-w-phase-normal-16"><span style=3D"margin-lef=
+t: 28px;"></span>=E6=82=A8=E5=A5=BD=EF=BC=81</div></div></div><div class=3D=
+"gen-item"><div class=3D"eml-w-item-block"><div class=3D"eml-w-phase-normal=
+-16"><p style=3D"margin-top: 0px;"><span style=3D"margin-left: 28px;"></spa=
+n> =E4=BB=8A=E5=A4=A9=E6=98=AF=E3=80=8C=E5=BC=80=E5=B7=A5=E8=8A=82=E3=80=8D=
+=E6=B4=BB=E5=8A=A8=E6=9C=80=E5=90=8E=E4=B8=80=E5=A4=A9=EF=BC=8C=E4=B8=93=E5=
+=B1=9E=E5=85=85=E5=80=BC=E7=A6=8F=E5=88=A9=E5=8D=B3=E5=B0=86=E4=BA=8E=E4=BB=
+=8A=E6=99=9A24:00=E6=88=AA=E6=AD=A2=EF=BC=81</span> =E8=BF=98=E6=B2=A1=E5=
+=8F=82=E4=B8=8E=E7=9A=84=E6=9C=8B=E5=8F=8B=EF=BC=8C=E8=AF=B7=E6=8A=93=E4=BD=
+=8F=E6=9C=80=E5=90=8E=E6=97=B6=E6=9C=BA=EF=BC=8C=E9=94=81=E5=AE=9A=E5=85=A8=
+=E5=B9=B4=E9=9A=BE=E5=BE=97=E7=9A=84=E8=B6=85=E5=80=BC=E4=BC=98=E6=83=A0=EF=
+=BC=81 <p style=3D"margin: 20px 0 5px 0;"> <span style=3D"color: #1E90FF; f=
+ont-size: 15px;font-weight: 600;">=F0=9F=92=B8=E5=BC=80=E5=B7=A5=E8=8A=82=
+=E6=B4=BB=E5=8A=A8=E4=BC=98=E6=83=A0=EF=BC=9A=E5=85=85=E5=80=BC=E5=8D=B3=E8=
+=B5=A0=EF=BC=8C=E9=87=91=E9=A2=9D=E7=9B=B4=E6=8E=A5=E5=88=B0=E8=B4=A6=EF=BC=
+=8C=E6=97=A0=E4=BD=BF=E7=94=A8=E9=99=90=E5=88=B6=EF=BC=9B=E6=8A=98=E6=89=A3=
+=E5=8A=9B=E5=BA=A6=E7=A9=BA=E5=89=8D=EF=BC=8C=E5=8A=A9=E6=82=A8=E9=99=8D=E6=
+=9C=AC=E5=A2=9E=E6=95=88=EF=BC=81</span> &nbsp;</p><p> <div class=3D"eml-w-=
+sale-text"><div style=3D"margin: 5px 28px auto;">=F0=9F=92=B0=E5=85=85=E5=
+=80=BC<span style=3D"color: #FF7F50"> 1500=E5=85=83</span>=EF=BC=8C=E7=AB=
+=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D"color: #FF7F50"> 100=E5=85=83<=
+/span>&nbsp;</div><div style=3D"margin: 5px 28px auto;">=F0=9F=92=B0=E5=85=
+=85=E5=80=BC<span style=3D"color: #FF7F50"> 3000=E5=85=83</span>=EF=BC=8C=
+=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D"color: #FF7F50"> 300=E5=
+=85=83</span>&nbsp;</div><div style=3D"margin: 5px 28px auto;">=F0=9F=92=B0=
+=E5=85=85=E5=80=BC<span style=3D"color: #FF7F50"> 6000=E5=85=83</span>=EF=
+=BC=8C=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D"color: #FF7F50"> 1=
+000=E5=85=83</span>&nbsp;</div><div style=3D"margin: 5px 28px auto;">=F0=9F=
+=92=B0=E5=85=85=E5=80=BC<span style=3D"color: #FF7F50"> 10000=E5=85=83</spa=
+n>=EF=BC=8C=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D"color: #FF7F5=
+0"> 2000=E5=85=83</span>&nbsp;</div><div style=3D"margin: 5px 28px auto;">=
+=F0=9F=92=B0=E5=85=85=E5=80=BC<span style=3D"color: #FF7F50"> 15000=E5=85=
+=83</span>=EF=BC=8C=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D"color=
+: #FF7F50"> 3500=E5=85=83</span>&nbsp;</div><div style=3D"margin: 5px 28px =
+auto;">=F0=9F=92=B0=E5=85=85=E5=80=BC<span style=3D"color: #FF7F50"> 20000=
+=E5=85=83</span>=EF=BC=8C=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81<span style=3D=
+"color: #FF7F50"> 6500=E5=85=83</span>&nbsp;</div><div style=3D"margin: 5px=
+ 28px auto;">=F0=9F=92=B0=E5=85=85=E5=80=BC<span style=3D"color: #FF7F50"> =
+=E2=89=A550000=E5=85=83</span>=EF=BC=8C=E7=AB=8B=E5=8D=B3=E8=B5=A0=E9=80=81=
+<span style=3D"color: #FF7F50"> 18000=E5=85=83</span>&nbsp;</div><div style=
+=3D"margin: 10px 0 auto;"><div style=3D"margin: 10px 28px auto;">=F0=9F=93=
+=B2 =E6=89=80=E6=9C=89=E8=B5=A0=E9=80=81=E9=87=91=E9=A2=9D=E5=B0=86=E7=9B=
+=B4=E6=8E=A5=E5=85=85=E5=85=A5=E6=82=A8=E7=9A=84=E8=B4=A6=E6=88=B7=E4=BD=99=
+=E9=A2=9D=EF=BC=8C=E6=97=A0=E9=97=A8=E6=A7=9B=EF=BC=8C=E5=8A=A9=E6=82=A8=E8=
+=BD=BB=E6=9D=BE=E5=BA=94=E5=AF=B9=E5=90=8E=E7=BB=AD=E4=B8=9A=E5=8A=A1=E6=8A=
+=95=E5=85=A5=E3=80=82=E7=AB=8B=E5=8D=B3=E5=8F=82=E4=B8=8E=EF=BC=8C=E7=82=B9=
+=E5=87=BB=E8=BF=9B=E5=85=A5<a href=3D"https://solution.wps.cn/activity/work=
+_festival_2026" style=3D"color: #FF4500;  font-size: 14px;"> =E6=B4=BB=E5=
+=8A=A8=E9=93=BE=E6=8E=A5=EF=BC=88=E7=82=B9=E5=87=BB=E6=9F=A5=E7=9C=8B=EF=BC=
+=89</a></div></div></p><p style=3D"margin-top: 6px;font-style: italic;"><sp=
+an style=3D"margin-left: 28px;"></span>=E6=9C=AC=E6=AC=A1=E6=B4=BB=E5=8A=A8=
+=E5=A6=82=E6=9C=89=E4=BB=BB=E4=BD=95=E9=97=AE=E9=A2=98=E6=88=96=E9=9C=80=E8=
+=A6=81=E6=9B=B4=E5=A4=9A=E6=94=AF=E6=8C=81=EF=BC=8C=E6=AC=A2=E8=BF=8E=E9=9A=
+=8F=E6=97=B6=E8=81=94=E7=B3=BB=E6=88=91=E4=BB=AC=E7=9A=84=E6=94=AF=E6=8C=81=
+=E5=9B=A2=E9=98=9F=EF=BC=88=E5=9B=9E=E5=A4=8D=E6=9C=AC=E9=82=AE=E4=BB=B6=E5=
+=8D=B3=E5=8F=AF=EF=BC=89=E6=88=96=E8=80=85<a href=3D"https://f.wps.cn/w/GOY=
+ajmzm/">=E7=95=99=E8=A8=80=E5=92=A8=E8=AF=A2</a>=EF=BC=8C=E6=88=91=E4=BB=AC=
+=E5=B0=86=E7=AB=AD=E8=AF=9A=E4=B8=BA=E6=82=A8=E6=8F=90=E4=BE=9B=E5=B8=AE=E5=
+=8A=A9=E5=92=8C=E6=94=AF=E6=8C=81=E3=80=82</p><p style=3D"margin-top: 20px;=
+"><span style=3D"margin-left: 28px;"></span>=E6=84=9F=E8=B0=A2=E6=82=A8=E5=
+=AF=B9WPS WebOffice=E5=BC=80=E6=94=BE=E5=B9=B3=E5=8F=B0=E7=9A=84=E6=94=AF=
+=E6=8C=81=E5=92=8C=E5=85=B3=E6=B3=A8=EF=BC=8C=E6=88=91=E4=BB=AC=E6=9C=9F=E5=
+=BE=85=E6=82=A8=E7=9A=84=E5=8F=82=E4=B8=8E=EF=BC=81</p></div></div></div></=
+div></div><div class=3D"eml-w-sys-footer">WPS WebOffice=E5=BC=80=E6=94=BE=
+=E5=B9=B3=E5=8F=B0=E5=9B=A2=E9=98=9F</div></div></div></div></div></body>

@@ -1,0 +1,21 @@
+{
+  "message_id": "<69b8f6ba6f1f2_b11118100427@sharedworker-d887d9d87-r7b4p.mail>",
+  "imap_uid": "2856",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "[GitHub] A third-party OAuth application has been added to your\r\n account",
+  "sender": "noreply@github.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-16T23:37:46-07:00",
+  "body_text": "Hey lgwanai!\r\n\r\nA third-party OAuth application (anyrouter) with user:email scopes was recently authorized to access your account.\r\nVisit https://github.com/settings/connections/applications/Ov23liOwlnIiYoF3bUqw for more information.\r\n\r\nTo see this and other security events for your account, visit https://github.com/settings/security-log\r\n\r\nIf you run into problems, please contact support by visiting https://github.com/contact\r\n\r\nThanks,\r\nThe GitHub Team\r\n\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/69b8f6ba6f1f2_b11118100427sharedworker-d887d9d87-r7b4p.mail.eml"
+}

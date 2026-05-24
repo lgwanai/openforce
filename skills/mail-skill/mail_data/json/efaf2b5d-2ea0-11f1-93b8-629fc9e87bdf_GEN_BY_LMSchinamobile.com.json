@@ -1,0 +1,40 @@
+{
+  "message_id": "<efaf2b5d-2ea0-11f1-93b8-629fc9e87bdf_GEN_BY_LMS@chinamobile.com>",
+  "imap_uid": "2971",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "今日SQL文件（3个）",
+  "sender": "wuliangds@chinamobile.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-02T22:33:37+08:00",
+  "body_text": "你好，请查收今天生成的3个SQL文件。\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "weekly_create_time_ranges_2023_to_today.sql",
+      "content_type": "application/x-sql",
+      "size": 28000,
+      "local_path": "./mail_data/attachments/<efaf2b5d-2ea0-11f1-93b8-629fc9e87bdf_GEN_BY_LMS@chinamobile.com>/weekly_create_time_ranges_2023_to_today.sql"
+    },
+    {
+      "filename": "price_bucket_stats_23_to_25.sql",
+      "content_type": "application/x-sql",
+      "size": 3002,
+      "local_path": "./mail_data/attachments/<efaf2b5d-2ea0-11f1-93b8-629fc9e87bdf_GEN_BY_LMS@chinamobile.com>/price_bucket_stats_23_to_25.sql"
+    },
+    {
+      "filename": "supplier_annual_service_fee.sql",
+      "content_type": "application/x-sql",
+      "size": 2896,
+      "local_path": "./mail_data/attachments/<efaf2b5d-2ea0-11f1-93b8-629fc9e87bdf_GEN_BY_LMS@chinamobile.com>/supplier_annual_service_fee.sql"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/efaf2b5d-2ea0-11f1-93b8-629fc9e87bdf_GEN_BY_LMSchinamobile.com.eml"
+}

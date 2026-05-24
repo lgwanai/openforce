@@ -1,0 +1,21 @@
+{
+  "message_id": "<69cc5174a8793_f71108187ae@flexworker-54cd7bd9cb-dx9k2.mail>",
+  "imap_uid": "2956",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "[GitHub] Your personal access token (classic) is about to expire",
+  "sender": "noreply@github.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-31T15:57:56-07:00",
+  "body_text": "Hi @lgwanai,\r\n\r\nWe noticed your personal access token (classic) \"openclaw\" with admin:org, gist, notifications, project, repo, user, and workflow scopes will expire in 7 days.\r\n\r\nIf this token is still needed, visit https://github.com/settings/tokens/3676247976/regenerate to generate an equivalent.\r\n\r\nIf you run into problems, please contact support by visiting https://github.com/contact\r\n\r\nThanks,\r\nThe GitHub Team\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/69cc5174a8793_f71108187aeflexworker-54cd7bd9cb-dx9k2.mail.eml"
+}

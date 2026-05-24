@@ -1,0 +1,644 @@
+Accept-Language: en-US
+Arc-Authentication-Results: i=2; lms; spf=pass (client-ip:52.101.126.46)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=F1kKFZ91n+
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Arc-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmw-brilliance.cn; dmarc=pass action=none
+ header.from=bmw-brilliance.cn; dkim=pass header.d=bmw-brilliance.cn;
+ arc=none
+Arc-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=i4VPBfAj7p4Yd6w36GykX0vzd5R5S1b1aiHqPKdiUP8=;
+ b=AyhJ+KUfy5HxnShjivUsKH+iM3K0orugGhLMvKY15gZIeUNTIKEJgOmZKZW8QiA9kGLUJRY
+ 4KTGLKiU4CGfclTMnCQQOV6HCQE3gmoXeFr+Y8WVDlpsdE6Ffo9DRVPnJz7uLWP2SBpomum/+
+ kw1xnqyDni1O13TTp0tP+U7IV5bXbhrQJbBSij2iSZG9ktpMTg7Va9Hg7ZI4s7DEpwJ7ApQ7u
+ R8La1z7+gKGC55jNUgtFrTa64vLX/rP3q+2jfSHsKrUUJ4qwiWGgdpCuMBgjjBmHUTbdmFyex
+ pthyyhbF2skx+R+P6zvrBwnts+1R0WhmzfNdJ8y6YYLcY7x6gd2A==
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microsoft.com; s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=i4VPBfAj7p4Yd6w36GykX0vzd5R5S1b1aiHqPKdiUP8=;
+ b=YfD028Afscz7er7qkW2CAhRvd7As2v/mnLXfrKbUHP0OjiL4wfHeWFk5P9UOHQfoofmZ4BANXBUu46jOxQAnSAuDwKRI/m6dSnzRn29D+Cw3g4MBXt0DlOYiAbEbI1ijH7+Levc8+smpF+vsHsRpcSDHdyibClSQ8nWZnwUeguSHEjmDupKZP+znRpTVRwz1d9DKzgEy4rTAQ9WYafk5UWn3KahlwB0XIhl6C9lNrmx37palYpwzqxCunxIFt2Px8cKQNmnbT030GMQTAOW0q5lkaXr4Y5GChhSWgO5spm5VWDA3drbezQSUnQFgAVkziFS1mLWz/I7yn3kVfqJoRw==
+Arc-Seal: i=2; a=rsa-sha256; t=1776664210; d=larksuite.com; s=arc230412;
+ cv=pass;
+ b=Jp6Ptjuabr+8Gt67zphXDsVnZ+Wc+bSIPAXoCSs4AzMmztrYGPLE1RShfqtX+0BM2viJoVi
+ ld1Edy5S3trO7i0NO9crh4uLhnNjofgMMvIRHTCSn0f8I5WVXiABPn2bGjJcCshAkSzEh612+
+ AHVZaGvmagm7NTAfbCYFChxZNLFcsRl1cZnBNR24xKNLU12UDrvKX1vRpTIjrFtp+RgUDMB7t
+ 3VI18q51hKEEy4bgIwAKUwgw1BLYZMwT0ubusUnYnEDEEaNAdOSn7ipxTpzi53fGHuumZsHzF
+ VBRaN8OifYl67VwL/SfU1u2uG3VhT15a0R4fo8+ijC3e9t8cBAfA==
+Arc-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kSiq2Bdj/BM3bXb5T16w/0gfzHxeqctIPaoINpJCmU0ljmiZHIX596DJa8Cs5mToPdCQGvtEtWNzfi2G+xwy2+uwREe74BCpQlV6lgOSV0qQSD2D14YCGY6rkQY3RGm67TfJYyDfVj2BGDb5w1XzZqPd20NPxToZwhyCb/G3UfE9127iTrv2g3HgH+G2kuBTx83hy/cqCrEy1EMDVw6s+A01yjCjxUb/fWttz5paZsv/27hz+fokYKFGHoWiaa1LRr2d25IQIFDeIt1fHYLXIGdbwt1nbKvww58dLcw0y6gUcKq/nvT9Z7qD8lzABeoqczV+NjdiXs5/cZXP+1dpNw==
+Authentication-Results: lms; spf=pass (client-ip:52.101.126.46)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=F1kKFZ91n+
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmw-brilliance.cn;
+Content-Class: 
+Content-Language: en-US
+Content-Type: multipart/alternative;
+ boundary="_000_KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2KL1PR0401MB4274_"
+Date: Mon, 20 Apr 2026 05:50:02 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmw-brilliance.cn;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=i4VPBfAj7p4Yd6w36GykX0vzd5R5S1b1aiHqPKdiUP8=;
+ b=F1kKFZ91n+3fmlI1eyiZ8OXaG404dB66cOMUAsnoz1oZ8QuiqVkJUAPBfsx/QeRjY01momkgMMbyVnhBD0wpbzy+A+20qtfBuewIYB34slneXv+5SARncFKaQTQwfCkRCbk6MI/THfoayx5D5v3unH4eyRAu8c22TnrVzdnYuaVOQs/kSl0TJnYVJNJlXLyLSHRpX1ZKxCDhewJaP7iz7EximN7SVZ3FACjx+Ic1BvfYpOfJsV27AmAwKN6b9QPZhCi/iJoqPmbkb/5DVzPQ4ghs/V2JRTpOrSYNJkYZJw2i5p+7A7iUEJ1cB74CwpnJ07pv0VU/TGfX2gCLK45MAQ==
+From: "Liu Adah, BBH-1A-1" <Jiayang.Liu@bmw-brilliance.cn>
+In-Reply-To: 
+ <KL1PR0401MB4274162B3281508A8ABCC68FB848A@KL1PR0401MB4274.apcprd04.prod.outlook.com>
+Message-Id: 
+ <KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2@KL1PR0401MB4274.apcprd04.prod.outlook.com>
+Mime-Version: 1.0
+Msip_labels: 
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ (2603:1096:820:26::13) by TYZPR04MB6613.apcprd04.prod.outlook.com
+ (2603:1096:400:261::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Mon, 20 Apr
+ 2026 05:50:03 +0000
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422]) by KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422%6]) with mapi id 15.20.9818.032; Mon, 20 Apr
+ 2026 05:50:02 +0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=52.101.126.46;
+ helo=TYPPR03CU001.outbound.protection.outlook.com;
+ envelope-from=Jiayang.Liu@bmw-brilliance.cn; receiver=<UNKNOWN>;
+References: 
+ <KL1PR0401MB4274162B3281508A8ABCC68FB848A@KL1PR0401MB4274.apcprd04.prod.outlook.com>
+Subject: FW: AI EASY OFFICE LEARNING CAMP 2026
+Thread-Index: AQHc0ImH38QOEORdRceCMNWVdWa70A==
+Thread-Topic: AI EASY OFFICE LEARNING CAMP 2026
+To: =?gb2312?B?1tzJug==?= <sue@woshipm.com>, =?gb2312?B?0e7T6vbO?=
+ <daisy_yang@woshipm.com>, =?gb2312?B?zuLBwQ==?= <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776664205/4fzZMK5q7xz1dL5jd/69E5BE8D.001/52.101.126.46/mail-japaneastazon11012046.outbound.protection.outlook.com/localhost/<Jiayang.Liu@bmw-brilliance.cn>
+X-Fangmail-Mid-Qid: 69E5BE8D.001/4fzZMK5q7xz1dL5jd
+X-Fangmail-Miltered: at n206-112-029 with ID 69E5BE8D.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Forefront-Antispam-Report: 
+ CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:KL1PR0401MB4274.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(8096899003)(38070700021)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-Lms-Client-Ip: 52.101.126.46
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: Jiayang.Liu@bmw-brilliance.cn
+X-Lms-Pvf: 
+ MnwyfDF8fD7GZjoQ7PXDhy5A2+KsUZn7h7pk2rnWQLSmi1S4H7g90vcslq3NFOLowR6uVRqNVWKVCAXndHQ0JX+FHCnHxr/YXUhvB8Jvt903PolP5gEhS6HIuGV9t8oa/oiwW9VPAQ==
+X-Microsoft-Antispam: 
+ BCL:0;ARA:13230040|1800799024|366016|376014|8096899003|38070700021|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+ xbdADq0MH8Xrz0ErPzEzFSulOkSO4fpYQZvPcBAfLE+2/+ycQL4lVSQgh8W3MW6TVxZD5fkRN8swbcDYCqzHnKWDIJ3cyLwTWWftBkCYKwq/mB/E2xlHM2oAk85mzkASSW7Hl0ahK2gbS9/5W7qQsmtEOkWkkW8aKZoZOUKrnQ1FktTToV30F3gdQOpHj2pEiN+xIrd0PCwaduPWvOVI2rMs1VHmU+7XY52eWQgfEt20Mpw/Xhz0Z6mwm+1eGGOLUNkw/GMMLPtbreNpuarSGg15wmQsGiJ+rEDiQrosZ42HQ03ZjeOvp9kO+xPqk4WyaCM33ud717+JwnL3VMda1oR2s6mHlicsduk8DEUZT1zKhQNbIkAL6lbDMwmXLQ16rvf3Q5V1y4B/BpG0bI4ie4iejgeaZgHi4y4FSx1rIm6x5Mf4abRgcQUDk9ANBm0bIouMfMsTtaboJ98PZ/OthG9EsjpSvtLIfCGln1kFNqRisWeYC3Q9a6Svo3fjP6W6foqXZGN5wkVCBOkj76OAMO3ritUjGW8CDbi7woLee0/Qwtqsm4F4vpHN4H3eXNRT075dtwbr8cjzgMN5dpdv6QdJkxpHVDkHS7P0YEwqu4cfQ2dSZL9cqXK7emRSVDHDrSuam5nHPx+6NmnafJ42xSgHy5eXOnmPH+6BN2L+tH5vzbChG/7f8fCPlStd1Ygw51KZixznrPGHle2X/PEUDjwZHC7u5yYy2XZ+l/fvMiz+xPojJENFMfMnWoeWbhWX
+X-Ms-Exchange-Antispam-Messagedata-0: 
+ =?gb2312?B?TUxRclg0K1ZIak5UQUxkRXM4cTFJbDA1OW1uRnJMM04wcXFRNmVBRnlUaC93?=
+ =?gb2312?B?TDBwRHRuZGZGaE4wUkhhWWRhSkpqamMwUVlvd2EvTjZXNXRnRDJMWWlYUC9L?=
+ =?gb2312?B?WmJXdXl1MjEwZnljSmJBemRhaHNSSzlVM1hVT2R0M1pjbUJ6OE5nZlJmTEsy?=
+ =?gb2312?B?NWx2V2o4TWdidTdXYlV0QnRNWGdvWUt6U2hQQ242R3A0aVNQYmNRTDJ1azBM?=
+ =?gb2312?B?a0RHQW14dTk0bUNrdklGQk02Uk5hM1VxdVdoQzNid3VkeFUxV2VTWEx5NVlD?=
+ =?gb2312?B?dlBSQm9mdGNJbHdoR2tOQ2REaVFINFlCb2dtRXNLT3ZTN1VQNCtxcVBIblpa?=
+ =?gb2312?B?ckIyblYxTmZOcnIvdWRyeUxpSnVBN2R4anFhM3pjUDdQbmdMV1huZThldWEr?=
+ =?gb2312?B?OXVjMzcrM250OE54Szc2NUZkb1lvaGMrdXg2aytwa0MwNkZWUFBNR1ZxT0Yr?=
+ =?gb2312?B?bVJ0VVNMei90Sk1lV1BraFVjSktPVGNGSjVFdkxDUzhGdVljSjN6dUZrVC9h?=
+ =?gb2312?B?ejR3Qm5JY1JDK3Q5UGlHTG03OGVQL1UzVGw5Q0dJKzVjWG5PNVRxWSs0UFR0?=
+ =?gb2312?B?Z3NTNWdpUFJnUUgvZTZqQ2JjQnBNNU5qYVluSUg2QzRTLzFVVTluc1NNNUNC?=
+ =?gb2312?B?RUNxYktxNVdHZzh1bWxUclJSYzVFVjQwZGZEdmd2SG5XVmRobkpzYlgrL2JQ?=
+ =?gb2312?B?eHA5S1lFenorUGpGVHBndnFsUnk0NXBBQ2xUMGNzRlE3YTczSDVFMWFQZW9O?=
+ =?gb2312?B?YXpSejdyckFvMDI3eS85WG5ZTER3cWFxa3FIRHpCS1h4eWtWRE55dklBMm45?=
+ =?gb2312?B?c0IrR1U1SUtIQllvWWZsaGswUTRiL3BxcFJndW5VQkxTRG1pVnpYOHhFa2JI?=
+ =?gb2312?B?c3E0MGFDdllNeDlhclpwbGIvMkJmTE1IbnRwUVNvN1RiaG0wQzhOSElxRGQ4?=
+ =?gb2312?B?OWhLMVRFbVBySk9vT25rU09BZk9FaFQ3OXcyQW9wVTFVcDltNFlNcDlVbUYx?=
+ =?gb2312?B?TFh4UE0wN0lnVDFiWlAway90bURtS0lPcFdSTmZnZzJBUnZ0M3prYlN1TmN1?=
+ =?gb2312?B?SDJ1RzZRTHJtcE9IQlF2U3IxOTdSajYwQk1maEVUd1MrRjVUSWU4NlVGaVYv?=
+ =?gb2312?B?WUdtejVEUkVORldCdW4yNkdLS1F0VjR5QThkNXQrblRNOHpjWk9VV3FmdmpP?=
+ =?gb2312?B?YnFDY1ZTdWltWnVyZytrbjNHNG5FRDRyeGpvU1NZaXBSV0hrOWxBdXJpbktL?=
+ =?gb2312?B?clFXZTBTZXhodHJaTG9pMExLS2xWOFcxMTFTdjZRaVhYLyswQkJ0alRnQzZM?=
+ =?gb2312?B?TVRqR3JjV3VqbDVETGp0Q1NacVNrS1owWW9mUU42YWM3M3JRZmlNY2ZkQVgz?=
+ =?gb2312?B?YUp1VWJGOEozc0k0RUhVblVjaU5vOVB0TWZSRjhiRm43WW1XTy9pbjE2a2xS?=
+ =?gb2312?B?R2ZNOEY1d3dUTllTd2xKRVJoTnFjTmlPK2ljN01iUE5vRWZoS25iSy9qQkUy?=
+ =?gb2312?B?b1hzWWhOTlIweE5BSWNRNjBYOXc2TmJySnYwK2k5YlFRRkRLNHJUUU9hNWV6?=
+ =?gb2312?B?VEo4S2hiSDVES2hvQUFDSmlIQldhWE5QM3lQTkczMEtzYXVJa2FrUkxqZW9R?=
+ =?gb2312?B?WXF1RTM4V0EvanRQTzdhZFZiTGhwc0FUcURNTXNONzRwTHIxWnBIVU4veHdl?=
+ =?gb2312?B?cjlIZThvV1JsZURsQXBoZkxUSXJWWkVTR3ZCN0EzTDBjeXJicVdwSitiSGht?=
+ =?gb2312?B?dDNsK284N2kxZTV0M0hja1pwYkMrR2xjaDBQdTN6ZEJiT3pRaFlFdnF0WjZh?=
+ =?gb2312?B?TkQyRVk3R0RjZTY1Y2dLYTh6THNHa3BHY09PcFpZUU9HMHFuQWZqOUI3MTdG?=
+ =?gb2312?B?TCtTVFVyY1B6SHJDQVFJWTFNZGM5SzNKS0x1U1FkZ0RNU2dtSlB3NkVtYnE3?=
+ =?gb2312?B?elhvdXNsV2J4VWZjTUc2b090SVBaNnQrdVMvYWJuYUwxVnB6MXRjQVpZZzhX?=
+ =?gb2312?B?dHVFcHIxNWozbDg1bDF6dXRBcCtGR1lwQnBLREs5WWQ0Umk2cHowMzRXaHhj?=
+ =?gb2312?B?S0s2R2g5TU85VTROMlgrbHJhY0VyMlNnakJ3dWJHSFJ1MDdRZUd3cjlkanpG?=
+ =?gb2312?B?ZEZPRXJZRnlzU2NZTjQ3ZVNmOC9DWjNoUDBKaEVyRHNUR3ZwVWVWQU1zYmtq?=
+ =?gb2312?B?SHdrWWNmQ0dDRHBld1FCMGVNUWJEU3FWT1Y3RFhpTTZLL2k5SmZDblZLSGkw?=
+ =?gb2312?B?UmIvVkZlamFVTm5PZTFidU43QldraDRLVU8yN28rVllLVE50bzhWYXprcWtJ?=
+ =?gb2312?B?elcwdE5JZTFXdVplVmtNVllNdzgyR1I3eFI0QnVVK0FDWUluN1dONWFkTHg0?=
+ =?gb2312?Q?pkvdvMjapNG9JM00=3D?=
+X-Ms-Exchange-Antispam-Messagedata-Chunkcount: 1
+X-Ms-Exchange-Antispam-Relay: 0
+X-Ms-Exchange-Calendar-Series-Instance-Id: 
+ BAAAAIIA4AB0xbcQGoLgCAAAAABggBJXj7vcAQAAAAAAAAAAEAAAAG6FO0KUNpdBvD1kQr/3/uI=
+X-Ms-Exchange-Crosstenant-Authas: Internal
+X-Ms-Exchange-Crosstenant-Authsource: 
+ KL1PR0401MB4274.apcprd04.prod.outlook.com
+X-Ms-Exchange-Crosstenant-Fromentityheader: Hosted
+X-Ms-Exchange-Crosstenant-Id: 698b0e46-51c0-4d3b-a023-16f2b23b8c1e
+X-Ms-Exchange-Crosstenant-Mailboxtype: HOSTED
+X-Ms-Exchange-Crosstenant-Network-Message-Id: 
+ 92e731bb-a86a-4a85-dabb-08de9ea0aa61
+X-Ms-Exchange-Crosstenant-Originalarrivaltime: 20 Apr 2026 05:50:02.2485
+ (UTC)
+X-Ms-Exchange-Crosstenant-Userprincipalname: 
+ W+tYfD7eCr+/o7ksGWehAIm8QYPDPJsCA8ciLHAsUmZ6oQ5ml4E7Weersqb7QplLQWmLHHoSmNss/F2+MmH/zYU9pvpXXCOLMi0Pj5cI9fg=
+X-Ms-Exchange-Meetingforward-Message: Forward
+X-Ms-Exchange-Messagesentrepresentingtype: 2
+X-Ms-Exchange-Senderadcheck: 1
+X-Ms-Exchange-Transport-Crosstenantheadersstamped: TYZPR04MB6613
+X-Ms-Has-Attach: 
+X-Ms-Office365-Filtering-Correlation-Id: 92e731bb-a86a-4a85-dabb-08de9ea0aa61
+X-Ms-Publictraffictype: Email
+X-Ms-Tnef-Correlator: 
+X-Ms-Traffictypediagnostic: 
+ KL1PR0401MB4274:EE_MeetingMessage|TYZPR04MB6613:EE_MeetingMessage
+X-Originatororg: bmw-brilliance.cn
+
+--_000_KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2KL1PR0401MB4274_
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
+
+RGVhcnMsIEFJIENBTVC1xLvh0unBtL3TDQrH6zEytePW06Osyc/P39f2suLK1KOs0LvQu6OhDQoN
+Ci0tLS0tT3JpZ2luYWwgQXBwb2ludG1lbnQtLS0tLQ0KRnJvbTogVGhlIEFjYWRlbXkgPFRoZS5B
+Y2FkZW15QGJtdy1icmlsbGlhbmNlLmNuPg0KU2VudDogVHVlc2RheSwgTWFyY2ggMjQsIDIwMjYg
+MToxMiBQTQ0KVG86IFRoZSBBY2FkZW15OyBMaXUgQWRhaCwgQkJILTFBLTENCkNjOiBIdSBYaXVx
+dWFuLCBCQkgtMUEtMSjBycT+zeLBqsbz0rW53MDt09DP3rmry74pDQpTdWJqZWN0OiBBSSBFQVNZ
+IE9GRklDRSBMRUFSTklORyBDQU1QIDIwMjYNCldoZW46IE9jY3VycyBldmVyeSBkYXkgZWZmZWN0
+aXZlIDQvMjEvMjAyNiB1bnRpbCA0LzI0LzIwMjYgZnJvbSAxMjozMCBQTSB0byAxOjQ1IFBNIChV
+VEMrMDg6MDApIEJlaWppbmcsIENob25ncWluZywgSG9uZyBLb25nLCBVcnVtcWkuDQpXaGVyZTog
+TWljcm9zb2Z0IFRlYW1zILvh0ukNCg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KTWljcm9z
+b2Z0IFRlYW1zILvh0ukNCsq508O158TUoaLSxrav06bTw7vyu+HS6crSyeixuLzTyOsNCrWlu/e0
+y7Sm0tS808jru+HS6TxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbC9tZWV0dXAtam9pbi8x
+OSUzYW1lZXRpbmdfTVRrek9EUmxaVEV0TURoaE1pMDBNalJtTFdJNE5qY3RaakJoWVRaall6TTJP
+VFpsJTQwdGhyZWFkLnYyLzA/Y29udGV4dD0lN2IlMjJUaWQlMjIlM2ElMjI2OThiMGU0Ni01MWMw
+LTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUlMjIlMmMlMjJPaWQlMjIlM2ElMjI1ZTFjNzdhZS05ZDI5
+LTRmZDItOWEwNi1mYmQwOGNiY2U3ZWElMjIlN2Q+DQq74dLpIElEOiA0NzMgMjc1IDYzOSAzMjUg
+NDgNCsPcwus6IHJGOXZ3MjVIDQrPwtTYIFRlYW1zPGh0dHBzOi8vd3d3Lm1pY3Jvc29mdC5jb20v
+ZW4tdXMvbWljcm9zb2Z0LXRlYW1zL2Rvd25sb2FkLWFwcD4gfCDU2iB3ZWIgyc+808jrPGh0dHBz
+Oi8vd3d3Lm1pY3Jvc29mdC5jb20vbWljcm9zb2Z0LXRlYW1zL2pvaW4tYS1tZWV0aW5nPg0KyrnT
+w8rTxrW74dLpyeixuLzTyOsNCjUwMDBAdmN0LmJtdy1icmlsbGlhbmNlLmNuPG1haWx0bzo1MDAw
+QHZjdC5ibXctYnJpbGxpYW5jZS5jbj4NCsrTxrW74dLpIElEOiAxMzYgNTQzIDE0MSAzDQqxuNPD
+IFZUQyDLtcP3PGh0dHBzOi8vdmlkZW9lZGdwb29sLnZjdC5ibXctYnJpbGxpYW5jZS5jbi90ZWFt
+cy8/Y29uZj0xMzY1NDMxNDEzJml2cj01MDAwJmQ9dmN0LmJtdy1icmlsbGlhbmNlLmNuJmlwPTIx
+OC4xMDYuMTk0LjE2MCZ0ZXN0PXRlc3RfY2FsbCZ3Pg0Ku/K69MjrKL320vTGtSkNCis4NiA0MDAg
+OTE5IDk2NDUsLDgyOTI2MDQ5MSM8dGVsOis4NjQwMDkxOTk2NDUsLDgyOTI2MDQ5MSM+DQogINbQ
+ufosIEFsbCBsb2NhdGlvbnMNCis4NiA0MDAgOTE5IDk2NDcsLDgyOTI2MDQ5MSM8dGVsOis4NjQw
+MDkxOTk2NDcsLDgyOTI2MDQ5MSM+DQogINbQufosIEFsbCBsb2NhdGlvbnMNCrXnu7C74dLpIElE
+OiA4MjkgMjYwIDQ5MSMNCrLp1dKxvrXYusXC6zxodHRwczovL2RpYWxpbi50ZWFtcy5taWNyb3Nv
+ZnQuY29tLzU3MTNkYjlhLThjMTMtNGMyMy05NWNhLTllY2UxNTQxYThhNj9pZD04MjkyNjA0OTE+
+IHwg1tjWwyBQSU48aHR0cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zb2Z0LmNvbS91c3AvcHN0bmNv
+bmZlcmVuY2luZz4NCkZvciBhYmlkaW5nIGJ5IHRoZSBCQkEgSW5zdHJ1Y3Rpb24gb24gSW5mb3Jt
+YXRpb24gU2VjdXJpdHkgYW5kIEN5YmVyIFNlY3VyaXR5LCBwbGVhc2UgaW5mb3JtIHBhcnRpY2lw
+YW50cyBiZWZvcmUgcmVjb3JkaW5nIG9yIHRyYW5zY3JpcHRpb24gZHVyaW5nIG1lZXRpbmdzLg0K
+wcu94rj8tuA8aHR0cHM6Ly9ha2EubXMvSm9pblRlYW1zTWVldGluZz4gfCC74dLp0aHP7jxodHRw
+czovL3RlYW1zLm1pY3Jvc29mdC5jb20vbWVldGluZ09wdGlvbnMvP29yZ2FuaXplcklkPTVlMWM3
+N2FlLTlkMjktNGZkMi05YTA2LWZiZDA4Y2JjZTdlYSZ0ZW5hbnRJZD02OThiMGU0Ni01MWMwLTRk
+M2ItYTAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVldGluZ19NVGt6T0RSbFpURXRNRGho
+TWkwME1qUm1MV0k0TmpjdFpqQmhZVFpqWXpNMk9UWmxAdGhyZWFkLnYyJm1lc3NhZ2VJZD0wJmxh
+bmd1YWdlPXpoLUNOPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCg0K
+
+--_000_KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2KL1PR0401MB4274_
+Content-Type: text/html; charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:=CB=CE=CC=E5;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"\@=CB=CE=CC=E5";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"BMWGroupTN Condensed TT";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"BMW Type Global Regular";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"\@BMW Type Global Regular";}
+@font-face
+	{font-family:=CE=A2=C8=ED=D1=C5=BA=DA;
+	panose-1:2 11 5 3 2 2 4 2 2 4;}
+@font-face
+	{font-family:"\@=CE=A2=C8=ED=D1=C5=BA=DA";}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#467886;
+	text-decoration:underline;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"BMWGroupTN Condensed TT";
+	color:windowtext;
+	font-weight:normal;
+	font-style:normal;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;">Dears, AI CAMP</span><span lang=3D"ZH-CN" styl=
+e=3D"font-size:11.0pt;font-family:&quot;BMW Type Global Regular&quot;">=B5=
+=C4=BB=E1=D2=E9=C1=B4=BD=D3</span><span style=3D"font-size:11.0pt;font-fami=
+ly:&quot;BMWGroupTN Condensed TT&quot;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-=
+family:&quot;BMW Type Global Regular&quot;">=C7=EB</span><span style=3D"fon=
+t-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;">12</span><sp=
+an lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW Type Glob=
+al Regular&quot;">=B5=E3=D6=D3=A3=AC=C9=CF=CF=DF=D7=F6=B2=E2=CA=D4=A3=AC=D0=
+=BB=D0=BB=A3=A1</span><span style=3D"font-size:11.0pt;font-family:&quot;BMW=
+GroupTN Condensed TT&quot;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;"><o:p>&nbsp;</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,sans-serif;mso-ligatures:none">-----Original Appointment-----<b=
+r>
+<b>From:</b> The Academy &lt;The.Academy@bmw-brilliance.cn&gt; <br>
+<b>Sent:</b> Tuesday, March 24, 2026 1:12 PM<br>
+<b>To:</b> The Academy; Liu Adah, BBH-1A-1<br>
+<b>Cc:</b> Hu Xiuquan, BBH-1A-1(</span><span lang=3D"ZH-CN" style=3D"font-s=
+ize:11.0pt;font-family:=CB=CE=CC=E5;mso-ligatures:none">=C1=C9=C4=FE=CD=E2=
+=C1=AA=C6=F3=D2=B5=B9=DC=C0=ED=D3=D0=CF=DE=B9=AB=CB=BE</span><span style=3D=
+"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;mso-ligatures:=
+none">)<br>
+<b>Subject:</b> AI EASY OFFICE LEARNING CAMP 2026<br>
+<b>When:</b> Occurs every day effective 4/21/2026 until 4/24/2026 from 12:3=
+0 PM to 1:45 PM (UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi.<br>
+<b>Where:</b> Microsoft Teams </span><span lang=3D"ZH-CN" style=3D"font-siz=
+e:11.0pt;font-family:=CB=CE=CC=E5;mso-ligatures:none">=BB=E1=D2=E9</span><s=
+pan style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;ms=
+o-ligatures:none"><o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><o:p>&nbsp;</o:p></=
+span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#5F5F5F">______________________=
+__________________________________________________________</span>
+<span style=3D"mso-ligatures:none"><o:p></o:p></span></p>
+</div>
+<div>
+<div style=3D"margin-top:.25in;margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:18.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Microsoft Teams
+</span><span lang=3D"ZH-CN" style=3D"font-size:18.0pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=BB=E1=D2=E9</span><s=
+pan lang=3D"ZH-CN" style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;col=
+or:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:15.0pt">
+<div>
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=CA=B9=D3=C3=B5=E7=C4=D4=A1=A2=D2=C6=B6=AF=D3=A6=D3=C3=BB=F2=BB=E1=D2=E9=CA=
+=D2=C9=E8=B1=B8=BC=D3=C8=EB</span></b><b><span lang=3D"ZH-CN" style=3D"font=
+-family:&quot;Segoe UI&quot;,sans-serif;color:#252424">
+</span></b><b><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;co=
+lor:#252424"><o:p></o:p></span></b></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://teams.microsoft.com/l/meetup-join/=
+19%3ameeting_MTkzODRlZTEtMDhhMi00MjRmLWI4NjctZjBhYTZjYzM2OTZl%40thread.v2/0=
+?context=3D%7b%22Tid%22%3a%22698b0e46-51c0-4d3b-a023-16f2b23b8c1e%22%2c%22O=
+id%22%3a%225e1c77ae-9d29-4fd2-9a06-fbd08cbce7ea%22%7d" target=3D"_blank"><s=
+pan lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=
+=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=B5=A5=BB=F7=B4=CB=B4=A6=D2=D4=
+=BC=D3=C8=EB=BB=E1=D2=E9</span></a>
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-top:15.0pt;margin-bottom:15.0pt">
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=BB=
+=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&=
+quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">473 275 639 325 48</span><span style=3D"font-size:10.5pt;font-family:=
+&quot;Segoe UI&quot;,sans-serif;color:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><br>
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=C3=DC=C2=EB</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">rF9vw25H <o:p>
+</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://www.microsoft.com=
+/en-us/microsoft-teams/download-app" target=3D"_blank"><span lang=3D"ZH-CN"=
+ style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color=
+:#6264A7">=CF=C2=D4=D8</span><span style=3D"color:#6264A7">
+ Teams</span></a> | <a href=3D"https://www.microsoft.com/microsoft-teams/jo=
+in-a-meeting" target=3D"_blank">
+<span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&qu=
+ot;,sans-serif;color:#6264A7">=D4=DA</span><span style=3D"color:#6264A7"> w=
+eb
+</span><span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#6264A7">=C9=CF=BC=D3=C8=EB</span></a><o:p></=
+o:p></span></p>
+</div>
+</div>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=CA=B9=D3=C3=CA=D3=C6=B5=BB=E1=D2=E9=C9=E8=B1=B8=BC=D3=C8=EB</span></b><spa=
+n lang=3D"ZH-CN" style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color=
+:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"mailto:5000@vct.bmw-brill=
+iance.cn">5000@vct.bmw-brilliance.cn</a>
+<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=CA=
+=D3=C6=B5=BB=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&qu=
+ot;Segoe UI&quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">136 543 141 3
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://videoedgpool.vct.=
+bmw-brilliance.cn/teams/?conf=3D1365431413&amp;ivr=3D5000&amp;d=3Dvct.bmw-b=
+rilliance.cn&amp;ip=3D218.106.194.160&amp;test=3Dtest_call&amp;w"><span lan=
+g=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-=
+serif;color:#6264A7">=B1=B8=D3=C3</span><span style=3D"color:#6264A7">
+ VTC </span><span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=
+=C5=BA=DA&quot;,sans-serif;color:#6264A7">=CB=B5=C3=F7</span></a>
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=BB=F2=BA=F4=C8=EB</span></b><b><span style=3D"font-size:10.5pt;font-family=
+:&quot;Segoe UI&quot;,sans-serif;color:#252424">(</span></b><b><span lang=
+=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#252424">=BD=F6=D2=F4=C6=B5</span></b><b><spa=
+n style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;col=
+or:#252424">)</span></b><span style=3D"font-family:&quot;Segoe UI&quot;,san=
+s-serif;color:#252424">
+<o:p></o:p></span></p>
+</div>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"3" cellpadding=
+=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199645,,829260491# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9645,,829260491#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp;
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=D6=D0=B9=FA</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199647,,829260491# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9647,,829260491#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp;
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=D6=D0=B9=FA</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=B5=
+=E7=BB=B0=BB=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&qu=
+ot;Segoe UI&quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">829 260 491#
+<o:p></o:p></span></p>
+<div style=3D"margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://dialin.teams.microsoft.com/5713db9=
+a-8c13-4c23-95ca-9ece1541a8a6?id=3D829260491" target=3D"_blank"><span lang=
+=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#6264A7">=B2=E9=D5=D2=B1=BE=B5=D8=BA=C5=C2=EB=
+</span></a>
+ | <a href=3D"https://dialin.teams.microsoft.com/usp/pstnconferencing" targ=
+et=3D"_blank">
+<span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=
+=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=D6=D8=D6=C3</span><span st=
+yle=3D"font-size:10.5pt;color:#6264A7"> PIN</span></a>
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">For abiding by the BBA Instruction o=
+n Information Security and Cyber Security, please inform participants befor=
+e recording or transcription during meetings.
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-top:15.0pt;margin-bottom:.25in">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://aka.ms/JoinTeamsMeeting" target=3D=
+"_blank"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=
+=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=C1=CB=BD=E2=B8=FC=
+=B6=E0</span></a> |
+<a href=3D"https://teams.microsoft.com/meetingOptions/?organizerId=3D5e1c77=
+ae-9d29-4fd2-9a06-fbd08cbce7ea&amp;tenantId=3D698b0e46-51c0-4d3b-a023-16f2b=
+23b8c1e&amp;threadId=3D19_meeting_MTkzODRlZTEtMDhhMi00MjRmLWI4NjctZjBhYTZjY=
+zM2OTZl@thread.v2&amp;messageId=3D0&amp;language=3Dzh-CN" target=3D"_blank"=
+>
+<span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=
+=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=BB=E1=D2=E9=D1=A1=CF=EE</s=
+pan></a>
+<o:p></o:p></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#5F5F5F">______________________=
+__________________________________________________________</span>
+<o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><o:p>&nbsp;</o:p></=
+span></p>
+</div>
+</body>
+</html>
+
+--_000_KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2KL1PR0401MB4274_
+Content-Type: text/calendar; charset="utf-8"; method=REQUEST
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpNRVRIT0Q6UkVRVUVTVA0KUFJPRElEOk1pY3Jvc29mdCBFeGNoYW5n
+ZSBTZXJ2ZXIgMjAxMA0KVkVSU0lPTjoyLjANCkJFR0lOOlZUSU1FWk9ORQ0KVFpJRDpDaGluYSBT
+dGFuZGFyZCBUaW1lDQpCRUdJTjpTVEFOREFSRA0KRFRTVEFSVDoxNjAxMDEwMVQwMDAwMDANClRa
+T0ZGU0VURlJPTTorMDgwMA0KVFpPRkZTRVRUTzorMDgwMA0KRU5EOlNUQU5EQVJEDQpCRUdJTjpE
+QVlMSUdIVA0KRFRTVEFSVDoxNjAxMDEwMVQwMDAwMDANClRaT0ZGU0VURlJPTTorMDgwMA0KVFpP
+RkZTRVRUTzorMDgwMA0KRU5EOkRBWUxJR0hUDQpFTkQ6VlRJTUVaT05FDQpCRUdJTjpWRVZFTlQN
+Ck9SR0FOSVpFUjtDTj1UaGUgQWNhZGVteTtTRU5ULUJZPSJtYWlsdG86SmlheWFuZy5MaXVAYm13
+LWJyaWxsaWFuY2UuY24iOm1haWx0DQogbzpUaGUuQWNhZGVteUBibXctYnJpbGxpYW5jZS5jbg0K
+QVRURU5ERUU7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9
+VFJVRTtDTj3lkajnj4o6bWFpDQogbHRvOnN1ZUB3b3NoaXBtLmNvbQ0KQVRURU5ERUU7Uk9MRT1S
+RVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9VFJVRTtDTj3mnajpm6jp
+kas6DQogbWFpbHRvOmRhaXN5X3lhbmdAd29zaGlwbS5jb20NCkFUVEVOREVFO1JPTEU9UkVRLVBB
+UlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPVRSVUU7Q0495ZC05LquOm1haQ0K
+IGx0bzp3dWxpYW5nQHhpYW5neml6YWkuY29tDQpBVFRFTkRFRTtST0xFPVJFUS1QQVJUSUNJUEFO
+VDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047UlNWUD1UUlVFO0NOPSJMaXUgQWRhaCwgDQogQkJILTFB
+LTEiOm1haWx0bzpKaWF5YW5nLkxpdUBibXctYnJpbGxpYW5jZS5jbg0KQVRURU5ERUU7Uk9MRT1P
+UFQtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9VFJVRTtDTj0iSHUgWGl1
+cXVhbg0KICwgQkJILTFBLTEo6L695a6B5aSW6IGU5LyB5Lia566h55CG5pyJ6ZmQ5YWs5Y+4KSI6
+bWFpbHRvOlhpdXF1YW4uSHUuZmZAcGFydA0KIG5lci5ibXctYnJpbGxpYW5jZS5jbg0KREVTQ1JJ
+UFRJT047TEFOR1VBR0U9ZW4tVVM6RGVhcnNcLCBBSSBDQU1Q55qE5Lya6K6u6ZO+5o6lXG7or7cx
+MueCuemSn++8jA0KIOS4iue6v+WBmua1i+ivle+8jOiwouiwou+8gVxuXG4tLS0tLU9yaWdpbmFs
+IEFwcG9pbnRtZW50LS0tLS1cbkZyb206IFRoZSBBDQogY2FkZW15IDxUaGUuQWNhZGVteUBibXct
+YnJpbGxpYW5jZS5jbj5cblNlbnQ6IFR1ZXNkYXlcLCBNYXJjaCAyNFwsIDIwMjYgMToNCiAxMiBQ
+TVxuVG86IFRoZSBBY2FkZW15XDsgTGl1IEFkYWhcLCBCQkgtMUEtMVxuQ2M6IEh1IFhpdXF1YW5c
+LCBCQkgtMUEtMSgNCiDovr3lroHlpJbogZTkvIHkuJrnrqHnkIbmnInpmZDlhazlj7gpXG5TdWJq
+ZWN0OiBBSSBFQVNZIE9GRklDRSBMRUFSTklORyBDQQ0KIE1QIDIwMjZcbldoZW46IE9jY3VycyBl
+dmVyeSBkYXkgZWZmZWN0aXZlIDQvMjEvMjAyNiB1bnRpbCA0LzI0LzIwMjYgZnJvbSAxDQogMjoz
+MCBQTSB0byAxOjQ1IFBNIChVVEMrMDg6MDApIEJlaWppbmdcLCBDaG9uZ3FpbmdcLCBIb25nIEtv
+bmdcLCBVcnVtcWkuXG4NCiBXaGVyZTogTWljcm9zb2Z0IFRlYW1zIOS8muiurlxuXG5cbl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KIF9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXG5NaWNyb3NvZnQgVGVhbXMg5Lya6K6uXG7kvb/nlKgNCiDn
+lLXohJHjgIHnp7vliqjlupTnlKjmiJbkvJrorq7lrqTorr7lpIfliqDlhaVcbuWNleWHu+atpOWk
+hOS7peWKoOWFpeS8muiurg0KIDxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbC9tZWV0dXAt
+am9pbi8xOSUzYW1lZXRpbmdfTVRrek9EUmxaVEV0TURoaE1pDQogMDBNalJtTFdJNE5qY3RaakJo
+WVRaall6TTJPVFpsJTQwdGhyZWFkLnYyLzA/Y29udGV4dD0lN2IlMjJUaWQlMjIlM2ElMjI2OTgN
+CiBiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUlMjIlMmMlMjJPaWQlMjIlM2ElMjI1
+ZTFjNzdhZS05ZDI5LTRmZDItOQ0KIGEwNi1mYmQwOGNiY2U3ZWElMjIlN2Q+XG7kvJrorq4gSUQ6
+IDQ3MyAyNzUgNjM5IDMyNSA0OFxu5a+G56CBOiByRjl2dzI1SFxuDQog5LiL6L29IFRlYW1zPGh0
+dHBzOi8vd3d3Lm1pY3Jvc29mdC5jb20vZW4tdXMvbWljcm9zb2Z0LXRlYW1zL2Rvd25sb2FkLWFw
+cD4NCiAgfCDlnKggd2ViIOS4iuWKoOWFpTxodHRwczovL3d3dy5taWNyb3NvZnQuY29tL21pY3Jv
+c29mdC10ZWFtcy9qb2luLWEtbWVldA0KIGluZz5cbuS9v+eUqOinhumikeS8muiuruiuvuWkh+WK
+oOWFpVxuNTAwMEB2Y3QuYm13LWJyaWxsaWFuY2UuY248bWFpbHRvOjUwDQogMDBAdmN0LmJtdy1i
+cmlsbGlhbmNlLmNuPlxu6KeG6aKR5Lya6K6uIElEOiAxMzYgNTQzIDE0MSAzXG7lpIfnlKggVlRD
+IOivtA0KIOaYjjxodHRwczovL3ZpZGVvZWRncG9vbC52Y3QuYm13LWJyaWxsaWFuY2UuY24vdGVh
+bXMvP2NvbmY9MTM2NTQzMTQxMyZpdnI9DQogNTAwMCZkPXZjdC5ibXctYnJpbGxpYW5jZS5jbiZp
+cD0yMTguMTA2LjE5NC4xNjAmdGVzdD10ZXN0X2NhbGwmdz5cbuaIluWRvA0KIOWFpSjku4Xpn7Pp
+opEpXG4rODYgNDAwIDkxOSA5NjQ1XCxcLDgyOTI2MDQ5MSM8dGVsOis4NjQwMDkxOTk2NDVcLFws
+ODI5MjYwDQogNDkxIz5cbiAg5Lit5Zu9XCwgQWxsIGxvY2F0aW9uc1xuKzg2IDQwMCA5MTkgOTY0
+N1wsXCw4MjkyNjA0OTEjPHRlbDorODY0MDANCiA5MTk5NjQ3XCxcLDgyOTI2MDQ5MSM+XG4gIOS4
+reWbvVwsIEFsbCBsb2NhdGlvbnNcbueUteivneS8muiuriBJRDogODI5IDI2MA0KICA0OTEjXG7m
+n6Xmib7mnKzlnLDlj7fnoIE8aHR0cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zb2Z0LmNvbS81NzEz
+ZGI5YS04YzEzDQogLTRjMjMtOTVjYS05ZWNlMTU0MWE4YTY/aWQ9ODI5MjYwNDkxPiB8IOmHjee9
+riBQSU48aHR0cHM6Ly9kaWFsaW4udGVhbXMubWkNCiBjcm9zb2Z0LmNvbS91c3AvcHN0bmNvbmZl
+cmVuY2luZz5cbkZvciBhYmlkaW5nIGJ5IHRoZSBCQkEgSW5zdHJ1Y3Rpb24gb24gSQ0KIG5mb3Jt
+YXRpb24gU2VjdXJpdHkgYW5kIEN5YmVyIFNlY3VyaXR5XCwgcGxlYXNlIGluZm9ybSBwYXJ0aWNp
+cGFudHMgYmVmb3JlDQogIHJlY29yZGluZyBvciB0cmFuc2NyaXB0aW9uIGR1cmluZyBtZWV0aW5n
+cy5cbuS6huino+abtOWkmjxodHRwczovL2FrYS5tcy8NCiBKb2luVGVhbXNNZWV0aW5nPiB8IOS8
+muiurumAiemhuTxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbWVldGluZ09wdGlvbg0KIHMv
+P29yZ2FuaXplcklkPTVlMWM3N2FlLTlkMjktNGZkMi05YTA2LWZiZDA4Y2JjZTdlYSZ0ZW5hbnRJ
+ZD02OThiMGU0Ni01MWMwDQogLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVl
+dGluZ19NVGt6T0RSbFpURXRNRGhoTWkwME1qUm1MV0k0TmoNCiBjdFpqQmhZVFpqWXpNMk9UWmxA
+dGhyZWFkLnYyJm1lc3NhZ2VJZD0wJmxhbmd1YWdlPXpoLUNOPlxuX19fX19fX19fX19fX19fXw0K
+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19cblxuDQpSUlVMRTpGUkVRPURBSUxZO1VOVElMPTIwMjYwNDI0VDA0MzAwMFo7SU5U
+RVJWQUw9MQ0KVUlEOjA0MDAwMDAwODIwMEUwMDA3NEM1QjcxMDFBODJFMDA4MDAwMDAwMDA2MDgw
+MTI1NzhGQkJEQzAxMDAwMDAwMDAwMDAwMDAwDQogMDEwMDAwMDAwNkU4NTNCNDI5NDM2OTc0MUJD
+M0Q2NDQyQkZGN0ZFRTINClNVTU1BUlk7TEFOR1VBR0U9ZW4tVVM6Rlc6IEFJIEVBU1kgT0ZGSUNF
+IExFQVJOSU5HIENBTVAgMjAyNg0KRFRTVEFSVDtUWklEPUNoaW5hIFN0YW5kYXJkIFRpbWU6MjAy
+NjA0MjFUMTIzMDAwDQpEVEVORDtUWklEPUNoaW5hIFN0YW5kYXJkIFRpbWU6MjAyNjA0MjFUMTM0
+NTAwDQpDTEFTUzpQVUJMSUMNClBSSU9SSVRZOjUNCkRUU1RBTVA6MjAyNjAzMjRUMDUxMTMyWg0K
+VFJBTlNQOk9QQVFVRQ0KU1RBVFVTOkNPTkZJUk1FRA0KU0VRVUVOQ0U6MA0KTE9DQVRJT047TEFO
+R1VBR0U9ZW4tVVM6TWljcm9zb2Z0IFRlYW1zIOS8muiurg0KWC1NSUNST1NPRlQtQ0RPLUFQUFQt
+U0VRVUVOQ0U6MA0KWC1NSUNST1NPRlQtQ0RPLU9XTkVSQVBQVElEOi0xMTU4MTM3ODc4DQpYLU1J
+Q1JPU09GVC1DRE8tQlVTWVNUQVRVUzpURU5UQVRJVkUNClgtTUlDUk9TT0ZULUNETy1JTlRFTkRF
+RFNUQVRVUzpCVVNZDQpYLU1JQ1JPU09GVC1DRE8tQUxMREFZRVZFTlQ6RkFMU0UNClgtTUlDUk9T
+T0ZULUNETy1JTVBPUlRBTkNFOjENClgtTUlDUk9TT0ZULUNETy1JTlNUVFlQRToxDQpYLU1JQ1JP
+U09GVC1PTkxJTkVNRUVUSU5HSU5GT1JNQVRJT046eyJPbmxpbmVNZWV0aW5nQ2hhbm5lbElkIjpu
+dWxsXCwiT25saW4NCiBlTWVldGluZ1Byb3ZpZGVyIjozfQ0KWC1NSUNST1NPRlQtU0tZUEVURUFN
+U01FRVRJTkdVUkw6aHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL2wvbWVldHVwLWpvaW4vDQog
+MTklM2FtZWV0aW5nX01Ua3pPRFJsWlRFdE1EaGhNaTAwTWpSbUxXSTROamN0WmpCaFlUWmpZek0y
+T1RabCU0MHRocmVhZC52Mi8NCiAwP2NvbnRleHQ9JTdiJTIyVGlkJTIyJTNhJTIyNjk4YjBlNDYt
+NTFjMC00ZDNiLWEwMjMtMTZmMmIyM2I4YzFlJTIyJTJjJTIyTw0KIGlkJTIyJTNhJTIyNWUxYzc3
+YWUtOWQyOS00ZmQyLTlhMDYtZmJkMDhjYmNlN2VhJTIyJTdkDQpYLU1JQ1JPU09GVC1TQ0hFRFVM
+SU5HU0VSVklDRVVQREFURVVSTDpodHRwczovL2FwaS5zY2hlZHVsZXIudGVhbXMubWljcm9zb2YN
+CiB0LmNvbS90ZWFtcy82OThiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUvNWUxYzc3
+YWUtOWQyOS00ZmQyLTlhMDYtZg0KIGJkMDhjYmNlN2VhLzE5X21lZXRpbmdfTVRrek9EUmxaVEV0
+TURoaE1pMDBNalJtTFdJNE5qY3RaakJoWVRaall6TTJPVFpsQHRoDQogcmVhZC52Mi8wDQpYLU1J
+Q1JPU09GVC1TS1lQRVRFQU1TUFJPUEVSVElFUzp7ImNpZCI6IjE5Om1lZXRpbmdfTVRrek9EUmxa
+VEV0TURoaE1pMDBNalINCiBtTFdJNE5qY3RaakJoWVRaall6TTJPVFpsQHRocmVhZC52MiJcLCJw
+cml2YXRlIjp0cnVlXCwidHlwZSI6MFwsIm1pZCI6MFwsIg0KIHJpZCI6MFwsInVpZCI6bnVsbH0N
+ClgtTUlDUk9TT0ZULURPTk9URk9SV0FSRE1FRVRJTkc6RkFMU0UNClgtTUlDUk9TT0ZULURJU0FM
+TE9XLUNPVU5URVI6RkFMU0UNClgtTUlDUk9TT0ZULVJFUVVFU1RFREFUVEVOREFOQ0VNT0RFOkRF
+RkFVTFQNClgtTUlDUk9TT0ZULUlTUkVTUE9OU0VSRVFVRVNURUQ6VFJVRQ0KWC1NSUNST1NPRlQt
+TE9DQVRJT05TOlt7IkRpc3BsYXlOYW1lIjoiTWljcm9zb2Z0IFRlYW1zIOS8muiuriJcLCJMb2Nh
+dGlvbkFuDQogbm90YXRpb24iOiIiXCwiTG9jYXRpb25VcmkiOiIiXCwiTG9jYXRpb25TdHJlZXQi
+OiIiXCwiTG9jYXRpb25DaXR5IjoiIlwsIkwNCiBvY2F0aW9uU3RhdGUiOiIiXCwiTG9jYXRpb25D
+b3VudHJ5IjoiIlwsIkxvY2F0aW9uUG9zdGFsQ29kZSI6IiJcLCJMb2NhdGlvbg0KIEZ1bGxBZGRy
+ZXNzIjoiIn1dDQpCRUdJTjpWQUxBUk0NCkRFU0NSSVBUSU9OOlJFTUlOREVSDQpUUklHR0VSO1JF
+TEFURUQ9U1RBUlQ6LVBUMTVNDQpBQ1RJT046RElTUExBWQ0KRU5EOlZBTEFSTQ0KRU5EOlZFVkVO
+VA0KRU5EOlZDQUxFTkRBUg0K
+
+--_000_KL1PR0401MB4274D5D1232B7DAAAABEE964B82F2KL1PR0401MB4274_--

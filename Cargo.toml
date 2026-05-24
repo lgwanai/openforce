@@ -24,6 +24,7 @@ members = [
     "crates/mtls",
     "crates/cube-sandbox",
     "crates/redis-session",
+    "crates/skill",
 ]
 
 [workspace.dependencies]

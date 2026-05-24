@@ -174,18 +174,27 @@ impl SchedulerTrait for SchedulerService {
 
     async fn send_heartbeat(&self, r: Request<SendHeartbeatRequest>) -> Result<Response<SendHeartbeatResponse>, Status> {
         let req = r.into_inner();
-        let lease_id = req.lease_id;
+        let tenant_id = req.tenant_id;
         let session_id = req.session_id;
         let task_id = req.task_id;
+        let fencing_token = req.fencing_token;
+
+        if tenant_id.is_empty() || session_id.is_empty() || task_id.is_empty() {
+            return Err(Status::invalid_argument("tenant_id, session_id, and task_id are required"));
+        }
+        if fencing_token == 0 {
+            return Err(Status::invalid_argument("fencing_token is required for heartbeat"));
+        }
 
         // Delegate heartbeat to session-store which verifies the lease is active
         let cmd = ProtoCommand {
             command_id: Uuid::now_v7().to_string(),
             command_type: "RenewLease".into(),
-            tenant_id: Uuid::nil().to_string(),
+            tenant_id,
             session_id,
             task_id,
             expected_version: 0,
+            payload: serde_json::to_vec(&serde_json::json!({"fencing_token": fencing_token})).unwrap_or_default(),
             ..Default::default()
         };
 

@@ -1,0 +1,300 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:140.205.209.142)
+ smtp.mailfrom=system@notice.aliyun.com; dkim=pass header.b=whTOacF6Xs
+ header.i=@newsletter.aliyun.com header.s=s1024; dmarc=pass (p=reject
+ sp=reject dis=none) header.from=notice.aliyun.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=ILxgOSJ5+UbzYAtNxkUqXFfq2EayM3THd+6qypHxwjA=;
+ b=CMa+SSRoddaG8z0fFPxt3+8DTsZNOwADRkbIYO6sZHyDvEgLKgAEC8+NZaQjtv7Y8tJVruf
+ ESzNigd7QZY1zTp3UwDd7iyD/6QXmICSWmYZOv7T4ZcsZc1KjJN4faH7x/sPzdk20xfim2LHe
+ uAL41liRh/Ck7krv/7Dun1Cta8h3A3d/CpU5NOyjKG0YYmao3gQQl9O4oBhO+uRvHD/+hEhpg
+ 9vYwAqtGoEI7bbR7PuIoLc/D4JFekZEehwzZ7FkFf9fM0J0YJoFLgPl29cq+5Hm367yYfdAJ0
+ KwvxGwbHTx6ojKtNhRvCIjb7gIZAyVVmz6L5aOKc2BY5pu3QTNiw==
+Arc-Seal: i=1; a=rsa-sha256; t=1773977496; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=wm/02ej8QVeGtnCh8JvIamGr2plTbs6q+GUdbpMEvuQf043AvlMNlOa2uynwhfhzZEIhCJr
+ bApLYubH2Inj3LdHUN5oIxKavTzhK4VXOvGELutau8btUK++xhxGjOzSFPzNIyqq/tupKsglP
+ jm6KE81flTWpf5zKeCHCgjLQHdF8lfaWnKI4vweKdsBab6gbF/OqYbrivpMu64qAnkziMGJFp
+ WKg7rDWW8GM/LrV5bqR8k1qUtld9LhY5kzQXBzquWbiHzbCD/CQFd5Gn1voosxWC5KNKxV2sg
+ Y875g0+4STOd0TCj4nTMCRr0LYn2FOAp5L+pQxEAhQuOBIWPzQwQ==
+Authentication-Results: lms; spf=pass (client-ip:140.205.209.142)
+ smtp.mailfrom=system@notice.aliyun.com; dkim=pass header.b=whTOacF6Xs
+ header.i=@newsletter.aliyun.com header.s=s1024; dmarc=pass (p=reject
+ sp=reject dis=none) header.from=notice.aliyun.com; arc=none
+Content-Type: multipart/mixed;
+ boundary="----=_Part_15225_2039327092.1773977491589"
+Date: Fri, 20 Mar 2026 11:31:31 +0800 (CST)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=newsletter.aliyun.com; s=s1024; t=1773977492;
+ h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type;
+ bh=ILxgOSJ5+UbzYAtNxkUqXFfq2EayM3THd+6qypHxwjA=;
+ b=whTOacF6XsY8or7jBo/0dEb6M2KHZSH9FHVrhkuajulh8N/zAjTCkjYHYE3kz8ZTEvfR6EzXwUk/QPuQ2lshrnkZDTitx9nnJ7SDx3fJcdPVfUf89HqiDHyv8APPzdcfhHZ4RrJItWynzwlduZyi2H1bZRQcqgLE2vKfOwrt8Zo=
+Feedback-Id: default:system@notice.aliyun.com:ali_aliyun_SmtpTrigger:23
+From: =?UTF-8?B?6Zi/6YeM5LqR6K6h566X?= <system@notice.aliyun.com>
+Message-Id: 10044489860907010
+Mime-Version: 1.0
+Received: from
+ yunge-channel-aliyun-service033080000212.center.na610(mailfrom:system@notice.aliyun.com
+ fp:SMTPD_-VHcFIyclf9 cluster:AY35D) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 20 Mar 2026 11:31:31 +0800
+Received-Spf: pass (lms verify) identity=mailfrom;
+ client-ip=140.205.209.142; helo=out209-142.dm.aliyun.com;
+ envelope-from=system@notice.aliyun.com; receiver=<UNKNOWN>;
+Subject: =?UTF-8?B?6Zi/6YeM5LqR5LqR5a6J5YWo5Lit5b+D77yI5oyJ6YeP?=
+ =?UTF-8?B?5LuY6LS577yJ5Yib5bu65oiW5byA6YCa5oiQ5Yqf6YCa55+l?=
+To: wuliang@xiangzizai.com
+X-Alidm-Rcptto: d3VsaWFuZ0B4aWFuZ3ppemFpLmNvbQ==
+X-Envid: 600000287987669718
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Mid-Qid: 69BCBF95.001/4fcSln0dJFzxbPVw
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 140.205.209.142
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: system@notice.aliyun.com
+X-Lms-Pvf: 
+ MnwyfDF8fHioGwi/DjHeyv6x/q+1tNoLqXo3AbDNRJcClgXUL2PoISpK0CUiOUxO7zYE3FVteqANh1VJmckWPnmGswmBd9cKZgSnDAkxqKniU7/4RmgXcMqYvtMv0Dqpo67sTDE6WA==
+X-Mailer: Yunge
+
+------=_Part_15225_2039327092.1773977491589
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"zh-cn">
+
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+" />
+    <title></title>
+    <style type=3D"text/css">
+        a {
+            color: #1366ec;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <span style=3D"display: none;">=E6=AD=A4=E9=82=AE=E4=BB=B6=E7=94=B1=E9=
+=98=BF=E9=87=8C=E4=BA=91=E5=8F=91=E9=80=81=EF=BC=8C=E7=94=B1=E7=B3=BB=E7=BB=
+=9F=E8=87=AA=E5=8A=A8=E5=8F=91=E5=87=BA=EF=BC=8C=E8=AF=B7=E5=8B=BF=E7=9B=B4=
+=E6=8E=A5=E5=9B=9E=E5=A4=8D=EF=BC=8C=E8=B0=A2=E8=B0=A2=EF=BC=81</span>
+    <div style=3D"max-width: 1200px;">
+        <div
+            style=3D"border-bottom: 1px solid #E9E9E9;padding:26px 0; overf=
+low: hidden;box-sizing:content-box;max-height:26px;">
+            <div style=3D"width:20%;float:left;">
+                <a href=3D"https://cn.aliyun.com/?utm_content=3Dg_100037487=
+0" target=3D"_blank" rel=3D"noopener"
+                    style=3D"text-decoration: none">
+                    <img style=3D"padding-left: 15%; max-width: 70%; vertic=
+al-align: middle"
+            src=3D"https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-2=
+12-48.png" alt=3D"=E9=98=BF=E9=87=8C=E4=BA=91 logo" />
+                </a>
+            </div>
+            <div style=3D"width:70%;padding-left:10%;float:right;overflow: =
+hidden;height:24px;box-sizing:content-box;">
+                <a href=3D"https://www.aliyun.com/product/list?utm_content=
+=3Dg_1000374871" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  text-decoration: none;
+                  margin-right:6.5%;
+                  display: inline-block;
+                " rel=3D"noopener">=E4=BA=A7=E5=93=81</a>
+                <a href=3D"https://www.aliyun.com/solution/tech-solution/?u=
+tm_content=3Dg_1000397171" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  text-decoration: none;
+                  margin-right:6.5%;
+                  display: inline-block;
+                " rel=3D"noopener">=E8=A7=A3=E5=86=B3=E6=96=B9=E6=A1=88</a>
+                <a href=3D"https://www.aliyun.com/resources?utm_content=3Dg=
+_1000374873" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  text-decoration: none;
+                  margin-right:6.5%;
+                  display: inline-block;
+                " rel=3D"noopener">=E6=96=87=E6=A1=A3=E4=B8=8E=E7=A4=BE=E5=
+=8C=BA</a>
+                <a href=3D"https://free.aliyun.com/?utm_content=3Dg_1000374=
+874" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  text-decoration: none;
+                  margin-right:6.5%;
+                  display: inline-block;
+                " rel=3D"noopener">=E5=85=8D=E8=B4=B9=E8=AF=95=E7=94=A8</a>
+                <a href=3D"https://www.aliyun.com/price?utm_content=3Dg_100=
+0374875" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  text-decoration: none;
+                  margin-right:6.5%;
+                  display: inline-block;
+                " rel=3D"noopener">=E5=AE=9A=E4=BB=B7</a>
+                <a href=3D"https://market.aliyun.com/?utm_content=3Dg_10003=
+74876" target=3D"_blank" style=3D"
+                  font-size: 12px;
+                  color: #181818;
+                  margin-right:6.5%;
+                  text-decoration: none;
+                  display: inline-block;
+                " rel=3D"noopener">=E4=BA=91=E5=B8=82=E5=9C=BA</a>
+                <a href=3D"https://www.aliyun.com/about?utm_content=3Dg_100=
+0374877" target=3D"_blank" style=3D"
+          font-size: 12px;=20
+          color: #181818;=20
+          text-decoration: none;
+          display: inline-block;
+          " rel=3D"noopener">=E4=BA=86=E8=A7=A3=E9=98=BF=E9=87=8C=E4=BA=91<=
+/a>
+            </div>
+        </div>
+        <div class=3D"email-body" style=3D"padding: 32px; font-size: 14px">
+            <div id=3D'mc_message_body'>=E5=B0=8A=E6=95=AC=E7=9A=84wuliang@=
+xiangzizai.com=EF=BC=9A<br>=20
+=E6=82=A8=E7=9A=84uid:1235686433406205=E4=B8=8B
+    1=E4=B8=AA=E4=BA=91=E5=AE=89=E5=85=A8=E4=B8=AD=E5=BF=83=EF=BC=88=E6=8C=
+=89=E9=87=8F=E4=BB=98=E8=B4=B9=EF=BC=89=E5=AE=9E=E4=BE=8B=E5=88=9B=E5=BB=BA=
+=E6=88=90=E5=8A=9F=E3=80=82
+
+=E8=AF=B7=E7=99=BB=E5=BD=95<a href=3D"http://yundun.console.aliyun.com/?p=
+=3Dsas#/sas/overviews" target=3D"_blank">=E6=8E=A7=E5=88=B6=E5=8F=B0</a>=E6=
+=9F=A5=E7=9C=8B=E5=8F=8A=E7=AE=A1=E7=90=86=E3=80=82
+</div>
+        </div>
+        <div class=3D"split-line" style=3D"padding: 0 25px 0 23px;clear:bot=
+h;">
+            <div style=3D"
+            width: 100%;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #e3e3e3;
+            height: 22px;
+            padding-top: 12px;
+            font-weight: 300;
+            line-height: 22px;
+            color: #808080;
+            font-size: 12px;
+            letter-spacing: 0.42857px;
+            margin-bottom: 14px;
+          ">
+                =E6=9C=AC=E9=82=AE=E4=BB=B6=E4=B8=BA=E7=B3=BB=E7=BB=9F=E9=
+=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8B=BF=E5=9B=9E=E5=A4=8D=E3=80=82
+            </div>
+        </div>
+        <div class=3D"email-footer">
+            <div
+                style=3D"overflow: hidden;background-color: #ececee; paddin=
+g: 2%;border-top-width: 1px;border-top-style: solid;border-top-color: #e3e3=
+e3;">
+                <div style=3D"float:left;width:80%;">
+                    <div style=3D"
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 24px;
+          color: #3d3d3d;
+        ">
+                        =E5=85=B3=E6=B3=A8=E9=98=BF=E9=87=8C=E4=BA=91
+                    </div>
+                    <div class=3D"pc" style=3D"
+          margin-top: 3px;
+          font-size: 12px;
+          line-height: 19px;
+          color: #808080;
+          letter-spacing: 0.42857px;
+        ">
+                        =E5=85=B3=E6=B3=A8=E9=98=BF=E9=87=8C=E4=BA=91=E5=85=
+=AC=E4=BC=97=E5=8F=B7=E6=88=96=E4=B8=8B=E8=BD=BD=E9=98=BF=E9=87=8C=E4=BA=91=
+APP=EF=BC=8C=E5=85=B3=E6=B3=A8=E4=BA=91=E8=B5=84=E8=AE=AF=EF=BC=8C=E9=9A=8F=
+=E6=97=B6=E9=9A=8F=E5=9C=B0=E8=BF=90=E7=BB=B4=E7=AE=A1=E6=8E=A7=E4=BA=91=E6=
+=9C=8D=E5=8A=A1
+                    </div>
+                    <div class=3D"tel" style=3D"margin: 12px 0;font-size: 1=
+2px;color: #3d3d3d;text-overflow: ellipsis;
+        ">
+                        <div style=3D"display:inline-block; margin-right: 2=
+0px;padding:1% 0;">=E8=81=94=E7=B3=BB=E6=88=91=E4=BB=AC=EF=BC=9A4008013260<=
+/div>
+                    </div>
+                </div>
+                <div style=3D"float:right;width:20%;">
+                    <a style=3D"
+                        display: inline-block;
+                        text-align: center;
+                        margin-right: 3%;
+                        font-size: 10px;
+                        width:45%;
+                      ">
+                        <img style=3D"display: block; max-width: 100%"
+              src=3D"https://img.alicdn.com/imgextra/i4/O1CN013gZ2Fa1K3VhE0=
+b6cU_!!6000000001108-2-tps-134-178.png"
+              alt=3D"=E9=98=BF=E9=87=8C=E4=BA=91=E5=AE=98=E6=96=B9 App" />
+                    </a>
+                    <a style=3D"
+                        display: inline-block;
+                        text-align: center;
+                        font-size: 10px;
+                        width:45%;
+                      ">
+                        <img style=3D"display: block; max-width: 100%"
+              src=3D"https://img.alicdn.com/imgextra/i3/O1CN01fea5Y21LllaIf=
+Hx8H_!!6000000001340-2-tps-134-178.png"
+              alt=3D"=E9=98=BF=E9=87=8C=E4=BA=91=E5=85=AC=E4=BC=97=E5=8F=B7=
+" />
+                    </a>
+                </div>
+                <p style=3D"clear:both;height: 1px; border-top: 1px solid r=
+gba(227, 227, 227, 1)"></p>
+                <div style=3D"
+                  height: 24px;
+                  max-width: 748px;
+                  margin-top: 14px;
+                  font-size: 12px;
+                  line-height: 24px;
+                  color: #999999;
+                ">
+                    Copyright =C2=A9 =E9=98=BF=E9=87=8C=E4=BA=91 2009-2026 =
+All Rights Reserved
+                </div>
+            </div>
+            <div style=3D"
+            text-align: left;
+            border: none;
+            padding-left: 21px;
+            margin: 0px;
+            background-color: #fff;
+            line-height: 2;
+            font-family: 'Microsoft YaHei';
+            font-size: 12px;
+            color: #999;
+          ">
+                =E5=A6=82=E6=9E=9C=E6=82=A8=E4=B8=8D=E6=83=B3=E5=86=8D=E6=
+=8E=A5=E6=94=B6=E9=98=BF=E9=87=8C=E4=BA=91=E7=9A=84=E3=80=8C=E4=BA=A7=E5=93=
+=81=E7=9A=84=E5=88=9B=E5=BB=BA=E3=80=81=E5=BC=80=E9=80=9A=E4=BF=A1=E6=81=AF=
+=E9=80=9A=E7=9F=A5=E3=80=8D=E9=82=AE=E4=BB=B6=EF=BC=8C=E6=88=96=E8=80=85=E9=
+=9C=80=E8=A6=81=E8=AE=BE=E7=BD=AE=E5=85=B6=E4=BB=96=E4=BA=BA=E6=8E=A5=E6=94=
+=B6=EF=BC=8C=E7=82=B9=E6=AD=A4<a href=3D"https://account.aliyun.com/login/l=
+ogin.htm?oauth_callback=3Dhttps%3a%2f%2fnotifications.console.aliyun.com%2f=
+%23%2fsubscribeMsg%3fmessageTypeId%3dprod_msg_alloc" target=3D"_blank" styl=
+e=3D"text-decoration:none; color:#00a2ca;">=E8=AE=BE=E7=BD=AE=E8=AE=A2=E9=
+=98=85=E3=80=82</a>
+            </div>
+        </div>
+    </div>
+
+  <img src=3D'https://ac.mmstat.com/aliyun.12.1?logtype=3D4&type=3Demail&ms=
+gid=3D10044489860907010&env=3Donline-cn&yunge_info=3Demail___10044489860907=
+010' />
+</body>
+
+</html>
+------=_Part_15225_2039327092.1773977491589--

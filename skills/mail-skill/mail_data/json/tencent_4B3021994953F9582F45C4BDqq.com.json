@@ -1,0 +1,100 @@
+{
+  "message_id": "<tencent_4B3021994953F9582F45C4BD@qq.com>",
+  "imap_uid": "3048",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "宝马AI CAMP-《智能数据处理》（平台：Dify）案例操作指引",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "wuliang@xiangzizai.com, sue@woshipm.com",
+  "cc": "",
+  "date": "2026-04-11T15:24:02+08:00",
+  "body_text": "下方为《智能数据处理》（平台：Dify）课程中需要提前进行测试的案例步骤描述，所需文件请在附件中下载。\r\n\r\n\r\n第一步：建立三个独立的知识库，下附三个知识库的配置及参数：\r\n\r\n\r\n\r\n&nbsp;知识库1：&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\r\n\r\n&nbsp;知识库2：&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\r\n\r\n&nbsp;知识库3：&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\r\n\r\n\r\n\r\n第二步：将&nbsp;三个 .md&nbsp;文件分别导入对应名字的数据库中（附件中下载）\r\n\r\n\r\n&nbsp; 对应&nbsp; →&nbsp;\r\n\r\n\r\n&nbsp;&nbsp;对应&nbsp; →&nbsp;\r\n\r\n\r\n&nbsp;&nbsp;对应&nbsp; →\r\n\r\n\r\n第三步：将Chat BI文件导入至Dify工作流，导入过程中系统会弹窗提示安装插件，点击同意即可。\r\n\r\n\r\n\r\n&nbsp;需要导入的文件（截图示意）：&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;\r\n\r\n\r\n&nbsp;系统提示需要安装的插件，点击弹窗“同意”：&nbsp; &nbsp;&nbsp;&nbsp;\r\n\r\n\r\n\r\n第四步：上传用于测试的CSV数据表。配置完毕后，就可以用口语化提问：上个季度我们电车销量怎么样？进行数据提取与分析\r\n\r\n\r\n用于测试的CSV数据表（截图示意）：&nbsp; &nbsp;&nbsp;&nbsp;\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "56723A2B@8147CE17.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 8077,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/56723A2B@8147CE17.12F7D96900000000.png"
+    },
+    {
+      "filename": "147F6EF0@792EA84B.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 19790,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/147F6EF0@792EA84B.12F7D96900000000.png"
+    },
+    {
+      "filename": "67A70B8A@3B35334D.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 10223,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/67A70B8A@3B35334D.12F7D96900000000.png"
+    },
+    {
+      "filename": "09D5B066@C0867C43.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 12396,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/09D5B066@C0867C43.12F7D96900000000.png"
+    },
+    {
+      "filename": "95D9D38B@D57DD22D.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 9886,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/95D9D38B@D57DD22D.12F7D96900000000.png"
+    },
+    {
+      "filename": "0DD80830@F66E3A5D.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 106290,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/0DD80830@F66E3A5D.12F7D96900000000.png"
+    },
+    {
+      "filename": "0E379C31@81DF8E12.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 8142,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/0E379C31@81DF8E12.12F7D96900000000.png"
+    },
+    {
+      "filename": "5B08195C@06357442.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 58716,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/5B08195C@06357442.12F7D96900000000.png"
+    },
+    {
+      "filename": "36069F29@1F9C615F.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 11773,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/36069F29@1F9C615F.12F7D96900000000.png"
+    },
+    {
+      "filename": "98E6A65E@68A29A76.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 202542,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/98E6A65E@68A29A76.12F7D96900000000.png"
+    },
+    {
+      "filename": "6DDF402F@CC56D032.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 200982,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/6DDF402F@CC56D032.12F7D96900000000.png"
+    },
+    {
+      "filename": "3DB2F093@32FF294B.12F7D96900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 192179,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/3DB2F093@32FF294B.12F7D96900000000.png"
+    },
+    {
+      "filename": "【Dify】案例测试资源包.zip",
+      "content_type": "application/octet-stream",
+      "size": 1338154,
+      "local_path": "./mail_data/attachments/<tencent_4B3021994953F9582F45C4BD@qq.com>/【Dify】案例测试资源包.zip"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_4B3021994953F9582F45C4BDqq.com.eml"
+}

@@ -1,0 +1,160 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.48.122)
+ smtp.mailfrom=0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com;
+ dkim=pass header.b=IIncgBAaEo header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=Sr0EiRIzia header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=IDBhACLwwIQLI+msb4OBlgcZfgyPED4SP1wJeC89yRM=;
+ b=DhFRRHGFUlJIJNd7ozbyXVOmcuYzKkFsgpbWX/I1KNzz1ks4GkQmyv3bXMWTr6T4i+LS+uy
+ 2acDNQdkT1e7IbAbRbZqqbCKqAVbjvHfCv0muKSXJtqFVvWTh2Buse9HjKi5I+2tva6nfI4aD
+ wUFN9OGJkOgdpBeKejGZ2Fc6A0da+Bz4FY55uT8XKy4tlYEN2m3AuM3iHO9yRcDf+A+RFQcZ3
+ Y87j25y7S1OVHEvmlepo2kk3YvddmCFdx+A3QfFGv2FKWF5t4JzYPiqd58lfEuIfohzE5ADBi
+ JTZeknPKm6v9jU+D37LivHu61qWRHBmd6V7U2TA86gs0J12YRmsQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775710024; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=WjNjXUsAta1FD/DP8Zot0iabObqTTgDqEsm8k6zkUjGV3hPptPhW6cnM4O5q+rRGmd/3+cW
+ G0w5tRPBhB9ELJuu2OSkH+zml7WyNXxcVckojU+F3GGQi6RqfNoNMFI1TqAlkt3Xjrqzi90yk
+ EvPdB8pWkWU7MoH/zGQu1XmUFZZFth4XsdP+YbBc8eYmjz3bq6x99OIfHhtpOM0Blys4qXgRS
+ 2sJuk7AKmbEzEPkJ9zLKgtvh8Q/SWeSAJvaebviyUjt2r8FHHr9t0paNer7teVQg3R9ibFJlG
+ dFZMRAXGuFQFrmWgWqBZGPSmoDLx+9T21fZ9XcjVrNqmGX6GjoYQ==
+Authentication-Results: lms; spf=pass (client-ip:54.240.48.122)
+ smtp.mailfrom=0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com;
+ dkim=pass header.b=IIncgBAaEo header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=Sr0EiRIzia header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Thu, 9 Apr 2026 04:46:52 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775710013;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=IMT5j7ViYvoiuQmWvfmHikl1wzQk0VE3iWGK1+9nico=;
+ b=IIncgBAaEoC+u2ru2MAKGc9ZdjHoB21WNsx/UQYdVYd2DwfLAW8kMCaJ9QavCy6D
+ 3cXjJ7swMOh/QZ7aYl298e0Vch3dsKo/Wz975bdoLic4A8LzOig7XYRZEw1AJHhkEAK
+ H10I54AdEl3IeVguaQ9rGZqym7qatQnlACxzNIH7uTPsMwHqQPVwSnXKKGgIpzUDoFB
+ zY3H5t7SQ+Bllb77qlkcmPJ6gpLgqCDjPoQonU4h8IkBTjXWSAkjAVf4f9WyUXKPYuf
+ axh7wqzYwSjfx59Wk1WbGyZu1IOu+feuSebvoUrBz6/zpnqDZ6Luq6qpuBWu507LLDv
+ ob2FQjZZ+A==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775710013;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=IMT5j7ViYvoiuQmWvfmHikl1wzQk0VE3iWGK1+9nico=;
+ b=Sr0EiRIziaGsX4CnJIeFkk+EjNOSsvbKfqdcRowN9PHhznDz5JmRuZDyltZvaJWL
+ 6jKm8QnKg+eMCCi75VdqPTiTXCs+Fay2MvSsxEuSxddH1Pwf+DCVE0kigtAgsgG47+S
+ SrEwGp21JVE52F34Tag7V+PWYFS5sl7oXnuIICi8=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.48.122;
+ helo=a48-122.smtp-out.amazonses.com;
+ envelope-from=0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: =?UTF-8?Q?We_miss_you_=E2=80=94_should_we_keep_sending_AI_Weekly=3F?=
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775710017/4frnTY0S4vzrdbmZ/69D72F41.000/54.240.48.122/a48-122.smtp-out.amazonses.com/localhost/<0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69D72F41.000/4frnTY0S4vzrdbmZ
+X-Fangmail-Miltered: at n151-171-208 with ID 69D72F41.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.48.122
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fA+YWYZVssfuDgcvbcG+M98bdLIaukK8OWotBZSnU672iqhIine5yn19ntn4cX13R9y/mDcx1szfFZHIghAtVF6JNffUF5QRxHAH2HBxudp8b55fS3nfIwycbGRRXUvg7A==
+X-Ses-Outgoing: 2026.04.09-54.240.48.122
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+</head>
+<body style=3D"margin:0;padding:0;font-family:'Lato','Helvetica Neue',Helve=
+tica,Arial,sans-serif;color:#454547;background:#f5f5f5;line-height:1.6;">
+  <div style=3D"max-width:600px;margin:0 auto;background:#fff;">
+
+    <div style=3D"background:#c6c6d4;padding:20px 30px;text-align:center;">
+      <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2=
+Faiweekly.co"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/production/p=
+ublication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=3D"AI We=
+ekly" style=3D"max-width:200px;height:auto;" /></a>
+    </div>
+
+    <div style=3D"padding:35px 30px;">
+      <h1 style=3D"font-family:'Merriweather',Georgia,serif;font-size:22px;=
+font-weight:700;color:#454547;margin:0 0 20px;">Should we keep sending?</h1=
+>
+
+      <p style=3D"font-size:16px;margin:0 0 16px;">Hey,</p>
+
+      <p style=3D"font-size:16px;margin:0 0 16px;">It looks like you haven'=
+t opened an AI Weekly email yet, and we don't want to clutter your inbox if=
+ you're no longer interested.</p>
+
+      <p style=3D"font-size:16px;margin:0 0 16px;">We'll automatically stop=
+ sending to you in <strong>30 days</strong> unless you let us know you'd li=
+ke to stay.</p>
+
+      <p style=3D"font-size:16px;margin:0 0 20px;">To stay subscribed, just=
+ do one of these:</p>
+
+      <div style=3D"text-align:center;margin:25px 0;">
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co" style=3D"display:inline-block;background:#24ab8a;color:#fff=
+;font-size:14px;font-weight:700;text-transform:uppercase;padding:14px 30px;=
+border-radius:3px;text-decoration:none;">Yes, keep me subscribed</a>
+      </div>
+
+      <p style=3D"font-size:14px;color:#77777f;text-align:center;margin:0 0=
+ 16px;">Clicking the button above or opening any future email counts as sta=
+ying.</p>
+
+      <div style=3D"background:#f9fafb;border-radius:6px;padding:16px 18px;=
+margin:20px 0;">
+        <p style=3D"font-size:14px;margin:0 0 8px;"><strong>Want to receive=
+ less?</strong></p>
+        <p style=3D"font-size:14px;color:#77777f;margin:0;">You can switch =
+to a weekly digest, pick specific topics, or choose your delivery time in <=
+a href=3D"https://aiweekly.co/preferences" style=3D"color:#1b5479;">your pr=
+eferences</a>.</p>
+      </div>
+
+      <p style=3D"font-size:16px;margin:20px 0 0;">=E2=80=94 Alexis, AI Wee=
+kly</p>
+    </div>
+
+    <div style=3D"border-top:1px solid rgba(69,69,71,0.2);padding:20px 30px=
+;text-align:center;font-size:12px;color:#77777f;">
+      <p style=3D"margin:5px 0;"><a href=3D"https://aiweekly.co/t/c/493039e=
+c53f3149a?u=3Dhttps%3A%2F%2Faiweekly.co" style=3D"color:#77777f;">AI Weekly=
+</a> | <a href=3D"https://aiweekly.co/preferences" style=3D"color:#77777f;"=
+>Preferences</a></p>
+      <p style=3D"margin:10px 0 0;"><a href=3D"https://aiweekly.co/unsubscr=
+ibe?email=3Dwuliang%40xiangzizai.com&token=3D54e64b41c750e582703c8188f5ee40=
+665c53db86617f53539d47ea4a2053902a" style=3D"color:#77777f;">Unsubscribe</a=
+> =E2=80=94 no hard feelings.</p>
+    </div>
+
+  </div>
+<img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=3D=
+"1" alt=3D"" style=3D"display:none;" /></body>
+</html>

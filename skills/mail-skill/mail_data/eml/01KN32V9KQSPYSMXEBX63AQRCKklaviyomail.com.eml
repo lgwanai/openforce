@@ -1,0 +1,208 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:170.203.16.38)
+ smtp.mailfrom=bounce-kl_25914533320-kl_101101kn0bvysge5h3xg-h-876d5cefbc=2@k3.send.photologo.co;
+ dkim=pass header.b=sCT9DLQkGp header.i=@shared.klaviyomail.com header.s=def1;
+ dkim=pass header.b=KyTieiIQ6x header.i=@send.photologo.co header.s=mtd1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=photologo.co;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=kZnJi/1Ifr9EHv2u3ZmMbRHi0lptBQSeM5Z+krxeL/E=;
+ b=HemySqYBaAdmC9yTNFWiiry2PrHj9fmIzVskE8T0gDpLlf1L9y+sPmdSe8hEjJb5cAT+tmR
+ lzntmb4JfmtqzXEVD/LLv9KApSTR5Rw/Mb75WpNW09lwA2HIYrkU6gHRWofCAjNvkosCeN3Cz
+ qKljlzci/8J4cnPvMex6VbuL5xrAwAQ2pRgYZB9XK4Nvdg+SBjvVldl9M7ULJ63Xz/qr4FYEX
+ Jm20fkUyBZ0XPXYTOL2wJmAH9OlQVCb6Xp6GE0fIoT+29B5EZpf19pi8mK28bvdhnNGdR+02L
+ Q0OdEsRdvob+pP5TuWmjxtTQI6sq08EX1h9UN9Bfblxf560erYUw==
+Arc-Seal: i=1; a=rsa-sha256; t=1774999835; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=1YvsIIDcMyU/3oevqoVY6/x/hENrkv/u56MSQweRVQRrMsIax82PBGhAqxH2xiCK30xYS6f
+ rGoKDiYlIYgAcTLNB7Lg7p82kfjzhre1BswQs0RJR3+ifE7KbEGTIcEKB0Z0w8CzYeTtMg2tR
+ iO3ZcshH9m13GTBtTtMMEhHptmWp4SgR5b0egJhSrTYXQguBK+aj+eeVBuVeUK3zHixdQtlSw
+ ba/3YtttVQfIaAgkUOxvCvhOG4xROMQekANupXekHs8Fwfn3vbhE6kBKBC2PERsAidTJibcQi
+ XOES/IJ36a1BNClLjIGzVCaavHpBHS6+hiV57D2+PUOkAjZIlNXA==
+Authentication-Results: lms; spf=pass (client-ip:170.203.16.38)
+ smtp.mailfrom=bounce-kl_25914533320-kl_101101kn0bvysge5h3xg-h-876d5cefbc=2@k3.send.photologo.co;
+ dkim=pass header.b=sCT9DLQkGp header.i=@shared.klaviyomail.com header.s=def1;
+ dkim=pass header.b=KyTieiIQ6x header.i=@send.photologo.co header.s=mtd1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=photologo.co;
+ arc=none
+Cfbl-Address: fbl@kmta.shared.klaviyomail.com; report=arf
+Content-Type: multipart/alternative;
+ boundary=93cc00b8108a19e2621a8a79fa1236e3ac86dfea11fb72cef23dbbe3de10
+Date: Tue, 31 Mar 2026 23:30:17 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: a=rsa-sha256;
+ bh=kZnJi/1Ifr9EHv2u3ZmMbRHi0lptBQSeM5Z+krxeL/E=; c=relaxed/relaxed;
+ d=shared.klaviyomail.com;
+ h=DKIM-Signature:CFBL-Address:List-Unsubscribe-Post:Message-ID:List-Unsubscribe:Date:Subject:From:To:Subject:From:To:CC:Date:CFBL-Feedback-ID:CFBL-Address;
+ s=def1; t=1774999818; v=1;
+ b=sCT9DLQkGpllL/e+qKdijIskdlTzHf4PSUOdU6zf9ld2SOYOSsA6EQTTo+65TlohDRo/cvTW
+ MzHK5zyZdetVaw+I3osbf8hCEE0KSQoCE+sg94IhqBTtR7hTaBjm8Eeoo+xet8L5KNN53ZSSC7L
+ cLuixQ26jJQ5W8mavG34L5U4=
+Dkim-Signature: a=rsa-sha256;
+ bh=kZnJi/1Ifr9EHv2u3ZmMbRHi0lptBQSeM5Z+krxeL/E=; c=relaxed/relaxed;
+ d=send.photologo.co;
+ h=CFBL-Address:List-Unsubscribe-Post:Message-ID:List-Unsubscribe:Date:Subject:From:To:Subject:From:To:CC:Date:CFBL-Feedback-ID:CFBL-Address;
+ s=mtd1; t=1774999818; v=1;
+ b=KyTieiIQ6xzzN/ruK48TA2NgVdebVFwKsX5aDXY4BD+Y5gNC7sm/pGhm4aL+TURo7RJj9TEB
+ FtRFrJowmWzSHd7hUMPobgsK+qDfKZuLXljWaNiCPK4asW2hTr5KpMiH7hzQ9WlCuve6qm1T48J
+ DGlHEc2rZtsJybMJe8oPg+k4=
+From: "Photologo" <info@photologo.co>
+List-Unsubscribe: 
+ <https://manage.kmail-lists.com/subscriptions/unsubscribe?a=R55CVA&c=01K670GK2F9D45GRSC03AG34ZQ&k=788b7f09a9a4b9f668eeae632f08a849&m=01KN0BVYSGE5H3XGJNV9EK8HMJ&r=01KN32V9KQSPYSMXEBX63AQRCK>,
+ <mailto:unsub1-01K670GK2F9D45GRSC03AG34ZQ-KI2TKQ2WIE======@shared.klaviyomail.com?subject=request%20unsubscribe%20ME6VENJVINLECJTDHUYDCSZWG4YEOSZSIY4UINBVI5JFGQZQGNAUOMZULJISM2Z5G44DQYRXMYYDSYJZME2GEOLGGY3DQZLFMFSTMMZSMYYDQYJYGQ4SM3J5GAYUWTRQIJLFSU2HIU2UQM2YI5FE4VRZIVFTQSCNJITHEPJQGFFU4MZSKY4UWUKTKBMVGTKYIVBFQNRTIFIVEQ2L>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <01KN32V9KQSPYSMXEBX63AQRCK@klaviyomail.com>
+Mime-Version: 1.0
+Received: from unknown (HELO kmta-worker-prod-go-86666fdddc-k79jt)
+ (kmta-send@vmta.klaviyomail.com@10.5.20.248) by
+ kmta-mta-blue-0c320cb8e3cc7307b.servers.clovesoftware.com with SMTP; 31 Mar
+ 2026 23:30:18 -0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=170.203.16.38;
+ helo=kl-203-16-38.kmta.shared.klaviyomail.com;
+ envelope-from=bounce-kl_25914533320-kl_101101kn0bvysge5h3xg-h-876d5cefbc=2@k3.send.photologo.co;
+ receiver=<UNKNOWN>;
+Subject: =?UTF-8?q?Fool_everyone._Not_yourself._=F0=9F=98=8F?=
+To: <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1774999827/4flkr13QLlzrfQhc/69CC5911.002/170.203.16.38/kl-203-16-38.kmta.shared.klaviyomail.com/localhost/<bounce-kl_25914533320-kl_101101kn0bvysge5h3xg-h-876d5cefbc=2@k3.send.photologo.co>
+X-Fangmail-Mid-Qid: 69CC5911.002/4flkr13QLlzrfQhc
+X-Fangmail-Miltered: at n151-171-208 with ID 69CC5911.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Kmail-Account: R55CVA
+X-Kmail-Message: 01KN0BVYSGE5H3XGJNV9EK8HMJ
+X-Kmail-Ops: 01K670GK2F9D45GRSC03AG34ZQ
+X-Lms-Client-Ip: 170.203.16.38
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ bounce-kl_25914533320-kl_101101kn0bvysge5h3xg-h-876d5cefbc=2@k3.send.photologo.co
+X-Lms-Pvf: 
+ MnwyfDF8fDFDvKut/Cdot8nRAtLFj+8KgQSkE7+y6CDgQvv17cE5Ev5583PDBkFbz3MhJhTzpudVm+SCGN5BWjrxraKcTYX/iuj6Qcxp2eP+b0Mj4A3HdhFXZ4oPmf9qzBeeTLpVqw==
+X-Mailer-Info: 10.sGbfJTN5EDN1MzMzIDM.sGbfFDMxEDMxsmbwImd5N3ZlVDazg3Z.wd1xWah
+ 52ZAhXah52Z6lmehlmLj9Wb.gsnIwEzSONjMWlzSRNFUZNVTYVkQYZzMBFlUDtkI6snIjJiOiIVN
+ 1MkVBJCLiMWYtJiOxwiIoRnI6EzN3QTO5kDOxcDLi0mI6ICMxskTwIkVZN1RFVDSzg1RK5kV5U0S
+ 4gUTKJCLiQnI6EzN3QTO5kDOxUDLiQXbiojIwEzSONjMWlzSRNFUZNVTYVkQYZzMBFlUDtkIsICe
+ iojItFmb1FGbi0Xf..EDMxEDMxskTwIkVZN1RFVDSzg1R..
+X-Mailer-Info-Extra: 876d5cefbc:0Hh1MIVTRHNVWWJEMOtUMwETMwEDApBQf9JCbh
+ Vnbh1mI6ICeiwiILNkURF0M2glQFhVTTlFUTF1S5YlMz40SxAjI6ISb0JCL1EDO5kTO0c
+ zNxojI0JCLioUTIhzSFljVOp0RYNDS1U0RTllVCBjTLFDMiojItJCL3EDO5kTO0czNxoj
+ I0hmIsEjOi0WYjJCLiEkVDVTNSJiOiMmI7pjILNkURF0M2glQFhVTTlFUTF1S5YlMz40S
+ xAjI7BCAjBQbvNmLpFmepp3ZuFWa4B0ZuFWasV3d++
+X-Mailer-Info-Extra2: 0daa2dcd40:0nh3MoVTZnNXe2JGMutWMwETMwEzXstGAzBQb
+ vNmLpFmepp3ZuFWa4B0ZuFWasV3dAIHA4MjLx4CNuATMAA3bAgzMtYTMtMDMy0CbrBgbv
+ BwMzAQavBQbvNmLslWYt9WepZXYstmLkVmchh2cuEGdttmL4MTL2ETLzAjMtw2aAg2bAI
+ zXtVXakVWbA4WbAMzM1EDAp1GAy8Vb1lGZl1GAtBAMyMzMzUDNxkTNy8FbrBAbAcEWzgU
+ NFd0UZZlQw40SxATMxATMAkGA91nIsFWduFWbiojI4JCLis0QSFVQzYDWCVEWNNVWQNVU
+ LljVyMjTLFDMiojItRnIsUTM4kTO5QzN3EjOiQnIsIiSNhEOLVUOW5kSHh1MIVTRHNVWW
+ JEMOtUMwIiOi0mIscTM4kTO5QzN3EjOiQHaiwSM6ISbhNmIsISQWNUN1IlI6IyYisnOis
+ 0QSFVQzYDWCVEWNNVWQNVULljVyMjTLFDMisHIAMGAxUDNjFDMzQjY1gTO++
+X-Report-Abuse: Please report any spam or abuse to: abuse@klaviyo.com
+
+--93cc00b8108a19e2621a8a79fa1236e3ac86dfea11fb72cef23dbbe3de10
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+
+Hi ,
+
+April Fools' is tomorrow. And every year, the internet loses its mind over =
+fake announcements, staged breakups, and brands pretending to launch ridicu=
+lous products.
+
+We're not doing any of that.
+
+Because honestly? The biggest joke in branding isn't a prank campaign.
+
+It's professionals with incredible talent, charging premium prices, doing e=
+xtraordinary work... and signing off with a font that came pre-loaded on a =
+laptop in 2009.
+
+That's the joke. And nobody's laughing.
+
+Your clients are making decisions about you before the meeting starts. Befo=
+re the pitch. Before the proposal. The moment they see your name, they've a=
+lready formed an opinion.
+
+[Make it the right one.](https://my.photologo.co/order/signature)
+
+A [Photologo](https://my.photologo.co/order/signature)isn't just a signatur=
+e; it's your reputation, hand-drawn.
+
+No pranks. No gimmicks. Just your name, finally doing the work it needs to =
+do. =E2=9C=8A
+
+Still not joking,
+The Photologo Team
+
+You received this email from Photologo. If you would like to unsubscribe, [=
+click here](https://manage.kmail-lists.com/subscriptions/unsubscribe?a=3DR5=
+5CVA&c=3D01K670GK2F9D45GRSC03AG34ZQ&k=3D788b7f09a9a4b9f668eeae632f08a849&m=
+=3D01KN0BVYSGE5H3XGJNV9EK8HMJ&r=3D01KN32V9KQSPYSMXEBX63AQRCK).
+--93cc00b8108a19e2621a8a79fa1236e3ac86dfea11fb72cef23dbbe3de10
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html><html><head><!--[if !mso]><!--><style>@import url("https://s=
+tatic-forms.klaviyo.com/fonts/api/v1/R55CVA/custom_fonts.css");</style><!--=
+<![endif]--></head><body><img src=3D"https://ctrk.klclick1.com/o/01KN32W4ZB=
+Y5C8XXCNP9NYK0KW" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"h=
+eight:1px !important;width:1px !important;border-width:0 !important;margin-=
+top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margi=
+n-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;pa=
+dding-right:0 !important;padding-left:0 !important;"/><p><span style=3D"fon=
+t-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight: 400;=
+ font-style: normal;">Hi ,</span></p>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">April Fools' is tomorrow. And =
+every year, the internet loses its mind over fake announcements, staged bre=
+akups, and brands pretending to launch ridiculous products.</span><br><br><=
+/div>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">We're not doing any of that.</=
+span><br><br></div>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">Because honestly? The biggest =
+joke in branding isn't a prank campaign.</span><br><br></div>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">It's professionals with incred=
+ible talent, charging premium prices, doing extraordinary work... and signi=
+ng off with a font that came pre-loaded on a laptop in 2009.</span><br><br>=
+</div>
+<div><span style=3D"font-weight: bold; font-family: Arial, 'Helvetica Neue'=
+, Helvetica, sans-serif; font-style: normal;">That's the joke. And nobody's=
+ laughing.</span><br><br></div>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">Your clients are making decisi=
+ons about you before the meeting starts. Before the pitch. Before the propo=
+sal. The moment they see your name, they've already formed an opinion.</spa=
+n><br><br></div>
+<div><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;"><a href=3D"https://ctrk.klclic=
+k1.com/l/01KN32W4ZBY5C8XXCNP9NYK0KW_0">Make it the right one.</a></span><br=
+><br><span style=3D"font-family: Arial, 'Helvetica Neue', Helvetica, sans-s=
+erif; font-weight: 400; font-style: normal;">A <a style=3D"text-decoration:=
+ none;" href=3D"https://ctrk.klclick1.com/l/01KN32W4ZBY5C8XXCNP9NYK0KW_1">P=
+hotologo<span style=3D"text-decoration: none;"> </span></a>isn't just a sig=
+nature; it's your reputation, hand-drawn.</span><br><br><span style=3D"font=
+-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight: 400; =
+font-style: normal;">No pranks. No gimmicks. Just your name, finally doing =
+the work it needs to do. =E2=9C=8A</span><br><br><span style=3D"font-family=
+: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight: bold; font-s=
+tyle: normal;">Still not joking,</span><br><span style=3D"font-family: Aria=
+l, 'Helvetica Neue', Helvetica, sans-serif; font-weight: 400; font-style: n=
+ormal;">The Photologo Team</span></div><table align=3D"left" style=3D"text-=
+align:left;background:#fff;">
+    <tbody><tr>
+        <td align=3D"left" valign=3D"top" style=3D"color:#888;font-family:H=
+elvetica,Arial,sans-serif;font-size:12px;line-height:110%;padding-top:20px;=
+text-align:left;">
+            <br><br>
+            You received this email from Photologo. If you would like to un=
+subscribe, <a style=3D"color:#888;" href=3D"https://ctrk.klclick1.com/l/01K=
+N32W4ZBY5C8XXCNP9NYK0KW_2">click here</a>.
+        </td>
+    </tr>
+</tbody></table></body></html>
+--93cc00b8108a19e2621a8a79fa1236e3ac86dfea11fb72cef23dbbe3de10--

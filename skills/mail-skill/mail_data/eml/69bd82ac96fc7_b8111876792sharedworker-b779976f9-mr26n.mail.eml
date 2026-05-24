@@ -1,0 +1,89 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.254.112.99)
+ smtp.mailfrom=bounces+848413-4da5-wuliang=xiangzizai.com@sgmail.github.com;
+ dkim=pass header.b=tZgiCyxvYt header.i=@github.com header.s=smtpapi;
+ dmarc=pass (p=none sp=reject dis=none) header.from=github.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=ibROS+FGwWFnP+8J1KZctrMr64v7HXkO3reIPmYbGIw=;
+ b=m3OP2PHpIeJmc2pIYELUvjpPjCZ0+Jle9Y02l07i/aQZDF2Pbipte+mwcWWejK1U0UDPDzw
+ zd4WnemWqeBJAGH0toxz5lP3n3C2IqMT1ldXy+DdDKvL//AQnfKf2MVCOab4Q49W4tBQYCJNM
+ 0gqmnQRmk+CtAs0SLvvuozVL5Yc0o6xUK8qwiLAbv++nV+D/M/c+qZQQNd+gE/koRIkjFl43W
+ q0zd6YH1Lvg0+MP9WTsZCllLqfOS2stXATDtX7vYePMceaE5g3JpbQDoaZdH0NpI45yoVPVV8
+ NKrHGgTe5iJFWjTJK4D0OSzt/y/SAx/79D2Hi6w9sZ4AnZb3+7/g==
+Arc-Seal: i=1; a=rsa-sha256; t=1774027445; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=XJ5U5HWaISsO1oQvSimoaWWNAaP7KA0gNzofJyc7zzj7/Erh8pwbnmpOpZWOnHuWLXrLQW1
+ wOukdUkY5f8XF4G6DL95QMFcp8BvJtT2Qqireh8FmIWD+MqZGP89NnKAJowkITmzfE1ZPMCHR
+ pm7NC6Fmnwx6u72ew3XaNOPMT4aQn+tfv46nP19cwtMx8K9xPPPbv9Rv2XIz9T2eZIbyV1YoI
+ A353piOzvdeRft69DSCT8PurJAJ11YOZAxUNWrjcwoNKMZGTtOpEROKP6RhPtLfLHrP5sMlgk
+ /lJV66ERIbCh9KniLvy8/lP+MMvMkG3sGKzExzITau0zW5wlZaVw==
+Authentication-Results: lms; spf=pass (client-ip:192.254.112.99)
+ smtp.mailfrom=bounces+848413-4da5-wuliang=xiangzizai.com@sgmail.github.com;
+ dkim=pass header.b=tZgiCyxvYt header.i=@github.com header.s=smtpapi;
+ dmarc=pass (p=none sp=reject dis=none) header.from=github.com; arc=none
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Date: Fri, 20 Mar 2026 17:23:58 +0000 (UTC)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+ h=date:from:subject:mime-version:content-type:content-transfer-encoding:
+ to:cc:content-type:date:from:subject:to; s=smtpapi; t=1774027438;
+ bh=ibROS+FGwWFnP+8J1KZctrMr64v7HXkO3reIPmYbGIw=;
+ b=tZgiCyxvYt4PgIgsGNe6AeY4zzhBty/NRZjg/FbBek6yOipy5zoovvl4P/Sgzd+QVz2S
+ FDevSO1DiTm8Uil4V8p0W/J1Oj4eCtklkLMIUYlCzPlj9Q7Jv9c/N/z8xdltXOqgsYrSMT
+ SO6UulkngJiuWfwNSDL/OVnuGrXIzcnhg=
+From: GitHub <noreply@github.com>
+Message-Id: <69bd82ac96fc7_b8111876792@sharedworker-b779976f9-mr26n.mail>
+Mime-Version: 1.0
+Received: by recvd-8478776996-vgl7p with SMTP id
+ recvd-8478776996-vgl7p-1-69BD82AE-83 2026-03-20 17:23:58.900263695 +0000
+ UTC m=+943714.635237444
+Received: from out-18.smtp.github.com (unknown) by geopod-ismtpd-31 (SG)
+ with ESMTP id Bi4izxFHQze0KrejTIGGeg for <wuliang@xiangzizai.com>; Fri, 20
+ Mar 2026 17:23:58.869 +0000 (UTC)
+Received: from github.com (hubbernetes-node-413f1f7.va3-iad.github.net
+ [10.48.155.12]) by smtp.github.com (Postfix) with ESMTPA id 993B2E0D02 for
+ <wuliang@xiangzizai.com>; Fri, 20 Mar 2026 10:23:56 -0700 (PDT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.254.112.99;
+ helo=o4.sgmail.github.com;
+ envelope-from=bounces+848413-4da5-wuliang=xiangzizai.com@sgmail.github.com;
+ receiver=<UNKNOWN>;
+Subject: [GitHub] A third-party OAuth application has been added to your
+ account
+To: lgwanai <wuliang@xiangzizai.com>
+X-Auto-Response-Suppress: All
+X-Entity-Id: u001.h3RSp2myFsXwI84tgZKC3Q==
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1774027442/4fcqDL3h4Jz2D5lPc/69BD82B2.003/192.254.112.99/o4.sgmail.github.com/localhost/<bounces+848413-4da5-wuliang=xiangzizai.com@sgmail.github.com>
+X-Fangmail-Mid-Qid: 69BD82B2.003/4fcqDL3h4Jz2D5lPc
+X-Fangmail-Miltered: at n206-112-038 with ID 69BD82B2.003 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 192.254.112.99
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: bounces+848413-4da5-wuliang=xiangzizai.com@sgmail.github.com
+X-Lms-Pvf: 
+ MnwyfDF8fFRjDs7WaV1toGJkmwb6AVPVz5EhHcuYM9HN3XYOVAsyxDUabUuIRJmj9rzG890NmkXAlFOJ6mDoXLAGtfX9nopUVMcNfOU+Y6v4hGn7xuX0VFaABQxHzXrOcAeoi9zlNg==
+X-Sg-Eid: 
+ =?us-ascii?Q?u001=2ElNcmDc+hNZCEz2pmfZvb7eKfMxLKAVj+NVF2+R9MxiZGI3oIB2=2FLmeGqw?=
+ =?us-ascii?Q?QMz+0gaIrmjngkwaOVJR+W5RIUyfB0dVMIBjbNP?=
+ =?us-ascii?Q?Z2sMoIlOknjwAANa0l3F66Ao1jY1H24rMRLzGWf?=
+ =?us-ascii?Q?ztiuOD0m7+EVSx=2F1MMdlowQ24SSk+MCWSwccBiH?=
+ =?us-ascii?Q?7Lo5mLLyAy+FFoAq8D6GEemZK4JfF2=2FekFm6CO4?=
+ =?us-ascii?Q?ZlbdgNK9NZnM9ncSV1remo=3D?=
+
+Hey lgwanai!
+
+A third-party OAuth application (ClawdHub) with read:user and user:email scopes was recently authorized to access your account.
+Visit https://github.com/settings/connections/applications/Ov23li5jsi0O2riseSu1 for more information.
+
+To see this and other security events for your account, visit https://github.com/settings/security-log
+
+If you run into problems, please contact support by visiting https://github.com/contact
+
+Thanks,
+The GitHub Team
+

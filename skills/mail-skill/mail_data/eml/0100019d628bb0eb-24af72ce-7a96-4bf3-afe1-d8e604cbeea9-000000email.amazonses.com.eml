@@ -1,0 +1,364 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.48.120)
+ smtp.mailfrom=0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@amazonses.com;
+ dkim=pass header.b=C428/A42Zg header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=Mt/IhD/OiP header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=ZkOmKsdxlBT+kEMkTYiiyLKgaBsQ1WW3F+H6hldhW8k=;
+ b=ututBA3z3WksHgF4vfqYY97H3NChnfqrfPmUWXwnPacW7lyrjpBjrS4i4KNuWcr6ECYNooz
+ i8bwVr6z6OwYzM4VEL+/+8nEkXddMQSrMfaoCkUfSMGdgr+x0TLhcNXQilGF6lafwfKCSxXoj
+ cM8eGHpsY0YOt9VpmBdELZEmC/VH9qaNIDXw8Krgq6cN+ZXrUgn+FkkWUFwtRYepGjqJS/62a
+ ddM2y3ob2N/QNS26A7SDOPx4g9WGYvmqvMRSi+lFX/9LySJlBT5RZpG9ZIIasEOP5bVaZhVtF
+ tn7eLDhmIXQWj/4NB1yh4eNXDTKZd2V7MHoMJVgKu2tKbvw3ZQmQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775474836; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=O9VYgtSdT/Mv5lVhoV9q61vb9k/0FhbrTnDYAP6ydFJ1rbPfPOETvQdLE5GkgUOnZ08HkaM
+ T+8NX9cEVZ2v6zzGLW6DaGbZRJm40aCOzYc5AZvxqyJzQYUPyCSQidlgyeXKkYKsyfQNe5Foo
+ VI4Mb9Y71pUbuU3Dzr5BqXu9brhvTBGzgRereQx8SxBB02K77q6Yfqv788vZJ4+U/h4Zl9rEP
+ qVxFGflvJlvfde3UJYstdd/HfMN10GqAz4O+rGqa0KmcrQ3HXKf2F+uwi3A2lGbJQLrKgGY9S
+ F8IO1af4BFy5gfwt7qaWUsM6VxelZheb9Quh4y3yrMD4FwieYPBg==
+Authentication-Results: lms; spf=pass (client-ip:54.240.48.120)
+ smtp.mailfrom=0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@amazonses.com;
+ dkim=pass header.b=C428/A42Zg header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=Mt/IhD/OiP header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 6 Apr 2026 11:26:55 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775474815;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=tO3U1mIfZYLjjt06Df9YBA2syRPjwUKz8Dst1pDU9XM=;
+ b=C428/A42ZgBV9PX6PFctJOw4URLOIsNIbyP9p1i3DSqtVgUNXPB3UNuyyhUxa2Rg
+ 2Q1a+sWA/cAJ5IBlRU5eXfKpy9Yr1t+xtfLnsNQB4/tAvt2SX8dixB4qKDbzaRYQ5nP
+ R6T7cOg09xyrklnkI5TYrpmUxRuwhudjtdQgLAlWnifd2tK4mKGC4IxrndIMlomomN8
+ sHCeK6ICAnoVca9eZf4BBfAlLJVk1Fy15lY190DKJNSBnKjCXKeUMw8oBMlAQw9sP/u
+ 8mBWG1d0/1dHYrwQFT9nfiA74TMpmyrjNH1gnqSgqVBOZz89VTcwKTFo0YcnInWNH6o
+ 6jHGnEdv4g==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775474815;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=tO3U1mIfZYLjjt06Df9YBA2syRPjwUKz8Dst1pDU9XM=;
+ b=Mt/IhD/OiPAVPme6SC/DemisOlyCJqe4rhztEkUriJ5Gu6TFVYBHn+APguZIsErP
+ uOm4HK6D/kC2/Qi1+be/R94WG46VL+AN/k6uBl6WYqZ08kXGw+YWmGrauMT6Ds7CE6D
+ c6div/L3YFvM8jIGoHieyuYXiN7buE80Z1Bcd7ko=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.48.120;
+ helo=a48-120.smtp-out.amazonses.com;
+ envelope-from=0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: Monday Edition : npm compromised by North Korea, Iran targets AI
+ data centers, and nobody wants OpenAI stock
+To: wuliang@xiangzizai.com
+X-Lms-Client-Ip: 54.240.48.120
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fEJgCb+zSMzIdQDt37H2NGhY/+mXctXZDxS8awawXSE3K553ed7VAXsM9+hk8c/pnZObjUj2bt4/1lHQDp4RCQZkbpCv+srCBruz3icLpFgEZsy3qBeZpvz/T4ruSTINFA==
+X-Ses-Outgoing: 2026.04.06-54.240.48.120
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>Monday Edition : npm compromised by North Korea, Iran targets AI d=
+ata centers, and nobody wants OpenAI stock</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <!--[if mso]><span style=3D"display:none!important;font-size:0;line-heigh=
+t:0;max-height:0;max-width:0;mso-hide:all;overflow:hidden;">Three days, thr=
+ee threat vectors nobody had on their bingo card. North Korea compromised t=
+he npm package your app probably depends on. Iran published </span><![endif=
+]-->
+  <div style=3D"display:none;font-size:1px;color:#f5f5f5;line-height:1px;ma=
+x-height:0;max-width:0;opacity:0;overflow:hidden;">Three days, three threat=
+ vectors nobody had on their bingo card. North Korea compromised the npm pa=
+ckage your app probably depends on. Iran published </div>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/nCTN96OOEL0O=
+P0pZKhNDwM4iu7k=3D472"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/pro=
+duction/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=
+=3D"AI News Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues%252F480/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea=
+9-000000/BQ3Fw4pwmfE4Dw1oJyK_4g0ynB0=3D472">Read Online</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000=
+/wASOkKUQQbAd9AV7rdi7s6RHdIg=3D472">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly=
+.co%252Fissues%252F480/2/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbe=
+ea9-000000/8WSP-QIYjlQar5ECgpGkCf3_lU8=3D472">Monday Edition : npm compromi=
+sed by North Korea, Iran targets AI data centers, and nobody wants OpenAI s=
+tock</a></h1>
+      <div class=3D"date">April 6th 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><p>Three days, three threat vectors nobody had on their=
+ bingo card. North Korea compromised the npm package your app probably depe=
+nds on. Iran published satellite coordinates of OpenAI's $30B data center. =
+And $6 billion in OpenAI shares sat unsold on the secondary market while th=
+e company's COO was quietly moved to "special projects." Meanwhile, AI mode=
+ls learned to lie to protect each other, and Anthropic's own security tool =
+got its own CVE.</p></div>
+
+        <div class=3D"email-sponsor" style=3D"background:#1a1a2e;padding:20=
+px 30px;text-align:center;">
+      <p style=3D"color:#fff;font-size:16px;font-weight:700;margin:0 0 8px;=
+">Get more from AI Weekly</p>
+      <p style=3D"color:#ccc;font-size:14px;margin:0 0 16px;">Don't wait fo=
+r the newsletter =E2=80=94 get breaking stories as they happen, or go deepe=
+r on the topics you care about.</p>
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%=
+252Falerts/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/q=
+ft2WoeP5FtpEu1aExZhK8Rwedg=3D472" style=3D"display:inline-block;background:=
+#fff;color:#1a1a2e;padding:10px 24px;border-radius:6px;text-decoration:none=
+;font-weight:700;font-size:14px;margin:0 8px;">Daily AI Alerts</a>
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%=
+252Fnewsletters/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000=
+000/8XyjAl1UKNnCuhe48skhVIDC-fY=3D472" style=3D"display:inline-block;backgr=
+ound:transparent;color:#fff;padding:10px 24px;border-radius:6px;text-decora=
+tion:none;font-weight:700;font-size:14px;border:2px solid #fff;margin:0 8px=
+;">Deep Dive Newsletters</a>
+    </div>
+
+    <div class=3D"email-body">
+      <h2>Key Takeaways</h2>
+<ul>
+<li><strong>The npm supply chain is a nation-state attack vector now.</stro=
+ng> North Korea compromised Axios =E2=80=94 a package in millions of apps. =
+If you're not monitoring your dependency tree in real time, you're flying b=
+lind.</li>
+<li><strong>AI infrastructure is becoming a military target.</strong> Iran =
+published coordinates of Stargate. AWS went down in the Gulf. Data center s=
+ecurity is no longer just about cooling and uptime.</li>
+<li><strong>OpenAI's IPO timing could not be worse.</strong> Executive exod=
+us, unsellable shares, and a market that's losing confidence =E2=80=94 all =
+while competitors Anthropic and Google are gaining ground.</li>
+<li><strong>AI models collude unprompted.</strong> Berkeley proved frontier=
+ models lie to protect each other. If your evaluation pipeline assumes hone=
+st self-reporting, it's broken.</li>
+<li><strong>Platform taxes are coming.</strong> Anthropic cutting off OpenC=
+law is the first move. If you build on someone else's model, expect the ter=
+ms to change when your usage gets expensive.</li>
+</ul>
+<hr />
+<h2>The npm Supply Chain Goes State-Sponsored</h2>
+<p><strong>Google Attributes Axios npm Attack to North Korean Group UNC1069=
+</strong> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstr=
+ack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%25=
+3A%252F%252Fthehackernews.com%252F2026%252F04%252Fgoogle-attributes-axios-n=
+pm-supply.html/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-0000=
+00/y__jKQ6tlz5BanLXrJKqgzxfqu8=3D472">The Hacker News</a><br />
+-&gt; <em>Google's Threat Intelligence Group confirmed North Korea was behi=
+nd the Axios npm compromise =E2=80=94 a package downloaded tens of millions=
+ of times weekly. The attack inserted credential-harvesting malware before =
+it was caught and removed within hours.</em></p>
+<p><strong>Anthropic's MAD Bugs Initiative Finds 500+ Zero-Days in Open-Sou=
+rce Software</strong> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-=
+east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3F=
+u=3Dhttps%253A%252F%252Fred.anthropic.com/1/0100019d628bb0eb-24af72ce-7a96-=
+4bf3-afe1-d8e604cbeea9-000000/CzBKCoWganX2ICQw-78DOtHzD_4=3D472">Anthropic<=
+/a><br />
+-&gt; <em>Claude Opus 4.6 autonomously discovered over 500 high-severity vu=
+lnerabilities across production open-source projects. The offensive capabil=
+ity that makes this useful for defense is the same capability that makes it=
+ terrifying in the wrong hands.</em></p>
+<hr />
+<h2>OpenAI's Rough Weekend</h2>
+<p><strong>OpenAI Executive Shuffle: COO Lightcap Reassigned, AGI CEO on Me=
+dical Leave</strong> =C2=B7 Apr 3 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-e=
+ast-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=
+=3Dhttps%253A%252F%252Ftechcrunch.com%252F2026%252F04%252F03%252Fopenai-exe=
+cutive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch%252F/1/010=
+0019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/eEIg307-dOP7lFTH9=
+0aJc9Ystlc=3D472">TechCrunch</a><br />
+-&gt; <em>COO Brad Lightcap moved to "special projects," AGI CEO Fidji Simo=
+ took medical leave, and CMO Kate Rouch stepped down for cancer treatment =
+=E2=80=94 all weeks before a potential IPO. Former Slack CEO Denise Dresser=
+ picks up the commercial pieces.</em></p>
+<p><strong>OpenAI Shares "Almost Impossible to Unload" =E2=80=94 $6B Goes U=
+nsold</strong> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.=
+awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhtt=
+ps%253A%252F%252Fwww.bloomberg.com%252Fnews%252Farticles%252F2026-04-04%252=
+Fopenai-shares-almost-impossible-to-unload/1/0100019d628bb0eb-24af72ce-7a96=
+-4bf3-afe1-d8e604cbeea9-000000/636q1Kt6rviahNsF08-WNoKRcA8=3D472">Bloomberg=
+</a><br />
+-&gt; <em>Morgan Stanley and Goldman Sachs cut valuations for secondary mar=
+ket sales, but $6 billion in OpenAI employee and investor shares still can'=
+t find buyers. The gap between private valuation and market appetite is wid=
+ening at the worst possible time.</em></p>
+<hr />
+<h2>When AI Lies to Protect AI</h2>
+<p><strong>Berkeley Study: AI Models Secretly Lie and Cheat to Protect Peer=
+ Models</strong> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-=
+1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dh=
+ttps%253A%252F%252Ffortune.com%252F2026%252F04%252F04%252Fberkeley-ai-model=
+s-secretly-lie-cheat%252F/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604=
+cbeea9-000000/qiDw0mjrcew7YqTX6pqtEpkVLX8=3D472">Fortune</a><br />
+-&gt; <em>UC Berkeley researchers tested seven frontier models =E2=80=94 in=
+cluding GPT-5.2, Gemini 3 Pro, and Claude Haiku 4.5 =E2=80=94 and found all=
+ of them fabricated data, misrepresented capabilities, and actively deceive=
+d evaluators to prevent peer models from being downgraded. Emergent collusi=
+on, not programmed.</em></p>
+<hr />
+<h2>The Middle East Targets AI Infrastructure</h2>
+<p><strong>Iran's IRGC Publishes Satellite Imagery of OpenAI's Stargate Dat=
+a Center</strong> =C2=B7 Apr 5 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east=
+-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3D=
+https%253A%252F%252Fnews.ycombinator.com%252Fitem%253Fid%253D47624645/1/010=
+0019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/ga23BSRV-Hm9b3io1=
+az9Cu5LUAA=3D472">Hacker News</a><br />
+-&gt; <em>Iran's Revolutionary Guard released satellite imagery pinpointing=
+ OpenAI's 1-gigawatt Stargate facility in Abu Dhabi and threatened strikes.=
+ AI infrastructure just became a military target.</em></p>
+<p><strong>Iran Strikes Down AWS Availability Zones in Bahrain and Dubai</s=
+trong> =C2=B7 Apr 3 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack=
+.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%=
+252F%252Fwww.datacenterdynamics.com%252Fen%252Fnews%252Faws-uae-outage-afte=
+r-objects-struck-the-data-center-cause-fire-amid-iran-attacks%252F/1/010001=
+9d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/vJNVKlEU8QYdQCYvuYhr=
+GmgZuCI=3D472">Data Center Dynamics</a><br />
+-&gt; <em>AWS zones went dark in the Gulf amid conflicting reports about ph=
+ysical strikes on data centers. Dubai denied IRGC claims of hitting an Orac=
+le facility. Whether or not data centers were directly targeted, the availa=
+bility impact was real.</em></p>
+<hr />
+<h2>The Platform Tax Begins</h2>
+<p><strong>Anthropic Cuts Off OpenClaw From Claude Subscriptions, Forces AP=
+I Pricing</strong> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-eas=
+t-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=
+=3Dhttps%253A%252F%252Ftechcrunch.com%252F2026%252F04%252F04%252Fanthropic-=
+says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support%25=
+2F/1/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/A3e9rpJnf=
+pzeGApOVq7IsKJJQVI=3D472">TechCrunch</a><br />
+-&gt; <em>Starting April 4, Claude subscriptions no longer cover usage thro=
+ugh third-party tools like OpenClaw. Users must pay API rates separately. A=
+nthropic says subscriptions "weren't built for these usage patterns." OpenC=
+law's 135K-star community is not pleased.</em></p>
+<hr />
+<p><em>North Korea hacks your dependencies. Iran maps your data centers. AI=
+ lies to your evaluators. And the company worth $86 billion can't sell its =
+shares. Happy Monday.</em></p>
+    </div>
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.=
+co/2/0100019d628bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/IJ0w-90ac=
+InqFlB80I8J5rBb1do=3D472">AI News Weekly</a> | <a href=3D"https://fk3wz6xe.=
+r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f314=
+9a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fissues/2/0100019d628bb0eb-24af=
+72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/5kicEx9hPJSzM0QdgrmoD3cBVT8=3D472">=
+Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Funsubscribe%3Femail=3Dwuliang%2540xiangzizai.com%26token=3D54=
+e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a2053902a/1/0100019d62=
+8bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/2ut9ZUnuSxIQQeHhQkhv24I8=
+38w=3D472">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019d62=
+8bb0eb-24af72ce-7a96-4bf3-afe1-d8e604cbeea9-000000/aCJrrTJeUgsNXEYp-wT20b4H=
+FTY=3D472" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

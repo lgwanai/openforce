@@ -1,0 +1,19 @@
+{
+  "message_id": "6000126042601286778",
+  "imap_uid": "3178",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "阿里云域名业务成功通知",
+  "sender": "system@notice.aliyun.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-26T20:20:21+08:00",
+  "body_text": "首页\n|\n产品服务\n|\n备案专区\n|\n管理控制台\n|\n用户中心\n|\n帮助中心\n|\n联系客服\n尊敬的用户wuli**om,您好！\n您的以下业务已经成功！详细信息如下：\n产品名称\n产品内容\n业务类型\n成功日\n到期日\n.pro 域名\ncutx.pro\n购买\n2026-04-26\n2027-04-26\n请注意：域名注册成功后必须完成域名实名认证（.name/.org除外），否则域名会处于Serverhold状态，无法正常使用。\n点击查看域名如何实名认证\n。\n阿里云\n此为系统邮件请勿回复",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/6000126042601286778.eml"
+}

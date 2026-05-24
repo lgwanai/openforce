@@ -128,6 +128,11 @@ impl CmdHandler {
         let tid = cmd.task_id.ok_or(DomainError::ValidationFailed { detail: "task_id required".into() })?;
         let t = ProjectionRepo::get_task(pool, cmd.session_id, tid).await?;
         if !t.state.is_runnable() { return Err(DomainError::LeaseExpired); }
+        // Verify fencing token for heartbeat/renewal authorization
+        let fencing_token = cmd.payload.get("fencing_token").and_then(|v| v.as_u64());
+        if let Some(provided) = fencing_token {
+            t.verify_fencing(provided)?;
+        }
         let evt = EventEnvelope::new("HeartbeatReceived", cmd.session_id, cmd.tenant_id,
             cmd.requested_by.clone(),
             EventPayload::HeartbeatReceived(openforce_domain::event::HeartbeatReceivedPayload {
@@ -195,16 +200,26 @@ impl CmdHandler {
     }
 
     async fn request_effect(pool: &PgPool, cmd: &Command) -> DomainResult<CommandResult> {
+        let tid = cmd.task_id.ok_or(DomainError::ValidationFailed { detail: "task_id required for effect request".into() })?;
+        let t = ProjectionRepo::get_task(pool, cmd.session_id, tid).await?;
+        t.verify_submissible()?;
+        let fencing_token = cmd.payload.get("fencing_token").and_then(|v| v.as_u64())
+            .ok_or(DomainError::ValidationFailed { detail: "fencing_token required in payload for effect request".into() })?;
+        t.verify_fencing(fencing_token)?;
+        let effect_type = cmd.payload.get("effect_type").and_then(|v| v.as_str()).unwrap_or("generic");
+        let idempotency_key = cmd.payload.get("idempotency_key").and_then(|v| v.as_str()).unwrap_or("");
+        let approval_policy = cmd.payload.get("approval_policy").and_then(|v| v.as_str()).unwrap_or("default");
         let evt = EventEnvelope::new("EffectRequested", cmd.session_id, cmd.tenant_id,
             cmd.requested_by.clone(),
             EventPayload::EffectRequested(openforce_domain::event::EffectRequestedPayload {
-                effect_id: Uuid::now_v7().to_string(), effect_type: "generic".into(),
-                idempotency_key: String::new(),
-                requested_by_task: cmd.task_id.map(|id| id.to_string()).unwrap_or_default(),
-                request_ref: String::new(), approval_policy: "default".into(),
-            }));
+                effect_id: Uuid::now_v7().to_string(), effect_type: effect_type.into(),
+                idempotency_key: idempotency_key.into(),
+                requested_by_task: tid.to_string(),
+                request_ref: String::new(), approval_policy: approval_policy.into(),
+            })).with_task(tid, t.task_attempt, 0, t.plan_epoch);
         let new_ver = EventStore::append_events(pool, cmd.session_id, cmd.expected_version, &[evt]).await?;
-        Ok(Self::res(cmd.command_id, new_ver, serde_json::json!({"status": "requested"})))
+        ProjectionBuilder::rebuild(pool, cmd.session_id).await?;
+        Ok(Self::res(cmd.command_id, new_ver, serde_json::json!({"status": "requested", "task_id": tid.to_string()})))
     }
 
     async fn mark_succeeded(pool: &PgPool, cmd: &Command) -> DomainResult<CommandResult> {

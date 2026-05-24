@@ -1,0 +1,517 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.27.196)
+ smtp.mailfrom=0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@mail.vercel.com;
+ dkim=pass header.b=nokuHZTDHw header.i=@vercel.com
+ header.s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd;
+ dkim=pass header.b=IgfVGfIt5C header.i=@amazonses.com
+ header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=vercel.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=fNXg2MRLyuzMyj+/PeW6fiGUggjp9xxXwi43mmxBCUU=;
+ b=nA5QASvoDp2lU2iQRH2O2HOp+Jkoz52JnB9QgLxZKJq9nWkdSg2eXC4wNfZV/bZP18df5Up
+ pcyynN6UKMFvgtA90F3XMv+/0jfWqwEzfevYyGppLeeL+6YJenvtlM/kj7Kyhelc/vGkLZ8sb
+ BfbjAueuPmG8uwb2tu7NqO/sDX2LKYkGwCz51/sw2MzwYpIQdYU/66DDOw6loHkwtw8IyrCJ1
+ /uRoJ/sf6xBVuRWgCddLiZ0HTHTj2gRHpJPaJKluvS7+RrcDt2f+H4obfg93gdjZdX4tvJWZd
+ E4fC0sIQg9dfNasmZKUgOhDP9xb9mYrXWLzOv2i3gEgKgA9p7iTA==
+Arc-Seal: i=1; a=rsa-sha256; t=1773870653; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=cy+o5ytqXKdDYQQXQxvonNz9WFU82wBprusB1VcOdaA5jweEJQqQKzCHVk8DFlOwxDp32HQ
+ egIpPdCPeibsxOlh/S5lx6NYYSY5g8Sf19oR8kO0T9epvc1/Z19XRSfQ38ESwCRf1ungsnKt9
+ Gu1IAjr21QUxBHOi9InfFiWGibYlAwapuq3Q0f8urTwXJksObN7dOykLvfurgUrtrksr524BT
+ 0Z9ieWOUlqBvAiwKYHPGamLNPmXv4vUJOcW4AVDrpbbj9p2t4TBzVSHfjpv0T8kUVccTB/odm
+ aGvjY8i5nYgtrK1nReN6U7CJz51L2hgNpMXmQ+UHvRgXiycZBF5g==
+Authentication-Results: lms; spf=pass (client-ip:54.240.27.196)
+ smtp.mailfrom=0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@mail.vercel.com;
+ dkim=pass header.b=nokuHZTDHw header.i=@vercel.com
+ header.s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd;
+ dkim=pass header.b=IgfVGfIt5C header.i=@amazonses.com
+ header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=vercel.com;
+ arc=none
+Content-Type: multipart/alternative;
+ boundary="----=_Part_704644_552905891.1773870646726"
+Date: Wed, 18 Mar 2026 21:50:46 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd; d=vercel.com; t=1773870646;
+ h=From:Reply-To:To:Subject:MIME-Version:Content-Type:Message-ID:Date;
+ bh=R0Can2VlRvqDYYb9I46HxsdQJHkYbh1jjFMGLUIqck0=;
+ b=nokuHZTDHw/g54laGsPrVo04sLy04By25TsFnNEM5uzZuUK9znqgvOsYpoOS94Q4
+ lZ4prB1VE3dcdNIPMSHsUJS1EYbmko0s6i5K/1lBRnPEi86qJYzDOBfIahq81t+Qx3b
+ rjoNX7WSOc2yl8kMyt2lFt392M72xsDHGc2aZmM5uNlCJhySSasZ5e3Qj1jsx2eULhY
+ Ng+ksMbOFqY608bEsMTjgFyGaLPjOaDFlR47M+QkbSpL98Ab8npQ1oBYEX+D4B/IF55
+ OVyazjmfCtu3K4htBJiQwln6Gc3IrJWeMrGNMrkfsQN6RNlq6wIAdVKlETZTo5fjh2X
+ aA59QTQzzg==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1773870646;
+ h=From:Reply-To:To:Subject:MIME-Version:Content-Type:Message-ID:Date:Feedback-ID;
+ bh=R0Can2VlRvqDYYb9I46HxsdQJHkYbh1jjFMGLUIqck0=;
+ b=IgfVGfIt5Cfy0jQpuMaqoXiaYjewpCMaKU2h91otudETpQq14Wu15r4b3dL/UMVa
+ 5oaoKDTpw0AivdnambIUNpEF6k+mBADi8yCoTcM4KlET/T603kXIqo36Qsta5YR0wLX
+ i5aDkQz3D2e+zlfjSX9Jyx21pLU30DorKRaFfURs=
+Feedback-Id: 
+ ::1.us-west-2.FoOqCThWXVf6UxtlBCXjpN6DawGbMccagHDueWriYXM=:AmazonSES
+From: Vercel <notifications@vercel.com>
+Message-Id: 
+ <0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@us-west-2.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.27.196;
+ helo=a27-196.smtp-out.us-west-2.amazonses.com;
+ envelope-from=0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@mail.vercel.com;
+ receiver=<UNKNOWN>;
+Reply-To: no-reply@vercel.com
+Subject: =?UTF-8?Q?We=E2=80=99re_updating_our_Terms_of_Service?=
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773870650/4fbjF61s2nzB4DKF/69BB1E3A.000/54.240.27.196/a27-196.smtp-out.us-west-2.amazonses.com/localhost/<0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@mail.vercel.com>
+X-Fangmail-Mid-Qid: 69BB1E3A.000/4fbjF61s2nzB4DKF
+X-Fangmail-Miltered: at n206-112-028 with ID 69BB1E3A.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.27.196
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0101019d02ee05c6-4beca81f-e53d-4953-9b95-d45e692570ff-000000@mail.vercel.com
+X-Lms-Pvf: 
+ MnwyfDF8fGOhcNGtigc/WLZTZ3tGALnCNZ5HW42qmxKa+0d0s+rbAsphPe5Tkxz3VCa5i4GpqktWdGWcQRRx61khkadH3/Qg4LGv+EBDhN84I70c8t5NBOXkWeDVwd64MXz07gFFqQ==
+X-Ses-Outgoing: 2026.03.18-54.240.27.196
+
+------=_Part_704644_552905891.1773870646726
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Vercel
+Hi wuliang-4062,
+
+We're updating our Terms of Service (https://vercel.com/terms)
+and Privacy Policy (https://vercel.com/privacy) to reflect how
+Vercel uses data to support agentic features, improve our
+platform, and contribute to the AI ecosystem.
+
+----------------
+
+What is changing
+----------------
+
+Agentic infrastructure capabilities
+
+We are developing features that allow Vercel to do more to keep
+your apps running efficiently, including:
+
+*
+Proactively investigating and mitigating incidents
+*
+Analyzing web app performance data and suggesting improvements
+*
+Identifying where your spend is going and creating PRs to
+optimize usage
+Optional AI model training
+
+You may choose whether Vercel can:
+
+*
+Use your code and Vercel agent chats to improve Vercel models
+*
+Share your code and Vercel agent chats with AI model providers
+
+Vercel will not share personal data, account details, or
+sensitive information like environment variables, and any
+information=C2=A0of this nature will be removed from data you make
+available for AI training.
+
+----------------
+
+Defaults by plan
+----------------
+
+* Hobby and Trial Pro: Opted in to AI model training by default,
+can opt out at any time
+* Pro: Opted out of AI model training by default, can opt in at
+any time
+You can manage your preferences in Team Settings =E2=86=92 Data
+Preferences
+(https://vercel.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%23data-preference=
+s&title=3DGo+to+Data+Preferences).
+
+If you choose to opt out by March 31, 2026, no data will be used
+by Vercel to train AI or shared with third parties. If you choose
+to opt out after March 31, 2026, your data will not be used or
+shared starting from the time of your opt-out.
+
+Other changes to our Terms of Service include updated dispute
+resolution processes, billing practices, and provisions to
+reflect compliance with the latest data protection laws. While
+arbitration has always been our method of resolving disputes with
+international and Enterprise customers, it now also applies to
+U.S.-based customers. The opt-out process described in Section 21
+of our Terms of Service is unchanged.
+
+For more detailed FAQs, visit our Changelog
+(https://vercel.com/changelog/updates-to-terms-of-service-march-2026?utm_ca=
+mpaign=3Dtos&utm_source=3Demail).
+
+-----------------------------------------------------------------
+
+Copyright =C2=A9 2026 Vercel Inc.
+(https://vercel.com?utm_medium=3Demail&utm_source=3Dnotifications>)
+All rights reserved.
+440 N Barranca Ave #4133 Covina, CA 91723
+
+Manage your notification settings
+(https://vercel.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%2Fnotifications&t=
+itle=3DNotification+Settings)
+
+p {
+color:#000;
+font-family:
+Geist,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI"
+,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid
+Sans","Helvetica Neue",sans-serif;
+font-size: 14px;
+line-height: 24px;
+overflow-wrap: anywhere;
+}
+.break-all {
+color:#000;
+font-family:
+Geist,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI"
+,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid
+Sans","Helvetica Neue",sans-serif;
+font-size: 14px;
+line-height: 24px;
+word-break: break-all
+}
+h1 {
+color: #000;
+font-family: Geist,-apple-system, BlinkMacSystemFont, "Segoe UI",
+"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid
+Sans","Helvetica Neue",sans-serif;
+font-size: 24px;
+font-weight: normal;
+margin: 30px 0;
+padding: 0;
+}
+h2 {
+font-size: 18px;
+}
+h3 {
+font-size: 16px;
+}
+pre {
+font-family: "Geist
+Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation
+Mono","Courier New",monospace
+width: 100%;
+max-width: 465px;
+overflow: hidden;
+text-overflow: ellipsis;
+color: #171717;
+border: 1px solid #e5e5e5;
+padding: 20px;
+border-radius: 6px;
+}
+.block-button.block-button--solid.block-button--sm {
+background-color:#000;
+border-radius:5px;
+color: #fff;
+display: inline-block;
+font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe
+UI" ,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid
+Sans","Helvetica Neue",sans-serif;
+font-size:14px;
+font-weight:500;
+line-height:50px;
+text-align:center;
+text-decoration:none;
+width:200px;
+}
+strong {
+color:#000;
+font-weight:bold;
+}
+a {
+color:#067df7;
+text-decoration:none;
+}
+code.inline {
+color:rgb(189,16,224);
+text-decoration:none;
+font-family:Menlo,Monaco,"Lucida Console","Liberation
+Mono","DejaVu Sans Mono","Bitstream Vera Sans Mono","Courier
+New",monospace,serif;
+font-size:0.9em;
+}
+ul {
+padding-left: 20px;
+}
+li, .usage {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid
+Sans","Helvetica Neue",sans-serif;
+font-size:14px;
+line-height: 2em;
+color:#000;
+}
+------=_Part_704644_552905891.1773870646726
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head></head><body><table width=3D"100%" border=3D"0" cellspacing=3D"=
+0" cellpadding=3D"0" style=3D"width:100%!important"><tbody><tr><td align=3D=
+"center"><table style=3D"margin:40px 0" width=3D"600" border=3D"0" cellspac=
+ing=3D"0" cellpadding=3D"40"><tbody><tr><td align=3D"center"><div style=3D"=
+font-family:-apple-system,BlinkMacSystemFont,&#39;Segoe UI&#39;,&#39;Roboto=
+&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&=
+#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;text-align:le=
+ft;width:465px"><table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpa=
+dding=3D"0" style=3D"width:100%!important"><tbody><tr><td align=3D"center">=
+<div style=3D"margin-bottom:24px"><img src=3D"https://assets.vercel.com/ema=
+il/vercel.png" width=3D"40" height=3D"36" alt=3D"Vercel"/></div></td></tr><=
+/tbody></table><table class=3D"block-row block-row--markdown-v1" id=3D"e7a1=
+fbc6-fb15-4633-82d8-900a424e9f9a" cellspacing=3D"0" width=3D"100%" cellpadd=
+ing=3D"0"><tbody><tr class=3D"block-row__row"><td class=3D"block-row__cell"=
+ style=3D"padding-bottom: 8px; padding-left: 4px; padding-right: 4px; paddi=
+ng-top: 8px;"><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0"><tb=
+ody><tr><td class=3D"block-markdown"><p style=3D"color:#000;font-family:Gei=
+st,-apple-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Robo=
+to&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira San=
+s&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:1=
+4px;line-height:24px;overflow-wrap:anywhere"><span class=3D"break-all" styl=
+e=3D"color:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSystemFon=
+t,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#=
+39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica N=
+eue&#39;,sans-serif;font-size:14px;line-height:24px;word-break:break-all">H=
+i wuliang-4062,</span></p><p style=3D"color:#000;font-family:Geist,-apple-s=
+ystem,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#3=
+9;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39=
+;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-he=
+ight:24px;overflow-wrap:anywhere">
+We&#39;re updating our <a href=3D"https://vercel.com/terms" style=3D"color:=
+#067df7;text-decoration:none">Terms of Service</a> and <a href=3D"https://v=
+ercel.com/privacy" style=3D"color:#067df7;text-decoration:none">Privacy Pol=
+icy</a> to reflect how Vercel uses data to support agentic features, improv=
+e our platform, and contribute to the AI ecosystem.</p><h2 style=3D"font-si=
+ze:18px">
+What is changing</h2><p style=3D"color:#000;font-family:Geist,-apple-system=
+,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxy=
+gen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droi=
+d Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-height:=
+24px;overflow-wrap:anywhere"><strong style=3D"color:#000;font-weight:bold">=
+Agentic infrastructure capabilities</strong></p><p style=3D"color:#000;font=
+-family:Geist,-apple-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39;=
+ ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#=
+39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;=
+font-size:14px;line-height:24px;overflow-wrap:anywhere">
+We are developing features that allow Vercel to do more to keep your apps r=
+unning efficiently, including:</p><ul style=3D"padding-left:20px"><li style=
+=3D"font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=09&#=
+39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;F=
+ira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font=
+-size:14px;line-height:2em;color:#000">
+Proactively investigating and mitigating incidents  </li><li style=3D"font-=
+family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=09&#39;Roboto=
+&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&=
+#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14p=
+x;line-height:2em;color:#000">
+Analyzing web app performance data and suggesting improvements  </li><li st=
+yle=3D"font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=
+=09&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&=
+#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif=
+;font-size:14px;line-height:2em;color:#000">
+Identifying where your spend is going and creating PRs to optimize usage  <=
+/li></ul><p style=3D"color:#000;font-family:Geist,-apple-system,system-ui,B=
+linkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#3=
+9;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,=
+&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-height:24px;overflo=
+w-wrap:anywhere"><strong style=3D"color:#000;font-weight:bold">Optional AI =
+model training</strong></p><p style=3D"color:#000;font-family:Geist,-apple-=
+system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#=
+39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#3=
+9;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-h=
+eight:24px;overflow-wrap:anywhere">
+You may choose whether Vercel can:</p><ul style=3D"padding-left:20px"><li s=
+tyle=3D"font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=
+=09&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&=
+#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif=
+;font-size:14px;line-height:2em;color:#000">
+Use your code and Vercel agent chats to improve Vercel models  </li><li sty=
+le=3D"font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=09=
+&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39=
+;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;fo=
+nt-size:14px;line-height:2em;color:#000">
+Share your code and Vercel agent chats with AI model providers  </li></ul><=
+p style=3D"color:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSys=
+temFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#=
+39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helve=
+tica Neue&#39;,sans-serif;font-size:14px;line-height:24px;overflow-wrap:any=
+where">
+Vercel will not share personal data, account details, or sensitive informat=
+ion like environment variables, and any information=C2=A0of this nature wil=
+l be removed from data you make available for AI training.</p><h2 style=3D"=
+font-size:18px">
+Defaults by plan</h2><ul style=3D"padding-left:20px"><li style=3D"font-fami=
+ly:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,=09&#39;Roboto&#39=
+;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;=
+,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;li=
+ne-height:2em;color:#000"><strong style=3D"color:#000;font-weight:bold">Hob=
+by and Trial Pro:</strong> Opted in to AI model training by default, can op=
+t out at any time  </li><li style=3D"font-family:-apple-system, BlinkMacSys=
+temFont, &#39;Segoe UI&#39;,=09&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubunt=
+u&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;He=
+lvetica Neue&#39;,sans-serif;font-size:14px;line-height:2em;color:#000"><st=
+rong style=3D"color:#000;font-weight:bold">Pro:</strong> Opted out of AI mo=
+del training by default, can opt in at any time  </li></ul><p style=3D"colo=
+r:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSystemFont,&#39;Se=
+goe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantar=
+ell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,=
+sans-serif;font-size:14px;line-height:24px;overflow-wrap:anywhere"><strong =
+style=3D"color:#000;font-weight:bold">You can manage your preferences in <a=
+ href=3D"https://vercel.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%23data-pr=
+eferences&amp;title=3DGo+to+Data+Preferences" style=3D"color:#067df7;text-d=
+ecoration:none">Team Settings =E2=86=92 Data Preferences</a>.</strong></p><=
+p style=3D"color:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSys=
+temFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#=
+39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helve=
+tica Neue&#39;,sans-serif;font-size:14px;line-height:24px;overflow-wrap:any=
+where">
+If you choose to opt out by March 31, 2026, no data will be used by Vercel =
+to train AI or shared with third parties. If you choose to opt out after Ma=
+rch 31, 2026, your data will not be used or shared starting from the time o=
+f your opt-out.</p><p style=3D"color:#000;font-family:Geist,-apple-system,s=
+ystem-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxyge=
+n&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid =
+Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-height:24=
+px;overflow-wrap:anywhere">
+Other changes to our Terms of Service include updated dispute resolution pr=
+ocesses, billing practices, and provisions to reflect compliance with the l=
+atest data protection laws. While arbitration has always been our method of=
+ resolving disputes with international and Enterprise customers, it now als=
+o applies to U.S.-based customers. The opt-out process described in Section=
+ 21 of our Terms of Service is unchanged.</p><p style=3D"color:#000;font-fa=
+mily:Geist,-apple-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&=
+#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;=
+Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;fon=
+t-size:14px;line-height:24px;overflow-wrap:anywhere">
+For more detailed FAQs, visit our <a href=3D"https://vercel.com/changelog/u=
+pdates-to-terms-of-service-march-2026?utm_campaign=3Dtos&amp;utm_source=3De=
+mail" style=3D"color:#067df7;text-decoration:none">Changelog</a>.
+</p></td></tr></tbody></table></td></tr></tbody></table><hr style=3D"border=
+:none;border-top:1px solid #eaeaea;margin:26px 0;width:100%"/><p style=3D"c=
+olor:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSystemFont,&#39=
+;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Can=
+tarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvetica Neue&#3=
+9;,sans-serif;font-size:14px;line-height:24px;overflow-wrap:anywhere;color:=
+#666666;font-size:14px"></p><p style=3D"color:#000;font-family:Geist,-apple=
+-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&=
+#39;Oxygen&#39;,&#39;Ubuntu&#39;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#=
+39;Droid Sans&#39;,&#39;Helvetica Neue&#39;,sans-serif;font-size:14px;line-=
+height:24px;overflow-wrap:anywhere;color:#666666;font-size:14px;line-height=
+:24px">Copyright =C2=A9 2026 <a href=3D"https://vercel.com?utm_medium=3Dema=
+il&amp;utm_source=3Dnotifications&gt;" style=3D"color:#067df7;text-decorati=
+on:none;color:#067df7;text-decoration:none" target=3D"_blank">Vercel Inc.</=
+a> All rights reserved.<br/>440 N Barranca Ave #4133 Covina, CA 91723</p><p=
+ style=3D"color:#000;font-family:Geist,-apple-system,system-ui,BlinkMacSyst=
+emFont,&#39;Segoe UI&#39; ,&#39;Roboto&#39;,&#39;Oxygen&#39;,&#39;Ubuntu&#3=
+9;,&#39;Cantarell&#39;,&#39;Fira Sans&#39;,&#39;Droid Sans&#39;,&#39;Helvet=
+ica Neue&#39;,sans-serif;font-size:14px;line-height:24px;overflow-wrap:anyw=
+here;color:#666666;font-size:14px;line-height:24px"><a href=3D"https://verc=
+el.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%2Fnotifications&amp;title=3DNo=
+tification+Settings" style=3D"color:#067df7;text-decoration:none;color:#067=
+df7;text-decoration:none" target=3D"_blank">Manage your notification settin=
+gs</a></p></div></td></tr></tbody></table></td></tr></tbody></table><style>
+  p {
+    color:#000;
+    font-family: Geist,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI=
+" ,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helveti=
+ca Neue",sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    overflow-wrap: anywhere;
+  }
+  .break-all {
+    color:#000;
+    font-family: Geist,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI=
+" ,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helveti=
+ca Neue",sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    word-break: break-all
+  }
+  h1 {
+    color: #000;
+    font-family: Geist,-apple-system, BlinkMacSystemFont, "Segoe UI",=09"Ro=
+boto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neu=
+e",sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 30px 0;
+    padding: 0;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  pre {
+    font-family: "Geist Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Cons=
+olas,"Liberation Mono","Courier New",monospace
+    width: 100%;
+    max-width: 465px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #171717;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    border-radius: 6px;
+  }
+ .block-button.block-button--solid.block-button--sm {
+    background-color:#000;
+    border-radius:5px;
+    color: #fff;
+    display: inline-block;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI" ,"Ro=
+boto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neu=
+e",sans-serif;
+    font-size:14px;
+    font-weight:500;
+    line-height:50px;
+    text-align:center;
+    text-decoration:none;
+    width:200px;
+  }
+  strong {
+    color:#000;
+    font-weight:bold;
+  }
+  a {
+    color:#067df7;
+    text-decoration:none;
+  }
+  code.inline {
+    color:rgb(189,16,224);
+    text-decoration:none;
+    font-family:Menlo,Monaco,"Lucida Console","Liberation Mono","DejaVu San=
+s Mono","Bitstream Vera Sans Mono","Courier New",monospace,serif;
+    font-size:0.9em;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  li, .usage {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",=09"Roboto",=
+"Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",san=
+s-serif;
+    font-size:14px;
+    line-height: 2em;
+    color:#000;
+  }
+</style><img src=3D"https://c1.knoclick.com/t/eyJhbGciOiJIUzI1NiIsInR5cCI6I=
+kpXVCJ9.eyJpYXQiOjE3NzM4NzA1OTI3OTQ1ODksIm1pZCI6IjNCOFZIMGFEaHRBdDdIbUFKWXp=
+QSmlpRGlicCJ9.il68vEhSGDOj9Hs5hfTgHeNyAQcOmcoVCLH-_Knp39o/k.png" class=3D"k=
+-png" width=3D"1px" height=3D"1px" role=3D"none"/></body></html>
+------=_Part_704644_552905891.1773870646726--

@@ -1,0 +1,21 @@
+{
+  "message_id": "<1262605370.1577673.1773630845273.JavaMail.\"zwfw-info@miit.gov.cn\"@jszt-idc07-msgcenter-5b6dc56f8f-sfsh9>",
+  "imap_uid": "2844",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "工业和信息化部网站备案系统邮件通知",
+  "sender": "zwfw-info@miit.gov.cn",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-16T11:14:05+08:00",
+  "body_text": "工业和信息化部网站备案系统-邮件通知\n尊敬的用户吴亮，您的备案信息已被变更，详情请咨询您的接入服务提供商。【工信部ICP备案】\n工业和信息化部网站备案系统",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/1262605370.1577673.1773630845273.JavaMail.zwfw-infomiit.gov.cnjszt-idc07-msgcenter-5b6dc56f8f-sfsh9.eml"
+}

@@ -1,0 +1,21 @@
+{
+  "message_id": "<e863dc03-52e3-fefa-44ad-7237be2fd968@xiangzizai.com>",
+  "imap_uid": "3001",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Your OKSkill Verification Code",
+  "sender": "service@xiangzizai.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-06T07:49:21+00:00",
+  "body_text": "Your verification code is: 373367\r\n\r\nThis code expires in 5 minutes.\r\n\r\nIf you did not request this code, please ignore this email.",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/e863dc03-52e3-fefa-44ad-7237be2fd968xiangzizai.com.eml"
+}

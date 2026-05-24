@@ -1,0 +1,28 @@
+{
+  "message_id": "<c8150b2f-2e9f-11f1-8bb3-82a74816a6df_GEN_BY_LMS@chinamobile.com>",
+  "imap_uid": "2970",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "表结构.md",
+  "sender": "wuliangds@chinamobile.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-02T22:25:21+08:00",
+  "body_text": "你好，请查收附件「表结构.md」，内含 hotel.dwd_hotel_order 表的完整字段说明。\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "表结构.md",
+      "content_type": "text/markdown",
+      "size": 3926,
+      "local_path": "./mail_data/attachments/<c8150b2f-2e9f-11f1-8bb3-82a74816a6df_GEN_BY_LMS@chinamobile.com>/表结构.md"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/c8150b2f-2e9f-11f1-8bb3-82a74816a6df_GEN_BY_LMSchinamobile.com.eml"
+}

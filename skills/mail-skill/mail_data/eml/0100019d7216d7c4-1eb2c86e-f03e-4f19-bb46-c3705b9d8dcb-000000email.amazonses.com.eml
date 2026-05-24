@@ -1,0 +1,557 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com;
+ dkim=pass header.b=YLW+oH7Q70 header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=ILvMQ33NbA header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=eDrnZjhzhDbewi8JiGLj7EW/YNQv31uS0ZYvH2fEywo=;
+ b=M+8nFxTFI/7x7a1VKMB8obvqmfmbspeajF6g8DXEYFlH5ZhWfz7BT1xk79+lNlDAzmMqVZA
+ 7AbviR+Madb0J5gI0/4kxdoq8Ot/bakhT/IJH8X78f2rUb2nA4oeVAcuNOoS/8FFRuS4Zd0Rx
+ 8wK18bGWsjjmSswqV/6SDtTyQAVR11VUTFKJgvs6yahG20loF+29fq14mND7CJ8U2sRtabApF
+ RoLyWXe17rh08JWar3GM0Zn7PQ0Xz8QesGdH3e6opn+zHT9/CcpjrWsmVcmRTFo8lnF02iMHj
+ ortzkfz9xceXxqM93ZaRpcPb90nxVtXsIZRsDRk02E5bBQUmDWaQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775735602; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=RX4/QjgYmxqXncib+O5uYcFV24KCptw145O6XP87XVgHBTzEfSFHd/74lvLRTUyiJsBYK9s
+ +d9j/X6U2rNmg+i00LExUZpehPERL+WpoWVJoE9GjQ/dLtXHx+3CEsja8GmecLcZG3fI9F8+/
+ 4nY8oPqAzLEP3ahDMNjWhIj0v3yfMPOF9tefMyVYGLz22kxpH5rl0rPyLzyPIokonoBeJLNqu
+ FNLbfzenCe8o0a4TmBY2+yO3TGRqDePNqwSNgn8vbHj7F/uc+/0pjfCNlM/R2eZjlhBvCm9N4
+ JIAGOzlY/LeEeqOCPFUhHTN09CDoiLyo50HX8Mu3JFqycxOWNYkg==
+Authentication-Results: lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com;
+ dkim=pass header.b=YLW+oH7Q70 header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=ILvMQ33NbA header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Thu, 9 Apr 2026 11:53:12 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775735593;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=4jLfs1t/nw/YaXsTgEf4K5A5twwrHQmyUC6JiPAi+kk=;
+ b=YLW+oH7Q708wb6m/NoHEaFIl8+oysnGKSYXH6sC804wj+KTUivcdxLoaax9ANzBY
+ o7z0EMirV/onFrTGeJyWoYu3/E3ypeGvoCmZP1DateaheRV0uvPPdjQSfoVyNg6S4qt
+ O/6CZwnvNfvXt/8fLym8AE0KOmFYHLaKVy1HX2MIBwZR3CwKxrPCQjatWss0N6t38Dm
+ iLhVxtlkkk6oaipUPvAYJKw+no6D2ZlnWk0kT5JB4bXn2GgxtSRgKNYamRdr+B1mapm
+ IjGS1gKC60kCVo+TEyHqHrqzaRe3k4V7CpI4e2kcVa/RydbgO07VwOSGhbBQZWBC2vS
+ Flu1opYb7Q==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775735593;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=4jLfs1t/nw/YaXsTgEf4K5A5twwrHQmyUC6JiPAi+kk=;
+ b=ILvMQ33NbArqLKNEhZ71/MrzIl+KKtuFdM+TsIQu1/uMmca6LjdVQsvYZlPi7ljg
+ l24ZlbnykFOsszkS+DZr0+vs8IrsOpvh1tVUltB6apJI/7KYjsTy/wwfcKGpK21KrGA
+ 3IJ5o40rNamj414wzav+d+r73zxKWvmVHC3co1Ic=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=24.110.89.22;
+ helo=i89-22.smtp-out.amazonses.com;
+ envelope-from=0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: Musk wants Altman fired, Anthropic passes OpenAI, Meta goes closed
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775735597/4fryxS747MzxbWCY/69D7932C.006/24.110.89.22/i89-22.smtp-out.amazonses.com/localhost/<0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69D7932C.006/4fryxS747MzxbWCY
+X-Fangmail-Miltered: at n206-112-037 with ID 69D7932C.006 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 24.110.89.22
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fFP1hPALGmECYlem6IEpIf/gSxleWCgJ0xWXyuBRECJB4gllOJvqAafwzPug0hvwBs+IHOgKunD1DiMCkqltoUlW/oaMKIBM85J2n7aeam12QCbTD4i9vC8e3VhMOdNTwQ==
+X-Ses-Outgoing: 2026.04.09-24.110.89.22
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>Musk wants Altman fired, Anthropic passes OpenAI, Meta goes closed=
+</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <!--[if mso]><span style=3D"display:none!important;font-size:0;line-heigh=
+t:0;max-height:0;max-width:0;mso-hide:all;overflow:hidden;">Three seismic s=
+hifts in one week. Anthropic's revenue run rate passed OpenAI's =E2=80=94 $=
+30 billion to $24 billion =E2=80=94 powered by enterprise demand that doubl=
+e</span><![endif]-->
+  <div style=3D"display:none;font-size:1px;color:#f5f5f5;line-height:1px;ma=
+x-height:0;max-width:0;opacity:0;overflow:hidden;">Three seismic shifts in =
+one week. Anthropic's revenue run rate passed OpenAI's =E2=80=94 $30 billio=
+n to $24 billion =E2=80=94 powered by enterprise demand that double</div>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/p2TR5fjHdShU=
+z7W9zNcx_fYeXaM=3D473"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/pro=
+duction/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=
+=3D"AI News Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues%252F481/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dc=
+b-000000/UahxaiDi011TXAosV7kn90k2Ra0=3D473">Read Online</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000=
+/8SXcJXdDV3XfFQ6FFektRB4FDkg=3D473">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly=
+.co%252Fissues%252F481/2/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8=
+dcb-000000/TmOxzSLPu9VjiuCwZxwoIuk-HHw=3D473">Musk wants Altman fired, Anth=
+ropic passes OpenAI, Meta goes closed</a></h1>
+      <div class=3D"date">April 9th 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><p>Three seismic shifts in one week. Anthropic's revenu=
+e run rate passed OpenAI's =E2=80=94 $30 billion to $24 billion =E2=80=94 p=
+owered by enterprise demand that doubled its million-dollar customers in un=
+der two months. Meta launched its first proprietary model under Alexandr Wa=
+ng's Superintelligence Labs, abandoning the open-source ethos that defined =
+Llama. And the legal apparatus around AI went into overdrive: Musk wants Al=
+tman fired, OpenAI wants Musk investigated, and Hollywood's writers just lo=
+cked down four more years of AI protections.</p></div>
+
+        <div class=3D"email-sponsor" style=3D"background:#1a1a2e;padding:24=
+px 30px;text-align:center;">
+      <p style=3D"color:#fff;font-size:17px;font-weight:700;margin:0 0 6px;=
+">Get more from AI Weekly</p>
+      <p style=3D"color:#ccc;font-size:14px;margin:0 0 18px;line-height:1.5=
+;">Breaking stories as they happen. Deep dives on the topics you care about=
+. 50+ free courses from Stanford, MIT, and more.</p>
+      <div style=3D"margin:0 auto;max-width:500px;">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fai-news-today/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb=
+-000000/xOj_QSDouxzHnyhaQbYfbqNKSPw=3D473" style=3D"display:inline-block;ba=
+ckground:#c00;color:#fff;padding:10px 22px;border-radius:6px;text-decoratio=
+n:none;font-weight:700;font-size:13px;margin:4px;">AI Alerts =E2=80=94 Live=
+</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fnewsletters/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-0=
+00000/OrPawpxUP_6Yta60BrNskpA-cT4=3D473" style=3D"display:inline-block;back=
+ground:transparent;color:#fff;padding:10px 22px;border-radius:6px;text-deco=
+ration:none;font-weight:700;font-size:13px;border:2px solid #fff;margin:4px=
+;">Deep Dive Topics</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Flearning-ai%252Fcourses/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3=
+705b9d8dcb-000000/hjw-mSEcdivNC9xFtpkP2PXYcuo=3D473" style=3D"display:inlin=
+e-block;background:transparent;color:#fff;padding:10px 22px;border-radius:6=
+px;text-decoration:none;font-weight:700;font-size:13px;border:2px solid #ff=
+f;margin:4px;">Free AI Courses</a>
+      </div>
+      <div style=3D"margin:18px auto 0;max-width:500px;text-align:left;">
+        <p style=3D"color:#ccc;font-size:13px;margin:0 0 8px;line-height:1.=
+5;">&#x1F514; <strong style=3D"color:#fff;">AI Alerts:</strong> When a stor=
+y like Mythos or the Musk filing breaks, alert subscribers know within hour=
+s =E2=80=94 not days. Max 2/day, zero noise.</p>
+        <p style=3D"color:#ccc;font-size:13px;margin:0;line-height:1.5;">&#=
+x1F4DA; <strong style=3D"color:#fff;">Free AI Courses:</strong> Stanford CS=
+229, MIT 6.S191, Karpathy's neural net series, and more =E2=80=94 hand-pick=
+ed courses that are actually worth your time.</p>
+      </div>
+    </div>
+
+    <div class=3D"email-body">
+      <p><strong>April 3 =E2=80=93 9, 2026</strong></p>
+<p><em>Anthropic makes more money than OpenAI. Meta stopped sharing its bes=
+t work. Musk and Altman want each other fired. And somewhere in Abu Dhabi, =
+someone is re-evaluating data center insurance premiums.</em></p>
+
+<hr />
+
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Anthropic is now the highest-revenue AI lab.</strong> $30B run =
+rate vs. OpenAI's $24B. Enterprise demand =E2=80=94 not consumer =E2=80=94 =
+drove it. If you're building on Claude, you're betting on the market leader=
+.</li>
+<li><strong>Meta killed open-source AI's biggest champion.</strong> Muse Sp=
+ark is closed. The hybrid strategy means open-source gets the scraps; the b=
+est models stay locked. Developers who built on Llama's openness need a Pla=
+n B.</li>
+<li><strong>OpenAI's IPO is in real trouble.</strong> When your own CFO say=
+s the timeline is too aggressive and gets excluded from meetings for saying=
+ it, the market reads that as a warning, not a disagreement.</li>
+<li><strong>China can build frontier AI without US chips.</strong> DeepSeek=
+ V4 on Huawei silicon is the proof point that export controls were buying t=
+ime, not solving the problem.</li>
+<li><strong>AI infrastructure is now a military target.</strong> Iran threa=
+tening the Stargate data center means physical security is no longer option=
+al for AI buildouts in contested regions.</li>
+</ul>
+
+<hr />
+
+<h2>Quick Hits</h2>
+<ul>
+<li><strong>Intel joins Musk's Terafab</strong>: <a href=3D"https://fk3wz6x=
+e.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3=
+149a%3Fu=3Dhttps%253A%252F%252Fwww.tomshardware.com%252Ftech-industry%252Fs=
+emiconductors%252Fintel-joins-elon-musks-terafab-project-intel-is-proud-to-=
+join-the-terafab-project-with-spacex-xai-and-tesla-to-help-refactor-silicon=
+-fab-technology/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000=
+000/pQOyXaccQzypGt0ACZk1Bvf8esI=3D473">Signed on</a> to the $20B+ AI chip f=
+ab alongside Tesla, SpaceX, and xAI.</li>
+<li><strong>Eclipse raises $1.3B</strong>: <a href=3D"https://fk3wz6xe.r.us=
+-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3=
+Fu=3Dhttps%253A%252F%252Ftechcrunch.com%252F2026%252F04%252F07%252Fvc-eclip=
+se-has-a-new-1-3b-to-back-and-build-physical-ai-startups%252F/1/0100019d721=
+6d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/TQA1dVpzJZY4VzjOaOLK1uGZ8=
+wk=3D473">Largest fund yet</a> for physical AI, robotics, and defense.</li>
+<li><strong>Flowise CVSS 10.0</strong>: Open-source AI agent builder <a hre=
+f=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2F=
+t%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fthehackernews.com%252F20=
+26%252F04%252Fflowise-ai-agent-builder-under-active.html/1/0100019d7216d7c4=
+-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/XPcGG90ivseiaAYx5vdPqJVenjQ=3D=
+473">under active exploit</a> =E2=80=94 12K+ instances exposed.</li>
+<li><strong>First deepfake conviction</strong>: <a href=3D"https://fk3wz6xe=
+.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f31=
+49a%3Fu=3Dhttps%253A%252F%252Fwww.nbcnews.com%252Ftech%252Fsecurity%252Ffir=
+st-person-convicted-law-criminalizing-intimate-deepfakes-rcna267236/1/01000=
+19d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/6dlNjvar89P7ES7_EJH=
+MvYyu2Sw=3D473">Federal Take It Down Act</a> gets its first guilty verdict.=
+</li>
+<li><strong>UnitedHealth's $3B AI bet</strong>: <a href=3D"https://fk3wz6xe=
+.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f31=
+49a%3Fu=3Dhttps%253A%252F%252Fwww.statnews.com%252F2026%252F04%252F06%252Fu=
+nitedhealth-group-massive-artificial-intelligence-push-patient-implications=
+%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/I4Xwi0=
+ZPbuvjlu0nYFFprg2bFDs=3D473">22K engineers</a> automating claims and clinic=
+al docs.</li>
+<li><strong>Big Three vs. China</strong>: <a href=3D"https://fk3wz6xe.r.us-=
+east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3F=
+u=3Dhttps%253A%252F%252Fwww.japantimes.co.jp%252Fbusiness%252F2026%252F04%2=
+52F07%252Ftech%252Fopenai-anthropic-google-china-copy%252F/1/0100019d7216d7=
+c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/EGzd2cbje5IQPbLQvKjle3vSzr0=
+=3D473">Sharing intelligence</a> to block model cloning via 24K fake Claude=
+ accounts.</li>
+<li><strong>OpenClaw blocked</strong>: Claude subs <a href=3D"https://fk3wz=
+6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53=
+f3149a%3Fu=3Dhttps%253A%252F%252Fwww.theregister.com%252F2026%252F04%252F06=
+%252Fanthropic_closes_door_on_subscription%252F/1/0100019d7216d7c4-1eb2c86e=
+-f03e-4f19-bb46-c3705b9d8dcb-000000/JPa6OJ8JeGRd5N2-4FZNbrBzFTE=3D473">no l=
+onger cover</a> third-party agents. API pricing required.</li>
+<li><strong>AI scribes inflating costs</strong>: Insurers and providers <a =
+href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co=
+%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.statnews.com%252F=
+2026%252F04%252F08%252Finsurers-providers-agree-ai-scribes-raise-health-car=
+e-costs%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000=
+/33JfIwu91cxA7akd8NRUazU8tZ8=3D473">agree</a> AI coding drives up bills.</l=
+i>
+</ul>
+
+<hr />
+
+<h2>=F0=9F=8E=AC Watch &amp; Listen First</h2>
+
+<p><strong>Dario Amodei: "We Are Near the End of the Exponential"</strong> =
+=C2=B7 Dwarkesh Podcast =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awst=
+rack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%2=
+53A%252F%252Fopen.spotify.com%252Fepisode%252F3l6LAC3LeQnr8eFaKXLEui/1/0100=
+019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/78kk4p4Nc-pqbKNuvD=
+I4gEayllQ=3D473">Listen on Spotify</a><br />
+=E2=86=92 <em>Anthropic's CEO on why the scaling hypothesis may be reaching=
+ its limits, how AI will diffuse through the economy, and whether regulatio=
+n will destroy the benefits. Essential context for the $30B revenue number =
+this week.</em></p>
+
+<p><strong>OpenClaw: The Viral AI Agent That Broke the Internet</strong> =
+=C2=B7 Lex Fridman #491 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awst=
+rack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%2=
+53A%252F%252Fwww.youtube.com%252Fwatch%253Fv%253DYFjfBk8HI5o/1/0100019d7216=
+d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/ezBD5XDBMWYkwaS34cVGSsTmbL=
+0=3D473">Watch on YouTube</a><br />
+=E2=86=92 <em>Peter Steinberger on how a side project hit 180K GitHub stars=
+ and forced Anthropic to block third-party agent access. Context for the Op=
+enClaw crackdown above.</em></p>
+
+<hr />
+
+<h2>The Revenue Crown Changes Hands</h2>
+
+<p><strong>Anthropic Hits $30B Run Rate, Passes OpenAI</strong> =C2=B7 Apr =
+7 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.bloom=
+berg.com%252Fnews%252Farticles%252F2026-04-06%252Fbroadcom-confirms-deal-to=
+-ship-google-tpu-chips-to-anthropic/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-b=
+b46-c3705b9d8dcb-000000/8sOQQ-8m15rP4tQpWjgCuNuwEAw=3D473">Bloomberg</a><br=
+ />
+=E2=86=92 <em>From $9B to $30B in four months. Enterprise demand doubled =
+=E2=80=94 1,000+ businesses now spend $1M+ annually on Claude =E2=80=94 and=
+ Anthropic locked in 3.5 gigawatts of next-gen TPU compute via Google and B=
+roadcom. The company that bet on safety is winning on revenue.</em></p>
+
+<p><strong>Claude Mythos Unleashed for Cybersecurity Only</strong> =C2=B7 A=
+pr 7 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Ftechcr=
+unch.com%252F2026%252F04%252F07%252Fanthropic-mythos-ai-model-preview-secur=
+ity%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/qXs=
+gVHJNg7kmxNw1QvUD5opZZI4=3D473">TechCrunch</a><br />
+=E2=86=92 <em>The most powerful AI model in the world exists and you can't =
+use it. Mythos found thousands of zero-days under Project Glasswing with 12=
+ partner orgs. Frontier models may debut in specialized domains before cons=
+umers =E2=80=94 cybersecurity first, general release never.</em></p>
+
+<hr />
+
+<h2>Meta Goes Closed-Source</h2>
+
+<p><strong>Meta Launches Muse Spark =E2=80=94 First Proprietary Model</stro=
+ng> =C2=B7 Apr 8 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me=
+/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252=
+F%252Fwww.cnbc.com%252F2026%252F04%252F08%252Fmeta-debuts-first-major-ai-mo=
+del-since-14-billion-deal-to-bring-in-alexandr-wang.html/1/0100019d7216d7c4=
+-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/D63AfzIBqFwsN7Od2OuVlw4hp5U=3D=
+473">CNBC</a><br />
+=E2=86=92 <em>Alexandr Wang's Superintelligence Labs shipped a closed model=
+ that matches Llama's midsize variant "for an order of magnitude less compu=
+te." Coming to Facebook, Instagram, WhatsApp, and Ray-Ban glasses. The comp=
+any that built its AI brand on openness just decided the best models are to=
+o valuable to share.</em></p>
+
+<p><strong>Meta Will Open-Source Small Models, Keep the Best Locked</strong=
+> =C2=B7 Apr 6 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L=
+0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%=
+252Fwww.axios.com%252F2026%252F04%252F06%252Fmeta-open-source-ai-models/1/0=
+100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/caVNYR6ogpnpU2c=
+8HVOFTMqJbPA=3D473">Axios</a><br />
+=E2=86=92 <em>The hybrid strategy: release the small stuff, gate the crown =
+jewels. After abandoning the 2-trillion-parameter Behemoth, Meta pivoted to=
+ smaller, efficient, proprietary models. Llama's open-source community shou=
+ld read the writing on the wall.</em></p>
+
+<hr />
+
+<h2>OpenAI vs. Everyone</h2>
+
+<p><strong>CFO Breaks Ranks: 2026 IPO "Too Aggressive"</strong> =C2=B7 Apr =
+6 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwinbuzzer=
+.com%252F2026%252F04%252F06%252Fopenai-ceo-cfo-split-ipo-timing-14b-loss-fo=
+recast-xcxwbn%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-=
+000000/QdSCtjVbWiV5PEOkprbD7wl-9VY=3D473">WinBuzzer</a><br />
+=E2=86=92 <em>Sarah Friar told colleagues the Q4 IPO won't happen, citing a=
+ $14B projected loss and $600B in cumulative spending. She's been excluded =
+from key financial meetings since. When your CFO publicly contradicts your =
+CEO on the biggest financial event in tech history, the market notices.</em=
+></p>
+
+<p><strong>Musk Seeks Court-Ordered Removal of Altman and Brockman</strong>=
+ =C2=B7 Apr 8 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0=
+/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%2=
+52Fwww.cnbc.com%252F2026%252F04%252F07%252Felon-musk-seeks-ouster-of-openai=
+-ceo-sam-altman-as-part-of-lawsuit.html/1/0100019d7216d7c4-1eb2c86e-f03e-4f=
+19-bb46-c3705b9d8dcb-000000/Jn0zLDRvKm-SCSpUO5mujqUsZu0=3D473">CNBC</a><br =
+/>
+=E2=86=92 <em>$79=E2=80=9397 billion in damages, nonprofit reversion, and r=
+emoval of both co-founders =E2=80=94 ahead of the April 27 trial. OpenAI <a=
+ href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.c=
+o%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.cnbc.com%252F202=
+6%252F04%252F06%252Fopenai-asks-california-ag-to-probe-musks-anti-competiti=
+ve-behavior-.html/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-0=
+00000/FbVRZsOksdOb6BhWk8NaZ-JT96k=3D473">fired back</a> by asking two state=
+ AGs to investigate Musk's "anti-competitive behavior" via xAI, Tesla, and =
+SpaceX.</em></p>
+
+<p><strong>OpenAI Proposes Robot Taxes, Public Wealth Fund, 4-Day Workweek<=
+/strong> =C2=B7 Apr 6 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstra=
+ck.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253=
+A%252F%252Ftechcrunch.com%252F2026%252F04%252F06%252Fopenais-vision-for-the=
+-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week%252F/1=
+/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/PZ3jb-ZU8_pC8=
+2PLO9Tw9Ko2dzM=3D473">TechCrunch</a><br />
+=E2=86=92 <em>A 13-page policy vision from the company losing $14 billion a=
+ year. Proposing how governments should redistribute the wealth AI creates =
+=E2=80=94 while simultaneously fighting to keep its own structure for-profi=
+t.</em></p>
+
+<hr />
+
+<h2>The Open-Source Race</h2>
+
+<p><strong>Google Releases Gemma 4 Under Apache 2.0</strong> =C2=B7 Apr 2 =
+=C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fa=
+iweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fblog.google=
+%252Finnovation-and-ai%252Ftechnology%252Fdevelopers-tools%252Fgemma-4%252F=
+/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/G8Um9-R2xkW=
+BfhzDOmcVfYogJaY=3D473">Google Blog</a><br />
+=E2=86=92 <em>Four models from edge to 31B params, all fully permissive =E2=
+=80=94 the first Gemma with zero commercial restrictions. Native multimodal=
+, 256K context, and competitive with closed models at a fraction of the cos=
+t. As Meta goes proprietary, Google fills the open-source vacuum.</em></p>
+
+<p><strong>DeepSeek V4 to Run Entirely on Huawei Chips</strong> =C2=B7 Apr =
+5 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Ftechwirea=
+sia.com%252F2026%252F04%252Fdeepseek-v4-points-to-growing-use-of-huawei-chi=
+ps-in-ai-models%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dc=
+b-000000/Ts06lZCszpE-8BDgKFNE-n5yfB0=3D473">TechWire Asia</a><br />
+=E2=86=92 <em>The first 1-trillion-parameter frontier model trained without=
+ any NVIDIA hardware. If it performs at scale on Huawei Ascend 950PR silico=
+n, the entire premise of US chip export controls needs rethinking. China pr=
+oved you can train cheap; now they're proving you can train sovereign.</em>=
+</p>
+
+<hr />
+
+<h2>AI Meets the Real World</h2>
+
+<p><strong>Iran Threatens "Complete Annihilation" of Stargate Data Center</=
+strong> =C2=B7 Apr 6 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrac=
+k.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A=
+%252F%252Ftechcrunch.com%252F2026%252F04%252F06%252Firan-threatens-stargate=
+-ai-data-centers%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8d=
+cb-000000/d3NLhupvzIrtVWYwRDJdpiHjGy8=3D473">TechCrunch</a><br />
+=E2=86=92 <em>The IRGC published satellite coordinates of OpenAI's $30B Abu=
+ Dhabi facility and threatened strikes. First time a nation-state has expli=
+citly threatened AI infrastructure. Data center security just went from IT =
+problem to national security problem.</em></p>
+
+<p><strong>Tech Layoffs Pass 165,000 =E2=80=94 AI Cited in 25% of March Cut=
+s</strong> =C2=B7 Apr 7 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awst=
+rack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%2=
+53A%252F%252Fwww.bloomberg.com%252Fnews%252Farticles%252F2026-04-02%252Fus-=
+job-cut-announcements-in-tech-keep-rising-with-ai-adoption/1/0100019d7216d7=
+c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/ail0Tb1ritAqvtOf8HW9on4hInw=
+=3D473">Bloomberg</a><br />
+=E2=86=92 <em>Up from single digits a year ago. The AP <a href=3D"https://f=
+k3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039=
+ec53f3149a%3Fu=3Dhttps%253A%252F%252Ffortune.com%252F2026%252F04%252F06%252=
+Fassociated-press-starts-offering-buyouts-to-newspaper-journalists-amid-wid=
+er-ai-transformation%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b=
+9d8dcb-000000/cjXSYpvW4rOlEJCtj3ZTP1rCilM=3D473">offered buyouts to 120+ jo=
+urnalists</a> pivoting to AI revenue. "Will AI take my job" is becoming pas=
+t tense for a growing share of knowledge workers.</em></p>
+
+<p><strong>WGA Locks Down Four-Year Deal With Expanded AI Protections</stro=
+ng> =C2=B7 Apr 4 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me=
+/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252=
+F%252Fvariety.com%252F2026%252Ffilm%252Fnews%252Fwga-deal-321-million-healt=
+h-fund-residuals-ai-1236711731%252F/1/0100019d7216d7c4-1eb2c86e-f03e-4f19-b=
+b46-c3705b9d8dcb-000000/7raJ1Yd3j5h3oTop0jjKfUt1Xwg=3D473">Variety</a><br /=
+>
+=E2=86=92 <em>$321M health fund, higher residuals, and new language requiri=
+ng studios to disclose and license writers' work before AI training. Studio=
+s still won't pay for training data =E2=80=94 but writers now have the righ=
+t to know when their words feed the machine. Vote runs April 16=E2=80=9324.=
+</em></p>
+    </div>
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.=
+co/2/0100019d7216d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/7ltOYChou=
+1k-zLjJKFu1RfXLAJw=3D473">AI News Weekly</a> | <a href=3D"https://fk3wz6xe.=
+r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f314=
+9a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fissues/2/0100019d7216d7c4-1eb2=
+c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/PdIbcoEMWJJMpnsP9HbgKzBVrcc=3D473">=
+Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Funsubscribe%3Femail=3Dwuliang%2540xiangzizai.com%26token=3D54=
+e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a2053902a/1/0100019d72=
+16d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/iLhJPegjX-HasmXcostJEhB8=
+3Jg=3D473">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019d72=
+16d7c4-1eb2c86e-f03e-4f19-bb46-c3705b9d8dcb-000000/9LKxzCZRIcfb92eB7vvJsMgR=
+8Ak=3D473" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

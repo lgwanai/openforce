@@ -1,0 +1,591 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.27.194)
+ smtp.mailfrom=0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@mail.vercel.com;
+ dkim=pass header.b=urhp9LGuMi header.i=@vercel.com
+ header.s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd;
+ dkim=pass header.b=2+Xx/iMRYA header.i=@amazonses.com
+ header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=vercel.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=zEKPOck6CtZV+Ar0knBPAAU4nuui3ZDaOsjBSmIGYk4=;
+ b=am79JaS/8hTyDwi55oW61vwibDnSgmQNPL2LiQtMf73FNW6HsD/vRhr/UH1KnKvg9hLb1Fj
+ EBGRYEMZvMtGDwx2SnjF/+UWC5oF7+bfi8t1pBZMTN1OyYVacNRZ/duf6VbGKyrEQ3U/3sGpc
+ a8AAA3WZe1oyggabvA5WR9f2adxnzax453EPui03AEXtkbKgis9PFA6bNP/oCxcEbAHeTFKS6
+ bFcjTcTYF0k4flhe+V7Jl1X5cgAl/Itkglxjfg2YLoaTi7gQFr1eLG5Lbx0gbnOnO0MDcQ+X0
+ 4qu/yClsFccQppZDXu3rVhlG+dQttCs2sZbpcFISfumENY+ARKOw==
+Arc-Seal: i=1; a=rsa-sha256; t=1776744722; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=PXZAu8Uqgs8Yf81W15Gj9t4f/oyxjF8b8wr6g4xM8gjRjDSzPhu7EiM5V11mmcw1ReDNykg
+ eImawjFzq4kbOM8BKQGoiMP+GdPNoC8RblvHYKmvK9w7sZctpJ6dsBuYWSL3LOubW7pNMs1vz
+ afzBYmm1vMk4QzWnFCfG6TmVfPz3f4wGObzT2+qDJj7u02zJTA/BgmEsUsuNkiSlI8YaDImy9
+ CrQeCelUEEFOjO3yVfn93qELOW1z8LLHN4tzxWFW73Q5XtglEV0xSAoUlPyARzxRZgqLIXzuU
+ +bLR8Beg7WUcyXGV3NWAZeu6ZxQBJX6IbXxY/hGCYAjyrEOG+rVw==
+Authentication-Results: lms; spf=pass (client-ip:54.240.27.194)
+ smtp.mailfrom=0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@mail.vercel.com;
+ dkim=pass header.b=urhp9LGuMi header.i=@vercel.com
+ header.s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd;
+ dkim=pass header.b=2+Xx/iMRYA header.i=@amazonses.com
+ header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=vercel.com;
+ arc=none
+Content-Type: multipart/alternative;
+ boundary="----=_Part_777086_209677797.1776744716211"
+Date: Tue, 21 Apr 2026 04:11:56 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=xrxz75cdd7hqmueggvr2yk4ulqxz34zd; d=vercel.com; t=1776744716;
+ h=From:Reply-To:To:Subject:MIME-Version:Content-Type:Message-ID:Date;
+ bh=/dkN3h886X+pHtbjMcx+ZQcDyp9pNQnbdlGN9pnTVJ8=;
+ b=urhp9LGuMilF6fzZFn0RcZ/vD3vCCZE3CmTev/TV0U8++R8F4cUsXX+rQbqo50Ji
+ 3sM1pG4NMUz/YQYnpMx/w701J8OTzh+s1vwJCHb8XiQYUmhPGvPnAAEiqnoaiW+35F8
+ WysTQdB34spJ/lMEt7/9oe/ZlcKZ+aN7BfPGB0B6WcS6GYXhOMNalpeR067ygm1NOSE
+ FfCKPEzDoITdQX/9kqmRpVIrxBwCDepukAXS20etHJ413D9ffhKW4ps5L3x2kPtIqKD
+ blPTBXFFmoG/HeUDjw+Mt95r5ECVbtl17pPEuNbwq212sklpqQuC26ak7nAZFIizLyo
+ CkPhY4zGsQ==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1776744716;
+ h=From:Reply-To:To:Subject:MIME-Version:Content-Type:Message-ID:Date:Feedback-ID;
+ bh=/dkN3h886X+pHtbjMcx+ZQcDyp9pNQnbdlGN9pnTVJ8=;
+ b=2+Xx/iMRYAiK/ylmcHCHNteKzL4uxQlFzneXFKL9KV4BHK1HJ3N1/J0px12Qxign
+ NL64SIx1FihBryMkvkAgxygjbBI7xoYCC4REXnZyf8ON7pBwSx1lIGEqekFdQ8I2C4A
+ kQDpOLtjCzExCPnSnXKSPx8YSc0qo6hbldf2krT4=
+Feedback-Id: 
+ ::1.us-west-2.FoOqCThWXVf6UxtlBCXjpN6DawGbMccagHDueWriYXM=:AmazonSES
+From: Vercel Security <security@vercel.com>
+Message-Id: 
+ <0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@us-west-2.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.27.194;
+ helo=a27-194.smtp-out.us-west-2.amazonses.com;
+ envelope-from=0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@mail.vercel.com;
+ receiver=<UNKNOWN>;
+Reply-To: no-reply@vercel.com
+Subject: Vercel Security Update
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776744719/4g087g4NFfzlpXfv/69E6F90F.004/54.240.27.194/a27-194.smtp-out.us-west-2.amazonses.com/localhost/<0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@mail.vercel.com>
+X-Fangmail-Mid-Qid: 69E6F90F.004/4g087g4NFfzlpXfv
+X-Fangmail-Miltered: at n151-171-209 with ID 69E6F90F.004 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.27.194
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0101019dae3cd7b3-f962fc0f-a2ae-44f1-8a01-835aebb105c4-000000@mail.vercel.com
+X-Lms-Pvf: 
+ MnwyfDF8fCtoh/OAiyCrCVHSUMzif41F9X5qbxvpDApRKjRxbcsXuPJSboASH2M0Y8sI0L2IMch/Tp5EanrB4e5cbEGsoOYa3VCPDAUNd/jvs2E0lYEDXJs12s0oFvqpInCQIG2sLQ==
+X-Ses-Outgoing: 2026.04.21-54.240.27.194
+
+------=_Part_777086_209677797.1776744716211
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Vercel
+We have discovered a security incident that involved unauthorized
+access to certain internal Vercel systems. We are actively
+investigating and have engaged incident response experts to help
+with investigation and remediation.
+
+Initially, we identified a limited subset of customers whose
+Vercel credentials were compromised. We reached out to that
+subset and recommended that they rotate their credentials
+immediately.
+
+At this time, we do not have reason to believe that your Vercel
+credentials or personal data have been compromised.
+
+We continue to investigate whether any data was exfiltrated and
+will contact customers if we discover further evidence of
+compromise. We've deployed extensive protective measures and
+monitoring, and our services remain operational.
+
+We recommend that all Vercel customers follow the Security
+Bulletin
+(https://vercel.com/kb/bulletin/vercel-april-2026-security-incident)
+closely, which we will update regularly. Here are some best
+practices you should follow:
+
+*
+Review the activity log (https://vercel.com/activity-log) for any
+suspicious account activity
+*
+Review and rotate environment variables
+(http://vercel.com/all-env-vars) used in your projects
+*
+Take advantage of the sensitive environment variables
+(https://vercel.com/docs/environment-variables/sensitive-environment-variab=
+les)
+feature
+
+-----------------------------------------------------------------
+
+If you'd like to report an issue, reach out to Vercel Help
+(https://vercel.com/help?utm_medium=3Demail&utm_source=3Dnotifications).
+
+Manage your notification settings
+(https://vercel.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%2Fnotifications&t=
+itle=3DNotification+Settings)
+
+Copyright =C2=A9 2026 Vercel Inc.
+(https://vercel.com?utm_medium=3Demail&utm_source=3Dnotifications)
+All rights reserved.
+
+440 N Barranca Ave #4133 Covina, CA 91723
+
+:root { color-scheme: light dark; }
+
+.body { background-color: #ffffff; margin: 0; padding: 0; }
+.outer-table, .outer-td, .inner-td { background-color: #ffffff; }
+
+.block-row__cell { padding: 0 !important; }
+.block-row { padding: 0 !important; }
+
+p {
+color: #171717;
+font-family: -apple-system,BlinkMacSystemFont,'Segoe
+UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid
+Sans','Helvetica Neue',sans-serif;
+font-size: 16px; line-height: 1.5; margin: 0 0 16px 0;
+overflow-wrap: anywhere;
+}
+.break-all { color: #171717; font-size: 16px; line-height: 1.5;
+word-break: break-all; }
+h1 {
+color: #171717;
+font-family: -apple-system,BlinkMacSystemFont,'Segoe
+UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid
+Sans','Helvetica Neue',sans-serif;
+font-size: 24px; font-weight: 600; letter-spacing: -0.02em;
+margin: 0 0 24px 0; padding: 0;
+}
+h2 { color: #171717; font-size: 18px; font-weight: 600; margin: 0
+0 16px 0; }
+h3 { color: #171717; font-size: 16px; font-weight: 600; margin: 0
+0 12px 0; }
+a { color: #0067D6; text-decoration: none; }
+.block-markdown a { color: #0067D6; text-decoration: none; }
+a.block-button { color: inherit; }
+strong { color: #171717; font-weight: 600; }
+pre {
+font-family:
+ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation
+Mono','Courier New',monospace;
+color: #171717; background-color: #F2F2F2; border: 1px solid
+#E6E6E6;
+padding: 12px 16px; border-radius: 8px; font-size: 14px;
+max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+}
+code.inline {
+font-family:
+ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation
+Mono','Courier New',monospace;
+color: #171717; font-size: 0.9em; background-color: #F2F2F2;
+padding: 2px 6px; border-radius: 4px;
+}
+ul { padding-left: 20px; margin: -8px 0 16px 0; }
+li { font-family: -apple-system,BlinkMacSystemFont,'Segoe
+UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid
+Sans','Helvetica Neue',sans-serif; font-size: 16px; line-height:
+1.75; color: #171717; }
+.footer-text { color: #7D7D7D; font-size: 14px; line-height: 1.5;
+margin: 0 0 8px 0; }
+.footer-text a { color: #7D7D7D !important; text-decoration:
+underline !important; font-weight: 400 !important; }
+.footer-link { color: #7D7D7D !important; text-decoration:
+underline !important; font-weight: 400 !important; }
+.footer-hr { border-top-color: #E6E6E6; }
+
+.block-row.block-row--button_set-v1 { margin: 32px 0 !important;
+}
+.block-row.block-row--button_set-v1 .block-button { display:
+inline-block; box-sizing: border-box; text-decoration: none;
+-webkit-text-size-adjust: none; }
+.block-row.block-row--button_set-v1
+.block-button.block-button--solid.block-button--sm {
+background-color: #000000 !important; border-radius: 8px
+!important; color: #ffffff !important;
+font-family: -apple-system,BlinkMacSystemFont,'Segoe
+UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid
+Sans','Helvetica Neue',sans-serif;
+font-size: 16px; font-weight: 500; padding: 14px 20px;
+text-align: center; text-decoration: none;
+}
+.block-row.block-row--button_set-v1
+.block-button.block-button--outline {
+border-style: solid; border-color: #E6E6E6; border-radius: 8px;
+color: #171717; font-size: 16px; font-weight: 500; padding: 14px
+20px;
+}
+.block-row.block-row--divider-v1 .block-divider { border-bottom:
+1px solid #E6E6E6; }
+.block-row.block-row--markdown-v1 .block-markdown > :first-child
+{ margin-top: 0; }
+.block-row.block-row--markdown-v1 .block-markdown > :last-child {
+margin-bottom: 0; }
+
+@media (prefers-color-scheme: dark) {
+.body, .outer-table, .outer-td, .inner-td { background-color:
+#111111 !important; }
+p, .break-all, li, td { color: #ededed !important; }
+h1, h2, h3, strong { color: #ffffff !important; }
+a { color: #4da3ff !important; }
+td[bgcolor=3D"#000000"], .email-cta { background-color: #EDEDED
+!important; }
+td[bgcolor=3D"#000000"] a, .email-cta a { color: #0A0A0A
+!important; background-color: #EDEDED !important; }
+pre { color: #ededed !important; background-color: #282828
+!important; border-color: #333333 !important; }
+code, code.inline { color: #ededed !important; background-color:
+#282828 !important; }
+.footer-text, .footer-text p { color: #7D7D7D !important; }
+.footer-text a { color: #7D7D7D !important; }
+.footer-link { color: #7D7D7D !important; }
+.footer-hr { border-top-color: #333333 !important; }
+.vercel-logo { filter: invert(1) !important; }
+.block-row.block-row--button_set-v1
+.block-button.block-button--solid.block-button--sm {
+background-color: #EDEDED !important; color: #0A0A0A !important;
+}
+.block-row.block-row--button_set-v1
+.block-button.block-button--outline { border-color: #333333
+!important; color: #ededed !important; }
+.block-row.block-row--divider-v1 .block-divider {
+border-bottom-color: #333333 !important; }
+.vercel-code-block { background-color: #282828 !important; color:
+#ffffff !important; }
+.vercel-label-default { background-color: #282828 !important;
+color: #ededed !important; }
+.vercel-label-info { background-color: #0A2540 !important; color:
+#4da3ff !important; }
+.vercel-label-error { background-color: #3D1417 !important;
+color: #FF6166 !important; }
+}
+
+@media only screen and (max-width: 620px) {
+.outer-td { padding: 32px 16px !important; }
+}
+------=_Part_777086_209677797.1776744716211
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html style=3D"color-scheme:light dark"><head><style type=3D"text/css" rel=
+=3D"stylesheet" media=3D"all">
+.block-row.block-row--button_set-v1 .block-button {
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  -webkit-text-size-adjust: none;
+}
+.block-row.block-row--button_set-v1 .block-button.block-button--outline {
+  border-style: solid;
+}
+.block-row.block-row--button_set-v1 .block-button.block-button--sm {
+  font-size: 14px;
+  line-height: 20px;
+  min-width: 32px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.block-row.block-row--divider-v1 .block-divider {
+  border-bottom: 1px solid #DDDEE1;
+}
+.block-row.block-row--markdown-v1 .block-markdown > :first-child {
+  margin-top: 0;
+}
+.block-row.block-row--markdown-v1 .block-markdown > :last-child {
+  margin-bottom: 0;
+}
+</style>
+
+  <meta name=3D"color-scheme" content=3D"light dark">
+  <meta name=3D"supported-color-schemes" content=3D"light dark">
+</head>
+<body class=3D"body" style=3D"background-color:#ffffff;margin:0;padding:0">
+
+
+
+
+
+
+
+
+
+
+<table class=3D"outer-table" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"width:100%!important;background-color:#ffffff">
+  <tbody>
+    <tr>
+      <td class=3D"outer-td" align=3D"center" style=3D"background-color:#ff=
+ffff;padding:32px 16px">
+        <table width=3D"600" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" style=3D"max-width:600px;width:100%;">
+          <tbody>
+            <tr>
+              <td class=3D"inner-td" style=3D"background-color:#ffffff">
+                <div style=3D"font-family:-apple-system,BlinkMacSystemFont,=
+'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans',=
+'Helvetica Neue',sans-serif;text-align:left;max-width:600px;">
+
+                  <div style=3D"margin-bottom:48px">
+                    <img class=3D"vercel-logo" src=3D"https://assets.vercel=
+.com/email/vercel.png" width=3D"24" height=3D"21" alt=3D"Vercel" style=3D"d=
+isplay:block;">
+                  </div>
+
+                 =20
+
+                  <table class=3D"block-row block-row--markdown-v1" id=3D"5=
+244e046-97a8-4a30-9195-174b1d6ca080" cellspacing=3D"0" width=3D"100%" cellp=
+adding=3D"0" style=3D"padding:0 !important">
+  <tbody><tr class=3D"block-row__row">
+    <td class=3D"block-row__cell" style=3D"padding:0 !important;padding-bot=
+tom:8px;padding-left:4px;padding-right:4px;padding-top:8px">
+      <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0">
+  <tbody><tr>
+    <td class=3D"block-markdown"><p style=3D"color:#171717;font-family:-app=
+le-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantare=
+ll','Fira Sans','Droid Sans','Helvetica Neue',sans-serif;font-size:16px;lin=
+e-height:1.5;margin:0 0 16px 0;overflow-wrap:anywhere;margin-top:0">
+We have discovered a security incident that involved unauthorized access to=
+ certain internal Vercel systems. We are actively investigating and have en=
+gaged incident response experts to help with investigation and remediation.=
+</p>
+<p style=3D"color:#171717;font-family:-apple-system,BlinkMacSystemFont,'Seg=
+oe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Hel=
+vetica Neue',sans-serif;font-size:16px;line-height:1.5;margin:0 0 16px 0;ov=
+erflow-wrap:anywhere">
+Initially, we identified a limited subset of customers whose Vercel credent=
+ials were compromised. We reached out to that subset and recommended that t=
+hey rotate their credentials immediately.</p>
+<p style=3D"color:#171717;font-family:-apple-system,BlinkMacSystemFont,'Seg=
+oe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Hel=
+vetica Neue',sans-serif;font-size:16px;line-height:1.5;margin:0 0 16px 0;ov=
+erflow-wrap:anywhere">
+<strong style=3D"color:#171717;font-weight:600">At this time, we do not hav=
+e reason to believe that your Vercel credentials or personal data have been=
+ compromised.</strong></p>
+<p style=3D"color:#171717;font-family:-apple-system,BlinkMacSystemFont,'Seg=
+oe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Hel=
+vetica Neue',sans-serif;font-size:16px;line-height:1.5;margin:0 0 16px 0;ov=
+erflow-wrap:anywhere">
+We continue to investigate whether any data was exfiltrated and will contac=
+t customers if we discover further evidence of compromise. We've deployed e=
+xtensive protective measures and monitoring, and our services remain operat=
+ional.</p>
+<p style=3D"color:#171717;font-family:-apple-system,BlinkMacSystemFont,'Seg=
+oe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Hel=
+vetica Neue',sans-serif;font-size:16px;line-height:1.5;margin:0 0 16px 0;ov=
+erflow-wrap:anywhere">
+We recommend that all Vercel customers follow the <a href=3D"https://vercel=
+.com/kb/bulletin/vercel-april-2026-security-incident" style=3D"color:#0067D=
+6;text-decoration:none">Security Bulletin</a> closely, which we will update=
+ regularly. Here are some best practices you should follow:</p>
+<ul style=3D"padding-left:20px;margin:-8px 0 16px 0;margin-bottom:0">
+  <li style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Rob=
+oto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue=
+',sans-serif;font-size:16px;line-height:1.75;color:#171717">
+Review the <a href=3D"https://vercel.com/activity-log" style=3D"color:#0067=
+D6;text-decoration:none">activity log</a> for any suspicious account activi=
+ty  </li>
+  <li style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Rob=
+oto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue=
+',sans-serif;font-size:16px;line-height:1.75;color:#171717">
+Review and rotate <a href=3D"http://vercel.com/all-env-vars" style=3D"color=
+:#0067D6;text-decoration:none">environment variables</a> used in your proje=
+cts  </li>
+  <li style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Rob=
+oto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue=
+',sans-serif;font-size:16px;line-height:1.75;color:#171717">
+Take advantage of the <a href=3D"https://vercel.com/docs/environment-variab=
+les/sensitive-environment-variables" style=3D"color:#0067D6;text-decoration=
+:none">sensitive environment variables</a> feature  </li>
+</ul>
+</td>
+  </tr>
+</tbody></table>
+
+    </td>
+  </tr>
+</tbody></table>
+
+
+                  <hr class=3D"footer-hr" style=3D"border-top-color:#E6E6E6=
+;border:none;border-top:1px solid #E6E6E6;margin:44px 0 32px 0;width:100%">
+
+                 =20
+                    <p class=3D"footer-text" style=3D"font-family:-apple-sy=
+stem,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','=
+Fira Sans','Droid Sans','Helvetica Neue',sans-serif;overflow-wrap:anywhere;=
+color:#7D7D7D;font-size:14px;line-height:1.5;margin:0 0 8px 0">If you'd lik=
+e to report an issue, reach out to <a class=3D"footer-link" style=3D"color:=
+#7D7D7D !important;text-decoration:underline !important;font-weight:400 !im=
+portant" href=3D"https://vercel.com/help?utm_medium=3Demail&amp;utm_source=
+=3Dnotifications" target=3D"_blank">Vercel Help</a>.</p>
+                 =20
+
+                  <p class=3D"footer-text" style=3D"font-family:-apple-syst=
+em,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fi=
+ra Sans','Droid Sans','Helvetica Neue',sans-serif;overflow-wrap:anywhere;co=
+lor:#7D7D7D;font-size:14px;line-height:1.5;margin:0 0 8px 0">
+                    <a class=3D"footer-link" style=3D"color:#7D7D7D !import=
+ant;text-decoration:underline !important;font-weight:400 !important" href=
+=3D"https://vercel.com/d?to=3D%2F%5Bteam%5D%2F%7E%2Fsettings%2Fnotification=
+s&amp;title=3DNotification+Settings" target=3D"_blank">Manage your notifica=
+tion settings</a>
+                  </p>
+
+                  <p class=3D"footer-text" style=3D"font-family:-apple-syst=
+em,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fi=
+ra Sans','Droid Sans','Helvetica Neue',sans-serif;overflow-wrap:anywhere;co=
+lor:#7D7D7D;font-size:14px;line-height:1.5;margin:0 0 8px 0">
+                    Copyright =C2=A9 2026 <a class=3D"footer-link" style=3D=
+"color:#7D7D7D !important;text-decoration:underline !important;font-weight:=
+400 !important" href=3D"https://vercel.com?utm_medium=3Demail&amp;utm_sourc=
+e=3Dnotifications" target=3D"_blank">Vercel Inc.</a> All rights reserved.<b=
+r>
+                    440 N Barranca Ave #4133 Covina, CA 91723
+                  </p>
+
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<style>
+  :root { color-scheme: light dark; }
+
+  .body { background-color: #ffffff; margin: 0; padding: 0; }
+  .outer-table, .outer-td, .inner-td { background-color: #ffffff; }
+
+  .block-row__cell { padding: 0 !important; }
+  .block-row { padding: 0 !important; }
+
+  p {
+    color: #171717;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxyg=
+en','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-ser=
+if;
+    font-size: 16px; line-height: 1.5; margin: 0 0 16px 0; overflow-wrap: a=
+nywhere;
+  }
+  .break-all { color: #171717; font-size: 16px; line-height: 1.5; word-brea=
+k: break-all; }
+  h1 {
+    color: #171717;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxyg=
+en','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-ser=
+if;
+    font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0=
+ 24px 0; padding: 0;
+  }
+  h2 { color: #171717; font-size: 18px; font-weight: 600; margin: 0 0 16px =
+0; }
+  h3 { color: #171717; font-size: 16px; font-weight: 600; margin: 0 0 12px =
+0; }
+  a { color: #0067D6; text-decoration: none; }
+  .block-markdown a { color: #0067D6; text-decoration: none; }
+  a.block-button { color: inherit; }
+  strong { color: #171717; font-weight: 600; }
+  pre {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberat=
+ion Mono','Courier New',monospace;
+    color: #171717; background-color: #F2F2F2; border: 1px solid #E6E6E6;
+    padding: 12px 16px; border-radius: 8px; font-size: 14px; max-width: 100=
+%; overflow: hidden; text-overflow: ellipsis;
+  }
+  code.inline {
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberat=
+ion Mono','Courier New',monospace;
+    color: #171717; font-size: 0.9em; background-color: #F2F2F2; padding: 2=
+px 6px; border-radius: 4px;
+  }
+  ul { padding-left: 20px; margin: -8px 0 16px 0; }
+  li { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','O=
+xygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-=
+serif; font-size: 16px; line-height: 1.75; color: #171717; }
+  .footer-text { color: #7D7D7D; font-size: 14px; line-height: 1.5; margin:=
+ 0 0 8px 0; }
+  .footer-text a { color: #7D7D7D !important; text-decoration: underline !i=
+mportant; font-weight: 400 !important; }
+  .footer-link { color: #7D7D7D !important; text-decoration: underline !imp=
+ortant; font-weight: 400 !important; }
+  .footer-hr { border-top-color: #E6E6E6; }
+
+  .block-row.block-row--button_set-v1 { margin: 32px 0 !important; }
+  .block-row.block-row--button_set-v1 .block-button { display: inline-block=
+; box-sizing: border-box; text-decoration: none; -webkit-text-size-adjust: =
+none; }
+  .block-row.block-row--button_set-v1 .block-button.block-button--solid.blo=
+ck-button--sm {
+    background-color: #000000 !important; border-radius: 8px !important; co=
+lor: #ffffff !important;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxyg=
+en','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-ser=
+if;
+    font-size: 16px; font-weight: 500; padding: 14px 20px; text-align: cent=
+er; text-decoration: none;
+  }
+  .block-row.block-row--button_set-v1 .block-button.block-button--outline {
+    border-style: solid; border-color: #E6E6E6; border-radius: 8px; color: =
+#171717; font-size: 16px; font-weight: 500; padding: 14px 20px;
+  }
+  .block-row.block-row--divider-v1 .block-divider { border-bottom: 1px soli=
+d #E6E6E6; }
+  .block-row.block-row--markdown-v1 .block-markdown > :first-child { margin=
+-top: 0; }
+  .block-row.block-row--markdown-v1 .block-markdown > :last-child { margin-=
+bottom: 0; }
+
+  @media (prefers-color-scheme: dark) {
+    .body, .outer-table, .outer-td, .inner-td { background-color: #111111 !=
+important; }
+    p, .break-all, li, td { color: #ededed !important; }
+    h1, h2, h3, strong { color: #ffffff !important; }
+    a { color: #4da3ff !important; }
+    td[bgcolor=3D"#000000"], .email-cta { background-color: #EDEDED !import=
+ant; }
+    td[bgcolor=3D"#000000"] a, .email-cta a { color: #0A0A0A !important; ba=
+ckground-color: #EDEDED !important; }
+    pre { color: #ededed !important; background-color: #282828 !important; =
+border-color: #333333 !important; }
+    code, code.inline { color: #ededed !important; background-color: #28282=
+8 !important; }
+    .footer-text, .footer-text p { color: #7D7D7D !important; }
+    .footer-text a { color: #7D7D7D !important; }
+    .footer-link { color: #7D7D7D !important; }
+    .footer-hr { border-top-color: #333333 !important; }
+    .vercel-logo { filter: invert(1) !important; }
+    .block-row.block-row--button_set-v1 .block-button.block-button--solid.b=
+lock-button--sm { background-color: #EDEDED !important; color: #0A0A0A !imp=
+ortant; }
+    .block-row.block-row--button_set-v1 .block-button.block-button--outline=
+ { border-color: #333333 !important; color: #ededed !important; }
+    .block-row.block-row--divider-v1 .block-divider { border-bottom-color: =
+#333333 !important; }
+    .vercel-code-block { background-color: #282828 !important; color: #ffff=
+ff !important; }
+    .vercel-label-default { background-color: #282828 !important; color: #e=
+deded !important; }
+    .vercel-label-info { background-color: #0A2540 !important; color: #4da3=
+ff !important; }
+    .vercel-label-error { background-color: #3D1417 !important; color: #FF6=
+166 !important; }
+  }
+
+  @media only screen and (max-width: 620px) {
+    .outer-td { padding: 32px 16px !important; }
+  }
+</style>
+
+</body></html>
+------=_Part_777086_209677797.1776744716211--

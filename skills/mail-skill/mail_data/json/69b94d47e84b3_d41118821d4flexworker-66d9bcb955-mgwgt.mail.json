@@ -1,0 +1,21 @@
+{
+  "message_id": "<69b94d47e84b3_d41118821d4@flexworker-66d9bcb955-mgwgt.mail>",
+  "imap_uid": "2857",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "[GitHub] Please download your two-factor recovery codes",
+  "sender": "noreply@github.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-17T05:47:03-07:00",
+  "body_text": "Hey lgwanai!\r\n\r\nYou’ve just enabled two-factor authentication.\r\n\r\nPlease take a moment to check that you have saved your recovery codes in a safe place. You can\r\ndownload your recovery codes at:\r\n\r\nhttps://github.com/settings/auth/recovery-codes\r\n\r\nRecovery codes are the only way to access your account again. By saving your\r\nrecovery codes, you’ll be able to regain access if you:\r\n\r\n* Lose your phone\r\n* Delete your authenticator app\r\n* Change your phone number\r\n\r\nGitHub Support will not be able to restore access to your account.\r\n\r\nTo disable two-factor authentication, visit\r\nhttps://github.com/settings/security\r\n\r\nMore information about two-factor authentication can be found on GitHub Help at\r\nhttps://docs.github.com/articles/about-two-factor-authentication\r\n\r\nIf you have any questions, please visit https://support.github.com.\r\n\r\nThanks,\r\nYour friends at GitHub\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/69b94d47e84b3_d41118821d4flexworker-66d9bcb955-mgwgt.mail.eml"
+}

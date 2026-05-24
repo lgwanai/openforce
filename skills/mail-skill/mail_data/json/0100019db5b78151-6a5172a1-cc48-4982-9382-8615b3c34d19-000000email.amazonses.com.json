@@ -1,0 +1,19 @@
+{
+  "message_id": "<0100019db5b78151-6a5172a1-cc48-4982-9382-8615b3c34d19-000000@email.amazonses.com>",
+  "imap_uid": "3155",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "NVIDIA 额外安全要素已更改",
+  "sender": "account@nvidia.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-22T15:03:15+00:00",
+  "body_text": "您好，  DemoNext\n您的 NVIDIA 账户 wuliang@xiangzizai.com 正在受额外安全要素的保护 Authentication App 。\n位置：\nBeijing\n为保护您的隐私，我们不会存储具体的位置。  Central China 是保留以供未来参考的位置。\nPrivacy Policy\n|\nManage My Privacy\n|\nContact\n© 2026 NVIDIA Corporation. All rights reserved.\nNVIDIA Corporation, 2788 San Tomas Expressway, Santa Clara, CA 95051.",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019db5b78151-6a5172a1-cc48-4982-9382-8615b3c34d19-000000email.amazonses.com.eml"
+}

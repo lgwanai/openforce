@@ -16,10 +16,43 @@ pub struct ApprovalStore {
 
 impl ApprovalStore {
     pub fn new(pool: PgPool) -> Self {
+        let key = Self::load_or_generate_signing_key();
+        Self { pool, signing_key: key }
+    }
+
+    /// Load signing key from APPROVAL_SIGNING_KEY_PATH env var (file containing PKCS#8 DER),
+    /// or generate a new one and persist it. This ensures the key survives restarts
+    /// and is consistent across instances in distributed deployments.
+    fn load_or_generate_signing_key() -> Ed25519KeyPair {
+        if let Ok(path) = std::env::var("APPROVAL_SIGNING_KEY_PATH") {
+            if let Ok(bytes) = std::fs::read(&path) {
+                if let Ok(key) = Ed25519KeyPair::from_pkcs8(&bytes) {
+                    tracing::info!("approval signing key loaded from {}", path);
+                    return key;
+                }
+            }
+            tracing::warn!("APPROVAL_SIGNING_KEY_PATH={path} specified but key could not be loaded, generating new key");
+        }
+
         let rng = SystemRandom::new();
         let pkcs8 = Ed25519KeyPair::generate_pkcs8(&rng).expect("generate signing key");
         let key = Ed25519KeyPair::from_pkcs8(pkcs8.as_ref()).expect("parse signing key");
-        Self { pool, signing_key: key }
+
+        // Persist the newly generated key if a path is configured
+        if let Ok(path) = std::env::var("APPROVAL_SIGNING_KEY_PATH") {
+            if let Err(e) = std::fs::write(&path, pkcs8.as_ref()) {
+                tracing::warn!("failed to persist approval signing key to {path}: {e}");
+            } else {
+                // Restrict file permissions to owner-only (best-effort on Unix)
+                #[cfg(unix)]
+                {{ let _ = std::process::Command::new("chmod").arg("600").arg(&path).output(); }}
+                tracing::info!("approval signing key persisted to {}", path);
+            }
+        } else {
+            tracing::warn!("APPROVAL_SIGNING_KEY_PATH not set — approval signing key will not survive restart");
+        }
+
+        key
     }
 
     pub async fn create_approval_request(
@@ -152,13 +185,17 @@ impl ApprovalStore {
         lease_id: Uuid, fencing_token: u64,
         base_snapshot_id: &str, payload_sha256: &str,
     ) -> DomainResult<ApprovalToken> {
+        // Use a transaction with FOR UPDATE to prevent TOCTOU race condition
+        let mut tx = self.pool.begin().await.map_err(|e| DomainError::ValidationFailed { detail: format!("begin tx: {e}") })?;
+
         let token = sqlx::query_as::<_, ApprovalTokenRow>(
             "SELECT approval_token_id, approval_request_id, session_id, task_id, task_attempt,
                     lease_id, fencing_token, worker_spec_id, tool_name, target_paths,
                     base_snapshot_id, payload_sha256, status, usage_limit, usage_count,
                     issued_at, expires_at, approved_by, signature
-             FROM approval_tokens WHERE approval_token_id = $1 AND status = 'approved'"
-        ).bind(token_id).fetch_optional(&self.pool).await
+             FROM approval_tokens WHERE approval_token_id = $1 AND status = 'approved'
+             FOR UPDATE"
+        ).bind(token_id).fetch_optional(&mut *tx).await
          .map_err(|e| DomainError::ValidationFailed { detail: e.to_string() })?
          .ok_or(DomainError::ValidationFailed { detail: "token not found".into() })?;
 
@@ -183,16 +220,24 @@ impl ApprovalStore {
             base_snapshot_id, payload_sha256)?;
 
         if Utc::now() >= token.expires_at {
+            tx.rollback().await.ok();
             return Err(DomainError::ValidationFailed { detail: "token expired".into() });
         }
 
-        // Increment usage count atomically
-        sqlx::query(
+        // Increment usage count atomically within the same transaction
+        let rows = sqlx::query(
             "UPDATE approval_tokens SET usage_count = usage_count + 1,
                     status = CASE WHEN usage_count + 1 >= usage_limit THEN 'consumed' ELSE 'approved' END
              WHERE approval_token_id = $1 AND usage_count < usage_limit"
-        ).bind(token_id).execute(&self.pool).await
+        ).bind(token_id).execute(&mut *tx).await
          .map_err(|e| DomainError::ValidationFailed { detail: e.to_string() })?;
+
+        if rows.rows_affected() == 0 {
+            tx.rollback().await.ok();
+            return Err(DomainError::ValidationFailed { detail: "token already consumed".into() });
+        }
+
+        tx.commit().await.map_err(|e| DomainError::ValidationFailed { detail: format!("commit: {e}") })?;
 
         Ok(token)
     }

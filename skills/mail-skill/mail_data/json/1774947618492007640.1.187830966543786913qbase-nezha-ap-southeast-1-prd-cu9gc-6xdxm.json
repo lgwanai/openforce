@@ -1,0 +1,21 @@
+{
+  "message_id": "<1774947618492007640.1.187830966543786913@qbase-nezha-ap-southeast-1-prd-cu9gc-6xdxm>",
+  "imap_uid": "2953",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Reset your Password for Qoder",
+  "sender": "no-reply@qoder.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-31T09:00:18+00:00",
+  "body_text": "Verify your email\nPlease verify with this verification code to reset your\r\n                                                                Qoder password for your wuliang@xiangzizai.com account.\n705667\nThis code expires in 10 minutes.\nIf you didn’t ask to reset your password, you can ignore\r\n                                                                this email.",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/1774947618492007640.1.187830966543786913qbase-nezha-ap-southeast-1-prd-cu9gc-6xdxm.eml"
+}

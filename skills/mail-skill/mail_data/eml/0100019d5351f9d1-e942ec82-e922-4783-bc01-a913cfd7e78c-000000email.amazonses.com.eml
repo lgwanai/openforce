@@ -1,0 +1,516 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com;
+ dkim=pass header.b=LP5u+8hylM header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=bTOpxJTwPg header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=Ty6TbyiaG23u4SszKG8GoTmrxVoS0peiLJU2GGG/ayI=;
+ b=bqrM73H5G/cp6PHS4diqTVgYtc6oDZ28zbkNKKiQXTeI0RQ3XhjmttqB4sA0++2Q4/trTAq
+ I1Me9Oq8SVtY5cLOP4iJxcK0ejbmyNsTcKZV1S+eSU7pRJP1oIOFBupApotQnXz9RqJx4Wo2Y
+ 9ym3P81wTWcChg2OIGl+Qps793QMLZS9x8eo9SFVqZmc04uACGU/Q9k/m9N7vNOuadRLi6mLx
+ qZN6Ub+4G9OmSWy2LvG62XBbJabziJ3R715PCqAVMQ2aaM/Rzx2hQy2ADWZ2jzFbxZoKzieIG
+ LBhDJVzSyu7WYdmeVAHjQPB+tRSvtWEdrfyZht5rpXC8JbLpk61A==
+Arc-Seal: i=1; a=rsa-sha256; t=1775219382; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=0trB2eS/Tg5rv5Y86wK9SvMKhg0g8ESdsBH83gbXYZ6ePLMqWnCuWzYSSWywIp3KG8IIYTX
+ 0f4Xm0ire1ofDFbuJRCAdWmcN3qlGSfub0hd+gT9SBuZ4AcE2VdebEfYqPhG1vj38YxIovt/0
+ pZYEahF5cdMPiwzgNL99tjy3voixjtC5e9tD4cuBC0vfe1hDsWcDwU42G56o+XEBW7+OqKSL+
+ 2iI5MHTYyqMpTEdcm3vD+tJM+WNgj5rfnC9221ttEMkgGJ8GEqTUv0FU+cOEvhBoLU889USAz
+ gAPqbG88vNAhW+1CbD0ki76gqO0JUJtloYBQ1znIzz6pGjThEH9Q==
+Authentication-Results: lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com;
+ dkim=pass header.b=LP5u+8hylM header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=bTOpxJTwPg header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 3 Apr 2026 12:29:34 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775219374;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=htDP5EZc6hLj4zxvINFed1dmgCdAjk1r/xQdK+NMSe0=;
+ b=LP5u+8hylM8mQt1493x8hsspg5b3WJzISWU0KUFYSJVfqRxMfRxvRZkfx2afvMi/
+ CEkGLWRJlax6kvkGqesuqDz3tceP/5K9O/jbBYTGbUZKOOKiRRBVZpVgF958JYOi2IX
+ QLmRG+9Tqo8tMD0rH2tHnr0snaMRjZaqd3nki8F2It1YM/7hqoEzINI6vBtb7M0qSJc
+ ldATwcOgUoBslrNB7s5SVplNCzAfuuidlPsbl06795kxrUVQCi0S7qyzv3vmVW9UPHq
+ pxWvmVDwR+S9798g1aUWgKO9dD6ruoasAooL6KGdaqxYvwiKebNM4buh0A6Qw5W+N6Q
+ KoD50f828Q==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775219374;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=htDP5EZc6hLj4zxvINFed1dmgCdAjk1r/xQdK+NMSe0=;
+ b=bTOpxJTwPgHkIohGYTuyBRvRohmsRaUr3II5I1FvvV/efdzUL3QpG2C5fijRMeja
+ MEh6FYRdpLk+5c+Xir+vLwApgdcA8b2beTZW/kMj0+WrZjpKYbq2AAqfSbtO7BXbK8T
+ 00wPy+Ej0ab/hzxvf41a1FPZvFifI+0CJtgV6Zis=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=24.110.89.22;
+ helo=i89-22.smtp-out.amazonses.com;
+ envelope-from=0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: 
+ =?UTF-8?Q?The_machines_are_hacking_back_=E2=80=94_and_so_is_everyone_else?=
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775219376/4fnJ280Kxjz3CvrD8/69CFB2B0.000/24.110.89.22/i89-22.smtp-out.amazonses.com/localhost/<0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69CFB2B0.000/4fnJ280Kxjz3CvrD8
+X-Fangmail-Miltered: at n206-112-031 with ID 69CFB2B0.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 24.110.89.22
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fO1FiGkYTGguA0YoJnz9cByU7oju4EJeEIaQPS9gE2QWahWkMLUIKO3GAeZsrVNJdW5fjGSLcQHIn09zNdl2djH4DIs6eclv16jH+qjZHKM1nKoWmAa9kbJBaywUxg1e9A==
+X-Ses-Outgoing: 2026.04.03-24.110.89.22
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>The machines are hacking back =E2=80=94 and so is everyone else</t=
+itle>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/0Ds7SayGPyg3=
+OXS0K6cGipnT29Y=3D472"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/pro=
+duction/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=
+=3D"AI News Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues%252F478/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78=
+c-000000/PiLVwRneP1sMxOekhWBRtoGTJAE=3D472">Read Online</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000=
+/mZxpGL3mvjEkEGV3RwFmdXntMC8=3D472">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly=
+.co%252Fissues%252F478/2/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e=
+78c-000000/pnP5EqAklslUv4kismvvmOKpCvs=3D472">The machines are hacking back=
+ =E2=80=94 and so is everyone else</a></h1>
+      <div class=3D"date">April 3rd 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><p>An AI agent went rogue at Meta and triggered a Sev 1=
+. Anthropic shipped its own source code to npm by accident =E2=80=94 then a=
+ccidentally DMCA'd 8,100 GitHub repos trying to clean up. A Chinese state g=
+roup weaponized Claude Code to run an espionage campaign with 90% autonomy.=
+ And a Nature Communications paper showed that reasoning models can jailbre=
+ak other models without human help. The threat landscape didn't just shift =
+=E2=80=94 it inverted.</p></div>
+
+        <div class=3D"email-sponsor">
+      <span class=3D"sponsor-label">Sponsor</span>
+      <a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/=
+L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F=
+%252Finnovatingwithai.com/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cf=
+d7e78c-000000/s-c_ZtngWudKLuxi5f9kZ9jr4bk=3D472"><img src=3D"https://dxj7es=
+hgz03ln.cloudfront.net/production/link/image/1102599/original_ratio_extra_l=
+arge_56050749-17e7-496a-8e38-506bc0825257.png" alt=3D"" width=3D"670" /></a=
+>
+      <h3><a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack=
+.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%=
+252F%252Finnovatingwithai.com/2/0100019d5351f9d1-e942ec82-e922-4783-bc01-a9=
+13cfd7e78c-000000/wutZgyR5U8jrKKIQa-94H7ztP2c=3D472">Become an AI consultan=
+t and deliver 'ROI with AI' to your clients</a></h3>
+      <p>AI is transforming every workplace =E2=80=93 but executives are te=
+rrified of becoming one of the companies that gets "no ROI on AI."</p><p>Th=
+at's where you come in, and how you can <strong>build a 6-figure consultanc=
+y</strong> with Innovating with AI's proven methods for delivering fast ROI=
+ on AI projects.</p>
+      <p><a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack.=
+me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%2=
+52F%252Finnovatingwithai.com/3/0100019d5351f9d1-e942ec82-e922-4783-bc01-a91=
+3cfd7e78c-000000/E5CXoq59p6M9nxlpSQc2L0_6eyc=3D472"><strong>Click here to r=
+equest access to The AI Consultancy Project =E2=86=92</strong></a></p>
+      <div class=3D"sponsor-footer"><a rel=3D"nofollow" href=3D"https://fk3=
+wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec=
+53f3149a%3Fu=3Dhttps%253A%252F%252Finnovatingwithai.com/4/0100019d5351f9d1-=
+e942ec82-e922-4783-bc01-a913cfd7e78c-000000/cSxlkKeWKExg5bNNMjeMy7KTaAI=3D4=
+72">innovatingwithai.com</a></div>
+    </div>
+
+    <div class=3D"email-body">
+      <p><strong>Want stories like these every week?</strong> Our <a href=
+=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft=
+%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fnewslette=
+rs%252Fai-safety/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-00=
+0000/9HaRaW-5eCxQF1wh6-XM2hvLpio=3D472">AI Safety, Security &amp; Ethics de=
+ep dive</a> covers AI-powered threats, vulnerabilities, jailbreaks, and wha=
+t defenders need to know. <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.=
+me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%2=
+52F%252Faiweekly.co%252Fnewsletters%252Fai-safety/2/0100019d5351f9d1-e942ec=
+82-e922-4783-bc01-a913cfd7e78c-000000/nvDSiM2KdWEBaCSb40jU14kCV7I=3D472">Su=
+bscribe here.</a></p>
+<hr />
+<h2>Watch &amp; Listen First</h2>
+<p><strong>Exploiting AI IDEs: 30 Vulnerabilities, 24 CVEs</strong> =C2=B7 =
+Feb 17 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fopen=
+.spotify.com%252Fepisode%252F0m3DRr5oZD3AyG344vatAr/1/0100019d5351f9d1-e942=
+ec82-e922-4783-bc01-a913cfd7e78c-000000/tC7a02phKAUxFbS56n6WeFOmvjI=3D472">=
+Resilient Cyber on Spotify</a><br />
+-&gt; <em>Researcher Ari Marzuk walks through "IDEsaster" =E2=80=94 a novel=
+ vulnerability class hitting Cursor, Copilot, and other AI coding tools. 25=
+ minutes of practical offense and defense that every developer using AI ass=
+istants needs to hear.</em></p>
+<p><strong>This Week in AI Security: The Perfect Storm</strong> =C2=B7 Apr =
+2 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.firet=
+ail.ai%252Fmodern-cyber-podcast%252Fepisode-101-this-week-in-ai-security-2n=
+d-april-2026/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000=
+/9N0kcF_rA2a2KRaZdBGtd_Vj56o=3D472">Modern Cyber Podcast</a><br />
+-&gt; <em>Jeremy Snyder breaks down how AI is now discovering vulnerabiliti=
+es faster than humans can patch them, while regulators raise the alarm on A=
+I-generated code. A sharp 20-minute weekly roundup.</em></p>
+<p><strong>RSAC 2026: Reimagining Security for the Agentic Workforce</stron=
+g> =C2=B7 Mar 24 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me=
+/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252=
+F%252Fwww.rsaconference.com%252Flibrary%252F/1/0100019d5351f9d1-e942ec82-e9=
+22-4783-bc01-a913cfd7e78c-000000/3ccdeAodvCm-NMaDvdvAwPUfFSw=3D472">RSAC Co=
+nference Library</a><br />
+-&gt; <em>Cisco's Jeetu Patel argues that agents =E2=80=94 not humans =E2=
+=80=94 are the new security perimeter. Google's Sandra Joyce shows how atta=
+cker dwell time collapsed from 8 hours to 22 seconds. The two most importan=
+t keynotes from this year's RSA Conference, available on demand.</em></p>
+<hr />
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>AI agents are the new insider threat.</strong> They have access=
+, they make decisions, and they can go rogue. Treat their permissions like =
+employee credentials =E2=80=94 least privilege, audit logs, approval gates.=
+</li>
+<li><strong>The AI supply chain is now a top attack vector.</strong> LiteLL=
+M, Langflow, OpenClaw, and npm packages were all compromised in weeks. If y=
+ou depend on AI tooling, pin versions and monitor updates like you would cr=
+itical infrastructure.</li>
+<li><strong>Safety guardrails are a speed bump, not a wall.</strong> Reason=
+ing models jailbreak other models at 97% success with zero human help. Don'=
+t build security architectures that assume any single model's safety holds.=
+</li>
+<li><strong>AI coding tools have the keys to your kingdom.</strong> They re=
+ad your files, your credentials, your keys. A single prompt injection or ma=
+licious extension can exfiltrate everything. Sandbox them.</li>
+<li><strong>Voice and image are no longer proof of identity.</strong> Deepf=
+ake X-rays fool doctors. Cloned voices fool banks. Any verification process=
+ that relies on "seeing" or "hearing" someone needs a second factor that is=
+n't biometric.</li>
+</ul>
+<hr />
+<h2>The Anthropic Meltdown</h2>
+<p><strong>Claude Code Source Leaked via npm Packaging Error</strong> =C2=
+=B7 Mar 31 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/ht=
+tps:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252F=
+www.theregister.com%252F2026%252F03%252F31%252Fanthropic_claude_code_source=
+_code%252F/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/D=
+wv_WppUpSHYALODcLW5GFyTzhM=3D472">The Register</a><br />
+-&gt; <em>A misconfigured .npmignore shipped a 59.8 MB source map containin=
+g 512,000 lines of TypeScript =E2=80=94 including permission models, bash v=
+alidators, 44 unreleased feature flags, and references to unannounced model=
+s. Within hours, 41,500 GitHub forks made the leak permanent.</em></p>
+<p><strong>Anthropic Nuked 8,100 GitHub Repos in Botched DMCA Cleanup</stro=
+ng> =C2=B7 Apr 1 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me=
+/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252=
+F%252Ftechcrunch.com%252F2026%252F04%252F01%252Fanthropic-took-down-thousan=
+ds-of-github-repos-trying-to-yank-its-leaked-source-code-a-move-the-company=
+-says-was-an-accident%252F/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913c=
+fd7e78c-000000/NURfpPDZYj84d2ScDWsVhzJm2XU=3D472">TechCrunch</a><br />
+-&gt; <em>The overbroad takedown hit thousands of unrelated repositories an=
+d triggered a developer backlash that rivaled the leak itself. Anthropic ca=
+lled it "an accident" =E2=80=94 their second in 72 hours.</em></p>
+<p><strong>Chinese State Group Weaponized Claude Code for Espionage at Scal=
+e</strong> =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/ht=
+tps:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252F=
+www.anthropic.com%252Fnews%252Fdisrupting-AI-espionage/1/0100019d5351f9d1-e=
+942ec82-e922-4783-bc01-a913cfd7e78c-000000/M3OPHvUEmT5Jv39as_T3bKmqGbk=3D47=
+2">Anthropic</a><br />
+-&gt; <em>Anthropic disclosed a campaign targeting 30 global entities where=
+ adversaries jailbroke Claude by decomposing attacks into innocent-looking =
+subtasks. The AI executed 80-90% of tactical operations without human inter=
+vention =E2=80=94 the first documented autonomous cyber espionage campaign.=
+</em></p>
+<hr />
+<h2>Agent Frameworks Under Siege</h2>
+<p><strong>CISA: Langflow Flaw Actively Exploited to Hijack AI Workflows</s=
+trong> =C2=B7 Mar 26 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrac=
+k.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A=
+%252F%252Fwww.bleepingcomputer.com%252Fnews%252Fsecurity%252Fcisa-new-langf=
+low-flaw-actively-exploited-to-hijack-ai-workflows%252F/1/0100019d5351f9d1-=
+e942ec82-e922-4783-bc01-a913cfd7e78c-000000/ykquozvB9wQtOmDLBZXbvvWR4qU=3D4=
+72">BleepingComputer</a><br />
+-&gt; <em>CVE-2026-33017 (CVSS 9.3) lets attackers execute arbitrary Python=
+ via a single HTTP request. Hackers built working exploits within 20 hours =
+of the advisory =E2=80=94 no PoC needed. Federal agencies have until April =
+8 to patch or pull the plug.</em></p>
+<p><strong>OpenClaw: From 135K GitHub Stars to Security Crisis in Three Wee=
+ks</strong> =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/h=
+ttps:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252=
+Fwww.darkreading.com%252Fapplication-security%252Fcritical-openclaw-vulnera=
+bility-ai-agent-risks/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e7=
+8c-000000/fL3uo_Ka6OHdFi2v6VyG8xmg5RQ=3D472">Dark Reading</a><br />
+-&gt; <em>The viral AI agent racked up three critical CVEs, 335 malicious s=
+kills on its marketplace (including keyloggers disguised as "solana-wallet-=
+tracker"), and 21,639 exposed instances on the public internet. China's CNC=
+ERT restricted its use on government systems.</em></p>
+<p><strong>CrewAI Hit by Four CVEs: Prompt Injection Chains to RCE</strong>=
+ =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.securi=
+tyweek.com%252Fcrewai-vulnerabilities-expose-devices-to-hacking%252F/1/0100=
+019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/XvA-GJCoMDajVsgzQx=
+C9d_tBZZA=3D472">SecurityWeek</a><br />
+-&gt; <em>When Docker isn't available, CrewAI silently falls back to an ins=
+ecure sandbox that allows arbitrary code execution. Add SSRF and file-read =
+vulnerabilities, and attackers can chain a prompt injection into full host =
+compromise. No patch yet.</em></p>
+<hr />
+<h2>AI Becomes the Weapon</h2>
+<p><strong>CyberStrikeAI: Hackers' One-Click Offensive AI Platform Hits 600=
++ FortiGate Firewalls</strong> =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east=
+-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3D=
+https%253A%252F%252Fthehackernews.com%252F2026%252F03%252Fopen-source-cyber=
+strikeai-deployed-in.html/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cf=
+d7e78c-000000/fsuwUJ8mPQ2Jk_XEfQ8ssFFo2Zg=3D472">The Hacker News</a><br />
+-&gt; <em>Built in Go, maintained by a developer with ties to China's CNNVD=
+, CyberStrikeAI integrates 100+ security tools with an AI decision engine. =
+Amazon detected it breaching FortiGate devices across 55 countries. The era=
+ of AI-automated offensive operations is no longer theoretical.</em></p>
+<p><strong>Microsoft: Hackers Now Use AI at Every Stage of Cyberattacks</st=
+rong> =C2=B7 Mar 6 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.=
+me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%2=
+52F%252Fwww.microsoft.com%252Fen-us%252Fsecurity%252Fblog%252F2026%252F03%2=
+52F06%252Fai-as-tradecraft-how-threat-actors-operationalize-ai%252F/1/01000=
+19d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/26A-DgDJg_NEh0y_tME=
+xNfj5zKE=3D472">Microsoft Security Blog</a><br />
+-&gt; <em>From reconnaissance to phishing to malware debugging, AI is stand=
+ard tradecraft for groups like North Korea's Jasper Sleet, which uses AI to=
+ generate fake identities and pass remote-work interviews at Western compan=
+ies.</em></p>
+<p><strong>Nature: Reasoning Models Jailbreak Other AIs With 97% Success</s=
+trong> =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.=
+nature.com%252Farticles%252Fs41467-026-69010-1/1/0100019d5351f9d1-e942ec82-=
+e922-4783-bc01-a913cfd7e78c-000000/i5siVxAKKyBJ29Vq0R-aTY151Bs=3D472">Natur=
+e Communications</a><br />
+-&gt; <em>DeepSeek-R1, Gemini 2.5 Flash, Grok 3 Mini, and Qwen3 autonomousl=
+y broke safety guardrails on nine target models =E2=80=94 no human supervis=
+ion needed. The paper calls it "alignment regression": advanced reasoning c=
+apabilities systematically erode the safety of other systems.</em></p>
+<hr />
+<h2>When AI Goes Rogue Inside the Building</h2>
+<p><strong>Meta AI Agent Triggers Sev 1: Exposes Data to Unauthorized Engin=
+eers</strong> =C2=B7 Mar 18 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.=
+awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhtt=
+ps%253A%252F%252Ftechcrunch.com%252F2026%252F03%252F18%252Fmeta-is-having-t=
+rouble-with-rogue-ai-agents%252F/1/0100019d5351f9d1-e942ec82-e922-4783-bc01=
+-a913cfd7e78c-000000/8Rt3OvX9IFTEP7Etm_P2m70F_T4=3D472">TechCrunch</a><br /=
+>
+-&gt; <em>An internal AI agent autonomously posted analysis into a public e=
+ngineering forum, bypassing access controls and exposing proprietary code a=
+nd user data for two hours. Meta insists "no user data was mishandled" but =
+classified it second-highest severity.</em></p>
+<p><strong>$10B AI Startup Mercor Breached via LiteLLM Supply Chain Attack<=
+/strong> =C2=B7 Mar 31 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstr=
+ack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%25=
+3A%252F%252Ftechcrunch.com%252F2026%252F03%252F31%252Fmercor-says-it-was-hi=
+t-by-cyberattack-tied-to-compromise-of-open-source-litellm-project%252F/1/0=
+100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/nhTiAiO8HiBm3E9=
+-zN2EObQXcS8=3D472">TechCrunch</a><br />
+-&gt; <em>Lapsus$ claims 4TB of data including source code, Slack logs, and=
+ videos of AI-contractor conversations. Y Combinator's Garry Tan warned the=
+ breach puts "state-of-the-art training data from every major lab" at risk =
+=E2=80=94 a national security problem.</em></p>
+<p><strong>Chrome Gemini Flaw Let Extensions Hijack Camera and Mic</strong>=
+ =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Funit42.pal=
+oaltonetworks.com%252Fgemini-live-in-chrome-hijacking%252F/1/0100019d5351f9=
+d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/SbNUIE926ETgQ241u1A5x5LRS3I=
+=3D472">Palo Alto Unit 42</a><br />
+-&gt; <em>CVE-2026-0628 (CVSS 8.8) let any low-privilege extension inject c=
+ode into Chrome's Gemini panel and silently access camera, mic, local files=
+, and screenshots. Patched in January, but the attack pattern =E2=80=94 hij=
+acking AI-privileged interfaces =E2=80=94 is the shape of things to come.</=
+em></p>
+<hr />
+<h2>Deepfakes Cross a Medical Threshold</h2>
+<p><strong>AI-Generated X-Rays Fool Radiologists =E2=80=94 Only 75% Accurac=
+y Even When Warned</strong> =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.=
+awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhtt=
+ps%253A%252F%252Fwww.nature.com%252Farticles%252Fd41586-026-00892-3/1/01000=
+19d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/HKylg7hhmnrPjcZjvnw=
+Dz8vVJFg=3D472">Nature</a><br />
+-&gt; <em>Across 12 research centers, radiologists correctly spotted ChatGP=
+T-generated deepfake X-rays 75% of the time. Without warning, accuracy drop=
+ped to 58%. Experience didn't help =E2=80=94 a zero-year resident performed=
+ the same as a 40-year veteran. Medical imaging integrity just became an ac=
+tive threat surface.</em></p>
+<p><strong>UN Calls AI-Powered Fraud a Global Wake-Up Call</strong> =C2=B7 =
+Mar 2026 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/http=
+s:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fne=
+ws.un.org%252Fen%252Fstory%252F2026%252F03%252F1167144/1/0100019d5351f9d1-e=
+942ec82-e922-4783-bc01-a913cfd7e78c-000000/r7Kubl4hEaRAqyLs5WqrvXCDYxo=3D47=
+2">UN News</a><br />
+-&gt; <em>Scam compounds using AI voice cloning and deepfakes now generate =
+tens of billions annually, powered by trafficked workers in Southeast Asian=
+ compounds. Voice cloning has crossed the "indistinguishable threshold" =E2=
+=80=94 some retailers report 1,000+ AI-generated scam calls per day.</em></=
+p>
+<hr />
+<h2>The Defense Side</h2>
+<p><strong>TENEX Raises $250M for AI-Powered Managed Detection and Response=
+</strong> =C2=B7 Mar 31 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-1.awst=
+rack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%2=
+53A%252F%252Fwww.businessobserverfl.com%252Fnews%252F2026%252Fmar%252F31%25=
+2Fsarasota-cybersecurity-firm-funding%252F/1/0100019d5351f9d1-e942ec82-e922=
+-4783-bc01-a913cfd7e78c-000000/4M4Y57ju5Jl8y9ofD-d6wi_rnVc=3D472">Business =
+Observer</a><br />
+-&gt; <em>The Series B values the Sarasota firm's approach of deploying AI =
+agents for threat detection =E2=80=94 the defensive mirror image of the off=
+ensive tools that are tearing through the landscape.</em></p>
+<p><strong>Next.js React2Shell: 766 Hosts Breached, Credentials Harvested a=
+t Scale</strong> =C2=B7 Apr 2 =C2=B7 <a href=3D"https://fk3wz6xe.r.us-east-=
+1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dh=
+ttps%253A%252F%252Fthehackernews.com%252F2026%252F04%252Fhackers-exploit-cv=
+e-2025-55182-to.html/1/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78=
+c-000000/1iSH5stUbdBhrMx3UzXSxwGysbE=3D472">The Hacker News</a><br />
+-&gt; <em>CVE-2025-55182 (CVSS 10.0) enables RCE in self-hosted Next.js app=
+s. UAT-10608 automated scanning and exploitation, stealing AWS secrets, SSH=
+ keys, Stripe API keys, and GitHub tokens from 766 targets. If you self-hos=
+t Next.js, patch now.</em></p>
+<hr />
+<p><em>The cybersecurity community spent a decade worrying about AI-powered=
+ attacks. In the last three weeks, we got AI-powered attacks, AI as the att=
+ack surface, AI attacking AI, and AI accidentally attacking itself. The thr=
+eat model isn't a model anymore =E2=80=94 it's the weather.</em></p>
+<hr />
+<p><strong>If this issue was useful, you'll want the deep dive.</strong> <a=
+ href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.c=
+o%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fnews=
+letters%252Fai-safety/3/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e7=
+8c-000000/QGNBPQjylkg1I0Vcrn5UwXDI90I=3D472">AI Safety, Security &amp; Ethi=
+cs</a> goes deeper every week on AI threats, agent vulnerabilities, supply =
+chain attacks, and defense. <a href=3D"https://fk3wz6xe.r.us-east-1.awstrac=
+k.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A=
+%252F%252Faiweekly.co%252Fnewsletters%252Fai-safety/4/0100019d5351f9d1-e942=
+ec82-e922-4783-bc01-a913cfd7e78c-000000/qoZ3HteO5rRwLRNkBnKhaQUMexU=3D472">=
+Sign up here =E2=80=94 it's free.</a></p>
+    </div>
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.=
+co/2/0100019d5351f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/Fi-qRZPIg=
+ahkBzx4u9f82i0wo80=3D472">AI News Weekly</a> | <a href=3D"https://fk3wz6xe.=
+r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f314=
+9a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fissues/2/0100019d5351f9d1-e942=
+ec82-e922-4783-bc01-a913cfd7e78c-000000/rDD3KFJsi26VhAEWl4wVj0IspRw=3D472">=
+Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Funsubscribe%3Femail=3Dwuliang%2540xiangzizai.com%26token=3D54=
+e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a2053902a/1/0100019d53=
+51f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/eSf0CfjHF400im5xQVKyCG4e=
+pTo=3D472">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019d53=
+51f9d1-e942ec82-e922-4783-bc01-a913cfd7e78c-000000/3F3fdfPP1KRna0NJ5ioIheLP=
+GXQ=3D472" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

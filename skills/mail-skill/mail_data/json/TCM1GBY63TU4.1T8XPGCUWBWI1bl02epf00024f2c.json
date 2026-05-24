@@ -1,0 +1,19 @@
+{
+  "message_id": "<TCM1GBY63TU4.1T8XPGCUWBWI1@bl02epf00024f2c>",
+  "imap_uid": "3167",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "New app(s) connected to your Microsoft account",
+  "sender": "account-security-noreply@accountprotection.microsoft.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-23T15:52:33-07:00",
+  "body_text": "Tavily Login connected to the Microsoft account wu**g@xiangzizai.com.\r\n\r\nIf you didn't grant this access, please remove the app(s) from your account.\r\n\r\nManage your apps https://account.live.com/consent/Manage?fn=email.\r\n\r\nYou can also opt out https://account.live.com/SecurityNotifications/Update or change where you receive security notifications.\r\n\r\nThanks,\r\nThe Microsoft account team \r\nPrivacy Statement: https://go.microsoft.com/fwlink/?LinkId=521839\r\nMicrosoft Corporation, One Microsoft Way, Redmond, WA 98052\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/TCM1GBY63TU4.1T8XPGCUWBWI1bl02epf00024f2c.eml"
+}

@@ -1,0 +1,38 @@
+{
+  "message_id": "<tencent_279124033AF27AFC6C4295BC@qq.com>",
+  "imap_uid": "3140",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "【AI CAMP】Copilot演示案例流程",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "jiayang.liu@bmw-brilliance.cn",
+  "cc": "sue@woshipm.com, wuliang@xiangzizai.com",
+  "date": "2026-04-22T10:57:56+08:00",
+  "body_text": "Dear Adah，\r\n\r\n\r\n附件为copilot演示的流程与PPT，辛苦您按流程操作后截一下效果图邮件发给我们，正面或反面的反馈都可以~\r\n\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【宝马AI CAMP】第六课-Copilot.pptx",
+      "content_type": "application/octet-stream",
+      "size": 706798,
+      "local_path": "./mail_data/attachments/<tencent_279124033AF27AFC6C4295BC@qq.com>/【宝马AI CAMP】第六课-Copilot.pptx"
+    },
+    {
+      "filename": "【宝马AI CAMP】第六课-Copilot.pdf",
+      "content_type": "application/octet-stream",
+      "size": 2982774,
+      "local_path": "./mail_data/attachments/<tencent_279124033AF27AFC6C4295BC@qq.com>/【宝马AI CAMP】第六课-Copilot.pdf"
+    },
+    {
+      "filename": "【更新】Microsoft Copilot 课程演示配套案例.docx",
+      "content_type": "application/octet-stream",
+      "size": 30094,
+      "local_path": "./mail_data/attachments/<tencent_279124033AF27AFC6C4295BC@qq.com>/【更新】Microsoft Copilot 课程演示配套案例.docx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_279124033AF27AFC6C4295BCqq.com.eml"
+}

@@ -1,0 +1,40 @@
+{
+  "message_id": "<tencent_14553F1701F43C5B0AFCC238@qq.com>",
+  "imap_uid": "3150",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "回复：RE: DIFY课程的Prompt",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "Jiayang.Liu@bmw-brilliance.cn, wuliang@xiangzizai.com",
+  "cc": "Xiuquan.Hu.ff@partner.bmw-brilliance.cn",
+  "date": "2026-04-22T17:26:27+08:00",
+  "body_text": "Dear all,\r\n\r\n\r\n1、今日演示的dify内容，在附件1&amp;2导入的文件中是含有提示词的，无需再另外输入， 学员可按照里面的内容进行练习；\r\n2、Dify工作流运用场景非常广泛，行业中有非常多成功案例，下方吴老师展示的只是冰山一角。鼓励学员多多探索，发现更多可赋能实际工作的领域。\r\n\r\n\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                    Liu Adah, BBH-1A-1<Jiayang.Liu@bmw-brilliance.cn&gt;&nbsp;在 2026年4月22日 周三 15:45 写道：\r\n\r\n   \r\n辛苦老师总结一下DIFY的应用场景，今天很多业务同事问DIFY的应用场景，除了今天讲的数据整理透视，是否还有别的\r\n \r\n&nbsp;\r\n  \r\n&nbsp;\r\n \r\n&nbsp;\r\n \r\nBR\r\n \r\nAdah\r\n \r\n \r\n&nbsp;\r\n   \r\nFrom: Liu Adah, BBH-1A-1 \r\n Sent: Wednesday, April 22, 2026 2:40 PM\r\n To: 杨雨鑫 <daisy_yang@woshipm.com&gt;; wuliang <wuliang@xiangzizai.com&gt;\r\n Cc: Hu Xiuquan, BBH-1A-1(辽宁外联企业管理有限公司) <Xiuquan.Hu.ff@partner.bmw-brilliance.cn&gt;\r\n Subject: DIFY课程的Prompt\r\n \r\n \r\n \r\n&nbsp;\r\n \r\nDaisy, 吴老师，\r\n \r\n今天老师的DIFY课程，里面有发送的系统提示词发我们一下，我们发给学员让他们练习\r\n \r\n&nbsp;\r\n \r\n--------------------------------------------------------\r\n \r\nBMW Brilliance Automotive Ltd. /华晨宝马汽车有限公司\r\n \r\nAdah Liu, APTD®\r\n \r\nThe Academy of BMW Group China\r\n \r\nBBH-1A-1\r\n \r\nNon-technical Training\r\n \r\n&nbsp;\r\n \r\nTel.：+86-  24- 8455 8188\r\n \r\nMail: jiayang.liu@bmw-brilliance.cn\r\n \r\nWeb：http://www.bmw-brilliance.cn\r\n \r\n&nbsp;",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "577309C7@F4A1950B.4394E86900000000.png",
+      "content_type": "application/octet-stream",
+      "size": 392284,
+      "local_path": "./mail_data/attachments/<tencent_14553F1701F43C5B0AFCC238@qq.com>/577309C7@F4A1950B.4394E86900000000.png"
+    },
+    {
+      "filename": "实操文件.zip",
+      "content_type": "application/octet-stream",
+      "size": 18546,
+      "local_path": "./mail_data/attachments/<tencent_14553F1701F43C5B0AFCC238@qq.com>/实操文件.zip"
+    },
+    {
+      "filename": "Dify案例操作指引.docx",
+      "content_type": "application/octet-stream",
+      "size": 2404318,
+      "local_path": "./mail_data/attachments/<tencent_14553F1701F43C5B0AFCC238@qq.com>/Dify案例操作指引.docx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_14553F1701F43C5B0AFCC238qq.com.eml"
+}

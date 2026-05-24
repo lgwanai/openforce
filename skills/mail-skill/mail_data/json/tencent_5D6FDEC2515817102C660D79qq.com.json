@@ -1,0 +1,29 @@
+{
+  "message_id": "<tencent_5D6FDEC2515817102C660D79@qq.com>",
+  "imap_uid": "2861",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "转发：AI CAMP话题方向改变",
+  "sender": "sue@woshipm.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-18T09:50:35+08:00",
+  "body_text": "---------- 转发的邮件信息 ----------\r\n \t \t\t发件人：Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn&gt; \t\t\r\n \t\t日期：2026年3月13日 16:21 \t\t\r\n \t\t收件人：周珊 <sue@woshipm.com&gt; \r\n \t\t主题：AI CAMP话题方向改变 \t\r\n      \t\t  \r\n珊珊，今天跟领导开会，定了一个方向是按照主题来讲每次的话题，现在的那些话题是可以的。有一个变化是，每一个话题下讲平台/软件，GAIA和Copilot都要讲，并且比重要平均，不要主讲GAIA副讲Copilot, 要同样重要。但是现在BBA的同事们只能用COPILOT  LITE version，不能用premium版本，老师设计的时候考虑一下，要怎么讲。\r\n \r\n你跟吴老师说一下，把话题+平台再更新一下，周一争取发给我。\r\n \r\n下面是copilot lite vs premium version对比，让老师看一下\r\n \r\n&nbsp;\r\n \r\n\r\n \r\n&nbsp;\r\n \r\n--------------------------------------------------------\r\n \r\nBMW Brilliance Automotive Ltd. /华晨宝马汽车有限公司\r\n \r\nAdah Liu, APTD®\r\n \r\nThe Academy of BMW Group China\r\n \r\nBBH-1A-1\r\n \r\nNon-technical Training\r\n \r\n&nbsp;\r\n \r\nTel.：+86-  24- 8455 8188\r\n \r\nMail: jiayang.liu@bmw-brilliance.cn\r\n \r\nWeb：http://www.bmw-brilliance.cn\r\n \r\n&nbsp;",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen",
+    "\\Answered"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "13875460@0010D31B.EB04BA6900000000",
+      "content_type": "application/octet-stream",
+      "size": 297324,
+      "local_path": "./mail_data/attachments/<tencent_5D6FDEC2515817102C660D79@qq.com>/13875460@0010D31B.EB04BA6900000000"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_5D6FDEC2515817102C660D79qq.com.eml"
+}

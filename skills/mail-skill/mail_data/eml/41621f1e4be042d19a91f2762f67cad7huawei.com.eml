@@ -1,0 +1,228 @@
+Accept-Language: zh-CN, en-US
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:113.46.200.222)
+ smtp.mailfrom=uMeeting@huawei.com; dkim=pass header.b=o/r4Yif+bk
+ header.i=@huawei.com header.s=dkim; dmarc=pass (p=quarantine sp=quarantine
+ dis=none) header.from=huawei.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:subject:date:content-type:mime-version:message-id:dkim-signature;
+ bh=xFxPoiMEffXkdUDYm5LPeA6RFnzAi+pwZTyoVOnKHbY=;
+ b=d6MifGhUm+fgHKrk7ckI5KrVlAqnbWI3hBXmibqrVIXFR2bG75pasZ+JXMhfAzvV50ABosw
+ d9Gfac9sGxQkRCqrJ6GnT6CLfftQufb9cxMCWv3WgL6vFXUgFjpsqYybA9ZB65AAsFoZ+RA/k
+ nmAkJKlUhS3+8Kl8uUkZUJ0GPEYjCy5JRFYEvsAw+xa1mthaap04ijJPiv3Hbj6L0ycwEtM3A
+ t2q7LRuGj1nJQcxgGmzkwdJPocCDBiwWD/uvStJIG7cJnJH+jL4StKs+UVyoG/0PONoFrPFxA
+ 11466WFTjgMNFWBIR/ny0ByArjMdhC7zcNWHjdi8w4A7sLtTc/2Q==
+Arc-Seal: i=1; a=rsa-sha256; t=1776756594; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=MS2vclm5gsas7ZoI6GGZxfeiJhMWtohcjwytkcimVGCYewPi4IhSEZ/e0ahnAxS8MHoliZi
+ L0/tXbL8jjpRLVUmO7I4jUfK21nJ94VfH8qe4QHdzseoxBsz3CPuaof4wYv2S6bg0hsyZwv9x
+ b4vqLIgqXmzBX2pIYOwPCqvmUL1V0hzgh4XOMo5BP/l3PKTCFakQP43PQufNUu3WGyeoojRH+
+ UfIj1K8LQQmQ8ShO2M801Ou2Ia4G9TJKjTixz787QGopCUcqmcbGVGFMXD3yp8qwzNdjkAZnU
+ sjfP3dcbAoxxRWx0PxxZfb8+t9WMDzn0w/f9LmSvF3/kWyYezunw==
+Authentication-Results: lms; spf=pass (client-ip:113.46.200.222)
+ smtp.mailfrom=uMeeting@huawei.com; dkim=pass header.b=o/r4Yif+bk
+ header.i=@huawei.com header.s=dkim; dmarc=pass (p=quarantine sp=quarantine
+ dis=none) header.from=huawei.com; arc=none
+Content-Language: en-US
+Content-Type: multipart/alternative;
+ boundary="_000_41621f1e4be042d19a91f2762f67cad7huaweicom_"
+Date: Tue, 21 Apr 2026 07:29:50 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim; c=relaxed/relaxed;
+ q=dns/txt; h=From; bh=xFxPoiMEffXkdUDYm5LPeA6RFnzAi+pwZTyoVOnKHbY=;
+ b=o/r4Yif+bkTKqqr3r3yyf8Qi2coltwFkGFPC18bpeFNF7u/ghCsvhjVNcVW1aEYId0PfEOdv/
+ o6fQkYpUMn9jlKSK7JRW41oEw3N9x20PSBPl5NNhi950/OIZZM8KMWQgCBrvdYUZJwWrOuryj5i
+ z6JlQfIurrV5N/3MsT3pyOg=
+From: Meeting Book <uMeeting@huawei.com>
+Message-Id: <41621f1e4be042d19a91f2762f67cad7@huawei.com>
+Mime-Version: 1.0
+Received: from mail.maildlp.com (unknown [172.19.163.200]) by
+ canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4g0DNd2g71zLlYg; Tue,
+ 21 Apr 2026 15:23:29 +0800 (CST)
+Received: from kwepemr500010.china.huawei.com (unknown [7.202.195.13]) by
+ mail.maildlp.com (Postfix) with ESMTPS id 9239F40563; Tue, 21 Apr 2026
+ 15:29:50 +0800 (CST)
+Received: from kwepemr500010.china.huawei.com (7.202.195.13) by
+ kwepemr500010.china.huawei.com (7.202.195.13) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Tue, 21 Apr 2026 15:29:50 +0800
+Received: from kwepemr500010.china.huawei.com ([7.202.195.13]) by
+ kwepemr500010.china.huawei.com ([7.202.195.13]) with mapi id
+ 15.02.1544.011; Tue, 21 Apr 2026 15:29:50 +0800
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=113.46.200.222;
+ helo=canpmsgout07.his.huawei.com; envelope-from=uMeeting@huawei.com;
+ receiver=<UNKNOWN>;
+Subject: =?gb2312?B?ob674dLpzajWqqG/IEFJxeDRtb27wfc=?=
+Thread-Index: AQHc0WCjYImDY5K/VkaUfB4amEXEvw==
+Thread-Topic: =?gb2312?B?ob674dLpzajWqqG/IEFJxeDRtb27wfc=?=
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776756591/4g0DWz4qw5zBCZwY/69E7276F.001/113.46.200.222/canpmsgout07.his.huawei.com/localhost/<uMeeting@huawei.com>
+X-Fangmail-Mid-Qid: 69E7276F.001/4g0DWz4qw5zBCZwY
+X-Fangmail-Miltered: at n206-112-028 with ID 69E7276F.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 113.46.200.222
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: uMeeting@huawei.com
+X-Lms-Pvf: 
+ MnwyfDF8fC2/252S8faeF84ImTIsYaOpqxirKRu/XnKYcTgytO1Nz2vW51/mGr64SLY7htxceP5HVlvhyTULJGv+8YxOd7Jw6527QpNAfhAZtPjEfX66JEWe+zj8fepf+pFoCsnT+A==
+X-Ms-Has-Attach: 
+X-Ms-Tnef-Correlator: 
+X-Originating-Ip: [7.207.116.4]
+
+--_000_41621f1e4be042d19a91f2762f67cad7huaweicom_
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
+
+u+HS6db3zOIgU3ViamVjdA0KQUnF4NG1vbvB9w0Ku+HS6cqxvOQgVGltZQ0KMjAyNi8wNC8yMijW
+3Mj9KSAwOTowMC0xMDozMCAoVVRDKzA4OjAwKUJlaWppbmcNCrvh0um12LXjIExvY2F0aW9uDQoN
+Cg0KV2VsaW5rytPGtbvh0ukgV2VsaW5rIFZpZGVvIE1lZXRpbmcNCrzTyOu74dLpKEV4dGVybmFs
+KTxodHRwczovL2FwcC5odWF3ZWkuY29tL3dtZWV0aW5nL2pvaW4vOTcwNjYxMzcveW4wd0NkdXEy
+NjdxTXNuakVoQkdJaDRkT3dFcFF5YW0wPg0Ku+HS6UlEIE1lZXRpbmcgSUQNCjk3MDY2MTM3DQpH
+dWVzdMPcwusgVm9pY2UgYWNjZXNzIGNvZGUNCjQyMDk2MA0KDQrM4cq+IFRpcHMNCsfrteO797vh
+0unBtL3TvNPI67vh0umho8rXtM7KudPDx+vPwtTYsqKwstewv827p7bLuvOjrMrkyOu74dLpSUTI
+67vhoaPP6sfpss6/vLLZ1/fWuLW8PGh0dHBzOi8vYXBwLmh1YXdlaS5jb20vd21lZXRpbmcvbWVl
+dGluZ3M/bG9jYWxlPXpoX0NOPg0KQ2xpY2sgdGhlIG1lZXRpbmcgbGluayB0byBqb2luIHRoZSBt
+ZWV0aW5nLiBGb3IgZmlyc3QtdGltZSB1c2VycywgcGxlYXNlIGRvd25sb2FkIGFuZCBpbnN0YWxs
+IHRoZSBjbGllbnQgZmlyc3QsIHRoZW4gZW50ZXIgdGhlIG1lZXRpbmcgSUQgdG8gam9pbi4gRm9y
+IGRldGFpbHMsIHBsZWFzZSByZWZlciB0byB0aGUgT3BlcmF0aW9uIEd1aWRlPGh0dHBzOi8vYXBw
+Lmh1YXdlaS5jb20vd21lZXRpbmcvbWVldGluZ3M/bG9jYWxlPWVuX1VTPg0K
+
+--_000_41621f1e4be042d19a91f2762f67cad7huaweicom_
+Content-Type: text/html; charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
+<title></title>
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1"=
+>
+<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+</head>
+<body>
+<div id=3D"mailTemplate">
+<table width=3D"100%" style=3D"border-collapse: collapse; table-layout: fix=
+ed;=0A=
+        word-break: break-all; word-wrap: break-word;">
+<tbody>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+=BB=E1=D2=E9=D6=F7=CC=E2 Subject</td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;color: #333333;line-height: 16pt;font-family=
+: =CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+AI=C5=E0=D1=B5=BD=BB=C1=F7</td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+=BB=E1=D2=E9=CA=B1=BC=E4 Time</td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;color: #333333;line-height: 16pt;font-family=
+: =CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+2026/04/22(=D6=DC=C8=FD) 09:00-10:30 (UTC&#43;08:00)Beijing</td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+=BB=E1=D2=E9=B5=D8=B5=E3 Location </td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;color: #333333;line-height: 16pt;font-family=
+: =CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+</td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"height: 0.75pt;border-bottom: 1px solid rgb(222, 222, 222)"></=
+td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+Welink=CA=D3=C6=B5=BB=E1=D2=E9 Welink Video Meeting </td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;line-height: 16pt;font-family: =CE=A2=C8=ED=
+=D1=C5=BA=DA, sans-serif;"><a href=3D"https://app.huawei.com/wmeeting/join/=
+97066137/yn0wCduq267qMsnjEhBGIh4dOwEpQyam0" target=3D"_blank" style=3D"text=
+-decoration: underline;=0A=
+            color:#1890ff; font-size: 10.5pt;">=BC=D3=C8=EB=BB=E1=D2=E9(Ext=
+ernal)</a></td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+=BB=E1=D2=E9ID Meeting ID </td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;color: #333333;line-height: 16pt;font-family=
+: =CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+97066137</td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+Guest=C3=DC=C2=EB Voice access code</td>
+</tr>
+<tr>
+<td style=3D"font-size: 10.5pt;color: #333333;line-height: 16pt;font-family=
+: =CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+420960</td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"height: 0.75pt;border-bottom: 1px solid rgb(222, 222, 222)"></=
+td>
+</tr>
+<tr style=3D"height: 12pt">
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;color: #999999;line-height: 16pt;font-family: =
+=CE=A2=C8=ED=D1=C5=BA=DA, sans-serif;">
+=CC=E1=CA=BE Tips</td>
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;line-height: 16pt;font-family: =CE=A2=C8=ED=D1=
+=C5=BA=DA, sans-serif;">=C7=EB=B5=E3=BB=F7=BB=E1=D2=E9=C1=B4=BD=D3=BC=D3=C8=
+=EB=BB=E1=D2=E9=A1=A3=CA=D7=B4=CE=CA=B9=D3=C3=C7=EB=CF=C2=D4=D8=B2=A2=B0=B2=
+=D7=B0=BF=CD=BB=A7=B6=CB=BA=F3=A3=AC=CA=E4=C8=EB=BB=E1=D2=E9ID=C8=EB=BB=E1=
+=A1=A3=CF=EA=C7=E9=B2=CE=BF=BC<a href=3D"https://app.huawei.com/wmeeting/me=
+etings?locale=3Dzh_CN" target=3D"_blank" style=3D"text-decoration: underlin=
+e; color:#1890ff;">=B2=D9=D7=F7=D6=B8=B5=BC</a>
+</td>
+</tr>
+<tr>
+<td style=3D"font-size: 9pt;line-height: 16pt;font-family: =CE=A2=C8=ED=D1=
+=C5=BA=DA, sans-serif;">Click the meeting link to join the meeting. For fir=
+st-time users, please download and install the client first, then enter the=
+ meeting ID to join. For details, please refer to the
+<a href=3D"https://app.huawei.com/wmeeting/meetings?locale=3Den_US" target=
+=3D"_blank" style=3D"text-decoration: underline; color:#1890ff;">
+Operation Guide</a> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
+
+--_000_41621f1e4be042d19a91f2762f67cad7huaweicom_--

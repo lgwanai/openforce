@@ -1,0 +1,1380 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:76.223.139.17)
+ smtp.mailfrom=0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@envelope.ollama.com;
+ dkim=pass header.b=HGaG2NJlO2 header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=cjPUBec+sc header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:cc:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=7ESls4eT0m2Egastop47eHG0VhZdvlr3W/M4/7vTxQM=;
+ b=QFVWzN0VnzVf9GMs+7kiX5GaDI7SxYH24XpL4Ivboc+l9I0MoCCTLjrSTu+JObEzlP7ZJT+
+ Lg+f8gxva5vPC5xqtZ7Hej4Ue1zM4zjISCX9o7yKpcFfPWR28jUFCtt9Okq89/pW0MtjQ/5Cn
+ 7306JipI9CNqsQHkLU9VtE9PhvShW6y8Fj7GDPJaMv9fzzqsKKdhXIrw30Y/fSIL2rPT7eJyn
+ hODhLyED98EjCE2g/SEeIfAfyD3EVpfXNr36c/Ux/aFLmscGahMsS24+N9XUMc0cXlrPtBbrc
+ cElbTpCXUDlw4UbMt6pZLTdJdkk/vm+X/oAF0Dk2pyY/ukwb4zNQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1773975229; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=YCtQc97kdeFtCecBTDZtZ/yeaHVl1HTz35zKPNGPnubwAXi7Ez/leAwUFI/NYKdTaYRaZuH
+ glyJKJur4izsvRyvq3GojPRqolI7URcRY3r+wicjT5rlKv4dbPa0+77aL2Qr8SJjAVQJuoAZo
+ /OUo5vSLwlUM/fzOA9cL2elhj74W1QiYoFwgizYLM7UbsLXk9r/QEUleTCrrSL+8kIcQrOX9R
+ ENKnAMhXpQ3chb4GX79j2Ed78+P/Pura+IGkrwkc8/vMXLyQA7759L2YcEEbFiWC2Ik0Hj0r+
+ rU9g2UZZkKEC8qOymn5VllMwcZ481hOIILK9i5+2ajgkkUnGzM6A==
+Authentication-Results: lms; spf=pass (client-ip:76.223.139.17)
+ smtp.mailfrom=0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@envelope.ollama.com;
+ dkim=pass header.b=HGaG2NJlO2 header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=cjPUBec+sc header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Cc: 
+Content-Type: multipart/alternative; boundary=gfwvig1e33e
+Date: Fri, 20 Mar 2026 02:53:41 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe; d=ollama.com; t=1773975221;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type;
+ bh=1YJnFjIb5/shJ2eLwI8fSn7Dm5fdgxy0UUeh66v8sk8=;
+ b=HGaG2NJlO2xU/dFP0e0s3d0rctjA+QImenjNkXL71jiuWKEIV478RWiegySYWqVQ
+ rrrpGDvjoaPnv9WzPkBXT6nfhkwrMqG4V2BXadHW9r2K/gt+6j0/HmRfk4SAuBgYNlX
+ pKjIe1FBcwqWayVd/cidHv7/mQA7U3gkb7deaZfkUbv1bc8ajiNSbjst39wI9Z8GLag
+ CkOQ6hHmC764BtGTulGs2nVdCHhQAr42rk2ypSPonBY5qZPoVVV3AgTLoRxIOL4usif
+ 3lPUazhqrpZ3aufeV2tX6hiaLakRHQnVBHvDHzQODNdORPgWgivlb1Rz5gcT8BOPgmS
+ dDe6CpJRCw==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1773975221;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type:Feedback-ID;
+ bh=1YJnFjIb5/shJ2eLwI8fSn7Dm5fdgxy0UUeh66v8sk8=;
+ b=cjPUBec+scqhbnSfZNVjfoh2VG0F29VGtNzSbB/sZ3ZBUGriqn1Ie6ISpzQNa5Bz
+ iI3cklQM5oA+ZXKXbLBllUIKCMlxQTp7OZ3Fnnxc6OcN3Mz8NttnxcrDyazqLosQXNj
+ LShIKvSQnMaQKvaSbdty/wAqOh/cZ31mESt6wjEY=
+Feedback-Id: 
+ :1.us-east-1.JDzjX75ORX7ZOlDQyH3e+sAhM8zXt0YcbCHaAUiTifupgpKOd0I9rAZkeLPRsSzJJxHTof/pHxfonOD0A05jDGayFrCfJJZf9pd+N1bB5d6OKiOV9J4UJMd5BbKaJxykDuLbmlFxDOt6RI624h7C+sx/dQ4pKDGs1SnKa2fxkKM=:1.us-east-1.1nRXWOT+ETvogqnAUaOa7HjKGx1p40xVES7T8DfH/Gc=:AmazonSES
+From: Ollama <hello@ollama.com>
+List-Id: "Ollama" <general.ollama.com>
+List-Unsubscribe: 
+ <mailto:cmmyb1lbv47yv014949fl7wfz+b6a34646f883f417b1e4b871ea2989b7cbda6f4b77d96c7d0cb7bf96d17d871d1452e17279f7c2c213969bd3957bfa80371c69d6acecc974e08a031d@unsubscribe.loops.so?subject=unsubscribe>,<https://app.loops.so/unsubscribe/cmmyb1lbv47yv014949fl7wfz/b6a34646f883f417b1e4b871ea2989b7cbda6f4b77d96c7d0cb7bf96d17d871d1452e17279f7c2c213969bd3957bfa80371c69d6acecc974e08a031d>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@email.amazonses.com>
+Mime-Version: 1.0
+Precedence: Bulk
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=76.223.139.17;
+ helo=c139-17.smtp-out.amazonses.com;
+ envelope-from=0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@envelope.ollama.com;
+ receiver=<UNKNOWN>;
+Reply-To: Ollama <hello@ollama.com>
+Subject: 
+ =?utf-8?B?T2xsYW1hICsgTlZJRElBOiBzYWZlciwgZmFzdGVyIE9wZW5DbGF3IHdpdGggTmVtb0NsYXcgYW5kIE5lbW90cm9uIDMgU3VwZXI=?=
+To: wuliang@xiangzizai.com
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773975226/4fcRw96Thpz2D7Gyq/69BCB6B9.003/76.223.139.17/c139-17.smtp-out.amazonses.com/localhost/<0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@envelope.ollama.com>
+X-Fangmail-Mid-Qid: 69BCB6B9.003/4fcRw96Thpz2D7Gyq
+X-Fangmail-Miltered: at n206-112-038 with ID 69BCB6B9.003 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 76.223.139.17
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@envelope.ollama.com
+X-Lms-Pvf: 
+ MnwyfDF8fIHb7Hum02K1X3Xj6IFldUi9xYJP736XeTrDA7Mjm+pw6LPray8U9CGkPeQcw/Fk3ke4ffGJq3Luszd7jHh9gSgL5GHkgZMk8ICeQj8ynQlaPzXIYCVpnDgq+XPe+TVvVA==
+X-Ses-Outgoing: 2026.03.20-76.223.139.17
+
+--gfwvig1e33e
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+
+=C2=A0
+
+
+
+=C2=A0
+Ollama and NVIDIA have teamed up to make OpenClaw faster =
+and safer:
+ * Nemotron 3 Super is available to run with Ollama =E2=80=93 a =
+new open model from NVIDIA that ranks #1 on PinchBench (the benchmark
+   measuring OpenClaw effectiveness), with 5x more throughput than previous=
+ models.
+
+ * NemoClaw is now available with built-in Ollama support to =
+provide a safe environment for your OpenClaw assistant with privacy
+   and security guardrails.
+
+=C2=A0
+
+
+OpenClaw with Nemotron 3 Super
+
+Start by downloading Ollama:
+=C2=A0
+
+Download Ollama [https://ollama.=
+com/download]
+
+=C2=A0
+Next, run OpenClaw with Nemotron 3 Super via Ollama's=
+ cloud:
+=C2=A0
+ollama launch openclaw --model nemotron-3-super:cloud
+=C2=A0
+Nemotron 3 Super can be used on Ollama's cloud for free.
+=C2=A0
+For challenging tasks, Ollama's Pro and Max plans [https://ollama.=
+com/pricing] enable your OpenClaw assistant to run multiple
+sub-agents and background tasks at the same time.
+=C2=A0
+On machines with 96GB of VRAM or more, Nemotron 3 Super can also be run =
+locally using Ollama. See the model page
+[https://ollama.=
+com/library/nemotron-3-super].
+=C2=A0
+
+
+NemoClaw: run OpenClaw more safely
+
+NVIDIA's NemoClaw is an open source stack that installs OpenClaw with added=
+ privacy and security controls, including
+pre-configured support for Ollama=
+.
+
+
+curl -fsSL https://nvidia.com/nemoclaw.sh | bash
+=C2=A0
+This will install NemoClaw and run its Installer. Enter 2 to select Ollama =
+when prompted:
+=C2=A0
+
+
+
+=C2=A0
+When prompted for a model, select =
+nemotron-3-super:cloud (or choose another model you may wish to run).
+=C2=A0
+Once OpenClaw is running, connect to it:
+=C2=A0
+nemoclaw my-assistant connect
+=C2=A0
+For more information on NemoClaw, see =
+NVIDIA's documentation [https://docs.nvidia.com/nemoclaw/latest/index.html]=
+.
+
+
+=C2=A0
+
+
+OpenShell: a safe runtime for other agents
+
+NVIDIA's OpenShell [https://github.com/NVIDIA/OpenShell] is a private =
+runtime for agents and assistants that brings the safety of
+NemoClaw to other agents such as Claude Code, Codex, OpenCode and more.
+=C2=A0
+To get started with OpenShell, first download and install it =
+[https://github.com/NVIDIA/OpenShell?tab=3Dreadme-ov-file#install].
+=C2=A0
+Next, create a new sandbox with Ollama:
+=C2=A0
+openshell sandbox create =
+--from ollama
+=C2=A0
+Finally, run Ollama to launch an agent:
+=C2=A0
+ollama
+=C2=A0
+=C2=A0
+If you have any feedback, reply directly to this email or =
+join Ollama's Discord channel [https://discord.gg/ollama].
+=C2=A0
+=E2=9D=A4=EF=B8=8F Ollama
+=C2=A0
+You are receiving this email because you =
+opted-in to receive updates from Ollama
+Ollama, 744 High Street, Palo Alto,=
+ CA 94301
+Unsubscribe [https://app.loops.so/unsubscribe/cmmyb1lbv47yv014949=
+fl7wfz/b6a34646f883f417b1e4b871ea2989b7cbda6f4b77d96c7d0cb7bf96d17d871d1452=
+e17279f7c2c213969bd3957bfa80371c69d6acecc974e08a031d]
+
+--gfwvig1e33e
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html lang=3D"en" dir=3D"auto" xmlns=3D"http://www.w3.org/1999/xhtml" xmlns=
+:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:o=
+ffice:office" style=3D"background-color: #FFFFFF;">
+  <head>
+    <title>Ollama + NVIDIA: safer, faster OpenClaw with NemoClaw and Nemotr=
+on 3 Super</title>
+    <!--[if !mso]><!-->
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+    <!--<![endif]-->
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">
+    <style type=3D"text/css">
+      #outlook a { padding:0; }
+      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size=
+-adjust:100%; }
+      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-r=
+space:0pt; }
+      img { border:0;height:auto;line-height:100%; outline:none;text-decora=
+tion:none;-ms-interpolation-mode:bicubic; }
+      p { display:block;margin:13px 0; }
+    </style>
+    <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type=3D"text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+   =20
+   =20
+    <style type=3D"text/css">
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      }
+    </style>
+    <style media=3D"screen and (min-width:480px)">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width:=
+ 100%; }
+    </style>
+   =20
+   =20
+ =20
+   =20
+    <style type=3D"text/css">
+
+    @media only screen and (max-width:479px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+ =20
+    </style>
+    =20
+    <style type=3D"text/css">
+.wfix {
+          max-width: 600px !important;
+        }
+       =20
+        @media(max-width: 480px) {
+          .body-image-mobile-width-552 td { width: 552px !important; }
+          .body-image td  { max-width: 100% !important; }
+          .body-image img  { box-sizing: border-box; }
+          .social-icon-mobile-spacer {
+            display: inline-block !important;
+          }
+        }
+       =20
+    .mobile-only { display: none !important; } .desktop-only { display: blo=
+ck !important; }
+    @media(max-width: 480px) { .column-stack { width: 100% !important; max-=
+width: 100% !important; display: block !important; } .column-stack td,.colu=
+mn-stack th { padding-left: 0 !important; padding-right: 0 !important; } .m=
+obile-only { display: block !important; } .desktop-only { display: none !im=
+portant; } }
+    </style>
+    <style>
+          .wrapper {
+            padding: 0 12px;
+          }
+
+          /* Superhuman selector */
+          .ShadowHTML .wrapper {
+            padding: 0 !important;
+          }
+        =20
+        =20
+        =20
+        =20
+  .ShadowHTML :is(.styleUnquotedContent .unquoted-content, .styleUnquotedCo=
+ntent .sh-unquoted-content, .styleQuotedContent .sh-quoted-content, .sh-sig=
+nature, .Signature-settings) :is(td.column-container, div[class^=3D"mj-colu=
+mn-per-"]){font-size:0!important}
+  html.sh-color :is(td.column-container, div[class^=3D"mj-column-per-"], di=
+v.mj-column-per-100.mj-outlook-group-fix){font-size:0!important}
+  @media(max-width:480px){
+    html.sh-color .column-stack{width:100%!important;max-width:100%!importa=
+nt;display:block!important}
+    html.sh-color :is(.column-stack td,.column-stack th){padding-left:0!imp=
+ortant;padding-right:0!important;width:100%!important;max-width:100%!import=
+ant;display:block!important}
+    html.sh-color :is(.column-stack, .column-stack *){word-break:break-word=
+!important;overflow-wrap:anywhere!important}
+    html.sh-color :is(.column-persist, .column-persist *){word-break:break-=
+word!important;overflow-wrap:anywhere!important}
+  }
+  html.sh-color a[href^=3D"tel:"]{color:inherit!important;text-decoration:n=
+one!important;font-size:inherit!important;line-height:inherit!important;let=
+ter-spacing:inherit!important;vertical-align:baseline!important}
+
+        =20
+      .isMarketing { background-color: #FFFFFF !important; }
+      .isMarketing .styled-primary-column { background-color: transparent !=
+important; border-radius: 12px; }
+   =20
+        =20
+         [class~=3D"x_social-icon-dark-mode"] { display: none !important; m=
+so-hide:all;  width: 0px !important; padding: 0px !important; }
+
+          /* Gmail selectors */
+          u + .body .wrapper {
+            padding: 0 !important;
+          }
+          div > u + .body .wrapper {
+            padding: 0 !important;
+          }
+         =20
+    a { text-decoration: none; color: #2D2A2A; }
+   =20
+ =20
+         =20
+         =20
+          .link-unsubscribe { color: #9ca3af !important; }
+          </style>
+<meta name=3D"color-scheme" content=3D"light">
+          <meta name=3D"supported-color-schemes" content=3D"light">
+  </head>
+  <body class=3D"body" style=3D"word-spacing:normal;background-color:#FFFFF=
+F;">
+   =20
+   =20
+      <div aria-label=3D"Ollama + NVIDIA: safer, faster OpenClaw with NemoC=
+law and Nemotron 3 Super" aria-roledescription=3D"email" class=3D"email-bod=
+y" style=3D"background-color:#FFFFFF;" role=3D"article" lang=3D"en" dir=3D"=
+auto">
+        <img alt=3D"" src=3D"http://c.vialoops.com/CI0/0100019d0929b542-dd6=
+9c3cb-e635-4e5e-80bf-bc89968b26f9-000000/LKjJ1YYynNWVaUWB2iGBdYcTaeUV2mYIk7=
+XQMe645nw=3D449" style=3D"display: none; width: 1px; height: 1px;">
+<!--[if mso]><style type=3D"text/css"> a { text-decoration: underline !impo=
+rtant; } .button a { text-decoration: none !important; } .outlook-list-fix =
+{ margin-left:4px !important; } .outlook-break-full-link { word-break: brea=
+k-all !important; } .outlook-hide-social-icon { display: none !important; m=
+so-hide:all; width: 0px !important; padding: 0px !important; } .outlook-hid=
+e-social-icon * { display: none !important; mso-hide:all; width: 0px !impor=
+tant; padding: 0px !important; } .outlook-hide-social-icon table { display:=
+ none !important; mso-hide:all; width: 0px !important; padding: 0px !import=
+ant; } .outlook-hide-social-icon tbody { display: none !important; mso-hide=
+:all; width: 0px !important; padding: 0px !important; } .outlook-hide-socia=
+l-icon tr { display: none !important; mso-hide:all; width: 0px !important; =
+padding: 0px !important; } .outlook-hide-social-icon td { display: none !im=
+portant; mso-hide:all; width: 0px !important; padding: 0px !important; } .o=
+utlook-hide-social-icon img { display: none !important; mso-hide:all; width=
+: 0px !important; padding: 0px !important; } .outlook-hide-social-icon a { =
+display: none !important; mso-hide:all; width: 0px !important; padding: 0px=
+ !important; }
+</style><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"wfix-outlook gmail-no-padding-outlook wrapper-outlook" role=
+=3D"presentation" style=3D"width:600px;" width=3D"600" ><tr><td style=3D"li=
+ne-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix gmail-no-padding wrapper" style=3D"margin:0px auto=
+;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-top:0;text-align:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"wfix-outlook" width=
+=3D"600px" ><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" class=3D"wfix-outlook" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix" style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-bottom:24px;padding-left:0px;padding-right:0px;padding-top:24px;text-ali=
+gn:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td align=3D"center" class=3D"wfix=
+-outlook rounded-corners-outlook styled-primary-column-outlook" style=3D"ve=
+rtical-align:top;width:600px;" ><![endif]-->
+           =20
+      <div class=3D"mj-column-per-100 mj-outlook-group-fix wfix rounded-cor=
+ners styled-primary-column" style=3D"font-size:0px;text-align:left;directio=
+n:ltr;display:inline-block;vertical-align:top;width:100%;">
+       =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" width=3D"100%" style=3D"border-collapse: separate;">
+        <tbody>
+          <tr>
+            <td style=3D"background-color:transparent;border-radius:12px;ve=
+rtical-align:top;border-collapse:separate;padding-top:4px;padding-right:24p=
+x;padding-bottom:4px;padding-left:24px;">
+             =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style width=3D"100%">
+        <tbody>
+         =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+      <img alt src=3D"https://images.vialoops.com/cmmxxcddv14600j4oigdgqgdk=
+/cmmy5gcln0bm90i20ahv2mmat.png" style=3D"border:0;border-radius:0px;display=
+:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:1=
+3px;" width=3D"552" height=3D"auto">
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Ollama and NVIDIA have teamed up t=
+o make OpenClaw faster and safer:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"1" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap=
+; line-height: 25px !important; font-size: 14px !important;" class=3D"bold"=
+>Nemotron 3 Super</span><span style=3D"line-height: 25px !important; font-s=
+ize: 14px; font-size: 14px !important; white-space: pre-wrap;"> is availabl=
+e to run with Ollama =E2=80=93 a new open model from NVIDIA that ranks #1 o=
+n PinchBench (the benchmark measuring OpenClaw effectiveness), with 5x more=
+ throughput than previous models.</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"2" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap=
+; line-height: 25px !important; font-size: 14px !important;" class=3D"bold"=
+>NemoClaw </span><span style=3D"line-height: 25px !important; font-size: 14=
+px; font-size: 14px !important; white-space: pre-wrap;">is now available wi=
+th built-in Ollama support to provide a safe environment for your OpenClaw =
+assistant with privacy and security guardrails.</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">OpenClaw with Nem=
+otron 3 Super</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Start by downloading Ollama:</span=
+></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"button sh-button" style=3D"font=
+-size:0px;padding:10px 25px;padding-top:4px;padding-right:0px;padding-botto=
+m:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:separate;line-height:100%;">
+        <tbody>
+          <tr>
+            <td align=3D"center" bgcolor=3D"#000000" role=3D"presentation" =
+style=3D"border:none;border-radius:100px;cursor:auto;mso-padding-alt:12px=
+=20
+  20px;background:#000000;" valign=3D"middle">
+              <a href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%=
+2Fdownload/1/0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000/5=
+0Ch1hJi8hEwg0Df28SWUGx-d8k4fmmgddVbmYYsnqE=3D449" style=3D"display: inline-=
+block; background: #000000; color: #ffffff; font-family: ui-sans-serif, san=
+s-serif; font-weight: normal; margin: 0; text-decoration: none; text-transf=
+orm: none; padding: 12px=20
+  20px; mso-padding-alt: 0px; border-radius: 100px; font-size: 15px !import=
+ant; line-height: 15px !important;" target=3D"_blank" class=3D"sh-preserve-=
+color">
+                Download Ollama
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Next, run OpenClaw with Nemotron 3=
+ Super via Ollama's cloud:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 14px; white-space: p=
+re-wrap; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"code">ollama launch openclaw --model nemotron-3-super:cloud</span></div=
+>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Nemotron 3 Super can be used on Ol=
+lama's cloud for free.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">For challenging tasks, Ollama's </=
+span><a target=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-link da=
+rk-force" href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%2Fprici=
+ng/1/0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000/RecJFHCBp=
+rKvTGBpcSukD9YAbCqF0pdjC-fE402r0AU=3D449" style=3D"text-decoration: none; c=
+olor: #2D2A2A;"><span style=3D"font-size: 14px; white-space: pre-wrap; text=
+-decoration: underline !important; line-height: 25px !important; font-size:=
+ 14px !important;" class=3D"underline">Pro and Max plans</span></a><span st=
+yle=3D"line-height: 25px !important; font-size: 14px; font-size: 14px !impo=
+rtant; white-space: pre-wrap;"> enable your OpenClaw assistant to run multi=
+ple sub-agents and background tasks at the same time.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">On machines with 96GB of VRAM or m=
+ore, Nemotron 3 Super can also be run locally using Ollama. See the </span>=
+<a target=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-link dark-fo=
+rce" href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%2Flibrary%2F=
+nemotron-3-super/1/0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-00=
+0000/fm1YizfOjReni0eln-DdGM_pDdSIUQ1jcPe8sqV0N0w=3D449" style=3D"text-decor=
+ation: none; color: #2D2A2A;"><span style=3D"font-size: 14px; white-space: =
+pre-wrap; text-decoration: underline !important; line-height: 25px !importa=
+nt; font-size: 14px !important;" class=3D"underline">model page</span></a><=
+span style=3D"line-height: 25px !important; font-size: 14px; font-size: 14p=
+x !important; white-space: pre-wrap;">.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">NemoClaw: run Ope=
+nClaw more safely</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">NVIDIA's NemoClaw is an open sourc=
+e stack that installs OpenClaw with added privacy and security controls, in=
+cluding pre-configured support for Ollama.</span><br><br></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 14px; white-space: p=
+re-wrap; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"code">curl -fsSL https://nvidia.com/nemoclaw.sh | bash</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">This will install NemoClaw and run=
+ its Installer. Enter </span><span style=3D"font-weight: 600; font-size: 14=
+px; white-space: pre-wrap; line-height: 25px !important; font-size: 14px !i=
+mportant;" class=3D"bold">2 </span><span style=3D"line-height: 25px !import=
+ant; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;">t=
+o select Ollama</span><span style=3D"font-weight: 600; font-size: 14px; whi=
+te-space: pre-wrap; line-height: 25px !important; font-size: 14px !importan=
+t;" class=3D"bold"> </span><span style=3D"line-height: 25px !important; fon=
+t-size: 14px; font-size: 14px !important; white-space: pre-wrap;">when prom=
+pted:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+      <img alt src=3D"https://images.vialoops.com/cmmxxcddv14600j4oigdgqgdk=
+/cmmy6c6cp0ik60i1lqn7f042b.png" style=3D"border:0;border-radius:0px;display=
+:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:1=
+3px;" width=3D"552" height=3D"auto">
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">When prompted for a model, select =
+</span><span style=3D"font-weight: 600; font-size: 14px; white-space: pre-w=
+rap; line-height: 25px !important; font-size: 14px !important;" class=3D"bo=
+ld">nemotron-3-super:cloud</span><span style=3D"line-height: 25px !importan=
+t; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;"> (o=
+r choose another model you may wish to run).</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Once OpenClaw is running, connect =
+to it:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 14px; white-space: p=
+re-wrap; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"code">nemoclaw my-assistant connect</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">For more information on NemoClaw, =
+see NVIDIA's </span><a target=3D"_blank" rel=3D"noopener noreferrer" class=
+=3D"body-link dark-force" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fdo=
+cs.nvidia.com%2Fnemoclaw%2Flatest%2Findex.html/1/0100019d0929b542-dd69c3cb-=
+e635-4e5e-80bf-bc89968b26f9-000000/fZL_mCly1-gy4pPWjzYV9ZO4q16z78txqAMVH_PG=
+62s=3D449" style=3D"text-decoration: none; color: #2D2A2A;"><span style=3D"=
+font-size: 14px; white-space: pre-wrap; text-decoration: underline !importa=
+nt; line-height: 25px !important; font-size: 14px !important;" class=3D"und=
+erline">documentation</span></a><span style=3D"line-height: 25px !important=
+; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;">.</s=
+pan></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span>&nbsp;</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">OpenShell: a safe=
+ runtime for other agents</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">NVIDIA's </span><a target=3D"_blan=
+k" rel=3D"noopener noreferrer" class=3D"body-link dark-force" href=3D"https=
+://c.vialoops.com/CL0/https:%2F%2Fgithub.com%2FNVIDIA%2FOpenShell/1/0100019=
+d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000/7l3Pbgw3lm2O8-EQyywZc=
+lAefXci1url2E_06xZ_4JE=3D449" style=3D"text-decoration: none; color: #2D2A2=
+A;"><span style=3D"font-size: 14px; white-space: pre-wrap; text-decoration:=
+ underline !important; line-height: 25px !important; font-size: 14px !impor=
+tant;" class=3D"underline">OpenShell</span></a><span style=3D"line-height: =
+25px !important; font-size: 14px; font-size: 14px !important; white-space: =
+pre-wrap;"> is a private runtime for agents and assistants that brings the =
+safety of NemoClaw to other agents such as Claude Code, Codex, OpenCode and=
+ more.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">To get started with OpenShell, fir=
+st </span><a target=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-li=
+nk dark-force" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fgithub.com%2F=
+NVIDIA%2FOpenShell%3Ftab=3Dreadme-ov-file%23install/1/0100019d0929b542-dd69=
+c3cb-e635-4e5e-80bf-bc89968b26f9-000000/o4lAZXqPTxNH9HRMjNlW7kpo2gTSUyQ-G2G=
+0_K2qKjs=3D449" style=3D"text-decoration: none; color: #2D2A2A;"><span styl=
+e=3D"font-size: 14px; white-space: pre-wrap; text-decoration: underline !im=
+portant; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"underline">download and install it</span></a><span style=3D"line-height=
+: 25px !important; font-size: 14px; font-size: 14px !important; white-space=
+: pre-wrap;">.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Next, create a new sandbox with Ol=
+lama:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 14px; white-space: p=
+re-wrap; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"code">openshell sandbox create --from ollama</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Finally, run Ollama to launch an a=
+gent:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 14px; white-space: p=
+re-wrap; line-height: 25px !important; font-size: 14px !important;" class=
+=3D"code">ollama</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">If you have any feedback, reply di=
+rectly to this email or join Ollama's </span><a target=3D"_blank" rel=3D"no=
+opener noreferrer" class=3D"body-link dark-force" href=3D"https://c.vialoop=
+s.com/CL0/https:%2F%2Fdiscord.gg%2Follama/1/0100019d0929b542-dd69c3cb-e635-=
+4e5e-80bf-bc89968b26f9-000000/EZbhAEGpS_QSCEN69x-eZcgqhYzE0Buc_e7uWZmZpnI=
+=3D449" style=3D"text-decoration: none; color: #2D2A2A;"><span style=3D"fon=
+t-size: 14px; white-space: pre-wrap; text-decoration: underline !important;=
+ line-height: 25px !important; font-size: 14px !important;" class=3D"underl=
+ine">Discord channel</span></a><span style=3D"line-height: 25px !important;=
+ font-size: 14px; font-size: 14px !important; white-space: pre-wrap;">.</sp=
+an></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">=E2=9D=A4=EF=B8=8F Ollama</span></=
+div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:24px;padding-right:0px;padding-left:0px;w=
+ord-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:12px;le=
+tter-spacing:0px;line-height:21px !important;text-align:left;color:#9ca3af;=
+"><span class=3D"opt-in-explanation" style=3D"color: #9ca3af !important; fo=
+nt-size: 12px !important; line-height: 21px !important;">
+  You are receiving this email because you opted-in to receive updates from=
+ Ollama<br>
+  Ollama, 744 High Street, Palo Alto, CA 94301<br>
+  <a style=3D"font-weight: 600; color: #9ca3af !important; text-decoration:=
+ none !important; font-size: 12px !important; line-height: 21px !important;=
+" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fapp.loops.so%2Funsubscribe=
+%2Fcmmyb1lbv47yv014949fl7wfz%2Fb6a34646f883f417b1e4b871ea2989b7cbda6f4b77d9=
+6c7d0cb7bf96d17d871d1452e17279f7c2c213969bd3957bfa80371c69d6acecc974e08a031=
+d/1/0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000/yu7oZbN2UZ=
+b8-H46AIx_-oIWAbWKUxg6fh_K6G8jDtM=3D449" target=3D"_blank" rel=3D"noopener =
+noreferrer" class=3D"bold link-unsubscribe">
+  Unsubscribe
+  </a>
+  </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+   =20
+   =20
+      </div>
+   =20
+  </body>
+</html>
+ =20
+
+--gfwvig1e33e--

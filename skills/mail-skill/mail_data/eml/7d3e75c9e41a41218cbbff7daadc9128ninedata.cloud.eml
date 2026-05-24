@@ -1,0 +1,974 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:207.8.97.37)
+ smtp.mailfrom=BOUNCE.124BF80.1383FC936.1657C87.19284B.bme@r1648715.ninedata.cloud;
+ dkim=pass header.b=WJI0E7x8o0 header.i=no-reply@ninedata.cloud
+ header.s=1648715;
+ dkim=pass header.b=m8MywVMczR header.i=@bmsend.com header.s=bmdeda;
+ dmarc=pass (p=none sp=none dis=none) header.from=ninedata.cloud; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=MhL0bB9yoJl3Do9c16950SqVVBJ9BpoytD1GQaIDWmI=;
+ b=k+81b6ssPlYcEJHKGNXyeoqhAi1Dy4ocJ/akpEp0MnXHCekoRS/E8D+9bNScpM3Y8zfZlG8
+ JW3K75pIf6ZNIWZ3eOP0pkMcHK8jqk+ud76Oam6aY4b0jojJt2ZMr67THQ9mw/KCczkBQUhZ5
+ 6CT7iaaEEZ4aXVORJDq0IXJU3Hzle/CEot8B3oUA755nAnxgEVvlXD36mG3FyKFw2G7robV+Z
+ GRMvpKIfeLcVnrj+Siexv66fipBbUeC8vpKl9Q3a06UWSw/j/peQGEqZdmkjLLe7DAzuM6lEo
+ +K005BlPbF1P2UVQ15TO2dtXHAKSTJIsRpamSRLEnCjTNB2jCcaw==
+Arc-Seal: i=1; a=rsa-sha256; t=1775783455; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=matxPGzAxMpzqv8LAg8yIvb/zC24Gq1hF5SDnze6OQeylo3jOq6fz63BA84ff8sbakwAX9t
+ LlwFJRkHQkEpWzrs31pKTVRzDRa9vaH7+rGQGsaNFtBUr+2aOWrCyzWaZtQvAeXCVzsjlqHNz
+ UTzSfao/d5bcM5FzVo0sIP3hvK7KsygbCNdu5h15X2yJMyHjL0eYbVsH2Qo86UBAe5jC2PqwM
+ 3/PYQXSiTdn9TA8Do2O4rsAZx1+diCye4e0dKRIA6Dks4lgem1Ce8eWMIRFe6jJw6wA70vPMB
+ mFT5uUI/aExY5DBwYYmo9JdMEw5Gj2eHlA/Cu/ph1l3HDVhcZhfg==
+Authentication-Results: lms; spf=pass (client-ip:207.8.97.37)
+ smtp.mailfrom=BOUNCE.124BF80.1383FC936.1657C87.19284B.bme@r1648715.ninedata.cloud;
+ dkim=pass header.b=WJI0E7x8o0 header.i=no-reply@ninedata.cloud
+ header.s=1648715;
+ dkim=pass header.b=m8MywVMczR header.i=@bmsend.com header.s=bmdeda;
+ dmarc=pass (p=none sp=none dis=none) header.from=ninedata.cloud; arc=none
+Content-Type: multipart/alternative; boundary="=-VEYbP7l3i5wQJ7ws95ub4w=="
+Date: Fri, 10 Apr 2026 01:10:35 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; d=ninedata.cloud; s=1648715;
+ c=relaxed/relaxed; i=no-reply@ninedata.cloud; t=1775783435;
+ h=subject:from:reply-to:to:date:message-id:list-unsubscribe:content-type:
+ mime-version; bh=MhL0bB9yoJl3Do9c16950SqVVBJ9BpoytD1GQaIDWmI=;
+ b=WJI0E7x8o0hn202ObFhK5HOpf5U84b0xCak15wCAJmB8Va/QAKlIAxLwDsSo+PZcntT4AaMHNZJ
+ 7DkciSWIKniSSjKNOGa6G0VM35ByfK4G8o0XKfJIjzFfWp4HE0DxTkO6P/IhM+M08Ymk3KPpGPcuF
+ iFX1tWfsHk19yvJOjuE=
+Dkim-Signature: v=1; a=rsa-sha256; d=bmsend.com; s=bmdeda;
+ c=relaxed/relaxed; t=1775783435;
+ h=subject:from:reply-to:to:date:message-id:feedback-id:list-unsubscribe:
+ content-type:mime-version; bh=MhL0bB9yoJl3Do9c16950SqVVBJ9BpoytD1GQaIDWmI=;
+ b=m8MywVMczRiL8DUgsVIRhrECZs/BJdTOsEWP+j4bQsCAsUX/4mZeJcaSPKsmJevpJHS+R0Z0Q0j
+ ec+1JoiJFVDruvvPiQvnzM4ShbBDioZFmEY44Aqpd0fASLitk1K9+Iy2RdYzZhcaMLBDOdbBa4cyc
+ 3LemEtpq/YDMa5RkVdE=
+Feedback-Id: 1648715:19185536:us:benchmarkemail
+From: NineData <no-reply@ninedata.cloud>
+List-Id: 5238671670BM list <5238671670.1648715@benchmarkemail.com>
+List-Unsubscribe: 
+ =?us-ascii?q?=3Chttps=3A=2F=2Fclt1648715=2Ebenchurl=2Ecom=2Fud=3F9tSN8Jgb1CY4EirTI0m%2BVpw?=
+ =?us-ascii?q?DfyNVSXHM7gOuCLPg5iCAJ0POg2J1xuHxfmr00CbR0ePE7Y4LysMElwBPzESu?=
+ =?us-ascii?q?qA%3D%3D=3E?=
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <7d3e75c9e41a41218cbbff7daadc9128@ninedata.cloud>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=207.8.97.37;
+ helo=mail289.bms6.bmsend.com;
+ envelope-from=BOUNCE.124BF80.1383FC936.1657C87.19284B.bme@r1648715.ninedata.cloud;
+ receiver=<UNKNOWN>;
+Reply-To: NineData <no-reply@ninedata.cloud>
+Subject: NineData 3
+ =?utf-8?b?5pyI5Lqn5ZOB5pu05paw77yaTGFyayDlrqHmibnjgIFTUUwgU2VydmVy?=
+ =?utf-8?b?IOW9kuaho+S4juWkjeWItuWinuW8ug==?=
+To: wuliang@xiangzizai.com
+X-Bm-User: 19284B
+X-Campaignid: 19185536
+X-Cmc: 1657C87.1383FC936
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775783451/4fsJdl374Fz2D5Zyd/69D84E1B.002/207.8.97.37/mail289.bms6.bmsend.com/localhost/<BOUNCE.124BF80.1383FC936.1657C87.19284B.bme@r1648715.ninedata.cloud>
+X-Fangmail-Mid-Qid: 69D84E1B.002/4fsJdl374Fz2D5Zyd
+X-Fangmail-Miltered: at n206-112-038 with ID 69D84E1B.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Identify: <19185536_5238671670@benchmarkemail.com>
+X-Lms-Client-Ip: 207.8.97.37
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ BOUNCE.124BF80.1383FC936.1657C87.19284B.bme@r1648715.ninedata.cloud
+X-Lms-Pvf: 
+ MnwyfDF8fHQ/tjJ22NynMGyrkQYB917gLM2igXM7VjoZby/ZnomdYqMiclNfIIeE0+BNj6L/xLw4gs59UsFoDGzsXMpTwPTQNcTxsUeUgPxXTJ0AUY8hkWYwhhodu0xwMiQtjpXVgw==
+X-Mailer: BME Mailer - **BME19185536-1648715-5238671670**
+X-Report-Abuse: 
+ =?us-ascii?q?https=3A=2F=2Fclt1648715=2Ebenchurl=2Ecom=2FAbuse=3F9tSN8Jgb1CY4EirTI0m%2BV?=
+ =?us-ascii?q?pwDfyNVSXHM7gOuCLPg5iCAJ0POg2J1xuHxfmr00CbR0ePE7Y4LysMElwBPzE?=
+ =?us-ascii?q?SuqA%3D%3D?=
+X-Sentfromrelay: mail289.bms6.bmsend.com
+X-Sentfromserver: 207.8.97.37
+
+--=-VEYbP7l3i5wQJ7ws95ub4w==
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+5LqG6KejIDMg5pyI5LiK57q/55qE6aOe5LmmIExhcmsg5a6h5om544CBU1FMIFNlcnZlciDm
+lbDmja7lvZLmoaPjgIHmhaLmn6Xor6LliIbmnpDmianlsZXkuI7lpI3liLbog73lipvlop7l
+vLrjgIIgICAgCiAgICAKTW9udGhseSBQcm9kdWN0IFVwZGF0ZSAgICAKTmluZURhdGEgMjAy
+NiDlubQgMyDmnIjkuqflk4Hmm7TmlrAgICAgCuS6huinoyAzIOaciOS4iue6v+eahOmjnuS5
+piBMYXJrIOWuoeaJueOAgVNRTCBTZXJ2ZXIg5pWw5o2u5b2S5qGj44CB5oWi5p+l6K+i5YiG
+5p6Q5omp5bGV5LiO5aSN5Yi26IO95Yqb5aKe5by644CCICAgIAozIOaciO+8jE5pbmVEYXRh
+IOWbtOe7leWklumDqOWNj+WQjOaOpeWFpeOAgeaVsOaNrueUn+WRveWRqOacn+ayu+eQhuWS
+jOWkp+inhOagvOaVsOaNruWkjeWItueos+WumuaAp+aMgee7rei/reS7o++8jOW4ruWKqeWb
+oumYn+abtOmhuueVheWcsOWujOaIkCBTUUwg5Y+Y5pu044CB5Y6G5Y+y5pWw5o2u5rK755CG
+5LiO6Leo5bqT5ZCM5q2l44CCICAgIApbMV0g5p+l55yLIDMg5pyI5pyI5oqlICAgIAogICAg
+CuWNj+WQjOWuoeaJueS4jua2iOaBr+mAmuefpeWNh+e6pyAgICAK6aOe5LmmIExhcmsg5aSW
+6YOo5a6h5om5546w5bey5pSv5oyBIFNRTCDku7vliqHjgIHmnYPpmZDnlLPor7flkozmlbDm
+ja7lr7zlh7rmtYHnqIvvvIzluK7liqnlm6LpmJ/lnKjml6LmnInljY/lkIzkvZPns7vlhoXl
+rozmiJDlrqHmibnpl63njq/jgILmtojmga/pgJrnn6XkuZ/mlrDlop7mlK/mjIHpo57kuaYg
+TGFya+OAgemSiemSieWSjOS8geS4muW+ruS/oea2iOaBr+WNoeeJh++8jOW5tuWPr+aMieiv
+reiogOiuvue9rumAmuefpeWGheWuueOAgiAgICAKICAgIAogWzJdIOafpeeciyAzIOaciOac
+iOaKpSAgICAKICAgIArmhaLmn6Xor6LliIbmnpDopobnm5bmm7TlpJrkupHmlbDmja7lupMg
+ICAgCuaFouaXpeW/l+mHh+mbhuaWsOWinuaUr+aMgemYv+mHjOS6kSBSRFMgTXlTUUzjgIHp
+mL/ph4zkupEgUkRTIFBvc3RncmVTUUzjgIFQb2xhckRCIGZvciBNeVNRTCDlkowgUG9sYXJE
+QiBmb3IgUG9zdGdyZVNRTO+8jOW5tuaWsOWiniBTUUwgU2VydmVyIOaFouafpeivouWIhuae
+kO+8jOW4ruWKqeWboumYn+WcqOabtOWkmuaVsOaNruW6k+WcuuaZr+S4i+W/q+mAn+WumuS9
+jeaAp+iDveeTtumiiOOAgiAgICAKICAgIAogWzNdIOafpeeci+aFouafpeivouWIhuaekCAg
+ICAKICAgIApTUUwgU2VydmVyIOWOhuWPsuaVsOaNruayu+eQhuiDveWKm+S4iue6vyAgICAK
+5pWw5o2u5b2S5qGj5LiO5riF55CG5paw5aKe5pSv5oyBIFNRTCBTZXJ2ZXLvvIzlj6/mjInp
+nIDphY3nva7lvZLmoaPjgIHlvZLmoaMr5riF55CG5oiW5LuF5riF55CG562W55Wl77yM5bCG
+5Y6G5Y+y5pWw5o2u5rK755CG57qz5YWl57uf5LiA5Lu75Yqh5L2T57O777yM5YW86aG+5a2Y
+5YKo5LyY5YyW44CB5oCn6IO957u05oqk5ZKM6L+Q57u05rWB56iL5LiA6Ie05oCn44CCICAg
+IAogICAgCiBbNF0g5LqG6Kej5pWw5o2u5b2S5qGj5LiO5riF55CGICAgIAogICAgCuWFtuS7
+luabtOaWsCAgICAK6Zmk6YeN54K55Y+R5biD5aSW77yMMyDmnIjmiJHku6zov5jlm7Tnu5Xm
+lbDmja7lpI3liLbnqLPlrprmgKfjgIFTUUwg6L+Q57u05L2T6aqM44CBQUkg6IO95Yqb5ZKM
+5bmz5Y+w5YW85a655oCn5YGa5LqG5oyB57ut6KGl5by644CCIOaVsOaNruWkjeWItu+8mumi
+hOajgOafpeWinuWKoOi2heaXtuaOp+WItuS4juabtOmrmOW5tuihjOW6pu+8jOWPjOWQkeWk
+jeWItuaUr+aMgeWPjeWQkemTvui3ryBETUwg5Yay56qB5aSE55CG77yMTXlTUUwg5aKe6YeP
+5aSN5Yi25pSv5oyB5oyJ6KGo5pSS5om55YaZ5YWl44CC6ZO+6Lev5Y+v6Z2g5oCn77yaT2Nl
+YW5CYXNlIE9yYWNsZeOAgVN5YmFzZSDnrYnpk77ot6/nmoTlhbzlrrnmgKfnu6fnu63lop7l
+vLrvvIzlubbkv67lpI3lop7ph4/or7vlj5bjgIFKU09OIOino+aekOOAgeaXoOS4u+mUruih
+qOWkjeWItuetieWcuuaZr+mXrumimOOAglNRTCDov5Dnu7TkuI4gQUnvvJrmlrDlop4gU1FM
+IFNlcnZlciBPbmxpbmVETUzjgIFPcmFjbGUgSm9iIOeuoeeQhu+8jENoYXREQkEg5paH5qGj
+6Kej5p6Q5pSv5oyB5aSn5paH5Lu244CB5Zu+54mH44CB57qv5Zu+54mHIFBERiDlkowgUFBU
+IOi9rCBQREbjgILkvb/nlKjkvZPpqozvvJrmjIHnu63kvJjljJYgT3JhY2xlIFNRTCDnqpfl
+j6PlpKflrZfmrrXlpITnkIbvvIxTUUwg5Lu75Yqh5aSH5Lu95LiO5pWw5o2u5a+85Ye66ZO+
+6Lev5omn6KGM5oCn6IO96L+b5LiA5q2l5o+Q5Y2H44CC5bmz5Y+w6KGl5by677ya5pWw5o2u
+6L+96Liq5LiO5Zue5rua44CBT25saW5lRERMIOmAgumFjSBNeVNRTCA4LjQg5Y+K5Lul5LiK
+54mI5pys77yM5bm25pSv5oyB5Li6IEhBTkEg5pWw5o2u5rqQ5Y+R6LW35p2D6ZmQ55Sz6K+3
+44CCICAgIAogICAgCiBbNV0g5p+l55yL5a6M5pW0IDMg5pyI5Y+R5biDICAgIAogICAgCk5p
+bmVEYXRhIOiHtOWKm+S6juW4ruWKqeWboumYn+abtOmrmOaViOWcsOWujOaIkOaVsOaNruW6
+k+WPmOabtOOAgei/geenu+OAgeWkjeWItuOAgeW9kuaho+S4juaBouWkjeOAgiAgICAKICAg
+IApbNl0g5Zyo572R6aG15Lit5p+l55yL6YKu5Lu2ICAgIApZb3UgYXJlIHJlY2VpdmluZyB0
+aGlzIGVtYWlsIGJlY2F1c2Ugb2YgeW91ciByZWxhdGlvbnNoaXAgd2l0aCDnjpbnq6Dnrpfm
+nK/vvIjmtZnmsZ/vvInnp5HmioDmnInpmZDlhazlj7guIFBsZWFzZSBbN10gcmVjb25maXJt
+eW91ciBpbnRlcmVzdCBpbiByZWNlaXZpbmcgZW1haWxzIGZyb20gdXMuIOWmguaenOaCqOS4
+jeaEv+aEj+e7p+e7reaOpeaUtuWIsOS7u+S9leebuOWFs+iur+aBr++8jOaCqOWPr+S7pVs4
+XSDlnKjmraTlj5bmtojorqLpmIXjgIIgICAgCiAgICAK5q2k6K6v5oGv55SxIG5vLXJlcGx5
+QG5pbmVkYXRhLmNsb3Vk5Y+R6YCB57uZIHRlc3RAYmVuY2htYXJrZW1haWwuY29tICAgIArk
+vZnmna3ljLrku5PliY3ooZfpgZPmtbfmmbrkuK3lv4Mz5bmiMTEwMiwg5p2t5bee5biCLCDm
+tZnmsZ/nnIEgMzEwMDAwLCBDaGluYSAgICAKICAgIArlj5bmtojorqLpmIV8IOeuoeeQhuiu
+oumYhXwg6YKu5Lu26L2s5a+EfCDlm57miqXkuLrlnoPlnL7pgq7ku7YgICAgCiAgICAKICAg
+IAogICAgCiBSZWZlcmVuY2VzOiAgICAKIDEuIGh0dHBzOi8vd3d3Lm5pbmVkYXRhLmNsb3Vk
+L3Byb21vdGlvbnMvcmVsZWFzZV9mb3JfTWFyY2hfMjAyNiAgICAKIDIuIGh0dHBzOi8vZG9j
+cy5uaW5lZGF0YS5jbG91ZC9yZWxlYXNlX25vdGVzLzIwMjY/RURNICAgIAogMy4gaHR0cHM6
+Ly9kb2NzLm5pbmVkYXRhLmNsb3VkL3NxbGRldi9zbG93X3F1ZXJ5ICAgIAogNC4gaHR0cHM6
+Ly9kb2NzLm5pbmVkYXRhLmNsb3VkL3NxbGRldi9kYXRhX2FyY2hpdmluZyAgICAKIDUuIGh0
+dHBzOi8vZG9jcy5uaW5lZGF0YS5jbG91ZC9yZWxlYXNlX25vdGVzLzIwMjY/RURNICAgIAog
+Ni4gaHR0cHM6Ly9uaW5lZGF0YS5iZW5jaHVybC5jb20vYy92P2U9MUIzN0FBMyZjPTE5Mjg0
+QiZ0PTAmbD0xMzgzRkM5MzYmZW1haWw9aVFDVkdpTnpDQXYlMkZkT2p3bWx4N0hxSVB3ZjhL
+cXhoYyAgICAKIDcuIGh0dHBzOi8vbmluZWRhdGEuYmVuY2h1cmwuY29tL2Mvb3B0P2U9MUIz
+N0FBMyZjPTE5Mjg0QiZ0PTAmbD0xMzgzRkM5MzYmZW1haWw9aVFDVkdpTnpDQXYlMkZkT2p3
+bWx4N0hxSVB3ZjhLcXhoYyAgICAKIDguIGh0dHBzOi8vbmluZWRhdGEuYmVuY2h1cmwuY29t
+L2Mvc3U/ZT0xQjM3QUEzJmM9MTkyODRCJnQ9MCZsPTEzODNGQzkzNiZlbWFpbD1pUUNWR2lO
+ekNBdiUyRmRPandtbHg3SHFJUHdmOEtxeGhjICAgIAogICAgCiAgICAKICAgIArol4nnlLHk
+uIvliJfov57nu5PvvIzmgqjlj6/ku6Xkv67mlLkv5pu05paw5oKo55qE6K6i6ZiF5L+h5oGv
+44CCICAgIAogICAgCiAgICAgICAgICAgICAKaHR0cHM6Ly9uaW5lZGF0YS5iZW5jaHVybC5j
+b20vYy9zdT9lPTFCMzdBQTMmYz0xOTI4NEImdD0wJmw9MTM4M0ZDOTM2JmVtYWlsPWlRQ1ZH
+aU56Q0F2JTJGZE9qd21seDdIcUlQd2Y4S3F4aGMmcmVsaWQ9ICAgIAogICAgCuS9meadreWM
+uuS7k+WJjeihl+mBk+a1t+aZuuS4reW/gzPluaIxMTAyLCDmna3lt57luIIsIOa1meaxn+ec
+gSAgMzEwMDAwLCBDaGluYSAgICAKICAgIArpgq7ku7bokKXplIAgICAgCmJlbmNobWFya2Vt
+YWlsLmNvbSAgICAKIFtodHRwczovL25pbmVkYXRhLmJlbmNodXJsLmNvbV0gICAgCiAgICAK
+ICAgICAgICA6ICAgICAKICAgIApodHRwczovL25pbmVkYXRhLmJlbmNodXJsLmNvbS9jL3Y/
+ZT0xQjM3QUEzJmM9MTkyODRCJnQ9MCZsPTEzODNGQzkzNiZlbWFpbD1pUUNWR2lOekNBdiUy
+RmRPandtbHg3SHFJUHdmOEtxeGhjJnJlbGlkPSAgICAKICAgIApZb3UgYXJlIHJlY2Vpdmlu
+ZyB0aGlzIGVtYWlsIGJlY2F1c2Ugb2YgeW91ciByZWxhdGlvbnNoaXAgd2l0aCDnjpbnq6Dn
+rpfmnK/vvIjmtZnmsZ/vvInnp5HmioDmnInpmZDlhazlj7guIFBsZWFzZSByZWNvbmZpcm0g
+eW91ciBpbnRlcmVzdCBpbiByZWNlaXZpbmcgZW1haWxzIGZyb20gdXMuICAg5aaC5p6c5oKo
+5LiN5oS/5oSP57un57ut5o6l5pS25Yiw5Lu75L2V55u45YWz6K6v5oGv77yM5oKo5Y+v5Lul
+5Zyo5q2k5Y+W5raI6K6i6ZiF5oiW5Zue5oql5Li65Z6D5Zy+6YKu5Lu244CCICAgIAogICAg
+Cmh0dHBzOi8vbmluZWRhdGEuYmVuY2h1cmwuY29tL2Mvc3U/ZT0xQjM3QUEzJmM9MTkyODRC
+JnQ9MCZsPTEzODNGQzkzNiZlbWFpbD1pUUNWR2lOekNBdiUyRmRPandtbHg3SHFJUHdmOEtx
+eGhjJnJlbGlkPQo=
+
+--=-VEYbP7l3i5wQJ7ws95ub4w==
+Content-Type: text/html; charset=utf-8
+Content-Id: <HV76FJNXYSU4.OSFUK7C4B4H73@prod-spawner1>
+Content-Transfer-Encoding: quoted-printable
+
+
+<!DOCTYPE html>   =20
+<html>   =20
+<head>   =20
+<meta content=3D"width=3Ddevice-width, initial-scale=3D1.0" name=3D"vi=
+ewport">   =20
+<style type=3D"text/css">=0D   =20
+/*** BMEMBF Start ***/=0D   =20
+/* CMS V4 Editor Test */=0D   =20
+[name=3DbmeMainBody]{min-height:1000px;}=0D   =20
+@media only screen and (max-width: 480px){table.blk, table.tblText, .b=
+meHolder, .bmeHolder1, table.bmeMainColumn{width:100% !important;} }  =
+ =20=0D   =20
+@media only screen and (max-width: 480px){.bmeImageCard table.bmeCapti=
+onTable td.tblCell{padding:0px 20px 20px 20px !important;} }   =20=0D   =20
+@media only screen and (max-width: 480px){.bmeImageCard table.bmeCapti=
+onTable.bmeCaptionTableMobileTop td.tblCell{padding:20px 20px 0 20px !=
+important;} }   =20=0D   =20
+@media only screen and (max-width: 480px){table.bmeCaptionTable td.tbl=
+Cell{padding:10px !important;} }   =20=0D   =20
+@media only screen and (max-width: 480px){table.tblGtr{ padding-bottom=
+:20px !important;} }   =20=0D   =20
+@media only screen and (max-width: 480px){td.blk_container, .blk_paren=
+t, .bmeLeftColumn, .bmeRightColumn, .bmeColumn1, .bmeColumn2, .bmeColu=
+mn3, .bmeBody{display:table !important;max-width:600px !important;widt=
+h:100% !important;} }   =20=0D   =20
+@media only screen and (max-width: 480px){table.container-table, .bmeh=
+eadertext, .container-table { width: 95% !important; } }   =20=0D   =20
+@media only screen and (max-width: 480px){.mobile-footer, .mobile-foot=
+er a{ font-size: 13px !important; line-height: 18px !important; } .mob=
+ile-footer{ text-align: center !important; } table.share-tbl { padding=
+-bottom: 15px; width: 100% !important; } table.share-tbl td { display:=
+ block !important; text-align: center !important; width: 100% !importa=
+nt; } }   =20=0D   =20
+@media only screen and (max-width: 480px){td.bmeShareTD, td.bmeSocialT=
+D{width: 100% !important; } }   =20=0D   =20
+@media only screen and (max-width: 480px){td.tdBoxedTextBorder{width: =
+auto !important;} }=0D   =20
+@media only screen and (max-width: 480px){th.tdBoxedTextBorder{width: =
+auto !important;} }=0D   =20
+=0D   =20
+@media only screen and (max-width: 480px){table.blk, table[name=3DtblT=
+ext], .bmeHolder, .bmeHolder1, table[name=3DbmeMainColumn]{width:100% =
+!important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeImageCard table.bmeCapti=
+onTable td[name=3DtblCell]{padding:0px 20px 20px 20px !important;} }=0D  =
+ =20
+@media only screen and (max-width: 480px){.bmeImageCard table.bmeCapti=
+onTable.bmeCaptionTableMobileTop td[name=3DtblCell]{padding:20px 20px =
+0 20px !important;} }=0D   =20
+@media only screen and (max-width: 480px){table.bmeCaptionTable td[nam=
+e=3DtblCell]{padding:10px !important;} }=0D   =20
+@media only screen and (max-width: 480px){table[name=3DtblGtr]{ paddin=
+g-bottom:20px !important;} }=0D   =20
+@media only screen and (max-width: 480px){td.blk_container, .blk_paren=
+t, [name=3DbmeLeftColumn], [name=3DbmeRightColumn], [name=3DbmeColumn1=
+], [name=3DbmeColumn2], [name=3DbmeColumn3], [name=3DbmeBody]{display:=
+table !important;max-width:600px !important;width:100% !important;} }=0D =
+  =20
+@media only screen and (max-width: 480px){table[class=3Dcontainer-tabl=
+e], .bmeheadertext, .container-table { width: 95% !important; } }=0D   =20
+@media only screen and (max-width: 480px){.mobile-footer, .mobile-foot=
+er a{ font-size: 13px !important; line-height: 18px !important; } .mob=
+ile-footer{ text-align: center !important; } table[class=3D"share-tbl"=
+] { padding-bottom: 15px; width: 100% !important; } table[class=3D"sha=
+re-tbl"] td { display: block !important; text-align: center !important=
+; width: 100% !important; } }=0D   =20
+@media only screen and (max-width: 480px){td[name=3DbmeShareTD], td[na=
+me=3DbmeSocialTD]{width: 100% !important; } }=0D   =20
+@media only screen and (max-width: 480px){td[name=3DtdBoxedTextBorder]=
+{width: auto !important;} }=0D   =20
+@media only screen and (max-width: 480px){th[name=3DtdBoxedTextBorder]=
+{width: auto !important;} }=0D   =20
+          =20=0D   =20
+@media only screen and (max-width: 480px){.bmeImageCard table.bmeImage=
+Table{height: auto !important; width:100% !important; padding:20px !im=
+portant;clear:both; float:left !important; border-collapse: separate;}=
+ }           =20=0D   =20
+@media only screen and (max-width: 480px){.bmeMblInline table.bmeImage=
+Table{height: auto !important; width:100% !important; padding:10px !im=
+portant;clear:both;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblInline table.bmeCapti=
+onTable{width:100% !important; clear:both;} }=0D   =20
+@media only screen and (max-width: 480px){table.bmeImageTable{height: =
+auto !important; width:100% !important; padding:10px !important;clear:=
+both; } }=0D   =20
+@media only screen and (max-width: 480px){table.bmeCaptionTable{width:=
+100% !important;  clear:both;} }=0D   =20
+@media only screen and (max-width: 480px){table.bmeImageContainer{widt=
+h:100% !important; clear:both; float:left !important;} }           =20=0D=
+   =20
+@media only screen and (max-width: 480px){table.bmeImageTable td{paddi=
+ng:0px !important; height: auto; } }           =20=0D   =20
+@media only screen and (max-width: 480px){img.mobile-img-large{width:1=
+00% !important; height:auto !important;} }=0D   =20
+@media only screen and (max-width: 480px){img.bmeRSSImage{max-width:32=
+0px; height:auto !important;} }=0D   =20
+@media only screen and (min-width: 640px){img.bmeRSSImage{max-width:60=
+0px !important; height:auto !important;} }           =20=0D   =20
+@media only screen and (max-width: 480px){.trMargin img{height:10px;} =
+}         =20=0D   =20
+@media only screen and (max-width: 480px){div.bmefooter, div.bmeheader=
+{ display:block !important;} } =20=0D   =20
+@media only screen and (max-width: 480px){.tdPart{ width:100% !importa=
+nt; clear:both; float:left !important; } }=0D   =20
+@media only screen and (max-width: 480px){table.blk_parent1, table.tbl=
+Part {width: 100% !important; } }           =20=0D   =20
+@media only screen and (max-width: 480px){.tblLine{min-width: 100% !im=
+portant;} }           =20=0D   =20
+@media only screen and (max-width: 480px){.bmeMblCenter img { margin: =
+0 auto; } }  =20=0D   =20
+@media only screen and (max-width: 480px){.bmeMblCenter, .bmeMblCenter=
+ div, .bmeMblCenter span  { text-align: center !important; text-align:=
+ -webkit-center !important; } }=0D   =20
+@media only screen and (max-width: 480px){.bmeNoBr br, .bmeImageGutter=
+Row, .bmeMblStackCenter .bmeShareItem .tdMblHide { display: none !impo=
+rtant; } }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblInline table.bmeImage=
+Table, .bmeMblInline table.bmeCaptionTable, .bmeMblInline { clear: non=
+e !important; width:50% !important; } }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblInlineHide, .bmeShare=
+Item .trMargin { display: none !important; } }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblInline table.bmeImage=
+Table img, .bmeMblShareCenter.tblContainer.mblSocialContain, .bmeMblFo=
+llowCenter.tblContainer.mblSocialContain{width: 100% !important; } }=0D  =
+ =20
+@media only screen and (max-width: 480px){.bmeMblStack> .bmeShareItem{=
+width: 100% !important; clear: both !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeShareItem{padding-top: 1=
+0px !important;} }           =20=0D   =20
+@media only screen and (max-width: 480px){.tdPart.bmeMblStackCenter, .=
+bmeMblStackCenter .bmeFollowItemIcon {padding:0px !important; text-ali=
+gn: center !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblStackCenter> .bmeShar=
+eItem{width: 100% !important;} }=0D   =20
+@media only screen and (max-width: 480px){ td.bmeMblCenter {border: 0 =
+none transparent !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeLinkTable.tdPart td{padd=
+ing-left:0px !important; padding-right:0px !important; border:0px none=
+ transparent !important;padding-bottom:15px !important;height: auto !i=
+mportant;} }=0D   =20
+@media only screen and (max-width: 480px){.tdMblHide{width:10px !impor=
+tant;} }           =20=0D   =20
+@media only screen and (max-width: 480px){.bmeShareItemBtn{display:tab=
+le !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblStack td {text-align:=
+ left !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblStack .bmeFollowItem{=
+clear:both !important; padding-top: 10px !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblStackCenter .bmeFollo=
+wItemText{padding-left: 5px !important;} }=0D   =20
+@media only screen and (max-width: 480px){.bmeMblStackCenter .bmeFollo=
+wItem{clear:both !important;align-self:center; float:none !important; =
+padding-top:10px;margin: 0 auto;} }           =20=0D   =20
+@media only screen and (max-width: 480px){=0D   =20
+.tdPart> table{width:100% !important;}=0D   =20
+}=0D   =20
+@media only screen and (max-width: 480px){.tdPart>table.bmeLinkContain=
+er{ width:auto !important; } }=0D   =20
+@media only screen and (max-width: 480px){.tdPart.mblStackCenter>table=
+.bmeLinkContainer{ width:100% !important;} }=20=0D   =20
+.blk_parent:first-child, .blk_parent{float:left;}           =20=0D   =20
+.blk_parent:last-child{float:right;}=0D   =20
+=0D   =20
+/* Tablet and Mobile Styles - 767px breakpoint TEXT BLOCK */=0D   =20
+@media only screen and (max-width: 767px){=20=0D   =20
+    table.bmeContainerRow { max-width: 100% !important; }=0D   =20
+    table[name=3DtblText], table.tblText { max-width: 100% !important;=
+ }=0D   =20
+}=0D   =20
+@media only screen and (max-width: 480px){=20=0D   =20
+    table.blk:not([name=3D"blk_divider"]),=0D   =20
+    table[name=3D"blk_text"] {=0D   =20
+        max-width: 100% !important;=0D   =20
+        /* width: auto !important; */=0D   =20
+    }=0D   =20
+    table.blk th.tdPart:not(.withBg) { height: auto !important; }=0D   =20
+}=0D   =20
+=0D   =20
+/*** BMEMBF END ***/   =20
+   =20
+</style>   =20
+<!--[if gte mso 9]>   =20
+<xml>   =20
+<o:OfficeDocumentSettings>   =20
+<o:AllowPNG/>   =20
+<o:PixelsPerInch>96</o:PixelsPerInch>   =20
+</o:OfficeDocumentSettings>   =20
+</xml>   =20
+<![endif]-->   =20
+   =20
+</head>   =20
+<body topmargin=3D"0" leftmargin=3D"0" style=3D"height: 100% !importan=
+t; margin: 0; padding: 0; width: 100% !important;min-width: 100%;"><im=
+g src=3D'https://ninedata.benchurl.com/c/o?e=3D1B37AA3&c=3D19284B&reli=
+d=3D&l=3D1383FC936&email=3DiQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc' alt=3D'=
+' border=3D"0" style=3D"display:none;" height=3D"1" width=3D"1"><div c=
+lass=3D"inbox-preview" style=3D"display: none; font-size: 0; max-heigh=
+t: 0; line-height: 0; padding: 0; mso-hide: all;">=E4=BA=86=E8=A7=A3 3=
+ =E6=9C=88=E4=B8=8A=E7=BA=BF=E7=9A=84=E9=A3=9E=E4=B9=A6 Lark =E5=AE=A1=
+=E6=89=B9=E3=80=81SQL Server =E6=95=B0=E6=8D=AE=E5=BD=92=E6=A1=A3=E3=80=
+=81=E6=85=A2=E6=9F=A5=E8=AF=A2=E5=88=86=E6=9E=90=E6=89=A9=E5=B1=95=E4=B8=
+=8E=E5=A4=8D=E5=88=B6=E8=83=BD=E5=8A=9B=E5=A2=9E=E5=BC=BA=E3=80=82</di=
+v><!-- inbox-preview -->   =20
+   =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+ name=3D"bmeMainBody" style=3D"background-color: #e6e6e8;" bgcolor=3D"=
+#e6e6e8"><tbody><tr><td width=3D"100%" valign=3D"top" align=3D"center"=
+>   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" name=3D"bmeMai=
+nColumnParentTable"><tbody><tr><td name=3D"bmeMainColumnParent" style=3D=
+"border-collapse: separate;">      =20
+<table name=3D"bmeMainColumn" class=3D"bmeHolder bmeMainColumn" style=3D=
+"max-width: 600px; overflow: visible;" cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0" align=3D"center"><tbody><tr id=3D"section_1" class=3D=
+"flexible-section" data-columns=3D"1" data-section-type=3D"bmePreHeade=
+r"><td width=3D"100%" class=3D"blk_container bmeHolder" name=3D"bmePre=
+Header" valign=3D"top" align=3D"center" bgcolor=3D"#e6e6e8" style=3D"b=
+ackground-color: rgb(230, 230, 232); color: rgb(102, 102, 102);   "><d=
+iv id=3D"dv_preheader" class=3D"blk_wrapper">   =20
+<table class=3D"blk" width=3D"600" border=3D"0" cellpadding=3D"0" cell=
+spacing=3D"0" style=3D"width:100%; max-width:600px;"><tbody><tr><td st=
+yle=3D"font-size:1px; line-height:1px; color:#e6e6e8; display:none; ma=
+x-height:0; max-width:0; opacity:0; overflow:hidden;">=E4=BA=86=E8=A7=A3=
+ 3 =E6=9C=88=E4=B8=8A=E7=BA=BF=E7=9A=84=E9=A3=9E=E4=B9=A6 Lark =E5=AE=A1=
+=E6=89=B9=E3=80=81SQL Server =E6=95=B0=E6=8D=AE=E5=BD=92=E6=A1=A3=E3=80=
+=81=E6=85=A2=E6=9F=A5=E8=AF=A2=E5=88=86=E6=9E=90=E6=89=A9=E5=B1=95=E4=B8=
+=8E=E5=A4=8D=E5=88=B6=E8=83=BD=E5=8A=9B=E5=A2=9E=E5=BC=BA=E3=80=82</td=
+></tr></tbody>   =20
+</table></div></td></tr>   <tr><td width=3D"100%" class=3D"bmeHolder" =
+valign=3D"top" align=3D"center" name=3D"bmeMainContentParent" style=3D=
+"border-color: rgb(128, 128, 128); border-radius: 5px; border-collapse=
+: separate; border-spacing: 0px;">   =20
+<table name=3D"bmeMainContent" style=3D"border-radius: 5px; border-col=
+lapse: separate;border-spacing: 0px; overflow: hidden;" width=3D"100%"=
+ cellspacing=3D"0" cellpadding=3D"0" border=3D"0" align=3D"center"><tb=
+ody><tr id=3D"section_3" class=3D"flexible-section" data-columns=3D"1"=
+ style=3D""><td width=3D"100%" class=3D"blk_container bmeHolder bmeBod=
+y" name=3D"bmeBody" valign=3D"top" align=3D"center" bgcolor=3D"#ffffff=
+" style=3D"background-color: rgb(255, 255, 255); color: rgb(54, 56, 56=
+);   ">   =20
+   =20
+   =20
+<div id=3D"dv_0" class=3D"blk_wrapper" style=3D"">   =20
+<table class=3D"blk" name=3D"blk_image" width=3D"600" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" style=3D"width: 100%; max-width: 600p=
+x;"><tbody><tr><td>   =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+><tbody><tr><td class=3D"bmeImage" style=3D"padding: 20px; border-coll=
+apse: collapse;" align=3D"center"><img src=3D"https://images.benchmark=
+email.com/client1648715/image15172485.png" width=3D"151.2" style=3D"ma=
+x-width: 151.2px; display: block; border-radius: 0px;" alt=3D"" data-r=
+adius=3D"0" border=3D"0" data-original-max-width=3D"2501" class=3D"kee=
+p-custom-width" data-customwidth=3D"27"></td></tr></tbody>   =20
+</table></td></tr></tbody>   =20
+</table></div></td></tr>   <tr id=3D"section_4" class=3D"flexible-sect=
+ion" data-columns=3D"1"><td width=3D"100%" class=3D"blk_container bmeH=
+older" name=3D"bmePreFooter" valign=3D"top" align=3D"center" bgcolor=3D=
+"#ffffff" style=3D"background-color: rgb(255, 255, 255);"><div id=3D"d=
+v_1" class=3D"blk_wrapper" style=3D"">   =20
+   =20
+   =20
+   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_card" style=3D"width: 100%; max-width: 600px=
+;">   =20
+  <tbody>   =20
+    <tr>   =20
+      <td class=3D"bmeImageCard" align=3D"center" style=3D"padding: 0p=
+x 20px;">   =20
+           =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+>   =20
+          <tbody>   =20
+            <tr>   =20
+              <td valign=3D"top" class=3D"bmeImageContainer" style=3D"=
+border-collapse: collapse; background-color: #D9EEFF; border-width: 1p=
+x; border-style: solid; border-color: #BFD9F6;">   =20
+                   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%"=
+>   =20
+                  <tbody>   =20
+                    <tr>   =20
+                      <th valign=3D"top" align=3D"center" class=3D"tdP=
+art">   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeCa=
+ptionTable bmeCaptionTableMobileTop" width=3D"558" style=3D"word-break=
+: break-word;">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td style=3D"padding: 20px 20px 0px; fon=
+t-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size=
+: 14px; color: rgb(56, 56, 56); text-align: left; word-break: break-wo=
+rd;" name=3D"tblCell" class=3D"tblCell" valign=3D"top" align=3D"left">=
+<div style=3D"line-height: 170%; text-align: left; color: #1c1e21;">  =
+ =20
+<div style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 22=
+px; font-weight: bold; line-height: 150%; margin-bottom: 12px; text-al=
+ign: center;">=E5=8D=8F=E5=90=8C=E5=AE=A1=E6=89=B9=E4=B8=8E=E6=B6=88=E6=
+=81=AF=E9=80=9A=E7=9F=A5=E5=8D=87=E7=BA=A7</div>   =20
+<div style=3D"font-size: 14px; line-height: 180%; color: #4d5560; text=
+-align: left;">=E9=A3=9E=E4=B9=A6 Lark =E5=A4=96=E9=83=A8=E5=AE=A1=E6=89=
+=B9=E7=8E=B0=E5=B7=B2=E6=94=AF=E6=8C=81 SQL =E4=BB=BB=E5=8A=A1=E3=80=81=
+=E6=9D=83=E9=99=90=E7=94=B3=E8=AF=B7=E5=92=8C=E6=95=B0=E6=8D=AE=E5=AF=BC=
+=E5=87=BA=E6=B5=81=E7=A8=8B=EF=BC=8C=E5=B8=AE=E5=8A=A9=E5=9B=A2=E9=98=9F=
+=E5=9C=A8=E6=97=A2=E6=9C=89=E5=8D=8F=E5=90=8C=E4=BD=93=E7=B3=BB=E5=86=85=
+=E5=AE=8C=E6=88=90=E5=AE=A1=E6=89=B9=E9=97=AD=E7=8E=AF=E3=80=82=E6=B6=88=
+=E6=81=AF=E9=80=9A=E7=9F=A5=E4=B9=9F=E6=96=B0=E5=A2=9E=E6=94=AF=E6=8C=81=
+=E9=A3=9E=E4=B9=A6 Lark=E3=80=81=E9=92=89=E9=92=89=E5=92=8C=E4=BC=81=E4=
+=B8=9A=E5=BE=AE=E4=BF=A1=E6=B6=88=E6=81=AF=E5=8D=A1=E7=89=87=EF=BC=8C=E5=
+=B9=B6=E5=8F=AF=E6=8C=89=E8=AF=AD=E8=A8=80=E8=AE=BE=E7=BD=AE=E9=80=9A=E7=
+=9F=A5=E5=86=85=E5=AE=B9=E3=80=82</div>   =20
+</div></td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeIm=
+ageTable" width=3D"558">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td name=3D"bmeImgHolder" style=3D"paddi=
+ng:20px;" align=3D"center" valign=3D"top" height=3D"">   =20
+                                <img src=3D"https://images.benchmarkem=
+ail.com/client1648715/image18800812.png" class=3D"mobile-img-large" st=
+yle=3D"max-width: 1681px; display: block; border-radius: 0px;" alt=3D"=
+=E5=8D=8F=E5=90=8C=E5=AE=A1=E6=89=B9=E4=B8=8E=E6=B6=88=E6=81=AF=E9=80=9A=
+=E7=9F=A5=E5=8D=87=E7=BA=A7" data-radius=3D"0" border=3D"0" data-origi=
+nal-max-width=3D"1681" width=3D"518">   =20
+                              </td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+                      </th>   =20
+                    </tr>   =20
+                  </tbody>   =20
+                   =20
+</table>   =20
+              </td>   =20
+            </tr>   =20
+          </tbody>   =20
+           =20
+</table>   =20
+      </td>   =20
+    </tr>   =20
+  </tbody>   =20
+   =20
+</table></div><div id=3D"dv_3" class=3D"blk_wrapper" style=3D"">   =20
+   =20
+   =20
+   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_card" style=3D"width: 100%; max-width: 600px=
+;">   =20
+  <tbody>   =20
+    <tr>   =20
+      <td class=3D"bmeImageCard" align=3D"center" style=3D"padding: 0p=
+x 20px;">   =20
+           =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+>   =20
+          <tbody>   =20
+            <tr>   =20
+              <td valign=3D"top" class=3D"bmeImageContainer" style=3D"=
+border-collapse: collapse; background-color: #F8F2E7; border-width: 1p=
+x; border-style: solid; border-color: #EEDFC1;">   =20
+                   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%"=
+>   =20
+                  <tbody>   =20
+                    <tr>   =20
+                      <th valign=3D"top" align=3D"center" class=3D"tdP=
+art">   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeCa=
+ptionTable bmeCaptionTableMobileTop" width=3D"558" style=3D"word-break=
+: break-word;">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td style=3D"padding: 20px 20px 0px; fon=
+t-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size=
+: 14px; color: rgb(56, 56, 56); text-align: left; word-break: break-wo=
+rd;" name=3D"tblCell" class=3D"tblCell" valign=3D"top" align=3D"left">=
+<div style=3D"line-height: 170%; text-align: left; color: #1c1e21;">  =
+ =20
+<div style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 22=
+px; font-weight: bold; line-height: 150%; margin-bottom: 12px; text-al=
+ign: center;">=E6=85=A2=E6=9F=A5=E8=AF=A2=E5=88=86=E6=9E=90=E8=A6=86=E7=
+=9B=96=E6=9B=B4=E5=A4=9A=E4=BA=91=E6=95=B0=E6=8D=AE=E5=BA=93</div>   =20
+<div style=3D"font-size: 14px; line-height: 180%; color: #4d5560; text=
+-align: left;">=E6=85=A2=E6=97=A5=E5=BF=97=E9=87=87=E9=9B=86=E6=96=B0=E5=
+=A2=9E=E6=94=AF=E6=8C=81=E9=98=BF=E9=87=8C=E4=BA=91 RDS MySQL=E3=80=81=
+=E9=98=BF=E9=87=8C=E4=BA=91 RDS PostgreSQL=E3=80=81PolarDB for MySQL =E5=
+=92=8C PolarDB for PostgreSQL=EF=BC=8C=E5=B9=B6=E6=96=B0=E5=A2=9E SQL =
+Server =E6=85=A2=E6=9F=A5=E8=AF=A2=E5=88=86=E6=9E=90=EF=BC=8C=E5=B8=AE=
+=E5=8A=A9=E5=9B=A2=E9=98=9F=E5=9C=A8=E6=9B=B4=E5=A4=9A=E6=95=B0=E6=8D=AE=
+=E5=BA=93=E5=9C=BA=E6=99=AF=E4=B8=8B=E5=BF=AB=E9=80=9F=E5=AE=9A=E4=BD=8D=
+=E6=80=A7=E8=83=BD=E7=93=B6=E9=A2=88=E3=80=82</div>   =20
+</div></td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeIm=
+ageTable" width=3D"558">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td name=3D"bmeImgHolder" style=3D"paddi=
+ng:20px;" align=3D"center" valign=3D"top" height=3D"">   =20
+                                <img src=3D"https://images.benchmarkem=
+ail.com/client1648715/image18800820.png" class=3D"mobile-img-large" st=
+yle=3D"max-width: 1681px; display: block; border-radius: 0px;" alt=3D"=
+=E6=85=A2=E6=9F=A5=E8=AF=A2=E5=88=86=E6=9E=90=E8=A6=86=E7=9B=96=E6=9B=B4=
+=E5=A4=9A=E4=BA=91=E6=95=B0=E6=8D=AE=E5=BA=93" data-radius=3D"0" borde=
+r=3D"0" data-original-max-width=3D"1681" width=3D"518">   =20
+                              </td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+                      </th>   =20
+                    </tr>   =20
+                  </tbody>   =20
+                   =20
+</table>   =20
+              </td>   =20
+            </tr>   =20
+          </tbody>   =20
+           =20
+</table>   =20
+      </td>   =20
+    </tr>   =20
+  </tbody>   =20
+   =20
+</table></div><div id=3D"dv_4" class=3D"blk_wrapper" style=3D"">   =20
+   =20
+   =20
+   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_card" style=3D"width: 100%; max-width: 600px=
+;">   =20
+  <tbody>   =20
+    <tr>   =20
+      <td class=3D"bmeImageCard" align=3D"center" style=3D"padding: 0p=
+x 20px;">   =20
+           =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+>   =20
+          <tbody>   =20
+            <tr>   =20
+              <td valign=3D"top" class=3D"bmeImageContainer" style=3D"=
+border-collapse: collapse; background-color: #E8F5EF; border-width: 1p=
+x; border-style: solid; border-color: #CFE6DA;">   =20
+                   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%"=
+>   =20
+                  <tbody>   =20
+                    <tr>   =20
+                      <th valign=3D"top" align=3D"center" class=3D"tdP=
+art">   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeCa=
+ptionTable bmeCaptionTableMobileTop" width=3D"558" style=3D"word-break=
+: break-word;">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td style=3D"padding: 20px 20px 0px; fon=
+t-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size=
+: 14px; color: rgb(56, 56, 56); text-align: left; word-break: break-wo=
+rd;" name=3D"tblCell" class=3D"tblCell" valign=3D"top" align=3D"left">=
+<div style=3D"line-height: 170%; text-align: left; color: #1c1e21;">  =
+ =20
+<div style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 22=
+px; font-weight: bold; line-height: 150%; margin-bottom: 12px; text-al=
+ign: center;">SQL Server =E5=8E=86=E5=8F=B2=E6=95=B0=E6=8D=AE=E6=B2=BB=
+=E7=90=86=E8=83=BD=E5=8A=9B=E4=B8=8A=E7=BA=BF</div>   =20
+<div style=3D"font-size: 14px; line-height: 180%; color: #4d5560; text=
+-align: left;">=E6=95=B0=E6=8D=AE=E5=BD=92=E6=A1=A3=E4=B8=8E=E6=B8=85=E7=
+=90=86=E6=96=B0=E5=A2=9E=E6=94=AF=E6=8C=81 SQL Server=EF=BC=8C=E5=8F=AF=
+=E6=8C=89=E9=9C=80=E9=85=8D=E7=BD=AE=E5=BD=92=E6=A1=A3=E3=80=81=E5=BD=92=
+=E6=A1=A3+=E6=B8=85=E7=90=86=E6=88=96=E4=BB=85=E6=B8=85=E7=90=86=E7=AD=
+=96=E7=95=A5=EF=BC=8C=E5=B0=86=E5=8E=86=E5=8F=B2=E6=95=B0=E6=8D=AE=E6=B2=
+=BB=E7=90=86=E7=BA=B3=E5=85=A5=E7=BB=9F=E4=B8=80=E4=BB=BB=E5=8A=A1=E4=BD=
+=93=E7=B3=BB=EF=BC=8C=E5=85=BC=E9=A1=BE=E5=AD=98=E5=82=A8=E4=BC=98=E5=8C=
+=96=E3=80=81=E6=80=A7=E8=83=BD=E7=BB=B4=E6=8A=A4=E5=92=8C=E8=BF=90=E7=BB=
+=B4=E6=B5=81=E7=A8=8B=E4=B8=80=E8=87=B4=E6=80=A7=E3=80=82</div>   =20
+</div></td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeIm=
+ageTable" width=3D"558">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td name=3D"bmeImgHolder" style=3D"paddi=
+ng:20px;" align=3D"center" valign=3D"top" height=3D"">   =20
+                                <img src=3D"https://images.benchmarkem=
+ail.com/client1648715/image18800858.png" class=3D"mobile-img-large" st=
+yle=3D"max-width: 1681px; display: block; border-radius: 0px;" alt=3D"=
+SQL Server =E5=8E=86=E5=8F=B2=E6=95=B0=E6=8D=AE=E6=B2=BB=E7=90=86=E8=83=
+=BD=E5=8A=9B=E4=B8=8A=E7=BA=BF" data-radius=3D"0" border=3D"0" data-or=
+iginal-max-width=3D"1681" width=3D"518">   =20
+                              </td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+                      </th>   =20
+                    </tr>   =20
+                  </tbody>   =20
+                   =20
+</table>   =20
+              </td>   =20
+            </tr>   =20
+          </tbody>   =20
+           =20
+</table>   =20
+      </td>   =20
+    </tr>   =20
+  </tbody>   =20
+   =20
+</table></div><div id=3D"dv_5" class=3D"blk_wrapper" style=3D"">   =20
+   =20
+   =20
+   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_card" style=3D"width: 100%; max-width: 600px=
+;">   =20
+  <tbody>   =20
+    <tr>   =20
+      <td class=3D"bmeImageCard" align=3D"center" style=3D"padding: 0p=
+x 20px;">   =20
+           =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+>   =20
+          <tbody>   =20
+            <tr>   =20
+              <td valign=3D"top" class=3D"bmeImageContainer" style=3D"=
+border-collapse: collapse; background-color: rgb(248, 246, 240); borde=
+r-width: 1px; border-style: solid; border-color: rgb(230, 223, 207);">=
+   =20
+                   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%"=
+>   =20
+                  <tbody>   =20
+                    <tr>   =20
+                      <th valign=3D"top" align=3D"center" class=3D"tdP=
+art">   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeCa=
+ptionTable bmeCaptionTableMobileTop" width=3D"558" style=3D"word-break=
+: break-word;">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td style=3D"padding: 20px 20px 0px; fon=
+t-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size=
+: 14px; color: rgb(56, 56, 56); text-align: left; word-break: break-wo=
+rd;" name=3D"tblCell" class=3D"tblCell" valign=3D"top" align=3D"left">=
+<div style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 22=
+px; font-weight: bold; line-height: 150%; margin-bottom: 12px; text-al=
+ign: center; color: #1c1e21;">=E5=85=B6=E4=BB=96=E6=9B=B4=E6=96=B0</di=
+v>   =20
+<div style=3D"font-size: 14px; line-height: 180%; color: #4d5560; marg=
+in-bottom: 16px;">=E9=99=A4=E9=87=8D=E7=82=B9=E5=8F=91=E5=B8=83=E5=A4=96=
+=EF=BC=8C3=E6=9C=88=E6=88=91=E4=BB=AC=E8=BF=98=E5=9B=B4=E7=BB=95=E6=95=
+=B0=E6=8D=AE=E5=A4=8D=E5=88=B6=E7=A8=B3=E5=AE=9A=E6=80=A7=E3=80=81SQL=E7=
+=AA=97=E5=8F=A3=E5=8A=9F=E8=83=BD=E4=BD=93=E9=AA=8C=E3=80=81AI=E8=83=BD=
+=E5=8A=9B=E7=AD=89=E5=81=9A=E4=BA=86=E6=8C=81=E7=BB=AD=E5=A2=9E=E5=BC=BA=
+=E3=80=82</div>   =20
+<ul style=3D"margin: 0; padding-left: 20px; font-size: 14px; line-heig=
+ht: 180%; color: #4d5560;">   =20
+   =20
+<li style=3D"margin-bottom: 12px;">=E6=95=B0=E6=8D=AE=E5=A4=8D=E5=88=B6=
+=EF=BC=9A=E9=A2=84=E6=A3=80=E6=9F=A5=E5=A2=9E=E5=8A=A0=E8=B6=85=E6=97=B6=
+=E6=8E=A7=E5=88=B6=E4=B8=8E=E6=9B=B4=E9=AB=98=E5=B9=B6=E8=A1=8C=E5=BA=A6=
+=EF=BC=8C=E5=8F=8C=E5=90=91=E5=A4=8D=E5=88=B6=E6=94=AF=E6=8C=81=E5=8F=8D=
+=E5=90=91=E9=93=BE=E8=B7=AFDML=E5=86=B2=E7=AA=81=E5=A4=84=E7=90=86=EF=BC=
+=8CMySQL=E5=A2=9E=E9=87=8F=E5=A4=8D=E5=88=B6=E6=94=AF=E6=8C=81=E6=8C=89=
+=E8=A1=A8=E6=94=92=E6=89=B9=E5=86=99=E5=85=A5=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">=E9=93=BE=E8=B7=AF=E5=8F=AF=E9=9D=A0=
+=E6=80=A7=EF=BC=9AOceanBase Oracle=E3=80=81Sybase=E7=AD=89=E9=93=BE=E8=
+=B7=AF=E7=9A=84=E5=85=BC=E5=AE=B9=E6=80=A7=E7=BB=A7=E7=BB=AD=E5=A2=9E=E5=
+=BC=BA=EF=BC=8C=E5=B9=B6=E4=BF=AE=E5=A4=8D=E5=A2=9E=E9=87=8F=E8=AF=BB=E5=
+=8F=96=E3=80=81JSON=E8=A7=A3=E6=9E=90=E3=80=81=E6=97=A0=E4=B8=BB=E9=94=
+=AE=E8=A1=A8=E5=A4=8D=E5=88=B6=E7=AD=89=E5=9C=BA=E6=99=AF=E9=97=AE=E9=A2=
+=98=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">OnlineDML=E8=83=BD=E5=8A=9B=E5=A2=9E=
+=E5=BC=BA=EF=BC=9AOnlineDML=E6=96=B0=E5=A2=9E=E6=94=AF=E6=8C=81SQL Ser=
+ver=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">OnlineDDL=E8=83=BD=E5=8A=9B=E5=A2=9E=
+=E5=BC=BA=EF=BC=9AOnlineDDL=E6=96=B0=E5=A2=9E=E6=94=AF=E6=8C=81MySQL 8=
+.4=E5=8F=8A=E4=BB=A5=E4=B8=8A=E7=89=88=E6=9C=AC=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">Oracle SQL=E7=AA=97=E5=8F=A3=E5=A2=9E=
+=E5=BC=BA=EF=BC=9A=E5=9C=A8SQL=E7=AA=97=E5=8F=A3=E4=B8=AD=EF=BC=8C=E6=94=
+=AF=E6=8C=81=E7=AE=A1=E7=90=86Oracle=E7=9A=84Jobs=E5=AF=B9=E8=B1=A1=E3=
+=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">=E6=95=B0=E6=8D=AE=E8=BF=BD=E8=B8=AA=
+=E4=B8=8E=E5=9B=9E=E6=BB=9A=E5=8A=9F=E8=83=BD=E5=A2=9E=E5=BC=BA=EF=BC=9A=
+=E9=80=82=E9=85=8DMySQL 8.4=E5=8F=8A=E4=BB=A5=E4=B8=8A=E7=89=88=E6=9C=AC=
+=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">AI=E5=A2=9E=E5=BC=BA=EF=BC=9AChatDB=
+A=E6=96=87=E6=A1=A3=E8=A7=A3=E6=9E=90=E5=8A=9F=E8=83=BD=E6=94=AF=E6=8C=
+=81=E5=A4=A7=E6=96=87=E4=BB=B6=E3=80=81=E5=9B=BE=E7=89=87=E3=80=81=E7=BA=
+=AF=E5=9B=BE=E7=89=87PDF=E5=92=8CPPT=E8=BD=ACPDF=E3=80=82</li>   =20
+   =20
+<li style=3D"margin-bottom: 12px;">=E4=BD=BF=E7=94=A8=E4=BD=93=E9=AA=8C=
+=EF=BC=9A=E6=8C=81=E7=BB=AD=E4=BC=98=E5=8C=96Oracle SQL=E7=AA=97=E5=8F=
+=A3=E5=A4=A7=E5=AD=97=E6=AE=B5=E5=A4=84=E7=90=86=EF=BC=8CSQL=E4=BB=BB=E5=
+=8A=A1=E5=A4=87=E4=BB=BD=E4=B8=8E=E6=95=B0=E6=8D=AE=E5=AF=BC=E5=87=BA=E9=
+=93=BE=E8=B7=AF=E6=89=A7=E8=A1=8C=E6=80=A7=E8=83=BD=E8=BF=9B=E4=B8=80=E6=
+=AD=A5=E6=8F=90=E5=8D=87=E3=80=82</li>   =20
+</ul></td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" class=3D"bmeIm=
+ageTable" width=3D"558">   =20
+                          <tbody>   =20
+                            <tr>   =20
+                              <td name=3D"bmeImgHolder" style=3D"paddi=
+ng: 20px;" align=3D"center" valign=3D"top" height=3D"">   =20
+                                <img src=3D"https://images.benchmarkem=
+ail.com/client1648715/image18800204.png" class=3D"mobile-img-large" st=
+yle=3D"max-width: 1681px; display: block; border-radius: 0px;" alt=3D"=
+=E5=85=B6=E4=BB=96=E6=9B=B4=E6=96=B0" data-radius=3D"0" border=3D"0" d=
+ata-original-max-width=3D"1681" width=3D"518">   =20
+                              </td>   =20
+                            </tr>   =20
+                          </tbody>   =20
+                           =20
+</table>   =20
+                           =20
+                      </th>   =20
+                    </tr>   =20
+                  </tbody>   =20
+                   =20
+</table>   =20
+              </td>   =20
+            </tr>   =20
+          </tbody>   =20
+           =20
+</table>   =20
+      </td>   =20
+    </tr>   =20
+  </tbody>   =20
+   =20
+</table></div><div id=3D"dv_6" class=3D"blk_wrapper" style=3D"">   =20
+   =20
+<table class=3D"blk" name=3D"blk_button" width=3D"600" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" style=3D"width: 100%; max-width: 600=
+px;">   =20
+  <tbody>   =20
+    <tr>   =20
+      <td width=3D"20"></td>   =20
+      <td align=3D"center">   =20
+           =20
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+ class=3D"tblContainer">   =20
+          <tbody>   =20
+            <tr><td height=3D"10"></td></tr>   =20
+            <tr>   =20
+              <td align=3D"center">   =20
+                   =20
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" align=3D"cente=
+r" class=3D"bmeButton" style=3D"border-collapse: separate;">   =20
+                  <tbody>   =20
+                    <tr>   =20
+                      <td class=3D"bmeButtonText" style=3D"border-radi=
+us: 5px; border-width: 0px; border-style: none; border-color: transpar=
+ent; background-color: rgb(46, 108, 242); text-align: center; padding:=
+ 10px 25px; font-weight: bold; word-break: break-word;">   =20
+                        <span style=3D"font-family:Arial, Verdana; fon=
+t-size:14px;color:#FFFFFF;">   =20
+                          <a target=3D"_blank" style=3D"color:#FFFFFF;=
+text-decoration:none;" href=3D"https://ninedata.benchurl.com/c/l?u=3D1=
+3BF2994&e=3D1B37AA3&c=3D19284B&&t=3D0&l=3D1383FC936&email=3DiQCVGiNzCA=
+v%2FdOjwmlx7HqIPwf8Kqxhc&seq=3D1" target=3D"_blank" data-link-type=3D"=
+web" draggable=3D"false">=E6=9F=A5=E7=9C=8B=E5=AE=8C=E6=95=B4 3 =E6=9C=
+=88=E5=8F=91=E5=B8=83</a>   =20
+                        </span>   =20
+                      </td>   =20
+                    </tr>   =20
+                  </tbody>   =20
+                   =20
+</table>   =20
+              </td>   =20
+            </tr>   =20
+            <tr><td height=3D"10"></td></tr>   =20
+          </tbody>   =20
+           =20
+</table>   =20
+      </td>   =20
+      <td width=3D"20"></td>   =20
+    </tr>   =20
+  </tbody>   =20
+   =20
+</table></div></td></tr> </tbody>   =20
+</table></td> </tr>  <tr id=3D"section_5" class=3D"flexible-section" d=
+ata-columns=3D"1" data-section-type=3D"bmeFooter"><td width=3D"100%" c=
+lass=3D"blk_container bmeHolder" name=3D"bmeFooter" valign=3D"top" ali=
+gn=3D"center" bgcolor=3D"#e6e6e8" style=3D"background-color: rgb(230, =
+230, 232); color: rgb(102, 102, 102);   "><div id=3D"dv_7" class=3D"bl=
+k_wrapper" style=3D"">   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_permission" style=3D"width: 100%; max-width:=
+ 600px;"><tbody><tr><td name=3D"tblCell" class=3D"tblCell" style=3D"pa=
+dding: 20px; word-break: break-word;" valign=3D"top" align=3D"left">  =
+ =20
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"=
+><tbody><tr><td name=3D"bmePermissionText" style=3D"text-align:left;" =
+align=3D"left"><span style=3D"font-family: Arial, Helvetica, sans-seri=
+f; font-weight: normal; font-size: 11px;line-height: 140%;"><a style=3D=
+"color: #16a7e0;" target=3D"_new" href=3D"https://ninedata.benchurl.co=
+m/c/v?e=3D1B37AA3&c=3D19284B&t=3D0&l=3D1383FC936&email=3DiQCVGiNzCAv%2=
+FdOjwmlx7HqIPwf8Kqxhc">=E5=9C=A8=E7=BD=91=E9=A1=B5=E4=B8=AD=E6=9F=A5=E7=
+=9C=8B=E9=82=AE=E4=BB=B6</a>   =20
+   =20
+<br>You are receiving this email because of your relationship with =E7=
+=8E=96=E7=AB=A0=E7=AE=97=E6=9C=AF=EF=BC=88=E6=B5=99=E6=B1=9F=EF=BC=89=E7=
+=A7=91=E6=8A=80=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=B8. Please <a style=3D=
+"color: #16a7e0;" target=3D"_new" href=3D"https://ninedata.benchurl.co=
+m/c/opt?e=3D1B37AA3&c=3D19284B&t=3D0&l=3D1383FC936&email=3DiQCVGiNzCAv=
+%2FdOjwmlx7HqIPwf8Kqxhc">reconfirm</a> your interest in receiving emai=
+ls from us.  =E5=A6=82=E6=9E=9C=E6=82=A8=E4=B8=8D=E6=84=BF=E6=84=8F=E7=
+=BB=A7=E7=BB=AD=E6=8E=A5=E6=94=B6=E5=88=B0=E4=BB=BB=E4=BD=95=E7=9B=B8=E5=
+=85=B3=E8=AE=AF=E6=81=AF=EF=BC=8C=E6=82=A8=E5=8F=AF=E4=BB=A5<a style=3D=
+"color: #16a7e0;" target=3D"_new" href=3D"https://ninedata.benchurl.co=
+m/c/su?e=3D1B37AA3&c=3D19284B&t=3D0&l=3D1383FC936&email=3DiQCVGiNzCAv%=
+2FdOjwmlx7HqIPwf8Kqxhc">=E5=9C=A8=E6=AD=A4=E5=8F=96=E6=B6=88=E8=AE=A2=E9=
+=98=85</a>=E3=80=82   =20
+</span></td></tr></tbody>   =20
+</table></td></tr></tbody>   =20
+</table></div><div id=3D"dv_8" class=3D"blk_wrapper" style=3D"">   =20
+<table width=3D"600" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" =
+class=3D"blk" name=3D"blk_footer" style=3D"width: 100%; max-width: 600=
+px;"><tbody><tr><td name=3D"tblCell" class=3D"tblCell" style=3D"paddin=
+g: 20px; word-break: break-word;" valign=3D"top" align=3D"left">   =20
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"=
+><tbody><tr><td name=3D"bmeBadgeText" style=3D"text-align:left; word-b=
+reak: break-word;" align=3D"left"><span id=3D"spnFooterText" style=3D"=
+font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-s=
+ize: 11px; line-height: 140%;">   =20
+<br>=E4=BD=99=E6=9D=AD=E5=8C=BA=E4=BB=93=E5=89=8D=E8=A1=97=E9=81=93=E6=
+=B5=B7=E6=99=BA=E4=B8=AD=E5=BF=833=E5=B9=A21102, =E6=9D=AD=E5=B7=9E=E5=
+=B8=82, =E6=B5=99=E6=B1=9F=E7=9C=81  310000, China</span>   =20
+<br>   =20
+<br><span style=3D"font-family: Arial, Helvetica, sans-serif; font-wei=
+ght: normal; font-size: 11px; line-height: 140%;"><!-- Verified 0:Fals=
+e:1 -->   =20
+<a class=3D"bmefootertext" target=3D"_new" href=3D"https://ninedata.be=
+nchurl.com/c/su?e=3D1B37AA3&c=3D19284B&t=3D0&l=3D1383FC936&email=3DiQC=
+VGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc&relid=3D" style=3D"color:inherit;text-=
+decoration:underline;">=E5=8F=96=E6=B6=88=E8=AE=A2=E9=98=85</a>     =20
+<br></span></td></tr><tr><td name=3D"bmeBadgeImage" style=3D"text-alig=
+n:left;padding-top:20px;" align=3D"left"><a href=3D"https://www.benchm=
+arkemail.com/cn?p=3D500289" target=3D"|URLTarget|"><img src=3D"https:/=
+/www.benchmarkemail.com/images/cn/web4/misc/emailfooter/opt11.png" sty=
+le=3D"max-width:116px;" border=3D"0"></a></td></tr></tbody>   =20
+</table></td></tr></tbody>   =20
+</table></div></td></tr> </tbody>   =20
+</table> </td></tr></tbody>   =20
+</table></td></tr></tbody>   =20
+</table>   =20
+</body>   =20
+</html>
+
+
+--=-VEYbP7l3i5wQJ7ws95ub4w==--
+

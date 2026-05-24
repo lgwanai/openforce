@@ -1,0 +1,781 @@
+Accept-Language: en-US
+Arc-Authentication-Results: i=2; lms; spf=pass (client-ip:40.107.75.13)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=UPjBjvPmy1
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Arc-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmw-brilliance.cn; dmarc=pass action=none
+ header.from=bmw-brilliance.cn; dkim=pass header.d=bmw-brilliance.cn;
+ arc=none
+Arc-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=s+yMSdi1ad9yaH6IPNk3aZOTYGyzMtQ6a3thXRa6xfo=;
+ b=CayE4a4evYX+j5MijS7iM2KDg0XqAArDZsqqwKyOgc3P6VvLNxeMli4jhk2CLl8B5beOa6W
+ pohQflLWIIWHJnt2Vkfjiyh2AF3HJvvL3SD1VUTYcDibq+Majfx/3Lynre16PXiy+0Uooilg4
+ hYyCPq2adrRQa7mkkKaMozOYLij5scbejmivOzMEpovMnjBnPvjRvmk8rMrq933y/KvOuWZ1e
+ 48hQal113QPkUB02xvADhPSZA2tPI+v0zYmktrnP+uflDRw5OEOxsi/iMjdu7wrcXD7gpTxzh
+ aNGatvsmbNhyLkj//iT4EhNCDLGjNsOTj8y2EuMzV7cnISuWMn3g==
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microsoft.com; s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s+yMSdi1ad9yaH6IPNk3aZOTYGyzMtQ6a3thXRa6xfo=;
+ b=Jx8rBAoIc8WBa78r7/13k1VB4mJOuTXLGcJ3JXIXtOfZluLzYbUZcY0X/NFBfblnX7ckykZY1MBi3cWs/k0J0vy8b1rVhGyRxlH21bGG1cM1xEn5SoA0u5EahTh8qWa9+qCua7U7k6SDYNUnv+17Ywk/QrZnRQMYAGkphciahfikMh/o/gfjVit3+CS9ZgUHC2Sehe2wfRybsxYLgpiKRtAsQYgj8b/QxZnx3uPSDMe0o6hC4qvLvCfVWPXXQ6h3nI2FCO/ElKXKAGx+OqqtDDXAXMSGXdnGmHhY7tky3URuuLyD9ZSec9oqP0p+aMlPk+uadxtAZdKUNvn1qiKv8g==
+Arc-Seal: i=2; a=rsa-sha256; t=1776664389; d=larksuite.com; s=arc230412;
+ cv=pass;
+ b=O+jPdCH/hl+9PNVSI7sn83KUG9ZgTim6FRIEmrIX5pUVThwZ6l+GteikTRkh1ao92WI8ohL
+ V/5DFYIiNP9Lldmqj5WRBy9lcBZlX1RRQDgjtUwt1egtp8TL3U1Zgkun00J6+NIzDimaY7tt5
+ B3TxTC+LP3AFFsJ2WEWwUj7D7udSJL8sf7wiySjUBrJT1zo2zNeksXHpNk4s+grE7jIy0qtbf
+ GuZ/2Y2hJ0OOCnIIyW/WC2yC4efENdRp1sFF6M8EeXGQvo/xfXOGRJo7TrTFdTIVrXLZwqiLU
+ QoVFoZwebiFIK2ZMzDQqDPuFJpv/2WHAWJi6aVTuOQPne06WEyuQ==
+Arc-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=txAVGVLLD/GLk29PqgRdwEGzejFS939tb2Ks4yfSkGvrD+0Hox2Vc9hJEmrp8Em8BM4MX+8p0s53xs92JC/nBjxuVYVOe673fv9ROIZJ9lWn3WWHO1MuPNvO35qzuc/nJP9cFjYxsmjQJqLVq/O2FsoTtiGz+RqyNw/FrEsuzOPX4KSrCshucosiuns+nfpRp0WFyMhDBtkWlt0earrcvARgV+ZHnyX9ms+WAQmGQfxuTwTjm7iwquP95jr+vwCXJjNUVe0fm1mvuZAcmBlemfVIU3qtZq2X+x/GHnfEpr6KyD9TyjDDSxVsAGQTFqWy7V6D+8HfBRM5qOUdAsPn2g==
+Authentication-Results: lms; spf=pass (client-ip:40.107.75.13)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=UPjBjvPmy1
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmw-brilliance.cn;
+Content-Class: 
+Content-Language: en-US
+Content-Type: multipart/alternative;
+ boundary="_000_KL1PR0401MB427410495B6255673D4C9F0AB82F2KL1PR0401MB4274_"
+Date: Mon, 20 Apr 2026 05:53:01 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmw-brilliance.cn;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=s+yMSdi1ad9yaH6IPNk3aZOTYGyzMtQ6a3thXRa6xfo=;
+ b=UPjBjvPmy1SK7bcm3jY40G5vDiXxUDzhz4dSXcqVBM3AXmPOzZaqYBBBZrlI+jOodl8wzAzYPf3D6oQlGQ8eD1eTDp9kVRGSpC562C4xcudfyXfsdIHj2kmmdCEODC43b78zwU7rNBylu9CnRRX61/AW+xDK7wTSY0GMvaJVZftd9tAK+MkDOrrG7yRVOTj/TQGVYobf+Rq9M99YGSy3R6roBJtmOA1Yy0en+aXQ6XPsOb+zqELCh5CnPxw+bERXM9r23o6KPiqrqm6/G1FGccRll2WNdrQLTgKhb4ul3t+QXHwRuNGsVWKNn+m24OXedyoodonNDg2NchDR+Y1OiQ==
+From: "Liu Adah, BBH-1A-1" <Jiayang.Liu@bmw-brilliance.cn>
+Message-Id: 
+ <KL1PR0401MB427410495B6255673D4C9F0AB82F2@KL1PR0401MB4274.apcprd04.prod.outlook.com>
+Mime-Version: 1.0
+Msip_labels: 
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ (2603:1096:820:26::13) by TYPPR04MB9245.apcprd04.prod.outlook.com
+ (2603:1096:405:383::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
+ 2026 05:53:01 +0000
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422]) by KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422%6]) with mapi id 15.20.9818.032; Mon, 20 Apr
+ 2026 05:53:01 +0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=40.107.75.13;
+ helo=OS8PR02CU002.outbound.protection.outlook.com;
+ envelope-from=Jiayang.Liu@bmw-brilliance.cn; receiver=<UNKNOWN>;
+Subject: AI CAMP Rehearsal
+Thread-Index: AdzQic94Uw7nmAjWTZa3tBZ4b3CVJQAACFZA
+Thread-Topic: AI CAMP Rehearsal
+To: =?gb2312?B?1tzJug==?= <sue@woshipm.com>, =?gb2312?B?0e7T6vbO?=
+ <daisy_yang@woshipm.com>, =?gb2312?B?zuLBwQ==?= <wuliang@xiangzizai.com>,
+ "Liu Guantong, BBF-46" <Guantong.Liu@bmw-brilliance.cn>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776664386/4fzZQp4tqsz1ZK8tJ/69E5BF42.002/40.107.75.13/mail-japanwestazon11012013.outbound.protection.outlook.com/localhost/<Jiayang.Liu@bmw-brilliance.cn>
+X-Fangmail-Mid-Qid: 69E5BF42.002/4fzZQp4tqsz1ZK8tJ
+X-Fangmail-Miltered: at n151-177-067 with ID 69E5BF42.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Forefront-Antispam-Report: 
+ CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:KL1PR0401MB4274.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(13003099007)(38070700021)(56012099003)(18002099003)(8096899003);DIR:OUT;SFP:1101;
+X-Lms-Client-Ip: 40.107.75.13
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: Jiayang.Liu@bmw-brilliance.cn
+X-Lms-Pvf: 
+ MnwyfDF8fAc9tfzDJXHcY0M+vEJS195JFNErIAs1xv/XgZpWGm/s7YNAXhIGd9EcXWoklMcR1hJae6lklJ4E4mPexILN84g03LuVMih/6nY4fJWsiJXTibZm0NNvyDNe8jr+27rxBA==
+X-Microsoft-Antispam: 
+ BCL:0;ARA:13230040|366016|376014|1800799024|13003099007|38070700021|56012099003|18002099003|8096899003;
+X-Microsoft-Antispam-Message-Info: 
+ m/oZGlqTbwlYYXcw8tC+LzHC1RtLcaPMzw6aXcsXVM78BrTjqfv0QOwgECrIr/YVw8xIOMKfFjQX0M3ElEOn+jgcVfOMxuQp2lWqye7STztF/UIDHVYGUyZELesobb1HmTl3J0sOUUxLhB4NUVJu731k0VVVFF7ZCxWtFHSHm9AvqTne/aQDIMXoxfZYDhb3YPUBUCQyC2ob4Dgvd6eJf3PcWWEm7jYeBTSB0Z39nfTeqA8mq1DCgUlBMG3CnAgn/GW/hehP2NU4Fs6jkmhZPonTGKvPefAz8SmVC0V6dL38JmbVlFEMWPtwi8bdqZRw6osDlY4u3DC6ibBtaTwJs5Mj0LTw+sVwop2Ual3txVgmvbPyFw71PRqMScwdFPOJ1PVvnOVmh8tXTcoOTC/+qRnns2V57K+TyyhKikElBJ5Aa2RfXNMnjdw2TIOZrkymmUljr9G6lA8sMH5Dru+vLYoLRp8xUR0n0ilg6WxoljwIUyROVeNsF+GlEkNHEy5Bs8Nkl6n8wSD2Kp2LE7PT+hqYlrk6C4BrovxkESV11wqa3J9ruDG6hyidH7qJz5JuJKiRd/MYGoCeMK5gj//lDvLYL69XaFz/nP7WrpLb5UsOQDuIsHUkTG2ApAnrlVyACVrKYfm4bWep9gX8UOpFtpm5PB5nqwQwkaa3u4HPyo9fBpitSWu3rhkmQ56RWt4bIAOH7aGT2oLkVOMr9tObSIJp9KREd3OKB12R8saqGnxnCbbNi4y/FRwNApw5gOak
+X-Ms-Exchange-Antispam-Messagedata-0: 
+ =?gb2312?B?Nk9BdUNOYlErQnBFdGRKQlIxZUt0eWpyV3Z4VFRlUnY2VVUzdzBNYTJYbXlE?=
+ =?gb2312?B?S1hydURkM3pNeWQyL2NjU0xpRmczNC9Fd29OV3psWUtJeThTZGlYcHZGQ3lQ?=
+ =?gb2312?B?bDJLYnpzNjM2eDFXMEpmY1NvOVVHZVJSNWVmTlZ6bGNWcjNyN01XbHJWaXJD?=
+ =?gb2312?B?NjBuNDRMQ3ZHME8wbXJkclVwa0FQRE5jeC85SXArN0J4VzRiNGxrbG11RFdK?=
+ =?gb2312?B?VEpkZUxGYUxKRUJ0VndWRXZ1OWRTT24ydEZFVWx2TXhnSmpOaGJSQzJWY1NL?=
+ =?gb2312?B?VnpmY2tRRTdOY3JSUlFZRU0zM0htZHF3UHRqNHBZSGd6M2pXeW1VenBhejg3?=
+ =?gb2312?B?ckd3VjlKNkJwMHJocTVYVGEzUU9YMTMvY1hhNlYrenVqQUg1U1dEQnV1WE9m?=
+ =?gb2312?B?OFBCKzUxUVRzMXBuTEhrQ29Eb09LUm5rbEswTnRUVWs1TjI5NDlDM0VwSFdF?=
+ =?gb2312?B?US9UOHZwUGR2L1lBOEQrK3VlRy9PcXkyOG55eXNpSVpjZ2p2em1vS1piL1JO?=
+ =?gb2312?B?bVZDcWtyVkhVRUlLeE9MY2RyT1pXalNJUjV2MnpTRmZZRmkwL1RqTEdBK051?=
+ =?gb2312?B?dU5xNExKYUhHMjZSRzVDeEREL2JBZ2ZwRmpSVExIVXp6RGl3MDVkdkRwQnVI?=
+ =?gb2312?B?R0hiK3VEOUdZcXc5Q0o3WERPWWN6TlNkN0dDc2w4QUxiaDIvOFpLL2FPUnNo?=
+ =?gb2312?B?V0JDZ0FvRERDNnR0Znd6L0Q3b0VpRzN1U3VTcktQTm56aHNJek5FUzI0MlFQ?=
+ =?gb2312?B?RWNzdkdWc0lmUzdoUzJOOWYvcFBLSlgxL0w5WTRxdUFTeUZQQk5hSjRtTHhs?=
+ =?gb2312?B?bHEvR1dmZXd0UjduMDVoa0s3R3FMVFRkZWMrVE8xU0M3U0U4RzRZazVVMTFS?=
+ =?gb2312?B?Wk9OOHpFMkd4SGNLZmIydGFnZWswTXY3cGlXOWxCRHhNZ3BFSG0vSXdJRi9E?=
+ =?gb2312?B?cHBoOVVtbHlFY291WnRGM1ZIcWZSWWlPcWlFUno0WmFyR3BuYnd2WmxHSFRl?=
+ =?gb2312?B?ZnRCa0pTakZMNG82MVEvendKTElCaC9USmkvbXhSSzNaYkYrSXZrNVkvRVRT?=
+ =?gb2312?B?aS9lN0FITWI2NXdJL2x5bzlSQmNGQm1Bbi8yTktzUVVGRWJ0ckdtMzFFTjZP?=
+ =?gb2312?B?bXVCc1pHN1hpd3BDVGdZUElpT21tcnlkbUIzM2k1Q3IzOExwOUxMUkNzRHp4?=
+ =?gb2312?B?MWQ1eVhsZE5GVzdZWmwrYXJyVXRMM1dJbFV6YXNiQXZZdU1ZMjliWkdtNUlt?=
+ =?gb2312?B?c1lIdTJ6Y1JUUXU0UHREZWlqM3JWZEF2c3hzRlNEMmtrUCtPL04yOVZqUnJG?=
+ =?gb2312?B?UUhmUW5xNGpKQ2VTcGViYnBic1RDbmJHbmhtMmtMRmcwQm5WUzVvM3c3Ni9t?=
+ =?gb2312?B?VFZKV01vekd1SkVIa0ZSVDRqUEJLQm9mMS9hZDJTYStDY3JNY3dGcXFSOWRk?=
+ =?gb2312?B?blYxNzhiMGxtZHQ0OWdGcmFDdVNMM2tSa3A2UGp6QzJNdEROZHBzK0NJUzVV?=
+ =?gb2312?B?djVsdER1dDRVby8rcXhzZFJucEl2ZEZxUk9DSlpjaEUzUURWajhwVnJaTVlN?=
+ =?gb2312?B?U1lRdkZ6QmxYRWVGKy9uUDJESW5nQ0R5N1JQU1pjYS8wQWVNMUlROGdTUklT?=
+ =?gb2312?B?OU5tQWQ4ZmRFRVk1ZzZwOWZEQUpSQ1VRVnI5Tk02R05pRnlSY2liVm9nb2sr?=
+ =?gb2312?B?eHR1WW1IZmFZK1pEMHJ4eThmNTRLRlNjQVlPYnk0YWh2eklGMmcxMGc2UnF4?=
+ =?gb2312?B?Z2RjaXcrNmpXMkt4dW8zYzA5d3NUVDVScmE3OUpGS3hhSmtVOUFkTmlFeWlX?=
+ =?gb2312?B?Sk5OdGtuR09YOGxEamFsSVcrOGNsK1hSakZKQ2J0ZTlZSzBOalVmb3ROdXlp?=
+ =?gb2312?B?bXNIN0dEYng5WThlbVNVbGQ0bkJlSnRQbWk2d1EyWUwxZVJVTUNMTXpBVS9M?=
+ =?gb2312?B?RTMzV3lEOVZRNDdBeTVSbUovdHhIVnhnZ0xPVGlFeFdWUmRrMVpGVERsaUJG?=
+ =?gb2312?B?bm1CR2RxandNNmxiVG9lRlpuUFlybzQ5c05ueGZtVzVER1I3dW5LemtGemIr?=
+ =?gb2312?B?WXdmS0VzUGJRZE1FZ2E4VU5teE5QdU5pMHczUDBIY1BBSklqZGU4TllINlU1?=
+ =?gb2312?B?SnZmbWp3NHJHaHhUNHdUdTlwbSt5WVJPTWVUNHdCdHVvT2VtaU5OU0s2L1Nz?=
+ =?gb2312?B?K3RqWTI5b0wxWkdtcGI4aGNKUUptSmdXcjE2M2pwaEIwNm9tdXJxS1A3RkE2?=
+ =?gb2312?B?cklNdFFFT2gwRW1mVDVVTHpnMEFlSk9uNFA2a01mS0MrVk44eUlPTHAwM0FL?=
+ =?gb2312?B?RU4xdHRuNnlIVEQ3UGVML0NvREdDQVBUektxbEpYSzRvZkNqaEU0dFRQOE1C?=
+ =?gb2312?Q?Q3x6XDhD5d8nkS8o=3D?=
+X-Ms-Exchange-Antispam-Messagedata-Chunkcount: 1
+X-Ms-Exchange-Antispam-Relay: 0
+X-Ms-Exchange-Calendar-Series-Instance-Id: 
+ BAAAAIIA4AB0xbcQGoLgCAAAAAAwO0bNzNDcAQAAAAAAAAAAEAAAANSwR8C6swhEtKHmkx0WkX0=
+X-Ms-Exchange-Crosstenant-Authas: Internal
+X-Ms-Exchange-Crosstenant-Authsource: 
+ KL1PR0401MB4274.apcprd04.prod.outlook.com
+X-Ms-Exchange-Crosstenant-Fromentityheader: Hosted
+X-Ms-Exchange-Crosstenant-Id: 698b0e46-51c0-4d3b-a023-16f2b23b8c1e
+X-Ms-Exchange-Crosstenant-Mailboxtype: HOSTED
+X-Ms-Exchange-Crosstenant-Network-Message-Id: 
+ b57e2835-4f42-42ca-9985-08de9ea1155c
+X-Ms-Exchange-Crosstenant-Originalarrivaltime: 20 Apr 2026 05:53:01.8411
+ (UTC)
+X-Ms-Exchange-Crosstenant-Userprincipalname: 
+ 45ogPQ+JYoAC+C2Drm9/l1whLAuKhgC0iHLGN5cGkmg77fhuFJATILkWEvfY6rzoPOA1pjlEFuz+ftkZpSE3pEBwgt60ZUwe5idFStmCTV0=
+X-Ms-Exchange-Senderadcheck: 1
+X-Ms-Exchange-Transport-Crosstenantheadersstamped: TYPPR04MB9245
+X-Ms-Has-Attach: 
+X-Ms-Office365-Filtering-Correlation-Id: b57e2835-4f42-42ca-9985-08de9ea1155c
+X-Ms-Publictraffictype: Email
+X-Ms-Tnef-Correlator: 
+X-Ms-Traffictypediagnostic: 
+ KL1PR0401MB4274:EE_MeetingMessage|TYPPR04MB9245:EE_MeetingMessage
+X-Originatororg: bmw-brilliance.cn
+
+--_000_KL1PR0401MB427410495B6255673D4C9F0AB82F2KL1PR0401MB4274_
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
+
+RGVhcnMsIMP3zOzM4cew0ru14zEyteO9+Lvh1/bSu8/CsuLK1KOs0LvQu6OhDQoNCkJSDQpBZGFo
+DQoNCg0KTWljcm9zb2Z0IFRlYW1zILvh0ukNCsq508O158TUoaLSxrav06bTw7vyu+HS6crSyeix
+uLzTyOsNCrWlu/e0y7Sm0tS808jru+HS6TxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbC9t
+ZWV0dXAtam9pbi8xOSUzYW1lZXRpbmdfTVRrek9EUmxaVEV0TURoaE1pMDBNalJtTFdJNE5qY3Ra
+akJoWVRaall6TTJPVFpsJTQwdGhyZWFkLnYyLzA/Y29udGV4dD0lN2IlMjJUaWQlMjIlM2ElMjI2
+OThiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUlMjIlMmMlMjJPaWQlMjIlM2ElMjI1
+ZTFjNzdhZS05ZDI5LTRmZDItOWEwNi1mYmQwOGNiY2U3ZWElMjIlN2Q+DQq74dLpIElEOiA0NzMg
+Mjc1IDYzOSAzMjUgNDgNCsPcwus6IHJGOXZ3MjVIDQrPwtTYIFRlYW1zPGh0dHBzOi8vd3d3Lm1p
+Y3Jvc29mdC5jb20vZW4tdXMvbWljcm9zb2Z0LXRlYW1zL2Rvd25sb2FkLWFwcD4gfCDU2iB3ZWIg
+yc+808jrPGh0dHBzOi8vd3d3Lm1pY3Jvc29mdC5jb20vbWljcm9zb2Z0LXRlYW1zL2pvaW4tYS1t
+ZWV0aW5nPg0KyrnTw8rTxrW74dLpyeixuLzTyOsNCjUwMDBAdmN0LmJtdy1icmlsbGlhbmNlLmNu
+PG1haWx0bzo1MDAwQHZjdC5ibXctYnJpbGxpYW5jZS5jbj4NCsrTxrW74dLpIElEOiAxMzYgNTQz
+IDE0MSAzDQqxuNPDIFZUQyDLtcP3PGh0dHBzOi8vdmlkZW9lZGdwb29sLnZjdC5ibXctYnJpbGxp
+YW5jZS5jbi90ZWFtcy8/Y29uZj0xMzY1NDMxNDEzJml2cj01MDAwJmQ9dmN0LmJtdy1icmlsbGlh
+bmNlLmNuJmlwPTIxOC4xMDYuMTk0LjE2MCZ0ZXN0PXRlc3RfY2FsbCZ3Pg0Ku/K69MjrKL320vTG
+tSkNCis4NiA0MDAgOTE5IDk2NDUsLDgyOTI2MDQ5MSM8dGVsOis4NjQwMDkxOTk2NDUsLDgyOTI2
+MDQ5MSM+DQogINbQufosIEFsbCBsb2NhdGlvbnMNCis4NiA0MDAgOTE5IDk2NDcsLDgyOTI2MDQ5
+MSM8dGVsOis4NjQwMDkxOTk2NDcsLDgyOTI2MDQ5MSM+DQogINbQufosIEFsbCBsb2NhdGlvbnMN
+CrXnu7C74dLpIElEOiA4MjkgMjYwIDQ5MSMNCrLp1dKxvrXYusXC6zxodHRwczovL2RpYWxpbi50
+ZWFtcy5taWNyb3NvZnQuY29tLzU3MTNkYjlhLThjMTMtNGMyMy05NWNhLTllY2UxNTQxYThhNj9p
+ZD04MjkyNjA0OTE+IHwg1tjWwyBQSU48aHR0cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zb2Z0LmNv
+bS91c3AvcHN0bmNvbmZlcmVuY2luZz4NCkZvciBhYmlkaW5nIGJ5IHRoZSBCQkEgSW5zdHJ1Y3Rp
+b24gb24gSW5mb3JtYXRpb24gU2VjdXJpdHkgYW5kIEN5YmVyIFNlY3VyaXR5LCBwbGVhc2UgaW5m
+b3JtIHBhcnRpY2lwYW50cyBiZWZvcmUgcmVjb3JkaW5nIG9yIHRyYW5zY3JpcHRpb24gZHVyaW5n
+IG1lZXRpbmdzLg0Kwcu94rj8tuA8aHR0cHM6Ly9ha2EubXMvSm9pblRlYW1zTWVldGluZz4gfCC7
+4dLp0aHP7jxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbWVldGluZ09wdGlvbnMvP29yZ2Fu
+aXplcklkPTVlMWM3N2FlLTlkMjktNGZkMi05YTA2LWZiZDA4Y2JjZTdlYSZ0ZW5hbnRJZD02OThi
+MGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVldGluZ19NVGt6
+T0RSbFpURXRNRGhoTWkwME1qUm1MV0k0TmpjdFpqQmhZVFpqWXpNMk9UWmxAdGhyZWFkLnYyJm1l
+c3NhZ2VJZD0wJmxhbmd1YWdlPXpoLUNOPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCg0KDQpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXw0KTWljcm9zb2Z0IFRlYW1zIG1lZXRpbmcNCkpvaW4gb24g
+eW91ciBjb21wdXRlciwgbW9iaWxlIGFwcCBvciByb29tIGRldmljZQ0KQ2xpY2sgaGVyZSB0byBq
+b2luIHRoZSBtZWV0aW5nPGh0dHBzOi8vdGVhbXMubWljcm9zb2Z0LmNvbS9sL21lZXR1cC1qb2lu
+LzE5JTNhbWVldGluZ19aVFl3WlRNM1pETXRZMkprTnkwMFlqa3hMV0UwWkRJdE16ZzJNVGN4WlRF
+M1pURXglNDB0aHJlYWQudjIvMD9jb250ZXh0PSU3YiUyMlRpZCUyMiUzYSUyMjY5OGIwZTQ2LTUx
+YzAtNGQzYi1hMDIzLTE2ZjJiMjNiOGMxZSUyMiUyYyUyMk9pZCUyMiUzYSUyMjNjNDMyYTgwLWZi
+MWUtNGQwYi1iYzNiLWZmYmNmYWFmYmZmOSUyMiU3ZD4NCk1lZXRpbmcgSUQ6IDQxMyAxMzUgNDYy
+IDkxMiAyMQ0KUGFzc2NvZGU6IHdZN2RMM0xoDQpEb3dubG9hZCBUZWFtczxodHRwczovL3d3dy5t
+aWNyb3NvZnQuY29tL2VuLXVzL21pY3Jvc29mdC10ZWFtcy9kb3dubG9hZC1hcHA+IHwgSm9pbiBv
+biB0aGUgd2ViPGh0dHBzOi8vd3d3Lm1pY3Jvc29mdC5jb20vbWljcm9zb2Z0LXRlYW1zL2pvaW4t
+YS1tZWV0aW5nPg0KSm9pbiB3aXRoIGEgdmlkZW8gY29uZmVyZW5jaW5nIGRldmljZQ0KNTAwMEB2
+Y3QuYm13LWJyaWxsaWFuY2UuY24NClZpZGVvIENvbmZlcmVuY2UgSUQ6IDEzOCA0MTkgNTAwIDcN
+CkFsdGVybmF0ZSBWVEMgaW5zdHJ1Y3Rpb25zPGh0dHBzOi8vdmlkZW9lZGdwb29sLnZjdC5ibXct
+YnJpbGxpYW5jZS5jbi90ZWFtcy8/Y29uZj0xMzg0MTk1MDA3Jml2cj01MDAwJmQ9dmN0LmJtdy1i
+cmlsbGlhbmNlLmNuJmlwPTIxOC4xMDYuMTk0LjE2MCZ0ZXN0PXRlc3RfY2FsbCZ3Pg0KT3IgY2Fs
+bCBpbiAoYXVkaW8gb25seSkNCis4NiA0MDAgOTE5IDk2NDUsLDMxMzQxNjg4MSM8dGVsOis4NjQw
+MDkxOTk2NDUsLDMxMzQxNjg4MSM+DQogIENoaW5hLCBBbGwgbG9jYXRpb25zDQorODYgNDAwIDkx
+OSA5NjQ3LCwzMTM0MTY4ODEjPHRlbDorODY0MDA5MTk5NjQ3LCwzMTM0MTY4ODEjPg0KICBDaGlu
+YSwgQWxsIGxvY2F0aW9ucw0KUGhvbmUgQ29uZmVyZW5jZSBJRDogMzEzIDQxNiA4ODEjDQpGaW5k
+IGEgbG9jYWwgbnVtYmVyPGh0dHBzOi8vZGlhbGluLnRlYW1zLm1pY3Jvc29mdC5jb20vNTcxM2Ri
+OWEtOGMxMy00YzIzLTk1Y2EtOWVjZTE1NDFhOGE2P2lkPTMxMzQxNjg4MT4gfCBSZXNldCBQSU48
+aHR0cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zb2Z0LmNvbS91c3AvcHN0bmNvbmZlcmVuY2luZz4N
+CkZvciBhYmlkaW5nIGJ5IHRoZSBCQkEgSW5zdHJ1Y3Rpb24gb24gSW5mb3JtYXRpb24gU2VjdXJp
+dHkgYW5kIEN5YmVyIFNlY3VyaXR5LCBwbGVhc2UgaW5mb3JtIHBhcnRpY2lwYW50cyBiZWZvcmUg
+cmVjb3JkaW5nIG9yIHRyYW5zY3JpcHRpb24gZHVyaW5nIG1lZXRpbmdzLg0KTGVhcm4gTW9yZTxo
+dHRwczovL2FrYS5tcy9Kb2luVGVhbXNNZWV0aW5nPiB8IE1lZXRpbmcgb3B0aW9uczxodHRwczov
+L3RlYW1zLm1pY3Jvc29mdC5jb20vbWVldGluZ09wdGlvbnMvP29yZ2FuaXplcklkPTNjNDMyYTgw
+LWZiMWUtNGQwYi1iYzNiLWZmYmNmYWFmYmZmOSZ0ZW5hbnRJZD02OThiMGU0Ni01MWMwLTRkM2It
+YTAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVldGluZ19aVFl3WlRNM1pETXRZMkprTnkw
+MFlqa3hMV0UwWkRJdE16ZzJNVGN4WlRFM1pURXhAdGhyZWFkLnYyJm1lc3NhZ2VJZD0wJmxhbmd1
+YWdlPWVuLVVTPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCg0K
+
+--_000_KL1PR0401MB427410495B6255673D4C9F0AB82F2KL1PR0401MB4274_
+Content-Type: text/html; charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:=CB=CE=CC=E5;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"\@=CB=CE=CC=E5";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"BMWGroupTN Condensed TT";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:=CE=A2=C8=ED=D1=C5=BA=DA;
+	panose-1:2 11 5 3 2 2 4 2 2 4;}
+@font-face
+	{font-family:"\@=CE=A2=C8=ED=D1=C5=BA=DA";}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:"Segoe UI Semibold";
+	panose-1:2 11 7 2 4 2 4 2 2 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#467886;
+	text-decoration:underline;}
+span.EmailStyle18
+	{mso-style-type:personal-compose;
+	font-family:"Segoe UI",sans-serif;
+	color:#252424;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Dears,
+</span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:=CB=CE=CC=
+=E5;color:#252424">=C3=F7=CC=EC=CC=E1=C7=B0=D2=BB=B5=E3</span><span style=
+=3D"font-size:11.0pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#252=
+424">12</span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:=
+=CB=CE=CC=E5;color:#252424">=B5=E3=BD=F8=BB=E1=D7=F6=D2=BB=CF=C2=B2=E2=CA=
+=D4=A3=AC=D0=BB=D0=BB=A3=A1</span><span style=3D"font-size:11.0pt;font-fami=
+ly:&quot;Segoe UI&quot;,sans-serif;color:#252424"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">BR<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Adah<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:18.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:18.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:18.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Microsoft Teams
+</span><span lang=3D"ZH-CN" style=3D"font-size:18.0pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=BB=E1=D2=E9</span><s=
+pan lang=3D"ZH-CN" style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;col=
+or:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=CA=B9=D3=C3=B5=E7=C4=D4=A1=A2=D2=C6=B6=AF=D3=A6=D3=C3=BB=F2=BB=E1=D2=E9=CA=
+=D2=C9=E8=B1=B8=BC=D3=C8=EB</span></b><b><span lang=3D"ZH-CN" style=3D"font=
+-family:&quot;Segoe UI&quot;,sans-serif;color:#252424">
+</span></b><b><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;co=
+lor:#252424"><o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://teams.microsoft.com/l/meetup-join/=
+19%3ameeting_MTkzODRlZTEtMDhhMi00MjRmLWI4NjctZjBhYTZjYzM2OTZl%40thread.v2/0=
+?context=3D%7b%22Tid%22%3a%22698b0e46-51c0-4d3b-a023-16f2b23b8c1e%22%2c%22O=
+id%22%3a%225e1c77ae-9d29-4fd2-9a06-fbd08cbce7ea%22%7d" target=3D"_blank"><s=
+pan lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=
+=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=B5=A5=BB=F7=B4=CB=B4=A6=D2=D4=
+=BC=D3=C8=EB=BB=E1=D2=E9</span></a>
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=BB=
+=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&=
+quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">473 275 639 325 48</span><span style=3D"font-size:10.5pt;font-family:=
+&quot;Segoe UI&quot;,sans-serif;color:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><br>
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=C3=DC=C2=EB</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">rF9vw25H <o:p>
+</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://www.microsoft.com=
+/en-us/microsoft-teams/download-app" target=3D"_blank"><span lang=3D"ZH-CN"=
+ style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color=
+:#6264A7">=CF=C2=D4=D8</span><span style=3D"color:#6264A7">
+ Teams</span></a> | <a href=3D"https://www.microsoft.com/microsoft-teams/jo=
+in-a-meeting" target=3D"_blank">
+<span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&qu=
+ot;,sans-serif;color:#6264A7">=D4=DA</span><span style=3D"color:#6264A7"> w=
+eb
+</span><span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#6264A7">=C9=CF=BC=D3=C8=EB</span></a><o:p></=
+o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=CA=B9=D3=C3=CA=D3=C6=B5=BB=E1=D2=E9=C9=E8=B1=B8=BC=D3=C8=EB</span></b><spa=
+n lang=3D"ZH-CN" style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color=
+:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"mailto:5000@vct.bmw-brill=
+iance.cn">5000@vct.bmw-brilliance.cn</a>
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=CA=
+=D3=C6=B5=BB=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&qu=
+ot;Segoe UI&quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">136 543 141 3
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://videoedgpool.vct.=
+bmw-brilliance.cn/teams/?conf=3D1365431413&amp;ivr=3D5000&amp;d=3Dvct.bmw-b=
+rilliance.cn&amp;ip=3D218.106.194.160&amp;test=3Dtest_call&amp;w"><span lan=
+g=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-=
+serif;color:#6264A7">=B1=B8=D3=C3</span><span style=3D"color:#6264A7">
+ VTC </span><span lang=3D"ZH-CN" style=3D"font-family:&quot;=CE=A2=C8=ED=D1=
+=C5=BA=DA&quot;,sans-serif;color:#6264A7">=CB=B5=C3=F7</span></a>
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;fo=
+nt-family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=
+=BB=F2=BA=F4=C8=EB</span></b><b><span style=3D"font-size:10.5pt;font-family=
+:&quot;Segoe UI&quot;,sans-serif;color:#252424">(</span></b><b><span lang=
+=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#252424">=BD=F6=D2=F4=C6=B5</span></b><b><spa=
+n style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;col=
+or:#252424">)</span></b><span style=3D"font-family:&quot;Segoe UI&quot;,san=
+s-serif;color:#252424">
+<o:p></o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"3" cellpadding=
+=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199645,,829260491# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9645,,829260491#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp;
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=D6=D0=B9=FA</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199647,,829260491# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9647,,829260491#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp;
+</span><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=
+=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=D6=D0=B9=FA</span><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-=
+family:&quot;=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#252424">=B5=
+=E7=BB=B0=BB=E1=D2=E9</span><span style=3D"font-size:10.5pt;font-family:&qu=
+ot;Segoe UI&quot;,sans-serif;color:#252424"> ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">829 260 491#
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://dialin.teams.microsoft.com/5713db9=
+a-8c13-4c23-95ca-9ece1541a8a6?id=3D829260491" target=3D"_blank"><span lang=
+=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=ED=D1=C5=
+=BA=DA&quot;,sans-serif;color:#6264A7">=B2=E9=D5=D2=B1=BE=B5=D8=BA=C5=C2=EB=
+</span></a>
+ | <a href=3D"https://dialin.teams.microsoft.com/usp/pstnconferencing" targ=
+et=3D"_blank">
+<span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=
+=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=D6=D8=D6=C3</span><span st=
+yle=3D"font-size:10.5pt;color:#6264A7"> PIN</span></a>
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">For abiding by the BBA Instruction o=
+n Information Security and Cyber Security, please inform participants befor=
+e recording or transcription during meetings.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://aka.ms/JoinTeamsMeeting" target=3D=
+"_blank"><span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=
+=CE=A2=C8=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=C1=CB=BD=E2=B8=FC=
+=B6=E0</span></a> |
+<a href=3D"https://teams.microsoft.com/meetingOptions/?organizerId=3D5e1c77=
+ae-9d29-4fd2-9a06-fbd08cbce7ea&amp;tenantId=3D698b0e46-51c0-4d3b-a023-16f2b=
+23b8c1e&amp;threadId=3D19_meeting_MTkzODRlZTEtMDhhMi00MjRmLWI4NjctZjBhYTZjY=
+zM2OTZl@thread.v2&amp;messageId=3D0&amp;language=3Dzh-CN" target=3D"_blank"=
+>
+<span lang=3D"ZH-CN" style=3D"font-size:10.5pt;font-family:&quot;=CE=A2=C8=
+=ED=D1=C5=BA=DA&quot;,sans-serif;color:#6264A7">=BB=E1=D2=E9=D1=A1=CF=EE</s=
+pan></a>
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#5F5F5F">______________________=
+__________________________________________________________</span>
+<o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><o:p>&nbsp;</o:p></=
+span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;"><o:p>&nbsp;</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#5F5F5F">______________________=
+__________________________________________________________</span>
+<span style=3D"mso-ligatures:none"><o:p></o:p></span></p>
+</div>
+<div>
+<div style=3D"margin-top:.25in;margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:18.0pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Microsoft Teams meeting</span><span =
+style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#252424">
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:15.0pt">
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.5pt;font-family:&quot=
+;Segoe UI&quot;,sans-serif;color:#252424">Join on your computer, mobile app=
+ or room device</span></b><b><span style=3D"font-family:&quot;Segoe UI&quot=
+;,sans-serif;color:#252424">
+<o:p></o:p></span></b></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://teams.microsoft.com/l/meetup-join/=
+19%3ameeting_ZTYwZTM3ZDMtY2JkNy00YjkxLWE0ZDItMzg2MTcxZTE3ZTEx%40thread.v2/0=
+?context=3D%7b%22Tid%22%3a%22698b0e46-51c0-4d3b-a023-16f2b23b8c1e%22%2c%22O=
+id%22%3a%223c432a80-fb1e-4d0b-bc3b-ffbcfaafbff9%22%7d" target=3D"_blank"><s=
+pan style=3D"font-size:10.5pt;font-family:&quot;Segoe UI Semibold&quot;,san=
+s-serif;color:#6264A7">Click
+ here to join the meeting</span></a> <o:p></o:p></span></p>
+</div>
+<div style=3D"margin-top:15.0pt;margin-bottom:15.0pt">
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Meeting ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">413 135 462 912 21</span><span style=3D"font-size:10.5pt;font-family:=
+&quot;Segoe UI&quot;,sans-serif;color:#252424">
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424"><br>
+</span><span style=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,san=
+s-serif;color:#252424">Passcode:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">wY7dL3Lh <o:p>
+</o:p></span></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://www.microsoft.com=
+/en-us/microsoft-teams/download-app" target=3D"_blank"><span style=3D"color=
+:#6264A7">Download Teams</span></a> |
+<a href=3D"https://www.microsoft.com/microsoft-teams/join-a-meeting" target=
+=3D"_blank">
+<span style=3D"color:#6264A7">Join on the web</span></a><o:p></o:p></span><=
+/p>
+</div>
+</div>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.5pt;font-family:&quot=
+;Segoe UI&quot;,sans-serif;color:#252424">Join with a video conferencing de=
+vice</span></b><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;c=
+olor:#252424">
+<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">5000@vct.bmw-brilliance.cn
+<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Video Conference ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">138 419 500 7
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424"><a href=3D"https://videoedgpool.vct.=
+bmw-brilliance.cn/teams/?conf=3D1384195007&amp;ivr=3D5000&amp;d=3Dvct.bmw-b=
+rilliance.cn&amp;ip=3D218.106.194.160&amp;test=3Dtest_call&amp;w"><span sty=
+le=3D"color:#6264A7">Alternate
+ VTC instructions</span></a> <o:p></o:p></span></p>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.5pt;font-family:&quot=
+;Segoe UI&quot;,sans-serif;color:#252424">Or call in (audio only)</span></b=
+><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#252424">
+<o:p></o:p></span></p>
+</div>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"3" cellpadding=
+=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199645,,313416881# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9645,,313416881#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp; China, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+<tr>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><a href=3D"tel:+864009199647,,313416881# "><span sty=
+le=3D"font-size:10.5pt;font-family:&quot;Segoe UI&quot;,sans-serif;color:#6=
+264A7">+86 400 919 9647,,313416881#</span></a>
+<o:p></o:p></p>
+</td>
+<td style=3D"padding:.75pt .75pt .75pt .75pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">&nbsp; China, All locations
+</span><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">Phone Conference ID:
+</span><span style=3D"font-family:&quot;Segoe UI&quot;,sans-serif;color:#25=
+2424">313 416 881#
+<o:p></o:p></span></p>
+<div style=3D"margin-bottom:15.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://dialin.teams.microsoft.com/5713db9=
+a-8c13-4c23-95ca-9ece1541a8a6?id=3D313416881" target=3D"_blank"><span style=
+=3D"font-size:10.5pt;color:#6264A7">Find a local number</span></a>
+ | <a href=3D"https://dialin.teams.microsoft.com/usp/pstnconferencing" targ=
+et=3D"_blank">
+<span style=3D"font-size:10.5pt;color:#6264A7">Reset PIN</span></a> <o:p></=
+o:p></span></p>
+</div>
+<div style=3D"margin-bottom:3.0pt">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#252424">For abiding by the BBA Instruction o=
+n Information Security and Cyber Security, please inform participants befor=
+e recording or transcription during meetings.
+<o:p></o:p></span></p>
+</div>
+<div style=3D"margin-top:15.0pt;margin-bottom:.25in">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe UI&quot;,sans=
+-serif;color:#252424"><a href=3D"https://aka.ms/JoinTeamsMeeting" target=3D=
+"_blank"><span style=3D"font-size:10.5pt;color:#6264A7">Learn More</span></=
+a> |
+<a href=3D"https://teams.microsoft.com/meetingOptions/?organizerId=3D3c432a=
+80-fb1e-4d0b-bc3b-ffbcfaafbff9&amp;tenantId=3D698b0e46-51c0-4d3b-a023-16f2b=
+23b8c1e&amp;threadId=3D19_meeting_ZTYwZTM3ZDMtY2JkNy00YjkxLWE0ZDItMzg2MTcxZ=
+TE3ZTEx@thread.v2&amp;messageId=3D0&amp;language=3Den-US" target=3D"_blank"=
+>
+<span style=3D"font-size:10.5pt;color:#6264A7">Meeting options</span></a> <=
+o:p></o:p></span></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#5F5F5F">______________________=
+__________________________________________________________</span>
+<o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;"><o:p>&nbsp;</o:p></span></p>
+</div>
+</body>
+</html>
+
+--_000_KL1PR0401MB427410495B6255673D4C9F0AB82F2KL1PR0401MB4274_
+Content-Type: text/calendar; charset="utf-8"; method=REQUEST
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpNRVRIT0Q6UkVRVUVTVA0KUFJPRElEOk1pY3Jvc29mdCBFeGNoYW5n
+ZSBTZXJ2ZXIgMjAxMA0KVkVSU0lPTjoyLjANCkJFR0lOOlZUSU1FWk9ORQ0KVFpJRDpDaGluYSBT
+dGFuZGFyZCBUaW1lDQpCRUdJTjpTVEFOREFSRA0KRFRTVEFSVDoxNjAxMDEwMVQwMDAwMDANClRa
+T0ZGU0VURlJPTTorMDgwMA0KVFpPRkZTRVRUTzorMDgwMA0KRU5EOlNUQU5EQVJEDQpCRUdJTjpE
+QVlMSUdIVA0KRFRTVEFSVDoxNjAxMDEwMVQwMDAwMDANClRaT0ZGU0VURlJPTTorMDgwMA0KVFpP
+RkZTRVRUTzorMDgwMA0KRU5EOkRBWUxJR0hUDQpFTkQ6VlRJTUVaT05FDQpCRUdJTjpWRVZFTlQN
+Ck9SR0FOSVpFUjtDTj0iTGl1IEFkYWgsIEJCSC0xQS0xIjptYWlsdG86SmlheWFuZy5MaXVAYm13
+LWJyaWxsaWFuY2UuY24NCkFUVEVOREVFO1JPTEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5F
+RURTLUFDVElPTjtSU1ZQPVRSVUU7Q0495ZGo54+KOm1haQ0KIGx0bzpzdWVAd29zaGlwbS5jb20N
+CkFUVEVOREVFO1JPTEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQ
+PVRSVUU7Q0495p2o6Zuo6ZGrOg0KIG1haWx0bzpkYWlzeV95YW5nQHdvc2hpcG0uY29tDQpBVFRF
+TkRFRTtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047UlNWUD1UUlVF
+O0NOPeWQtOS6rjptYWkNCiBsdG86d3VsaWFuZ0B4aWFuZ3ppemFpLmNvbQ0KQVRURU5ERUU7Uk9M
+RT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9VFJVRTtDTj0iTGl1
+IEd1YW50bw0KIG5nLCBCQkYtNDYiOm1haWx0bzpHdWFudG9uZy5MaXVAYm13LWJyaWxsaWFuY2Uu
+Y24NCkRFU0NSSVBUSU9OO0xBTkdVQUdFPWVuLVVTOkRlYXJzXCwg5piO5aSp5o+Q5YmN5LiA54K5
+MTLngrnov5vkvJrlgZrkuIDkuIsNCiDmtYvor5XvvIzosKLosKLvvIFcblxuQlJcbkFkYWhcblxu
+XG5NaWNyb3NvZnQgVGVhbXMg5Lya6K6uXG7kvb/nlKjnlLXohJENCiDjgIHnp7vliqjlupTnlKjm
+iJbkvJrorq7lrqTorr7lpIfliqDlhaVcbuWNleWHu+atpOWkhOS7peWKoOWFpeS8muiurjxodHRw
+cw0KIDovL3RlYW1zLm1pY3Jvc29mdC5jb20vbC9tZWV0dXAtam9pbi8xOSUzYW1lZXRpbmdfTVRr
+ek9EUmxaVEV0TURoaE1pMDBNalJtDQogTFdJNE5qY3RaakJoWVRaall6TTJPVFpsJTQwdGhyZWFk
+LnYyLzA/Y29udGV4dD0lN2IlMjJUaWQlMjIlM2ElMjI2OThiMGU0Ni0NCiA1MWMwLTRkM2ItYTAy
+My0xNmYyYjIzYjhjMWUlMjIlMmMlMjJPaWQlMjIlM2ElMjI1ZTFjNzdhZS05ZDI5LTRmZDItOWEw
+Ni1mYg0KIGQwOGNiY2U3ZWElMjIlN2Q+XG7kvJrorq4gSUQ6IDQ3MyAyNzUgNjM5IDMyNSA0OFxu
+5a+G56CBOiByRjl2dzI1SFxu5LiL6L29DQogIFRlYW1zPGh0dHBzOi8vd3d3Lm1pY3Jvc29mdC5j
+b20vZW4tdXMvbWljcm9zb2Z0LXRlYW1zL2Rvd25sb2FkLWFwcD4gfCDlnKgNCiAgd2ViIOS4iuWK
+oOWFpTxodHRwczovL3d3dy5taWNyb3NvZnQuY29tL21pY3Jvc29mdC10ZWFtcy9qb2luLWEtbWVl
+dGluZz5cbg0KIOS9v+eUqOinhumikeS8muiuruiuvuWkh+WKoOWFpVxuNTAwMEB2Y3QuYm13LWJy
+aWxsaWFuY2UuY248bWFpbHRvOjUwMDBAdmN0DQogLmJtdy1icmlsbGlhbmNlLmNuPlxu6KeG6aKR
+5Lya6K6uIElEOiAxMzYgNTQzIDE0MSAzXG7lpIfnlKggVlRDIOivtOaYjjxodHQNCiBwczovL3Zp
+ZGVvZWRncG9vbC52Y3QuYm13LWJyaWxsaWFuY2UuY24vdGVhbXMvP2NvbmY9MTM2NTQzMTQxMyZp
+dnI9NTAwMCZkPQ0KIHZjdC5ibXctYnJpbGxpYW5jZS5jbiZpcD0yMTguMTA2LjE5NC4xNjAmdGVz
+dD10ZXN0X2NhbGwmdz5cbuaIluWRvOWFpSjku4UNCiDpn7PpopEpXG4rODYgNDAwIDkxOSA5NjQ1
+XCxcLDgyOTI2MDQ5MSM8dGVsOis4NjQwMDkxOTk2NDVcLFwsODI5MjYwNDkxIz5cbg0KICAg5Lit
+5Zu9XCwgQWxsIGxvY2F0aW9uc1xuKzg2IDQwMCA5MTkgOTY0N1wsXCw4MjkyNjA0OTEjPHRlbDor
+ODY0MDA5MTk5NjQ3DQogXCxcLDgyOTI2MDQ5MSM+XG4gIOS4reWbvVwsIEFsbCBsb2NhdGlvbnNc
+bueUteivneS8muiuriBJRDogODI5IDI2MCA0OTEjXG4NCiDmn6Xmib7mnKzlnLDlj7fnoIE8aHR0
+cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zb2Z0LmNvbS81NzEzZGI5YS04YzEzLTRjMjMtOQ0KIDVj
+YS05ZWNlMTU0MWE4YTY/aWQ9ODI5MjYwNDkxPiB8IOmHjee9riBQSU48aHR0cHM6Ly9kaWFsaW4u
+dGVhbXMubWljcm9zb2Z0DQogLmNvbS91c3AvcHN0bmNvbmZlcmVuY2luZz5cbkZvciBhYmlkaW5n
+IGJ5IHRoZSBCQkEgSW5zdHJ1Y3Rpb24gb24gSW5mb3JtYXQNCiBpb24gU2VjdXJpdHkgYW5kIEN5
+YmVyIFNlY3VyaXR5XCwgcGxlYXNlIGluZm9ybSBwYXJ0aWNpcGFudHMgYmVmb3JlIHJlY29yZA0K
+IGluZyBvciB0cmFuc2NyaXB0aW9uIGR1cmluZyBtZWV0aW5ncy5cbuS6huino+abtOWkmjxodHRw
+czovL2FrYS5tcy9Kb2luVGVhDQogbXNNZWV0aW5nPiB8IOS8muiurumAiemhuTxodHRwczovL3Rl
+YW1zLm1pY3Jvc29mdC5jb20vbWVldGluZ09wdGlvbnMvP29yZ2ENCiBuaXplcklkPTVlMWM3N2Fl
+LTlkMjktNGZkMi05YTA2LWZiZDA4Y2JjZTdlYSZ0ZW5hbnRJZD02OThiMGU0Ni01MWMwLTRkM2It
+YQ0KIDAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVldGluZ19NVGt6T0RSbFpURXRNRGho
+TWkwME1qUm1MV0k0TmpjdFpqQmhZDQogVFpqWXpNMk9UWmxAdGhyZWFkLnYyJm1lc3NhZ2VJZD0w
+Jmxhbmd1YWdlPXpoLUNOPlxuX19fX19fX19fX19fX19fX19fX19fX18NCiBfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19cblxuXG5fX19fX19f
+X19fXw0KIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX1xuTWljDQogcm9zb2Z0IFRlYW1zIG1lZXRpbmdcbkpvaW4gb24g
+eW91ciBjb21wdXRlclwsIG1vYmlsZSBhcHAgb3Igcm9vbSBkZXZpY2VcbkMNCiBsaWNrIGhlcmUg
+dG8gam9pbiB0aGUgbWVldGluZzxodHRwczovL3RlYW1zLm1pY3Jvc29mdC5jb20vbC9tZWV0dXAt
+am9pbi8xOQ0KICUzYW1lZXRpbmdfWlRZd1pUTTNaRE10WTJKa055MDBZamt4TFdFMFpESXRNemcy
+TVRjeFpURTNaVEV4JTQwdGhyZWFkLnYyLzA/DQogY29udGV4dD0lN2IlMjJUaWQlMjIlM2ElMjI2
+OThiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUlMjIlMmMlMjJPaWQNCiAlMjIlM2El
+MjIzYzQzMmE4MC1mYjFlLTRkMGItYmMzYi1mZmJjZmFhZmJmZjklMjIlN2Q+XG5NZWV0aW5nIElE
+OiA0MTMgMTM1IA0KIDQ2MiA5MTIgMjFcblBhc3Njb2RlOiB3WTdkTDNMaFxuRG93bmxvYWQgVGVh
+bXM8aHR0cHM6Ly93d3cubWljcm9zb2Z0LmNvbS9lDQogbi11cy9taWNyb3NvZnQtdGVhbXMvZG93
+bmxvYWQtYXBwPiB8IEpvaW4gb24gdGhlIHdlYjxodHRwczovL3d3dy5taWNyb3NvZnQNCiAuY29t
+L21pY3Jvc29mdC10ZWFtcy9qb2luLWEtbWVldGluZz5cbkpvaW4gd2l0aCBhIHZpZGVvIGNvbmZl
+cmVuY2luZyBkZXZpYw0KIGVcbjUwMDBAdmN0LmJtdy1icmlsbGlhbmNlLmNuXG5WaWRlbyBDb25m
+ZXJlbmNlIElEOiAxMzggNDE5IDUwMCA3XG5BbHRlcm5hDQogdGUgVlRDIGluc3RydWN0aW9uczxo
+dHRwczovL3ZpZGVvZWRncG9vbC52Y3QuYm13LWJyaWxsaWFuY2UuY24vdGVhbXMvP2NvbmYNCiA9
+MTM4NDE5NTAwNyZpdnI9NTAwMCZkPXZjdC5ibXctYnJpbGxpYW5jZS5jbiZpcD0yMTguMTA2LjE5
+NC4xNjAmdGVzdD10ZXN0Xw0KIGNhbGwmdz5cbk9yIGNhbGwgaW4gKGF1ZGlvIG9ubHkpXG4rODYg
+NDAwIDkxOSA5NjQ1XCxcLDMxMzQxNjg4MSM8dGVsOis4NjQwDQogMDkxOTk2NDVcLFwsMzEzNDE2
+ODgxIz5cbiAgQ2hpbmFcLCBBbGwgbG9jYXRpb25zXG4rODYgNDAwIDkxOSA5NjQ3XCxcLDMxMzQN
+CiAxNjg4MSM8dGVsOis4NjQwMDkxOTk2NDdcLFwsMzEzNDE2ODgxIz5cbiAgQ2hpbmFcLCBBbGwg
+bG9jYXRpb25zXG5QaG9uZSBDbw0KIG5mZXJlbmNlIElEOiAzMTMgNDE2IDg4MSNcbkZpbmQgYSBs
+b2NhbCBudW1iZXI8aHR0cHM6Ly9kaWFsaW4udGVhbXMubWljcm9zDQogb2Z0LmNvbS81NzEzZGI5
+YS04YzEzLTRjMjMtOTVjYS05ZWNlMTU0MWE4YTY/aWQ9MzEzNDE2ODgxPiB8IFJlc2V0IFBJTjxo
+dHQNCiBwczovL2RpYWxpbi50ZWFtcy5taWNyb3NvZnQuY29tL3VzcC9wc3RuY29uZmVyZW5jaW5n
+PlxuRm9yIGFiaWRpbmcgYnkgdGhlIA0KIEJCQSBJbnN0cnVjdGlvbiBvbiBJbmZvcm1hdGlvbiBT
+ZWN1cml0eSBhbmQgQ3liZXIgU2VjdXJpdHlcLCBwbGVhc2UgaW5mb3JtDQogIHBhcnRpY2lwYW50
+cyBiZWZvcmUgcmVjb3JkaW5nIG9yIHRyYW5zY3JpcHRpb24gZHVyaW5nIG1lZXRpbmdzLlxuTGVh
+cm4gTW8NCiByZTxodHRwczovL2FrYS5tcy9Kb2luVGVhbXNNZWV0aW5nPiB8IE1lZXRpbmcgb3B0
+aW9uczxodHRwczovL3RlYW1zLm1pY3Jvcw0KIG9mdC5jb20vbWVldGluZ09wdGlvbnMvP29yZ2Fu
+aXplcklkPTNjNDMyYTgwLWZiMWUtNGQwYi1iYzNiLWZmYmNmYWFmYmZmOSZ0DQogZW5hbnRJZD02
+OThiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUmdGhyZWFkSWQ9MTlfbWVldGluZ19a
+VFl3WlRNM1oNCiBETXRZMkprTnkwMFlqa3hMV0UwWkRJdE16ZzJNVGN4WlRFM1pURXhAdGhyZWFk
+LnYyJm1lc3NhZ2VJZD0wJmxhbmd1YWdlPWVuLQ0KIFVTPlxuX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQogX19fX19f
+X19fX19cblxuDQpVSUQ6MDQwMDAwMDA4MjAwRTAwMDc0QzVCNzEwMUE4MkUwMDgwMDAwMDAwMDMw
+M0I0NkNEQ0NEMERDMDEwMDAwMDAwMDAwMDAwMDANCiAwMTAwMDAwMDBENEIwNDdDMEJBQjMwODQ0
+QjRBMUU2OTMxRDE2OTE3RA0KU1VNTUFSWTtMQU5HVUFHRT1lbi1VUzpBSSBDQU1QIFJlaGVhcnNh
+bA0KRFRTVEFSVDtUWklEPUNoaW5hIFN0YW5kYXJkIFRpbWU6MjAyNjA0MjFUMTIwMDAwDQpEVEVO
+RDtUWklEPUNoaW5hIFN0YW5kYXJkIFRpbWU6MjAyNjA0MjFUMTIzMDAwDQpDTEFTUzpQVUJMSUMN
+ClBSSU9SSVRZOjUNCkRUU1RBTVA6MjAyNjA0MjBUMDU1MjU4Wg0KVFJBTlNQOk9QQVFVRQ0KU1RB
+VFVTOkNPTkZJUk1FRA0KU0VRVUVOQ0U6MA0KTE9DQVRJT047TEFOR1VBR0U9ZW4tVVM6TWljcm9z
+b2Z0IFRlYW1zIE1lZXRpbmcNClgtTUlDUk9TT0ZULUNETy1BUFBULVNFUVVFTkNFOjANClgtTUlD
+Uk9TT0ZULUNETy1PV05FUkFQUFRJRDotMTEzOTUyMTU1OA0KWC1NSUNST1NPRlQtQ0RPLUJVU1lT
+VEFUVVM6VEVOVEFUSVZFDQpYLU1JQ1JPU09GVC1DRE8tSU5URU5ERURTVEFUVVM6QlVTWQ0KWC1N
+SUNST1NPRlQtQ0RPLUFMTERBWUVWRU5UOkZBTFNFDQpYLU1JQ1JPU09GVC1DRE8tSU1QT1JUQU5D
+RToxDQpYLU1JQ1JPU09GVC1DRE8tSU5TVFRZUEU6MA0KWC1NSUNST1NPRlQtU0tZUEVURUFNU01F
+RVRJTkdVUkw6aHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL2wvbWVldHVwLWpvaW4vDQogMTkl
+M2FtZWV0aW5nX1pUWXdaVE0zWkRNdFkySmtOeTAwWWpreExXRTBaREl0TXpnMk1UY3haVEUzWlRF
+eCU0MHRocmVhZC52Mi8NCiAwP2NvbnRleHQ9JTdiJTIyVGlkJTIyJTNhJTIyNjk4YjBlNDYtNTFj
+MC00ZDNiLWEwMjMtMTZmMmIyM2I4YzFlJTIyJTJjJTIyTw0KIGlkJTIyJTNhJTIyM2M0MzJhODAt
+ZmIxZS00ZDBiLWJjM2ItZmZiY2ZhYWZiZmY5JTIyJTdkDQpYLU1JQ1JPU09GVC1TQ0hFRFVMSU5H
+U0VSVklDRVVQREFURVVSTDpodHRwczovL2FwaS5zY2hlZHVsZXIudGVhbXMubWljcm9zb2YNCiB0
+LmNvbS90ZWFtcy82OThiMGU0Ni01MWMwLTRkM2ItYTAyMy0xNmYyYjIzYjhjMWUvM2M0MzJhODAt
+ZmIxZS00ZDBiLWJjM2ItZg0KIGZiY2ZhYWZiZmY5LzE5X21lZXRpbmdfWlRZd1pUTTNaRE10WTJK
+a055MDBZamt4TFdFMFpESXRNemcyTVRjeFpURTNaVEV4QHRoDQogcmVhZC52Mi8wDQpYLU1JQ1JP
+U09GVC1TS1lQRVRFQU1TUFJPUEVSVElFUzp7ImNpZCI6IjE5Om1lZXRpbmdfWlRZd1pUTTNaRE10
+WTJKa055MDBZamsNCiB4TFdFMFpESXRNemcyTVRjeFpURTNaVEV4QHRocmVhZC52MiJcLCJwcml2
+YXRlIjp0cnVlXCwidHlwZSI6MFwsIm1pZCI6MFwsIg0KIHJpZCI6MFwsInVpZCI6bnVsbH0NClgt
+TUlDUk9TT0ZULURPTk9URk9SV0FSRE1FRVRJTkc6RkFMU0UNClgtTUlDUk9TT0ZULURJU0FMTE9X
+LUNPVU5URVI6RkFMU0UNClgtTUlDUk9TT0ZULVJFUVVFU1RFREFUVEVOREFOQ0VNT0RFOkRFRkFV
+TFQNClgtTUlDUk9TT0ZULUlTUkVTUE9OU0VSRVFVRVNURUQ6VFJVRQ0KWC1NSUNST1NPRlQtTE9D
+QVRJT05TOlsgeyAiRGlzcGxheU5hbWUiIDogIk1pY3Jvc29mdCBUZWFtcyBNZWV0aW5nIlwsICJM
+b2NhDQogdGlvbkFubm90YXRpb24iIDogIiJcLCAiTG9jYXRpb25Tb3VyY2UiIDogMFwsICJVbnJl
+c29sdmVkIiA6IGZhbHNlXCwgIkxvY2ENCiB0aW9uVXJpIiA6ICIiIH0gXQ0KQkVHSU46VkFMQVJN
+DQpERVNDUklQVElPTjpSRU1JTkRFUg0KVFJJR0dFUjtSRUxBVEVEPVNUQVJUOi1QVDE1TQ0KQUNU
+SU9OOkRJU1BMQVkNCkVORDpWQUxBUk0NCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVINCg==
+
+--_000_KL1PR0401MB427410495B6255673D4C9F0AB82F2KL1PR0401MB4274_--

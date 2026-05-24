@@ -1,0 +1,416 @@
+Accept-Language: en-US
+Arc-Authentication-Results: i=2; lms; spf=pass (client-ip:40.107.75.68)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=C+rT4YePyD
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Arc-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmw-brilliance.cn; dmarc=pass action=none
+ header.from=bmw-brilliance.cn; dkim=pass header.d=bmw-brilliance.cn;
+ arc=none
+Arc-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=WNDFUFQrN8shWlZg+z5UZ5k5ExK0zhhETBEqVAO+6dI=;
+ b=Yc4yAwjIxo7w4qC3NDhIIVm4e7AZvWG7Tr3HkBBwOSLLo8klrmFyW0G7tzEsOiAIi5MMC9e
+ ATUcaoKTtK55Rf/bJFbxDxKLj8w554o15OnYGaYivaMgyKofeWu0Uft44S70L6SlBkt3xn1MK
+ GMXnr2a0YjZ4/TVWIFF4kQDzKyYFfx4aW+f7quMCHbARH3czO2NJEjGxJeVvumAggxHLzu78u
+ XOVeiw1GN3CCLpAG9c+CuixF1nPdFyDsXGZV/TBhH4vbTjGz9wnIPWvRQtTdJWwUnK46uC2YD
+ hNDxk+RmDVnLx4QUeAD1/M6R4kOLQedLm+PBscWDSBYN8FWGmhDw==
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microsoft.com; s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WNDFUFQrN8shWlZg+z5UZ5k5ExK0zhhETBEqVAO+6dI=;
+ b=Ddb57H9lHTvkU3xg2j2SEZbdlWkGT+Ezo9lsCc4GAI9GZFtVVT11uq8CZRzcBylNSzmk7NnMeFa8AHrVeZkQ5b71UyVVOtnzuUjXOd0fT3PgXell3Kuz4j0WhxpFsvBiIuj/i8WUtd8s1M5RI/+o8AflBHBwM5DG2xuVx1RkPv0jDOET0baCGaTT/OF7Yd7wS9n5jMMBGn34Py1EcAQ8TKSOmMWDRXTm5AbBcoBQfyyNdZhzSjtkNGYEQtkSon3PbBJbxBS18JXv/vGWOPBsTx6185+DmnnNGX/zLqOCS61BahuByXGyN6yL3FkAVula7rBiDXIrmUfGbPrR6UgGBw==
+Arc-Seal: i=2; a=rsa-sha256; t=1776664435; d=larksuite.com; s=arc230412;
+ cv=pass;
+ b=pQo1KGAyGP0s3FlNHJ3PRxNgI2ojOWHO1t61nT1hN9WTac3EXaxHFG1HJ0SsXbQYqS4A3b+
+ OU7zIXzNOSKO1hwV9z30OTRKDlmx5RJPyR6u0c/3feq9lo9mOQcIaksbr3wwjNzLOnPYUhTFe
+ 48nSnEWMb7KBx7T2VDPnk5UBAVSzFrbKvQLnjCupgx2DinESY1Qt0K85w4CdtGRBMCvXkEEXo
+ dHpZI5I+XIn7UG/xq7jqoR0aAECNR7SlT0LL7O3gIM/xK4OhrET9Iq1eoPhMFwkWIRwXv2GPz
+ ZXM7a7aovytLvk7VJXr+Drir7D6BlpImeas8Y6nD38+oghR0jdpQ==
+Arc-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WYhCFDlJc8ju3SDw2KXQwTch0ugoG4xOwsr6MerkKdliqYhQdM3Ca/pOZitj8ZAKkkIQcAbALHt36K3BjbtHDy+6onSNfCoP4LNXhzL6aOUR9H4xUnrfez6bODQws+amcn04WIXX5lU7VB9KllwdATgrl3Q+lI8XLjVLr0cThD6FLkjzyXBvvY9mcaa/o0JZS5ybQI+vmaMFXBVevyaD7tdpTLiVIZYoWKM5ye+1KpS3StQ53f33Z5anXc292QFBqoZaXodW+6U/tb7/A9+NKpLFg9WfS5j0YLTa+5PK0JPel04CQlLRYtE0X6IJPjAEMxnwQ7QlOsY2czjjNaFwOg==
+Authentication-Results: lms; spf=pass (client-ip:40.107.75.68)
+ smtp.mailfrom=Jiayang.Liu@bmw-brilliance.cn; dkim=pass header.b=C+rT4YePyD
+ header.i=@bmw-brilliance.cn header.s=selector1; dmarc=pass (p=none sp=none
+ dis=none) header.from=bmw-brilliance.cn; arc=pass header.oldest-pass=0
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmw-brilliance.cn;
+Content-Language: en-US
+Content-Type: multipart/alternative;
+ boundary="_000_KL1PR0401MB4274EF259FEE3CA19E74894FB82F2KL1PR0401MB4274_"
+Date: Mon, 20 Apr 2026 05:53:48 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmw-brilliance.cn;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WNDFUFQrN8shWlZg+z5UZ5k5ExK0zhhETBEqVAO+6dI=;
+ b=C+rT4YePyDLdhsehDr4M7Gg9xDqAj82H8Aj3k37NsPvJs/ECtpaJ2FEPYUpSGVM3ueSl8dx8P7fTXg73i73d5SLSq/tHC8Rxc0AU++N9TV3pHMFk7mkEracVQpylwEPJjU6wrWHiG03gHlxWRyPLHkWjRYoFHTeLfKeCyZkSrdrlwjsMBMVLVXMnyoxqlYQ4ttBoquyGu9AfqfE8YNwaIk6NRVAAA85KeMv2UH8l7lYYMw3NOG41OKuDpYCUI2RuyeO7vrWsfZGY9YSbuC5nJ8u4uhg7T78PH6n6cko2SuwGCsjhTZDeEed/mSB5ZBf1NEB2NfXASrndiD2rlGT0zA==
+From: "Liu Adah, BBH-1A-1" <Jiayang.Liu@bmw-brilliance.cn>
+Message-Id: 
+ <KL1PR0401MB4274EF259FEE3CA19E74894FB82F2@KL1PR0401MB4274.apcprd04.prod.outlook.com>
+Mime-Version: 1.0
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ (2603:1096:820:26::13) by SE2PPF461B2363D.apcprd04.prod.outlook.com
+ (2603:1096:108:1::610) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Mon, 20 Apr
+ 2026 05:53:48 +0000
+Received: from KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422]) by KL1PR0401MB4274.apcprd04.prod.outlook.com
+ ([fe80::f312:f79a:123e:5422%6]) with mapi id 15.20.9818.032; Mon, 20 Apr
+ 2026 05:53:48 +0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=40.107.75.68;
+ helo=OS8PR02CU002.outbound.protection.outlook.com;
+ envelope-from=Jiayang.Liu@bmw-brilliance.cn; receiver=<UNKNOWN>;
+Subject: AI CAMP Open Points, need to confirm today
+Thread-Index: AdzQig1Gy7A50hzqROGAZR4OWVZy5Q==
+Thread-Topic: AI CAMP Open Points, need to confirm today
+To: =?gb2312?B?1tzJug==?= <sue@woshipm.com>, =?gb2312?B?0e7T6vbO?=
+ <daisy_yang@woshipm.com>, =?gb2312?B?zuLBwQ==?= <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776664431/4fzZRg2zbQz1dKLMT/69E5BF6F.002/40.107.75.68/mail-japanwestazon11012068.outbound.protection.outlook.com/localhost/<Jiayang.Liu@bmw-brilliance.cn>
+X-Fangmail-Mid-Qid: 69E5BF6F.002/4fzZRg2zbQz1dKLMT
+X-Fangmail-Miltered: at n206-112-029 with ID 69E5BF6F.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Forefront-Antispam-Report: 
+ CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:KL1PR0401MB4274.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(8096899003)(13003099007)(38070700021)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-Lms-Client-Ip: 40.107.75.68
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: Jiayang.Liu@bmw-brilliance.cn
+X-Lms-Pvf: 
+ MnwyfDF8fE29KlT4NmZnUUG/Xt0gF+hhr+dMsI1DdOX+wGCt+KcL63mCzKe90m0XjoPntwSSsAg/9ioMnlNeGHitNqD4ZA1ifvtpMeyBFVMlW3P3upP40dAbR/+zS90zhEV8JDMeVg==
+X-Microsoft-Antispam: 
+ BCL:0;ARA:13230040|1800799024|376014|366016|8096899003|13003099007|38070700021|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+ 7bvp/WFkxez/netLDe5W3+om+EYz3AvFXX9+AIoTXLX+C2+4ksVprSLLsE87nPUokX02OFZUMoD+8kXZnFy/bBT89MlPbPLrZ3Z+XUMA7fW5n+3PNu3gea70Ag+z8vAD+teW49dYP9xQ4uisMSRssB6Epk0/yQnVBXRcrsthotOF9xuE9qzMKtGFwFrODfeC+yRFAY+zES5ystfa68ASai66evxFPRYxQ4gHNY+Ack/6n3hbd+o/mxRSkhW3c6DTei36Yofs1tso10ropPKIGq35iwVj3N22kPeXWTjts05hvht0rkB5krBFFMlzARhjFl6OSFlGBLFHVC5pUY8XLreCGg8urxWZeH4u1JDP6yTJIGLPvIdh1J10QkwhCbHa6IVqA6XCt1b7Wyoe+9Qm6zDzu34Dv5QAuWQdzKkhcGZD5P2USPAdoFBAHiDHS+cvwMimZ+qwM8FOxxtlsEQ0/KJrqHfcSZafOjFa5hJrmkFpX24CVIGBqSAwmU9TxX+s3UiW1+zm3PcQ3Czuvp4sSAPl0AwbcY7reKS6Trc628F3LhNgeSxukUW/vYgWR8BAErh8+SYG7k2BqBexm9D8CfWOozQpLWKGj/YRKFQQxlttQoft15kBeIr+Sg7/p0bAwH1lUM04NxTlSw3wsRR9OE0VqU1EMYko7QngncrFv10dIMpYJv6ImRlF6Z9dK11ybYqaUmJLFqt+yd3ZSDi+rvt+H6e4weu5uMPatFkf62zpwYqk3LmZW4zx91THlk8N
+X-Ms-Exchange-Antispam-Messagedata-0: 
+ =?gb2312?B?ZVhYWlJZT1NUbmM3NXdaMUM3OUx0SVk4V3k4bmttWnNrUThBU0h4eTIzMDFR?=
+ =?gb2312?B?ZjFnS0RNNVBaU2JhWjdvTnMzWXFWcDNPeGNjNm9kZWN0M0FxbDBVTGRWVkhZ?=
+ =?gb2312?B?Y1ZueUNid2tIWkd4SjFyalo2YzVROWpTMk5LN2NvRFVXUlM0ZUZBdHdxc0M4?=
+ =?gb2312?B?UjNUNFdSQVhZR1pLaFZscU5jdEp6dXBqMExmRTg2WnRUd1FtOGYydEczV0hY?=
+ =?gb2312?B?TVRVc1pRWEV0YjV2TE0vVUlkRnNha3BhUkVZVFJncDE5cEs1aHJPME44VDc4?=
+ =?gb2312?B?bjYxWmhtUUdPL0NRTEJ5WVFxbDU1Qm94MzU1QmFjbEl2ZGU5eGVPZXczWk5B?=
+ =?gb2312?B?NC9GMW5KK3Y0SXJSMnZac3gyM09rQTNRK3ozTXVkbEJuVHc4RTVvNXhwVTY1?=
+ =?gb2312?B?YWsxMmJCaml1WGJ3YWNVNW1OVlQ3OTU0UzNWaFZqeHZRL2lqa3FKRjhQQlpv?=
+ =?gb2312?B?RTZjTG5kdHIrTzkxcG42RWFMVkgwaXhlWU00VjVSNThHVUZUdzVNaWpUYjZK?=
+ =?gb2312?B?NU43ZlFUV0hjaHRCN1QwekVrc0hpSUFEZHRZak92anA4U2hVOVhOT0doTFpo?=
+ =?gb2312?B?Szk4bWhSUlZjVDdEYTN1dmthQU8xSWVVY0pVTGhMRkFSOFZ5NGU5ODg0RXlz?=
+ =?gb2312?B?b0JTMDFxV3YrWE9nSFhCV0hnU0t5MTM2YytZT2xTRXpqa1E5eDQyakVYOXJU?=
+ =?gb2312?B?M3Y0b1VYUWF6SWNqbysvZy9IMTB0R2FPamd4UmlLL1RzQ0ZTNjlSVmN3TFpP?=
+ =?gb2312?B?ZE03eXBDMTVxY3FJQkRlaFFyamdWWm5KQk42eTMxdGI4WEMwY2pBSnplWW84?=
+ =?gb2312?B?Y091UFpBSTBNSVdNT2E5NHlGNDZ0Q2ZmbStTQ1RqWkd0RUMzc21sSGJ5U2xj?=
+ =?gb2312?B?MG4wdVIwVEFxQnV4c1E1YXhTWnVPbE1WanpKcmlMV1NhdzJZTDJDclZDS1dU?=
+ =?gb2312?B?YTN2emhLSjd6OW5xRElPSVNHSHJMb3FrMGo3TWp1SmVUK1dZallTZDN1SjZ2?=
+ =?gb2312?B?elRPeXMrYmVJcDFHa1lhTVgyRDFGVkVlV0tyVWdGa1Q1eWpsOURZUG51UmVB?=
+ =?gb2312?B?akFpS21RaCtTNXR3dzQrS2c4T1RQMXFYcGxnL1VRZXlFZkE3cEt0RmJSa1Ny?=
+ =?gb2312?B?QnM2SFVUOUtzbHI2U1oyOXFyNE9DZTU0QXBwZERUZEZXb3hBUFFLMWJiVS9a?=
+ =?gb2312?B?TXh1a0VUczBiSFpJS0NGUFpWT1BRZzllT0hhaEdkSS9Xb0NxRDJ0bG9JWlpN?=
+ =?gb2312?B?QUpWZXVZcWlNQ1ppbWYyOENVa1ZvTSs3bjdsdE82VmVEZDBRU2o2ZHNITno1?=
+ =?gb2312?B?VG5WL3I3OU0vT3d2Ui85LzJGd1Q0WFpQUU83eFJhbVgxb3ZGUXdTdEoxSHVG?=
+ =?gb2312?B?dnBUSUVyWXRXMVAwWC9IY01wUnJPME5JZm9PRFR6djJsMTZRRTBQNXJjcDJ0?=
+ =?gb2312?B?SVpKZmo5eEIwRWxzNWoxdDkvRGtiYUxKaVhzWTV4Q2xmVUFuTFdVd3NCQWVh?=
+ =?gb2312?B?MFJJT0hsN0VZMWNMeGF2b0JNeUljY2ptK3FtaW9ZTDB5UjY1QXRrUjE2N0ww?=
+ =?gb2312?B?QVcrdE9Fc2pYQkhYK01CeXFoQ2xmSlBRSFY1Zk5SdkZ3OTk2UUlrOXdpR2NR?=
+ =?gb2312?B?aExmSlFCUWYxVmlyMUc3SHZ4Sm9keHZoMlU2cDNncWNNUnhWNlJlN3lKQnQ0?=
+ =?gb2312?B?OXJGdW96ekpXeG8zUzdvcFNVYTR6SndDRnpEcVJRL1BqOXdNWW1CSlZVcURH?=
+ =?gb2312?B?NWl6eTFSYnFOMFNQY21Sd283U0QwK3hYSnNaVVVSZVZxcHQwK3FnSmNCK3Ir?=
+ =?gb2312?B?UGs5YXpPWm15QU16RWp1ZTNSdm5CeUN6YXlHcnpvYnZMM21TUGJVRE5LaStE?=
+ =?gb2312?B?NmI1anVnalpMV0QzVGdLT2h0enIvNWJ3UmQvQnBNZ1hmODdkem5UNU12czQ5?=
+ =?gb2312?B?NERVRUFUakU0YThrYm1ocVdycWpSVFZVOWdtNTl1YitpY0FIS29QdXQzbG4r?=
+ =?gb2312?B?V25wTXlFWCtKZWhkNmFBY3Y5NFo4Nkl4M1FmSTVuZ3kwWk5PTlJIRlp6aUcr?=
+ =?gb2312?B?emFUWENvVU5YZ2ZjeWt4bHBPYkdlRlZsMDVFUUt6L3NGQWRnYXJSbllsSUhG?=
+ =?gb2312?B?VHpNNzZaUzI2N3RhSzlhYkd2N1kvbTJnSDAyYm1GUkZobjlsa2hDYjJ5Q3Mr?=
+ =?gb2312?B?MEJwV1BRdWo0d2IvVmJwQThlN2lPck9tdUFrQmluL2NtNzJVVXRKNGJZbjFX?=
+ =?gb2312?B?dEZvT04rSUk1VENLYUlNSnlVdytqcVkvK2pUUVFxMFhocnczci92RXp2NE1k?=
+ =?gb2312?B?aGQvSUFYVVk3RGVkQTBDVUltM1ZsZVIrWGtoR21abnhwa1k4d2krN3hIWmhM?=
+ =?gb2312?Q?0HZ6BfH8gmGJQUDQ=3D?=
+X-Ms-Exchange-Antispam-Messagedata-Chunkcount: 1
+X-Ms-Exchange-Antispam-Relay: 0
+X-Ms-Exchange-Crosstenant-Authas: Internal
+X-Ms-Exchange-Crosstenant-Authsource: 
+ KL1PR0401MB4274.apcprd04.prod.outlook.com
+X-Ms-Exchange-Crosstenant-Fromentityheader: Hosted
+X-Ms-Exchange-Crosstenant-Id: 698b0e46-51c0-4d3b-a023-16f2b23b8c1e
+X-Ms-Exchange-Crosstenant-Mailboxtype: HOSTED
+X-Ms-Exchange-Crosstenant-Network-Message-Id: 
+ 5eec67d7-f644-404b-b182-08de9ea13153
+X-Ms-Exchange-Crosstenant-Originalarrivaltime: 20 Apr 2026 05:53:48.7159
+ (UTC)
+X-Ms-Exchange-Crosstenant-Userprincipalname: 
+ 2Ro19eB2n5st3witIAiKmy2kByhJKBp+An5xc5O3wqIrOL7obUNx0SjIqSiKKZqbzp+jl4OmqPHOXhI/+aOys2hNjE3+8F3trYFj3youyck=
+X-Ms-Exchange-Senderadcheck: 1
+X-Ms-Exchange-Transport-Crosstenantheadersstamped: SE2PPF461B2363D
+X-Ms-Has-Attach: 
+X-Ms-Office365-Filtering-Correlation-Id: 5eec67d7-f644-404b-b182-08de9ea13153
+X-Ms-Publictraffictype: Email
+X-Ms-Tnef-Correlator: 
+X-Ms-Traffictypediagnostic: KL1PR0401MB4274:EE_|SE2PPF461B2363D:EE_
+X-Originatororg: bmw-brilliance.cn
+
+--_000_KL1PR0401MB4274EF259FEE3CA19E74894FB82F2KL1PR0401MB4274_
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
+
+RGVhciBhbGwsDQpBSSBDQU1Q09C8uLj2b3BlbiBwb2ludHOjrLTzvNK/tNK7z8KjrL3xzOzO8bHY
+uOO2qA0KDQogIDEuICBQUFS1xLeiy82ho9axsqW1xMqxuvLO0s/Ic2hvd87StcTGwcS7o6y688Pm
+uPi1vc7iwM/KprXEyrG68qOszuLAz8qm1bnKvlBQVKGjUFBUt6K4+M7So6zO0tf20ru49mJhY2t1
+cC4NCiAgMi4gIERJRlnE2sjdtcTIt8jPoaO98czs0qq4+kRJRlm5pLPMyqbIt8jPxNrI3aOs0+r2
+zrj60rvPwqOsyOe5+8O709C72Li0tN/Su8/CoaPIt8jPzeqjrM/CsODWrsewuObL387SDQogIDMu
+ICBDb3BpbG90LCCy+sa3vq3A7bvh1dLSu7j2yMvWsbKltcTKsbry1/bP1rOhtPDSyaGj06a4w7K7
+u+HX9rrP1/fVucq+o6zV4rj2tdi3vc7iwM/Kpte8sbjSu7j2s8nGt9W5yr692M28sMmhow0Kw/fM
+7DEytePJz8/f1/ay4srUoaPAz8qmv6rJ49Owzbehow0Kyse38bu509DG5Mv7b3BlbiBwb2ludHOj
+vw0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQ0KQk1XIEJyaWxsaWFuY2UgQXV0b21vdGl2ZSBMdGQuIC+7qrO/sabC7cb7s7XT0M/euavL
+vg0KQWRhaCBMaXUsIEFQVEQocikNClRoZSBBY2FkZW15IG9mIEJNVyBHcm91cCBDaGluYQ0KQkJI
+LTFBLTENCk5vbi10ZWNobmljYWwgVHJhaW5pbmcNCg0KVGVsLqO6Kzg2LSAyNC0gODQ1NSA4MTg4
+DQpNYWlsOiBqaWF5YW5nLmxpdUBibXctYnJpbGxpYW5jZS5jbjxtYWlsdG86amlheWFuZy5saXVA
+Ym13LWJyaWxsaWFuY2UuY24+DQpXZWKjumh0dHA6Ly93d3cuYm13LWJyaWxsaWFuY2UuY248aHR0
+cDovL3d3dy5ibXctYnJpbGxpYW5jZS5jbi8+DQoNCg==
+
+--_000_KL1PR0401MB4274EF259FEE3CA19E74894FB82F2KL1PR0401MB4274_
+Content-Type: text/html; charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:=BA=DA=CC=E5;
+	panose-1:2 1 6 9 6 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:=B5=C8=CF=DF;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"\@=B5=C8=CF=DF";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"BMWGroupTN Condensed TT";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"BMW Type Global Regular";
+	panose-1:0 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"\@BMW Type Global Regular";}
+@font-face
+	{font-family:"\@=BA=DA=CC=E5";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"BMWGroupTN Condensed TT";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.WordSection1
+	{page:WordSection1;}
+/* List Definitions */
+@list l0
+	{mso-list-id:945188518;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1476347722 67698703 67698713 67698715 67698703 6769=
+8713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+@list l0:level4
+	{mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+@list l0:level7
+	{mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:none;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;">Dear all,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;">AI CAMP</span><span lang=3D"ZH-CN" style=3D"fo=
+nt-size:11.0pt;font-family:&quot;BMW Type Global Regular&quot;">=D3=D0=BC=
+=B8=B8=F6</span><span style=3D"font-size:11.0pt;font-family:&quot;BMWGroupT=
+N Condensed TT&quot;">open
+ points</span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&q=
+uot;BMW Type Global Regular&quot;">=A3=AC=B4=F3=BC=D2=BF=B4=D2=BB=CF=C2=A3=
+=AC=BD=F1=CC=EC=CE=F1=B1=D8=B8=E3=B6=A8</span><span style=3D"font-size:11.0=
+pt;font-family:&quot;BMWGroupTN Condensed TT&quot;"><o:p></o:p></span></p>
+<ol style=3D"margin-top:0in" start=3D"1" type=3D"1">
+<li class=3D"MsoListParagraph" style=3D"margin-left:0in;mso-list:l0 level1 =
+lfo1"><span style=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condense=
+d TT&quot;">PPT</span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-f=
+amily:&quot;BMW Type Global Regular&quot;">=B5=C4=B7=A2=CB=CD=A1=A3=D6=B1=
+=B2=A5=B5=C4=CA=B1=BA=F2=CE=D2=CF=C8</span><span style=3D"font-size:11.0pt;=
+font-family:&quot;BMWGroupTN Condensed TT&quot;">show</span><span lang=3D"Z=
+H-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW Type Global Regular&q=
+uot;">=CE=D2=B5=C4=C6=C1=C4=BB=A3=AC=BA=F3=C3=E6=B8=F8=B5=BD=CE=E2=C0=CF=CA=
+=A6=B5=C4=CA=B1=BA=F2=A3=AC=CE=E2=C0=CF=CA=A6=D5=B9=CA=BE</span><span style=
+=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;">PPT</=
+span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW T=
+ype Global Regular&quot;">=A1=A3</span><span style=3D"font-size:11.0pt;font=
+-family:&quot;BMWGroupTN Condensed TT&quot;">PPT</span><span lang=3D"ZH-CN"=
+ style=3D"font-size:11.0pt;font-family:&quot;BMW Type Global Regular&quot;"=
+>=B7=A2=B8=F8=CE=D2=A3=AC=CE=D2=D7=F6=D2=BB=B8=F6</span><span style=3D"font=
+-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;">backup.<o:p><=
+/o:p></span></li><li class=3D"MsoListParagraph" style=3D"margin-left:0in;ms=
+o-list:l0 level1 lfo1"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;">DIFY</span><span lang=3D"ZH-CN" style=3D"font-=
+size:11.0pt;font-family:&quot;BMW Type Global Regular&quot;">=C4=DA=C8=DD=
+=B5=C4=C8=B7=C8=CF=A1=A3=BD=F1=CC=EC=D2=AA=B8=FA</span><span style=3D"font-=
+size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;">DIFY</span><sp=
+an lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW Type Glob=
+al Regular&quot;">=B9=A4=B3=CC=CA=A6=C8=B7=C8=CF=C4=DA=C8=DD=A3=AC=D3=EA=F6=
+=CE=B8=FA=D2=BB=CF=C2=A3=AC=C8=E7=B9=FB=C3=BB=D3=D0=BB=D8=B8=B4=B4=DF=D2=BB=
+=CF=C2=A1=A3=C8=B7=C8=CF=CD=EA=A3=AC=CF=C2=B0=E0=D6=AE=C7=B0=B8=E6=CB=DF=CE=
+=D2</span><span style=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Cond=
+ensed TT&quot;"><o:p></o:p></span></li><li class=3D"MsoListParagraph" style=
+=3D"margin-left:0in;mso-list:l0 level1 lfo1"><span style=3D"font-size:11.0p=
+t;font-family:&quot;BMWGroupTN Condensed TT&quot;">Copilot,
+</span><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW=
+ Type Global Regular&quot;">=B2=FA=C6=B7=BE=AD=C0=ED=BB=E1=D5=D2=D2=BB=B8=
+=F6=C8=CB=D6=B1=B2=A5=B5=C4=CA=B1=BA=F2=D7=F6=CF=D6=B3=A1=B4=F0=D2=C9=A1=A3=
+=D3=A6=B8=C3=B2=BB=BB=E1=D7=F6=BA=CF=D7=F7=D5=B9=CA=BE=A3=AC=D5=E2=B8=F6=B5=
+=D8=B7=BD=CE=E2=C0=CF=CA=A6=D7=BC=B1=B8=D2=BB=B8=F6=B3=C9=C6=B7=D5=B9=CA=BE=
+=BD=D8=CD=BC=B0=C9=A1=A3</span><span style=3D"font-size:11.0pt;font-family:=
+&quot;BMWGroupTN Condensed TT&quot;"><o:p></o:p></span></li></ol>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-=
+family:&quot;BMW Type Global Regular&quot;">=C3=F7=CC=EC</span><span style=
+=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;">12</s=
+pan><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-family:&quot;BMW Ty=
+pe Global Regular&quot;">=B5=E3=C9=CF=CF=DF=D7=F6=B2=E2=CA=D4=A1=A3=C0=CF=
+=CA=A6=BF=AA=C9=E3=D3=B0=CD=B7=A1=A3</span><span style=3D"font-size:11.0pt;=
+font-family:&quot;BMWGroupTN Condensed TT&quot;"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"ZH-CN" style=3D"font-size:11.0pt;font-=
+family:&quot;BMW Type Global Regular&quot;">=CA=C7=B7=F1=BB=B9=D3=D0=C6=E4=
+=CB=FB</span><span style=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN C=
+ondensed TT&quot;">open points</span><span lang=3D"ZH-CN" style=3D"font-siz=
+e:11.0pt;font-family:&quot;BMW Type Global Regular&quot;">=A3=BF</span><spa=
+n style=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;=
+"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">---------------------------=
+-----------------------------</span><span style=3D"font-size:10.5pt;font-fa=
+mily:&quot;BMWGroupTN Condensed TT&quot;;mso-ligatures:none"><o:p></o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11.0pt;font-family:&quot=
+;BMWGroupTN Condensed TT&quot;;mso-ligatures:none">BMW Brilliance Automotiv=
+e Ltd. /</span></b><span lang=3D"ZH-CN" style=3D"font-family:=BA=DA=CC=E5;c=
+olor:#1F4E79;mso-ligatures:none">=BB=AA=B3=BF=B1=A6=C2=ED=C6=FB=B3=B5=D3=D0=
+=CF=DE=B9=AB=CB=BE</span><i><span style=3D"font-size:11.0pt;font-family:&qu=
+ot;BMWGroupTN Condensed TT&quot;;mso-ligatures:none"><o:p></o:p></span></i>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">Adah Liu, APTD<sup>&reg;<o:=
+p></o:p></sup></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">The Academy of BMW Group Ch=
+ina<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">BBH-1A-1<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">Non-technical Training<o:p>=
+</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none"><o:p>&nbsp;</o:p></span></p=
+>
+<p class=3D"MsoNormal"><span lang=3D"EN-GB" style=3D"font-size:11.0pt;font-=
+family:&quot;BMWGroupTN Condensed TT&quot;;mso-ligatures:none">Tel.</span><=
+span lang=3D"ZH-CN" style=3D"font-family:=B5=C8=CF=DF;color:#1F4E79;mso-lig=
+atures:none">=A3=BA</span><span style=3D"font-size:11.0pt;font-family:&quot=
+;BMWGroupTN Condensed TT&quot;;mso-ligatures:none">+86-
+ 24- 8455 8188</span><span lang=3D"EN-GB" style=3D"font-size:11.0pt;font-fa=
+mily:&quot;BMWGroupTN Condensed TT&quot;;mso-ligatures:none"><o:p></o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;BM=
+WGroupTN Condensed TT&quot;;mso-ligatures:none">Mail:
+<a href=3D"mailto:jiayang.liu@bmw-brilliance.cn"><span style=3D"color:#1F4E=
+79">jiayang.liu@bmw-brilliance.cn</span></a><o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"text-align:justify;text-justify:inter-ideog=
+raph"><span style=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condense=
+d TT&quot;;mso-ligatures:none">Web</span><span lang=3D"ZH-CN" style=3D"font=
+-family:=B5=C8=CF=DF;color:#1F4E79;mso-ligatures:none">=A3=BA</span><span s=
+tyle=3D"font-size:11.0pt;font-family:&quot;BMWGroupTN Condensed TT&quot;;ms=
+o-ligatures:none"><a href=3D"http://www.bmw-brilliance.cn/"><span style=3D"=
+color:#1F4E79">http://www.bmw-brilliance.cn</span></a><o:p></o:p></span></p=
+>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_KL1PR0401MB4274EF259FEE3CA19E74894FB82F2KL1PR0401MB4274_--

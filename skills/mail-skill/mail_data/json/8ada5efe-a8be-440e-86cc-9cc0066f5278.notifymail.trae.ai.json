@@ -1,0 +1,21 @@
+{
+  "message_id": "<8ada5efe-a8be-440e-86cc-9cc0066f5278.notify@mail.trae.ai>",
+  "imap_uid": "2982",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "[TRAE] Meet the New SOLO (Beta Early Access)",
+  "sender": "notify@mail.trae.ai",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-04T07:30:27+00:00",
+  "body_text": "Introducing The New SOLO\nDear TRAE User,\nOn March 31, we launched the new\nTRAE\nSOLO (beta)\n, a standalone AI agent designed for everyone in the product development lifecycle.\nDevelopers, product managers, data scientists, designers, marketers, operations teams, everyone in the professional workspace can leverage SOLO to handle their tasks.\nWith SOLO, you define the task, review the results, and SOLO handles the execution, turning your files and context into structured, professional deliverables.\nWhat's New in SOLO\n- Code Mode:\na focused, chat-driven coding experience where SOLO writes, runs, and iterates on code\n- MTC (More Than Coding) Mode:\nhandles\nprofessional tasks like creating documents, analyzing datasets, generating reports, building presentations, and conducting research from a single workspace\n- Desktop and Web:\nwork with local files on Desktop, or run tasks in the cloud via Web\nBeta\nEarly Access\n- SOLO is\nfree\nduring the beta early access phase. An\ninvite code\nis required\n-\nTRAE\nUltra users\ndo not need a code as beta early access is included in the plan\n-\nInvite codes are available through\nsocial media giveaways\n,\ncommunity events\nand\nTRAE IDE drops\nTake a Deep Dive\nSOLO is now available on Desktop and Web.\nTake a deeper dive into the full launch blog which includes best practices and role based scenarios that show how SOLO helps you move from ideas to professional deliverables, faster.\nExplore SOLO Now\nHave a great time exploring SOLO!\nThe TRAE Team\nFollow us for product updates, best practices, and community highlights:\nDiscord\nYouTube\nX\nTo help make your experience with TRAE the best it can be, we’ll send occasional updates about news, offers, or other resources. If you no longer want to receive any updates from us, feel free to\nunsubscribe\nat any time.",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/8ada5efe-a8be-440e-86cc-9cc0066f5278.notifymail.trae.ai.eml"
+}

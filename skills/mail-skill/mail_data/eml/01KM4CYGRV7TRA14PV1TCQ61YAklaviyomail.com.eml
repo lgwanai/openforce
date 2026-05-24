@@ -1,0 +1,181 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:170.203.16.38)
+ smtp.mailfrom=bounce-kl_25914533320-kl_101101km3zfb9tjw1fxc-h-92eb83abb1=2@k3.send.photologo.co;
+ dkim=pass header.b=cSpTVIOMpj header.i=@shared.klaviyomail.com header.s=def1;
+ dkim=pass header.b=WBPWGn/FNs header.i=@send.photologo.co header.s=mtd1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=photologo.co;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=3A+IF0ZTFDeRVcIkDN6C6zrCvUVFFTaXG3QRSc9Gk6Y=;
+ b=RYFcWJkZhi19lF/kmYs73UddbF+xqerkW/beK4aV2q/GkPlL+YOUgn0VRGtuT/Q0kMysG4i
+ Ic8N/74Px/V7RXiAR0CalvxUxN5Jp8TdIa1DFSqe2UAP5WE/0a5XItGB0I9w/jR6K3+1fBwh3
+ RrRZlXwIxGqu0dtUKPeRoOZg79ibKz51tqmKNPs1pTNXeCoEnj6nvjrE7DQxSJ69z9a844ooi
+ KM9suVC9SmWtvZ8DKHsQcKzf3XTdDEU3mYOVmJ6me2ml7QM6EZU2TaBEzCLsiWolx482mhkF4
+ +U14Ynwluz86iCxt7CNdIPR/QrB+jrkVnFx2aPoOWuVhcwUlXNGw==
+Arc-Seal: i=1; a=rsa-sha256; t=1773970222; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=gVNy0Q5Wno1mWg26WgB91Zc0jak8MGaSuMYlxw+UMoy92/sN6nw8WPPg7kFKZUb1/osI224
+ 7bIauqMhaD95dH1paCEThfR1gYZBMQdVMbb0Yd0d0gxJstuGVWEjE9Lrbs6FS9xirgYlMZZla
+ 9M4OKq8fGYYM3+7sh49CtJZeQn8HAWY1gxL5UcY2L7FhYlqvF76txJ6u7TrShs4vevsV2tg2z
+ TGf1/47RsvavGNsM38Z787XVJy4e6MobTTC466Nm/NEl3jGRTi0ROFyJ70iLHmLusPxu6P9nh
+ dW6hh7laqOeLIQ5KdKB5VATqltZ48Pu5CKaqOZmhaP5O8AN3ulGw==
+Authentication-Results: lms; spf=pass (client-ip:170.203.16.38)
+ smtp.mailfrom=bounce-kl_25914533320-kl_101101km3zfb9tjw1fxc-h-92eb83abb1=2@k3.send.photologo.co;
+ dkim=pass header.b=cSpTVIOMpj header.i=@shared.klaviyomail.com header.s=def1;
+ dkim=pass header.b=WBPWGn/FNs header.i=@send.photologo.co header.s=mtd1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=photologo.co;
+ arc=none
+Cfbl-Address: fbl@kmta.shared.klaviyomail.com; report=arf
+Content-Type: multipart/alternative;
+ boundary=c53cdfe05b0ace2124f6d9f5f68e910e7d647beb44a66fa33053e1c24687
+Date: Fri, 20 Mar 2026 01:30:06 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: a=rsa-sha256;
+ bh=3A+IF0ZTFDeRVcIkDN6C6zrCvUVFFTaXG3QRSc9Gk6Y=; c=relaxed/relaxed;
+ d=shared.klaviyomail.com;
+ h=DKIM-Signature:Subject:From:To:CFBL-Address:List-Unsubscribe:Message-ID:List-Unsubscribe-Post:Date:Subject:From:To:CC:Date:CFBL-Feedback-ID:CFBL-Address;
+ s=def1; t=1773970207; v=1;
+ b=cSpTVIOMpj3BqBnSqc5mdSAcmDJg+HRrc35AhdAdMQo1P9szAumi/SOWurdkNApNqrUuazuF
+ loPhO4rv7OBoTIE1L32+BhVZ252ckpEP3m7qfimzCfTjMM3J1Y1nl02GjQb8Q7KyVA7DzRPhyyn
+ xFTjY1dE2o2xGxTAJYfDrPrU=
+Dkim-Signature: a=rsa-sha256;
+ bh=3A+IF0ZTFDeRVcIkDN6C6zrCvUVFFTaXG3QRSc9Gk6Y=; c=relaxed/relaxed;
+ d=send.photologo.co;
+ h=Subject:From:To:CFBL-Address:List-Unsubscribe:Message-ID:List-Unsubscribe-Post:Date:Subject:From:To:CC:Date:CFBL-Feedback-ID:CFBL-Address;
+ s=mtd1; t=1773970207; v=1;
+ b=WBPWGn/FNsb7VwyKGrSFbe1vMltibS9MmOjhkoeuCXcHUu3I/incMWsmDZp5K2YCvoxc8LHK
+ a2UV7iDdPUDzGhGGGWOGple8Gk93AQjUrqZqNcY05uqJduWXoKBKkWtU/XRB6CmO//tXycsCixM
+ gVsIX1CPorcSF28tqA3a7xKo=
+From: "Photologo" <info@photologo.co>
+List-Unsubscribe: 
+ <https://manage.kmail-lists.com/subscriptions/unsubscribe?a=R55CVA&c=01K670GK2F9D45GRSC03AG34ZQ&k=788b7f09a9a4b9f668eeae632f08a849&m=01KM3ZFB9TJW1FXC7JZ6PK1H31&r=01KM4CYGRV7TRA14PV1TCQ61YA>,
+ <mailto:unsub1-01K670GK2F9D45GRSC03AG34ZQ-KI2TKQ2WIE======@shared.klaviyomail.com?subject=request%20unsubscribe%20ME6VENJVINLECJTDHUYDCSZWG4YEOSZSIY4UINBVI5JFGQZQGNAUOMZULJISM2Z5G44DQYRXMYYDSYJZME2GEOLGGY3DQZLFMFSTMMZSMYYDQYJYGQ4SM3J5GAYUWTJTLJDEEOKUJJLTCRSYIM3UUWRWKBFTCSBTGETHEPJQGFFU2NCDLFDVEVRXKRJECMJUKBLDCVCDKE3DCWKB>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <01KM4CYGRV7TRA14PV1TCQ61YA@klaviyomail.com>
+Mime-Version: 1.0
+Received: from unknown (HELO kmta-worker-prod-go-bbc5cd8f8-xmtp8)
+ (kmta-send@vmta.klaviyomail.com@10.6.95.95) by
+ kmta-mta-blue-025161ad3c459bf3e.servers.clovesoftware.com with SMTP; 20 Mar
+ 2026 01:30:07 -0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=170.203.16.38;
+ helo=kl-203-16-38.kmta.shared.klaviyomail.com;
+ envelope-from=bounce-kl_25914533320-kl_101101km3zfb9tjw1fxc-h-92eb83abb1=2@k3.send.photologo.co;
+ receiver=<UNKNOWN>;
+Subject: The universal "thief" of professional satisfaction
+To: <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773970214/4fcQ3m2q03zlpGM1/69BCA324.001/170.203.16.38/kl-203-16-38.kmta.shared.klaviyomail.com/localhost/<bounce-kl_25914533320-kl_101101km3zfb9tjw1fxc-h-92eb83abb1=2@k3.send.photologo.co>
+X-Fangmail-Mid-Qid: 69BCA324.001/4fcQ3m2q03zlpGM1
+X-Fangmail-Miltered: at n151-171-209 with ID 69BCA324.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Kmail-Account: R55CVA
+X-Kmail-Message: 01KM3ZFB9TJW1FXC7JZ6PK1H31
+X-Kmail-Ops: 01K670GK2F9D45GRSC03AG34ZQ
+X-Lms-Client-Ip: 170.203.16.38
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ bounce-kl_25914533320-kl_101101km3zfb9tjw1fxc-h-92eb83abb1=2@k3.send.photologo.co
+X-Lms-Pvf: 
+ MnwyfDF8fO06BpBYrB9cbqb6eG/mQ50VUylF3MDa3CuuFtr8WrQz37LaWvDzKxSwSoKMNNB6jFld8QWz+cMxVFgjiiSI83CySYFid6ajTTy1SZmPhN5H6XyYWD3Soi6UpZ6ARuBHhQ==
+X-Mailer-Info: 10.sGbfJTN5EDN1MzMzIDM.sGbfFDMxEDMxsWbzonZilDdqdXMmh3Y.wd1xWah
+ 52ZAhXah52Z6lmehlmLj9Wb.gsnIwEzSNRzQZdkUWdDVSFUM0AlVxQ1QRZTMZFkI6snIjJiOiIVN
+ 1MkVBJCLiMWYtJiOxwiIoRnI6EzN3MTO3AjMwYDLi0mI6ICMxsUTzolRClDVKdVMGh1Q3okW2A1S
+ xg0MxICLiQnI6EzN3MTO3AjMwQDLiQXbiojIwEzSNRzQZdkUWdDVSFUM0AlVxQ1QRZTMZFkIsICe
+ iojItFmb1FGbi0Xf..EDMxEDMxsUTzolRClDVKdVMGh1Q..
+X-Mailer-Info-Extra: 92eb83abb1:0DhlRxclSUljQGp1MNtUMwETMwEDApBQf9JCbh
+ Vnbh1mI6ICeiwiIBlVM2E1QUFjVQRTMBJFV3YlUHl1Q000SxAjI6ISb0JCL0AjMwcTOzc
+ zNxojI0JCLiEzMIFzSQZjWKdzQYZUMXpEV5IkRaNTTLFDMiojItJCL2AjMwcTOzczNxoj
+ I0hmIsEjOi0WYjJCLiEkVDVTNSJiOiMmI7pjIBlVM2E1QUFjVQRTMBJFV3YlUHl1Q000S
+ xAjI7BCAjBQbvNmLpFmepp3ZuFWa4B0ZuFWasV3d++
+X-Mailer-Info-Extra2: 22c81135ee:0MGemFzdqRXOiZmez02axATMxATMfx2aAMHAt
+ 92YukWY6lmen5WYphHQn5WYpxWd3BgcAgzMuEjL04CMxAAcvBAOz0iNx0yMwITLstGAu9
+ GAzMDAp9GAt92YuwWah12b5lmdhx2auQWZyFGaz5SY012augzMtYTMtMDMy0CbrBAavBg
+ Mf1WdpRWZtBgbtBAM5kDAp1GAy8Vb1lGZl1GAtBAMyMzMzUDNxkTNy8FbrBAbAMEWGFzV
+ KRVOCZkWz00SxATMxATMAkGA91nIsFWduFWbiojI4JCLiEUWxYTUDRVMWBFNxEkUUdjVS
+ dUWDRTTLFDMiojItRnIsQDMyAzN5MzN3EjOiQnIsISMzgUMLBlNap0NDhlRxclSUljQGp
+ 1MNtUMwIiOi0mIsYDMyAzN5MzN3EjOiQHaiwSM6ISbhNmIsISQWNUN1IlI6IyYisnOiEU
+ WxYTUDRVMWBFNxEkUUdjVSdUWDRTTLFDMisHIAMGAzUmMkFzMhBjNxQTO++
+X-Report-Abuse: Please report any spam or abuse to: abuse@klaviyo.com
+
+--c53cdfe05b0ace2124f6d9f5f68e910e7d647beb44a66fa33053e1c24687
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+
+Hi ,
+
+Whether you=E2=80=99re a chef or a coder, we all share one psychological ne=
+ed: Attribution.
+
+Psychologists call it the "Endowment Effect"; the deep-seated satisfaction =
+of being identified with our own creations. When that link is broken, the w=
+ork feels diminished. Yet, in our digital world, your best efforts often be=
+come "anonymous" the moment they are shared.
+
+You=E2=80=99ve captured the vision, but is your identity traveling with it?
+
+We believe your craft deserves more than just a digital footprint; it deser=
+ves a signature. At [Photologo](https://my.photologo.co/order/signature), w=
+e bridge the gap between creation and credit. We don't just "watermark"; we=
+ provide a [hand-crafted, elegant identity](https://my.photologo.co/order/s=
+ignature) that turns a fleeting image into a permanent legacy.
+
+Don't let your work go nameless. Give it the finish it=E2=80=99s been missi=
+ng.
+
+Best,
+The Photologo Team
+
+P.S. [Claim your craft!](https://my.photologo.co/order/signature)
+
+You received this email from Photologo. If you would like to unsubscribe, [=
+click here](https://manage.kmail-lists.com/subscriptions/unsubscribe?a=3DR5=
+5CVA&c=3D01K670GK2F9D45GRSC03AG34ZQ&k=3D788b7f09a9a4b9f668eeae632f08a849&m=
+=3D01KM3ZFB9TJW1FXC7JZ6PK1H31&r=3D01KM4CYGRV7TRA14PV1TCQ61YA).
+--c53cdfe05b0ace2124f6d9f5f68e910e7d647beb44a66fa33053e1c24687
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html><html><head><!--[if !mso]><!--><style>@import url("https://s=
+tatic-forms.klaviyo.com/fonts/api/v1/R55CVA/custom_fonts.css");</style><!--=
+<![endif]--></head><body><img src=3D"https://ctrk.klclick1.com/o/01KM4D0DVC=
+CXWEVSY6BA0JSX60" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"h=
+eight:1px !important;width:1px !important;border-width:0 !important;margin-=
+top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margi=
+n-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;pa=
+dding-right:0 !important;padding-left:0 !important;"/><p>Hi ,</p>
+<div>Whether you=E2=80=99re a chef or a coder, we all share one psychologic=
+al need:<span style=3D"font-weight: bold;"> Attribution.</span> <br><br>Psy=
+chologists call it the "Endowment Effect"; the deep-seated satisfaction of =
+being identified with our own creations. When that link is broken, the work=
+ feels diminished. Yet, in our digital world, your best efforts often becom=
+e "anonymous" the moment they are shared.<br><br></div>
+<div>You=E2=80=99ve captured the vision, but is your identity traveling wit=
+h it?<br><br></div>
+<div>We believe your craft deserves more than just a digital footprint; it =
+deserves a signature. At <a href=3D"https://ctrk.klclick1.com/l/01KM4D0DVCC=
+XWEVSY6BA0JSX60_0">Photologo</a>, we bridge the gap between creation and cr=
+edit. We don't just "watermark"; we provide a <a href=3D"https://ctrk.klcli=
+ck1.com/l/01KM4D0DVCCXWEVSY6BA0JSX60_1">hand-crafted, elegant identity</a> =
+that turns a fleeting image into a permanent legacy.<br><br></div>
+<div>Don't let your work go nameless. Give it the finish it=E2=80=99s been =
+missing.<br><br></div>
+<div>Best,</div>
+<div>The Photologo Team<br><br>P.S. <a href=3D"https://ctrk.klclick1.com/l/=
+01KM4D0DVCCXWEVSY6BA0JSX60_2">Claim your craft!</a></div><table align=3D"le=
+ft" style=3D"text-align:left;background:#fff;">
+    <tbody><tr>
+        <td align=3D"left" valign=3D"top" style=3D"color:#888;font-family:H=
+elvetica,Arial,sans-serif;font-size:12px;line-height:110%;padding-top:20px;=
+text-align:left;">
+            <br><br>
+            You received this email from Photologo. If you would like to un=
+subscribe, <a style=3D"color:#888;" href=3D"https://ctrk.klclick1.com/l/01K=
+M4D0DVCCXWEVSY6BA0JSX60_3">click here</a>.
+        </td>
+    </tr>
+</tbody></table></body></html>
+--c53cdfe05b0ace2124f6d9f5f68e910e7d647beb44a66fa33053e1c24687--

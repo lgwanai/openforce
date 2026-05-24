@@ -1,0 +1,87 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.30.252.205)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=b86BQ3Mn9u
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=JxERl8iONsH7gniJO9jfAzRWyqgAbFGYcTSm7deThls=;
+ b=znJGetyA8Y8EQ/p2rqDRJM1bYw0b+StaSvNkz9tqwvvKgMZwK2JlqkHJzzGhwmKtgmqWKWp
+ Ya3aIzBqKZP3IaKFVBgIcooaEC/6nkYnWnSo31YpOm1/lRPn5MdBNe6K5QIw9yZmdhHMGMtw9
+ IPINwXr4Vy/+tp54P66csEV+r7TpHW8KPn0LPrE/tjRc8PCMw7/5TWqfdHLrZp/zI+POXPVyZ
+ wlNzTfWi1d5kwHmikpWw96T6S+qzkcOnYBOFB0iE1qYxyFxmSk3mp5Yhx0X/SNuYXkBuAacjd
+ 3KrUB4IGgJBMmA+JI6L2va1zggNIzjr9XFAdvH9xQ3Gh/pUn9nYw==
+Arc-Seal: i=1; a=rsa-sha256; t=1773751631; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=oHzH2EZQoQQCVctW5V8EqVHv5OJEAsKMvxYlQXg2plcEyxPYHAsoxI34nRe0ZDuGQEbPapo
+ U3IU3xAGA6N97P9NDAyCsMMCmEfro2Zun4obrHOAlwpiC4afNxW3IQ81ZvwoBOnNj1qjRkmTp
+ L7VDw7SleOoKtPyvZKZW5bEVX1QzteIGqokLThg1UcsgSTYRuVuHG6qHgi6HdgYWA4f5oJlaG
+ K8Zt7ji0C0Shv2hLrGqgzshC4Z9rbR8hLdhho/SZtdq2Al5/6V5n8sycbpb4mA+dgDFWT/tPw
+ jLU8ZTdbsfTLXY/208M2kUcmz+83SWtNg4qSyCEXOxJbZpaoYjkg==
+Authentication-Results: lms; spf=pass (client-ip:192.30.252.205)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=b86BQ3Mn9u
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 17 Mar 2026 05:47:03 -0700
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+ s=pf2023; t=1773751624; bh=JxERl8iONsH7gniJO9jfAzRWyqgAbFGYcTSm7deThls=;
+ h=Date:From:To:Subject:From;
+ b=b86BQ3Mn9uknrQFCEhSA32DcWSfdMjaj3Vhr6QLXbnwEPerTeqYJU7NEPy61HYtqE
+ N3ipaZ3sMzadFVD0o7jvVDK82+jkSH5HhH1J83Isee6TXxAHiELEKkIJJdpMhDpYWs
+ sTL6UdanwjHlr4ephWwE0WPL4Qd8j1Ur+6o3k/bw=
+From: GitHub <noreply@github.com>
+Message-Id: <69b94d47e84b3_d41118821d4@flexworker-66d9bcb955-mgwgt.mail>
+Mime-Version: 1.0
+Received: from github.com (hubbernetes-node-e16a99e.ac4-iad.github.net
+ [10.52.142.39]) by smtp.github.com (Postfix) with ESMTPA id EACF921394 for
+ <wuliang@xiangzizai.com>; Tue, 17 Mar 2026 05:47:03 -0700 (PDT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.30.252.205;
+ helo=out-22.smtp.github.com; envelope-from=noreply@github.com;
+ receiver=<UNKNOWN>;
+Subject: [GitHub] Please download your two-factor recovery codes
+To: lgwanai <wuliang@xiangzizai.com>
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Mid-Qid: 69B94D4B.00A/4fZsDC5xFsz282MRX
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 192.30.252.205
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: noreply@github.com
+X-Lms-Pvf: 
+ MnwyfDF8fCn1WlmdUnk2QlNoD6lagDTwwkfNPZjII0LGzufgYgSXz3/OYJDSadvQCnRgFX7IOb5hsyMwWO+oFkFG2PvS/OGR07Jj6ffa0ootVrwRf+NhPKJRqnMvQzoISrFnLUXVXQ==
+
+Hey lgwanai!
+
+You=E2=80=99ve just enabled two-factor authentication.
+
+Please take a moment to check that you have saved your recovery codes in =
+a safe place. You can
+download your recovery codes at:
+
+https://github.com/settings/auth/recovery-codes
+
+Recovery codes are the only way to access your account again. By saving y=
+our
+recovery codes, you=E2=80=99ll be able to regain access if you:
+
+* Lose your phone
+* Delete your authenticator app
+* Change your phone number
+
+GitHub Support will not be able to restore access to your account.
+
+To disable two-factor authentication, visit
+https://github.com/settings/security
+
+More information about two-factor authentication can be found on GitHub H=
+elp at
+https://docs.github.com/articles/about-two-factor-authentication
+
+If you have any questions, please visit https://support.github.com.
+
+Thanks,
+Your friends at GitHub

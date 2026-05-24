@@ -16,12 +16,42 @@ pub struct App {
 
 impl App {
     pub fn new(addr: SocketAddr) -> Self {
+        let token_verifier = Self::create_verifier_from_env();
         Self {
             addr,
             session_store_addr: std::env::var("SESSION_STORE_ADDR").unwrap_or_else(|_| "127.0.0.1:50051".into()),
             project_tools_addr: std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into()),
             effect_gateway_addr: std::env::var("EFFECT_GATEWAY_ADDR").unwrap_or_else(|_| "127.0.0.1:50054".into()),
-            token_verifier: None,
+            token_verifier,
+        }
+    }
+
+    /// Load the Scheduler's Ed25519 public key for capability token verification.
+    /// REQUIRED in production: set SCHEDULER_PUBLIC_KEY_PATH to a file containing 32-byte Ed25519 public key.
+    /// If not set, a warning is logged and signature verification is skipped (INSECURE — dev/test only).
+    fn create_verifier_from_env() -> Option<middleware::TokenVerifier> {
+        match std::env::var("SCHEDULER_PUBLIC_KEY_PATH") {
+            Ok(path) => {
+                match std::fs::read(&path) {
+                    Ok(bytes) => {
+                        if bytes.len() != 32 {
+                            tracing::error!("SCHEDULER_PUBLIC_KEY_PATH={path}: expected 32 bytes, got {}", bytes.len());
+                            None
+                        } else {
+                            tracing::info!("scheduler public key loaded from {path}");
+                            Some(middleware::TokenVerifier::from_public_key_bytes(bytes))
+                        }
+                    }
+                    Err(e) => {
+                        tracing::error!("failed to read SCHEDULER_PUBLIC_KEY_PATH={path}: {e}");
+                        None
+                    }
+                }
+            }
+            Err(_) => {
+                tracing::warn!("SCHEDULER_PUBLIC_KEY_PATH not set — token signature verification DISABLED (INSECURE, dev/test only)");
+                None
+            }
         }
     }
 

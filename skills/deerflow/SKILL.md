@@ -1,6 +1,12 @@
 ---
 name: deerflow-skill
 description: DeerFlow agent orchestration for complex tasks requiring multi-step reasoning, web search, tool orchestration, or parallel subagent delegation. Use when user needs to research topics, search web, or delegate complex tasks to subagents. 使用此 Skill 进行复杂任务的编排和执行。
+allowed-tools:
+  - web_search
+  - web_fetch
+version: "1.0.0"
+author: openforce
+license: MIT
 ---
 
 # DeerFlow Agent

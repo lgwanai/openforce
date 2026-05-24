@@ -1,0 +1,1740 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:159.183.103.72)
+ smtp.mailfrom=bounces+50481841-cddd-wuliang=xiangzizai.com@em7206.mail.trae.ai;
+ dkim=pass header.b=HA2vS7lQlH header.i=@mail.trae.ai header.s=s1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=mail.trae.ai; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=Ook0anJr8xwRY7gZqnmyo81Q6Z4GjQGquBPiaCFjt0g=;
+ b=OeNx2jeck8yFm6+hmwqWx7fHGEomrNchg7bH2xdNltWHdSStXbnEUF1PSm0kqjJX+7gjpb1
+ qHqm+9GF2r22GclHz0RMXIu1j0xzPONuy4BYA+iNjzU1MASqd97R0LgXiYvxu+nM6lQvHcMlO
+ ej/Ea7BGGyS7a7SoBf+tSRkKKPbxtUXJhix7Zc9gDGLG4OI5Ju/C4vuaGOUDCwT1OVLxrQrY7
+ zHLLccrccCX6KPq+tCOUneW1gKa7+AF3DvurraG0KRaY3CVDTrgaeMciNjg4VSi1rb773r0QG
+ bvobHi6Uqwjhe9KVc4kUtHZ5TMVQHBdnJzega5YHPcF1avTj5GhA==
+Arc-Seal: i=1; a=rsa-sha256; t=1775287835; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=ZX579PnAwxFNkpHPxuXN6mGKbWw0/wPj5tm3R7UYxtjzxPS1jO61x02oHOTUsDEeeRQjPLX
+ UP3yPOU+vP4HmEgSzozzXqDK8NzRChYcfCD/5L9o9bOU/jjYo81pB9ekrPygfwOaBoS33j57u
+ UKZ8NoXIvyYYsaRI//VrXwWRYYztTp7vW8Qhjz/wV6oP9bQgTKT5bs+M63hHiUUV1HqRwmSg8
+ rQVtWVbR0s5+7mvVal4+l3I6U9hjhPuU8AMO31Fcx5AR1DL+NfkS5eW6qxZ53kuAXMa0YcuT6
+ pETWbguOFSulgoep7+sLrrjvvOmiBL+yDDO+ZT8IzQLrKypefzFQ==
+Authentication-Results: lms; spf=pass (client-ip:159.183.103.72)
+ smtp.mailfrom=bounces+50481841-cddd-wuliang=xiangzizai.com@em7206.mail.trae.ai;
+ dkim=pass header.b=HA2vS7lQlH header.i=@mail.trae.ai header.s=s1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=mail.trae.ai; arc=none
+Content-Type: multipart/alternative; boundary="GoBoundary"
+Date: Sat, 04 Apr 2026 07:30:27 +0000 (UTC)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mail.trae.ai;
+ h=mime-version:from:date:list-unsubscribe-post:subject:content-type:
+ list-unsubscribe:reply-to:to:cc:content-type:date:from:subject:to; s=s1;
+ t=1775287827; bh=Ook0anJr8xwRY7gZqnmyo81Q6Z4GjQGquBPiaCFjt0g=;
+ b=HA2vS7lQlHuZYsmDLNY6xIizv15IPqX9mluGQASIz7kp1/UfvUOw3aR1YDxxVu0VRWfe
+ upHXOQk55B65ntPyTh+xNhU8w4JCtrcQSrpbxPdb3EbvKMP91/TK4ZK7el2DMHLHbSYTf5
+ 3MtJxPbeIxAgtZfRkmRn+e8hesUtHCRqx6k3d+iM8wTarTAzwA7GEsr92wDrPMf7x/0/OK
+ Q+HZJt1dctzG0+CfSHG+qugxfe7ibaYrR3615OwQK2/CtXOqzis1OBqU546gO9jUU8G5JZ
+ /msY/OUezVN3dE6xoEu7rJXhwzlK3sjZYYS7TlkS54Po0hWoVPk/SJC7elcRQ9Og==
+From: TRAE <notify@mail.trae.ai>
+List-Unsubscribe: 
+ =?us-ascii?Q?=3Chttps=3A=2F=2Fwww=2Etrae=2Eai=2Funsubscribe=3Fticket=3DbtpYjHx%2FWr2G5GGacmua?=
+ =?us-ascii?Q?DnKEjh44cQm70ifXfrb2FRw3OLGtSlsE4qTTDPS?=
+ =?us-ascii?Q?NGExDDEPXKEMjh4djxFhE5rAOsciyHak%2B%2FV?=
+ =?us-ascii?Q?fU%2BhihrF0wClZFjDFPDNo4noscPJVUyqZ35xP?=
+ =?us-ascii?Q?pOdzj9gD154rteya3yhprZ5T9zYRRNhJ8l7azEd?=
+ =?us-ascii?Q?Kiukb4cRSz%2FE0dX7U%3D&msg=5Fid=3D8ada5efe-?=
+ =?us-ascii?Q?a8be-440e-86cc-9cc0066f5278&timestamp=3D1?=
+ =?us-ascii?Q?775287826&aid=3D677332&from=3Dnotify=40mail=2Et?=
+ =?us-ascii?Q?rae=2Eai&to=3DhsL7k%2Fs6HYHrIH8BxZmeh55Mycf?=
+ =?us-ascii?Q?CWfL974DjgIS5GM%2Flrn0QqrP11wusrVG0CMeT?=
+ =?us-ascii?Q?YOn0z7f7rF7h9Y%2BE&scene=5Fid=3D104&tid=3D808?=
+ =?us-ascii?Q?95&uid=3D7462206472203879441=3E?=
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <8ada5efe-a8be-440e-86cc-9cc0066f5278.notify@mail.trae.ai>
+Mime-Version: 1.0
+Received: by recvd-75d9db7f9f-gghlq with SMTP id
+ recvd-75d9db7f9f-gghlq-1-69D0BE13-7F 2026-04-04 07:30:27.238008611 +0000
+ UTC m=+383623.866275956
+Received: from localhost (unknown) by geopod-ismtpd-0 (SG) with ESMTP id
+ 77nz1LX6Tc-S0ydsKMx9uw for <wuliang@xiangzizai.com>; Sat, 04 Apr 2026
+ 07:30:26.890 +0000 (UTC)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=159.183.103.72;
+ helo=o41.ptr6729.bytedance.com;
+ envelope-from=bounces+50481841-cddd-wuliang=xiangzizai.com@em7206.mail.trae.ai;
+ receiver=<UNKNOWN>;
+Reply-To: notify@mail.trae.ai
+Subject: [TRAE] Meet the New SOLO (Beta Early Access)
+To: wuliang@xiangzizai.com
+X-Alidm-Trace: eyJPcGVuVHJhY2UiOiIxIiwiVGFnTmFtZSI6Im9wZW50YWcifQ==
+X-Entity-Id: u001.d0AwOZZ2ChmJM/d7jYeEag==
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775287832/4fnnLc2l37zlgbhx/69D0BE18.001/159.183.103.72/o41.ptr6729.bytedance.com/localhost/<bounces+50481841-cddd-wuliang=xiangzizai.com@em7206.mail.trae.ai>
+X-Fangmail-Mid-Qid: 69D0BE18.001/4fnnLc2l37zlgbhx
+X-Fangmail-Miltered: at n151-171-210 with ID 69D0BE18.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 159.183.103.72
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ bounces+50481841-cddd-wuliang=xiangzizai.com@em7206.mail.trae.ai
+X-Lms-Pvf: 
+ MnwyfDF8fPT808IXAc7mewEyjitHcUW5kmphB4cuK1NGmy4PnV5ym8uRayUUoOcXtodf2S5ZTlxKsG/H+7UY70SMAvpWlQiUub2Kzfevf3r7lfD0FLv171r5YWVe/+7+iznf7c5Ilw==
+X-Sg-Eid: 
+ =?us-ascii?Q?u001=2E=2FiUrM+pjQCGKV7kLatQ8f6uk8VGS8DRkyKVPJjmbfJoidhljRxmPkx7GD?=
+ =?us-ascii?Q?GgpdPlNj25B7WUYKJbaHyhXCRYtOKhk2RS1RPUA?=
+ =?us-ascii?Q?vxAcnlmG+fad5lf3vKgIcT02r=2FVrvxI5+frzHBp?=
+ =?us-ascii?Q?sR9mG9riHEo8LxMu5IbTaeli0lIy0P2U7WOfE1p?=
+ =?us-ascii?Q?zvjNXTfsNI5wWj9ciZ9nl3tKij34pwS3tEyjCid?=
+ =?us-ascii?Q?7HvC+fAc4qJDDzg1PgOGrI=3D?=
+X-Sg-Id: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BpTL9BgbK5wfSJMJGMsmprCwCFE4V+wi854pf?=
+ =?us-ascii?Q?mhqyXfmckDLhrT+PFlEZ8N7fQ6vN+EW4SwgFTYP?=
+ =?us-ascii?Q?QpF41XwsjWKK3wjb2dWAlCibfn0hMqxpI9WlZO8?=
+ =?us-ascii?Q?RDIcHQlOnrIHc33MTb8eUuxHuNVcobdXN4QLCSu?=
+ =?us-ascii?Q?Z=2FPYMkRU34QbMYS7c8xkCF705p5AMcGk9AUtEfn?=
+ =?us-ascii?Q?Q=3D=3D?=
+
+--GoBoundary
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<!doctype html>
+<html lang="und" dir="auto" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head>
+    <title></title>
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      #outlook a { padding:0; }
+      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%; }
+      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt; }
+      img { border:0;height:auto;line-height:100%; outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; }
+      p { display:block;margin:13px 0; }
+    </style>
+    <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type="text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+    
+    
+    <style type="text/css">
+      @media only screen and (min-width:0px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      }
+    </style>
+    <style media="screen and (min-width:0px)">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+    </style>
+    
+    
+  
+    
+    <style type="text/css">
+
+    @media only screen and (max-width:-1px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+  
+    </style>
+     
+    <style type="text/css">
+.mjml-body { width: 375px; margin: 0px auto; }
+a {color: inherit} a:hover {color: inherit} a:active {color: inherit}
+    </style>
+    
+  </head>
+  <body style="word-spacing:normal;background-color:#f3f3f3;">
+    
+    
+      <div
+         aria-roledescription="email" class="mj-body" style="background-color:#f3f3f3;" role="article" lang="und" dir="auto"
+      >
+        
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#FFFFFF" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="background:#FFFFFF;background-color:#FFFFFF;margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#FFFFFF;background-color:#FFFFFF;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="border:none;direction:ltr;font-size:0px;padding:0px 0px 0px 0px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
+      >
+        <tbody>
+          <tr>
+            <td  style="border:none;vertical-align:top;padding:0px 0px 0px 0px;">
+              
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="font-size:0px;padding:0px 0px 0px 0px;word-break:break-word;"
+                >
+                  
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
+      >
+        <tbody>
+          <tr>
+            <td  style="width:600px;">
+              
+      <img
+         alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/e13ec9ee757242f5be0d74fd39a0408f~tplv-gy9etg9ol0-image-v1.png" style="border:0px solid #fafafa;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600" height="auto"
+      />
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#FFFFFF" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="background:#FFFFFF;background-color:#FFFFFF;margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#FFFFFF;background-color:#FFFFFF;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="border:none  ;direction:ltr;font-size:0px;padding:0px 0px 0px 0px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
+      >
+        <tbody>
+          <tr>
+            <td  style="border:none  ;vertical-align:top;padding:0px 0px 0px 0px;">
+              
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><div style="text-align: center;">
+            <div data-page-id="GjyVdg3hKotBJjxy7liure6fsjc" data-lark-html-role="root" data-docx-has-block-data="false">
+              <div class=" old-record-id-Sj8cdssoYoLxeyxOGxbuJaCOsqd">
+                <font color="#0dc766" size="4"><b>Introducing The New SOLO</b></font>
+              </div>
+              <div class=" old-record-id-Sj8cdssoYoLxeyxOGxbuJaCOsqd"><span data-lark-record-data="{&quot;rootId&quot;:&quot;ACPyd5GsjosBAgxuCF7cofKynig&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;直播预告丨 TRAE 2.0，为你全力加码！&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+m&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;6809797602117173249&quot;]},&quot;nextNum&quot;:1}},&quot;type&quot;:&quot;page&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:true,&quot;pasteRandomId&quot;:&quot;4e212bd1-bba4-4ef9-848c-4e8d001599ee&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;
+ end&quot;:22},&quot;recordId&quot;:&quot;ACPyd5GsjosBAgxuCF7cofKynig&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+            </div><span data-lark-record-data="{&quot;rootId&quot;:&quot;GjyVdg3hKotBJjxy7liure6fsjc&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;As one of our early users, here’s what’s new&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+18&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7264622861774487558&quot;]},&quot;nextNum&quot;:1}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;663237ea-0bb0-460c-96f0-27882e35dab8&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:6,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:13,&quot;end&quot;:57},&quot;recordId&quot;:&quot;Sj8cdsso
+ YoLxeyxOGxbuJaCOsqd&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>
+          </div></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      >Dear TRAE User,</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><div>
+            <div data-page-id="Vv5QdWyLnoBHyYxZ7HScCp3onxb" data-lark-html-role="root" data-docx-has-block-data="false">
+              <div class="ace-line ace-line old-record-id-TXHmdZCS0o1mhWx6eCyccaV0nXb">On March 31, we launched the new <strong>TRAE</strong><strong> SOLO (beta)</strong>, a standalone AI agent designed for everyone in the product development lifecycle.</div>
+              <div class="ace-line ace-line old-record-id-TXHmdZCS0o1mhWx6eCyccaV0nXb"><br></div>
+              <div class="ace-line ace-line old-record-id-TXHmdZCS0o1mhWx6eCyccaV0nXb">
+                <div data-page-id="Vv5QdWyLnoBHyYxZ7HScCp3onxb" data-lark-html-role="root" data-docx-has-block-data="false">
+                  <div class="ace-line ace-line old-record-id-SMEkd7qoJoMtChxrhCjc1ScInbg">Developers, product managers, data scientists, designers, marketers, operations teams, everyone in the professional workspace can leverage SOLO to handle their tasks.</div>
+                  <div class="ace-line ace-line old-record-id-SMEkd7qoJoMtChxrhCjc1ScInbg"><br></div>
+                  <div class="ace-line ace-line old-record-id-KBVrdif0somoIDxzmfPcNYt3nGg">With SOLO, you define the task, review the results, and SOLO handles the execution, turning your files and context into structured, professional deliverables.</div>
+                </div><span data-lark-record-data="{&quot;isCut&quot;:false,&quot;rootId&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;,&quot;parentId&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;,&quot;blockIds&quot;:[59,41],&quot;recordIds&quot;:[&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;,&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;],&quot;recordMap&quot;:{&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;:{&quot;id&quot;:&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;With SOLO, you define the task, review the results, and SOLO handles the execution, turning your files and context into structured, professional deliverables.&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+4e&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;
+ :[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1}},&quot;folded&quot;:false,&quot;parent_id&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;}},&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;:{&quot;id&quot;:&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;,&quot;snapshot&quot;:{&quot;parent_id&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;,&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;Developers, product managers, data scientists, designers, marketers, operations teams, everyone in the professional workspace can leverage SOLO to handle their tasks.&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+4m&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1}},&quot;folded&quot;:false}},&quot;V
+ v5QdWyLnoBHyYxZ7HScCp3onxb&quot;:{&quot;id&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;page&quot;,&quot;parent_id&quot;:&quot;&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[&quot;doxcnEwR18ZTun7BAK26nBEwFzd&quot;,&quot;doxcn1fK9Bpi7ZD0iXUFTrJFEob&quot;,&quot;NbiEdHU0poaSUXxMM4XcvK2vnQc&quot;,&quot;TXHmdZCS0o1mhWx6eCyccaV0nXb&quot;,&quot;doxcnQTqcgQQ1VO75kyjTmVzZHe&quot;,&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;,&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;,&quot;CFmFdyhW6ofuyYxlHBmcLUS0nrQ&quot;,&quot;OxaAd52s6oDys9xFqIgcV0lbnqe&quot;,&quot;WpTZdxm6QoiuozxpD2QcgeaenTN&quot;,&quot;DzZDdajeqoEZCVxKl8QcVgiznld&quot;,&quot;UBwsd1r0honuBfxTUxhcNsusniK&quot;,&quot;ZaC9dkKkgoKLHDx9QZUc7r3unpe&quot;,&quot;LSNSdZL90oTECDxFbppcSk9kn7e&quot;,&quot;Vu1fd5rplodVWCxAadvci1Rhnjf&quot;,&quot;TZrDd3OQJoMraVxndp7ccrvfnth&quot;,&quot
+ ;B5pQdtN9SoZpYgxYDGMclsr6nJg&quot;,&quot;LVIjdjYKToGbjHxKmXZc2b12nlb&quot;,&quot;WC7QdF43LoCbENx3gREcY9RInhf&quot;,&quot;doxcnFBl11Zk4lXNn15NeQpBzbh&quot;,&quot;doxcnz3k097yd96gxp5Awj1UJke&quot;,&quot;doxcnBaWHoqWQbXVWtEbjaSoMRe&quot;,&quot;doxcnnpqV84VFTG1T22CO78rxtc&quot;],&quot;text&quot;:{&quot;apool&quot;:{&quot;nextNum&quot;:1,&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]}},&quot;initialAttributedTexts&quot;:{&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+15&quot;},&quot;text&quot;:{&quot;0&quot;:&quot;[Email] 0403 SOLO Beta for All TRAE Users&quot;}}},&quot;align&quot;:&quot;&quot;,&quot;doc_info&quot;:{&quot;editors&quot;:[&quot;7594294002787159245&quot;],&quot;options&quot;:[&quot;editors&quot;,&quot;edit_time&quot;],&quot;deleted_editors&quot;:[],&quot;option_modified&quot;:null}}}},&quot;payloadMap&quot;:{&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;:{&quot;level&quot;:1},&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;:{&quot;level&quot;:1}},&
+ quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;pasteRandomId&quot;:&quot;ca599e5b-8d8b-47b2-8ec2-592fd40fc4ba&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{},&quot;isEqualBlockSelection&quot;:true},&quot;isKeepQuoteContainer&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:59,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:166},&quot;recordId&quot;:&quot;SMEkd7qoJoMtChxrhCjc1ScInbg&quot;},{&quot;id&quot;:41,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:158},&quot;recordId&quot;:&quot;KBVrdif0somoIDxzmfPcNYt3nGg&quot;}],&quot;pasteFlag&quot;:&quot;c528dbd4-65e9-40d2-b116-d5d5b0a8ea04&quot;}" data-lark-record-format="docx/record" class="lark-record-clipboard"></span>
+              </div>
+            </div><span data-lark-record-data="{&quot;rootId&quot;:&quot;Vv5QdWyLnoBHyYxZ7HScCp3onxb&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;On March 31, we launched the new TRAE SOLO (beta), a standalone AI agent designed for everyone in the product development lifecycle.&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+x*0*1+g*0+2b&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;],&quot;1&quot;:[&quot;bold&quot;,&quot;true&quot;]},&quot;nextNum&quot;:2}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:true,&quot;pasteRandomId&quot;:&quot;7ead4fec-ae3c-4a67-9756-74331d1abcf6&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;i
+ d&quot;:42,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:132},&quot;recordId&quot;:&quot;TXHmdZCS0o1mhWx6eCyccaV0nXb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>
+          </div>
+          <div><span data-lark-record-data="{&quot;isCut&quot;:false,&quot;rootId&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;parentId&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;blockIds&quot;:[5,65,6,66,59,67,7],&quot;recordIds&quot;:[&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;,&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;,&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;,&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;,&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;,&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;,&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;],&quot;recordMap&quot;:{&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;:{&quot;id&quot;:&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[],&quot;text&quot;:{&quot;initialAttributedTexts&quot;:
+ {&quot;text&quot;:{&quot;0&quot;:&quot;Dear TRAE Ultra Member,&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+n&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1}},&quot;align&quot;:&quot;&quot;,&quot;folded&quot;:false}},&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;:{&quot;id&quot;:&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[],&quot;text&quot;:{&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7594294002787159245&quot;:0}},&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&qu
+ ot;We're introducing SOLO, a standalone AI agent designed for every professional in the product development lifecycle.&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+37&quot;},&quot;rows&quot;:{},&quot;cols&quot;:{}}},&quot;align&quot;:&quot;&quot;,&quot;folded&quot;:false}},&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;:{&quot;id&quot;:&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[],&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;The new SOLO is currently in beta with code-gated access. As a TRAE Ultra member, your account is already activated for SOLO. You can start exploring it for free when beta access opens on March 31, 2026.&quot;},&quot;attribs&quot;:{&quot
+ ;0&quot;:&quot;*0+2a*0*1+16*0+27&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;],&quot;1&quot;:[&quot;bold&quot;,&quot;true&quot;]},&quot;nextNum&quot;:2}},&quot;align&quot;:&quot;&quot;,&quot;folded&quot;:false}},&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;:{&quot;id&quot;:&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;,&quot;snapshot&quot;:{&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;With its Code and MTC (More Than Coding) modes, SOLO handles everything from product development and data analysis to marketing campaigns and creative design, all through simple conversation. Available on Desktop and Web.&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+65&quot;}
+ ,&quot;rows&quot;:{},&quot;cols&quot;:{}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7594294002787159245&quot;:0}}},&quot;folded&quot;:false}},&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;:{&quot;id&quot;:&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;,&quot;snapshot&quot;:{&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{},&quot;nextNum&quot;:0}},&quot;folded&quot;:false}},&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;:{&quot;id&quot;:&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;,&quot;snapshot&quot;:{&quot;parent_id&quot;:
+ &quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{},&quot;nextNum&quot;:0}},&quot;folded&quot;:false}},&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;:{&quot;id&quot;:&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;,&quot;snapshot&quot;:{&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;type&quot;:&quot;text&quot;,&quot;children&quot;:[],&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{},&quot;nextNum&quot
+ ;:0}},&quot;folded&quot;:false}},&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;:{&quot;id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;page&quot;,&quot;parent_id&quot;:&quot;&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[&quot;NvYidIGd7oMeIzxUVlkc2W9UnLd&quot;,&quot;Ifmadmqv4oQ8KSxsY7JcUOmvn7f&quot;,&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;,&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;,&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;,&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;,&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;,&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;,&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;,&quot;J2lndXdCNoKI3FxUZnvcTXnnnlB&quot;,&quot;JbsZdbku5oWSHUxEcV6ckaANnmh&quot;,&quot;CVu0dNfq7o7nsvxLJp5ctEV3nrP&quot;,&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;,&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;],&quot;text&quot;:{&quot;apool&quot;:{&quot;n
+ umToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7594294002787159245&quot;:0}},&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;[Emails] 0331 SOLO Ultra Membership Exclusive&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+19&quot;},&quot;rows&quot;:{},&quot;cols&quot;:{}}},&quot;align&quot;:&quot;&quot;,&quot;doc_info&quot;:{&quot;editors&quot;:[&quot;7594294002787159245&quot;],&quot;options&quot;:[&quot;editors&quot;,&quot;edit_time&quot;],&quot;deleted_editors&quot;:[],&quot;option_modified&quot;:null}}}},&quot;payloadMap&quot;:{&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;:{&quot;level&quot;:1},&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;:{&quot;level&quot;:1},&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;:{&quot;level&quot;:1},&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;:{&quot;level&quot;:1},&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;:{&quot;level&quot;:1},&quot;NFPbdYYyEoY2Ucxj3n3
+ cMfZNnAd&quot;:{&quot;level&quot;:1},&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;:{&quot;level&quot;:1},&quot;lingoClipboardPayload&quot;:{&quot;spaceSubExtraInfo&quot;:[{&quot;spaceSubId&quot;:&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;,&quot;word&quot;:&quot;As&quot;}],&quot;spaceId&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;spaceType&quot;:1}},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;pasteRandomId&quot;:&quot;d79625cb-069c-4b2e-bec0-05b5d6f09168&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{},&quot;isEqualBlockSelection&quot;:true},&quot;isKeepQuoteContainer&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:5,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:23},&quot;recordId&quot;:&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;},{&quot;id&quot;:65,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:0},&quot;recordId&quot;:&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nK
+ d&quot;},{&quot;id&quot;:6,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:115},&quot;recordId&quot;:&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;},{&quot;id&quot;:66,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:0},&quot;recordId&quot;:&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;},{&quot;id&quot;:59,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:221},&quot;recordId&quot;:&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;},{&quot;id&quot;:67,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:0},&quot;recordId&quot;:&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;},{&quot;id&quot;:7,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:203},&quot;recordId&quot;:&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;}],&quot;pasteFlag&quot;:&quot;508a2a34-e1e5-4d64-af69-f40ecd25ada8&quot;}" data-lark-record-format="
+ docx/record" class="lark-record-clipboard"></span></div></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:0px 0px 0px 0px;word-break:break-word;"
+                >
+                  
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
+      >
+        <tbody>
+          <tr>
+            <td  style="width:550px;">
+              
+        <a
+           href="https://www.trae.ai/blog/new_solo_beta_0331" target="_blank"
+        >
+          
+      <img
+         alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/a296109513d04b3b9d2d83c08bc8c087~tplv-gy9etg9ol0-image-v1.png" style="border:0px solid red;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="550" height="auto"
+      />
+    
+        </a>
+      
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><font size="3" color="#0cc766"><b style="">What's New in SOLO</b></font></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><b>- Code Mode: </b>a focused, chat-driven coding experience where SOLO writes, runs, and iterates on code<div><span style="word-spacing: normal;"><b>- MTC (More Than Coding) Mode:&nbsp;</b></span><span style="word-spacing: normal;">handles</span><span style="word-spacing: normal;">&nbsp;professional tasks like creating documents, analyzing datasets, generating reports, building presentations, and conducting research from a single workspace</span></div>
+          <div><span style="word-spacing: normal;"><b>- Desktop and Web: </b>work with local files on Desktop, or run tasks in the cloud via Web</span></div></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:0px 0px 0px 0px;word-break:break-word;"
+                >
+                  
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
+      >
+        <tbody>
+          <tr>
+            <td  style="width:550px;">
+              
+      <img
+         alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/e409c73004b14a5096fe3d41bfdc7c16~tplv-gy9etg9ol0-image-v1.png" style="border:0px solid red;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="550" height="auto"
+      />
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><b style="--hover-color: rgb(106,161,255); --selected-color: rgb(22,93,255); color: rgb(12, 199, 102); font-size: medium;">Beta&nbsp;</b>
+          <font size="3" color="#0cc766"><b style="">Early Access</b></font></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      >-&nbsp;SOLO is <b>free</b> during the beta early access phase. An <b>invite code</b> is required<div><span style="word-spacing: normal;">-&nbsp;</span>TRAE <b>Ultra users</b> do not need a code as beta early access is included in the plan</div>
+          <div><span style="word-spacing: normal;">-&nbsp;</span>Invite codes are available through <b>social media giveaways</b>, <b>community events</b> and <b>TRAE IDE drops</b></div></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><font color="#0cc766" size="3"><b>Take a Deep Dive</b></font></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      >SOLO is now available on Desktop and Web.<div><br></div>
+          <div>Take a deeper dive into the full launch blog which includes best practices and role based scenarios that show how SOLO helps you move from ideas to professional deliverables, faster.</div></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;width:60%;line-height:100%;"
+      >
+        <tbody>
+          <tr>
+            <td
+               align="center" bgcolor="#38aa58" role="presentation" style="border:none  ;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px 10px 25px;text-align:center;background:#38aa58;" valign="middle"
+            >
+              <a
+                 href="https://www.trae.ai/blog/new_solo_beta_0331" style="display:inline-block;background:#38aa58;color:#1a1919;font-family:Arial, sans-serif;font-size:13px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px 10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"
+              >
+                Explore SOLO Now
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   style="background:#fafafa;font-size:0px;word-break:break-word;"
+                >
+                  
+      <div
+         style="height:20px;line-height:20px;"
+      >&#8202;</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><div data-page-id="YIXvduPpJomRMwxCssOcHEOmnwe" data-lark-html-role="root" data-docx-has-block-data="false">
+            <div class="ace-line ace-line old-record-id-TRvGd5N9soD5NIxguZ3cuNvMnZV">Have a great time exploring SOLO!</div>
+            <div class="ace-line ace-line old-record-id-TRvGd5N9soD5NIxguZ3cuNvMnZV"><br></div>
+            <div class="ace-line ace-line old-record-id-TRvGd5N9soD5NIxguZ3cuNvMnZV"><span style="word-spacing: normal;">The TRAE Team</span></div>
+          </div><span data-lark-record-data="{&quot;isCut&quot;:false,&quot;rootId&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;parentId&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;blockIds&quot;:[19,20],&quot;recordIds&quot;:[&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;,&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;],&quot;recordMap&quot;:{&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;:{&quot;id&quot;:&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[],&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;Have a great time exploring SOLO!&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+x&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;
+ ,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1}},&quot;align&quot;:&quot;&quot;,&quot;folded&quot;:false}},&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;:{&quot;id&quot;:&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;,&quot;snapshot&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[],&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;The TRAE Team&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+d&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1}},&quot;align&quot;:&quot;&quot;,&quot;folded&quot;:false}},&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;:{&quot;id&quot;:&quot;YIXvduPpJomRMwxCssOcHEOmnwe&quot;,&quot;snapshot&quot;:{&quot;type&qu
+ ot;:&quot;page&quot;,&quot;parent_id&quot;:&quot;&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7594294002787159245&quot;,&quot;children&quot;:[&quot;NvYidIGd7oMeIzxUVlkc2W9UnLd&quot;,&quot;Ifmadmqv4oQ8KSxsY7JcUOmvn7f&quot;,&quot;JyHTdrLbpoDlFRxoCLNcj2zjnpJ&quot;,&quot;OhAPdw6fwoNUqoxcx2Gc9ve7nKd&quot;,&quot;UwrvdjYDyoxzLWxAq5hcTUpanLc&quot;,&quot;BPZtdhfSmodotCxyBbdcceCdn8g&quot;,&quot;MCZQdUijRoOT6LxlPfZcG0kgn8d&quot;,&quot;NFPbdYYyEoY2Ucxj3n3cMfZNnAd&quot;,&quot;FCl2dRWe8oHTvBxF3Iuc5wwcn8g&quot;,&quot;J2lndXdCNoKI3FxUZnvcTXnnnlB&quot;,&quot;JbsZdbku5oWSHUxEcV6ckaANnmh&quot;,&quot;CVu0dNfq7o7nsvxLJp5ctEV3nrP&quot;,&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;,&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;],&quot;text&quot;:{&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7594294002787159245&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,759429400278715924
+ 5&quot;:0}},&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;[Emails] 0331 SOLO Ultra Membership Exclusive&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+19&quot;},&quot;rows&quot;:{},&quot;cols&quot;:{}}},&quot;align&quot;:&quot;&quot;,&quot;doc_info&quot;:{&quot;editors&quot;:[&quot;7594294002787159245&quot;],&quot;options&quot;:[&quot;editors&quot;,&quot;edit_time&quot;],&quot;deleted_editors&quot;:[],&quot;option_modified&quot;:null}}}},&quot;payloadMap&quot;:{&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;:{&quot;level&quot;:1},&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;:{&quot;level&quot;:1}},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;pasteRandomId&quot;:&quot;53e61291-92e1-4afc-b48c-5ed5e08bd413&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{},&quot;isEqualBlockSelection&quot;:true},&quot;isKeepQuoteContainer&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:19,&quot;type&quot;:&quot;text&quot;,&quot;selection&qu
+ ot;:{&quot;start&quot;:0,&quot;end&quot;:33},&quot;recordId&quot;:&quot;TRvGd5N9soD5NIxguZ3cuNvMnZV&quot;},{&quot;id&quot;:20,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:13},&quot;recordId&quot;:&quot;N7x2dOq8eoUQDOxRZHlc1hcOn9T&quot;}],&quot;pasteFlag&quot;:&quot;508a2a34-e1e5-4d64-af69-f40ecd25ada8&quot;}" data-lark-record-format="docx/record" class="lark-record-clipboard"></span></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:10px 0px 10px 0px;word-break:break-word;"
+                >
+                  
+      <p
+         style="border-top:solid 1px #C9CCCF;font-size:1px;margin:0px auto;width:100%;"
+      >
+      </p>
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px #C9CCCF;font-size:1px;margin:0px auto;width:600px;" role="presentation" width="600px" ><tr><td style="height:0;line-height:0;"> &nbsp;
+</td></tr></table><![endif]-->
+    
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:center;color:#000000;"
+      >Follow us for product updates, best practices, and community highlights:</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      
+     <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" ><tr><td><![endif]-->
+              <table
+                 align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;"
+              >
+                <tbody>
+                  
+      <tr
+        
+      >
+        
+        <td  style="padding:4px 4px 4px 4px;vertical-align:middle;">
+          <table
+             border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:20px;"
+          >
+            <tbody>
+              <tr>
+                <td  style="padding:0px;font-size:0;height:20px;vertical-align:middle;width:20px;">
+                  <a  href="https://discord.gg/EXtSRn2e3X" target="_blank">
+                    <img
+                       alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/77e55a252d7b4cedbcb7869944cad74a~tplv-gy9etg9ol0-image-v1.png" style="border-radius:3px;display:block;" width="20"
+                    />
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+       
+        
+          <td  style="vertical-align:middle;padding:4px 4px 4px 0px;text-align:left;">
+            <a
+                 href="https://discord.gg/EXtSRn2e3X" style="color:#333333;font-size:13px;font-weight:normal;font-family:Arial, sans-serif;line-height:22px;text-decoration:none;" target="_blank">
+              Discord
+            </a>
+          </td>
+          
+      
+      </tr>
+    
+                </tbody>
+              </table>
+            <!--[if mso | IE]></td><td><![endif]-->
+              <table
+                 align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;"
+              >
+                <tbody>
+                  
+      <tr
+        
+      >
+        
+        <td  style="padding:4px 4px 4px 4px;vertical-align:middle;">
+          <table
+             border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:20px;"
+          >
+            <tbody>
+              <tr>
+                <td  style="padding:0px;font-size:0;height:20px;vertical-align:middle;width:20px;">
+                  <a  href="https://www.youtube.com/@Trae_ai" target="_blank">
+                    <img
+                       alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/c6f3dadeb54545d196484cb1574b219e~tplv-gy9etg9ol0-image-v1.png" style="border-radius:3px;display:block;" width="20"
+                    />
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+       
+        
+          <td  style="vertical-align:middle;padding:4px 4px 4px 0px;text-align:left;">
+            <a
+                 href="https://www.youtube.com/@Trae_ai" style="color:#333333;font-size:13px;font-weight:normal;font-family:Arial, sans-serif;line-height:22px;text-decoration:none;" target="_blank">
+              YouTube
+            </a>
+          </td>
+          
+      
+      </tr>
+    
+                </tbody>
+              </table>
+            <!--[if mso | IE]></td><td><![endif]-->
+              <table
+                 align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;"
+              >
+                <tbody>
+                  
+      <tr
+        
+      >
+        
+        <td  style="padding:4px 4px 4px 4px;vertical-align:middle;">
+          <table
+             border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:20px;"
+          >
+            <tbody>
+              <tr>
+                <td  style="padding:0px;font-size:0;height:20px;vertical-align:middle;width:20px;">
+                  <a  href="https://x.com/Trae_ai" target="_blank">
+                    <img
+                       alt="" src="https://p19-mercury-sg.ibyteimg.com/tos-alisg-i-gy9etg9ol0-sg/a869759412bb4545827d5a5f57988878~tplv-gy9etg9ol0-image-v1.png" style="border-radius:3px;display:block;" width="20"
+                    />
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+       
+        
+          <td  style="vertical-align:middle;padding:4px 4px 4px 0px;text-align:left;">
+            <a
+                 href="https://x.com/Trae_ai" style="color:#333333;font-size:13px;font-weight:normal;font-family:Arial, sans-serif;line-height:22px;text-decoration:none;" target="_blank">
+              X
+            </a>
+          </td>
+          
+      
+      </tr>
+    
+                </tbody>
+              </table>
+            <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="center" style="background:#fafafa;font-size:0px;padding:10px 0px 10px 0px;word-break:break-word;"
+                >
+                  
+      <p
+         style="border-top:solid 1px #C9CCCF;font-size:1px;margin:0px auto;width:100%;"
+      >
+      </p>
+      
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px #C9CCCF;font-size:1px;margin:0px auto;width:600px;" role="presentation" width="600px" ><tr><td style="height:0;line-height:0;"> &nbsp;
+</td></tr></table><![endif]-->
+    
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    
+      
+      <div  style="margin:0px auto;max-width:600px;">
+        
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style="direction:ltr;font-size:0px;padding:0px;text-align:left;"
+              >
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+            
+      <div
+         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+      >
+        
+      <table
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align="left" style="background:#fafafa;font-size:0px;padding:10px 25px 10px 25px;word-break:break-word;"
+                >
+                  
+      <div
+         style="font-family:Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.7;text-align:left;color:#000000;"
+      ><font color="#9b9b9b"><i>To help make your experience with TRAE the best it can be, we’ll send occasional updates about news, offers, or other resources. If you no longer want to receive any updates from us, feel free to <a href="https://www.trae.ai/unsubscribe?ticket=btpYjHx%2FWr2G5GGacmuaDnKEjh44cQm70ifXfrb2FRw3OLGtSlsE4qTTDPSNGExDDEPXKEMjh4djxFhE5rAOsciyHak%2B%2FVfU%2BhihrF0wClZFjDFPDNo4noscPJVUyqZ35xPpOdzj9gD154rteya3yhprZ5T9zYRRNhJ8l7azEdKiukb4cRSz%2FE0dX7U%3D&amp;msg_id=8ada5efe-a8be-440e-86cc-9cc0066f5278&amp;timestamp=1775287826&amp;aid=677332&amp;from=notify@mail.trae.ai&amp;to=hsL7k%2Fs6HYHrIH8BxZmeh55MycfCWfL974DjgIS5GM%2Flrn0QqrP11wusrVG0CMeTYOn0z7f7rF7h9Y%2BE&amp;scene_id=104&amp;tid=80895&amp;uid=7462206472203879441" target="_blank" style="text-decoration: underline; color: inherit;" tabindex="-1">unsubscribe</a> at any time.</i></font></div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    <span style="height: 1px;width: 1px;display: block;overflow: hidden"></span>
+      </div>
+    
+  <img src="http://url9668.mail.trae.ai/wf/open?upn=u001.1MXHcLGzvnwn3-2FTwTI5DfMxbKbB4Sl6dQmJBKAZIGobw6f-2Bie6hMdYwi-2B4I7n6q6qby4lgo4GQALQ9BpFNfzezWMtSXW-2FApnfGK6HgJDag9-2BvfCLuQRC8CgvvL1al-2FFV1R-2FsIonXXNuKjFnGQBVtz1qeF36GaUGd3aqtXX-2B-2BjSDCT13yMFOApzd-2BL43mV5JAzX07fdh1B0OBNfy-2B9WMPITJNgbf077OukchbgEByDkN7NoVd70TLdnum9ou5-2B458CzExvY2l6aNNtzFjIdFrie0SCk51s-2FlRUbnZ5F41FaqFUMosbTQsX9y8Zc7r2GA-2Fd6eO9lCNOGSfwhG9tEHhXX-2BM1599JoFI7cpRtc00GflzPLmoMb-2ByXSsXXHVmLqG6" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;"/></body>
+</html>
+
+--GoBoundary--

@@ -1,0 +1,19 @@
+{
+  "message_id": "<0100019d04122290-064f8e7f-3078-4870-a2b2-129f652e3ae9-000000@email.amazonses.com>",
+  "imap_uid": "2869",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "MiniMax-M2.7 with self-improvement & research in OpenClaw",
+  "sender": "hello@ollama.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-19T03:09:50+00:00",
+  "body_text": "\r\n\r\n\r\n \r\n\r\n\r\n\r\n\r\n \r\n\r\nMiniMax-M2.7 is now available to run via Ollama's cloud. This new model is designed to excel at completing end-to-end tasks in\r\nsoftware engineering and office productivity while improving its character and emotional intelligence.\r\n \r\nM2.7 is also good at self-improvement using data from the web. This allows assistants like OpenClaw to do research and learn new\r\nskills.\r\n \r\nTo get started, download Ollama:\r\n \r\n\r\nDownload Ollama [https://ollama.com/download]\r\n\r\n \r\nNext, launch OpenClaw with MiniMax-M2.7:\r\n \r\nollama launch openclaw --model minimax-m2.7:cloud\r\n \r\nIf you already have OpenClaw running with Ollama, switch to MiniMax-M2.7 cloud by using the /model command:\r\n \r\n/model ollama/minimax-m2.7:cloud\r\n\r\n\r\n \r\n\r\n\r\nSelf-improvement & research\r\n\r\nOpenClaw can now perform deep research tasks and use up-to-date web information to teach itself skills and best practices.\r\n \r\nExample: financial reporting\r\n \r\nTeach yourself how to write financial research reports by studying examples from top analysts. Write a PPT presentation and Word\r\ndocument report on TSMC based on their latest earnings. Save your research framework as a skill so future reports follow the same\r\nprocess.\r\n \r\n\r\n\r\nLaunch agents in non-interactive mode\r\n\r\nOllama can now launch non-interactive agents using the new --yes flag.\r\n \r\nThis enables running OpenClaw and other agents in the background without interruption on servers, scripts, and other environments\r\nthat do not support the OpenClaw gateway.\r\n \r\nTo launch a non-interactive OpenClaw agent, run:\r\n \r\nollama launch openclaw \\\r\n--model minimax-m2.7:cloud \\\r\n--yes -- agent \\\r\n--agent main \\\r\n--local \\\r\n--message \"Prepare a pre-read for my next meeting\"\r\n \r\n \r\nIf you have any feedback, reply directly to this email or join Ollama's Discord channel [https://discord.gg/ollama].\r\n \r\n❤️ Ollama\r\n \r\nYou are receiving this email because you opted-in to receive updates from Ollama\r\nOllama, 744 High Street, Palo Alto, CA 94301\r\nUnsubscribe [https://app.loops.so/unsubscribe/cmmww6idm23xw01be23uqelen/231bd3764fa07aecb30eab4789b1ef2346859d548f4c22a3c80f30372473dca8d130729ab127236cc6b60eddd5eeac44db2b1b50c8ef24dde7b890ea]\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019d04122290-064f8e7f-3078-4870-a2b2-129f652e3ae9-000000email.amazonses.com.eml"
+}

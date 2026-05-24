@@ -1,0 +1,297 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:8.219.24.146)
+ smtp.mailfrom=no-reply@qoder.com; dkim=pass header.b=DLTEKU8ecN
+ header.i=@qoder.com header.s=aliyun-ap-southeast-1; dmarc=pass
+ (p=quarantine sp=quarantine dis=none) header.from=qoder.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=12P57v9fl5IJE9z1SEg60VWsUZMjzyiWFIvvTy4QXrE=;
+ b=wfVGCDkKFjtO+czf69ff1HLG9Wzb28aXucpWNDH8Tgt3uwYYd/J7f025AFBDHmno2VFnD5+
+ +PtwsVf244/Nt5Rn0+BFAVcMx9pOS5GVv12e0q4gChbo5tLScZiLVi6HTTtmpp8saqf9MH/v5
+ hnacsgi0wdOUu7whEoj66+YRDjWM3J6M1WrNkuIC7Xq0skf8CM4RYhTaL1oeg6kJYlQ6xsRBX
+ zIlB39l+VWaRK6kt5i0+8exZMaNQxt4waq9O92ZKMIbWPgf+SPMJ2sNFVPBJe53ekKfbL4Viu
+ jFbzHF5sgiXEvXRy6W01J8vSkE34sT3tKU7OTfPZWOMYn4n33KvA==
+Arc-Seal: i=1; a=rsa-sha256; t=1777202189; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=S5zpD6HihYOYKgHjY/o5pwG53IFZzkprwNHVhFyuc9ySGxMhrCdUG5AfUNblmbJlqTeUH6m
+ O4N+j9eZ1kXvuSRJhy02zj7eUb3UgO97nSea8KIqh3rYRdvv39cn53W1uitdWxbrt3rezHCgf
+ h60XVWH7DugOwlmASXemiX2Ns4dShzdJHAn6oZO/dnYprV+FF6of6D7UEC1D+hct7IpH0wa4n
+ peNU7uIFL069P911pEM2sbrGB9ozQFvxZFNOYqh+HmBX/HqWv4OW71HppNlZj/rMXgfIU95Oh
+ lZaX4ZHj++TccFvx4Wx0W96ek7Bzyfmc/IbymRp0nrDBwlr7gzTQ==
+Authentication-Results: lms; spf=pass (client-ip:8.219.24.146)
+ smtp.mailfrom=no-reply@qoder.com; dkim=pass header.b=DLTEKU8ecN
+ header.i=@qoder.com header.s=aliyun-ap-southeast-1; dmarc=pass
+ (p=quarantine sp=quarantine dis=none) header.from=qoder.com; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 26 Apr 2026 11:16:24 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qoder.com;
+ s=aliyun-ap-southeast-1; t=1777202184;
+ h=Content-Type:To:Subject:Message-Id:From:Date:Mime-Version;
+ bh=12P57v9fl5IJE9z1SEg60VWsUZMjzyiWFIvvTy4QXrE=;
+ b=DLTEKU8ecNCDpgxpOhdakRSV5HcWgCV8F/iAtzfztvmlGRiqTVHW1dlBxQ+2nbmPLi94oKIdCBZiaQxI4uOhFKlcnNyPMN+eWUYXrCWTnHY/Bkt3s9xJuxv+b9oOg2DdVVfB8bAuPlGVYXhOni0UvHFMhgC2pOoRRb7pqKY7OtE=
+Feedback-Id: default:no-reply@qoder.com:excellent_SmtpTrigger:418251
+From: <no-reply@qoder.com>
+Message-Id: 
+ <1777202184032705271.1.4237159015967944989@qbase-nezha-ap-southeast-1-prd-cu9gc-cpt9p>
+Mime-Version: 1.0
+Received: from localhost(mailfrom:no-reply@qoder.com fp:SMTPD_4w3hRb8mEUf
+ cluster:dm-ay35sg-a) by smtp.aliyun-inc.com(127.0.0.1); Sun, 26 Apr 2026
+ 19:16:24 +0800
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=8.219.24.146;
+ helo=out24-146.sg.a.dm.aliyun.com; envelope-from=no-reply@qoder.com;
+ receiver=<UNKNOWN>;
+Subject: Welcome to Qoder Pro+!
+To: <wuliang@xiangzizai.com>
+X-Alidm-Rcptto: d3VsaWFuZ0B4aWFuZ3ppemFpLmNvbQ==
+X-Envid: 8000000260108257325
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1777202182/4g3PK24Rb0zLJH0/69EDF406.001/8.219.24.146/out24-146.sg.a.dm.aliyun.com/localhost/<no-reply@qoder.com>
+X-Fangmail-Mid-Qid: 69EDF406.001/4g3PK24Rb0zLJH0
+X-Fangmail-Miltered: at n206-112-030 with ID 69EDF406.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 8.219.24.146
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: no-reply@qoder.com
+X-Lms-Pvf: 
+ MnwyfDF8fFhqTx0clTWXzMwvMKVLyPYEI3DS7UDdjNdBkPlipGn9Zf8qFPyh0OROnRdX4YL7NKKl4cGPQxPl+zKcvNAYILzh1DdT6ePbS26XaA6aLwrIFMY0o9iYWa8B/6TyLYIgHw==
+
+
+<html lang=3D"en">
+<head>
+    <meta charset=3D"UTF-8" />
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0" />
+    <title>Welcome to Qoder Pro+!</title>
+</head>
+<body
+        style=3D"
+      margin: 20px 0 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+    "
+>
+<!-- Main Container -->
+<table
+        width=3D"100%"
+        cellpadding=3D"0"
+        cellspacing=3D"0"
+        border=3D"0"
+        style=3D"background-color: #ffffff"
+>
+    <tr>
+        <td align=3D"center" valign=3D"middle">
+            <!-- Email Content Container -->
+            <table
+                    width=3D"600"
+                    cellpadding=3D"0"
+                    cellspacing=3D"0"
+                    border=3D"0"
+                    style=3D"
+              background-color: #ffffff;
+              border-radius: 8px;
+              border: 1px solid #c3c9d6;
+            "
+            >
+                <!-- Header -->
+                <tr>
+                    <td
+                            style=3D"
+                  padding: 30px 40px 20px 40px;
+                  background-color: #ffffff;
+                  border-radius: 8px 8px 0 0;
+                "
+                    >
+                        <img
+                                src=3D"https://img.alicdn.com/imgextra/i2/O=
+1CN01emoKxb1F9rL7Q2gOb_!!6000000000445-2-tps-2080-584.png"
+                                alt=3D"Qoder Logo"
+                                style=3D"width: 152px; display: block"
+                        />
+                    </td>
+                </tr>
+
+                <!-- Title -->
+                <tr>
+                    <td style=3D"padding: 0 40px 20px 40px">
+                        <h1
+                                style=3D"
+                    margin: 0;
+                    font-size: 28px;
+                    font-weight: bold;
+                    color: #333333;
+                    line-height: 1.2;
+                  "
+                        >
+                            Welcome to Qoder Pro+!
+                        </h1>
+                    </td>
+                </tr>
+
+                <!-- Greeting -->
+                <tr>
+                    <td style=3D"padding: 0 40px 8px 40px">
+                        <p style=3D"margin: 0; font-size: 16px; color: #2b3=
+547; line-height: 1.6;">
+                            Hi lgwanai,
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Body Paragraphs -->
+               =20
+               =20
+                <tr>
+                    <td style=3D"padding: 0 40px 8px 40px">
+                        <p
+                                style=3D"
+                    margin: 0 0 8px 0;
+                    font-size: 16px;
+                    color: #2b3547;
+                    line-height: 1.6;
+                  "
+                        >
+                            Welcome to Qoder Pro+! Your plan is active, so =
+you can dive right in.
+                        </p>
+                    </td>
+                </tr>
+               =20
+                <tr>
+                    <td style=3D"padding: 0 40px 20px 40px">
+                        <p
+                                style=3D"
+                    margin: 0 0 20px 0;
+                    font-size: 16px;
+                    color: #2b3547;
+                    line-height: 1.6;
+                  "
+                        >
+                            Should you have any questions, feedback, or sug=
+gestions, please don't hesitate to contact us. We're always happy to help.
+                        </p>
+                    </td>
+                </tr>
+               =20
+
+                <!-- Signature -->
+               =20
+                <tr>
+                    <td style=3D"padding: 0 40px 8px 40px">
+                        <p style=3D"margin: 0 0 8px 0; font-size: 16px; col=
+or: #2b3547">
+                            Thanks,
+                        </p>
+                    </td>
+                </tr>
+               =20
+                <tr>
+                    <td style=3D"padding: 0 40px 40px 40px">
+                        <p style=3D"margin: 0 0 10px 0; font-size: 16px; co=
+lor: #2b3547">
+                            The Qoder Team
+                        </p>
+                    </td>
+                </tr>
+               =20
+
+                <!-- Footer -->
+                <tr>
+                    <td
+                            style=3D"
+                  padding: 30px 40px;
+                  text-align: center;
+                  border-radius: 0 0 8px 8px;
+                  border-top: 1px solid #c3c9d6;
+                "
+                    >
+                        <!-- Social Media Icons -->
+                        <table
+                                cellpadding=3D"0"
+                                cellspacing=3D"0"
+                                border=3D"0"
+                                style=3D"margin: 0 auto"
+                        >
+                            <tr>
+                                <td style=3D"padding: 0 12px">
+                                    <a
+                                            href=3D"https://x.com/Qoder_ai_=
+ide"
+                                            style=3D"
+                          text-decoration: none;
+                          height: 20px;
+                          display: block;cursor:pointer;
+                        "
+                                    >
+                                        <img
+                                                src=3D"https://img.alicdn.c=
+om/imgextra/i2/O1CN01fYNln829cMT3FjPA2_!!6000000008088-2-tps-140-140.png"
+                                                alt=3D"Twitter"
+                                                style=3D"width: 20px; heigh=
+t: 20px"
+                                        />
+                                    </a>
+                                </td>
+                                <td style=3D"padding: 0 12px">
+                                    <a
+                                            href=3D"https://discord.gg/8NrH=
+CxESyQ"
+                                            style=3D"
+                          text-decoration: none;
+                          height: 20px;
+                          display: block;cursor:pointer;
+                        "
+                                    >
+                                        <img
+                                                src=3D"https://img.alicdn.c=
+om/imgextra/i4/O1CN01yyWL1u1XUcN8Q0BH5_!!6000000002927-2-tps-140-140.png"
+                                                alt=3D"Discord"
+                                                style=3D"width: 20px; heigh=
+t: 20px"
+                                        />
+                                    </a>
+                                </td>
+                                <td style=3D"padding: 0 12px">
+                                    <a
+                                            href=3D"https://www.youtube.com=
+/@qoder_ai"
+                                            style=3D"
+                          text-decoration: none;
+                          height: 20px;
+                          display: block;cursor:pointer;
+                        "
+                                    >
+                                        <img
+                                                src=3D"https://img.alicdn.c=
+om/imgextra/i4/O1CN01w8qkOo1iQSY8DtURQ_!!6000000004407-2-tps-140-140.png"
+                                                alt=3D"YouTube"
+                                                style=3D"width: 20px; heigh=
+t: 20px"
+                                        />
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p
+                                style=3D"
+                    margin: 20 0 0 0;
+                    font-size: 14px;
+                    color: rgba(43, 53, 71, 0.25);
+                  "
+                        >
+                            =C2=A9 2025 BRIGHT ZENITH PRIVATE LIMITED
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

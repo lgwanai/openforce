@@ -1,0 +1,21 @@
+{
+  "message_id": "<e0a6a87b8394fdcc592669bc53f0c209043c4a9e.ea056d80.3d9d.11f1.809a.628f50fdf446@feishu.cn>",
+  "imap_uid": "3134",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "邮件退信",
+  "sender": "mailer-daemon@feishu.cn",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-22T00:19:47+08:00",
+  "body_text": "Email delivery failed outlook_AA3141DDB5A9EAF5@outlook.com",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/e0a6a87b8394fdcc592669bc53f0c209043c4a9e.ea056d80.3d9d.11f1.809a.628f50fdf446feishu.cn.eml"
+}

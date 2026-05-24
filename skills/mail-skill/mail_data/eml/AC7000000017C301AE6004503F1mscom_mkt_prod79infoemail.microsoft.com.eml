@@ -1,0 +1,1423 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:172.82.208.9)
+ smtp.mailfrom=bounce@infoemail.microsoft.com; dkim=pass header.b=Bft8JaKgb2
+ header.i=@infoemail.microsoft.com header.s=mscom; dmarc=pass (p=none
+ sp=none dis=none) header.from=infoemail.microsoft.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=prS9gtsohdu3ce0KWQX+kSk8YpSyZ+Adlzhw82vmUsc=;
+ b=cRLLXzyj7qZHy8FJcm1ygitJ/AGL2EnFxwy3cI/PtvGbuOonyWbyAmSHKYGtlB+LTLxPwzK
+ WgpEEj+zvZZkpqCoLftBO7L0j8cXYGcGL47QEqGQMwTdoM2HmdS4QDB4+1wfV5Uc1yxuM0Eq2
+ dGJqiDVszAkQYsO1a8PLNgEsc9G/7DEnXQrPw/etafjf/TDqD7d2lvzxlG4o39iGtuK15egYC
+ CpG4iZuuuUepX2c0FWW5Nda4yDTiyg0O8Y9r+40qzZTo2lU8LGxfPy5Vm4OC0/R4vaC2U/IPj
+ cP05ZgUoqTSeMhbcfVQmw6hqDIRDE7a0EVvFhczRAY9CPh1jQ78g==
+Arc-Seal: i=1; a=rsa-sha256; t=1777043388; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Mtw+DTncT1iNHQ9R1v1D6q+P0s+e36vPvON77lpUFDgzWuYxVqvrNqRUz56B1/9Cwf6PfeQ
+ V0x4lBBxakb2IY1LCuaxBtPGccjqRx8U7K1BAo0+jAAbMgGM1nFJvqb8Mtal11miDjzapMQ72
+ zoORao5aWpmKxrnSIC05VVYoF9PdXxeF044lvvaszztExiBNFKyqdwh0S60ULsbDwl9E6yRVN
+ WoR/DHm+wq4s9Kw3ynaC2CplK5YMEeFcVxCtS+L//qmxS3VOkacMZofGqnqYeZQ+/tLsG8iz+
+ Pf0EC6lRzWG/ZOnSUbERAIVzMKjp3T2y38WqjW0irvqSXM0+xarg==
+Authentication-Results: lms; spf=pass (client-ip:172.82.208.9)
+ smtp.mailfrom=bounce@infoemail.microsoft.com; dkim=pass header.b=Bft8JaKgb2
+ header.i=@infoemail.microsoft.com header.s=mscom; dmarc=pass (p=none
+ sp=none dis=none) header.from=infoemail.microsoft.com; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+Date: Fri, 24 Apr 2026 08:09:32 -0700
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=infoemail.microsoft.com; s=mscom; t=1777043373;
+ bh=prS9gtsohdu3ce0KWQX+kSk8YpSyZ+Adlzhw82vmUsc=;
+ h=From:Date:Subject:To:MIME-Version:Message-ID:List-Unsubscribe:
+ List-Unsubscribe-Post:Content-Type;
+ b=Bft8JaKgb2LdGlgPYpPE6GTLtCg/2LeGpNJV27Z2dao1SIJ4eRUf2RiiPcHtYPMiD
+ UugnR3u2peYdDjmwzv5CEwPegBImluDI7NGKVAazEM9aOq/DAAmvhrp+e6WOkcphEV
+ b4Tb/HWgK4we8tqfu5+c0SPiX+qefAY6ug1lX2HQktgpGR3PlfNMOdYd7vq5OF5SRA
+ lpF9DBDJAWOaS3QwR/bUpKImouZr3Gmn78rOZByzE29crvCA1frytzZipVlymWSWTn
+ IFeKqad4tSKORlxDAjkBOU0/wWayv4pJ8c5N107CyAi9PX64D3tI3W1c7ZtOlpMjlF
+ aCRfOD15lK0qw==
+From: "Microsoft Rewards" <MicrosoftRewards@infoemail.microsoft.com>
+List-Unsubscribe: 
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <AC7000000017C301AE6004503F1mscom_mkt_prod79@infoemail.microsoft.com>
+Mime-Version: 1.0
+Received: from [10.1.1.12] ([10.1.1.12:54073]
+ helo=r7.customermail.microsoft.com) by or2-prod1-mta-i-07b45b16f433239e9
+ (envelope-from <bounce@infoemail.microsoft.com>) (ecelerity 4.4.1.20033
+ r(msys-ecelerity:tags/4.4.1.0^0)) with ESMTP id 89/90-56002-DA78BE96; Fri,
+ 24 Apr 2026 15:09:33 +0000
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=172.82.208.9;
+ helo=r9.customermail.microsoft.com;
+ envelope-from=bounce@infoemail.microsoft.com; receiver=<UNKNOWN>;
+Reply-To: "noreply" <replies@microsoft.com>
+Subject: Important update to your Microsoft Rewards account
+To: <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1777043385/4g2GbC36mMzZ0q7C/69EB87B7.005/172.82.208.9/[10.46.28.195]/localhost/<bounce@infoemail.microsoft.com>
+X-Fangmail-Mid-Qid: 69EB87B7.005/4g2GbC36mMzZ0q7C
+X-Fangmail-Miltered: at n151-171-211 with ID 69EB87B7.005 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 172.82.208.9
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: bounce@infoemail.microsoft.com
+X-Lms-Pvf: 
+ MnwyfDF8fO5X+kToQjJWdKASXZyVYTgs0ctGVMebBRpSJS5skRF/2tXp+0C0a35dSqYG6FcWkyaK70RwIBnjKe7fK93SIG8iW2QNWyGehS7pTICDosxZh01/cAJ51eSdv33u3FIRJA==
+X-Mailer: nlserver, Build 7.0.0.10714
+X-Msfbl: gi5ti7nWFsc/3M38PUGSOaBvi/UOiss1/OQoUtmskoY=|eyJyIjoid3VsaWFuZ0B
+ 4aWFuZ3ppemFpLmNvbSIsInJjcHRfbWV0YSI6eyAiaW4iOiAibXNjb21fbWt0X3B
+ yb2Q3OSIsICJyIjogInd1bGlhbmdAeGlhbmd6aXphaS5jb20iLCAibSI6ICI2Mzc
+ 4NDk0Njk0IiwgImQiOiAiNDUyMjk5MyIsICJpIjogIkVBNzZBREU5NTc3NkQyRUM
+ 3RjAwMDEwMUBBZG9iZU9yZyIgfSwiYiI6Im1zY29tXzE3Mi44Mi4yMDguOV9iYXR
+ jaHRyaWdnZXJtYXJrZXRpbmdfNWQzMDAzMWEtMzIyMy00NWMxLWI2ZjMtMTU3ODc
+ wMDZmZDIwIiwiZyI6ImJhdGNodHJpZ2dlcm1hcmtldGluZ181ZDMwMDMxYS0zMjI
+ zLTQ1YzEtYjZmMy0xNTc4NzAwNmZkMjAifQ==
+
+
+<!DOCTYPE HTML>
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:o=3D"urn:schemas-microso=
+ft-com:office:office" xmlns:v=3D"urn:schemas-microsoft-com:vml" dir=3D"ltr"=
+ lang=3D"en-us">
+    <head>
+
+    <!--[if gte mso 9]>
+      <xml>
+         <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+         </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+
+    <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DUTF-8=
+"/>
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge"/>
+    <meta name=3D"HandheldFriendly" content=3D"true"/>
+    <meta name=3D"x-apple-disable-message-reformatting"/>
+    <!-- Use page properties directly, no head.js required -->
+=09<title>Important update to your Microsoft Rewards account</title>
+    <meta name=3D"content-page-ref" content=3D"QN_nz7V1lVdBvjSbbRlAFNhH4Kml=
+cqNrkQu492uJ4nIhNWzCsML6r2NY2StoW0oFAykHldN0LIy8fOGWDCCWxTvS7WE49BIxvpOqe51=
+3ugN7SHg_Wg5ELDUkukk9mFcjBEoAfbcUWkocqRlU-a8FxD2DN3SLAbsNdxIHOnSp20QD-SOSPb=
+rdo19aAIolK-GQ_V1fxTZF7yKGP4HPQa7A56FbBprRZN01s1jHOIX5ZZE"/>
+<link rel=3D"canonical" href=3D"/content/campaigns/rewards-consumer/en-us/a=
+do169518_restructure_notice_email_final_wave_rewards/ADO169518_Restructure-=
+Notice-Email-Final-Wave_Rewards.html"/>
+    
+=09<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0"/>
+
+=09<meta name=3D"format-detection" content=3D"telephone=3Dno"/>
+    <meta name=3D"format-detection" content=3D"date=3Dno"/>
+    <meta name=3D"format-detection" content=3D"address=3Dno"/>
+    <meta name=3D"format-detection" content=3D"email=3Dno"/>
+
+    
+
+    
+    
+        
+    
+
+
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <style media=3D"all" type=3D"text/css">
+    =09@-ms-viewport { width: device-width;}
+    </style>
+    <style type=3D"text/css">
+    =09 sup{line-height: 0;}
+    =09.xf-content-height { margin:0 !important; }
+=09=09.xf-content-height .newpar { margin: 0; height: 100% !important; }
+=09=09.desktop-block { display:block; }
+=09    .rtl-template,  .rtl-template td { direction: rtl !important; text-a=
+lign: right !important; }
+=09=09.rtl-template .text-rtl-center td, .rtl-template .hero-text-center{te=
+xt-align:center !important}
+=09=09.rtl-template .btn-rtl th { direction: rtl !important; }
+        .rtl-template ul { margin: 0 !important; padding-right: 22px !impor=
+tant;text-align: right !important;direction: rtl !important; }
+        .rtl-template ol { margin-top: 0 !important;margin-bottom:0 !import=
+ant; padding-right: 22px !important;text-align: right !important;}
+        .rtl-template .social-icons { padding-left: 12px !important; paddin=
+g-right: 0 !important; }
+        .rtl-template .text-align-right th { text-align: right !important;p=
+adding-right:0px !important; padding-left:3px !important; }
+=09=09.rtl-template .txt-align-right, .rtl-template .block-text-align-right=
+ {text-align: right !important;}
+=09=09.rtl-template li { padding: 0 12px 8px 0 !important; }
+=09=09.rtl-template .rating-thumbs-up { padding-left: 30px; padding-right: =
+0; }
+=09=09.rtl-template .reward-tile-card {padding-left: 20px; padding-right: 0=
+; }
+        .rtl-template .ribbon-cta .block-max-width {text-align: left !impor=
+tant;}
+=09=09.rtl-template .block-max-width, .rtl-template .btn-block-right {text-=
+align: right !important;}
+=09=09.rtl-template .block-max-width-center {text-align: center !important;=
+}
+=09=09u+.rtl-template a { color:#0067B8 !important; }
+=09=09.rtl-template .table-ruler td, .rtl-template .table-ruler th, .rtl-te=
+mplate .table-zebra td, .rtl-template .table-zebra th,
+=09=09.rtl-template .table-hr-icon td, .rtl-template .table-zebra-icon td {=
+ padding: 20px 20px 20px 0 !important;=09text-align: right !important; }
+=09=09.rtl-template .table-ruler-mobile th, .rtl-template .table-zebra-mobi=
+le th { text-align: right !important; =09}
+=09=09.rtl-template .text-rtl-center td {text-align: center !important;}
+    =09.rtl-template .text-rtl-center {display:block; margin:0 auto;}
+=09=09.email-table .text-center p,.email-table .text-center td {text-align:=
+center !important;}
+        .email-table .text-center img {Margin:0 auto;margin:0 auto;}
+        .email-table .text-left p,.email-table .text-left td {text-align:le=
+ft !important;}
+        .email-table .text-right p,.email-table .text-right td {text-align:=
+right !important;}
+        .rtl-template .email-table .text-center p,.rtl-template .email-tabl=
+e .text-center td {direction: rtl !important;text-align: center !important;=
+}
+=09=09.rtl-template .btn-rtl th {direction: rtl !important;}
+=09=09.rtl-template .tile-headline, .rtl-template .tile-paragraph { padding=
+: 0 20px 0 20px;}
+=09=09.rtl-template .small-tile-image { padding: 20px 20px 0px 20px;}
+=09=09.rtl-template .tile-button { padding: 0 20px 20px 20px; }
+=09=09.rtl-template .padd-left-right-40 { padding: 0 40px 0 40px !important=
+;}
+=09=09.rtl-template .padd-left-20 { padding-left: 20px !important; padding-=
+right: 0 !important;}
+=09=09.rtl-template .intro-tile-image {padding:10px 10px 10px 20px}
+=09=09.rtl-template .intro-tile-text {padding:0 0 0 10px}
+        .rtl-template .image-tile-10 { padding:10px 10px 0px 0px !important=
+;}
+        .rtl-template .image-tile-20 {padding: 20px 20px 0px 0px !important=
+;}
+        .footer-address-center td,.footer-address-center td p,.footer-addre=
+ss-center td p a{text-align:center !important;direction:ltr !important;}
+=09=09 table.groupthree a {text-decoration: underline !important;}
+=09=09.txt-center ul li, .txt-center ol li{text-align: center !important; l=
+ist-style-position: inside;}
+         body {margin:0;padding:0;}
+         table td {border-collapse:collapse;margin:0;padding:0;}
+         table td p {margin:0;padding:0;}
+=09=09 table td p a {color:#0067B8;text-decoration:underline;font-weight: n=
+ormal;}
+=09=09 table th {font-weight: normal !important;}
+         .desktopHidden, .desktop-hidden, .table-ruler-mobile, .table-zebra=
+-mobile {display: none !important;}
+         .gutter {padding:0 30px;}
+=09=09 .tile-pad-large-4 {padding-left: 50px !important; padding-right: 50p=
+x !important;}
+         .tile-pad-large {padding-left: 30px !important; padding-right: 30p=
+x !important;}
+         .tile-pad-small-v1 {padding-left: 50px !important; padding-right: =
+50px !important;}
+         .tile-pad-small-v2 {padding-left: 84px !important; padding-right: =
+84px !important;}
+         .tile-pad-small-v3 {padding-left: 119px !important; padding-right:=
+ 119px !important;}
+         .tile-pad-small-v5 {padding-left: 154px !important; padding-right:=
+ 154px !important;}
+=09=09 .padd-left-right-40 { padding:0 40px 0 40px !important;}
+=09=09 .padd-left-right-20 { padding:0 20px 0 20px !important;}
+=09=09 .padd-left-right-10 { padding:0 10px 0 10px !important;}
+=09=09 .padd-left-right-28 { padding:0 28px 0 28px !important;}
+=09=09 .padd-right-26 { padding:0 26px 0 0 !important;}
+=09=09 .padd-left-26 { padding:0 0 0 26px !important;}
+=09=09 .tile-small-box .btn-block {vertical-align:top}
+=09=09 .tile-image {padding: 10px 20px 10px 10px;}
+=09=09 .reward-tile-card {padding-right: 20px;}
+         .lg-tile-image, .lg-tile-headline, .lg-tile-paragraph, .lg-tile-bu=
+tton {padding: 0 40px 0 40px;}
+         .tile-headline, .tile-paragraph { padding: 0 20px 0 20px;}
+         .small-tile-image { padding: 20px 20px 0px 20px;}
+         .tile-button { padding: 0 20px 20px 20px;}
+         .tile-txt-small {font-family: 'Segoe=C2=A0UI', Helvetica, Arial, s=
+ans-serif; font-size: 12px; font-style: normal; color: #505050; line-height=
+: 16px; letter-spacing: -0.01em; text-align: center; padding-left: 5px; pad=
+ding-right: 5px; word-wrap: break-word; word-break: break-all;}
+         .tile-txt-large {font-family: 'Segoe UI', Helvetica, Arial, sans-s=
+erif; font-size: 14px; font-style: normal; color: #505050; line-height: 20p=
+x; letter-spacing: -0.01em; text-align: center; padding-left: 10px; padding=
+-right: 10px; word-wrap: break-word; word-break: break-all;}
+         .boxed-list-wrapper {padding: 20px 30px 0;}
+=09=09 .block-padd-top-30 {padding-top: 0px;}
+=09=09 .rating-thumbs-up {padding-right: 30px;}
+=09=09 .text-card-padding {padding: 0 80px 0px 80px;}
+         .rte-spacer-20 p,.rte-spacer-20 ul,.rte-spacer-20 ol {padding-bott=
+om: 20px !important;}
+=09=09 .rte-spacer-10 p,.rte-spacer-10 ul,.rte-spacer-10 ol {padding-bottom=
+: 10px !important;}
+         .rte-footerspacer-10 p,.rte-footerspacer-10 ul,.rte-footerspacer-1=
+0 ol {padding-top: 10px !important;}
+=09=09 .semibold{font-weight:600;}
+=09=09 .strikethrough { text-decoration: line-through;}
+=09=09 .spacer-ln-ht-0 {line-height: 0px;font-size: 0px;}
+=09=09 .table-ruler-mobile td, .table-ruler-mobile th, .table-zebra-mobile =
+td, .table-zebra-mobile th, .table-hr-icon td, .table-zebra-icon td {
+      =09=09height: 30px !important; padding: 20px 0 20px 20px !important; =
+text-align: left !important;=09word-wrap: break-word !important;=09overflow=
+-wrap: break-word !important; }
+=09=09 .table-ruler th, .table-ruler td { height: 30px !important;=09paddin=
+g: 20px 0 20px 20px !important; text-align: left !important; word-wrap: bre=
+ak-word !important; overflow-wrap: break-word !important; }
+=09=09 .table-zebra th, .table-zebra td { height: 30px !important;=09paddin=
+g: 20px 0 20px 20px !important; text-align: left !important; word-wrap: bre=
+ak-word !important; overflow-wrap: break-word !important; }
+         .table-ruler th, .table-ruler td, .table-ruler-mobile th, .table-r=
+uler-mobile td, .table-hr-icon td {
+         border-bottom: 1px solid #E0E0E0 !important;}
+         .table-zebra-mobile th, .table-zebra-mobile td {border-bottom : 1p=
+x solid #ffffff !important;}
+         .table-ruler-mobile, .table-hr-icon {border-top: 1px solid #E0E0E0=
+;}
+         .table-ruler-mobile th, .table-zebra-mobile th {font-weight: 600 !=
+important;}
+         .table-zebra-icon .odd-row td, .table-zebra .odd-row td, .table-ze=
+bra-mobile .odd-row td {background-color: #F6F6F6;}
+         .table-zebra th, .table-zebra-mobile th {background-color: #e7e7e7=
+;}
+=09=09 .hero-text-center {text-align: center !important;padding: 0 30px !im=
+portant;}
+=09=09 .intro-tile-image { padding:10px 20px 10px 10px !important;}
+=09=09 .intro-tile-text  {padding:0 10px 0 0}
+=09=09 .intro-tile-text-20 {padding: 0 20px 0 0;}
+         .intro-tile-image-20 {padding: 20px 20px 20px 20px !important;}
+         .image-tile-10 { padding:10px 0px 0px 10px !important;}
+         .image-tile-20 {padding: 20px 0px 0px 20px !important;}
+         .email-table th table td { font-weight:600 !important;}
+         @media only screen and (max-width: 640px) {
+         .mobileHide {display:none;line-height:0; mso-hide: all;max-height:=
+ 0; max-width: 0; width:0;}
+         }
+         @media only screen and (max-width: 480px) {
+=09=09 .wrapper, .table-hr-icon, .table-zebra-icon, .email-table {width: 10=
+0%!important;}
+=09=09 .text-card-padding {padding: 0px 40px 0px 40px !important;}
+         .block, .block-text-align-right, .desktopHidden {width:100% !impor=
+tant; display:block !important;}
+=09=09 .app-download-block th, .btn-block, .btn-block-right {display: block=
+ !important; width: auto !important;}
+=09=09 .block-max-width, .block-max-width-center{ max-width: none !importan=
+t; display: block !important; width: auto !important;}
+         .addressText {font-size:10px !important;}
+=09=09 .mobileHidden, .table-ruler, .table-zebra {display: none !important;=
+}
+         .mobileBodyPadding {padding:10px 20px 35px 20px !important; width:=
+288px !important;}
+         .mobileNoPadding {padding:0 !important;}
+=09=09 .mobile-block-padd-top-30 {display: block !important;padding-top: 30=
+px;width: 100%;}
+         .mobileTopPad5 { padding-top: 5px !important; }
+         .mobileTopPad10 { padding-top: 10px !important; }
+         .hide{display:none;}
+         .show{display:none;}
+         .desktophide{display:block!important;}
+         .w-100p{width:100%!important;}
+         .p-0{padding:0!important;}
+         .flex{display:block!important;width:100%!important;box-sizing:bord=
+er-box!important;}
+         .thold{display:table!important;width:100%!important;}
+         .thead{display:table-header-group!important;width:100%!important;}
+         .tfoot{display:table-footer-group!important;width:100%!important;}
+         .mobile-padding-20{padding-left:20px!important; padding-right:20px=
+!important;}
+         .mobile-padding-rght-20{padding-left:0px!important; padding-right:=
+20px!important;}
+         .mobile-social-table{text-align:center!important;}
+         .mobile-social-padd-btm{padding-bottom:35px!important;}
+=09=09 .mobile-social-padd-btm-top{padding-bottom:35px!important;}
+         .mobile-social-marg-btm{margin-top:20px!important;}
+=09=09 .mobile-social-inline{display:inline-block!important; padding-right:=
+2px!important;}
+=09=09 .logo-mobile-img{width:85px!important;height:18px!important;}
+=09=09 .mobile-monthly-padd-left{padding-left:20px!important;}
+=09=09 .secondary-logo-padd-left{ padding-left:0px!important;}
+         .secondary-logo-padd-left-20{ padding-left:20px!important;}
+         .mobile-txt-center {text-align: center!important;}
+         .social-text-pad-rght{padding-right:20px!important;padding-bottom:=
+0px!important;}
+=09=09 .followus-pad-top{padding-top:20px!important;}
+=09=09.card-padding {padding-left: 20px!important; padding-right: 20px!impo=
+rtant; padding-top: 40px!important; padding-bottom: 40px!important;}
+=09=09.thead {display: table-header-group!important; width: 100%!important;=
+}
+=09=09.mobile-txt-center {text-align: center!important;}
+=09=09.tfoot {display: table-footer-group!important; width: 100%!important;=
+}
+=09=09.tile-pad-large-4 {padding-left: 20px !important; padding-right: 20px=
+ !important;}
+=09=09.tile-pad-large {padding-left: 60px !important; padding-right: 60px !=
+important;}
+=09=09.tile-pad-small-v1 {padding-left: 20px !important; padding-right: 20p=
+x !important;}
+=09=09.tile-pad-small-v2 {padding-left: 20px !important; padding-right: 20p=
+x !important;}
+=09=09.tile-pad-small-v3 {padding-left: 20px !important; padding-right: 20p=
+x !important;}
+=09=09.tile-pad-small-v5 {padding-left: 55px !important; padding-right: 55p=
+x !important;}
+=09=09.mob-padd-top-zero {padding-top: 0px !important;}
+        .boxed-list-wrapper {padding: 20px 20px 0 !important;}
+        .gutter {padding:0 20px!important;}
+=09=09.block-padd-top-30 { display: block !important; padding-top: 30px; }
+=09=09.mobile-bottom-padding-20 { padding: 0 0 20px 0 !important;}
+=09=09.hero-mobile { width: 100% !important; max-width: 100% !important; he=
+ight: auto !important;}
+        .hero-text-center {padding: 0 20px !important;}
+         .spacer-mob-30 {height: 30px !important;}
+         .spacer-mob-20 {height: 20px !important;}
+         .table-zebra-mobile, .table-ruler-mobile {display: table !importan=
+t;}
+         .table-ruler-mobile td, .table-zebra-mobile td, .table-ruler-mobil=
+e th, .table-zebra-mobile th {padding: 20px !important;}
+         .table-hr-icon td, .table-zebra-icon td {min-width: 16px !importan=
+t; max-width: 150px !important;}
+=09=09.rtl-template .block-text-align-right { text-align: right !important;=
+}
+        .thold { display: table !important; width: 100% !important; }
+=09=09.thead { display: table-header-group !important; width: 100% !importa=
+nt; }
+=09=09.tfoot { display: table-footer-group !important; width: 100% !importa=
+nt; }
+        .email-banner-padding { padding-left:20px !important; padding-right=
+:20px !important; }
+    .social-link{display: inline-block;padding-right:20px;}
+=09=09.rtl-template .social-link{display: inline-block;padding-left:20px !i=
+mportant;padding-right:0 !important;}
+=09=09.social-link:last-child { padding-right: 0;}
+=09=09.rtl-template .social-link:last-child{padding-left: 0;}
+         }
+         ul { margin:0 !important;padding-left:22px !important;text-align: =
+left !important;}
+         ol { margin-top:0 !important;margin-bottom:0 !important;padding-le=
+ft:22px !important;text-align: left !important;}
+=09=09 li{padding: 0 0 8px 12px !important;margin: 0 !important;}
+=09=09 li a {text-decoration: underline; color: #0067B8;}
+         *[class].gmailfix {display:none; display:none!important;}
+      </style>
+     <!--[if gte mso 16]>
+=09=09<style type=3D"text/css">
+=09=09p { mso-hyphenate: none;}
+        .rtl-template,
+        .rtl-template td{
+        direction: ltr !important;
+        text-align: right !important;
+        }
+        .rtl-template p {
+        direction: rtl !important;
+        text-align: right !important;
+        }
+        .text-rtl-center .list-item-right p {
+=09=09text-align: right !important;
+=09=09direction: rtl !important;
+=09=09}
+        .rtl-template .email-header p {
+        direction: rtl !important;
+        text-align: left !important;
+        }
+        .email-table th table td {
+=09=09font-weight:600 !important;
+=09=09}
+=09=09.text-rtl-center p,
+        .rtl-template .email-table .text-center p,
+        .rtl-template .email-table .text-center td {
+=09=09=09direction: rtl !important;
+=09=09=09text-align: center !important;
+=09=09}
+=09=09.email-table .text-center p,
+=09=09.email-table .text-center td {
+=09=09=09text-align:center !important;
+=09=09}
+        .email-table .text-left p,
+        .email-table .text-left td {
+         text-align:left !important;
+        }
+        .footer-address-center td,
+=09=09.footer-address-center td p,
+=09=09.footer-address-center td p a{
+=09=09=09=09text-align:center !important;
+=09=09=09=09direction:ltr !important;
+=09=09}
+ =09=09.cta-button{
+=09=09font-weight:normal !important;
+=09=09}
+=09=09li
+         {
+         margin: 0 0 8px 0 !important;
+         text-align: left !important;
+         }
+         div.list ul li {
+         mso-special-format: bullet;
+         }
+         div.list {
+         margin: 0 0 0 -20px;
+         }
+         div li.list-bottom{
+            margin-bottom: 28px !important;
+         }
+         .rtl-template li
+         {
+         margin: 0 0 8px 0 !important;
+         text-align: right !important;
+         direction : rtl !important;
+         }
+        .rtl-template div.list
+         {
+         Margin: 0 -20px 0 0;
+         }
+=09=09 .rtl-template .footeraddressrtl p,
+         .rtl-template .footeraddressrtl  {
+         direction: ltr !important;
+         text-align:right !important;
+         }
+         .footeraddressrtl {
+         mso-padding-alt: 0 30px !important;
+         }
+         .text-rtl-center .footeraddressrtl p,
+         .rtl-template .footeraddressrtl  {
+         direction: ltr !important;
+         text-align:center !important;
+         }
+         .text-rtl-center .txt-align-right td {
+=09=09  text-align:right !important;
+=09=09=09}
+=09=09 .txt-center ul li,
+         .txt-center ol li
+         {
+            text-align:center !important;
+         }
+=09=09 .rte-spacer-20 p
+=09=09 {
+=09=09=09mso-margin-bottom-alt: 20px;
+=09=09 }
+=09=09 .rte-spacer-10 p
+=09=09 {
+=09        mso-margin-bottom-alt: 10px;
+         }
+         .rte-footerspacer-10 p {
+=09        mso-margin-top-alt: 10px;
+         }
+         .rtl-template th.tileimage {
+         =09direction: ltr !important;
+         }
+=09=09 .table-hr-icon td,
+         .table-zebra-icon td,
+         .table-zebra td,
+         .table-zebra th,
+         .table-zebra-mobile td,
+         .table-zebra-mobile th,
+         .table-ruler td,
+         .table-ruler th,
+         .table-ruler-mobile td,
+         .table-ruler-mobile th
+         {
+=09=09=09mso-padding-alt: 20px 0 20px 20px !important;
+         }
+=09=09 .rtl-template .table-ruler th,
+=09=09 .rtl-template .table-zebra th {
+=09=09=09direction: rtl !important;
+=09=09 }
+=09=09 .rtl-template .rating-thumbs-down {
+=09=09=09padding-left:1px;
+=09=09 }
+=09=09 table {
+=09=09=09border-spacing: 0;
+=09=09=09mso-margin-bottom-alt: 0;
+=09=09=09mso-margin-top-alt: 0;
+=09=09=09mso-table-lspace: 0pt;
+=09=09=09mso-table-rspace: 0pt;
+=09=09}
+=09=09td ,th {
+=09=09mso-table-lspace: 0pt !important;
+=09=09mso-table-rspace: 0pt !important;
+=09=09}
+=09=09.mso-line-ht-rule {
+=09=09  mso-line-height-rule: exactly;
+=09=09}
+        .hero-text-center p{
+            text-align: center !important;
+        }
+        </style>
+=09<![endif]-->
+
+    
+   </head>
+    
+  <body dir=3D"ltr" style=3D"font-family:Segoe UI, Helvetica, Arial, sans-s=
+erif; font-size:12px; color:#4d4d4d; background-color:#e6e6e6; line-height:=
+20px; -webkit-text-size-adjust: none;">
+
+
+<div class=3D"root container responsivegrid">
+      <div style=3D"display:none;font-size:1px;color:#ffffff;line-height:1p=
+x;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;">Wat=
+ch for an email about this next month</div>
+=09=09=09<div style=3D"display:none;font-size:1px;color:#ffffff;line-height=
+:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;">
+=09=09=09=09=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =
+=C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =
+=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=
+=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F=
+ =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =
+=E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=
+=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =
+=C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =
+=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=
+=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=CD=8F =
+=E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=
+=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =
+=C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=
+=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F=
+ =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =
+=E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=
+=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =
+=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=
+=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F=
+ =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =
+=E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=
+=80=8C =C2=A0=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =
+=C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =
+=CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=
+=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F=
+ =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =
+=E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=
+=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=
+=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C=
+ =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =
+=C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=
+=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0=
+ =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =CD=8F =E2=80=8C =C2=A0 =
+=CD=8F =E2=80=8C =C2=A0
+=09=09=09</div>
+      <!--Gmail App Scaling Fix Don't Remove these =C2=A0 s its required fo=
+r gmail apps -->
+      <div class=3D"gmailfix" style=3D"white-space:nowrap; font:15px courie=
+r; line-height:0;">
+         =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 
+         =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 
+         =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0
+      </div>
+      <!--PARENT TABLE Starts Here -->
+=09  
+=09  <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%"=
+ align=3D"center" class=3D"wrapper" style=3D"background-color:#e6e6e6; marg=
+in:0 auto;" role=3D"presentation">
+=09  
+=09  
+         <tbody>
+      =09=09<tr>
+               <td>
+                  <!--SECONDARY TABLE FOR OTHER COMPONENT Starts here -->
+=09=09=09=09  <!--[if gte mso 16]>
+                  <table cellspacing=3D"0" cellpadding=3D"0" class=3D"" ali=
+gn=3D"center" style=3D"width:660px; margin:0 auto; margin-top:2px;">
+=09=09=09=09  <![endif]-->
+=09=09=09=09  <!--[if !mso]><!-->
+=09=09=09=09  <table cellspacing=3D"0" cellpadding=3D"0" class=3D" wrapper"=
+ align=3D"center" style=3D"width:660px; margin:0 auto; margin-top:2px;" rol=
+e=3D"presentation">
+=09=09=09=09  <!--<![endif]-->
+                     <tbody>
+=09=09=09=09=09    <!-- Eyebrow component starts-->
+=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09   <td>
+=09=09=09=09=09=09=09=09
+    
+    
+    
+        <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"10=
+0%" style=3D"background-color: #f2f2f2;" role=3D"presentation">
+            <tbody>
+                <tr>
+                    <td>
+                        
+                        
+                            <table border=3D"0" cellspacing=3D"0" cellpaddi=
+ng=3D"0" width=3D"100%" style=3D"background-color: #f2f2f2;" role=3D"presen=
+tation">
+                                <tbody>
+                                    <tr>
+                                        <td class=3D"mobile-padding-20" ali=
+gn=3D"left" style=3D"color:#000000; font-family:Segoe UI, Helvetica, Arial,=
+ sans-serif; font-size:10px; line-height:14px;letter-spacing: -0.02em;paddi=
+ng:10px 30px 10px 30px;">
+                                            <p style=3D"color:#000000; font=
+-family:Segoe UI, Helvetica, Arial, sans-serif; font-size:10px; line-height=
+:14px;margin:0;padding:0;letter-spacing: -0.02em;">
+                                                
+                                                <a href=3D"https://t.infoem=
+ail.microsoft.com/r/=3Fid=3Dh17c301ae6,4503f1,44a96fee&e=3DcDE9QERKNFpWdy0w=
+bXl0NWZ2eTdhcG9TNzJpWWJEaWJiX1hwRUtvSFM5czBjR1JXY1Rsdm0zUkZMX05BdjBPWFQzLWh=
+MZGFfVGR4SGVJSFlPUjJoeTlHaUExd1FDNzZ0RHM0SGhocTJTTTMzR0JCeFU0dm4&s=3DpXwZ1N=
+SeAUgPBTl7IPCP0PJNfKUyv_uaFFJkYADMQkA" style=3D"white-space: nowrap;font-we=
+ight:400;color:#000000;" >                                                 =
+   View as a webpage
+                                                </a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+
+=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09<!-- Eyebrow component ends-->
+=09=09=09=09=09
+                     =09<!-- HEADER SECTION STARTS HERE-->
+                     =09<tr>
+                     =09=09<td>
+                     =09=09=09
+=09
+=09
+=09=09
+=09
+=09
+=09
+=09=09<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0=
+" bgcolor=3D"#ffffff" role=3D"presentation">
+=09=09=09<tbody>
+=09=09=09
+=09=09=09=09
+   <tr>
+       <td height=3D"20px">=C2=A0</td>
+   </tr>
+
+=09=09=09=09<tr>
+=09=09=09=09=09<td class=3D"gutter">
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09<a target=3D"_blank" href=3D"https://t.infoemail.micro=
+soft.com/r/=3Fid=3Dh17c301ae6,4503f1,44a96fef" ><img src=3D"https://cdn-dyn=
+media-1.microsoft.com/is/image/microsoftcorp/Microsoft@2x%20Light%20Theme=
+=3Fscl=3D1&fmt=3Dpng-alpha" alt=3D"Microsoft Logo" style=3D"display:block; =
+height:20px;" height=3D"20"/>
+=09
+=09
+
+=09=09=09=09=09=09=09</a>
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09</td>
+=09=09=09=09</tr>
+=09=09=09=09
+   <tr>
+       <td height=3D"20px">=C2=A0</td>
+   </tr>
+
+=09=09=09
+=09=09=09</tbody>
+=09=09</table>
+=09
+
+=09=09
+=09=09
+=09=09
+=09=09
+=09=09
+=09
+
+
+                     =09=09</td>
+                     =09</tr>
+                     =09<!-- HEADER SECTION ENDS HERE-->
+=09=09=09=09=09=09<tr>
+                     =09=09<td>
+                                
+
+
+
+
+    
+    
+    <div class=3D"card">
+=09
+=09
+=09
+=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%=
+" style=3D"background-color: #ffffff" role=3D"presentation">
+=09=09=09<tbody>
+=09=09=09
+=09=09=09
+    
+    
+        <tr>
+            <td height=3D"20">=C2=A0</td>
+        </tr>
+    
+
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09<tr>
+=09=09=09=09<td>
+=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" widt=
+h=3D"100%" role=3D"presentation">
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+        
+        
+    
+    
+
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09<td class=3D"gutter" align=3D"left">
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09<a target=3D"_blank" href=3D"https://t.infoem=
+ail.microsoft.com/r/=3Fid=3Dh17c301ae6,4503f1,44a96ff0" style=3D"text-decor=
+ation: none;" ><p style=3D"color:#000000;
+         font-family:Segoe UI, Helvetica, Arial, sans-serif;font-style: nor=
+mal;font-weight:600; font-size:42px;line-height:56px;letter-spacing:-0.02em=
+;margin:0; padding:0;" role=3D"heading" aria-level=3D"3"> Key updates to Mi=
+crosoft Rewards </p>
+        
+
+        
+
+        
+
+        
+
+        
+=09    
+        
+
+        
+
+        
+=09=09
+=09=09
+=09  
+    
+
+=09=09=09=09=09=09=09=09=09=09</a>
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+    
+        <tr>
+            <td height=3D"20">=C2=A0</td>
+        </tr>
+    
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09</table>
+=09=09=09=09</td>
+=09=09=09</tr>
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09</tbody>
+=09=09</table>
+=09
+</div>
+
+
+    
+    
+    <div class=3D"card">
+=09
+=09
+=09
+=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%=
+" style=3D"background-color: #3d5fe5" role=3D"presentation">
+=09=09=09<tbody>
+=09=09=09
+=09=09=09
+    
+        
+        
+            <tr>
+                
+                <td height=3D"10" style=3D"font-size:0px;line-height:0px" c=
+lass=3D"spacer-ln-ht-0">=C2=A0</td>
+            </tr>
+        
+    
+    
+
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09<tr>
+=09=09=09=09<td>
+=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" widt=
+h=3D"100%" role=3D"presentation">
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+        
+        
+    
+    
+
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09<td class=3D"hero-text-center" align=3D"center">
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09<a target=3D"_blank" href=3D"https://t.infoem=
+ail.microsoft.com/r/=3Fid=3Dh17c301ae6,4503f1,44a96ff1" style=3D"text-decor=
+ation: none;" ><p style=3D"color:#ffffff;
+         font-family:Segoe UI, Helvetica, Arial, sans-serif; font-style: no=
+rmal;font-weight:600;font-size: 21px;line-height:28px;letter-spacing: -0.02=
+em;margin:0; padding:0;" role=3D"heading" aria-level=3D"3"> Coming soon </p=
+>
+        
+
+        
+=09    
+        
+
+        
+
+        
+=09=09
+=09=09
+=09  
+    
+
+=09=09=09=09=09=09=09=09=09=09</a>
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+        
+        
+            <tr>
+                
+                <td height=3D"10" style=3D"font-size:0px;line-height:0px" c=
+lass=3D"spacer-ln-ht-0">=C2=A0</td>
+            </tr>
+        
+    
+    
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09</table>
+=09=09=09=09</td>
+=09=09=09</tr>
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09</tbody>
+=09=09</table>
+=09
+</div>
+
+
+    
+    
+    <div class=3D"imagestandalone">
+   
+   
+      
+=09=09 =09
+      
+      
+      
+      
+      
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" styl=
+e=3D"background-color: ;" role=3D"presentation">
+   <tr>
+       <td>
+           
+               <a target=3D"_blank" href=3D"https://t.infoemail.microsoft.c=
+om/r/=3Fid=3Dh17c301ae6,4503f1,44a96ff2" ><img src=3D"https://cdn-dynmedia-=
+1.microsoft.com/is/image/microsoftcorp/Keyupdate_hero=3Fscl=3D1&fmt=3Dpng-a=
+lpha" alt=3D"Microsoft Rewards medal icons" style=3D"width: 100%;vertical-a=
+lign:bottom;max-height:370px;" border=3D"0" class=3D"hero-mobile" height=3D=
+"auto" width=3D"660"/>
+=09
+=09
+
+               </a>
+           
+           
+       </td>
+   </tr>
+</table>
+
+=09=09 =09
+      
+   
+</div>
+
+
+    
+    
+    <div class=3D"card">
+=09
+=09
+=09
+=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%=
+" style=3D"background-color: #FFFFFF" role=3D"presentation">
+=09=09=09<tbody>
+=09=09=09
+=09=09=09
+    
+        
+        
+    
+    
+
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09<tr>
+=09=09=09=09<td>
+=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" widt=
+h=3D"100%" role=3D"presentation">
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+        
+        
+    
+    
+
+=09=09=09=09=09=09=09
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09<td class=3D"txt-align-right" style=3D"padding-t=
+op:20px; padding-bottom:0px;" align=3D"left">
+=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellspacing=3D"0" cellpad=
+ding=3D"0" width=3D"100%" class=3D"rte-spacer-20" role=3D"presentation">
+=09=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09=09=09=09<td class=3D"gutter" style=3D"color:=
+#000000;font-family:Segoe UI, Helvetica, Arial, sans-serif; font-size:16px;=
+ font-style:normal;line-height:24px;letter-spacing: -0.02em;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<!--[if mso]>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<div class=3D"list">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<![endif]-->
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p>Starting in May 2026, we will =
+be making updates to the Rewards program.</p>
+<p>Here's what you need to know:</p>
+<ul>
+ <li>We're announcing 3 new participation levels with a range of benefits t=
+hat allow you to earn points in new ways: Member, Silver, and Gold.</li>
+ <li class=3D"list-bottom">In order to accommodate these changes, the daily=
+ search point limit will update by level. They will update to Member (25), =
+Silver (50), and Gold (100). There will be new opportunities to earn additi=
+onal bonus points.</li>
+</ul>
+<p>As we evaluate=C2=A0the program, we might make more changes to further t=
+he benefits of the program. There's no action required on your part.</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<!--[if mso]>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</div>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<![endif]-->
+=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09<td style=3D"text-align:left;" align=3D"left">
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09=09
+   
+   
+   
+   
+   
+   
+   
+   <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" s=
+tyle=3D"background-color: #FFFFFF;" role=3D"presentation">
+      <tbody>
+         <tr>
+            <td class=3D"gutter">
+               <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" alig=
+n role=3D"presentation">
+=09=09=09    <tr>
+                    <td>
+                        <table border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" align role=3D"presentation">
+                  <tbody>
+                     <tr>
+                        
+                           
+                           
+                              
+                                 
+                                 
+                                 <!--[if mso]>
+                                 <td class=3D"btn-block" >
+                                 <![endif]-->=09
+                                 
+                                 <!-- hide from outlook -->
+                                 <!--[if !mso]><\!-->
+                                 <td class=3D"btn-block">
+                                    <!-- <![endif]-->
+                                    <table class=3D"btn-rtl" border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0" align role=3D"presentation">
+                                       <tbody>
+                                          <tr>
+                                             <td>
+                                                <table border=3D"0" cellspa=
+cing=3D"0" cellpadding=3D"0" width=3D"100%" dir=3D"ltr" role=3D"presentatio=
+n">
+                                                   
+    
+    
+=09
+        
+        
+            <th class=3D"block-max-width-center" align=3D"center" style=3D"=
+border-radius:2px; font-family:Segoe UI, Helvetica, Arial, sans-serif; font=
+-style: normal; font-weight:600 !important; font-size:18px; line-height:24p=
+x; mso-line-height-rule: exactly; padding:8px 20px; min-width:100px; border=
+: 1px solid #0067B8;" bgcolor=3D"#0067B8">
+                <a href=3D"https://t.infoemail.microsoft.com/r/=3Fid=3Dh17c=
+301ae6,4503f1,44a96ff3" title=3D"Visit dashboard" style=3D"text-decoration:=
+none; ; color : #ffffff;" aria-label=3D"Visit dashboard, opens a new window=
+" target=3D"_blank" ><strong class=3D"cta-button" style=3D"color : #ffffff;=
+ font-weight:600;">Visit dashboard</strong>
+                </a>
+            </th>
+        
+=09
+=09
+    
+
+                                                </table>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              
+                              
+                           
+                        
+                     </tr>
+                  </tbody>
+=09=09=09=09 </table>
+                </td>
+               </tr>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09=09
+    
+    
+        <tr>
+            <td height=3D"40">=C2=A0</td>
+        </tr>
+    
+
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09=09
+=09=09=09=09=09=09
+=09=09=09=09=09</table>
+=09=09=09=09</td>
+=09=09=09</tr>
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09
+=09=09=09</tbody>
+=09=09</table>
+=09
+</div>
+
+
+
+                            </td>
+                     =09</tr>
+
+                        <!-- FOOTER SECTION STARTS HERE -->
+
+                        <tr>
+                     =09=09<td>
+                                
+
+
+
+
+
+                            </td>
+                     =09</tr>
+
+                        <tr>
+                     =09=09<td>
+                 =09=09=09=09
+   
+
+   
+   
+      <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%=
+" style=3D"background-color:#F2F2F2;" role=3D"presentation">
+         <tbody>
+            
+=09=09=09
+            
+            
+            
+            
+            <tr>
+               <td>
+                  
+                  
+                  
+                  
+                  
+=09
+
+
+
+
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%">
+   <tr>
+   =09<td height=3D"20">&#xA0;</td>
+   </tr>
+   <!--Privacy text-->
+   
+     
+    
+   <tr>
+      <td class=3D"gutter" style=3D"font-family:Segoe UI,Helvetica,Arial,sa=
+ns-serif;font-size:10px;line-height:14px;color:#000000;">
+         
+
+
+
+
+
+
+<a title=3D"Privacy Statement" href=3D"https://t.infoemail.microsoft.com/r/=
+=3Fid=3Dh17c301ae6,4503f1,44a9705c" _label=3D"Privacy Link" _type=3D"Email =
+click" ><strong style=3D"color:#000000;text-decoration:underline;font-weigh=
+t: normal;">Privacy Statement</strong></a>
+
+      </td>
+   </tr>
+   
+    
+
+
+
+      <tr>
+      <!--[if gte mso 9]>
+=09=09=09=09<td class=3D"footeraddressrtl" style=3D"color:#000000;font-fami=
+ly:Segoe UI,Helvetica,Arial,sans-serif;font-size:10px;line-height:14px;lett=
+er-spacing:-0.02em;font-style:normal;">     
+=09=09=09<![endif]-->
+=09=09=09<!--[if !gte mso 9]><!-- -->
+=09=09=09=09<td class=3D"gutter" style=3D"color:#000000;font-family:Segoe U=
+I,Helvetica,Arial,sans-serif;font-size:10px;line-height:14px;letter-spacing=
+:-0.02em;font-style:normal;">
+=09=09=09<!--<![endif]-->
+      =09 
+         <p>Microsoft Corporation,&#xA0;One Microsoft Way,&#xA0;Redmond, WA=
+ 98052
+         </p>
+         
+      </td>
+   </tr>
+   <tr>
+     <td style=3D"line-height:1px; mso-line-height-rule:exactly;">
+       <img border=3D"0" src=3D"https://me-cam-pixel-tracker-prod.azure-api=
+.net/api/p79/track.png" height=3D"1" width=3D"1" style=3D"display:block;hei=
+ght:1px;">
+     </td>
+</tr>
+</table>
+
+=09
+
+               </td>
+            </tr>            
+            <tr>
+               
+    
+    
+        <tr>
+            <td height=3D"20">=C2=A0</td>
+        </tr>
+    
+
+               <td>
+                  <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" w=
+idth=3D"100%" role=3D"presentation">
+                     <tr>
+                          <td class=3D"gutter" width=3D"100" style=3D"line-=
+height:14px;">
+                                
+                                       <a target=3D"_blank" href=3D"https:/=
+/t.infoemail.microsoft.com/r/=3Fid=3Dh17c301ae6,4503f1,44a9717e" ><img src=
+=3D"https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/microsoft%2=
+0logo-1=3Fscl=3D1&fmt=3Dpng-alpha" alt=3D"Microsoft Logo" style=3D"display:=
+block; height:20px;" height=3D"20"/>
+=09
+=09
+
+                                         </a>
+                                 
+                                  
+=09=09=09=09=09=09=09</td>
+                       </tr>
+                  </table>
+               </td>
+            </tr>
+            
+    
+    
+        <tr>
+            <td height=3D"30">=C2=A0</td>
+        </tr>
+    
+
+         </tbody>
+      </table>
+   
+
+                 =09=09=09</td>
+                 =09=09</tr>
+                  =09=09<!-- FOOTER SECTION ENDS HERE -->
+
+                     </tbody>
+                  </table>
+                </td>
+              </tr>
+      =09=09
+      =09 </tbody>
+      </table>
+      <!--PARENT TABLE Ends Here -->
+      <p style=3D"line-height:1px;">=C2=A0</p>
+=09</div>
+
+<img height=3D'0' width=3D'0' alt=3D'' src=3D'https://t.infoemail.microsoft=
+.com/r/=3Fid=3Dh17c301ae6,4503f1,1'/>
+</body>
+</html>
+

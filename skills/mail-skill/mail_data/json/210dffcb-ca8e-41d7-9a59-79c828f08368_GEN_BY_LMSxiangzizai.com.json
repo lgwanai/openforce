@@ -1,0 +1,21 @@
+{
+  "message_id": "<210dffcb-ca8e-41d7-9a59-79c828f08368_GEN_BY_LMS@xiangzizai.com>",
+  "imap_uid": "2885",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Test Newlines",
+  "sender": "wuliang@xiangzizai.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-21T00:57:50+08:00",
+  "body_text": "朋友你好！\r\n\r\n告诉你一个好消息 —— 现在我可以帮你收发邮件啦！🐾\r\n\r\n以后有什么需要直接告诉我就行，我来帮你搞定！\r\n\r\n—— 小爪爪",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/210dffcb-ca8e-41d7-9a59-79c828f08368_GEN_BY_LMSxiangzizai.com.eml"
+}

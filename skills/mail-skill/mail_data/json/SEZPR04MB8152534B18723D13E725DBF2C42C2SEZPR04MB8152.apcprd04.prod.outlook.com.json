@@ -1,0 +1,34 @@
+{
+  "message_id": "<SEZPR04MB8152534B18723D13E725DBF2C42C2@SEZPR04MB8152.apcprd04.prod.outlook.com>",
+  "imap_uid": "3123",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AQHc0K+dtrBC3cY0lUe3EIxn4wXaYrXorqTw",
+  "subject": "FW: [EXTERNAL] 【宝马AI CAMP】GAIA课件",
+  "sender": "Guantong.Liu@bmw-brilliance.cn",
+  "recipient": "Ziwen.Weng@bmw-brilliance.cn, sheng.fang@bmw.com",
+  "cc": "Jiayang.Liu@bmw-brilliance.cn, sue@woshipm.com, wuliang@xiangzizai.com, daisy_yang@woshipm.com",
+  "date": "2026-04-21T00:48:46+00:00",
+  "body_text": "Dear Eva and Sheng 哥，\r\n\r\n今天中午的课件已按建议调整。请查收\r\n\r\nBR,\r\nAndrea\r\n\r\nFrom: 杨雨鑫 <daisy_yang@woshipm.com>\r\nSent: Monday, April 20, 2026 6:20 PM\r\nTo: Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn>\r\nCc: Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn>; 周珊 <sue@woshipm.com>; 吴亮 <wuliang@xiangzizai.com>\r\nSubject: [EXTERNAL] 【宝马AI CAMP】GAIA课件\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nDear all\r\n\r\n附件为直播课-GAIA课件的PPT与PDF版本，请查收[https://wwcdn.weixin.qq.com/node/wework/images/qymailplugin_pc4_sticker92.png]\r\nDify与Copilot课件明早与大家同步\r\n\r\nRegards,\r\nDaisy\r\n\r\n________________________________\r\n人人都是产品经理\r\n[https://rescdn.qqmail.com/node/wwqy/qymng/style/images/sass/independent/card_verify_full.png]\r\n\r\n\r\n杨雨鑫\r\n服务运营\r\n[https://rescdn.qqmail.com/node/wwqy/qymng/style/images/sass/independent/card_logo.png]\r\n\r\n\r\n\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【宝马AI CAMP】第四课-GAIA.pdf",
+      "content_type": "application/octet-stream",
+      "size": 3093682,
+      "local_path": "./mail_data/attachments/<SEZPR04MB8152534B18723D13E725DBF2C42C2@SEZPR04MB8152.apcprd04.prod.outlook.com>/【宝马AI CAMP】第四课-GAIA.pdf"
+    },
+    {
+      "filename": "【宝马AI CAMP】第四课-GAIA.pptx",
+      "content_type": "application/octet-stream",
+      "size": 3202457,
+      "local_path": "./mail_data/attachments/<SEZPR04MB8152534B18723D13E725DBF2C42C2@SEZPR04MB8152.apcprd04.prod.outlook.com>/【宝马AI CAMP】第四课-GAIA.pptx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/SEZPR04MB8152534B18723D13E725DBF2C42C2SEZPR04MB8152.apcprd04.prod.outlook.com.eml"
+}

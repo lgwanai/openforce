@@ -1,0 +1,330 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:8.219.24.149)
+ smtp.mailfrom=no-reply@qoder.com; dkim=pass header.b=AHMR+NDTty
+ header.i=@qoder.com header.s=aliyun-ap-southeast-1; dmarc=pass
+ (p=quarantine sp=quarantine dis=none) header.from=qoder.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=K0DvKiD+do8W/JI/NEx651HEWndOFhJBSZWEOmJajX0=;
+ b=0DU6Eovm+Aj+YjP4Db0I0yHA86EnoryQeRne5FBX9iYZawwKjKzd/cdXQOg3G2MMIw5dw74
+ tS87GFkzsoPSZbeGE8MADsqAzNm6LXiQiGZ7d/uE23hsyDCbQr8KdA19kDlnmbhd/zhKXbTEZ
+ UuqEmLT0dccZ1dVsl5mX+FMsgMYTpuEqHOhjC/F2Dk/gcoeWB0dnumQXihma5eZ20bWuuJEHE
+ 3pDvvJxWvHev4CdDHrE4iszPyu6Kwi+iP6zBVEVZ5z9rn/wpZCr956QIMdz8I4/+HQRXQ5TNr
+ LrZsF0z7xyb39eEFNPg2Xqr9e3914AB7n2+NJXihQio5FciXwIXQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1774947623; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=GhnB8KV30IFFS06s3ldVS6mAiQ7oZeLdf6V9Mm6gEzE2uIwv1lndpa9dGa/GpBjpEPnMBqW
+ Z4CNNkW9WmQg/at9LByPtSmOPKYVHwK3haYGI4LsAy2dd9W/CxL754S2RfBXADdo8KDd18vFi
+ 1b4bxNyrmtI2c9ZVPWDGYqV71Fn4cnxgGnUc92lOPOgD82Ra0oMf75/wpMW0IIUHx0HJYA38n
+ vhKgePTosSthoTPxIhnSjjFtc8s8qiJlo81rWeu4wiFmShPBdPxykqE8pS5IfWEdI/Q5fxWSY
+ ITUDEnqiVCb3EmCUwZStv5kQ5w0QGVVVODoe3mllgooYsJEvzcLQ==
+Authentication-Results: lms; spf=pass (client-ip:8.219.24.149)
+ smtp.mailfrom=no-reply@qoder.com; dkim=pass header.b=AHMR+NDTty
+ header.i=@qoder.com header.s=aliyun-ap-southeast-1; dmarc=pass
+ (p=quarantine sp=quarantine dis=none) header.from=qoder.com; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Tue, 31 Mar 2026 09:00:18 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qoder.com;
+ s=aliyun-ap-southeast-1; t=1774947618;
+ h=Mime-Version:Content-Type:To:Subject:Message-Id:From:Date;
+ bh=K0DvKiD+do8W/JI/NEx651HEWndOFhJBSZWEOmJajX0=;
+ b=AHMR+NDTtyl8YWfoMDSAjDeIsMVqu4g3lLR0F+rnutfT4M7Fk/Gq7T6DoWM23khhSkRJSa9ODj0utI12YjojEW6iCLFVxZBivESbPP5hTwoG36L/JrRUPKzDKZ3q/CUwXC9WMIhcqHPbXEi2Fk3ETE2AjUki/k3TpVjOmo7Y/es=
+Feedback-Id: default:no-reply@qoder.com:excellent_SmtpTrigger:418251
+From: <no-reply@qoder.com>
+Message-Id: 
+ <1774947618492007640.1.187830966543786913@qbase-nezha-ap-southeast-1-prd-cu9gc-6xdxm>
+Mime-Version: 1.0
+Received: from localhost(mailfrom:no-reply@qoder.com fp:SMTPD_4w3hROOphtt
+ cluster:dm-ay35sg-a) by smtp.aliyun-inc.com(127.0.0.1); Tue, 31 Mar 2026
+ 17:00:18 +0800
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=8.219.24.149;
+ helo=out24-149.sg.a.dm.aliyun.com; envelope-from=no-reply@qoder.com;
+ receiver=<UNKNOWN>;
+Subject: Reset your Password for Qoder
+To: <wuliang@xiangzizai.com>
+X-Alidm-Rcptto: d3VsaWFuZ0B4aWFuZ3ppemFpLmNvbQ==
+X-Envid: 8000000246418955898
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1774947617/4flMX156J7z3BqQFl/69CB8D21.004/8.219.24.149/out24-149.sg.a.dm.aliyun.com/localhost/<no-reply@qoder.com>
+X-Fangmail-Mid-Qid: 69CB8D21.004/4flMX156J7z3BqQFl
+X-Fangmail-Miltered: at n206-112-031 with ID 69CB8D21.004 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 8.219.24.149
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: no-reply@qoder.com
+X-Lms-Pvf: 
+ MnwyfDF8fAi3uXColG4luKncnCI0p4ykEtXjwUfYThXxLxIDr0QP3E1Wnby4LvjH4PLXONcOCSkRupgXk7AFP0UX/Zc/oTTuw7BpKkzhiDwrQACaT/fOy+n5mEOLmo1sP/MpUPbwPQ==
+
+
+<html>
+<head>
+    <meta charset=3D"UTF-8"/>
+</head>
+<body
+        style=3D"margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;=
+padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;background-co=
+lor:#F9F8F9;">
+<div>
+    <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"width: 100%;">
+        <tbody>
+        <tr>
+            <td>
+                <div style=3D"margin: 0px auto; max-width: 674px;">
+                    <table align=3D"center" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" role=3D"presentation"
+                           style=3D"width: 100%;">
+                        <tbody>
+                        <tr>
+                            <td
+                                    style=3D"direction: ltr; font-size: 0px=
+; padding: 60px 16px 0px; text-align: center;">
+                                <div
+                                        style=3D"font-size: 0px; text-align=
+: left; direction: ltr; display: inline-block; vertical-align: top; width: =
+100%;">
+                                    <table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation"
+                                           width=3D"100%" style=3D"border-c=
+ollapse: separate;">
+                                        <tbody>
+                                        <tr>
+                                            <td
+                                                    style=3D"background: #f=
+fffff; border-top: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; bord=
+er-left: 1px solid #d8d8d8; border-image: initial; border-bottom: none; bor=
+der-radius: 12px 12px 0px 0px; vertical-align: top; padding: 32px 32px 0px;=
+">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0"
+                                                       role=3D"presentation=
+" width=3D"100%">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><img alt=3D"" h=
+eight=3D"40" width=3D"40"
+                                                                 src=3D"htt=
+ps://img.alicdn.com/imgextra/i2/O1CN01GUmHCO1H7EH2Iu8Lc_!!6000000000710-2-t=
+ps-48-48.png"
+                                                                 style=3D"d=
+isplay:block">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                                style=3D"fo=
+nt-size: 0px; padding: 0px; word-break: break-word;">
+                                                            <div style=3D"h=
+eight: 24px; line-height: 24px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"width: 100%;">
+        <tbody>
+        <tr>
+            <td>
+                <div style=3D"margin: 0px auto; max-width: 674px;">
+                    <table align=3D"center" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" role=3D"presentation"
+                           style=3D"width: 100%;">
+                        <tbody>
+                        <tr>
+                            <td
+                                    style=3D"direction: ltr; font-size: 0px=
+; padding: 0px 16px 24px; text-align: center;">
+                                <div
+                                        style=3D"font-size: 0px; text-align=
+: left; direction: ltr; display: inline-block; vertical-align: top; width: =
+100%;">
+                                    <table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation"
+                                           width=3D"100%" style=3D"border-c=
+ollapse: separate;">
+                                        <tbody>
+                                        <tr>
+                                            <td
+                                                    style=3D"background-col=
+or: rgb(255, 255, 255); border-right: 1px solid #d8d8d8; border-bottom: 1px=
+ solid #d8d8d8; border-left: 1px solid #d8d8d8; border-image: initial; bord=
+er-radius: 0px 0px 12px 12px; border-top: none; vertical-align: top; paddin=
+g: 0px 32px 40px;">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0"
+                                                       role=3D"presentation=
+" width=3D"100%">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td align=3D"left"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <div
+                                                                    style=
+=3D"font-family:SF Pro;font-size:24px;font-weight:510;line-height:150%;lett=
+er-spacing:normal;color:#232323;">
+                                                                Verify your=
+ email
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style=3D"h=
+eight: 24px; line-height: 24px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align=3D"left"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <div
+                                                                    style=
+=3D"font-size:16px;font-family:SF Pro;font-weight:normal;line-height:150%;l=
+etter-spacing:normal;color:#464646;">
+                                                                Please veri=
+fy with this verification code to reset your
+                                                                Qoder passw=
+ord for your wuliang@xiangzizai.com account.
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                                style=3D"fo=
+nt-size: 0px; padding: 0px; word-break: break-word;">
+                                                            <div style=3D"h=
+eight: 24px; line-height: 24px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align=3D"left"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <table border=
+=3D"0" cellpadding=3D"0"
+                                                                   cellspac=
+ing=3D"0" role=3D"presentation"
+                                                                   style=3D=
+"border-collapse: separate; line-height: 100%;">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td ali=
+gn=3D"center"
+                                                                        rol=
+e=3D"presentation"
+                                                                        val=
+ign=3D"middle"
+                                                                        sty=
+le=3D"font-size:40px;font-family:SF Pro;font-weight:normal;line-height:150%=
+;letter-spacing:5px;color:#232323;margin-bottom:40px">
+                                                                        705=
+667
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                                style=3D"fo=
+nt-size: 0px; padding: 0px; word-break: break-word;">
+                                                            <div style=3D"h=
+eight: 40px; line-height: 40px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align=3D"center=
+"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <p
+                                                                    style=
+=3D"border-top: 1px solid rgb(217, 217, 217); font-size: 1px; margin: 0px a=
+uto; width: 100%;">
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                                style=3D"fo=
+nt-size: 0px; padding: 0px; word-break: break-word;">
+                                                            <div style=3D"h=
+eight: 40px; line-height: 40px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align=3D"left"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <div
+                                                                    style=
+=3D"margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;font-family:S=
+F Pro;font-size:16px;font-weight:normal;line-height:32px;letter-spacing:nor=
+mal;color:#464646">
+                                                                This code e=
+xpires in 10 minutes.
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                                style=3D"fo=
+nt-size: 0px; padding: 0px; word-break: break-word;">
+                                                            <div></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align=3D"left"
+                                                            style=3D"font-s=
+ize: 0px; padding: 0px; word-break: break-word;">
+                                                            <div
+                                                                    style=
+=3D"margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;font-family:S=
+F Pro;font-size:16px;font-weight:normal;line-height:32px;letter-spacing:nor=
+mal;color:#464646">
+                                                                If you didn=
+=E2=80=99t ask to reset your password, you can ignore
+                                                                this email.
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.48.117)
+ smtp.mailfrom=0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com;
+ dkim=pass header.b=YKD7jKBTvH header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=hwdX4xu7HA header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=U3wwlMMDhzAIwjjJ+qSu9yhCmSv8+RmsxVubtll0nVU=;
+ b=VwbbP/by2pe3/YDF6k2zNcrS7R78rSkPfB7JxufLB0W5R2bAWVQP6cXFW3fceF/TFkah1yT
+ Kni1f64pOhAFuZLiXpBCcJ0e8nkTdTTT6VJ0elldXg54aE72fJ0PxcBbsEzH1uyJG7uKiDBwX
+ +kS/z+itD9cdYtcTweT7q1ssKdWF4QKyLMX5qL1piR3ZNechJd+7Hx8GACAZHBTWAodiG0b6P
+ Hdk5STlVY14koYzcdyMZ4JGiqvN/2iVuY5Mb9Bef8lhKbPpB1fLpgZrfinci9nXCQdY58XdPP
+ rRCa6YzCRE1XL5c1eCagCp5ha6Fn3siEhrGtr4sb6tGGyAUk0OEg==
+Arc-Seal: i=1; a=rsa-sha256; t=1775044030; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=JGIFOp8tsUBumSNDZEba9lFacsC/kbjFNY2T6+0xLf4LUuVttb32sRc+htamKwmyMnhm093
+ fpt7W5TK88EL/PH/PB/U8hcayz61B1RVEbaa6HqVdwjgq6NQT3vNFA1J4ySk7iqHqIRYMiJqy
+ uo3X8u//kPIt8l2wHVxZ51YSNVa0O8wFtwSmBHyvr2XF/RdTGfzLda7tQKIe3st+YbHATpLiV
+ NkeWUUwcKOH4v18Lls7FHVdnzquczRTgy/qW4K8lzHY8IULgGdIsydHKEBmrysrWoCxpMhWgB
+ FRMnM+MfCPR4c8LRK+JjG31pfzfLUEZyOQHqc1+BbaBucYPpaN1w==
+Authentication-Results: lms; spf=pass (client-ip:54.240.48.117)
+ smtp.mailfrom=0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com;
+ dkim=pass header.b=YKD7jKBTvH header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=hwdX4xu7HA header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 1 Apr 2026 11:47:01 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775044022;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=/XlxxqpwE0l4KJxrcULk0MmQSV66Jn4mCytZcBAvvD0=;
+ b=YKD7jKBTvHj4yl2pGbpxVrEe2MsfASuZ7zwywUaxlVRpd4goR0EolsYd2OLL4DVo
+ f1OBQ4+vTdk+Xhf6UJYwPiKsT6LBAsaNelSkhq7v3TyIgp1ZMsEQJVUOMj/nVrfymSY
+ wFKdTgMl7oWTFXk8e+GVn9w1usfXI0JfcrY5fJ0fLLG3QJYXiZcEP/wUyC4hjl7P/OR
+ Gq5txWZsYLyxVzAgF+dkO9WviWj4rnWWK1riXVVV6tsjRUzRoaT4Vuk+W12BObOelMg
+ cFw9lZjGHIuB0niiaVjjediDIienCclfFQO6oLw6HH8ii95qm32S1TWh+OXMXJyxS9n
+ dm6ESMVvSA==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775044022;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=/XlxxqpwE0l4KJxrcULk0MmQSV66Jn4mCytZcBAvvD0=;
+ b=hwdX4xu7HAfIgzQnlDtn56cNW80qMF7h4TZxQESeNjQ6OJatFr370DGDZROqv4zA
+ o8DKXA/+ptnoV0zVmjPT6ScI/vHt2dnTbsPPz7ZAm25OCMvRX/VVIJXMoVUezSDh3Q+
+ B8dXII4myx9KlZaB5LujhRKBWMq6uX6I0ypkISLk=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.48.117;
+ helo=a48-117.smtp-out.amazonses.com;
+ envelope-from=0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: NVIDIA announces exit from AI chip market, pivoting entirely to
+ quantum computing
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775044026/4fm3B20mLCzxc52F/69CD05BA.000/54.240.48.117/a48-117.smtp-out.amazonses.com/localhost/<0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69CD05BA.000/4fm3B20mLCzxc52F
+X-Fangmail-Miltered: at n206-112-037 with ID 69CD05BA.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.48.117
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d48de4e54-7e1a407c-73fd-476d-b4fd-e98dc1c3abb5-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fFJJq3ofoNrdqVw7IsDGUKj5xcVCC0FgKfIawirodfk8jgYWv+SmrQMAGTink3mp86KImpi0YXYo30jcTLEI5cbu+3Rq1HxR9B9xLgx8oaswj3lfufjIapxWLJBlOGEB7A==
+X-Ses-Outgoing: 2026.04.01-54.240.48.117
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>AI Weekly Alert</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .alert-wrapper { max-width: 600px; margin: 0 auto; background: #fff; }
+    .alert-bar { background: #ff6b35; height: 4px; }
+    .alert-header { padding: 20px 25px 15px; }
+    .alert-header-title { font-size: 13px; font-weight: 700; text-transform=
+: uppercase; letter-spacing: 1.5px; color: #ff6b35; margin: 0; }
+    .alert-header-date { font-size: 13px; color: #77777f; margin-top: 2px; =
+}
+    .alert-body { padding: 0 25px 20px; }
+    .alert-story { padding: 18px 0; border-bottom: 1px solid rgba(69,69,71,=
+0.1); }
+    .alert-story:last-child { border-bottom: none; }
+    .alert-headline { font-family: 'Merriweather', Georgia, serif; font-siz=
+e: 17px; font-weight: 700; line-height: 1.35; margin-bottom: 4px; }
+    .alert-headline a { color: #1b5479; text-decoration: none; }
+    .alert-meta { font-size: 12px; color: #77777f; margin-bottom: 8px; }
+    .alert-copy { font-size: 15px; line-height: 1.55; color: #454547; margi=
+n-bottom: 8px; }
+    .alert-link { font-size: 13px; font-weight: 700; }
+    .alert-link a { color: #ff6b35; text-decoration: none; }
+    .reveal { background: #f0faf6; border: 2px solid #24ab8a; border-radius=
+: 6px; padding: 20px 25px; margin: 10px 25px 20px; text-align: center; }
+    .reveal h2 { font-size: 22px; margin: 0 0 10px; color: #24ab8a; }
+    .reveal p { font-size: 15px; line-height: 1.55; color: #454547; margin:=
+ 0 0 12px; }
+    .reveal-cta { display: inline-block; background: #ff6b35; color: #fff; =
+text-decoration: none; padding: 12px 28px; border-radius: 4px; font-size: 1=
+4px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .alert-footer { border-top: 1px solid rgba(69,69,71,0.15); padding: 18p=
+x 25px; text-align: center; font-size: 11px; color: #999; }
+    .alert-footer a { color: #999; text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1a1a1a; }
+      .alert-wrapper { background: #242424; }
+      .alert-header-title { color: #ff8c5a; }
+      .alert-headline a { color: #7ab8e0; }
+      .alert-copy { color: #ccc; }
+      .alert-story { border-color: rgba(255,255,255,0.1); }
+      .reveal { background: #1a2e26; border-color: #24ab8a; }
+      .reveal p { color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class=3D"alert-wrapper">
+    <div class=3D"alert-bar"></div>
+    <div class=3D"alert-header">
+      <div class=3D"alert-header-title">&#9889; AI Weekly Alert =E2=80=94 B=
+REAKING</div>
+      <div class=3D"alert-header-date">April 1st, 2026 =C2=B7 6 stories dem=
+anding your attention</div>
+    </div>
+    <div class=3D"alert-body">
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">Jensen Huang reveals leather jacket is an AI agent that has been run=
+ning NVIDIA since 2019</a></div>
+        <div class=3D"alert-meta">The Verge =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">In a surprise GTC afterparty keynote, NVI=
+DIA CEO Jensen Huang revealed that his iconic leather jacket has been a ful=
+ly autonomous AI agent since 2019, making all major product decisions inclu=
+ding the pivot to data centers. "I just show up and do the cooking demos," =
+Huang told a stunned audience. "The jacket handles earnings calls."</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">Sam Altman announces OpenAI will become a nonprofit again, citing 'v=
+ibes'</a></div>
+        <div class=3D"alert-meta">Reuters =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">OpenAI CEO Sam Altman announced the compa=
+ny will reverse its for-profit conversion and return to its original nonpro=
+fit structure, returning $110 billion to investors. "We ran the numbers and=
+ honestly the vibes were just better when we were nonprofit," Altman wrote =
+in a blog post titled "oops." SoftBank's Masayoshi Son was reportedly seen =
+sprinting through a Tokyo parking garage.</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">Elon Musk puts Grok in charge of US nuclear arsenal, says it 'passed=
+ the vibe check'</a></div>
+        <div class=3D"alert-meta">CNBC =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">xAI's Grok chatbot has been granted advis=
+ory access to STRATCOM systems after Musk convinced the Pentagon that "an A=
+I with a sense of humor is exactly what nuclear deterrence needs." When ask=
+ed about the risks, Grok reportedly replied: "Don't worry, I mostly just wa=
+nt to post memes."</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">Google announces 47th messaging app, this one powered by Gemini and =
+'definitely the one'</a></div>
+        <div class=3D"alert-meta">9to5Google =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">Google unveiled Gemini Chat, its 47th att=
+empt at a messaging platform, which the company insists will be different b=
+ecause "this time the AI writes your messages for you, so it doesn't matter=
+ if nobody's on the platform." The app will be sunset in Q3 2026 and replac=
+ed by a new messaging feature inside Google Sheets.</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">Mark Zuckerberg pivots Meta from AI to metaverse and back to AI thre=
+e times during single keynote</a></div>
+        <div class=3D"alert-meta">TechCrunch =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">In a disorienting 12-minute keynote, Zuck=
+erberg announced Meta would refocus on the metaverse, then checked his phon=
+e, said "wait never mind," and pivoted back to AI. He repeated this cycle t=
+hree times. Meta stock fluctuated 8% during the presentation. An unnamed bo=
+ard member told reporters: "We just go where the slides tell us."</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+      <div class=3D"alert-story">
+        <div class=3D"alert-headline"><a href=3D"https://aiweekly.co/april-=
+fools">EU passes emergency law requiring all AI models to apologize before =
+every response</a></div>
+        <div class=3D"alert-meta">Politico =C2=B7 April 1, 2026</div>
+        <div class=3D"alert-copy">The European Commission fast-tracked the =
+AI Politeness Directive, requiring all AI systems deployed in Europe to beg=
+in every response with a formal apology. Non-compliant models face fines of=
+ 4% of global revenue per unapologetic response. Claude was found to alread=
+y be in compliance.</div>
+        <div class=3D"alert-link"><a href=3D"https://aiweekly.co/april-fool=
+s">Read =E2=86=92</a></div>
+      </div>
+
+    </div>
+
+    <div class=3D"reveal">
+      <h2>April Fools! =F0=9F=8E=A3</h2>
+      <p>None of these stories are real. But the fact that every single one=
+ felt plausible tells you something about the world we're living in.</p>
+      <p>The <strong>real</strong> alerts are just as wild =E2=80=94 and th=
+ey're true. AI Weekly scans hundreds of high-quality sources in AI every ho=
+ur and only pings you when something genuinely matters. No noise, no hype, =
+just the stories that change how you work.</p>
+      <p style=3D"margin-top:16px;"><a href=3D"https://aiweekly.co/april-fo=
+ols" class=3D"reveal-cta">Enable AI Alerts =E2=86=92</a></p>
+    </div>
+
+    <div class=3D"alert-footer">
+      <a href=3D"https://aiweekly.co">AI Weekly</a> =C2=B7 You received thi=
+s because you're subscribed to AI Weekly. =C2=B7 <a href=3D"https://aiweekl=
+y.co/unsubscribe">Unsubscribe</a>
+    </div>
+  </div>
+</body>
+</html>

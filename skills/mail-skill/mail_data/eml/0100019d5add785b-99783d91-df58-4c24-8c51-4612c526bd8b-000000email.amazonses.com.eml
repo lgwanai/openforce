@@ -1,0 +1,980 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:24.110.89.109)
+ smtp.mailfrom=0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@envelope.ollama.com;
+ dkim=pass header.b=LXh0ozYmkY header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=ZpUQASypTP header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:cc:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=0cKpluj5xeTMA8jyXDxxOHJe1Hnl54Bm1W8NPTNaZH0=;
+ b=xSbxOIX3QmKYIWxe9W94w4yY8Y7gvvS2ESkslkhs5hNhzRBKFZOqhhzC5qj2QSnaqbSJ8zh
+ /bV84tp3Y2Wd15PzmKkpsG3H7+CvGnbY1tk2wfyWCRHWLqw/MOE0V5LAqk7v5l9yq9jexVyIm
+ 4oAtiNv+RdTcEsRtGyM9wuTTPkibLhiGKtt71SDTnajftvyivcKbjBEPLAZWdkHNT5Wj0j4ls
+ l7ut/98vBca8TXE12a9UxLy8QplpL5u9i84jhYqSjnNyerakqIn9gp0FcsjxW5N7QmeapBhvk
+ MvUkmljMXR2Spf3wPZVVFv2aX/h0zoXAdJNXXpP3JeQh/9ZzCvVw==
+Arc-Seal: i=1; a=rsa-sha256; t=1775345964; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=U8TM8XH26fCxNtBJ4Wda65lXoIpMXpg2jrogpJH9LGe0AWbxqJutR3MJlsHJobax+PjzNPg
+ Q0qCfW9efLnWGjziKZnohMcOKFRf6hMcrf07vqpQHrS0oAd9b+lfQDnhtajnPVvksw1l1xd4c
+ oVuyM5jzY9i1RTtNhT33afQwERQoI9XrCsW1LRx5hNEIHEZ7hbFljau4Bb/7a8Wq/O81zkE93
+ r9yGIGitxzrEBJ4uHqjhkTJi9BEXRMolY4pBbSGkJ3S41ORbDBGfQqjn76kRoih3N6kLw3ted
+ 3/qX5ccM2FyWqCg9ocGk+MvI73evX7899E9lb9hEDV/weyzen8gQ==
+Authentication-Results: lms; spf=pass (client-ip:24.110.89.109)
+ smtp.mailfrom=0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@envelope.ollama.com;
+ dkim=pass header.b=LXh0ozYmkY header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=ZpUQASypTP header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Cc: 
+Content-Type: multipart/alternative; boundary=q4d0yrnk5i
+Date: Sat, 4 Apr 2026 23:39:16 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe; d=ollama.com; t=1775345957;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type;
+ bh=ST+ie/EEB9DbBPUS5KnjiB4U6SvHg6iJdYfeTxY44QM=;
+ b=LXh0ozYmkYvOHVQn4H6hcaqxmsgVtVnfLUXeazUgrJCpTgHY4tP0vnK8rXWlwKOb
+ 5Dg4XJ+FHkSbdWaEy8K8KdlSdXDDYqXyVOx9NAfJC1ZpJCXNeS4D3Je/P5AcvbTQ+pY
+ IpFZMn6S+6arRx5G5CWHs6is8Dzv5xneMVOUTS+iw+Oks+SlW3TL8U6nf0+E7zeCl4G
+ Dcq7Q4z0dtOywspt1HJfiKP/UTuv0LrQovhTRNc6RXYlJTv8WrNu/dzatUBPK2M3bbL
+ oMs+LiNVuErmnWEkUIVdreNVMuaHx1sv9AdlcEghQPzz3JI4fc9BqAOgF4rnW4DfL37
+ 6PO33ed72Q==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775345957;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type:Feedback-ID;
+ bh=ST+ie/EEB9DbBPUS5KnjiB4U6SvHg6iJdYfeTxY44QM=;
+ b=ZpUQASypTPSCjd52rvyjHCVrweKqhw8w7ZUNWLOc3UaA3K1lFonRWUZL5Nub6goH
+ Ulbfgy/fuJZxyLS/QxKFdfo1rYCB3S8kc1vCbLHG7FRdAxZ2jpvxlffzWFqAart6RyM
+ Ec3O/a1kTB++skYCwJtpsJeAOWnRl0XXSRYjjuG0=
+Feedback-Id: 
+ :1.us-east-1.JDzjX75ORX7ZOlDQyH3e+sAhM8zXt0YcbCHaAUiTifupgpKOd0I9rAZkeLPRsSzJJxHTof/pHxfonOD0A05jDGayFrCfJJZf9pd+N1bB5d6OKiOV9J4UJMd5BbKaJxykDuLbmlFxDOt6RI624h7C+sx/dQ4pKDGs1SnKa2fxkKM=:1.us-east-1.1nRXWOT+ETvogqnAUaOa7HjKGx1p40xVES7T8DfH/Gc=:AmazonSES
+From: Ollama <hello@ollama.com>
+List-Id: "Ollama" <general.ollama.com>
+List-Unsubscribe: 
+ <mailto:cmnkz57is64uc017k68rcag5x+43ec6db3f495c5f52b966be84be144e3814ec83573cd9e22b03ab51428f3670b6d4da2d134c921f47225c040654b869561ff4720d22b03e0b3b2ab62@unsubscribe.loops.so?subject=unsubscribe>,<https://app.loops.so/unsubscribe/cmnkz57is64uc017k68rcag5x/43ec6db3f495c5f52b966be84be144e3814ec83573cd9e22b03ab51428f3670b6d4da2d134c921f47225c040654b869561ff4720d22b03e0b3b2ab62>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@email.amazonses.com>
+Mime-Version: 1.0
+Precedence: Bulk
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=24.110.89.109;
+ helo=i89-109.smtp-out.amazonses.com;
+ envelope-from=0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@envelope.ollama.com;
+ receiver=<UNKNOWN>;
+Reply-To: Ollama <hello@ollama.com>
+Subject: =?utf-8?B?T2xsYW1hJ3MgY2xvdWQgdG8gcG93ZXIgT3BlbkNsYXcgIA==?=
+To: wuliang@xiangzizai.com
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775345960/4fpBrS0LB9zLRjY/69D1A128.000/24.110.89.109/i89-109.smtp-out.amazonses.com/localhost/<0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@envelope.ollama.com>
+X-Fangmail-Mid-Qid: 69D1A128.000/4fpBrS0LB9zLRjY
+X-Fangmail-Miltered: at n206-112-030 with ID 69D1A128.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 24.110.89.109
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@envelope.ollama.com
+X-Lms-Pvf: 
+ MnwyfDF8fEtwfGZ3nK5vODTJ7jijKpqeeIx2+KhJFNyOu8KznJ7S1q0VjhMI0TKl8HzS3vgrPML3mFcnBwirWCQ9Yc366GdZWaxvXGmcdsc3rOK4OjZ6IgG1KpcPcH6jpLclvFDjeQ==
+X-Ses-Outgoing: 2026.04.04-24.110.89.109
+
+--q4d0yrnk5i
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+
+
+=C2=A0
+Ollama is here to support your usage of third-party tools like =
+OpenClaw. If you are using Ollama's cloud, we have refreshed your
+Ollama subscription usage.
+=C2=A0
+OpenClaw is a personal AI assistant that =
+can clear your inbox, send emails, manage your calendar, and complete other=
+ tasks via
+messaging apps like WhatsApp, Telegram, iMessage, or any chat =
+app you already use.
+=C2=A0
+Ollama's cloud plans [https://ollama.=
+com/pricing] are designed as for the usage patterns of third-party tools. =
+You can trust
+Ollama's cloud [https://ollama.com/pricing] to power your =
+projects, tools, and integrations. There are no surprise fees or banning
+your favorite integrations.
+
+
+https://ollama.com/pricing
+
+
+Set up OpenClaw
+
+Open a terminal, and type in:
+=C2=A0
+ollama launch openclaw
+=C2=A0
+By default, Ollama will also configure openclaw to use its web search =
+functionality.
+=C2=A0
+If you want to customize your OpenClaw after to =
+connect different chat apps or other integrations, please run:
+=C2=A0
+openclaw onboard
+=C2=A0
+
+
+Some models to try =F0=9F=A6=9E
+
+ * kimi-k2.5:cloud
+
+ * glm-5:cloud
+
+ * minimax-m2.7:cloud
+
+ * gemma4:31b-cloud
+
+=C2=A0
+
+Download Ollama [https://ollama.com/download]
+
+=C2=A0
+If you have any feedback, please directly reply to this email or =
+join Ollama's Discord channel
+[https://discord.com/invite/ollama].
+=C2=A0
+=E2=9D=A4=EF=B8=8F Ollama
+You are receiving this email because you opted-in=
+ to receive updates from Ollama
+Ollama, 744 High Street, Palo Alto, CA =
+94301
+Unsubscribe [https://app.loops.so/unsubscribe/cmnkz57is64uc017k68rcag=
+5x/43ec6db3f495c5f52b966be84be144e3814ec83573cd9e22b03ab51428f3670b6d4da2d1=
+34c921f47225c040654b869561ff4720d22b03e0b3b2ab62]
+
+--q4d0yrnk5i
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html lang=3D"en" dir=3D"auto" xmlns=3D"http://www.w3.org/1999/xhtml" xmlns=
+:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:o=
+ffice:office" style=3D"background-color: #FFFFFF;">
+  <head>
+    <title>Ollama&#39;s cloud to power OpenClaw  </title>
+    <!--[if !mso]><!-->
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+    <!--<![endif]-->
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">
+    <style type=3D"text/css">
+      #outlook a { padding:0; }
+      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size=
+-adjust:100%; }
+      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-r=
+space:0pt; }
+      img { border:0;height:auto;line-height:100%; outline:none;text-decora=
+tion:none;-ms-interpolation-mode:bicubic; }
+      p { display:block;margin:13px 0; }
+    </style>
+    <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type=3D"text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+   =20
+   =20
+    <style type=3D"text/css">
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      }
+    </style>
+    <style media=3D"screen and (min-width:480px)">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width:=
+ 100%; }
+    </style>
+   =20
+   =20
+ =20
+   =20
+    <style type=3D"text/css">
+
+    @media only screen and (max-width:479px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+ =20
+    </style>
+    =20
+    <style type=3D"text/css">
+.wfix {
+          max-width: 600px !important;
+        }
+       =20
+        @media(max-width: 480px) {
+          .body-image-mobile-width-552 td { width: 552px !important; }
+          .body-image td  { max-width: 100% !important; }
+          .body-image img  { box-sizing: border-box; }
+          .social-icon-mobile-spacer {
+            display: inline-block !important;
+          }
+        }
+       =20
+    .mobile-only { display: none !important; } .desktop-only { display: blo=
+ck !important; }
+    @media(max-width: 480px) { .column-stack { width: 100% !important; max-=
+width: 100% !important; display: block !important; } .column-stack td,.colu=
+mn-stack th { padding-left: 0 !important; padding-right: 0 !important; } .m=
+obile-only { display: block !important; } .desktop-only { display: none !im=
+portant; } }
+    </style>
+    <style>
+          .wrapper {
+            padding: 0 12px;
+          }
+
+          /* Superhuman selector */
+          .ShadowHTML .wrapper {
+            padding: 0 !important;
+          }
+        =20
+        =20
+        =20
+        =20
+  .ShadowHTML :is(.styleUnquotedContent .unquoted-content, .styleUnquotedCo=
+ntent .sh-unquoted-content, .styleQuotedContent .sh-quoted-content, .sh-sig=
+nature, .Signature-settings) :is(td.column-container, div[class^=3D"mj-colu=
+mn-per-"]){font-size:0!important}
+  html.sh-color :is(td.column-container, div[class^=3D"mj-column-per-"], di=
+v.mj-column-per-100.mj-outlook-group-fix){font-size:0!important}
+  @media(max-width:480px){
+    html.sh-color .column-stack{width:100%!important;max-width:100%!importa=
+nt;display:block!important}
+    html.sh-color :is(.column-stack td,.column-stack th){padding-left:0!imp=
+ortant;padding-right:0!important;width:100%!important;max-width:100%!import=
+ant;display:block!important}
+    html.sh-color :is(.column-stack, .column-stack *){word-break:break-word=
+!important;overflow-wrap:anywhere!important}
+    html.sh-color :is(.column-persist, .column-persist *){word-break:break-=
+word!important;overflow-wrap:anywhere!important}
+  }
+  html.sh-color a[href^=3D"tel:"]{color:inherit!important;text-decoration:n=
+one!important;font-size:inherit!important;line-height:inherit!important;let=
+ter-spacing:inherit!important;vertical-align:baseline!important}
+
+        =20
+      .isMarketing { background-color: #FFFFFF !important; }
+      .isMarketing .styled-primary-column { background-color: transparent !=
+important; border-radius: 12px; }
+   =20
+        =20
+         [class~=3D"x_social-icon-dark-mode"] { display: none !important; m=
+so-hide:all;  width: 0px !important; padding: 0px !important; }
+
+          /* Gmail selectors */
+          u + .body .wrapper {
+            padding: 0 !important;
+          }
+          div > u + .body .wrapper {
+            padding: 0 !important;
+          }
+         =20
+    a { text-decoration: none; color: #2D2A2A; }
+   =20
+ =20
+         =20
+         =20
+          .link-unsubscribe { color: #9ca3af !important; }
+          </style>
+<meta name=3D"color-scheme" content=3D"light">
+          <meta name=3D"supported-color-schemes" content=3D"light">
+  </head>
+  <body class=3D"body" style=3D"word-spacing:normal;background-color:#FFFFF=
+F;">
+   =20
+    <div style=3D"display:none;font-size:1px;color:#ffffff;line-height:1px;=
+max-height:0px;max-width:0px;opacity:0;overflow:hidden;"></div>
+ =20
+   =20
+      <div aria-label=3D"Ollama&#39;s cloud to power OpenClaw  " aria-roled=
+escription=3D"email" class=3D"email-body" style=3D"background-color:#FFFFFF=
+;" role=3D"article" lang=3D"en" dir=3D"auto">
+        <img alt=3D"" src=3D"http://c.vialoops.com/CI0/0100019d5add785b-997=
+83d91-df58-4c24-8c51-4612c526bd8b-000000/GYS5Iz86j-o5WDbH9R9sRaM863LS3XTdBR=
+Vre09MoTA=3D451" style=3D"display: none; width: 1px; height: 1px;">
+
+        <!--[if mso]><style type=3D"text/css"> a { text-decoration: underli=
+ne !important; } .button a { text-decoration: none !important; } .outlook-l=
+ist-fix { margin-left:4px !important; } .outlook-break-full-link { word-bre=
+ak: break-all !important; } .outlook-hide-social-icon { display: none !impo=
+rtant; mso-hide:all; width: 0px !important; padding: 0px !important; } .out=
+look-hide-social-icon * { display: none !important; mso-hide:all; width: 0p=
+x !important; padding: 0px !important; } .outlook-hide-social-icon table { =
+display: none !important; mso-hide:all; width: 0px !important; padding: 0px=
+ !important; } .outlook-hide-social-icon tbody { display: none !important; =
+mso-hide:all; width: 0px !important; padding: 0px !important; } .outlook-hi=
+de-social-icon tr { display: none !important; mso-hide:all; width: 0px !imp=
+ortant; padding: 0px !important; } .outlook-hide-social-icon td { display: =
+none !important; mso-hide:all; width: 0px !important; padding: 0px !importa=
+nt; } .outlook-hide-social-icon img { display: none !important; mso-hide:al=
+l; width: 0px !important; padding: 0px !important; } .outlook-hide-social-i=
+con a { display: none !important; mso-hide:all; width: 0px !important; padd=
+ing: 0px !important; }
+</style><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"wfix-outlook gmail-no-padding-outlook wrapper-outlook" role=
+=3D"presentation" style=3D"width:600px;" width=3D"600" ><tr><td style=3D"li=
+ne-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix gmail-no-padding wrapper" style=3D"margin:0px auto=
+;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-top:0;text-align:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"wfix-outlook" width=
+=3D"600px" ><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" class=3D"wfix-outlook" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix" style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-bottom:24px;padding-left:0px;padding-right:0px;padding-top:24px;text-ali=
+gn:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td align=3D"center" class=3D"wfix=
+-outlook rounded-corners-outlook styled-primary-column-outlook" style=3D"ve=
+rtical-align:top;width:600px;" ><![endif]-->
+           =20
+      <div class=3D"mj-column-per-100 mj-outlook-group-fix wfix rounded-cor=
+ners styled-primary-column" style=3D"font-size:0px;text-align:left;directio=
+n:ltr;display:inline-block;vertical-align:top;width:100%;">
+       =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" width=3D"100%" style=3D"border-collapse: separate;">
+        <tbody>
+          <tr>
+            <td style=3D"background-color:transparent;border-radius:12px;ve=
+rtical-align:top;border-collapse:separate;padding-top:4px;padding-right:24p=
+x;padding-bottom:4px;padding-left:24px;">
+             =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style width=3D"100%">
+        <tbody>
+         =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+      <img alt src=3D"https://images.vialoops.com/cmnkiyjwe2xqj0iy8ii809enu=
+/cmnkp8c4r033g0ixu7ayxrdh0.png" style=3D"border:0;border-radius:40px;displa=
+y:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:=
+13px;" width=3D"552" height=3D"auto">
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Ollama is here to support your usa=
+ge of third-party tools like OpenClaw. If you are using Ollama's cloud, we =
+have refreshed your Ollama subscription usage. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">OpenClaw is a personal AI assistan=
+t that can clear your inbox, send emails, manage your calendar, and complet=
+e other tasks via messaging apps like WhatsApp, Telegram, iMessage, or any =
+chat app you already use. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><a target=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-link dark-=
+force" href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%2Fpricing/=
+1/0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000/vqhP47TN4zUq=
+g5F3fRq5ICuxL3_O7PBQ0sU-UASNySc=3D451" style=3D"text-decoration: none; colo=
+r: #2D2A2A;"><span style=3D"font-size: 14px; white-space: pre-wrap; text-de=
+coration: underline !important; line-height: 25px !important; font-size: 14=
+px !important;" class=3D"underline">Ollama's cloud plans</span></a><span st=
+yle=3D"line-height: 25px !important; font-size: 14px; font-size: 14px !impo=
+rtant; white-space: pre-wrap;"> are designed as for the usage patterns of t=
+hird-party tools. You can trust </span><a target=3D"_blank" rel=3D"noopener=
+ noreferrer" class=3D"body-link dark-force" href=3D"https://c.vialoops.com/=
+CL0/https:%2F%2Follama.com%2Fpricing/2/0100019d5add785b-99783d91-df58-4c24-=
+8c51-4612c526bd8b-000000/Nkot0nHy2l-xaNvo3b5VeYez9D0pYszXkdKRY0D8Fxg=3D451"=
+ style=3D"text-decoration: none; color: #2D2A2A;"><span style=3D"font-size:=
+ 14px; white-space: pre-wrap; text-decoration: underline !important; line-h=
+eight: 25px !important; font-size: 14px !important;" class=3D"underline">Ol=
+lama's cloud</span></a><span style=3D"line-height: 25px !important; font-si=
+ze: 14px; font-size: 14px !important; white-space: pre-wrap;"> to power you=
+r projects, tools, and integrations. There are no surprise fees or banning =
+your favorite integrations. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;"> </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+        <a href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%2Fpric=
+ing/3/0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000/g-BdIA8P=
+0IsecWvuegb9sUDN9XNlR6ShcIK5qBP9BKA=3D451" target=3D"_blank" style=3D"text-=
+decoration: none; color: #2D2A2A;">
+         =20
+      <img alt src=3D"https://images.vialoops.com/cmnkiyjwe2xqj0iy8ii809enu=
+/cmnkw28xa0ief0ivk4063ufue.png" style=3D"border:0;border-radius:20px;displa=
+y:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:=
+13px;" width=3D"552" height=3D"auto">
+   =20
+        </a>
+     =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">Set up OpenClaw</=
+span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Open a terminal, and type in: </sp=
+an></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:15px;le=
+tter-spacing:0px;line-height:27px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 15px; white-space: p=
+re-wrap; line-height: 27px !important; font-size: 15px !important;" class=
+=3D"code">ollama launch openclaw</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">By default, Ollama will also confi=
+gure openclaw to use its web search functionality. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">If you want to customize your Open=
+Claw after to connect different chat apps or other integrations, please run=
+: </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:15px;le=
+tter-spacing:0px;line-height:27px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; color: #2D2A2A; font-size: 15px; white-space: p=
+re-wrap; line-height: 27px !important; font-size: 15px !important;" class=
+=3D"code">openclaw onboard</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">Some models to tr=
+y =F0=9F=A6=9E</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"1" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">kimi-k2.5:cloud </span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"2" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">glm-5:cloud </span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"3" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">minimax-m2.7:cloud</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"4" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">gemma4:31b-cloud  </span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"button sh-button" style=3D"font=
+-size:0px;padding:10px 25px;padding-top:4px;padding-right:0px;padding-botto=
+m:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:separate;line-height:100%;">
+        <tbody>
+          <tr>
+            <td align=3D"center" bgcolor=3D"#000000" role=3D"presentation" =
+style=3D"border:none;border-radius:100px;cursor:auto;mso-padding-alt:12px=
+=20
+  20px;background:#000000;" valign=3D"middle">
+              <a href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%=
+2Fdownload/1/0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000/B=
+WGOP5Kamda9JpvBSk7Q2A9ExO0pX1x7zgAKGU0arfY=3D451" style=3D"display: inline-=
+block; background: #000000; color: #ffffff; font-family: ui-sans-serif, san=
+s-serif; font-weight: normal; margin: 0; text-decoration: none; text-transf=
+orm: none; padding: 12px=20
+  20px; mso-padding-alt: 0px; border-radius: 100px; font-size: 15px !import=
+ant; line-height: 15px !important;" target=3D"_blank" class=3D"sh-preserve-=
+color">
+                Download Ollama
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">If you have any feedback, please d=
+irectly reply to this email or join Ollama's </span><a target=3D"_blank" re=
+l=3D"noopener noreferrer" class=3D"body-link dark-force" href=3D"https://c.=
+vialoops.com/CL0/https:%2F%2Fdiscord.com%2Finvite%2Follama/1/0100019d5add78=
+5b-99783d91-df58-4c24-8c51-4612c526bd8b-000000/W5aLN_corziAzGi0hL9J44zgzenM=
+JIw5x5f-uvOfjro=3D451" style=3D"text-decoration: none; color: #2D2A2A;"><sp=
+an style=3D"font-size: 14px; white-space: pre-wrap; text-decoration: underl=
+ine !important; line-height: 25px !important; font-size: 14px !important;" =
+class=3D"underline">Discord channel</span></a><span style=3D"line-height: 2=
+5px !important; font-size: 14px; font-size: 14px !important; white-space: p=
+re-wrap;">. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">=E2=9D=A4=EF=B8=8F Ollama</span></=
+div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:24px;padding-right:0px;padding-left:0px;w=
+ord-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:12px;le=
+tter-spacing:0px;line-height:21px !important;text-align:left;color:#9ca3af;=
+"><span class=3D"opt-in-explanation" style=3D"color: #9ca3af !important; fo=
+nt-size: 12px !important; line-height: 21px !important;">
+  You are receiving this email because you opted-in to receive updates from=
+ Ollama<br>
+  Ollama, 744 High Street, Palo Alto, CA 94301<br>
+  <a style=3D"font-weight: 600; color: #9ca3af !important; text-decoration:=
+ none !important; font-size: 12px !important; line-height: 21px !important;=
+" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fapp.loops.so%2Funsubscribe=
+%2Fcmnkz57is64uc017k68rcag5x%2F43ec6db3f495c5f52b966be84be144e3814ec83573cd=
+9e22b03ab51428f3670b6d4da2d134c921f47225c040654b869561ff4720d22b03e0b3b2ab6=
+2/1/0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000/wjMG576phX=
+arUVmWEE7nv9JUhSsxfT-Yp562P0YuqxQ=3D451" target=3D"_blank" rel=3D"noopener =
+noreferrer" class=3D"bold link-unsubscribe">
+  Unsubscribe
+  </a>
+  </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+   =20
+   =20
+      </div>
+   =20
+  </body>
+</html>
+ =20
+
+--q4d0yrnk5i--

@@ -1,0 +1,1126 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:199.15.215.81)
+ smtp.mailfrom=351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com;
+ dkim=pass header.b=AQ6l3JRYuA header.i=@sensortower.com header.s=m1;
+ dkim=pass header.b=Gj9ZVKwcCG header.i=@mktomail.com header.s=m1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=sensortower.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=Azl/VxyQvx7XrwvGvJ0rLIeO9db+PhUFvPCfN9ociL4=;
+ b=sBfIYXbUhFQNxmPyJ3iK9VO3Y0jwueZJwEmLOlQEsBOJXZFi2S9veAP/peP2ihpohVk1H9q
+ iGhKsDf8M/FrBthzhwxNV9lfDva+ov7BW/HdV8s0B9Vknf4FjBqVKXtcxUkES2nZF+fyxdAmT
+ km75AFyFx7WTd3mqW0WUJz4mq3OmAeEMkNZFV8oRgjPB5pYVez5gwAXqDWqajZLeSZLlpxxhs
+ ZCC+yfm37zaKNnpFS0sIzQHqolIXN1rZLScIevrPJhOtePl88O52GrCKzEtDQSrzuNJYDMdqQ
+ p/n4CB3lFU7D/Os4ecbTe3UzZDXbVk98eiLOTry6vYlyCqaN+k5w==
+Arc-Seal: i=1; a=rsa-sha256; t=1773633634; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=YZq50a6vXZri1eoAhJ6auCx8kLMUEEk33kkh0Hi5tCPVXFDvVsktcAZr3fNwGpFoq/Xd7Pt
+ /CJljdcn8CtWjuwgMGwdRR5CVeaZcWxfxxKGdSNtVnmszS7MXxvCmxogkNZcu9WhLNo9ORz5y
+ ljSx/CUxlqQsB6nxB1y3SahOFEvQnzCdcBqNxEvFZf3hOZvvqQFiGQ5Q98195e54UQzBYixlT
+ lQVSURecEVNrm6dzKh5jbT8FCZLFe4yp6WLsChiq1D2qHGBk83UDR8h+sYhnwaZ7SIdRIBYpT
+ JLawuI4kcopLG3QVaLnp3NQr6eQ6/D+NuSNlz95tBSg5JbTAz8KA==
+Authentication-Results: lms; spf=pass (client-ip:199.15.215.81)
+ smtp.mailfrom=351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com;
+ dkim=pass header.b=AQ6l3JRYuA header.i=@sensortower.com header.s=m1;
+ dkim=pass header.b=Gj9ZVKwcCG header.i=@mktomail.com header.s=m1;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=sensortower.com;
+ arc=none
+Content-Type: multipart/alternative;
+ boundary="----=_Part_183515637_524129349.1773633625897"
+Date: Sun, 15 Mar 2026 23:00:25 -0500 (CDT)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ t=1773633625; s=m1; d=sensortower.com; i=@sensortower.com;
+ h=List-Unsubscribe:List-Unsubscribe-Post:Content-Type:MIME-Version:Subject:To:From:Date;
+ bh=Azl/VxyQvx7XrwvGvJ0rLIeO9db+PhUFvPCfN9ociL4=;
+ b=AQ6l3JRYuA9Zlju4gg1sD/FyMN5d6YUHl/h6U+SOH4lqVknswrOSG63eysdpanaO
+ 1dqGRtxdcpvlPyI6vDlEluol94XshwIQWopyLOpFmmqzRVTyS19l1wugm8v9Z0xM4uU
+ 7bh8eLZ/r5+ClaC29gJnsgDmR1miWdPEVRCz9Gzg=
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ t=1773633625; s=m1; d=mktomail.com; i=@mktomail.com;
+ h=List-Unsubscribe:List-Unsubscribe-Post:Content-Type:MIME-Version:Subject:To:From:Date;
+ bh=Azl/VxyQvx7XrwvGvJ0rLIeO9db+PhUFvPCfN9ociL4=;
+ b=Gj9ZVKwcCGsWijejMBnS3EBsVusxRUfmrR580Pi3KJulJQwDc+0pstxpBQAUAwU0
+ LoNL3gUK6Is461AJc89wh4Fj+VF47tfSxgQe09VsGWHXT8iIFGKcwxArgCHjrfb0EoJ
+ L07Bbu2sbFbDUil+YtuTZdNQ3nZx9u7jSnIsmn+8=
+From: Tom from Sensor Tower <tom.c@sensortower.com>
+List-Unsubscribe: 
+ <https://marketo.sensortower.com/u/MzUxLVJXSC0zMTUAAAGgk8YPIEizxtOWLkjdY3WBOgsUv5szGm_DBKY32A2Ue5gdKmFgaCfCGo_bWwuVoUGNRddAQm4=?emailAddress=MzUxLVJXSC0zMTUAAAGgk8YPIF325pggQC7ExbeMMSae-82VVkUSB_Fm0f47tfbCQ-oft9guPszl2YCrIwvQTo0TFVI7>,
+ <mailto:JRYFAWTNKM2FC5DJGBKTKLJTOJITEU3CIFTT2PI=.361256.16178.9@unsub-sj.mktomail.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <1640560282.183515638.1773633625898@sjmktmail-batch1j.marketo.org>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=199.15.215.81;
+ helo=em-sj-81.mktomail.com;
+ envelope-from=351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com;
+ receiver=<UNKNOWN>;
+Reply-To: tom.c@sensortower.com
+Subject: =?UTF-8?B?44CKMjAyNuW5tOa4uOaIj+W4guWcuuaKpeWRiuOAi+WPkeW4gw==?=
+To: wuliang@xiangzizai.com
+X-Binding: bg-sj-01
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773633629/4fZ1b15Cffz1ZJ4q0/69B7805D.012/199.15.215.81/em-sj-81.mktomail.com/localhost/<351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com>
+X-Fangmail-Mid-Qid: 69B7805D.012/4fZ1b15Cffz1ZJ4q0
+X-Fangmail-Miltered: at n151-177-067 with ID 69B7805D.012 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 199.15.215.81
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com
+X-Lms-Pvf: 
+ MnwyfDF8fG5ZuJeV+f6JQUV8Vc9VXNl4w4hWTPqzipeUQC8kWGgD9KFr+JyBZzMu9Bu+Ht7Mcp6ZH2yb1hgHxoniq0TTpdwHbzyaGqxDncR+iFttPavWwfI/tQdMUefYQ+1wu/Bjfg==
+X-Mailfrom: 351-RWH-315.0.361256.0.0.16178.9.8860969@em-sj-77.mktomail.com
+X-Marketoid: 351-RWH-315:0:21425:106581:295407:16178:9:361256:8860969
+X-Mktarchive: false
+X-Mktmaildkim: true
+X-Msfbl: khBRcYrh4ZzMOdxi7SBMDQdR7mB1n2VqTgYZwxDkQGw=|eyJiIjoiZHZwLTE5OS0
+ xNS0yMTUtODEiLCJyIjoid3VsaWFuZ0B4aWFuZ3ppemFpLmNvbSIsImciOiJiZy1
+ zai0wMSIsInUiOiIzNTEtUldILTMxNTowOjIxNDI1OjEwNjU4MToyOTU0MDc6MTY
+ xNzg6OTozNjEyNTY6ODg2MDk2OSJ9
+X-Msys-Api: {"options":{"open_tracking":false,"click_tracking":false}}
+
+------=_Part_183515637_524129349.1773633625897
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+To view this email as a web page, go to the following address: https://go.s=
+ensortower.com/index.php/email/emailWebview?mkt_tok=3DMzUxLVJXSC0zMTUAAAGgk=
+8YPIWkJuV1HwPW5wyD0jypX7BPn_IWkcNVclW2Zi06eU_D6enFbMa5U259V4xPQMeakig8jET4r=
+dcvE6zqNhpJMIqUu5xx9Sjkbsfj-ojuwDA
+
+Sensor Tower. (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIING=
+Bha7Slnfo0ZqbFDaus9-jawNAlMQtOlBoRaEyYqzvGPrRrmpWtimTYinA-udc6I=3D)        =
+ =20
+2026=E5=B9=B4=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E6=8A=A5=E5=91=8A        =
+    =20
+=E6=82=A8=E5=A5=BDWu=EF=BC=8C
+
+2025=E5=B9=B4=EF=BC=8C=E5=85=A8=E7=90=83=E7=A7=BB=E5=8A=A8=E6=B8=B8=E6=88=
+=8F=E5=B9=B3=E5=9D=87=E6=AF=8F=E5=88=86=E9=92=9F=E4=B8=8B=E8=BD=BD=E9=87=8F=
+=E8=BE=BE=E5=88=B0=E7=BA=A69.5=E4=B8=87=E6=AC=A1=EF=BC=9B=E4=B8=8E=E6=AD=A4=
+=E5=90=8C=E6=97=B6=EF=BC=8CPC=E5=8F=8A=E4=B8=BB=E6=9C=BA=E6=B8=B8=E6=88=8F=
+=E7=9A=84=E6=AF=8F=E5=88=86=E9=92=9F=E4=B8=8B=E8=BD=BD=E9=87=8F=E7=BA=A6=E4=
+=B8=BA3,800=E6=AC=A1=E3=80=82=E5=9C=A8=E6=B8=B8=E6=88=8F=E6=97=B6=E9=95=BF=
+=E4=B8=8E=E5=86=85=E5=AE=B9=E6=8C=81=E7=BB=AD=E5=A2=9E=E9=95=BF=E7=9A=84=E8=
+=83=8C=E6=99=AF=E4=B8=8B=EF=BC=8C=E5=A6=82=E4=BD=95=E4=BB=8E=E6=B5=B7=E9=87=
+=8F=E4=BF=A1=E6=81=AF=E4=B8=AD=E6=B4=9E=E5=AF=9F=E7=9C=9F=E6=AD=A3=E9=87=8D=
+=E8=A6=81=E7=9A=84=E8=A1=8C=E4=B8=9A=E8=B6=8B=E5=8A=BF=EF=BC=8C=E5=8F=98=E5=
+=BE=97=E6=AF=94=E4=BB=A5=E5=BE=80=E6=9B=B4=E5=8A=A0=E5=85=B3=E9=94=AE=E3=80=
+=82=C2=A0
+
+=E4=B8=BA=E6=AD=A4=EF=BC=8C=E6=88=91=E4=BB=AC=E5=8F=91=E5=B8=83=E4=BA=86=E3=
+=80=8A2026=E5=B9=B4=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E6=8A=A5=E5=91=8A (=
+https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIGuX0zWrB6wCoqG2vAI=
+QGfvmkcybTojEfByBXuXfula0hVMF5HCW9oXndLyqyEbWt4k=3D) =E3=80=8B=E3=80=82=E6=
+=8A=A5=E5=91=8A=E5=9F=BA=E4=BA=8E=E5=A4=9A=E7=BB=B4=E6=95=B0=E6=8D=AE=E5=88=
+=86=E6=9E=90=EF=BC=8C=E7=B3=BB=E7=BB=9F=E6=A2=B3=E7=90=86=E5=85=A8=E7=90=83=
+=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E7=9A=84=E5=8F=91=E5=B1=95=E6=A0=BC=E5=
+=B1=80=EF=BC=8C=E5=B9=B6=E4=B8=BA=E8=A1=8C=E4=B8=9A=E5=8F=82=E4=B8=8E=E8=80=
+=85=E6=8F=90=E4=BE=9B=E6=B8=85=E6=99=B0=E7=9A=84=E8=B6=8B=E5=8A=BF=E5=8F=82=
+=E8=80=83=E3=80=82=C2=A0
+
+=E6=8A=A5=E5=91=8A=E9=A6=96=E5=85=88=E4=BB=8E=E8=B7=A8=E5=B9=B3=E5=8F=B0=E8=
+=A7=86=E8=A7=92=E5=AF=B9=E6=95=B4=E4=BD=93=E6=B8=B8=E6=88=8F=E8=A1=8C=E4=B8=
+=9A=E8=BF=9B=E8=A1=8C=E5=AE=8F=E8=A7=82=E5=88=86=E6=9E=90=EF=BC=8C=E9=9A=8F=
+=E5=90=8E=E9=87=8D=E7=82=B9=E6=B7=B1=E5=85=A5=E6=8E=A2=E8=AE=A8=E7=A7=BB=E5=
+=8A=A8=E6=B8=B8=E6=88=8F=E7=9A=84=E5=B8=82=E5=9C=BA=E8=A1=A8=E7=8E=B0=E3=80=
+=81=E8=90=A5=E9=94=80=E8=B6=8B=E5=8A=BF=E4=B8=8ELive Ops=E8=BF=90=E8=90=A5=
+=E7=AD=96=E7=95=A5=EF=BC=9B=E5=90=8C=E6=97=B6=E8=BF=98=E5=AF=B9PC=E4=B8=8E=
+=E4=B8=BB=E6=9C=BA=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E7=BB=93=E6=9E=84=E4=
+=B8=8E=E5=A2=9E=E9=95=BF=E5=8A=A8=E5=8A=9B=E8=BF=9B=E8=A1=8C=E8=A7=A3=E8=AF=
+=BB=EF=BC=8C=E5=B9=B6=E4=BB=A5=E5=B0=84=E5=87=BB=E7=B1=BB=E6=B8=B8=E6=88=8F=
+=E4=B8=BA=E6=A1=88=E4=BE=8B=E8=BF=9B=E8=A1=8C=E6=B7=B1=E5=BA=A6=E5=88=86=E6=
+=9E=90=E3=80=82       =20
+      =E4=B8=8B=E8=BD=BD=E5=AE=8C=E6=95=B4=E6=8A=A5=E5=91=8A (https://marke=
+to.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIIXJ-GoPAUvObgpkrCkTCiHneUvhqvIG=
+Jcn4UoysXV-WwfqOi4uckYBNWaoZKX9Yr4I=3D)=20
+   =20
+=E6=8A=A5=E5=91=8A=E6=A0=B8=E5=BF=83=E6=95=B0=E6=8D=AE=E6=A6=82=E8=A7=88=EF=
+=BC=9A
+[CN] 2026 State of Gaming stats. (https://marketo.sensortower.com/MzUxLVJXS=
+C0zMTUAAAGgk8YPIBFd6LATXPLjW_9ykd3g2U6iGXV31exaJNGRw7Otx4WNCAdGQ8XX4LMUrEF3=
+C93imw0=3D) =E7=A7=BB=E5=8A=A8=E6=B8=B8=E6=88=8F=E8=BF=9B=E5=85=A5=E7=B2=BE=
+=E7=BB=86=E5=8C=96=E5=8F=98=E7=8E=B0=E9=98=B6=E6=AE=B5=EF=BC=9A=E5=9C=A8=E4=
+=B8=8B=E8=BD=BD=E9=87=8F=E6=8C=81=E7=BB=AD=E6=94=B6=E7=BC=A9=E3=80=81=E6=94=
+=B6=E5=85=A5=E6=95=B4=E4=BD=93=E4=BF=9D=E6=8C=81=E7=A8=B3=E5=AE=9A=E7=9A=84=
+=E6=83=85=E5=86=B5=E4=B8=8B=EF=BC=8C=E6=AF=8F=E4=B8=80=E6=AC=A1=E6=96=B0=E5=
+=A2=9E=E4=B8=8B=E8=BD=BD=E7=9A=84=E4=BB=B7=E5=80=BC=E5=8F=98=E5=BE=97=E6=9B=
+=B4=E5=8A=A0=E9=87=8D=E8=A6=81=E3=80=82=E5=A6=82=E4=BD=95=E6=8F=90=E5=8D=87=
+=E7=8E=A9=E5=AE=B6=E7=95=99=E5=AD=98=E3=80=81=E5=8F=82=E4=B8=8E=E5=BA=A6=E4=
+=B8=8E=E5=8F=98=E7=8E=B0=E8=83=BD=E5=8A=9B=EF=BC=8C=E6=88=90=E4=B8=BA=E7=A7=
+=BB=E5=8A=A8=E6=B8=B8=E6=88=8F=E5=8E=82=E5=95=86=E7=9A=84=E6=A0=B8=E5=BF=83=
+=E8=AF=BE=E9=A2=98=E3=80=82
+
+PC=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E5=86=8D=E5=88=9B=E7=BA=AA=E5=BD=95=
+=EF=BC=9ASteam=E5=B9=B3=E5=8F=B0=E5=9C=A8=E9=94=80=E9=87=8F=E3=80=81=E4=BB=
+=98=E8=B4=B9=E6=B8=B8=E6=88=8F=E6=94=B6=E5=85=A5=E4=BB=A5=E5=8F=8A=E6=96=B0=
+=E6=B8=B8=E6=88=8F=E5=8F=91=E5=B8=83=E6=95=B0=E9=87=8F=E6=96=B9=E9=9D=A2=E5=
+=9D=87=E5=88=9B=E4=B8=8B=E5=8E=86=E5=8F=B2=E6=96=B0=E9=AB=98=EF=BC=8C=E5=85=
+=B6=E4=B8=AD=E5=A2=9E=E9=95=BF=E4=B8=BB=E8=A6=81=E7=94=B1AAA=E4=B8=8EAA=E7=
+=BA=A7=E5=8F=91=E8=A1=8C=E5=95=86=E6=8E=A8=E5=8A=A8=E3=80=82
+
+YouTube=E5=9C=A8=E7=A7=BB=E5=8A=A8=E5=B9=BF=E5=91=8A=E4=B8=AD=E7=9A=84=E5=
+=BD=B1=E5=93=8D=E5=8A=9B=E6=8F=90=E5=8D=87=EF=BC=9A=E8=99=BD=E7=84=B6=E7=A7=
+=BB=E5=8A=A8=E6=B8=B8=E6=88=8F=E5=B9=BF=E5=91=8A=E6=8A=95=E6=94=BE=E4=BB=8D=
+=E4=BB=A5=E7=A7=BB=E5=8A=A8=E5=B9=BF=E5=91=8A=E7=BD=91=E7=BB=9C=E4=B8=BA=E4=
+=B8=BB=EF=BC=8C=E8=80=8CYouTube=E4=BE=9D=E7=84=B6=E6=98=AFPC/=E4=B8=BB=E6=
+=9C=BA=E6=B8=B8=E6=88=8F=E5=B9=BF=E5=91=8A=E7=9A=84=E4=B8=BB=E8=A6=81=E6=B8=
+=A0=E9=81=93=EF=BC=8C=E4=BD=86=E5=85=B6=E5=B9=BF=E5=91=8A=E6=94=AF=E5=87=BA=
+=E5=8D=A0=E6=AF=94=E6=AD=A3=E9=80=90=E6=B8=90=E4=BB=8EPC/=E4=B8=BB=E6=9C=BA=
+=E7=AB=AF=E5=90=91=E7=A7=BB=E5=8A=A8=E7=AB=AF=E8=BD=AC=E7=A7=BB=E3=80=82
+
+=E3=80=8ABattlefield 6=E3=80=8B=E9=A2=86=E8=B7=91=E7=AB=9E=E4=BA=89=E6=BF=
+=80=E7=83=88=E7=9A=84=E5=B0=84=E5=87=BB=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=
+=EF=BC=9A=E5=9C=A8=E3=80=8ACall of Duty=E3=80=8B=E3=80=8AFortnite=E3=80=8B=
+=E7=AD=89=E5=A4=B4=E9=83=A8IP=E4=BB=A5=E5=8F=8A=E3=80=8ADelta Force=E3=80=
+=8B=E3=80=8AMarvel Rivals=E3=80=8B=E7=AD=89=E9=87=8D=E7=A3=85=E6=96=B0=E4=
+=BD=9C=E7=AB=9E=E4=BA=89=E4=B8=8B=EF=BC=8C=E3=80=8ABattlefield 6=E3=80=8B=
+=E4=BB=8D=E6=88=90=E4=B8=BA2025=E5=B9=B4PC/=E4=B8=BB=E6=9C=BA=E5=B9=B3=E5=
+=8F=B0=E9=94=80=E9=87=8F=E5=86=A0=E5=86=9B=E3=80=82
+
+4X=E7=AD=96=E7=95=A5=E6=B8=B8=E6=88=8F=E6=88=90=E4=B8=BA=E7=A7=BB=E5=8A=A8=
+=E7=AB=AF=E5=A2=9E=E9=95=BF=E5=BC=95=E6=93=8E=EF=BC=9A=E7=AD=96=E7=95=A5=E7=
+=B1=BB=E6=98=AF=E5=94=AF=E4=B8=80=E5=9C=A8=E6=94=B6=E5=85=A5=E3=80=81=E4=B8=
+=8B=E8=BD=BD=E9=87=8F=E5=92=8C=E7=8E=A9=E5=AE=B6=E6=97=B6=E9=95=BF=E4=B8=89=
+=E9=A1=B9=E6=8C=87=E6=A0=87=E4=B8=8A=E5=9D=87=E5=AE=9E=E7=8E=B0=E5=A2=9E=E9=
+=95=BF=E7=9A=84=E5=93=81=E7=B1=BB=EF=BC=8C=E5=85=B6=E4=B8=AD=E3=80=8ALast W=
+ar: Survival=E3=80=8B=E5=92=8C=E3=80=8AWhiteout Survival=E3=80=8B=E5=88=86=
+=E5=88=AB=E4=BD=8D=E5=88=972025=E5=B9=B4=E7=A7=BB=E5=8A=A8=E6=B8=B8=E6=88=
+=8F=E6=94=B6=E5=85=A5=E6=A6=9C=E5=89=8D=E4=B8=A4=E4=BD=8D=E3=80=82
+
+=E5=86=85=E5=AE=B9=E5=88=9B=E4=BD=9C=E8=80=85=E4=B8=8E=E5=A5=BD=E5=8F=8B=E7=
+=A4=BE=E4=BA=A4=E4=BD=93=E9=AA=8C=E5=B4=9B=E8=B5=B7=EF=BC=9A2025=E5=B9=B4PC=
+/=E4=B8=BB=E6=9C=BA=E5=B9=B3=E5=8F=B0=E9=94=80=E9=87=8F=E6=8E=92=E5=90=8D=
+=E7=AC=AC2=E5=92=8C=E7=AC=AC3=E7=9A=84=E3=80=8AR.E.P.O.=E3=80=8B=E4=B8=8E=
+=E3=80=8APEAK=E3=80=8B=EF=BC=8C=E5=9C=A8=E7=94=A8=E6=88=B7=E8=A7=84=E6=A8=
+=A1=E4=B8=8A=E8=B6=85=E8=B6=8A=E5=A4=9A=E6=AC=BEAAA=E5=A4=A7=E4=BD=9C=E3=80=
+=82=E9=9A=8F=E7=9D=80=E3=80=8AGTA 6=E3=80=8B=E7=9A=84=E6=8E=A8=E5=87=BA=EF=
+=BC=8C=E8=BF=99=E4=B8=80=E8=B6=8B=E5=8A=BF=E6=9C=89=E6=9C=9B=E8=BF=9B=E4=B8=
+=80=E6=AD=A5=E6=94=BE=E5=A4=A7=E3=80=82
+      =E4=B8=8B=E8=BD=BD=E5=AE=8C=E6=95=B4=E6=8A=A5=E5=91=8A (https://marke=
+to.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIP3ewC5vaKcp-ehJ-gA5feNrnHVVeGyg=
+kF8pw0vXGhFW1jH0ktPnOhw_TUxAcgjjx0k=3D)=20
+                    =20
+=C2=A9 Sensor Tower, Inc. All rights reserved.
+2261 Market Street #4331, San Francisco, CA 94114
+=E4=B8=BB=E9=A1=B5 (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8Y=
+PIMZ2up1pz72t5P2QpwlJS-LQTppUy7ePn63_gbZTx9U4X5eHnnOcUtp6zRA2t542U-4=3D)  |=
+ =E9=80=80=E8=AE=A2 (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8=
+YPIMfar-wc3lvOzGjiV3oOJ-5Il4Nojwrm23otR-_QBW0Zlre8JkBWiNMZJPj9EUnn9pM=3D)=
+=20
+   =20
+     =20
+     (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIEAW_hBd28PHT=
+wc-hyqHLjdFpvEA_WGBSfOYhPVPzgKAM1K0q9JA0g5LcuItAdBzrLc=3D)=20
+ =20
+   =20
+     =20
+     (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIOHHeiUIwjSKH=
+LgoOxY-LgTmElCNzKyHS0tl9Wlg7_kpAQew5cvUMONKrKK6c17wkxM=3D)=20
+ =20
+   =20
+     =20
+     (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIAKpPddg6pwTv=
+HCaNLAzfj4evp4V-Zg0za8_w4K5VDNxPtAt3tXx4TVib21qAt-bECc=3D)=20
+ =20
+   =20
+     =20
+     (https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIHSgHxLVPQyan=
+yu1oSVCLRa4Nn6pn-O4eQKRjBjDo53a4doffOqqf31exW4CweDMy4c=3D)
+
+This email was sent to wuliang@xiangzizai.com. If you no longer wish to rec=
+eive these emails you may unsubscribe here: https://go.sensortower.com/Unsu=
+bscribePage.html?mkt_unsubscribe=3D1&mkt_tok=3DMzUxLVJXSC0zMTUAAAGgk8YPIWkJ=
+uV1HwPW5wyD0jypX7BPn_IWkcNVclW2Zi06eU_D6enFbMa5U259V4xPQMeakig8jET4rdcvE6zq=
+NhpJMIqUu5xx9Sjkbsfj-ojuwDA.
+
+------=_Part_183515637_524129349.1773633625897
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html style class><head><meta charset=3D"utf-8"><meta name=3D"content-versi=
+on" content=3D"3.3.50"><meta name=3D"x-apple-disable-message-reformatting">=
+<meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1.0=
+"><style data-name=3D"default" type=3D"text/css">body{font-family:sans-seri=
+f;margin:0 !important;padding:0 !important;background:#FFFFFF;min-width:750=
+px;}td{padding:0;border-collapse:collapse;}th{font-weight:normal;text-align=
+:left;padding:0;}.acr-fragment,.acr-component{padding:0;}.acr-fragment img,=
+.acr-component img{vertical-align:middle;}.divider-container{padding:5px 0;=
+font-size:0px;}.text-container p{margin:0;}.image-container{line-height:0;}=
+.acr-tmp-component img,.image-container img{height:auto;}.button-container =
+a{text-decoration:none;color:inherit;}.acr-structure{background-size:auto;b=
+ackground-repeat:no-repeat;}.structure__table{table-layout:fixed;margin:0 a=
+uto;border-spacing:0;background-size:auto;background-repeat:no-repeat;mso-t=
+able-lspace:0pt !important;mso-table-rspace:0pt !important;}.colspan1{width=
+:100%;}.colspan2{width:50%;}.colspan3{width:75%;}.colspan4{width:25%;}.cols=
+pan33{width:33%;}.colspan66{width:66%;}.component-social-container{width:10=
+0%;text-align:center;}span.preheader{display:none !important;visibility:hid=
+den;mso-hide:all;opacity:0;}.ExternalClass{width:100%;}.ExternalClass,.Exte=
+rnalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.Exte=
+rnalClass div{line-height:100%;}h1,h2,h3,h4,h5{display:block;font-weight:bo=
+ld;}h1{font-size:24px;margin:19px 0 19px 0;}h2{font-size:24px;margin:20px 0=
+ 20px 0;}h3{font-size:19px;margin:19px 0 19px 0;}h4{font-size:16px;margin:2=
+1px 0 21px 0;}h5{font-size:13px;margin:22px 0 22px 0;}h6{font-size:11px;mar=
+gin:25px 0 25px 0;}.mso-is-desktop-hidden,.mso-is-desktop-hidden table{mso-=
+hide:all;}.colspan1,.colspan2,.colspan3,.colspan4,.colspan33,.colspan66,.co=
+lspan-n{background-size:auto;background-repeat:no-repeat;box-sizing:border-=
+box;}.acr-grid-column{box-sizing:border-box;}@media screen and (min-width: =
+500px){th.is-desktop-visible{display:table-cell !important;}.is-desktop-hid=
+den{display:none !important;}.is-desktop-visible{display:block !important;}=
+.is-mobile-visible{display:none !important;}}.acr-dark-img{display:none;}.t=
+ext-container ul,.text-container ol{padding-left:40px;}</style><style data-=
+name=3D"custom" type=3D"text/css">body,#acr-body{background-color:rgb(250, =
+250, 250)!important;}.structure__table{background-color:transparent!importa=
+nt;}#acr-112491524913304{background-color:rgb(243, 244, 248);}#acr-14522761=
+99440269{color:rgb(128, 128, 128);}#acr-634987601407058{font-size:40px;font=
+-weight:bold;line-height:42px;}</style><style data-name=3D"grid" type=3D"te=
+xt/css">
+  .acr-grid-table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+  }
+
+  .acr-grid-column,
+  .acr-repeat-grid-column {
+    box-sizing: border-box;
+  }
+
+  @media screen and (max-width: 500px) {
+    .acr-grid-table td {
+      display: block;
+      min-width: 100%;
+    }
+  }
+</style><style data-name=3D"media-default-max-width-500px" type=3D"text/css=
+">@media screen and (max-width: 500px){body,#acr-body{width:100% !important=
+;min-width:0px !important;}.structure__table{width:100% !important;}.colspa=
+n1,.colspan2,.colspan3,.colspan4,.colspan33,.colspan66,.colspan-n{display:b=
+lock !important;min-width:100%;}.container-small-size .colspan1,.container-=
+small-size .colspan2,.container-small-size .colspan3,.container-small-size =
+.colspan4,.container-small-size .colspan33,.container-small-size .colspan66=
+,.container-small-size .colspan-n{display:table-cell !important;width:100% =
+!important;}.is-mobile-hidden{display:none !important;}.is-mobile-visible{d=
+isplay:block !important;}.is-desktop-visible{display:none !important;}}</st=
+yle><style data-name=3D"media-custom-max-width-500px" type=3D"text/css">@me=
+dia screen and (max-width: 500px){#acr-84579140{margin:0px 20px!important;}=
+#acr-1655579994450106{padding:10px 20px 0px 20px!important;}#acr-1097803150=
+175376{height:auto!important;width:90%!important;border-radius:10px!importa=
+nt;}#acr-71261746{padding:0px 0px 10px 0px!important;}#acr-133920953882947{=
+margin:10px 0px 0px 0px!important;}#acr-756217520565983,#acr-40476368{width=
+:41.55844155844156%!important;margin:10px 20px 30px 20px!important;}#acr-64=
+414903{padding:10px 20px 20px 20px!important;}#acr-634987601407058{font-siz=
+e:36px!important;line-height:40px!important;font-family:Source Sans 3, Aria=
+l, sans-serif!important;}#acr-6673682{font-size:30px!important;}#acr-536235=
+44{font-size:20px!important;}#acr-48212438{font-size:34px!important;}#acr-8=
+130894,#acr-73397648{font-size:32px!important;}}</style><title>2026 State o=
+f Gaming</title><style data-name=3D"media-custom-prefers-color-scheme-dark"=
+ type=3D"text/css">@media (prefers-color-scheme: dark){.acr-dark-img{displa=
+y:inline-block!important;}.acr-light-img{display:none!important;}body,#acr-=
+body{background-color:transparent!important;}}</style><style>@import url(ht=
+tps://fonts.googleapis.com/css2?family=3DKumbh+Sans&display=3Dswap);</style=
+><style>/* Sidekick sidebar styles */
+#csk-sidebar-container * {
+  box-sizing: border-box;
+  /* padding: 0;
+  margin: 0; */
+}
+.csk-element-sidebar {
+  z-index: 1000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  background-color: #f6f9fc;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+  color: #111;
+  font-family: 'Kumbh Sans', Verdana, sans-serif;
+  font-size: 13px;
+  line-height: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: transform 0.5s;
+  transform: translateX(-100%);
+}
+[data-init-csk] .csk-element-sidebar.show {
+  transform: translateX(0);
+}
+
+.csk-h1,
+.csk-h2 {
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+}
+
+.csk-h1 {
+  position: relative;
+  padding: 6px 0 3px 26px;
+  background-color: #000;
+  color: #fff;
+}
+
+.csk-h1 svg {
+  position: absolute;
+  top: 4px;
+  right: 23px;
+  width: 30px;
+  filter: invert(1);
+}
+
+.csk-h2 {
+  padding: 20px 26px 8px;
+  color: #000;
+}
+
+.csk-element-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.csk-element-sidebar .csk-item-group {
+  display: block;
+  color: #111;
+  line-height: 2;
+  user-select: none;
+  transition: 0.3s;
+}
+
+.csk-element-sidebar .csk-item-group.selected,
+.csk-element-sidebar .csk-item-group:hover {
+  background-color: #ececec;
+}
+
+.csk-element-sidebar .csk-item {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.csk-element-sidebar .csk-item:focus,
+.csk-element-sidebar .csk-icon-expand:focus {
+  outline: none;
+}
+
+.csk-sidebar-node {
+  padding: 0 0;
+}
+
+.csk-sidebar-node .csk-icon-expand:before {
+  display: inline-block;
+  width: 10px;
+  margin-right: 4px;
+}
+
+.csk-sidebar-node.expanded .csk-icon-expand:before {
+  content: '-';
+}
+
+.csk-sidebar-node.collapsed .csk-icon-expand:before {
+  content: '+';
+}
+
+.csk-sidebar-node.collapsed > ul {
+  display: none;
+  overflow: hidden;
+}
+
+.csk-element-sidebar .edit,
+.csk-element-sidebar .view {
+  margin-left: 5px;
+  padding: 4px 5px 2.4px;
+  background-color: #eaeaea;
+  border-radius: 10px;
+  color: #555;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.1s linear, color 0.05s linear;
+  opacity: 0;
+}
+
+.csk-element-sidebar .csk-item-group:hover .edit,
+.csk-element-sidebar .csk-item-group:hover .view {
+  opacity: 1;
+}
+
+.csk-element-sidebar .csk-item-group .edit:hover,
+.csk-element-sidebar .csk-item-group .view:hover {
+  background-color: #9146ff;
+  color: #fff;
+  transition: background-color 0.1s linear, color 0.05s linear;
+}
+
+.csk-element-sidebar .csk-icon-expand {
+  cursor: pointer;
+  text-indent: 0;
+}
+
+.csk-element-sidebar li .csk-item-group {
+  text-indent: 26px;
+}
+
+.csk-element-sidebar li li .csk-item-group {
+  text-indent: 51px;
+}
+
+.csk-element-sidebar li li li .csk-item-group {
+  text-indent: 76px;
+}
+
+.csk-element-sidebar li li li li .csk-item-group {
+  text-indent: 101px;
+}
+
+.csk-element-sidebar li li li li li .csk-item-group {
+  text-indent: 126px;
+}
+
+.csk-element-sidebar li li li li li li .csk-item-group {
+  text-indent: 151px;
+}
+
+.csk-element-sidebar .csk-error-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+}
+
+.csk-element-sidebar .csk-tooltip-container {
+  position: relative;
+  display: inline-block;
+  text-indent: initial;
+}
+
+.csk-element-sidebar .csk-item-group:hover .csk-tooltip-content {
+  opacity: 1;
+}
+
+.csk-element-sidebar .csk-tooltip-content {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 42px);
+  transform: translateY(-50%);
+  padding: 8px;
+  background: white;
+  box-shadow: 1px 1px 10px 0px #00000024;
+  border-radius: 2px;
+  opacity: 0;
+  transition: 0.3s;
+  width: 170px;
+  font-size: 12px;
+}
+
+.csk-section {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+}
+#csk-sidebar-container {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: block;
+  pointer-events: none;
+}
+#csk-sidebar-container > * {
+  pointer-events: auto;
+}
+
+/*# sourceMappingURL=3Ddata:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3V=
+yY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9zaGFyZWQvanMvY29tcG9uZW50cy9TaWRla2ljay9TaW=
+Rla2ljay5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsNEJBQTRCO0FBRTVCO0VBQ=
+0Usc0JBQXNCO0VBQ3RCO2NBQ1k7QUFDZDtBQUNBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFD=
+ZixNQUFNO0VBQ04sT0FBTztFQUNQLFdBQVc7RUFDWCxhQUFhO0VBQ2IsaUJBQWlCO0VBQ2pCLGd=
+CQUFnQjtFQUNoQix5QkFBeUI7RUFDekIsd0NBQXdDO0VBQ3hDLFdBQVc7RUFDWCw4Q0FBOEM7RU=
+FDOUMsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixtQ0FBbUM7RUFDbkMsa0NBQWtDO0VBQ2xDLDBCQ=
+UEwQjtFQUMxQiw0QkFBNEI7QUFDOUI7QUFDQTtFQUNFLHdCQUF3QjtBQUMxQjs7QUFFQTs7RUFF=
+RSxtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixxQkFBcUI7QUFDdkI7O0FBRUE=
+7RUFDRSxrQkFBa0I7RUFDbEIsdUJBQXVCO0VBQ3ZCLHNCQUFzQjtFQUN0QixXQUFXO0FBQ2I7O0=
+FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsUUFBUTtFQUNSLFdBQVc7RUFDWCxXQUFXO0VBQ1gsaUJBQ=
+WlCO0FBQ25COztBQUVBO0VBQ0Usc0JBQXNCO0VBQ3RCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdC=
+QUFnQjtFQUNoQixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsV0FBVztFQUNYLGNBQWM=
+7RUFDZCxpQkFBaUI7RUFDakIsZ0JBQWdCO0FBQ2xCOztBQUVBOztFQUVFLHlCQUF5QjtBQUMzQj=
+s7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0FBQ2pCOztBQUVBOztFQUVFLGFBQWE7QUFDZ=
+js7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLHFCQUFxQjtFQUNyQixXQUFXO0VBQ1gs=
+aUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtBQUNkOzt=
+BQUVBO0VBQ0UsYUFBYTtFQUNiLGdCQUFnQjtBQUNsQjs7QUFFQTs7RUFFRSxnQkFBZ0I7RUFDaE=
+Isc0JBQXNCO0VBQ3RCLHlCQUF5QjtFQUN6QixtQkFBbUI7RUFDbkIsV0FBVztFQUNYLGNBQWM7R=
+UFDZCxpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLHFCQUFxQjtFQUNyQix5QkFBeUI7RUFDekIs=
+NERBQTREO0VBQzVELFVBQVU7QUFDWjs7QUFFQTs7RUFFRSxVQUFVO0FBQ1o7O0FBRUE7O0VBRUU=
+seUJBQXlCO0VBQ3pCLFdBQVc7RUFDWCw0REFBNEQ7QUFDOUQ7O0FBRUE7RUFDRSxlQUFlO0VBQ2=
+YsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGlCQUFpQjtBQ=
+UNuQjs7QUFFQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7QUFF=
+QTtFQUNFLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFd=
+BQVc7RUFDWCxZQUFZO0VBQ1osZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLH=
+FCQUFxQjtFQUNyQixvQkFBb0I7QUFDdEI7O0FBRUE7RUFDRSxVQUFVO0FBQ1o7O0FBRUE7RUFDR=
+SxrQkFBa0I7RUFDbEIsUUFBUTtFQUNSLHVCQUF1QjtFQUN2QiwyQkFBMkI7RUFDM0IsWUFBWTtF=
+QUNaLGlCQUFpQjtFQUNqQixzQ0FBc0M7RUFDdEMsa0JBQWtCO0VBQ2xCLFVBQVU7RUFDVixnQkF=
+BZ0I7RUFDaEIsWUFBWTtFQUNaLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsVU=
+FBVTtFQUNWLFNBQVM7RUFDVCxZQUFZO0FBQ2Q7QUFDQTtFQUNFLFlBQVk7RUFDWixrQkFBa0I7R=
+UFDbEIsV0FBVztFQUNYLGNBQWM7RUFDZCxvQkFBb0I7QUFDdEI7QUFDQTtFQUNFLG9CQUFvQjtB=
+QUN0QiIsInNvdXJjZXNDb250ZW50IjpbIi8qIFNpZGVraWNrIHNpZGViYXIgc3R5bGVzICovXG5=
+AaW1wb3J0IHVybCgnaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1LdW=
+1iaCtTYW5zJmRpc3BsYXk9c3dhcCcpO1xuI2Nzay1zaWRlYmFyLWNvbnRhaW5lciAqIHtcbiAgY=
+m94LXNpemluZzogYm9yZGVyLWJveDtcbiAgLyogcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwOyAq=
+L1xufVxuLmNzay1lbGVtZW50LXNpZGViYXIge1xuICB6LWluZGV4OiAxMDAwMDAwO1xuICBwb3N=
+pdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDIwdnc7XG4gIG=
+hlaWdodDogMTAwdmg7XG4gIG1heC1oZWlnaHQ6IDEwMHZoO1xuICBvdmVyZmxvdy15OiBhdXRvO=
+1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjZmOWZjO1xuICBib3gtc2hhZG93OiAwIDAgN3B4IDAg=
+cmdiYSgwLCAwLCAwLCAwLjIpO1xuICBjb2xvcjogIzExMTtcbiAgZm9udC1mYW1pbHk6ICdLdW1=
+iaCBTYW5zJywgVmVyZGFuYSwgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAxM3B4O1xuICBsaW=
+5lLWhlaWdodDogMnJlbTtcbiAgLXdlYmtpdC1mb250LXNtb290aGluZzogYW50aWFsaWFzZWQ7X=
+G4gIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XG4gIHRyYW5zaXRpb246IHRy=
+YW5zZm9ybSAwLjVzO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpO1xufVxuW2RhdGE=
+taW5pdC1jc2tdIC5jc2stZWxlbWVudC1zaWRlYmFyLnNob3cge1xuICB0cmFuc2Zvcm06IHRyYW=
+5zbGF0ZVgoMCk7XG59XG5cbi5jc2staDEsXG4uY3NrLWgyIHtcbiAgd2hpdGUtc3BhY2U6IG5vd=
+3JhcDtcbiAgZm9udC1zaXplOiAxM3B4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgbGV0dGVy=
+LXNwYWNpbmc6IDAuNHB4O1xufVxuXG4uY3NrLWgxIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1x=
+uICBwYWRkaW5nOiA2cHggMCAzcHggMjZweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDtcbi=
+AgY29sb3I6ICNmZmY7XG59XG5cbi5jc2staDEgc3ZnIHtcbiAgcG9zaXRpb246IGFic29sdXRlO=
+1xuICB0b3A6IDRweDtcbiAgcmlnaHQ6IDIzcHg7XG4gIHdpZHRoOiAzMHB4O1xuICBmaWx0ZXI6=
+IGludmVydCgxKTtcbn1cblxuLmNzay1oMiB7XG4gIHBhZGRpbmc6IDIwcHggMjZweCA4cHg7XG4=
+gIGNvbG9yOiAjMDAwO1xufVxuXG4uY3NrLWVsZW1lbnQtc2lkZWJhciB1bCB7XG4gIGxpc3Qtc3=
+R5bGU6IG5vbmU7XG4gIHBhZGRpbmc6IDA7XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIC5jc=
+2staXRlbS1ncm91cCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBjb2xvcjogIzExMTtcbiAgbGlu=
+ZS1oZWlnaHQ6IDI7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICB0cmFuc2l0aW9uOiAwLjNzO1x=
+ufVxuXG4uY3NrLWVsZW1lbnQtc2lkZWJhciAuY3NrLWl0ZW0tZ3JvdXAuc2VsZWN0ZWQsXG4uY3=
+NrLWVsZW1lbnQtc2lkZWJhciAuY3NrLWl0ZW0tZ3JvdXA6aG92ZXIge1xuICBiYWNrZ3JvdW5kL=
+WNvbG9yOiAjZWNlY2VjO1xufVxuXG4uY3NrLWVsZW1lbnQtc2lkZWJhciAuY3NrLWl0ZW0ge1xu=
+ICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5jc2s=
+tZWxlbWVudC1zaWRlYmFyIC5jc2staXRlbTpmb2N1cyxcbi5jc2stZWxlbWVudC1zaWRlYmFyIC=
+5jc2staWNvbi1leHBhbmQ6Zm9jdXMge1xuICBvdXRsaW5lOiBub25lO1xufVxuXG4uY3NrLXNpZ=
+GViYXItbm9kZSB7XG4gIHBhZGRpbmc6IDAgMDtcbn1cblxuLmNzay1zaWRlYmFyLW5vZGUgLmNz=
+ay1pY29uLWV4cGFuZDpiZWZvcmUge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHR=
+oOiAxMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDRweDtcbn1cblxuLmNzay1zaWRlYmFyLW5vZGUuZX=
+hwYW5kZWQgLmNzay1pY29uLWV4cGFuZDpiZWZvcmUge1xuICBjb250ZW50OiAnLSc7XG59XG5cb=
+i5jc2stc2lkZWJhci1ub2RlLmNvbGxhcHNlZCAuY3NrLWljb24tZXhwYW5kOmJlZm9yZSB7XG4g=
+IGNvbnRlbnQ6ICcrJztcbn1cblxuLmNzay1zaWRlYmFyLW5vZGUuY29sbGFwc2VkID4gdWwge1x=
+uICBkaXNwbGF5OiBub25lO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG4uY3NrLWVsZW1lbn=
+Qtc2lkZWJhciAuZWRpdCxcbi5jc2stZWxlbWVudC1zaWRlYmFyIC52aWV3IHtcbiAgbWFyZ2luL=
+WxlZnQ6IDVweDtcbiAgcGFkZGluZzogNHB4IDVweCAyLjRweDtcbiAgYmFja2dyb3VuZC1jb2xv=
+cjogI2VhZWFlYTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgY29sb3I6ICM1NTU7XG4gIGZ=
+vbnQtc2l6ZTogOXB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgbGV0dGVyLXNwYWNpbmc6ID=
+AuNHB4O1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlc=
+mNhc2U7XG4gIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4xcyBsaW5lYXIsIGNvbG9y=
+IDAuMDVzIGxpbmVhcjtcbiAgb3BhY2l0eTogMDtcbn1cblxuLmNzay1lbGVtZW50LXNpZGViYXI=
+gLmNzay1pdGVtLWdyb3VwOmhvdmVyIC5lZGl0LFxuLmNzay1lbGVtZW50LXNpZGViYXIgLmNzay=
+1pdGVtLWdyb3VwOmhvdmVyIC52aWV3IHtcbiAgb3BhY2l0eTogMTtcbn1cblxuLmNzay1lbGVtZ=
+W50LXNpZGViYXIgLmNzay1pdGVtLWdyb3VwIC5lZGl0OmhvdmVyLFxuLmNzay1lbGVtZW50LXNp=
+ZGViYXIgLmNzay1pdGVtLWdyb3VwIC52aWV3OmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjo=
+gIzkxNDZmZjtcbiAgY29sb3I6ICNmZmY7XG4gIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3=
+IgMC4xcyBsaW5lYXIsIGNvbG9yIDAuMDVzIGxpbmVhcjtcbn1cblxuLmNzay1lbGVtZW50LXNpZ=
+GViYXIgLmNzay1pY29uLWV4cGFuZCB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgdGV4dC1pbmRl=
+bnQ6IDA7XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIGxpIC5jc2staXRlbS1ncm91cCB7XG4=
+gIHRleHQtaW5kZW50OiAyNnB4O1xufVxuXG4uY3NrLWVsZW1lbnQtc2lkZWJhciBsaSBsaSAuY3=
+NrLWl0ZW0tZ3JvdXAge1xuICB0ZXh0LWluZGVudDogNTFweDtcbn1cblxuLmNzay1lbGVtZW50L=
+XNpZGViYXIgbGkgbGkgbGkgLmNzay1pdGVtLWdyb3VwIHtcbiAgdGV4dC1pbmRlbnQ6IDc2cHg7=
+XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIGxpIGxpIGxpIGxpIC5jc2staXRlbS1ncm91cCB=
+7XG4gIHRleHQtaW5kZW50OiAxMDFweDtcbn1cblxuLmNzay1lbGVtZW50LXNpZGViYXIgbGkgbG=
+kgbGkgbGkgbGkgLmNzay1pdGVtLWdyb3VwIHtcbiAgdGV4dC1pbmRlbnQ6IDEyNnB4O1xufVxuX=
+G4uY3NrLWVsZW1lbnQtc2lkZWJhciBsaSBsaSBsaSBsaSBsaSBsaSAuY3NrLWl0ZW0tZ3JvdXAg=
+e1xuICB0ZXh0LWluZGVudDogMTUxcHg7XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIC5jc2s=
+tZXJyb3ItaWNvbiB7XG4gIHdpZHRoOiAxNnB4O1xuICBoZWlnaHQ6IDE2cHg7XG4gIG1hcmdpbi=
+1sZWZ0OiA4cHg7XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIC5jc2stdG9vbHRpcC1jb250Y=
+WluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztc=
+biAgdGV4dC1pbmRlbnQ6IGluaXRpYWw7XG59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIC5jc2s=
+taXRlbS1ncm91cDpob3ZlciAuY3NrLXRvb2x0aXAtY29udGVudCB7XG4gIG9wYWNpdHk6IDE7XG=
+59XG5cbi5jc2stZWxlbWVudC1zaWRlYmFyIC5jc2stdG9vbHRpcC1jb250ZW50IHtcbiAgcG9za=
+XRpb246IGFic29sdXRlO1xuICB0b3A6IDUwJTtcbiAgbGVmdDogY2FsYygxMDAlICsgNDJweCk7=
+XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgcGFkZGluZzogOHB4O1xuICBiYWN=
+rZ3JvdW5kOiB3aGl0ZTtcbiAgYm94LXNoYWRvdzogMXB4IDFweCAxMHB4IDBweCAjMDAwMDAwMj=
+Q7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogM=
+C4zcztcbiAgd2lkdGg6IDE3MHB4O1xuICBmb250LXNpemU6IDEycHg7XG59XG5cbi5jc2stc2Vj=
+dGlvbiB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiA=
+wO1xuICB6LWluZGV4OiA5OTk7XG59XG4jY3NrLXNpZGViYXItY29udGFpbmVyIHtcbiAgaGVpZ2=
+h0OiAxMDAlO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHdpZHRoOiAxMDAlO1xuICBkaXNwb=
+GF5OiBibG9jaztcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG4jY3NrLXNpZGViYXItY29u=
+dGFpbmVyID4gKiB7XG4gIHBvaW50ZXItZXZlbnRzOiBhdXRvO1xufVxuIl0sInNvdXJjZVJvb3Q=
+iOiIifQ=3D=3D */</style><style>.banner {
+  position: fixed;
+  top: -50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #9146ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  transition: top 0.5s ease;
+  z-index: 10000;
+}
+
+.banner.show {
+  top: 0;
+}
+
+.banner button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=3Ddata:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3V=
+yY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9zaGFyZWQvanMvY29tcG9uZW50cy9CYW5uZXIvQmFubm=
+VyLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQWU7RUFDZixVQUFVO=
+0VBQ1YsT0FBTztFQUNQLFFBQVE7RUFDUixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGFBQWE7RUFD=
+YixtQkFBbUI7RUFDbkIsOEJBQThCO0VBQzlCLGVBQWU7RUFDZixZQUFZO0VBQ1osaUJBQWlCO0V=
+BQ2pCLGVBQWU7RUFDZix5QkFBeUI7RUFDekIsY0FBYztBQUNoQjs7QUFFQTtFQUNFLE1BQU07QU=
+FDUjs7QUFFQTtFQUNFLDZCQUE2QjtFQUM3QixZQUFZO0VBQ1osWUFBWTtFQUNaLGVBQWU7RUFDZ=
+ixlQUFlO0FBQ2pCIiwic291cmNlc0NvbnRlbnQiOlsiLmJhbm5lciB7XG4gIHBvc2l0aW9uOiBm=
+aXhlZDtcbiAgdG9wOiAtNTBweDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG4gIGhlaWdodDo=
+gNTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzkxNDZmZjtcbiAgZGlzcGxheTogZmxleDtcbi=
+AgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO=
+1xuICBwYWRkaW5nOiAwIDIwcHg7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC13ZWlnaHQ6IGJv=
+bGQ7XG4gIGZvbnQtc2l6ZTogMTJweDtcbiAgdHJhbnNpdGlvbjogdG9wIDAuNXMgZWFzZTtcbiA=
+gei1pbmRleDogMTAwMDA7XG59XG5cbi5iYW5uZXIuc2hvdyB7XG4gIHRvcDogMDtcbn1cblxuLm=
+Jhbm5lciBidXR0b24ge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgY29sb=
+3I6IHdoaXRlO1xuICBib3JkZXI6IG5vbmU7XG4gIGZvbnQtc2l6ZTogMjBweDtcbiAgY3Vyc29y=
+OiBwb2ludGVyO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ=3D=3D */</style><style data-=
+name=3D"global-custom" type=3D"text/css"></style><!--[if gte mso 9]><style =
+acrite-mso-css=3D"true">.image-container div {  display: block;}.structure_=
+_table td {  padding: 0;  border: none;}.button-container {  border: none !=
+important;  padding: 0 !important;  margin: 0 !important;  line-height: nor=
+mal !important;}.acr-structure {  margin: 0 !important;}.acr-component, .ac=
+r-tmp-component {  margin: 0 !important;  border: none !important;}.acr-fra=
+gment {  margin: 0 !important;  border: none !important;}.colspan1, .colspa=
+n2, .colspan3, .colspan4, .colspan33, .colspan66, .colspan-n {  box-sizing:=
+ border-box !important;}.acr-grid-column {  box-sizing: border-box !importa=
+nt;}.divider-mso-hidden {  border: none !important;}</style><![endif]--></h=
+ead><body class id=3D"acr-body" style=3D"min-width:700px;font-family:arial;=
+" data-has-int-mso-hack=3D"true"><style type=3D"text/css">div#emailPreHeade=
+r{ display: none !important; }</style><div id=3D"emailPreHeader" style=3D"m=
+so-hide:all; visibility:hidden; opacity:0; color:transparent; mso-line-heig=
+ht-rule:exactly; line-height:0; font-size:0px; overflow:hidden; border-widt=
+h:0; display:none !important;">50+=E9=A1=B5=E8=B7=A8=E5=B9=B3=E5=8F=B0=E6=
+=95=B0=E6=8D=AE=E6=B4=9E=E5=AF=9F</div>
+<div style=3D"text-align: center"><font face=3D"Verdana" size=3D"1">To view=
+ this email as a web page, <a href=3D
+"https://marketo.sensortower.com/v/MzUxLVJXSC0zMTUAAAGgk8YPIAXWKodrFOxybMAf=
+E57_-Cy9KQilxJK5hkQXmFBHAZCfXOk066-xlBsPiNX-uB-5Ajc=3D"
+>click here</a><br /><br /></font></div>
+<!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=
+=3D"100%"><tr><td style=3D"font-family: arial;" ><![endif]--><span style=3D=
+"display:none !important;visibility:hidden;mso-hide:all;opacity:0;" class=
+=3D"acr-preheader"></span><div class=3D"acr-container">     <div class=3D"a=
+cr-structure" data-structure-id=3D"1-1-column" data-structure-name=3D"richt=
+ext.structure_1_1_column" data-source-chatid=3D"819173d0-9a0c-4523-b681-ce4=
+b3d15f37f"> <table class=3D"structure__table" align=3D"center" cellpadding=
+=3D"0" cellspacing=3D"0" border=3D"0" width=3D"700"> <tbody> <tr role=3D"pr=
+esentation"> <th class=3D"colspan1"><!--[if mso]><table cellpadding=3D"0" c=
+ellspacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"padding: 10px=
+ 0px 0px;" ><![endif]--><div class=3D"acr-fragment acr-component image-cont=
+ainer" data-component-id=3D"image" style=3D"width:100%;text-align:center;ma=
+rgin:10px 0px 0px;" id=3D"acr-133920953882947" data-has-ext-mso-hack=3D"tru=
+e" data-has-int-mso-hack=3D"true" data-source-chatid=3D"d79ff3c2-6bf7-4c06-=
+8b77-3b1363608bc2" data-contenteditable=3D"false"><!--[if mso]><table cellp=
+adding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D=
+"text-align: center; border: none; border-radius: 10px;" ><![endif]--><a cl=
+ass=3D"arc-link" data-nl-type=3D"externalLink" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIP4USgm0nodUTY-Mzg=
+vaiVsEm9CM_4Qrk5wsNFMsNiBjzRJ7grZDX80llwF7FJjpyoo=3D" id=3D"acr-link-429535=
+61" style=3D"text-decoration:underline;"
+><img src=3D"https://go.sensortower.com/rs/351-RWH-315/images/ST Email Head=
+er - Navy %2B Report.png?version=3D0" style=3D"height:auto;width:100%;borde=
+r:none;border-radius:10px;" width=3D"700" id=3D"acr-1097803150175376" alt=
+=3D"Sensor Tower." height=3D"auto"></a><!--[if mso]></td></tr></table><![en=
+dif]--></div><!--[if mso]></td></tr></table><![endif]--></th> </tr> </tbody=
+> </table> </div> <div class=3D"acr-structure" data-structure-id=3D"1-1-col=
+umn" data-structure-name=3D"richtext.structure_1_1_column" data-source-chat=
+id=3D"7e465155-3a0c-4b41-a147-476e90728f18"> <table class=3D"structure__tab=
+le" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=
+=3D"700"> <tbody> <tr role=3D"presentation"> <th class=3D"colspan1"><div cl=
+ass=3D"acr-fragment acr-component" data-component-id=3D"text" id=3D"acr-165=
+5579994450106" style=3D"padding:20px 0px 10px;" data-has-int-mso-hack=3D"tr=
+ue" data-source-chatid=3D"20384edf-5b2a-45da-87af-2501987aab20" data-conten=
+teditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0"=
+ border=3D"0" width=3D"100%"><tr><td style=3D"mso-line-height-rule:exactly;=
+font-size: 40px; font-family: sans-serif; color: rgb(0, 0, 0); text-align: =
+left; font-weight: bold; font-style: normal; padding: 20px 0px 10px; line-h=
+eight: 42px; text-decoration: none;" ><![endif]--><div class=3D"text-contai=
+ner" data-contenteditable=3D"true"><p style=3D"font-family:sans-serif;color=
+:rgb(0, 0, 0);text-align:left;font-style:normal;" id=3D"acr-634987601407058=
+"><span style=3D"font-size:42px;">2026=E5=B9=B4=E6=B8=B8=E6=88=8F=E5=B8=82=
+=E5=9C=BA=E6=8A=A5=E5=91=8A</span></p></div><!--[if mso]></td></tr></table>=
+<![endif]--></div></th> </tr> </tbody> </table> </div>     <div class=3D"ac=
+r-structure" data-structure-id=3D"1-1-column" data-structure-name=3D"richte=
+xt.structure_1_1_column" data-source-chatid=3D"f80534a3-47f0-4749-8169-a45a=
+9185566a"> <table class=3D"structure__table" align=3D"center" cellpadding=
+=3D"0" cellspacing=3D"0" border=3D"0" width=3D"700"> <tbody> <tr role=3D"pr=
+esentation"> <th class=3D"colspan1"><div class=3D"acr-fragment acr-componen=
+t" data-component-id=3D"text" style=3D"line-height:20px;padding:20px 0px 10=
+px;" id=3D"acr-64414903" data-has-int-mso-hack=3D"true" data-source-chatid=
+=3D"f5d60c40-91da-400e-8adf-0b8b4f4ce06c" data-contenteditable=3D"false"><!=
+--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D=
+"100%"><tr><td style=3D"font-size: 14px; font-family: sans-serif; color: rg=
+b(0, 0, 0); text-align: left; font-weight: normal; font-style: normal; padd=
+ing: 20px 0px 10px;" ><![endif]--><div class=3D"text-container" data-conten=
+teditable=3D"true"><p style=3D"font-size:14px;font-family:sans-serif;color:=
+rgb(0, 0, 0);text-align:left;font-weight:normal;font-style:normal;">=E6=82=
+=A8=E5=A5=BDWu=EF=BC=8C</p><p style=3D"font-size:14px;font-family:sans-seri=
+f;color:rgb(0, 0, 0);text-align:left;font-weight:normal;font-style:normal;"=
+><br></p><p style=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, =
+0);text-align:left;">2025=E5=B9=B4=EF=BC=8C=E5=85=A8=E7=90=83=E7=A7=BB=E5=
+=8A=A8=E6=B8=B8=E6=88=8F=E5=B9=B3=E5=9D=87=E6=AF=8F=E5=88=86=E9=92=9F=E4=B8=
+=8B=E8=BD=BD=E9=87=8F=E8=BE=BE=E5=88=B0=E7=BA=A69.5=E4=B8=87=E6=AC=A1=EF=BC=
+=9B=E4=B8=8E=E6=AD=A4=E5=90=8C=E6=97=B6=EF=BC=8CPC=E5=8F=8A=E4=B8=BB=E6=9C=
+=BA=E6=B8=B8=E6=88=8F=E7=9A=84=E6=AF=8F=E5=88=86=E9=92=9F=E4=B8=8B=E8=BD=BD=
+=E9=87=8F=E7=BA=A6=E4=B8=BA3,800=E6=AC=A1=E3=80=82=E5=9C=A8=E6=B8=B8=E6=88=
+=8F=E6=97=B6=E9=95=BF=E4=B8=8E=E5=86=85=E5=AE=B9=E6=8C=81=E7=BB=AD=E5=A2=9E=
+=E9=95=BF=E7=9A=84=E8=83=8C=E6=99=AF=E4=B8=8B=EF=BC=8C=E5=A6=82=E4=BD=95=E4=
+=BB=8E=E6=B5=B7=E9=87=8F=E4=BF=A1=E6=81=AF=E4=B8=AD=E6=B4=9E=E5=AF=9F=E7=9C=
+=9F=E6=AD=A3=E9=87=8D=E8=A6=81=E7=9A=84=E8=A1=8C=E4=B8=9A=E8=B6=8B=E5=8A=BF=
+=EF=BC=8C=E5=8F=98=E5=BE=97=E6=AF=94=E4=BB=A5=E5=BE=80=E6=9B=B4=E5=8A=A0=E5=
+=85=B3=E9=94=AE=E3=80=82=C2=A0</p><p style=3D"font-size:14px;font-family:sa=
+ns-serif;color:rgb(0, 0, 0);text-align:left;"><br></p><p style=3D"font-size=
+:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:left;">=E4=B8=BA=
+=E6=AD=A4=EF=BC=8C=E6=88=91=E4=BB=AC=E5=8F=91=E5=B8=83=E4=BA=86=E3=80=8A<sp=
+an style=3D"font-weight:700;"><a class=3D"arc-link" data-nl-type=3D"externa=
+lLink" style=3D"text-decoration:underline;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIFW3ZAZO0WhQAaUK2g=
+_ZQdxanz1vHC3AqwtIUBiyPSQ7V9yKHvxf8Ktl4hFwq0E4lc4=3D" id=3D"acr-link-763304=
+04"
+>2026=E5=B9=B4=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E6=8A=A5=E5=91=8A</a></s=
+pan>=E3=80=8B=E3=80=82=E6=8A=A5=E5=91=8A=E5=9F=BA=E4=BA=8E=E5=A4=9A=E7=BB=
+=B4=E6=95=B0=E6=8D=AE=E5=88=86=E6=9E=90=EF=BC=8C=E7=B3=BB=E7=BB=9F=E6=A2=B3=
+=E7=90=86=E5=85=A8=E7=90=83=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E7=9A=84=E5=
+=8F=91=E5=B1=95=E6=A0=BC=E5=B1=80=EF=BC=8C=E5=B9=B6=E4=B8=BA=E8=A1=8C=E4=B8=
+=9A=E5=8F=82=E4=B8=8E=E8=80=85=E6=8F=90=E4=BE=9B=E6=B8=85=E6=99=B0=E7=9A=84=
+=E8=B6=8B=E5=8A=BF=E5=8F=82=E8=80=83=E3=80=82=C2=A0</p><p style=3D"font-siz=
+e:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:left;"><br></p>=
+<p style=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-a=
+lign:left;">=E6=8A=A5=E5=91=8A=E9=A6=96=E5=85=88=E4=BB=8E=E8=B7=A8=E5=B9=B3=
+=E5=8F=B0=E8=A7=86=E8=A7=92=E5=AF=B9=E6=95=B4=E4=BD=93=E6=B8=B8=E6=88=8F=E8=
+=A1=8C=E4=B8=9A=E8=BF=9B=E8=A1=8C=E5=AE=8F=E8=A7=82=E5=88=86=E6=9E=90=EF=BC=
+=8C=E9=9A=8F=E5=90=8E=E9=87=8D=E7=82=B9=E6=B7=B1=E5=85=A5=E6=8E=A2=E8=AE=A8=
+=E7=A7=BB=E5=8A=A8=E6=B8=B8=E6=88=8F=E7=9A=84=E5=B8=82=E5=9C=BA=E8=A1=A8=E7=
+=8E=B0=E3=80=81=E8=90=A5=E9=94=80=E8=B6=8B=E5=8A=BF=E4=B8=8ELive Ops=E8=BF=
+=90=E8=90=A5=E7=AD=96=E7=95=A5=EF=BC=9B=E5=90=8C=E6=97=B6=E8=BF=98=E5=AF=B9=
+PC=E4=B8=8E=E4=B8=BB=E6=9C=BA=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=BA=E7=BB=93=
+=E6=9E=84=E4=B8=8E=E5=A2=9E=E9=95=BF=E5=8A=A8=E5=8A=9B=E8=BF=9B=E8=A1=8C=E8=
+=A7=A3=E8=AF=BB=EF=BC=8C=E5=B9=B6=E4=BB=A5=E5=B0=84=E5=87=BB=E7=B1=BB=E6=B8=
+=B8=E6=88=8F=E4=B8=BA=E6=A1=88=E4=BE=8B=E8=BF=9B=E8=A1=8C=E6=B7=B1=E5=BA=A6=
+=E5=88=86=E6=9E=90=E3=80=82</p></div><!--[if mso]></td></tr></table><![endi=
+f]--></div></th> </tr> </tbody> </table> </div><div class=3D"acr-structure"=
+ data-structure-id=3D"1-1-column" data-structure-name=3D"richtext.structure=
+_1_1_column" style=3D"padding:10px 0px;" data-has-int-mso-hack=3D"true" dat=
+a-source-chatid=3D"dcf0c9f3-c77e-4388-9bd9-ed5d2dfff9f4" id=3D"acr-71261746=
+"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" widt=
+h=3D"100%"><tr><td style=3D"padding: 20px;" ><table cellpadding=3D"0" cells=
+pacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"padding: 10px 0px=
+;" ><![endif]--> <table class=3D"structure__table" align=3D"center" cellpad=
+ding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"700"> <tbody> <tr role=
+=3D"presentation"> <th class=3D"colspan1"><!--[if mso]><table cellpadding=
+=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"paddi=
+ng: 10px 20px 30px;" ><![endif]--><div class=3D"acr-fragment acr-component"=
+ data-component-id=3D"button:2" style=3D"width:100%;text-align:left;font-fa=
+mily:sans-serif;" data-source-chatid=3D"219a2d7d-7758-4c89-a932-ae8d24bae01=
+9" data-has-ext-mso-hack=3D"true" data-has-int-mso-hack=3D"true" data-conte=
+nteditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0=
+" border=3D"0" width=3D"100%"><tr><td style=3D"text-align: left; padding: 0=
+px 0px 20px;" ><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" widt=
+h=3D"195"><tr><td style=3D"mso-line-height-rule:exactly;text-align: center;=
+" ><v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:sc=
+hemas-microsoft-com:office:word" style=3D"height:30pt; width:149.25pt; v-te=
+xt-anchor:middle;" arcsize=3D"75%" fillcolor=3D"rgb(0, 207, 184)" strokewei=
+ght=3D"1.5pt" strokecolor=3D"rgb(0, 0, 0)"><v:stroke dashstyle=3D"solid" />=
+<v:textbox inset=3D"0,0,0,0"><center style=3D"color:rgb(255, 255, 255); fon=
+t-family:sans-serif; font-size:14px; text-align:center;"><![endif]--><a hre=
+f=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIIXJ-GoPAUvObgpkrC=
+kTCiHneUvhqvIGJcn4UoysXV-WwfqOi4uckYBNWaoZKX9Yr4I=3D" class=3D"arc-link" st=
+yle=3D"text-decoration:none;" data-nl-type=3D"externalLink"
+>
+      <div class=3D"button-container" style=3D"width:195px;text-align:cente=
+r;margin:0px 0px 20px;max-width:100%;display:inline-block;border:2px solid =
+transparent;border-radius:30px;height:36px;line-height:36px;background-colo=
+r:rgb(0, 207, 184);" id=3D"acr-756217520565983" data-contenteditable=3D"tru=
+e"><span style=3D"color:rgb(255, 255, 255);font-size:14px;font-weight:700;t=
+ext-decoration:none;">=E4=B8=8B=E8=BD=BD=E5=AE=8C=E6=95=B4=E6=8A=A5=E5=91=
+=8A</span></div>
+    </a><!--[if mso]></center></v:textbox></v:stroke></v:roundrect></td></t=
+r></table></td></tr></table><![endif]--></div><!--[if mso]></td></tr></tabl=
+e><![endif]--><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" borde=
+r=3D"0" width=3D"100%"><tr><td style=3D"padding: 0px 20px;" ><![endif]--><d=
+iv class=3D"acr-fragment acr-component" data-component-id=3D"container" sty=
+le=3D"padding:30px;background-color:rgb(255, 255, 255);border-top:none;bord=
+er-right:none;border-bottom:3px solid rgb(240, 240, 240);border-left:3px so=
+lid rgb(240, 240, 240);border-image:initial;border-radius:15px;" data-has-e=
+xt-mso-hack=3D"true" data-has-int-mso-hack=3D"true" id=3D"acr-84579140" dat=
+a-contenteditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspaci=
+ng=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"padding: 30px; backgr=
+ound-color: rgb(255, 255, 255); border-top: none; border-right: none; borde=
+r-bottom: 3px solid rgb(240, 240, 240); border-left: 3px solid rgb(240, 240=
+, 240); border-image: initial; border-radius: 15px;" ><![endif]--><div clas=
+s=3D"container-wrapper"><div class=3D"acr-fragment acr-component" data-comp=
+onent-id=3D"text" style=3D"padding:0px 0px 20px;" data-source-chatid=3D"3b8=
+e8fac-120c-48b6-9217-27dfafe3acd7" data-has-int-mso-hack=3D"true" data-cont=
+enteditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"=
+0" border=3D"0" width=3D"100%"><tr><td style=3D"font-size: 24px; font-famil=
+y: sans-serif; color: rgb(0, 0, 0); text-align: left; font-weight: normal; =
+font-style: normal; padding: 0px 0px 20px;" ><![endif]--><div class=3D"text=
+-container" data-contenteditable=3D"true"><p style=3D"font-size:24px;font-f=
+amily:sans-serif;color:rgb(0, 0, 0);text-align:left;font-style:normal;" id=
+=3D"acr-53623544"><span style=3D"font-weight:700;">=E6=8A=A5=E5=91=8A=E6=A0=
+=B8=E5=BF=83=E6=95=B0=E6=8D=AE=E6=A6=82=E8=A7=88=EF=BC=9A</span></p></div><=
+!--[if mso]></td></tr></table><![endif]--></div><!--[if mso]><table cellpad=
+ding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"p=
+adding: 0px;" ><![endif]--><div class=3D"acr-fragment acr-component" data-c=
+omponent-id=3D"text" style=3D"margin:0px;line-height:20px;" data-has-ext-ms=
+o-hack=3D"true" data-has-int-mso-hack=3D"true" data-source-chatid=3D"92193b=
+b8-80d0-4c1d-bd27-c436330f3bed" data-contenteditable=3D"false"><!--[if mso]=
+><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"><tr=
+><td style=3D"font-size: 14px; font-family: sans-serif; color: rgb(0, 0, 0)=
+; text-align: left; font-weight: normal; font-style: normal;" ><![endif]-->=
+<div class=3D"text-container" data-contenteditable=3D"true"><p style=3D"fon=
+t-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:left;font-=
+style:normal;"><a class=3D"arc-link" data-nl-type=3D"externalLink" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIBFd6LATXPLjW_9ykd=
+3g2U6iGXV31exaJNGRw7Otx4WNCAdGQ8XX4LMUrEF3C93imw0=3D" style=3D"text-decorat=
+ion:underline;"
+><img src=3D"https://go.sensortower.com/rs/351-RWH-315/images/[CN] State of=
+ Gaming 2026_Email - Executive Summary Stats.jpg" width=3D"700" height=3D"a=
+uto" style=3D"font-family:arial;font-size:initial;height:auto;width:100%;bo=
+rder-width:initial;border-color:initial;border-image:initial;border-radius:=
+15px;" class alt=3D"[CN] 2026 State of Gaming stats." data-medialibrary-id=
+=3D"1835232"></a><br><br><span style=3D"font-weight:bold;">=E7=A7=BB=E5=8A=
+=A8=E6=B8=B8=E6=88=8F=E8=BF=9B=E5=85=A5=E7=B2=BE=E7=BB=86=E5=8C=96=E5=8F=98=
+=E7=8E=B0=E9=98=B6=E6=AE=B5=EF=BC=9A</span>=E5=9C=A8=E4=B8=8B=E8=BD=BD=E9=
+=87=8F=E6=8C=81=E7=BB=AD=E6=94=B6=E7=BC=A9=E3=80=81=E6=94=B6=E5=85=A5=E6=95=
+=B4=E4=BD=93=E4=BF=9D=E6=8C=81=E7=A8=B3=E5=AE=9A=E7=9A=84=E6=83=85=E5=86=B5=
+=E4=B8=8B=EF=BC=8C=E6=AF=8F=E4=B8=80=E6=AC=A1=E6=96=B0=E5=A2=9E=E4=B8=8B=E8=
+=BD=BD=E7=9A=84=E4=BB=B7=E5=80=BC=E5=8F=98=E5=BE=97=E6=9B=B4=E5=8A=A0=E9=87=
+=8D=E8=A6=81=E3=80=82=E5=A6=82=E4=BD=95=E6=8F=90=E5=8D=87=E7=8E=A9=E5=AE=B6=
+=E7=95=99=E5=AD=98=E3=80=81=E5=8F=82=E4=B8=8E=E5=BA=A6=E4=B8=8E=E5=8F=98=E7=
+=8E=B0=E8=83=BD=E5=8A=9B=EF=BC=8C=E6=88=90=E4=B8=BA=E7=A7=BB=E5=8A=A8=E6=B8=
+=B8=E6=88=8F=E5=8E=82=E5=95=86=E7=9A=84=E6=A0=B8=E5=BF=83=E8=AF=BE=E9=A2=98=
+=E3=80=82</p><p style=3D"font-size:14px;font-family:sans-serif;color:rgb(0,=
+ 0, 0);text-align:left;font-style:normal;"><br></p><p style=3D"font-size:14=
+px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:left;font-style:nor=
+mal;"><span style=3D"font-weight:bold;">PC=E6=B8=B8=E6=88=8F=E5=B8=82=E5=9C=
+=BA=E5=86=8D=E5=88=9B=E7=BA=AA=E5=BD=95=EF=BC=9A</span>Steam=E5=B9=B3=E5=8F=
+=B0=E5=9C=A8=E9=94=80=E9=87=8F=E3=80=81=E4=BB=98=E8=B4=B9=E6=B8=B8=E6=88=8F=
+=E6=94=B6=E5=85=A5=E4=BB=A5=E5=8F=8A=E6=96=B0=E6=B8=B8=E6=88=8F=E5=8F=91=E5=
+=B8=83=E6=95=B0=E9=87=8F=E6=96=B9=E9=9D=A2=E5=9D=87=E5=88=9B=E4=B8=8B=E5=8E=
+=86=E5=8F=B2=E6=96=B0=E9=AB=98=EF=BC=8C=E5=85=B6=E4=B8=AD=E5=A2=9E=E9=95=BF=
+=E4=B8=BB=E8=A6=81=E7=94=B1AAA=E4=B8=8EAA=E7=BA=A7=E5=8F=91=E8=A1=8C=E5=95=
+=86=E6=8E=A8=E5=8A=A8=E3=80=82</p><p style=3D"font-size:14px;font-family:sa=
+ns-serif;color:rgb(0, 0, 0);text-align:left;font-style:normal;"><br></p><p =
+style=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-alig=
+n:left;font-style:normal;"><span style=3D"font-weight:bold;">YouTube=E5=9C=
+=A8=E7=A7=BB=E5=8A=A8=E5=B9=BF=E5=91=8A=E4=B8=AD=E7=9A=84=E5=BD=B1=E5=93=8D=
+=E5=8A=9B=E6=8F=90=E5=8D=87=EF=BC=9A</span>=E8=99=BD=E7=84=B6=E7=A7=BB=E5=
+=8A=A8=E6=B8=B8=E6=88=8F=E5=B9=BF=E5=91=8A=E6=8A=95=E6=94=BE=E4=BB=8D=E4=BB=
+=A5=E7=A7=BB=E5=8A=A8=E5=B9=BF=E5=91=8A=E7=BD=91=E7=BB=9C=E4=B8=BA=E4=B8=BB=
+=EF=BC=8C=E8=80=8CYouTube=E4=BE=9D=E7=84=B6=E6=98=AFPC/=E4=B8=BB=E6=9C=BA=
+=E6=B8=B8=E6=88=8F=E5=B9=BF=E5=91=8A=E7=9A=84=E4=B8=BB=E8=A6=81=E6=B8=A0=E9=
+=81=93=EF=BC=8C=E4=BD=86=E5=85=B6=E5=B9=BF=E5=91=8A=E6=94=AF=E5=87=BA=E5=8D=
+=A0=E6=AF=94=E6=AD=A3=E9=80=90=E6=B8=90=E4=BB=8EPC/=E4=B8=BB=E6=9C=BA=E7=AB=
+=AF=E5=90=91=E7=A7=BB=E5=8A=A8=E7=AB=AF=E8=BD=AC=E7=A7=BB=E3=80=82</p><p st=
+yle=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:=
+left;font-style:normal;"><br></p><p style=3D"font-size:14px;font-family:san=
+s-serif;color:rgb(0, 0, 0);text-align:left;font-style:normal;"><span style=
+=3D"font-weight:bold;">=E3=80=8ABattlefield 6=E3=80=8B=E9=A2=86=E8=B7=91=E7=
+=AB=9E=E4=BA=89=E6=BF=80=E7=83=88=E7=9A=84=E5=B0=84=E5=87=BB=E6=B8=B8=E6=88=
+=8F=E5=B8=82=E5=9C=BA=EF=BC=9A</span>=E5=9C=A8=E3=80=8ACall of Duty=E3=80=
+=8B=E3=80=8AFortnite=E3=80=8B=E7=AD=89=E5=A4=B4=E9=83=A8IP=E4=BB=A5=E5=8F=
+=8A=E3=80=8ADelta Force=E3=80=8B=E3=80=8AMarvel Rivals=E3=80=8B=E7=AD=89=E9=
+=87=8D=E7=A3=85=E6=96=B0=E4=BD=9C=E7=AB=9E=E4=BA=89=E4=B8=8B=EF=BC=8C=E3=80=
+=8ABattlefield 6=E3=80=8B=E4=BB=8D=E6=88=90=E4=B8=BA2025=E5=B9=B4PC/=E4=B8=
+=BB=E6=9C=BA=E5=B9=B3=E5=8F=B0=E9=94=80=E9=87=8F=E5=86=A0=E5=86=9B=E3=80=82=
+</p><p style=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);te=
+xt-align:left;font-style:normal;"><br></p><p style=3D"font-size:14px;font-f=
+amily:sans-serif;color:rgb(0, 0, 0);text-align:left;font-style:normal;"><sp=
+an style=3D"font-weight:bold;">4X=E7=AD=96=E7=95=A5=E6=B8=B8=E6=88=8F=E6=88=
+=90=E4=B8=BA=E7=A7=BB=E5=8A=A8=E7=AB=AF=E5=A2=9E=E9=95=BF=E5=BC=95=E6=93=8E=
+=EF=BC=9A</span>=E7=AD=96=E7=95=A5=E7=B1=BB=E6=98=AF=E5=94=AF=E4=B8=80=E5=
+=9C=A8=E6=94=B6=E5=85=A5=E3=80=81=E4=B8=8B=E8=BD=BD=E9=87=8F=E5=92=8C=E7=8E=
+=A9=E5=AE=B6=E6=97=B6=E9=95=BF=E4=B8=89=E9=A1=B9=E6=8C=87=E6=A0=87=E4=B8=8A=
+=E5=9D=87=E5=AE=9E=E7=8E=B0=E5=A2=9E=E9=95=BF=E7=9A=84=E5=93=81=E7=B1=BB=EF=
+=BC=8C=E5=85=B6=E4=B8=AD=E3=80=8ALast War: Survival=E3=80=8B=E5=92=8C=E3=80=
+=8AWhiteout Survival=E3=80=8B=E5=88=86=E5=88=AB=E4=BD=8D=E5=88=972025=E5=B9=
+=B4=E7=A7=BB=E5=8A=A8=E6=B8=B8=E6=88=8F=E6=94=B6=E5=85=A5=E6=A6=9C=E5=89=8D=
+=E4=B8=A4=E4=BD=8D=E3=80=82</p><p style=3D"font-size:14px;font-family:sans-=
+serif;color:rgb(0, 0, 0);text-align:left;font-style:normal;"><br></p><p sty=
+le=3D"font-size:14px;font-family:sans-serif;color:rgb(0, 0, 0);text-align:l=
+eft;font-style:normal;"><span style=3D"font-weight:bold;">=E5=86=85=E5=AE=
+=B9=E5=88=9B=E4=BD=9C=E8=80=85=E4=B8=8E=E5=A5=BD=E5=8F=8B=E7=A4=BE=E4=BA=A4=
+=E4=BD=93=E9=AA=8C=E5=B4=9B=E8=B5=B7=EF=BC=9A</span>2025=E5=B9=B4PC/=E4=B8=
+=BB=E6=9C=BA=E5=B9=B3=E5=8F=B0=E9=94=80=E9=87=8F=E6=8E=92=E5=90=8D=E7=AC=AC=
+2=E5=92=8C=E7=AC=AC3=E7=9A=84=E3=80=8AR.E.P.O.=E3=80=8B=E4=B8=8E=E3=80=8APE=
+AK=E3=80=8B=EF=BC=8C=E5=9C=A8=E7=94=A8=E6=88=B7=E8=A7=84=E6=A8=A1=E4=B8=8A=
+=E8=B6=85=E8=B6=8A=E5=A4=9A=E6=AC=BEAAA=E5=A4=A7=E4=BD=9C=E3=80=82=E9=9A=8F=
+=E7=9D=80=E3=80=8AGTA 6=E3=80=8B=E7=9A=84=E6=8E=A8=E5=87=BA=EF=BC=8C=E8=BF=
+=99=E4=B8=80=E8=B6=8B=E5=8A=BF=E6=9C=89=E6=9C=9B=E8=BF=9B=E4=B8=80=E6=AD=A5=
+=E6=94=BE=E5=A4=A7=E3=80=82</p></div><!--[if mso]></td></tr></table><![endi=
+f]--></div><!--[if mso]></td></tr></table><![endif]--><!--[if mso]><table c=
+ellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"><tr><td styl=
+e=3D"padding: 10px 20px 30px;" ><![endif]--><div class=3D"acr-fragment acr-=
+component" data-component-id=3D"button:2" style=3D"width:100%;text-align:ce=
+nter;font-family:sans-serif;" data-source-chatid=3D"219a2d7d-7758-4c89-a932=
+-ae8d24bae019" data-has-ext-mso-hack=3D"true" data-has-int-mso-hack=3D"true=
+" data-contenteditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cell=
+spacing=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"text-align: cent=
+er; padding: 20px 0px 0px;" ><table cellpadding=3D"0" cellspacing=3D"0" bor=
+der=3D"0" width=3D"195"><tr><td style=3D"mso-line-height-rule:exactly;text-=
+align: center;" ><v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xml=
+ns:w=3D"urn:schemas-microsoft-com:office:word" style=3D"height:30pt; width:=
+149.25pt; v-text-anchor:middle;" arcsize=3D"75%" fillcolor=3D"rgb(0, 207, 1=
+84)" strokeweight=3D"1.5pt" strokecolor=3D"rgb(0, 0, 0)"><v:stroke dashstyl=
+e=3D"solid" /><v:textbox inset=3D"0,0,0,0"><center style=3D"color:rgb(255, =
+255, 255); font-family:sans-serif; font-size:14px; text-align:center;"><![e=
+ndif]--><a href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIP3ewC5vaKcp-ehJ-g=
+A5feNrnHVVeGygkF8pw0vXGhFW1jH0ktPnOhw_TUxAcgjjx0k=3D" class=3D"arc-link" st=
+yle=3D"text-decoration:none;" data-nl-type=3D"externalLink"
+>
+      <div class=3D"button-container" style=3D"width:195px;text-align:cente=
+r;margin:20px 0px 0px;max-width:100%;display:inline-block;border:2px solid =
+transparent;border-radius:30px;height:36px;line-height:36px;background-colo=
+r:rgb(0, 207, 184);padding:0px;" id=3D"acr-40476368" data-contenteditable=
+=3D"true"><span style=3D"color:rgb(255, 255, 255);font-size:14px;font-weigh=
+t:700;text-decoration:none;">=E4=B8=8B=E8=BD=BD=E5=AE=8C=E6=95=B4=E6=8A=A5=
+=E5=91=8A</span></div>
+    </a><!--[if mso]></center></v:textbox></v:stroke></v:roundrect></td></t=
+r></table></td></tr></table><![endif]--></div><!--[if mso]></td></tr></tabl=
+e><![endif]--></div><!--[if mso]></td></tr></table><![endif]--></div><!--[i=
+f mso]></td></tr></table><![endif]--></th> </tr> </tbody> </table> <!--[if =
+mso]></td></tr></table></td></tr></table><![endif]--></div>         <!--[if=
+ mso]><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%=
+"><tr><td style=3D"padding: 10px 0px 0px;" ><![endif]--><div class=3D"acr-s=
+tructure" data-structure-id=3D"1-1-column" data-structure-name=3D"richtext.=
+structure_1_1_column" style=3D"background-color:transparent;margin:10px 0px=
+ 0px;background-image:none;" data-has-ext-mso-hack=3D"true" data-has-int-ms=
+o-hack=3D"true"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" bor=
+der=3D"0" width=3D"100%"><tr><td style=3D"background-color: transparent; ba=
+ckground-image: none;" ><![endif]--> <table class=3D"structure__table" alig=
+n=3D"center" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"700"=
+> <tbody> <tr role=3D"presentation"> <th class=3D"colspan1"><div class=3D"a=
+cr-fragment acr-component image-container" data-component-id=3D"image" styl=
+e=3D"display:block;height:auto;text-align:center;background-color:rgb(243, =
+244, 248);padding:20px 0px 0px;" data-has-int-mso-hack=3D"true" data-conten=
+teditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0"=
+ border=3D"0" width=3D"100%"><tr><td style=3D"text-align: center; padding: =
+20px 0px 0px; font-size: 16px; font-family: sans-serif; color: rgb(0, 0, 0)=
+; font-weight: normal; font-style: normal; background-color: rgb(243, 244, =
+248); background-image: none;" ><![endif]--><img src=3D"https://go.sensorto=
+wer.com/rs/351-RWH-315/images/ST_Logo_Gray.png" data-medialibrary-id=3D"161=
+2593" style=3D"height:auto;width:120px;max-width:120px;" width=3D"120" heig=
+ht=3D"auto"><!--[if mso]></td></tr></table><![endif]--></div><div class=3D"=
+acr-fragment acr-component" data-component-id=3D"text" style=3D"line-height=
+:18px;padding:10px 0px;" id=3D"acr-112491524913304" data-has-int-mso-hack=
+=3D"true" data-source-chatid=3D"71419622-e08b-4a91-a5e2-7d22dcc9c758" data-=
+contenteditable=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0" width=3D"100%"><tr><td style=3D"font-size: 12px; font-f=
+amily: sans-serif; color: rgb(128, 128, 128); text-align: center; font-weig=
+ht: normal; font-style: normal; padding: 10px 0px; background-color: rgb(24=
+3, 244, 248); mso-line-height-rule:exactly; line-height: 18px;" ><![endif]-=
+-><div class=3D"text-container" data-contenteditable=3D"true"><p style=3D"f=
+ont-size:12px;font-family:sans-serif;text-align:center;font-weight:normal;f=
+ont-style:normal;" id=3D"acr-1452276199440269">=C2=A9 Sensor Tower, Inc. Al=
+l rights reserved.</p><p style=3D"font-size:12px;font-family:sans-serif;col=
+or:rgb(255, 255, 255);text-align:center;font-weight:normal;font-style:norma=
+l;"><span style=3D"color:rgb(128, 128, 128);">2261 Market Street #4331, San=
+ Francisco, CA 94114</span></p><p style=3D"font-size:12px;font-family:sans-=
+serif;color:rgb(255, 255, 255);text-align:center;font-weight:normal;font-st=
+yle:normal;"><a class=3D"arc-link" data-nl-type=3D"externalLink" style=3D"t=
+ext-decoration:none;color:rgb(128, 128, 128);font-weight:700;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIL9KDTfAajccsHDo9z=
+dTeshi1MfFZY999ymsNGo2Q5dNeosDX4JS4aAPnPryO2gU3uU=3D" id=3D"acr-link-333694=
+42"
+>=E4=B8=BB=E9=A1=B5</a><span style=3D"font-weight:700;"> | </span><a class=
+=3D"arc-link" data-nl-type=3D"externalLink" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIKCcZHd9anOmIEVWTR=
+Izk4h4yTNwYxgR7CXoAzCpqX_xttIgCHzuJ1n4N3KviCNu-4c=3D" id=3D"acr-link-332565=
+36" style=3D"text-decoration:none;color:rgb(128, 128, 128);font-weight:700;=
+"
+>=E9=80=80=E8=AE=A2</a></p></div><!--[if mso]></td></tr></table><![endif]--=
+></div><div class=3D"acr-fragment acr-component" data-component-id=3D"socia=
+l" style=3D"width:100%;text-align:center;background-color:rgb(243, 244, 248=
+);padding:0px 0px 10px;" data-has-int-mso-hack=3D"true" data-contenteditabl=
+e=3D"false"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"100%"><tr><td style=3D"text-align: center; background-color=
+: rgb(243, 244, 248); padding: 0px 0px 10px;" ><![endif]--><table style=3D"=
+width:auto;display:inline-block;"><tbody><tr class=3D"component-social-cont=
+ainer"><td style=3D"padding:5px;">
+    <a style=3D"text-decoration:none;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIEAW_hBd28PHTwc-hy=
+qHLjdFpvEA_WGBSfOYhPVPzgKAM1K0q9JA0g5LcuItAdBzrLc=3D" data-component-social=
+-icon-id=3D"97820995" class
+>
+      <img width=3D"20" style=3D"height:20px;width:20px;" src=3D"https://go=
+.sensortower.com/rs/351-RWH-315/images/Linkedin-Icon_Gray.png?hash=3D28913"=
+ alt>
+    </a>
+  </td><td style=3D"padding:5px;">
+    <a style=3D"text-decoration:none;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIOHHeiUIwjSKHLgoOx=
+Y-LgTmElCNzKyHS0tl9Wlg7_kpAQew5cvUMONKrKK6c17wkxM=3D" data-component-social=
+-icon-id=3D"65196236" class
+>
+      <img width=3D"20" style=3D"height:20px;width:20px;" src=3D"https://go=
+.sensortower.com/rs/351-RWH-315/images/X-Icon_Gray.png?hash=3D358676" alt>
+    </a>
+  </td><td style=3D"padding:5px;">
+    <a style=3D"text-decoration:none;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIAKpPddg6pwTvHCaNL=
+Azfj4evp4V-Zg0za8_w4K5VDNxPtAt3tXx4TVib21qAt-bECc=3D" data-component-social=
+-icon-id=3D"26027117" class
+>
+      <img width=3D"20" style=3D"height:20px;width:20px;" src=3D"https://go=
+.sensortower.com/rs/351-RWH-315/images/YouTube_Gray.png?hash=3D783508" alt>
+    </a>
+  </td><td style=3D"padding:5px;">
+    <a style=3D"text-decoration:none;" href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIHSgHxLVPQyanyu1oS=
+VCLRa4Nn6pn-O4eQKRjBjDo53a4doffOqqf31exW4CweDMy4c=3D" data-component-social=
+-icon-id=3D"50062385" class
+>
+      <img width=3D"20" style=3D"height:20px;width:20px;" src=3D"https://go=
+.sensortower.com/rs/351-RWH-315/images/G2-Icon_Gray.png?hash=3D641153" alt>
+    </a>
+  </td></tr></tbody></table><!--[if mso]></td></tr></table><![endif]--></di=
+v></th> </tr> </tbody> </table> <!--[if mso]></td></tr></table><![endif]-->=
+</div><!--[if mso]></td></tr></table><![endif]--> <div class=3D"acr-structu=
+re" data-structure-id=3D"1-1-column" data-structure-name=3D"richtext.struct=
+ure_1_1_column"> <table class=3D"structure__table" align=3D"center" cellpad=
+ding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"700"> <tbody> <tr role=
+=3D"presentation"> <th class=3D"colspan1"><div class=3D"acr-fragment acr-co=
+mponent image-container" data-component-id=3D"image" style=3D"width:100%;te=
+xt-align:center;" data-has-int-mso-hack=3D"true" data-contenteditable=3D"fa=
+lse"><!--[if mso]><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" w=
+idth=3D"100%"><tr><td style=3D"text-align: center;" ><![endif]--><img src=
+=3D"https://go.sensortower.com/rs/351-RWH-315/images/Footer-Rule.png" data-=
+medialibrary-id=3D"1612603" style=3D"height:auto;width:100%;" width=3D"700"=
+ height=3D"auto"><!--[if mso]></td></tr></table><![endif]--></div></th> </t=
+r> </tbody> </table> </div></div><!--[if mso]></td></tr></table><![endif]--=
+><a href=3D
+"https://marketo.sensortower.com/MzUxLVJXSC0zMTUAAAGgk8YPIEpmiJpbCa9n7X2Sz1=
+cZYhd83spGuLNRTxaKU6yKM9DvlVJEoVKqjxnusDe3stdeXl8=3D"
+></a>
+<img src=3D"https://marketo.sensortower.com/trk?t=3D1&mid=3DMzUxLVJXSC0zMTU=
+AAAGgk8YPIG8gzMVcBA3jyFUdsbDO26C2N8PFfSFLPIkOgUEa206Pfdx-1uQWTRWPQyg411_WAI=
+QYc8dgNqDypG9ZeaWE_yEQFLXiuiMkw0piWnsUCCzh-ysY72yEswYf2OV57tRwzbBwhfsNk3hJm=
+PYw" width=3D"1" height=3D"1" style=3D"display:none !important;" alt=3D"" /=
+>
+
+<!--This is a comment -->
+</body></html>
+------=_Part_183515637_524129349.1773633625897--

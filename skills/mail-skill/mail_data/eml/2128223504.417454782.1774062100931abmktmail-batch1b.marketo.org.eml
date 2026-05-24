@@ -1,0 +1,1512 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.28.150.227)
+ smtp.mailfrom=710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com;
+ dkim=pass header.b=Js0rj09Gs+ header.i=@neo4j.com header.s=m1;
+ dkim=pass header.b=HBypz29qmd header.i=@mktomail.com header.s=m1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=neo4j.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=vSVs8yqGoB/3+cm1t3PHphwUvpb4Q4J+9JZAVxGef2k=;
+ b=pUhj2sHMCu3ai+t6Z+jTlY7XXaJWmc3P++MW/s54WIpOqeHC1UM894rao2MVAcLEXnjpCG1
+ YQC0/Wj47Tl4v3doi2ewIV9lG4YIZvii74BOOpYytff9M9E+6+41VY7C/h6hx6sRQVrYvdcx1
+ /NCwYbJdGGoumIt5vN2+Bbwe+K++8T+SVGeG1rgQZHl+QDmBmzp8kgkFTao3Tat4Pn+P5whBe
+ Sk6cLKTrElnSj1DsFjCKTPDtV5sKUa7jKZQAw3Sgvq8S5pgIfJoS7t53FiIOfWVcmK7xzrZTs
+ HUGy5bYCjn6GQJ8GwV3Wb+/uROJgk/W75s2LT99mTel9MimUru3Q==
+Arc-Seal: i=1; a=rsa-sha256; t=1774062110; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=MiRIG3OQOUXLuXj/yWOCLYgonFIgfkm+28ziY1wli6Rqdtus23ixE+sYWKFe6lVo+4cnD30
+ 5rShA8Iw+VwQ77iEkL02VhsbvxCvQ0jUiPLAeUJF0gcQILGAI0bDJ7JpzB9ivk3RlfSQMnGwc
+ YKWrvg7U21vnFOUCu4EU2mad4Wty1trYrDqBw3jr11XRMvIW0FdM1yVviaBMbp57PERNO/Uc3
+ ZCtsUD3O59CoAy7ATqY++hu+2fSgZLowtRPV7OlTF/GuFOpKUAVI20fxg5qT3hMpgCl3XKdTQ
+ fMmYS0k6RDFjqH1wS5++rfjxZHpCSAg19K2QLZEqlHvqDzcay0Xg==
+Authentication-Results: lms; spf=pass (client-ip:192.28.150.227)
+ smtp.mailfrom=710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com;
+ dkim=pass header.b=Js0rj09Gs+ header.i=@neo4j.com header.s=m1;
+ dkim=pass header.b=HBypz29qmd header.i=@mktomail.com header.s=m1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=neo4j.com; arc=none
+Content-Type: multipart/alternative;
+ boundary="----=_Part_417454781_2034950909.1774062100930"
+Date: Fri, 20 Mar 2026 22:01:40 -0500 (CDT)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ t=1774062100; s=m1; d=neo4j.com; i=@neo4j.com;
+ h=List-Unsubscribe:List-Unsubscribe-Post:Content-Type:MIME-Version:Subject:To:From:Date;
+ bh=vSVs8yqGoB/3+cm1t3PHphwUvpb4Q4J+9JZAVxGef2k=;
+ b=Js0rj09Gs+vDxVwmX1VSETsMg7q1yiVfFpaPUAp+syb8ixIPqpdT9eg1Sxu8xPmD
+ zrFVGJ8XR3dRqRD4KUkpw4UAroUyWy6rPgY8JCrn/TY6/Po6ZLutFiyez9qy1/o6MCE
+ v0YfWdXEZgPyz+gLLORD1pGyVAUCbKeglwY0rCKg=
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ t=1774062100; s=m1; d=mktomail.com; i=@mktomail.com;
+ h=List-Unsubscribe:List-Unsubscribe-Post:Content-Type:MIME-Version:Subject:To:From:Date;
+ bh=vSVs8yqGoB/3+cm1t3PHphwUvpb4Q4J+9JZAVxGef2k=;
+ b=HBypz29qmdldwq1swUgJ7RL8dH82LrfY6z3MTWLlLFxp20YrvOCpa455PqNwj4YH
+ 0HbwPRrdO/5NmhDAhynWFtVWhinskM1nxLjXb+CYXBd4irwCyrBD90u+np5AkAhamXM
+ xqsovAAJLPe/uY8E6pm3tmQxbQiDUlDdegCSIVnc=
+From: Alexander Erdl <noreply@neo4j.com>
+List-Unsubscribe: 
+ <https://message.neo4j.com/u/NzEwLVJSQy0zMzUAAAGgrVARvEAWIZJkiy8o6nLKLpsB3-eCyJ5sAhTpxSnILT2ywBmo-iNWGoM5BcxfKd87-H6HI-U=?emailAddress=NzEwLVJSQy0zMzUAAAGgrVARu6TEmNrUuycCO3zFNOgqHdaM7KxnBp40PeT9kdecUq8hJHQoM-SyK1DgscUbMWau4hwk>,
+ <mailto:KJEG6OCCOFWHUU2TI5IDAZKVGAYDMWKKOMYHC5SLNNHUU4LDI5EFSWDRN4YVG4SFGFMVKPI=.340190.98246.9@unsub-ab.mktomail.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <2128223504.417454782.1774062100931@abmktmail-batch1b.marketo.org>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.28.150.227;
+ helo=potomac1227.mktomail.com;
+ envelope-from=710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com;
+ receiver=<UNKNOWN>;
+Reply-To: noreply@neo4j.com
+Subject: This Week in Neo4j: AI in Production, Memory, GraphRAG,
+ Architecture and more
+To: wuliang@xiangzizai.com
+X-Binding: bg-ab-01
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1774062105/4fd42x3cFSzxbkv7/69BE0A19.001/192.28.150.227/potomac1227.mktomail.com/localhost/<710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com>
+X-Fangmail-Mid-Qid: 69BE0A19.001/4fd42x3cFSzxbkv7
+X-Fangmail-Miltered: at n206-112-037 with ID 69BE0A19.001 by FangMail
+ milter!
+X-Fangmail-Spf: unknown
+X-Lms-Client-Ip: 192.28.150.227
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com
+X-Lms-Pvf: 
+ MnwyfDF8fJWRR0qfHpMi3pCTpcpMJqDn3DgGxfzg7zIptFlDByqxLk6zVQffesJMRbRW8NDCD34NDDk+ChWKU7/YMKN480HPLBQIakexpSVpkulFTDAHybWn1FY3yxpv5pwRmS3lJA==
+X-Mailfrom: 710-RRC-335.0.340190.0.0.98246.9.18468527@potomac1050.mktomail.com
+X-Marketoid: 710-RRC-335:0:88081:392490:1643329:98246:9:340190:18468527
+X-Mktarchive: false
+X-Mktmaildkim: true
+X-Msfbl: Sxmrrw0wto41vqQrYtSJMV2bu3n6bDaPCD6EMBFtZsI=|eyJyIjoid3VsaWFuZ0B
+ 4aWFuZ3ppemFpLmNvbSIsImciOiJiZy1hYi0wMSIsInUiOiI3MTAtUlJDLTMzNTo
+ wOjg4MDgxOjM5MjQ5MDoxNjQzMzI5Ojk4MjQ2Ojk6MzQwMTkwOjE4NDY4NTI3Iiw
+ iYiI6ImR2cC0xOTItMjgtMTUwLTIyNyJ9
+X-Msys-Api: {"options":{"open_tracking":false,"click_tracking":false}}
+
+------=_Part_417454781_2034950909.1774062100930
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEhTcmSdjrTmXVAhSNyWjxLH=
+385AqM4fwKEd4LVH-ewSmp1bjr5ebt3nN_0lx6bFEzs=3D>
+Neo4j Developer News
+View it in Your Browser <https://message.neo4j.com/dc/tkdL1LgnFRJjCDlqRdJWr=
+hIKfWh-At2aJYy191DQOeQeudsGvo0eeMciAl5Pxw_fLNEtNUziuePVJxswUaj-XiDUnIAY7nRF=
+vQnmV1-x7VdssAhP94Qulo65T3XRbEXNSYj1h6mMKXKzExsLXRWzAg=3D=3D/NzEwLVJSQy0zMz=
+UAAAGgrVARvMD2fX_Z-rF8QGb9BvAEBfdZFZJRG1KngL83WdrYL8OCktkZ26xooAQfRDltIMtgQ=
+vU=3D>
+
+
+Welcome to This Week in Neo4j, your fix for news from the world of graph da=
+tabases!
+
+This edition brings together some of the most grounded perspectives on buil=
+ding agents, memory and GraphRAG implementations that hold up in the real w=
+orld.
+I also wanted to take the opportunity to highlight the Essential GraphRAG b=
+ook that you can get for free. Finally, we take a closer look at the AI mem=
+ory gap and hear how GraphRAG, neuro-symbolic AI and graph-based memory add=
+ress core limitations of LLMs.
+
+NODES AI <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvOSa7OobgNsDa-P=
+cwzobz6ZMRzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D>, our global graph-=
+and-AI event, is taking place April 15, and the full agenda with themes lik=
+e Context Graph, GraphRAG, Agents and AI in Production =E2=80=93 register n=
+ow! You can still catch the final Road to NODES workshop events to fulfil y=
+our need for something hands-on!
+
+
+Happy Graphing,=20
+Alexander Erdl
+COMING UP!
+-=20
+
+Livestream: Neo4j Live: NODES AI Agenda with Aura Agents <https://message.n=
+eo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvHKnhVfzIYW8AeUzbwfmfXtbm3W_vzur79tJ3RMN_U=
+LwH1TCkKosqOz2wFNEWD0E2Qs=3D> on April 1
+
+=09-=20
+
+Conferences: Find us at Kubecon Europe, Amsterdam <https://message.neo4j.co=
+m/NzEwLVJSQy0zMzUAAAGgrVARvE19RKp111JNbXp60jyaC_lEuEJtd9dAfs5Y4WU8Uk5209VJR=
+Hb6zI0KXkES6qtTG0g=3D> on March 22-24, All Things AI, Durham <https://messa=
+ge.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFuM4boXo2ipXkQ9pakXkLBR3v9850VbsRacbF=
+Ek9JXsvUlK9ndcR3iPqX_pRfPzHgA=3D> on March 23-24 & MCP Dev Summit, New York=
+ <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvNiVjjyquih5YZ3PlnnAxHj=
+AusBs7fl9tzqLvNuH0l4ich2LQccLfOjEVxt_UNWHHLM=3D> on April 2-3
+
+=09-=20
+
+Meetup: Meet us in Mountain View, US <https://message.neo4j.com/NzEwLVJSQy0=
+zMzUAAAGgrVARvEZ678G9L8LiIktdknB96n_PapSMIfd2LReelHu2Wkh5POFO2uspVCK6nyU5Q5=
+fsTXQ=3D> on March 23, Menlo Park, US <https://message.neo4j.com/NzEwLVJSQy=
+0zMzUAAAGgrVARvCoBQAmzIcbNSK6Mly9bmVzYa5tRLEpwjfx89na-dxThDOlQqLpvEZCP1P7b_=
+waK5IA=3D> on March 24, Amsterdam, NL <https://message.neo4j.com/NzEwLVJSQy=
+0zMzUAAAGgrVARvMf3j0brC2-_hy0lMkgvG3OFabAJ-DsAxwFIdjg9l-VnRxOdbo9NPxyuNYyea=
+qRsRfs=3D> on March 25 & San Francisco, US <https://message.neo4j.com/NzEwL=
+VJSQy0zMzUAAAGgrVARvJLAX0h6arrUJyIUmn9t1XrmG2CG9XYww4Omq-IcauMizBKtaVJQY4Hn=
+Gb4UPhnlmXY=3D> on March 30
+
+=09-=20
+
+All Neo4j Events: Webinars and More <https://message.neo4j.com/NzEwLVJSQy0z=
+MzUAAAGgrVARvPYhYVph6NptT_MfsNEh7PAiJ-Sa703GKL7-RY4HYOadn8_I3OMFEDIo9FtWM3E=
+4Ycc=3D>
+
+=09-=20
+
+GraphSummit Series: Transform Your Enterprise with Graph and GenAI =E2=80=
+=93 Next Stop: Paris <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEf=
+i6pvd61GUtI9YUmN09NXBLH1xmXvefzYgkspW34dlEyi0GyrRAnGpjn715blJYt4=3D> on Apr=
+il 14
+FEATURED COMMUNITY MEMBER: Vincent Koc <https://message.neo4j.com/NzEwLVJSQ=
+y0zMzUAAAGgrVARvLie0_OXS0KRu9oPWKHWCG18Y7NYXtsMt8lXQhdwGY7CNW2RgM1alCkR1JIr=
+y9tBRn0=3D>
+Vincent Koc is an engineering technologist with extensive experience in dat=
+a-driven disciplines. He holds a fellowship at the Institute of Managers an=
+d Leaders Australia, where he serves as a thought leader and mentor to the =
+next generation of data professionals.
+Connect with him on LinkedIn <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAG=
+grVARvLie0_OXS0KRu9oPWKHWCG18Y7NYXtsMt8lXQhdwGY7CNW2RgM1alCkR1JIry9tBRn0=3D=
+>.
+
+
+
+His session at NODES AI <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVAR=
+vOSa7OobgNsDa-Pcwzobz6ZMRzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D> is =
+=E2=80=9CAgent Interaction Graphs: Evaluating Multi-Agent Systems with Grap=
+h-Based Reasoning=E2=80=9D, where he will model agent executions as an inte=
+raction graph in Neo4j and use this knowledge graph, attach evaluations and=
+ run graph queries to pinpoint critical issues, recurring failure points an=
+d bottlenecks based on deep contextual relevancy from a graph.
+<https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvOSa7OobgNsDa-Pcwzobz6ZM=
+Rzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D>
+Useful AI Agent Case Studies: What Actually Works in Production <https://me=
+ssage.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLJ4CMmbxoZjNrS5gDKph7IQmIA_qeon4GJ=
+tNeoXJACZh7va9POp6QtuYKyMITNgjjI=3D>
+
+This article by Jes=C3=BAs Barrasa explores real-world AI agent case studie=
+s, focusing on where agents actually deliver value in production =E2=80=93 =
+especially in workflows that require memory, multi-step reasoning and tool =
+use. It breaks down how context engineering and structured data (such as kn=
+owledge graphs) enable agents to move beyond demos, highlighting lessons le=
+arned from deploying agents in messy, real-world enterprise systems.
+
+
+
+
+Bridging the Gap: Why We Built Perseus to Solve the AI Memory Problem <http=
+s://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvONwKbRJUHUdQtx9k6qoANNIh03wX=
+xh_nMFET4rsH-uWpuAs-0SWdcYoH142td5eoXA=3D>
+
+Charles Borderie looks at the AI memory gap and argues that better memory a=
+rchitectures are essential for trustworthy AI: LLM-based systems struggle w=
+ith reliable reasoning due to a lack of structured, persistent memory. Lett=
+ria introduces its approach of combining knowledge graphs, improved benchma=
+rks and its Perseus SDK to turn unstructured data into structured, queryabl=
+e memory=E2=80=94shifting AI from =E2=80=9Cguessing=E2=80=9D to grounded, e=
+xplainable reasoning
+
+
+
+
+Essential GraphRAG <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvJhNj=
+6AEbwvNdSliVtw7C8A0dqr95khZtVOmHXGYQiZHij8RMSaOqAIBJNXWT7ZdNbU=3D>
+
+Essential GraphRAG by Toma=C5=BE Bratanic and Oskar Hane is a hands-on guid=
+e to building production-ready GraphRAG systems by combining knowledge grap=
+hs with vector retrieval, enabling richer context, better accuracy and impr=
+oved traceability for LLM applications. It walks developers through constru=
+cting graphs from unstructured data, generating Cypher queries from natural=
+ language and designing hybrid, agentic RAG pipelines that go beyond simple=
+ semantic search.
+The ebook is available as a free download!
+
+
+
+
+
+Graph Chat: Neo4j=E2=80=99s Philip Rathle on Neuro-symbolic AI and Infinigr=
+aph <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAgcYKJYZPv5S1II8vs-=
+bfJqcpWEP-a_yWxRwNpitPk4B9n8nVtmQzlkMTELq_446rE=3D>
+
+
+
+In this GraphGeeks video, Amy Hodler and Neo4j CTO Philip Rathle unpack why=
+ the current AI wave is fundamentally a graph moment, not just a vector one=
+. They explore how GraphRAG, neuro-symbolic AI and graph-based memory addre=
+ss core limitations of LLMs=E2=80=94bringing explainability, reasoning and =
+scalable context (via innovations like Infinigraph) to enterprise AI system=
+s.
+CONTINUOUS LEARNING
+-=20
+
+GraphAcademy: Create intelligent AI applications in =E2=80=9CDeveloping wit=
+h Neo4j MCP Tools <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAf0fE=
+9jmteXdnF4E94kBekG9GLYEnX6qRe-niWpHfGq-l9fWqqsWsALDCNjEk1hykg=3D>=E2=80=9C
+
+=09-=20
+
+Learn on Your Schedule: Go deeper into graph technology on Neo4j=E2=80=99s =
+On-Demand webinar library <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrV=
+ARvLiofSGa90GfK8nwampYO-EhM_EXrCWbtN0_ceZRVRnyeiIHYgOHktmDwNtRkzNlkcc=3D>
+
+=09-=20
+
+Workshops: Join our virtual classrooms workshops from Fundamentals to GenAI=
+ <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvPG0lFhDFadLtjBJgclaFJu=
+b4IvIJKBbSAdLFIRFo-GOAAqI3ZcjU_t5koQlL4mGMQo=3D>
+
+=09-=20
+
+New Webinar: Connect the Dots With Context Graphs =E2=80=93 Americas <https=
+://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvHV4h9wjfH_QZoNjLf8nKu0fZjbGBb=
+FlXfGCGZboAJaNPCyWVBpke0qhWI7LaH1QPxM=3D>, Europe, Middle East & Africa <ht=
+tps://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvMC69td9DPlz7Nm_Gc6Fg5ybfCC=
+hMmrLvEyoWvrpLaMfNZdHeEWofbbz4WGHwF8Q1fQ=3D>, Asia Pacific <https://message=
+.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAw3FHlorkNlRON5dfAHFZN7Z3c6QplFmP8NCRYr=
+_yliV8U-_BB1L5b0EaAUAzazI8Y=3D>
+POST OF THE WEEK: Zep AI <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVA=
+RvB_-UyYgaf2ISWewyA2FzGno8RrqODFdAUQvYaovzKqV5T5iK7zKfV3UAU0vbo1BkU8=3D>
+<https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFtHtviBwI5NADN5yhrRWH2V=
+6A7RMR50I_aUhuxklsE-EDBf7jAahvZdVv1XmGqruy8=3D>
+
+
+
+
+Please share it if you like it!
+Neo4j Community Forum
+community.neo4j.com <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvMLk=
+5ldnFxZ70065AwZulAwP_LIHCPEL_G01u8v_sHILc4OFhn5njuN0xFZ-CadMdUY=3D>
+Join the discussion! <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvML=
+k5ldnFxZ70065AwZulAwP_LIHCPEL_G01u8v_sHILc4OFhn5njuN0xFZ-CadMdUY=3D>
+<https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEUXzuU3kXrWQWPxK3fLnFLa=
+Z6aDw-XVO1VhLCPAdba6sDKQ9FeuRWBI_OCJTQGqqAk=3D>    <https://message.neo4j.c=
+om/NzEwLVJSQy0zMzUAAAGgrVARvPlpTdCeo4SlCD66Pwsa7oi2neCmafh4QCnmKdT80naDwIVs=
+7GDKuu1xrLz_WCtc4UQ=3D>    <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgr=
+VARvEQz7hGJ-lKyxpPejbc88c5yx3PkNFsF1dS5QXPd9qlXovkofVtU0AMOtHwChBao8PQ=3D> =
+   <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvBvl3mCrlfYgvNgjb2wNI=
+8mW4At-Y5m2WZ9ZnQ0kADFS3x-qokxml9PGktpEUF97HCY=3D>
+<https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEhTcmSdjrTmXVAhSNyWjxLH=
+385AqM4fwKEd4LVH-ewSmp1bjr5ebt3nN_0lx6bFEzs=3D>
+=C2=A9 2026 Neo4j, Inc.
+ Terms <https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFOb6AYKJtMNjQfg3=
+2Jl4zdWm9NqDW5Q8569-AnOEh5RXny1RrJ4P7X7sEgkrsGyfrY=3D> | Privacy Policy <ht=
+tps://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEbNJFHkqLup3VL7PJ-_QQ4DklK=
+0CXj3tI-1csBy8G-CcYeFs7osZ_5OgXbPPMu1mNM=3D> | Manage Subscriptions <https:=
+//message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLpOtEhKKfzfdfe7JReJxy_QPmaT9B1=
+Pcl9aHN4wZjziNnP9ljdZPbsc9av12ZU0Uvg=3D> | Unsubscribe <https://message.neo=
+4j.com/NzEwLVJSQy0zMzUAAAGgrVARvCboQclXL9tJZH-8wRaZ2jBR__JHwZIDL-g8ewMOJpGA=
+rt1OjfB4B_XgxRMZZ8eGNCU=3D>
+=20
+ 400 Concar Dr, San Mateo, CA 94402
+
+This email was sent to wuliang@xiangzizai.com. If you no longer wish to rec=
+eive these emails you may unsubscribe here: https://go.neo4j.com/Unsubscrib=
+ePage.html?mkt_unsubscribe=3D1&mkt_tok=3DNzEwLVJSQy0zMzUAAAGgrVARvFXvVw6IlG=
+xSJ9dJ4GB5VN7Fm874YL23p2AlCRKioVlnmfB02iBuAcLnw7ANjsQgOa7PrZjavHoX0Q8CCrdAi=
+ASE2VvrT7KA3pXthPkN1Pk.
+
+------=_Part_417454781_2034950909.1774062100930
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-microso=
+ft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office" lang=3D"en"=
+>
+<!-- Built with care by upcraft.io -->
+<head>=20
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+  <o:PixelsPerInch>96</o:PixelsPerInch>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->=20
+<meta charset=3D"UTF-8">=20
+<meta name=3D"x-apple-disable-message-reformatting">=20
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1"=
+>=20
+<meta name=3D"format-detection" content=3D"telephone=3Dno,address=3Dno,emai=
+l=3Dno,date=3Dno,url=3Dno">=20
+<meta name=3D"color-scheme" content=3D"light">=20
+<meta name=3D"supported-color-schemes" content=3D"light">=20
+<!-- START Marketo Variables -->=20
+<!-- Global Variables-->             =20
+<!-- Background Variables-->            =20
+<!-- Content Variables-->                                            =20
+<!-- Button 1 Variables-->      =20
+<!-- Button 2 Variables-->      =20
+<!-- END Marketo Variables -->=20
+<title></title>=20
+<!-- No title needed -->=20
+<style>
+=09=09/* START - WEBFONTS, ALWAYS use import method for email to avoid auto=
+mation tracking issues */
+=09=09@import url('https://fonts.googleapis.com/css2?family=3DPublic+Sans:w=
+ght@200;300;400;500;600;700&amp;display=3Dswap');
+=09=09@import url('https://fonts.googleapis.com/css2?family=3DMontserrat:wg=
+ht@300;400;500;600;700&amp;display=3Dswap');
+=09=09/* END - WEBFONTS, ALWAYS use import method for email to avoid automa=
+tion tracking issues */
+
+=09=09/* START - Universal styles */
+=09=09body {
+=09=09=09margin: 0 !important;
+=09=09=09padding: 0 !important;
+=09=09=09font-family: Arial, sans-serif;
+=09=09=09font-size: 16px;
+=09=09=09color: #181414;
+=09=09=09line-height: 20px;
+=09=09=09-webkit-text-size-adjust: none;
+=09=09=09-ms-text-size-adjust: 100%;
+=09=09}
+
+=09=09img,
+=09=09a img {
+=09=09=09outline: none;
+=09=09=09text-decoration: none;
+=09=09=09border: none;
+=09=09=09-ms-interpolation-mode: bicubic;
+=09=09}
+
+=09=09.imgblock img {
+=09=09=09display: block;
+=09=09}
+
+=09=09.img100,
+=09=09.img100 img {
+=09=09=09width: 100% !important;
+=09=09=09height: auto !important;
+=09=09}
+
+=09=09p {
+=09=09=09margin-top: 0;
+=09=09=09padding-top: 0;
+=09=09}
+
+=09=09a {
+=09=09=09color: #0A6190;
+=09=09}
+
+=09=09/* END - Universal styles  */
+
+=09=09/* START - Mobile universal styles */
+=09=09@media screen and (max-width: 480px) {
+=09=09=09body {
+=09=09=09=09margin: 0 !important;
+=09=09=09=09padding: 0 !important;
+=09=09=09}
+=09=09=09.buttoncenter {float: none !important; margin: 0 auto !important;}
+=09=09=09.t100 {
+=09=09=09=09width: 100% !important;
+=09=09=09=09float: none !important;
+=09=09=09}
+
+=09=09=09.mimg100 img,
+=09=09=09.mimg100 {
+=09=09=09=09width: 100% !important;
+=09=09=09=09height: auto !important;
+=09=09=09}
+
+=09=09=09.mimg50 img,
+=09=09=09.mimg50 {
+=09=09=09=09width: 50% !important;
+=09=09=09=09height: auto !important;
+=09=09=09}
+
+=09=09=09.logoimg {
+=09=09=09=09max-width: 125px !important;
+=09=09=09=09height: auto !important;
+=09=09=09}
+
+=09=09=09.text-center {
+=09=09=09=09text-align: center !important;
+=09=09=09}
+
+=09=09=09.heightauto {
+=09=09=09=09height: auto !important;
+=09=09=09}
+
+=09=09=09.herowidth {
+=09=09=09=09width: 90% !important;
+=09=09=09}
+
+=09=09=09.column {
+=09=09=09=09display: block !important;
+=09=09=09=09width: 100% !important;
+=09=09=09}
+
+=09=09=09.p0 {
+=09=09=09=09padding: 0 !important;
+=09=09=09}
+
+=09=09=09.plr0 {
+=09=09=09=09padding-left: 0 !important;
+=09=09=09=09padding-right: 0 !important;
+=09=09=09}
+
+=09=09=09.pt5 {
+=09=09=09=09padding-top: 5px !important;
+=09=09=09}
+
+=09=09=09.pr5 {
+=09=09=09=09padding-right: 5px !important;
+=09=09=09}
+=09=09=09.pr0 {
+=09=09=09=09padding-right: 0px !important;
+=09=09=09}
+=09=09=09.pl0 {
+=09=09=09=09padding-left: 0px !important;
+=09=09=09}
+
+=09=09=09.pb5 {
+=09=09=09=09padding-bottom: 5px !important;
+=09=09=09}
+
+=09=09=09.pl5 {
+=09=09=09=09padding-left: 5px !important;
+=09=09=09}
+
+=09=09=09.pt10 {
+=09=09=09=09padding-top: 10px !important;
+=09=09=09}
+
+=09=09=09.pr10 {
+=09=09=09=09padding-right: 10px !important;
+=09=09=09}
+
+=09=09=09.pb10 {
+=09=09=09=09padding-bottom: 10px !important;
+=09=09=09}
+
+=09=09=09.pl10 {
+=09=09=09=09padding-left: 10px !important;
+=09=09=09}
+
+=09=09=09.p15 {
+=09=09=09=09padding: 16px !important;
+=09=09=09}
+
+=09=09=09.pt15 {
+=09=09=09=09padding-top: 16px !important;
+=09=09=09}
+
+=09=09=09.pr15 {
+=09=09=09=09padding-right: 16px !important;
+=09=09=09}
+
+=09=09=09.pb15 {
+=09=09=09=09padding-bottom: 16px !important;
+=09=09=09}
+
+=09=09=09.pl15 {
+=09=09=09=09padding-left: 16px !important;
+=09=09=09}
+
+=09=09=09.pt20 {
+=09=09=09=09padding-top: 20px !important;
+=09=09=09}
+
+=09=09=09.pr20 {
+=09=09=09=09padding-right: 20px !important;
+=09=09=09}
+
+=09=09=09.pb20 {
+=09=09=09=09padding-bottom: 20px !important;
+=09=09=09}
+
+=09=09=09.pl20 {
+=09=09=09=09padding-left: 20px !important;
+=09=09=09}
+
+=09=09=09.pt30 {
+=09=09=09=09padding-top: 30px !important;
+=09=09=09}
+
+=09=09=09.pr30 {
+=09=09=09=09padding-right: 30px !important;
+=09=09=09}
+
+=09=09=09.pb30 {
+=09=09=09=09padding-bottom: 30px !important;
+=09=09=09}
+
+=09=09=09.pl30 {
+=09=09=09=09padding-left: 30px !important;
+=09=09=09}
+
+=09=09=09.plr15 {
+=09=09=09=09padding-left: 16px !important;
+=09=09=09=09padding-right: 16px !important;
+=09=09=09}
+
+=09=09=09.mpad {
+=09=09=09=09padding-left: 16px !important;
+=09=09=09=09padding-right: 16px !important;
+=09=09=09}
+=09=09}
+
+=09=09/* END - Mobile universal styles */
+
+=09=09/* START - Webfont fix, keeps Outlook from rendering Times. Loads for=
+ all devices except Outlook. */
+=09=09@media {
+=09=09=09body {
+=09=09=09=09font-family: 'Public Sans', sans-serif !important;
+=09=09=09}
+
+=09=09=09.headlines {
+=09=09=09=09font-family: 'Montserrat', sans-serif !important;
+=09=09=09}
+=09=09}
+
+=09=09/* END - Webfont fix, keeps Outlook from rendering Times. Loads for a=
+ll devices except Outlook. */
+
+
+
+=09=09/* START - Custom CSS */
+
+=09=09/* END -  Custom CSS */
+
+
+=09=09/* START - Custom mobile CSS */
+=09=09@media screen and (max-width: 480px) {}
+
+=09=09/* END -  Custom mobile CSS */
+=09</style>=20
+<!--[if (gte mso 9)|(IE)]>
+<style type=3D"text/css">
+table {
+border-collapse: collapse;
+border-spacing: 0; }
+</style>
+<![endif]-->=20
+<style>
+=09=09/* START - Fix white font Gmail dark mode */
+=09=09u + .body .gmail-blend-screen { background:#000; mix-blend-mode:scree=
+n; }
+=09=09u + .body .gmail-blend-difference { background:#000; mix-blend-mode:d=
+ifference; }
+=09=09/* END - Fix white font Gmail dark mode */
+=09</style>=20
+</head>=20
+<body style=3D"background: #F2EAD4; min-width:100%;" class=3D"body"><style =
+type=3D"text/css">div#emailPreHeader{ display: none !important; }</style><d=
+iv id=3D"emailPreHeader" style=3D"mso-hide:all; visibility:hidden; opacity:=
+0; color:transparent; mso-line-height-rule:exactly; line-height:0; font-siz=
+e:0px; overflow:hidden; border-width:0; display:none !important;">Welcome t=
+o This Week in Neo4j: This Week in Neo4j: AI in Production, Memory, GraphRA=
+G, Architecture and more</div>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 10px" class=3D"p0">=20
+<table role=3D"presentation" width=3D"650" border=3D"0" align=3D"center" ce=
+llpadding=3D"0" cellspacing=3D"0" class=3D"t100" style=3D"width:650px;">=20
+<tbody>=20
+<tr>=20
+<td id=3D"wrapper" style=3D"background: #ffffff; padding: 0;" class=3D"mkto=
+Container">
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"l1l">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"L-1-L" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 16px 0 16px 0;" class=3D"mpad">=20
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" align=3D"none" style=3D"float:none">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"logoimg mktoSnippet" id=3D"lakdafo">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEhTcmSdjrTmXVAhSNyWjxLH=
+385AqM4fwKEd4LVH-ewSmp1bjr5ebt3nN_0lx6bFEzs=3D" target=3D"_blank"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/neo4j_logo2.png" co=
+nstrain=3D"true" imagepreview=3D"false" width=3D"210" height=3D"35"></a>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"hero-bgb">=20
+<tbody>=20
+<tr>=20
+<td background=3D"https://go.neo4j.com/rs/710-RRC-335/images/Group28.png" s=
+tyle=3D"background: url(https://go.neo4j.com/rs/710-RRC-335/images/Group28.=
+png) right; background-size: cover;" width=3D"650" height=3D"271" valign=3D=
+"top">=20
+<!--[if gte mso 9]>
+  <v:rect xmlns:v=3D"urn:schemas-microsoft-com:vml" fill=3D"true" stroke=3D=
+"false" style=3D"width:650px;height:271px;">
+=09<v:fill type=3D"frame" src=3D"https://go.neo4j.com/rs/710-RRC-335/images=
+/Group28.png" color=3D"#333333" />
+=09<v:textbox inset=3D"0,0,0,0">
+  <![endif]-->=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0">=20
+<tbody>=20
+<tr>=20
+<td height=3D"271" style=3D"height: 271px;" valign=3D"middle" class=3D"pt30=
+ pb30">=20
+<table role=3D"presentation" width=3D"91%" border=3D"0" align=3D"center" ce=
+llpadding=3D"0" cellspacing=3D"0" class=3D"herowidth">=20
+<tbody>=20
+<tr>=20
+<td>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 30px; padding-bottom: 20px; line-height:36px; text-=
+align: none; color: #ffffff; font-weight: 600;mso-color-alt:auto;">=20
+<div class=3D"gmail-blend-screen">=20
+<div class=3D"gmail-blend-difference">=20
+<div class=3D"mktoText headlines" id=3D"kdjgsdsfdsd9b">=20
+<div>=20
+<br>=20
+</div>=20
+<div>
+ Neo4j Developer News=20
+<br>=20
+</div>=20
+</div>=20
+</div>=20
+</div></td>=20
+</tr>=20
+<tr>=20
+<td style=3D"font-size: 18px; line-height: 22px; padding-bottom: 20px; text=
+-align: none; color: #ffffff;mso-color-alt:auto;">=20
+<div class=3D"gmail-blend-screen">=20
+<div class=3D"gmail-blend-difference">=20
+<div class=3D"mktoText" id=3D"kdjgw0e9b"></div>=20
+</div>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>=20
+<!--[if gte mso 9]>
+=09</v:textbox>
+  </v:rect>
+  <![endif]--> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdg">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 24px 0 8px 0; font-size: 16px; color: #181414; line-=
+height: 20px;" class=3D"mpad mktoText" id=3D"skgodkd">=20
+<div>=20
+<span style=3D"font-size: 14px;"><a href=3D
+"https://message.neo4j.com/dc/tkdL1LgnFRJjCDlqRdJWrhIKfWh-At2aJYy191DQOeQeu=
+dsGvo0eeMciAl5Pxw_fLNEtNUziuePVJxswUaj-XiDUnIAY7nRFvQnmV1-x7VdssAhP94Qulo65=
+T3XRbEXNSYj1h6mMKXKzExsLXRWzAg=3D=3D/NzEwLVJSQy0zMzUAAAGgrVARvMD2fX_Z-rF8QG=
+b9BvAEBfdZFZJRG1KngL83WdrYL8OCktkZ26xooAQfRDltIMtgQvU=3D" target=3D"_blank"=
+ id=3D""
+>View it in Your Browser</a></span>=20
+</div>=20
+<div>=20
+<br>=20
+</div>=20
+<div>
+ Welcome to This Week in Neo4j, your fix for news from the world of graph d=
+atabases!=20
+<br>=20
+<br>This edition brings together some of the most grounded perspectives on =
+building agents, memory and GraphRAG implementations that hold up in the re=
+al world.=20
+<br>I also wanted to take the opportunity to highlight the Essential GraphR=
+AG book that you can get for free. Finally, we take a closer look at the AI=
+ memory gap and hear how GraphRAG, neuro-symbolic AI and graph-based memory=
+ address core limitations of LLMs.=20
+<br>=20
+<br>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvOSa7OobgNsDa-Pcwzobz6ZM=
+Rzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D" target=3D"_blank" id=3D""
+>NODES AI</a>, our global graph-and-AI event, is taking place April 15, and=
+ the full agenda with themes like Context Graph, GraphRAG, Agents and AI in=
+ Production =E2=80=93 register now! You can still catch the final Road to N=
+ODES workshop events to fulfil your need for something hands-on!=20
+</div>=20
+<div>=20
+<div>=20
+<br>Happy Graphing,=20
+<br>Alexander Erdl=20
+</div>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"iaamg1">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100">=20
+<div class=3D"mktoImg" id=3D"kdfaa929" mktolockimgsize=3D"true" mktolockimg=
+style=3D"true">
+<a><img style=3D"display:block;" alt=3D"image" src=3D"https://go.neo4j.com/=
+rs/710-RRC-335/images/dividergraphic.png" width=3D"650" class=3D"mimg100"><=
+/a>
+</div> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slk2welk">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FCF9F6;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"SH-1-L" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" class=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td class=3D"mpad">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 14px; line-height: 18px; padding: 8px 0 8px 0; text=
+-align: none; color: #181414;" class=3D"mktoText" id=3D"k9ed">=20
+<div>=20
+<span style=3D"font-size: 18px;"><strong>COMING UP!</strong></span>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdg238b3840-754e-42e3-a9c8=
+-10c8fdf55475">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FCF9F6;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 8px 0 8px 0; font-size: 16px; color: #181414; line-h=
+eight: 20px;" class=3D"mpad mktoText" id=3D"skgodkd51e061f6-e2ce-4395-887a-=
+0244e2a92bd2">=20
+<ul>=20
+<li> <p><strong>Livestream:</strong> <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvHKnhVfzIYW8AeUzbwfmfXtb=
+m3W_vzur79tJ3RMN_ULwH1TCkKosqOz2wFNEWD0E2Qs=3D" target=3D"_blank" id=3D""
+>Neo4j Live: NODES AI Agenda with Aura Agents</a> on April 1</p> </li>=20
+<li> <p><strong>Conferences:</strong> Find us at <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvE19RKp111JNbXp60jyaC_lE=
+uEJtd9dAfs5Y4WU8Uk5209VJRHb6zI0KXkES6qtTG0g=3D" target=3D"_blank" id=3D""
+>Kubecon Europe, Amsterdam</a> on March 22-24, <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFuM4boXo2ipXkQ9pakXkLBR=
+3v9850VbsRacbFEk9JXsvUlK9ndcR3iPqX_pRfPzHgA=3D" target=3D"_blank" id=3D""
+>All Things AI, Durham</a> on March 23-24 &amp; <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvNiVjjyquih5YZ3PlnnAxHjA=
+usBs7fl9tzqLvNuH0l4ich2LQccLfOjEVxt_UNWHHLM=3D" target=3D"_blank" id=3D""
+>MCP Dev Summit, New York</a> on April 2-3</p> </li>=20
+<li> <p><strong>Meetup:</strong> Meet us in <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEZ678G9L8LiIktdknB96n_P=
+apSMIfd2LReelHu2Wkh5POFO2uspVCK6nyU5Q5fsTXQ=3D" target=3D"_blank" id=3D""
+>Mountain View, US</a> on March 23, <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvCoBQAmzIcbNSK6Mly9bmVzY=
+a5tRLEpwjfx89na-dxThDOlQqLpvEZCP1P7b_waK5IA=3D" target=3D"_blank" id=3D""
+>Menlo Park, US</a> on March 24, <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvMf3j0brC2-_hy0lMkgvG3OF=
+abAJ-DsAxwFIdjg9l-VnRxOdbo9NPxyuNYyeaqRsRfs=3D" target=3D"_blank" id=3D""
+>Amsterdam, NL</a> on March 25 &amp; <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvJLAX0h6arrUJyIUmn9t1Xrm=
+G2CG9XYww4Omq-IcauMizBKtaVJQY4HnGb4UPhnlmXY=3D" target=3D"_blank" id=3D""
+>San Francisco, US</a> on March 30</p> </li>=20
+<li> <p><strong>All Neo4j Events:</strong> <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvPYhYVph6NptT_MfsNEh7PAi=
+J-Sa703GKL7-RY4HYOadn8_I3OMFEDIo9FtWM3E4Ycc=3D" target=3D"_blank" id=3D""
+>Webinars and More</a></p> </li>=20
+<li> <p><strong>GraphSummit Series:</strong> Transform Your Enterprise with=
+ Graph and GenAI =E2=80=93 Next Stop: <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEfi6pvd61GUtI9YUmN09NXB=
+LH1xmXvefzYgkspW34dlEyi0GyrRAnGpjn715blJYt4=3D" target=3D"_blank" id=3D""
+>Paris</a> on April 14</p> </li>=20
+</ul></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"iaamg1eea17bf3-254f-4564-a5c3-7d11e6f33db7">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100">=20
+<div class=3D"mktoImg" id=3D"kdfaa9292b04a4d2-78ea-4c49-8573-080efe56f18e" =
+mktolockimgsize=3D"true" mktolockimgstyle=3D"true">=20
+<a><img style=3D"display:block;" alt=3D"image" src=3D"https://go.neo4j.com/=
+rs/710-RRC-335/images/dividergraphic-2.png" width=3D"650" class=3D"mimg100"=
+></a>=20
+</div> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slk2welk5896860b-3f87-429f-b57=
+8-730d4c76e578">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"SH-1-L" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" class=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td class=3D"mpad">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 14px; line-height: 18px; padding: 8px 0 8px 0; text=
+-align: none; color: #181414;" class=3D"mktoText" id=3D"k9ed1f2da5ef-303a-4=
+1a9-a8f8-55b249941022">=20
+<div>=20
+<strong><span style=3D"font-size: 18px;">FEATURED COMMUNITY MEMBER: <a href=
+=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLie0_OXS0KRu9oPWKHWCG18=
+Y7NYXtsMt8lXQhdwGY7CNW2RgM1alCkR1JIry9tBRn0=3D" target=3D"_blank" id=3D""
+>Vincent Koc</a></span></strong>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdgafad40bf-2ec5-42ab-9d1e=
+-123c9ca259d3">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 8px 0 8px 0; font-size: 16px; color: #181414; line-h=
+eight: 20px;" class=3D"mpad mktoText" id=3D"skgodkd980e4aec-84c6-4792-aedb-=
+0c648fb11aa5"><p>Vincent Koc is an engineering technologist with extensive =
+experience in data-driven disciplines. He holds a fellowship at the Institu=
+te of Managers and Leaders Australia, where he serves as a thought leader a=
+nd mentor to the next generation of data professionals.</p>=20
+<div>
+ Connect with him on=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLie0_OXS0KRu9oPWKHWCG18=
+Y7NYXtsMt8lXQhdwGY7CNW2RgM1alCkR1JIry9tBRn0=3D" target=3D"_blank" id=3D""
+>LinkedIn</a>.=20
+<div>=20
+<br>=20
+</div>=20
+<div></div>=20
+<div>
+ His session at=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvOSa7OobgNsDa-Pcwzobz6ZM=
+Rzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D" target=3D"_blank" id=3D""
+>NODES AI</a> is =E2=80=9CAgent Interaction Graphs: Evaluating Multi-Agent =
+Systems with Graph-Based Reasoning=E2=80=9D, where he will model agent exec=
+utions as an interaction graph in Neo4j and use this knowledge graph, attac=
+h evaluations and run graph queries to pinpoint critical issues, recurring =
+failure points and bottlenecks based on deep contextual relevancy from a gr=
+aph.=20
+</div>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"img1eae65e4e-8db9-4725-81cc-254f7b20372e">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100 mktoText" id=3D"lakdfo43c022c1-9=
+ad3-4c68-8771-86d4111a3e39">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvOSa7OobgNsDa-Pcwzobz6ZM=
+Rzg7cTTHRrRKaSkPzXzGeRnFG38Fe32T73qMFQ_5gv0=3D" target=3D"_blank"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/Twin4j 260321 - Spe=
+aker.png?version=3D0" alt=3D"image" width=3D"650" height=3D"330" style=3D"d=
+isplay: block;" constrain=3D"true" imagepreview=3D"false"></a>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdg847124c2-ae2c-44b3-a82f=
+-ada1d6fca708">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 24px 0 8px 0; font-size: 16px; color: #181414; line-=
+height: 20px;" class=3D"mpad mktoText" id=3D"skgodkd08193054-aa8a-473e-8aa7=
+-9d9ae53bf80d"><p><strong><span style=3D"font-size: 18px;"><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLJ4CMmbxoZjNrS5gDKph7IQ=
+mIA_qeon4GJtNeoXJACZh7va9POp6QtuYKyMITNgjjI=3D" target=3D"_blank" id=3D""
+>Useful AI Agent Case Studies: What Actually Works in Production</a></span>=
+</strong></p> <p>This article by Jes=C3=BAs Barrasa explores real-world AI =
+agent case studies, focusing on where agents actually deliver value in prod=
+uction =E2=80=93 especially in workflows that require memory, multi-step re=
+asoning and tool use. It breaks down how context engineering and structured=
+ data (such as knowledge graphs) enable agents to move beyond demos, highli=
+ghting lessons learned from deploying agents in messy, real-world enterpris=
+e systems.<br><br></p>=20
+<div>=20
+<p><strong><span style=3D"font-size: 18px;"><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvONwKbRJUHUdQtx9k6qoANNI=
+h03wXxh_nMFET4rsH-uWpuAs-0SWdcYoH142td5eoXA=3D" target=3D"_blank" id=3D""
+>Bridging the Gap: Why We Built Perseus to Solve the AI Memory Problem</a><=
+/span></strong></p>=20
+<p>Charles Borderie looks at the AI memory gap and argues that better memor=
+y architectures are essential for trustworthy AI: LLM-based systems struggl=
+e with reliable reasoning due to a lack of structured, persistent memory. L=
+ettria introduces its approach of combining knowledge graphs, improved benc=
+hmarks and its Perseus SDK to turn unstructured data into structured, query=
+able memory=E2=80=94shifting AI from =E2=80=9Cguessing=E2=80=9D to grounded=
+, explainable reasoning<br><br></p>=20
+<div>=20
+<p><strong><span style=3D"font-size: 18px;"><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvJhNj6AEbwvNdSliVtw7C8A0=
+dqr95khZtVOmHXGYQiZHij8RMSaOqAIBJNXWT7ZdNbU=3D" target=3D"_blank" id=3D""
+>Essential GraphRAG</a></span></strong></p>=20
+<p>Essential GraphRAG by Toma=C5=BE Bratanic and Oskar Hane is a hands-on g=
+uide to building production-ready GraphRAG systems by combining knowledge g=
+raphs with vector retrieval, enabling richer context, better accuracy and i=
+mproved traceability for LLM applications. It walks developers through cons=
+tructing graphs from unstructured data, generating Cypher queries from natu=
+ral language and designing hybrid, agentic RAG pipelines that go beyond sim=
+ple semantic search.</p>=20
+<div>
+ The ebook is available as a free download!=20
+<br>=20
+<br>=20
+<div>=20
+<p><br><span style=3D"font-size: 18px;"><strong><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAgcYKJYZPv5S1II8vs-bfJq=
+cpWEP-a_yWxRwNpitPk4B9n8nVtmQzlkMTELq_446rE=3D" target=3D"_blank" id=3D""
+>Graph Chat: Neo4j=E2=80=99s Philip Rathle on Neuro-symbolic AI and Infinig=
+raph</a></strong></span><br></p>=20
+<div>=20
+<p>In this GraphGeeks video, Amy Hodler and Neo4j CTO Philip Rathle unpack =
+why the current AI wave is fundamentally a graph moment, not just a vector =
+one. They explore how GraphRAG, neuro-symbolic AI and graph-based memory ad=
+dress core limitations of LLMs=E2=80=94bringing explainability, reasoning a=
+nd scalable context (via innovations like Infinigraph) to enterprise AI sys=
+tems.</p>=20
+</div>=20
+</div>=20
+</div>=20
+</div>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"iaamg157139cb0-3ad6-4fa2-be27-d28db5c6ce53">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100">=20
+<div class=3D"mktoImg" id=3D"kdfaa9294e39905b-dd0a-4e17-b6e0-066eaa988067" =
+mktolockimgsize=3D"true" mktolockimgstyle=3D"true">=20
+<a><img style=3D"display:block;" alt=3D"image" src=3D"https://go.neo4j.com/=
+rs/710-RRC-335/images/dividergraphic.png" width=3D"650" class=3D"mimg100"><=
+/a>=20
+</div> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slk2welk736c2830-04ec-4389-b36=
+9-5d3bd1e9b285">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FCF9F6;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"SH-1-L" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" class=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td class=3D"mpad">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 14px; line-height: 18px; padding: 8px 0 8px 0; text=
+-align: none; color: #181414;" class=3D"mktoText" id=3D"k9ed19fd2dc9-0a68-4=
+88e-a323-64d637ad1870">=20
+<div>=20
+<strong><span style=3D"font-size: 18px;">CONTINUOUS LEARNING</span></strong=
+>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdg7fe139cb-8c64-4663-a910=
+-122eded8c9ea">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FCF9F6;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 8px 0 8px 0; font-size: 16px; color: #181414; line-h=
+eight: 20px;" class=3D"mpad mktoText" id=3D"skgodkd6ec2814d-5e8e-469a-a5f7-=
+f74a5c956b80">=20
+<ul>=20
+<li> <p><strong>GraphAcademy:</strong> Create intelligent AI applications i=
+n =E2=80=9C<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAf0fE9jmteXdnF4E94kBekG=
+9GLYEnX6qRe-niWpHfGq-l9fWqqsWsALDCNjEk1hykg=3D" target=3D"_blank" id=3D""
+>Developing with Neo4j MCP Tools</a>=E2=80=9C</p> </li>=20
+<li> <p><strong>Learn on Your Schedule:</strong> Go deeper into graph techn=
+ology on Neo4j=E2=80=99s <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLiofSGa90GfK8nwampYO-Eh=
+M_EXrCWbtN0_ceZRVRnyeiIHYgOHktmDwNtRkzNlkcc=3D" target=3D"_blank" id=3D""
+>On-Demand webinar library</a></p> </li>=20
+<li> <p><strong>Workshops:</strong> Join our virtual classrooms workshops <=
+a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvPG0lFhDFadLtjBJgclaFJub=
+4IvIJKBbSAdLFIRFo-GOAAqI3ZcjU_t5koQlL4mGMQo=3D" target=3D"_blank" id=3D""
+>from Fundamentals to GenAI</a></p> </li>=20
+<li> <p><strong>New Webinar:</strong> Connect the Dots With Context Graphs =
+=E2=80=93 <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvHV4h9wjfH_QZoNjLf8nKu0f=
+ZjbGBbFlXfGCGZboAJaNPCyWVBpke0qhWI7LaH1QPxM=3D" target=3D"_blank" id=3D""
+>Americas</a>, <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvMC69td9DPlz7Nm_Gc6Fg5yb=
+fCChMmrLvEyoWvrpLaMfNZdHeEWofbbz4WGHwF8Q1fQ=3D" target=3D"_blank" id=3D""
+>Europe, Middle East &amp; Africa</a>, <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvAw3FHlorkNlRON5dfAHFZN7=
+Z3c6QplFmP8NCRYr_yliV8U-_BB1L5b0EaAUAzazI8Y=3D" target=3D"_blank" id=3D""
+>Asia Pacific</a></p> </li>=20
+</ul></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"iaamg194dd6558-c620-4f51-82b3-4b4b95dfcb80">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100">=20
+<div class=3D"mktoImg" id=3D"kdfaa9298dc37bea-5c51-4e58-990c-6dbcabbf9054" =
+mktolockimgsize=3D"true" mktolockimgstyle=3D"true">=20
+<a><img style=3D"display:block;" alt=3D"image" src=3D"https://go.neo4j.com/=
+rs/710-RRC-335/images/dividergraphic-2.png" width=3D"650" class=3D"mimg100"=
+></a>=20
+</div> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slk2welkc743edef-f866-4496-a7f=
+2-a8641d815e1b">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"SH-1-L" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td>=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0" class=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td class=3D"mpad">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 14px; line-height: 18px; padding: 8px 0 8px 0; text=
+-align: none; color: #181414;" class=3D"mktoText" id=3D"k9ed4dbf8ff4-1b45-4=
+ebb-9258-a9dc292eb786">=20
+<div>=20
+<strong><span style=3D"font-size: 18px;">POST OF THE WEEK: <a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvB_-UyYgaf2ISWewyA2FzGno=
+8RrqODFdAUQvYaovzKqV5T5iK7zKfV3UAU0vbo1BkU8=3D" target=3D"_blank" id=3D""
+>Zep AI</a></span></strong>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slkgsdg5a1b94e6-5e33-4882-b121=
+-06d51bcf2f13">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #FFFFFF;">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"CS-2" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td style=3D" padding: 8px 0 24px 0; font-size: 16px; color: #181414; line-=
+height: 20px;" class=3D"mpad mktoText" id=3D"skgodkd7ab34cd3-67af-444e-bc3a=
+-428c215b5b0c">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFtHtviBwI5NADN5yhrRWH2V=
+6A7RMR50I_aUhuxklsE-EDBf7jAahvZdVv1XmGqruy8=3D" target=3D"_blank"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/Twin4j 260321 - Pos=
+t.png?version=3D0" constrain=3D"true" imagepreview=3D"false" style=3D"displ=
+ay: block; margin-left: auto; margin-right: auto;" width=3D"70%" height=3D"=
+70%"></a>=20
+</div>=20
+<div>=20
+<br>=20
+</div>=20
+<div>=20
+<br>=20
+</div>=20
+<div>
+ Please share it if you like it!=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"iaamg1f5cb6a10-9f02-40f3-a945-7200e6c926ae">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 0;" class=3D"mimg100">=20
+<div class=3D"mktoImg" id=3D"kdfaa9294cad84a8-e468-4a9b-907e-0ad3021b3026" =
+mktolockimgsize=3D"true" mktolockimgstyle=3D"true">=20
+<a><img style=3D"display:block;" alt=3D"image" src=3D"https://go.neo4j.com/=
+rs/710-RRC-335/images/dividergraphic.png" width=3D"650" class=3D"mimg100"><=
+/a>=20
+</div> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width: 650px" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"gaddggf">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 30px; background: #FCF9F6" class=3D"mpad">=20
+<table role=3D"presentation" width=3D"590" style=3D"width:590px;" align=3D"=
+center" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" class=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background:#02507B; border-radius:8px;">=20
+<table role=3D"presentation" width=3D"285" style=3D"width: 285px; float: le=
+ft" border=3D"0" align=3D"left" cellpadding=3D"0" cellspacing=3D"0" class=
+=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td height=3D"127" style=3D"height: 127px; padding: 0 0 0 30px;" class=3D"h=
+eightauto pt30 pb15 pl0">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"font-size: 20px; line-height: 26px; font-weight: 600; color: #=
+ffffff;" class=3D"mktoText headlines text-center mpad" id=3D"kdjqq9">=20
+<div>=20
+<span style=3D"font-size: 18px;"><br>Neo4j Community Forum</span>=20
+</div>=20
+<div>=20
+<span style=3D"font-size: 14px; color: #ffffff;"><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEVrDMWgM8A4uPJ8pJCc8ui2=
+TQDG4RucVmS19U50wKI9vqLTICxNpUXyiEfUUkwZ5ts=3D" target=3D"_blank" title=3D"=
+Neo4j Community Forum" style=3D"text-decoration: none; color: #ffffff;"
+>community.neo4j.com</a></span>=20
+</div>=20
+<div>=20
+<br>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>=20
+<table role=3D"presentation" width=3D"275" style=3D"width: 275px; float: ri=
+ght" border=3D"0" align=3D"right" cellpadding=3D"0" cellspacing=3D"0" class=
+=3D"t100">=20
+<tbody>=20
+<tr>=20
+<td style=3D"text-align: center; font-size: 14px; line-height: 18px; ">=20
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td height=3D"127" style=3D"height: 127px; padding: 0 30px 0 0; text-align:=
+right;" class=3D"heightauto pb30 pr0 text-center">=20
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" style=3D"float:right;" class=3D"buttoncenter">=20
+<tbody>=20
+<tr>=20
+<td align=3D"center" class=3D"cta mktoText" id=3D"skadttksld2" style=3D"bac=
+kground-color:#8FE3E8;font-size:14px;text-align:center;-webkit-text-size-ad=
+just:none; padding: 11px 25px 11px 25px; border-radius:50px; font-weight:bo=
+ld;">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEVrDMWgM8A4uPJ8pJCc8ui2=
+TQDG4RucVmS19U50wKI9vqLTICxNpUXyiEfUUkwZ5ts=3D" style=3D"color: #064163; te=
+xt-decoration: none;" target=3D"_blank" title=3D"Neo4j Community Forum"
+>Join the discussion!</a>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table></td>=20
+</tr>=20
+</tbody>=20
+</table></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100 mkto=
+Module" id=3D"s1">=20
+<tbody>=20
+<tr>=20
+<td style=3D"padding: 16px 0 16px 0; background: #F5F5F5; font-size: 12px; =
+line-height: 16px;" class=3D"plr15">=20
+<table role=3D"presentation" width=3D"160" style=3D"width:160px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0">=20
+<tbody>=20
+<tr>=20
+<td style=3D"text-align: center;" class=3D"mktoSnippet" id=3D"ogiw2">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEUXzuU3kXrWQWPxK3fLnFLa=
+Z6aDw-XVO1VhLCPAdba6sDKQ9FeuRWBI_OCJTQGqqAk=3D"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/upct-linkedin.png" =
+alt=3D"LinkedIn" width=3D"28" height=3D"28"></a> &nbsp;=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvPlpTdCeo4SlCD66Pwsa7oi2=
+neCmafh4QCnmKdT80naDwIVs7GDKuu1xrLz_WCtc4UQ=3D"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/upct-twitter.png" a=
+lt=3D"twitter" width=3D"28" height=3D"28"></a> &nbsp;=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEQz7hGJ-lKyxpPejbc88c5y=
+x3PkNFsF1dS5QXPd9qlXovkofVtU0AMOtHwChBao8PQ=3D"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/upct-facebook.png" =
+alt=3D"Facebook" width=3D"28" height=3D"28"></a> &nbsp;=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvBvl3mCrlfYgvNgjb2wNI8mW=
+4At-Y5m2WZ9ZnQ0kADFS3x-qokxml9PGktpEUF97HCY=3D"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/upct-youtube.png" a=
+lt=3D"YouTube" width=3D"28" height=3D"28"></a>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" class=3D"mktoModule" id=3D"slwsdgk">=20
+<tbody>=20
+<tr>=20
+<td style=3D"background: #F2EAD4;">=20
+<table role=3D"presentation" width=3D"650" style=3D"width:650px;" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" class=3D"t100" id=
+=3D"F-3" mktoname=3D"Module">=20
+<tbody>=20
+<tr>=20
+<td valign=3D"top" class=3D"mpad" style=3D"padding: 16px 0 16px 0;">=20
+<table role=3D"presentation" border=3D"0" align=3D"right" cellpadding=3D"0"=
+ cellspacing=3D"0" class=3D"t100" style=3D"float:right;">=20
+<tbody>=20
+<tr>=20
+<td style=3D"text-align: center;" class=3D"pb5 mktoSnippet logoimg" id=3D"l=
+akdfogk">=20
+<div>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEhTcmSdjrTmXVAhSNyWjxLH=
+385AqM4fwKEd4LVH-ewSmp1bjr5ebt3nN_0lx6bFEzs=3D" target=3D"_blank"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/Logo_FullColor_CMYK=
+_TransBG2.png" alt=3D"logo" width=3D"80" constrain=3D"true" imagepreview=3D=
+"false"></a>=20
+</div></td>=20
+</tr>=20
+</tbody>=20
+</table>=20
+<table role=3D"presentation" width=3D"365" style=3D"width:365px; float:left=
+;" border=3D"0" align=3D"left" cellpadding=3D"0" cellspacing=3D"0" class=3D=
+"t100">=20
+<tbody>=20
+<tr>=20
+<td style=3D"text-align: left; font-size: 12px; line-height: 16px;" class=
+=3D"text-center mktoSnippet" id=3D"kdfjwe9">=20
+<div>
+ =C2=A9 2026 Neo4j, Inc.=20
+<br>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvFOb6AYKJtMNjQfg32Jl4zdW=
+m9NqDW5Q8569-AnOEh5RXny1RrJ4P7X7sEgkrsGyfrY=3D" style=3D"color: #0a6190;"
+>Terms</a> |=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvEbNJFHkqLup3VL7PJ-_QQ4D=
+klK0CXj3tI-1csBy8G-CcYeFs7osZ_5OgXbPPMu1mNM=3D" style=3D"color: #0a6190;"
+>Privacy Policy</a> |=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvLpOtEhKKfzfdfe7JReJxy_Q=
+PmaT9B1Pcl9aHN4wZjziNnP9ljdZPbsc9av12ZU0Uvg=3D" style=3D"color: #0a6190;" r=
+el=3D"nofollow,noreferrer"
+>Manage Subscriptions</a>&nbsp;|=20
+<span style=3D"color: #0a6190;"><a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvCboQclXL9tJZH-8wRaZ2jBR=
+__JHwZIDL-g8ewMOJpGArt1OjfB4B_XgxRMZZ8eGNCU=3D" target=3D"_blank" id=3D"" s=
+tyle=3D"color: #0a6190;"
+>Unsubscribe</a></span>=20
+<br>=20
+<br> 400 Concar Dr, San Mateo, CA 94402=20
+<br>=20
+</div>=20
+<!--https://go.neo4j.com/UnsubscribePage.html?mkt_unsubscribe=3D1&mkt_tok=
+=3DNzEwLVJSQy0zMzUAAAGgrVARvFXvVw6IlGxSJ9dJ4GB5VN7Fm874YL23p2AlCRKioVlnmfB0=
+2iBuAcLnw7ANjsQgOa7PrZjavHoX0Q8CCrdAiASE2VvrT7KA3pXthPkN1Pk--></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table></td>=20
+</tr>=20
+</tbody>=20
+</table> </td>=20
+</tr>=20
+</tbody>=20
+</table>=20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvKslIp89EQnU3kKJj_Q0MluV=
+qM8jeqcqD9-k6rVYN5f0Z6DAmq8V5f0Y22VG9vd1HWA=3D"
+><img src=3D"https://go.neo4j.com/rs/710-RRC-335/images/pixel_tp.png" style=
+=3D"display:block;"></a> =20
+<a href=3D
+"https://message.neo4j.com/NzEwLVJSQy0zMzUAAAGgrVARvIZXW9Q6HCffRX4r6DRnaG5F=
+mi1ZqtNJ3nn2CXZuYSYMc5G7Co_nqGSLEPWwxKizJFM=3D"
+></a>
+<img src=3D"https://message.neo4j.com/trk?t=3D1&mid=3DNzEwLVJSQy0zMzUAAAGgr=
+VARvOsU2-ZtyB-qu_VQd9NibnkSi0lhi90WE5UiOSB3mB3u3IkdhBM3ykhGGk5q-nQ1KGbuzyV4=
+mj_Bx8t-bp8z5Hrc4f_wN5jcf_uAv_TXJjEZRPX7XCJOdW_2fKbOc7-RiGVeFtT9e6BN35r5lq0=
+" width=3D"1" height=3D"1" style=3D"display:none !important;" alt=3D"" />
+</body>
+</html>
+------=_Part_417454781_2034950909.1774062100930--

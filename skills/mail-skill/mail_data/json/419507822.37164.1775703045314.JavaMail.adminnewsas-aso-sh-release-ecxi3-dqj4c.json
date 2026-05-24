@@ -1,0 +1,176 @@
+{
+  "message_id": "<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>",
+  "imap_uid": "3028",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "云安全中心安全运营报告 2026-04-09",
+  "sender": "report@sas.notice.aliyun.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-09T10:50:45+08:00",
+  "body_text": "安全报告\n(\n单账号视角\n)\n报告周期：\n2026年4月2日 00:00:00\n～\n2026年4月8日 23:59:59\n数据截止：\n2026年4月8日 23:59:59\n账户UID：\n1235686433406205\n报告概览\n本次报告统计了 1235686433406205 等共 1 个账号下全部资产信息。统计数据周期为 2026年4月2日 00:00:00 \r\n 至 2026年4月8日 23:59:59 。\n在当前统计周期内，\n整体安全评分达到了\n88\n分，\n资产管理\n-\n接入主机资产\n-\n接入云产品\n-\n清理主机\n-\n清理主机\n-\n风险加固\n-\n收敛公网暴露资产\n-\n已启用核心功能\n16\n修复弱口令\n-\n修复系统漏洞\n-\n修复基线风险\n-\n修复云产品配置风险\n-\n检测及防护\n-\n防御网络攻击\n-\n防御恶意进程\n-\n病毒扫描\n-\n基线检测\n-\n云产品配置检查\n-\n事件处置\n-\n处理告警\n-\n处理AK泄漏事件\n-\n响应应急漏洞总数\n-\n安全评分\n88\n分\n1. 立即检测并修复 152 个应急漏洞，优先处理高危 CVE 漏洞。\n2. 处理 10 个紧急告警（如进程异常行为类）和 30 个可疑告警（含恶意软件、异常登录等）。\n3. 检查 Linux 系统登录弱口令检查项，虽当前无主机命中，但仍需确保 1 项基线检查覆盖到位。\n4. 关注进程异常行为告警共 32 起，为最高频风险，建议核查可疑进程并加固主机权限配置。\n大模型总结：\n安全评分稳定在 88 分，未发生波动；当前存在 3 条扣分项，主要因 152 个未检测应急漏洞、10 个未处理紧急告警及 30 个未处理可疑告警，合计扣分 12 分。\n核心功能状态\n应用防护功能\n已启用\n客户端自保护\n已启用\n防病毒功能\n已启用\n日志分析\n已启用\n执行镜像安全扫描\n已启用\n防勒索诱饵目录\n已启用\n防篡改功能\n已启用\n基线检查周期策略\n已启用\n恶意网络行为防御\n已启用\n云安全中心服务授权\n已启用\n云产品配置风险周期策略\n已启用\n镜像安全扫描配置\n已启用\n病毒防御扫描功能\n已启用\n容器威胁检测功能\n已启用\n漏洞扫描周期策略\n已启用\n防勒索功能\n已启用\n资产概览\n接入主机资产总数\n0\n接入云产品总数\n0\n安装客户端总数\n0\n清理资产数\n0\n暴露资产数\n0\n资产盘点\n主机\n当前主机\n1\n台\n未防护\n0\n台\n新增\n0\n台\n客户端\n当前客户端\n1\n台\n未防护\n0\n台\n新增\n0\n台\n容器\n当前容器\n0\n集群\n未防护\n0\n集群\n新增\n0\n集群\n云产品\n当前云产品\n1061\n个\n未防护\n0\n个\n新增\n0\n个\n暴露资产变化趋势\n风险资产变化趋势\n环比风险资产占比趋势\n弱口令风险概览\n本周期修复弱口令数\n0\n当前未修复弱口令数\n0\n本周期处置率\n0\n本期新增弱口令数\n0\n基线检查项名称列表\nTOP基线检查项名称\n影响资产数\n1\n弱口令-Linux系统登录弱口令检查\n0\n台\nNaN\n基线风险概览\n本周期处置基线风险数\n0\n0\n0\n0\n本周期处置率\n0%\n当前未处置基线风险数\n0\n0\n0\n0\n本期新增基线风险数\n0\n基线风险变化趋势\n基线风险响应趋势\n漏洞风险概览\n本周期处置漏洞数\n0\n0\n0\n0\n本周期处置率\n0%\n当前未处置漏洞数\n0\n0\n0\n0\n本期新增漏洞数\n0\nLinux软件漏洞列表\n漏洞名称\n影响主机数\n没有查询到符合条件的记录\nWindows系统漏洞列表\n漏洞名称\n影响主机数\n没有查询到符合条件的记录\n应用漏洞列表\n漏洞名称\n影响主机数\n没有查询到符合条件的记录\n应急漏洞列表\n漏洞名称\n影响主机数\n没有查询到符合条件的记录\n漏洞风险变化趋势\n漏洞风险响应趋势\n攻击分析概览\n本周期防御攻击总数\n0\n累计防御攻击总数\n0\n本周期云安全中心防御攻击数\n0\n本周期Web应用防火墙防御攻击数\n0\n攻击分析防御趋势\n安全告警分类统计\n安全告警概览\n本周期处置告警数\n0\n0\n0\n0\n本周期处置率\n0%\n当前未处置告警数\n0\n0\n0\n0\n本期新增告警数\n0\n累计发现告警数\n0\n安全告警变化趋势\n安全告警变化趋势\n应用防护概览\n本周期监控攻击数\n0\n本周期阻断攻击数\n0\n待防御漏洞数\n0\n已防御应用漏洞数\n0\n应用防护攻击监控趋势\n应用防护阻断攻击趋势\n应用防护防御漏洞TOP5\nTOP漏洞名称\n防御次数\n没有查询到符合条件的记录\n网页防篡改风险概览\n本周期监控攻击数\n0\n本周期阻断攻击数\n0\n累计监控攻击数\n0\n累计阻断攻击数\n0\n网页防篡改告警变化趋势\n网页防篡改阻断事件趋势\n云安全态势管理概览\n本周期处置风险数\n0\n0\n0\n0\n本周期处置率\n0%\n同比\n↓\n13.9%\n当前未处置风险数\n7\n0\n3\n4\n本期新增风险数\n0\n检查次数\n0\n云安全态势管理变化趋势\n云安全态势管理响应趋势\n云蜜罐风险概览\n本周期处置风险数\n0\n0\n0\n0\n本周期处置率\n0%\n当前未处理事件数\n0\n0\n0\n0\n本周期新增风险数\n0\n云蜜罐风险变化趋势\n云蜜罐风险响应趋势\nAK泄露检测\n发现时间\n账户类型\n账户名称\n泄漏AK\n情报来源\nGitHub用户名\n没有查询到符合条件的记录\n安全建议（大模型）\n报告概览\n1. 本周期内，网络攻击防御数量为 0 次，安全分保持在 88 分，与上一周期相同，表明当前整体安全态势平稳，无新增攻击事件影响。\n2. 安全告警总数为 0，但安全告警分类统计中显示存在进程异常行为（32 次）、恶意软件（7 次）、异常登录（2 次）和恶意脚本（1 次）等告警类型，说明部分告警未归入标准风险计数，需关注真实威胁线索。\n3. 云安全态势管理检测到风险总数为 7 个（含低危 4 个、中危 3 个），上一周期新增风险 36 个，已处置 5 个，表明云平台配置类风险持续存在，需加强闭环管理。\n4. 资产盘点显示共纳管云资产 1061 个，但安装客户端数量为 0，主机资产总数为 1 台且未安装客户端，导致大部分防护能力（如防病毒、防篡改、漏洞扫描等）无法生效，是当前核心风险根源。\n加固建议\n1. 当前安装客户端数量为 0，所有主机均未部署安全客户端，导致应用防护、防病毒、防勒索、基线检查等核心能力完全失效，建议立即为全部 1 台主机及关键云资产部署并启用客户端。\n2. 云安全态势管理发现 7 个风险（低危 4 个、中危 3 个），TOP 风险类型集中在云平台配置不合规，建议依据云平台配置检查周期策略，对高风险配置项（如OSS公开读写、RDS弱密码、ECS密钥泄露等）开展专项修复。\n3. 安全告警分类中“进程异常行为”达 32 次，为最高频告警项，可能反映隐蔽驻留或横向移动行为，建议结合日志分析功能深入溯源，排查是否存在未授权进程或可疑父进程链。\n4. 基线检查项“弱口令-Linux系统登录弱口令检查”虽当前告警数为 0，但检查覆盖仅 1 项（checkCount 为 1），说明基线覆盖严重不足，建议扩展基线检查范围并启用全部检查项。\n核心功能状态",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "img-w3dd2rewh-mnqvqs11.png",
+      "content_type": "image/png",
+      "size": 6140,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-w3dd2rewh-mnqvqs11.png"
+    },
+    {
+      "filename": "img-yuo1oix4r-mnqvqs1c.png",
+      "content_type": "image/png",
+      "size": 12951,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-yuo1oix4r-mnqvqs1c.png"
+    },
+    {
+      "filename": "img-bjcwz4i9a-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 12843,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-bjcwz4i9a-mnqvqs17.png"
+    },
+    {
+      "filename": "img-vrzlhj85e-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 15925,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-vrzlhj85e-mnqvqs17.png"
+    },
+    {
+      "filename": "img-y4yypjpt2-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 14205,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-y4yypjpt2-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-u0h6p8xng-mnqvqs1a.png",
+      "content_type": "image/png",
+      "size": 13726,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-u0h6p8xng-mnqvqs1a.png"
+    },
+    {
+      "filename": "img-epc19tbuv-mnqvqs1g.png",
+      "content_type": "image/png",
+      "size": 19197,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-epc19tbuv-mnqvqs1g.png"
+    },
+    {
+      "filename": "img-u9wendt8c-mnqvqs19.png",
+      "content_type": "image/png",
+      "size": 13726,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-u9wendt8c-mnqvqs19.png"
+    },
+    {
+      "filename": "img-2npetlui0-mnqvqs18.png",
+      "content_type": "image/png",
+      "size": 15943,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-2npetlui0-mnqvqs18.png"
+    },
+    {
+      "filename": "img-ehro40g93-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 13685,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-ehro40g93-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-x6r0g5qmw-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 13500,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-x6r0g5qmw-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-qde3vj8uj-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 12465,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-qde3vj8uj-mnqvqs17.png"
+    },
+    {
+      "filename": "img-ak7kb2rau-mnqvqs19.png",
+      "content_type": "image/png",
+      "size": 12672,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-ak7kb2rau-mnqvqs19.png"
+    },
+    {
+      "filename": "img-gwy0zbcgl-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 24589,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-gwy0zbcgl-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-8993btv8t-mnqvqs1f.png",
+      "content_type": "image/png",
+      "size": 12743,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-8993btv8t-mnqvqs1f.png"
+    },
+    {
+      "filename": "img-oc44ohpiw-mnqvqs1a.png",
+      "content_type": "image/png",
+      "size": 17786,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-oc44ohpiw-mnqvqs1a.png"
+    },
+    {
+      "filename": "img-rczw8ci2r-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 12545,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-rczw8ci2r-mnqvqs17.png"
+    },
+    {
+      "filename": "img-z8f36prg9-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 12758,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-z8f36prg9-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-pqa80tjyn-mnqvqs1b.png",
+      "content_type": "image/png",
+      "size": 13711,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-pqa80tjyn-mnqvqs1b.png"
+    },
+    {
+      "filename": "img-rf58z1xv9-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 12461,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-rf58z1xv9-mnqvqs17.png"
+    },
+    {
+      "filename": "img-97j65dp9x-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 18899,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-97j65dp9x-mnqvqs17.png"
+    },
+    {
+      "filename": "img-nykj8k0sh-mnqvqs1g.png",
+      "content_type": "image/png",
+      "size": 13726,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-nykj8k0sh-mnqvqs1g.png"
+    },
+    {
+      "filename": "img-xaa305ogk-mnqvqs1g.png",
+      "content_type": "image/png",
+      "size": 13726,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-xaa305ogk-mnqvqs1g.png"
+    },
+    {
+      "filename": "img-hq7p8r02i-mnqvqs1g.png",
+      "content_type": "image/png",
+      "size": 12970,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-hq7p8r02i-mnqvqs1g.png"
+    },
+    {
+      "filename": "img-wswiusg0f-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 11618,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-wswiusg0f-mnqvqs17.png"
+    },
+    {
+      "filename": "img-3n0qr7je9-mnqvqs17.png",
+      "content_type": "image/png",
+      "size": 16147,
+      "local_path": "./mail_data/attachments/<419507822.37164.1775703045314.JavaMail.admin@newsas-aso-sh-release-ecxi3-dqj4c>/img-3n0qr7je9-mnqvqs17.png"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/419507822.37164.1775703045314.JavaMail.adminnewsas-aso-sh-release-ecxi3-dqj4c.eml"
+}

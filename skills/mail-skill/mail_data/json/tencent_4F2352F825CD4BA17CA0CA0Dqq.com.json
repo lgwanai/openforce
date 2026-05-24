@@ -1,0 +1,28 @@
+{
+  "message_id": "<tencent_4F2352F825CD4BA17CA0CA0D@qq.com>",
+  "imap_uid": "3142",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "回复：【AI CAMP】Copilot演示案例流程-补充数据表",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "jiayang.liu@bmw-brilliance.cn",
+  "cc": "sue@woshipm.com, wuliang@xiangzizai.com",
+  "date": "2026-04-22T11:10:03+08:00",
+  "body_text": "&nbsp;Dear Adah,\r\n\r\n\r\nAdah老师，copilot演示Excel的时候会用到一个上传的文件，辛苦您在附件中下载。\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n\r\n\r\n\r\n                    杨雨鑫<daisy_yang@woshipm.com&gt;&nbsp;在 2026年4月22日 周三 10:58 写道：\r\n\r\n Dear Adah，\r\n\r\n\r\n附件为copilot演示的流程与PPT，辛苦您按流程操作后截一下效果图邮件发给我们，正面或反面的反馈都可以~\r\n\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "2026Q1_区域销量数据.xlsx",
+      "content_type": "application/octet-stream",
+      "size": 149083,
+      "local_path": "./mail_data/attachments/<tencent_4F2352F825CD4BA17CA0CA0D@qq.com>/2026Q1_区域销量数据.xlsx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_4F2352F825CD4BA17CA0CA0Dqq.com.eml"
+}

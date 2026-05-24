@@ -1,0 +1,19 @@
+{
+  "message_id": "<7d3e75c9e41a41218cbbff7daadc9128@ninedata.cloud>",
+  "imap_uid": "3038",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "NineData 3月产品更新：Lark 审批、SQL Server 归档与复制增强",
+  "sender": "no-reply@ninedata.cloud",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-10T01:10:35+00:00",
+  "body_text": "了解 3 月上线的飞书 Lark 审批、SQL Server 数据归档、慢查询分析扩展与复制能力增强。    \n    \nMonthly Product Update    \nNineData 2026 年 3 月产品更新    \n了解 3 月上线的飞书 Lark 审批、SQL Server 数据归档、慢查询分析扩展与复制能力增强。    \n3 月，NineData 围绕外部协同接入、数据生命周期治理和大规格数据复制稳定性持续迭代，帮助团队更顺畅地完成 SQL 变更、历史数据治理与跨库同步。    \n[1] 查看 3 月月报    \n    \n协同审批与消息通知升级    \n飞书 Lark 外部审批现已支持 SQL 任务、权限申请和数据导出流程，帮助团队在既有协同体系内完成审批闭环。消息通知也新增支持飞书 Lark、钉钉和企业微信消息卡片，并可按语言设置通知内容。    \n    \n [2] 查看 3 月月报    \n    \n慢查询分析覆盖更多云数据库    \n慢日志采集新增支持阿里云 RDS MySQL、阿里云 RDS PostgreSQL、PolarDB for MySQL 和 PolarDB for PostgreSQL，并新增 SQL Server 慢查询分析，帮助团队在更多数据库场景下快速定位性能瓶颈。    \n    \n [3] 查看慢查询分析    \n    \nSQL Server 历史数据治理能力上线    \n数据归档与清理新增支持 SQL Server，可按需配置归档、归档+清理或仅清理策略，将历史数据治理纳入统一任务体系，兼顾存储优化、性能维护和运维流程一致性。    \n    \n [4] 了解数据归档与清理    \n    \n其他更新    \n除重点发布外，3 月我们还围绕数据复制稳定性、SQL 运维体验、AI 能力和平台兼容性做了持续补强。 数据复制：预检查增加超时控制与更高并行度，双向复制支持反向链路 DML 冲突处理，MySQL 增量复制支持按表攒批写入。链路可靠性：OceanBase Oracle、Sybase 等链路的兼容性继续增强，并修复增量读取、JSON 解析、无主键表复制等场景问题。SQL 运维与 AI：新增 SQL Server OnlineDML、Oracle Job 管理，ChatDBA 文档解析支持大文件、图片、纯图片 PDF 和 PPT 转 PDF。使用体验：持续优化 Oracle SQL 窗口大字段处理，SQL 任务备份与数据导出链路执行性能进一步提升。平台补强：数据追踪与回滚、OnlineDDL 适配 MySQL 8.4 及以上版本，并支持为 HANA 数据源发起权限申请。    \n    \n [5] 查看完整 3 月发布    \n    \nNineData 致力于帮助团队更高效地完成数据库变更、迁移、复制、归档与恢复。    \n    \n[6] 在网页中查看邮件    \nYou are receiving this email because of your relationship with 玖章算术（浙江）科技有限公司. Please [7] reconfirmyour interest in receiving emails from us. 如果您不愿意继续接收到任何相关讯息，您可以[8] 在此取消订阅。    \n    \n此讯息由 no-reply@ninedata.cloud发送给 test@benchmarkemail.com    \n余杭区仓前街道海智中心3幢1102, 杭州市, 浙江省 310000, China    \n    \n取消订阅| 管理订阅| 邮件转寄| 回报为垃圾邮件    \n    \n    \n    \n References:    \n 1. https://www.ninedata.cloud/promotions/release_for_March_2026    \n 2. https://docs.ninedata.cloud/release_notes/2026?EDM    \n 3. https://docs.ninedata.cloud/sqldev/slow_query    \n 4. https://docs.ninedata.cloud/sqldev/data_archiving    \n 5. https://docs.ninedata.cloud/release_notes/2026?EDM    \n 6. https://ninedata.benchurl.com/c/v?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc    \n 7. https://ninedata.benchurl.com/c/opt?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc    \n 8. https://ninedata.benchurl.com/c/su?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc    \n    \n    \n    \n藉由下列连结，您可以修改/更新您的订阅信息。    \n    \n             \nhttps://ninedata.benchurl.com/c/su?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc&relid=    \n    \n余杭区仓前街道海智中心3幢1102, 杭州市, 浙江省  310000, China    \n    \n邮件营销    \nbenchmarkemail.com    \n [https://ninedata.benchurl.com]    \n    \n        :     \n    \nhttps://ninedata.benchurl.com/c/v?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc&relid=    \n    \nYou are receiving this email because of your relationship with 玖章算术（浙江）科技有限公司. Please reconfirm your interest in receiving emails from us.   如果您不愿意继续接收到任何相关讯息，您可以在此取消订阅或回报为垃圾邮件。    \n    \nhttps://ninedata.benchurl.com/c/su?e=1B37AA3&c=19284B&t=0&l=1383FC936&email=iQCVGiNzCAv%2FdOjwmlx7HqIPwf8Kqxhc&relid=\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/7d3e75c9e41a41218cbbff7daadc9128ninedata.cloud.eml"
+}

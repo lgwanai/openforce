@@ -1,0 +1,21 @@
+{
+  "message_id": "<69b5b380cd5ed_1bdf511181642c2@flexworker-68f5c7c86b-wpdgk.mail>",
+  "imap_uid": "2840",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "[ACTION REQUIRED] Your GitHub account, lgwanai, will soon require\r\n 2FA",
+  "sender": "noreply@github.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-14T12:14:08-07:00",
+  "body_text": "Hey lgwanai!\nWe're reaching out to let you know that, as announced last year, we have officially begun requiring users who\r\n  contribute code on GitHub.com to have two-factor authentication (2FA) enabled.\nYour account meets this criteria, and you will need to enroll in 2FA within 45 days, by April 28th, 2026 at 00:00 (UTC). After this\r\n  date, your access to GitHub.com will be limited until you enroll in 2FA. Enrolling is easy, and we support several\r\n  options, starting with TOTP apps and text messages (SMS) and then adding on passkeys and the GitHub Mobile\r\n  app.\nClick here to enroll in 2FA\n.\nMaking the software supply chain more secure is a team effort, and we can't do it without you. Your enrollment in\r\n  2FA is an impactful step in keeping the world's software secure. If you want to learn more about this change,\r\n  please take a look at our\ndocumentation about the program\n.\nTo see this and other security events for your account, visit\nyour account security audit log.\nIf you run into problems, please contact support by visiting\nthe GitHub support page.\nThanks,\nThe GitHub Team",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/69b5b380cd5ed_1bdf511181642c2flexworker-68f5c7c86b-wpdgk.mail.eml"
+}

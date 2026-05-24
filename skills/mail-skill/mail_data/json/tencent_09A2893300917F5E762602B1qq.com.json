@@ -1,0 +1,32 @@
+{
+  "message_id": "<tencent_09A2893300917F5E762602B1@qq.com>",
+  "imap_uid": "3139",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "【宝马AI CAMP】Dify课件",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "jiayang.liu@bmw-brilliance.cn",
+  "cc": "guantong.liu@bmw-brilliance.cn, sue@woshipm.com, wuliang@xiangzizai.com",
+  "date": "2026-04-22T10:50:12+08:00",
+  "body_text": "Dear all\r\n\r\n\r\n&nbsp;\r\n\r\n附件为直播课-Dify课件的PPT与PDF版本，请查收\r\n\r\n\r\n\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n\r\n\r\n\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【宝马AI CAMP】第五课《Dify》.pdf",
+      "content_type": "application/octet-stream",
+      "size": 4089547,
+      "local_path": "./mail_data/attachments/<tencent_09A2893300917F5E762602B1@qq.com>/【宝马AI CAMP】第五课《Dify》.pdf"
+    },
+    {
+      "filename": "【宝马AI CAMP】第五课《Dify》.pptx",
+      "content_type": "application/octet-stream",
+      "size": 843015,
+      "local_path": "./mail_data/attachments/<tencent_09A2893300917F5E762602B1@qq.com>/【宝马AI CAMP】第五课《Dify》.pptx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_09A2893300917F5E762602B1qq.com.eml"
+}

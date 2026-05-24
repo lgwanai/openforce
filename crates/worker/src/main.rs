@@ -165,7 +165,7 @@ impl ToolExecutor {
         match fs::read_to_string(&matched) {
             Ok(content) => {
                 let truncated = if content.len() > 16000 {
-                    format!("{}\n... (truncated, {} total)", &content[..16000], content.len())
+                    format!("{}\n... (truncated, {} total)", safe_slice(&content, 16000), content.len())
                 } else { content.clone() };
                 self.active_file_content = Some((matched.clone(), truncated.clone()));
                 self.memory.add_decision(0, "READ", &format!("{} ({} chars)", matched, content.len()));
@@ -203,7 +203,7 @@ impl ToolExecutor {
         match output {
             Ok(Ok(out)) => {
                 let combined = format!("{}{}", String::from_utf8_lossy(&out.stdout), String::from_utf8_lossy(&out.stderr));
-                let truncated = if combined.len() > 4000 { format!("{}\n... (truncated)", &combined[..4000]) } else { combined.clone() };
+                let truncated = if combined.len() > 4000 { format!("{}\n... (truncated)", safe_slice(&combined, 4000)) } else { combined.clone() };
                 self.active_file_content = Some((format!("SHELL:{cmd}"), truncated.clone()));
                 self.memory.add_decision(0, "SHELL", &format!("{cmd} ({} chars)", combined.len()));
                 ToolResult::success(&call.id, &truncated)
@@ -269,7 +269,7 @@ impl ToolExecutor {
         let executor = SkillExecutor::new(&self.skill_registry);
         match executor.execute_script(sn, sp, &sargs).await {
             Ok(output) => {
-                let truncated = if output.len() > 4000 { format!("{}\n... (truncated)", &output[..4000]) } else { output.clone() };
+                let truncated = if output.len() > 4000 { format!("{}\n... (truncated)", safe_slice(&output, 4000)) } else { output.clone() };
                 self.active_file_content = Some((format!("SCRIPT:{sn}/{sp}"), truncated.clone()));
                 ToolResult::success(&call.id, &truncated)
             }
@@ -318,8 +318,16 @@ async fn perform_compaction(client: &LlmClient, system: &str, history: &str) -> 
 
 fn extract_json(s: &str) -> Option<&str> { let start = s.find('{')?; let end = s.rfind('}')?; Some(&s[start..=end]) }
 
+fn safe_slice(s: &str, max_len: usize) -> &str {
+    let end = s.char_indices().nth(max_len).map(|(i, _)| i).unwrap_or(s.len());
+    &s[..end]
+}
+
 fn truncate_str(s: &str, max_len: usize) -> String {
-    if s.len() <= max_len { s.to_string() } else { format!("{}...", &s[..max_len]) }
+    if s.len() <= max_len { s.to_string() } else {
+        let end = s.char_indices().nth(max_len).map(|(i, _)| i).unwrap_or(s.len());
+        format!("{}...", &s[..end])
+    }
 }
 
 fn build_worker_output(executor: &ToolExecutor, task: &WorkerTask, cycles: usize, tokens: usize, text: &str, passed: bool) -> Value {
@@ -382,7 +390,7 @@ async fn main() -> Result<()> {
     let max_cycles: usize = std::env::var("WORKER_MAX_CYCLES").ok().and_then(|s| s.parse().ok()).unwrap_or(40);
     let max_no_prog: usize = std::env::var("WORKER_MAX_NO_PROGRESS").ok().and_then(|s| s.parse().ok()).unwrap_or(8);
     let mut tokens_used: usize = 0;
-    let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(150000);
+    let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(2_000_000);
 
     let system = if task.system_prompt.is_empty() {
         format!("You are a {}. Use the provided tools. Do NOT describe tool calls in text. When done, use mark_all_done.", task.profile_name)
@@ -448,123 +456,84 @@ async fn main() -> Result<()> {
         executor.memory.subtasks.len(), executor.memory.acceptance_criteria.len(),
         executor.memory.files_available.len());
 
-    // ── Phase 1: Tool Calling Loop ──
+    // ── Phase 1: Criteria-Driven Execution ──
+    // Each subtask has a clear acceptance criterion. Fulfill one at a time, verify, and move on.
+    // No unbounded loop — criteria met = done.
     let mut cycles: usize = 0;
-    let mut last_prog: usize = 0;
+    let criteria_list: Vec<String> = executor.memory.acceptance_criteria.clone();
+    let subtask_count = executor.memory.subtasks.len();
 
-    loop {
-        let elapsed = start.elapsed();
-        let done = executor.memory.subtasks.iter().filter(|t| t.status == "done").count();
+    'subtask_loop: for st_idx in 0..subtask_count {
+        executor.memory.subtasks[st_idx].status = "in_progress".into();
+        let st_desc = executor.memory.subtasks[st_idx].description.clone();
+        let criterion = criteria_list.get(st_idx).cloned().unwrap_or_else(|| "Complete".into());
+        eprintln!("[Subtask {}/{}] {}", st_idx+1, subtask_count, truncate_str(&st_desc, 100));
 
-        if elapsed > max_dur {
-            write_output(&task, &serde_json::json!({"success":false,"action":"timeout","subtasks_done":done,"subtasks_total":executor.memory.subtasks.len()}));
-            return Ok(());
-        }
-        if tokens_used >= max_tokens {
-            write_output(&task, &serde_json::json!({"success":false,"action":"token_budget","subtasks_done":done,"subtasks_total":executor.memory.subtasks.len()}));
-            return Ok(());
-        }
-        if cycles >= max_cycles {
-            write_output(&task, &serde_json::json!({
-                "success":done>0,"action":if done>0{"completed_partial"}else{"stalled"},
-                "subtasks_done":done,"subtasks_total":executor.memory.subtasks.len(),"cycles":cycles}));
-            return Ok(());
-        }
+        let max_st = (max_cycles / subtask_count.max(1)).min(8);
 
-        cycles += 1;
-        if let Some(idx) = executor.memory.subtasks.iter().position(|t| t.status == "pending") {
-            executor.memory.subtasks[idx].status = "in_progress".into();
-        }
-        if executor.memory.all_done() { break; }
-        if done > last_prog { last_prog = done; }
-
-        // Stall check
-        if cycles.saturating_sub(last_prog * 3) > max_no_prog && last_prog < executor.memory.subtasks.len() {
-            let fc = build_context_string(&executor);
-            let fp = format!("{fc}\n\n── FORCE ──\nNo progress. Use mark_all_done or explain what's blocking.");
-            if let Ok((text, tks)) = client.chat(&system, &fp).await {
-                tokens_used += tks as usize;
-                eprintln!("  [!] Force: {}", truncate_str(&text, 80));
+        for st_cycle in 0..max_st {
+            cycles += 1;
+            if start.elapsed() > max_dur || tokens_used >= max_tokens {
+                let d = executor.memory.subtasks.iter().filter(|t| t.status == "done").count();
+                write_output(&task, &serde_json::json!({"success":false,"action":"timeout","subtasks_done":d,"subtasks_total":subtask_count}));
+                return Ok(());
             }
-            continue;
-        }
 
-        // Context overflow check (AgentMemory + conversation history)
-        let memory_tokens = ContextManager::estimate_tokens(&build_context_string(&executor));
-        let conv_tokens: usize = conversation.iter()
-            .map(|m| ContextManager::estimate_tokens(&m.content) + 100) // +100 for tool_call overhead
-            .sum();
-        let total_tokens = memory_tokens + conv_tokens;
-        if ctx_mgr.is_overflow(total_tokens) {
-            eprintln!("  [compaction] overflow detected");
-            let history_text: String = conversation.iter()
-                .map(|m| format!("[{}] {}", m.role, truncate_str(&m.content, 200)))
-                .collect::<Vec<_>>().join("\n");
-            if let Ok(summary) = perform_compaction(&client, &system, &history_text).await {
-                conversation.clear();
-                conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!("[COMPACTED CONTEXT]\n{summary}")));
-                eprintln!("  [compaction] done, {} chars", summary.len());
-            }
-        }
+            let ctx = build_context_string(&executor);
+            let um = if st_cycle == 0 {
+                format!("{skill}TASK: {td}\nSUBTASK #{n}/{t}: {st}\nCRITERION: {crit}\n\nFiles ({fc}):\n{files}\n\nFulfill THIS subtask only. When done, self-verify against the criterion.\nPASS → respond: VERIFIED: <brief evidence>\nFAIL → respond: FAILED: <reason>",
+                    skill=task.skill_metadata.as_deref().unwrap_or(""),
+                    td=task.subtask, n=st_idx+1, t=subtask_count, st=st_desc, crit=criterion,
+                    fc=executor.memory.files_available.len(),
+                    files=executor.memory.files_available.iter().take(20).map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n"))
+            } else {
+                format!("SUBTASK #{n}: {st}\nCriterion: {crit}\nRetry {rc}/{m}\nRespond VERIFIED or FAILED.",
+                    n=st_idx+1, st=st_desc, crit=criterion, rc=st_cycle+1, m=max_st)
+            };
 
-        let context = build_context_string(&executor);
-        let um = format!(
-            "{skill}{ctx}\n\n── CYCLE {c}/{m} ──\nUse tools to make progress. When done, use mark_all_done.",
-            skill=task.skill_metadata.as_deref().unwrap_or(""), c=cycles, m=max_cycles, ctx=context);
+            conversation.push(openforce_llm_client::unified::ToolMessage::user(&um));
 
-        // Append user message to conversation history
-        conversation.push(openforce_llm_client::unified::ToolMessage::user(&um));
-
-        match client.chat_with_tools(&system, &conversation, &tools).await {
-            Ok(response) => {
-                tokens_used += response.tokens_used as usize;
-                if response.has_tool_calls() {
-                    eprintln!("  [→] C{cycles}: {} tool calls", response.tool_calls.len());
-                    for tc in &response.tool_calls {
-                        eprintln!("    {}({})", tc.name, truncate_str(&tc.arguments, 80));
+            match client.chat_with_tools(&system, &conversation, &tools).await {
+                Ok(response) => {
+                    tokens_used += response.tokens_used as usize;
+                    if response.has_tool_calls() {
+                        conversation.push(openforce_llm_client::unified::ToolMessage::assistant_with_tools(&response.text, &response.tool_calls));
+                        let mut tr = Vec::new();
+                        for tc in &response.tool_calls {
+                            let r = executor.execute(tc).await;
+                            eprintln!("    {} {}", if r.success {"✓"} else {"✗"}, tc.name);
+                            tr.push(r);
+                        }
+                        conversation.push(openforce_llm_client::unified::ToolMessage::tool_results(&tr));
+                        continue;
                     }
-                    // Append assistant response with tool calls
-                    conversation.push(
-                        openforce_llm_client::unified::ToolMessage::assistant_with_tools(&response.text, &response.tool_calls)
-                    );
-                    // Execute tools and collect results
-                    let mut t_results = Vec::new();
-                    for tc in &response.tool_calls {
-                        let result = executor.execute(tc).await;
-                        let status = if result.success { "✓" } else { "✗" };
-                        eprintln!("    {status} {} done", tc.name);
-                        t_results.push(result);
-                    }
-                    // Append tool results to conversation
-                    conversation.push(openforce_llm_client::unified::ToolMessage::tool_results(&t_results));
-                } else if response.is_finished() {
-                    eprintln!("  [Done] C{cycles}: finished ({})", response.finish_reason);
+                    let text = &response.text;
                     conversation.push(openforce_llm_client::unified::ToolMessage {
-                        role: "assistant".into(), content: response.text.clone(),
+                        role: "assistant".into(), content: text.clone(),
                         tool_calls: None, tool_results: None, tool_call_id: None,
                     });
-                    if executor.memory.all_done() { break; }
-                    if !response.text.is_empty() {
-                        executor.memory.add_decision(cycles, "RESPONSE", &truncate_str(&response.text, 120));
+                    let upper = text.to_uppercase();
+                    if upper.contains("VERIFIED") || upper.contains("FINAL: PASS") {
+                        executor.memory.subtasks[st_idx].status = "done".into();
+                        executor.memory.subtasks[st_idx].output = text.clone();
+                        eprintln!("  ✓ Subtask {}/{} PASS", st_idx+1, subtask_count);
+                        continue 'subtask_loop;
+                    } else if upper.contains("FAILED") {
+                        eprintln!("  ✗ Subtask {}/{} FAIL, retry {}/{}", st_idx+1, subtask_count, st_cycle+1, max_st);
+                    } else {
+                        executor.memory.add_decision(cycles, "WORKING", &truncate_str(text, 120));
                     }
-                } else if !response.text.is_empty() {
-                    conversation.push(openforce_llm_client::unified::ToolMessage {
-                        role: "assistant".into(), content: response.text.clone(),
-                        tool_calls: None, tool_results: None, tool_call_id: None,
-                    });
-                    executor.memory.add_decision(cycles, "ANALYSIS", &truncate_str(&response.text, 120));
-                    if response.text.len() > 300 { executor.memory.add_finding(&response.text); }
-                    eprintln!("  [~] C{cycles}: analysis ({} chars)", response.text.len());
+                }
+                Err(e) => {
+                    eprintln!("[LLM error subtask {}]: {e}", st_idx+1);
+                    write_output(&task, &serde_json::json!({"success":false,"action":"error","detail":format!("{e}")}));
+                    std::process::exit(1);
                 }
             }
-            Err(e) => {
-                eprintln!("[LLM error C{cycles}]: {e}");
-                write_output(&task, &serde_json::json!({"success":false,"action":"error","reason":"llm_error","detail":format!("{e}")}));
-                std::process::exit(1);
-            }
         }
+        executor.memory.subtasks[st_idx].status = "failed".into();
+        executor.memory.subtasks[st_idx].output = format!("Retries exhausted ({})", max_st);
     }
-
     // Phase 2: Verification
     let vp = format!("{}\n\nFINAL: rate each criterion PASS/FAIL. End with: FINAL: PASS|FAIL", build_context_string(&executor));
     match client.chat(&system, &vp).await {

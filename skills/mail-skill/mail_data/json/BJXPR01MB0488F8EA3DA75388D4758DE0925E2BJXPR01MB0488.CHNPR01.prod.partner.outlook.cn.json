@@ -1,0 +1,34 @@
+{
+  "message_id": "<BJXPR01MB0488F8EA3DA75388D4758DE0925E2@BJXPR01MB0488.CHNPR01.prod.partner.outlook.cn>",
+  "imap_uid": "2976",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AdzDHvTCPLY7heFjTNmN535GYAmAcQAAEq9w",
+  "subject": "Exchange with Qidian",
+  "sender": "extern.fengyi.lu@volkswagen.com.cn",
+  "recipient": "haojing.ye@volkswagen.com.cn, penjiangchen@woshipm.com, wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-03T04:06:34+00:00",
+  "body_text": "Dear All,\r\n\r\nKindly block your time to exchange ~\r\n\r\n\r\nBest Regards,\r\nStella Lu\r\n________________________________________________________________________________\r\nMicrosoft Teams meeting\r\nJoin on your computer, mobile app or room device\r\nClick here to join the meeting<https://teams.microsoftonline.cn/l/meetup-join/19%3agal%3ameeting_a13ed06cc6c043c1827d0403bd6501ee%40thread.v2/0?context=%7b%22Tid%22%3a%221272ef7d-0a4c-4c35-8f4b-416e283c5d59%22%2c%22Oid%22%3a%2216277f85-ab16-4242-ba0e-70eae9155673%22%7d>\r\nMeeting ID: 997 716 990 837 654 5\r\nPasscode: AY9fw373\r\nDownload Teams<https://www.microsoft.com/en-us/microsoft-teams/download-app> | Join on the web<https://www.microsoft.com/microsoft-teams/join-a-meeting>\r\nLearn More<https://aka.ms/JoinTeamsMeeting> | Help<https://support.microsoft.com/en-us/office/meetings-and-calls-in-microsoft-teams-d92432d5-dd0f-4d17-8f69-06096b6b48a8?ui=de-de&rs=de-de&ad=de> | Meeting options<https://teams.microsoftonline.cn/meetingOptions/?organizerId=16277f85-ab16-4242-ba0e-70eae9155673&tenantId=1272ef7d-0a4c-4c35-8f4b-416e283c5d59&threadId=19_gal_meeting_a13ed06cc6c043c1827d0403bd6501ee@thread.v2&messageId=0&language=en-US>\r\n________________________________________________________________________________\r\n\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "Qidian_AI Camp+AI competition.pdf",
+      "content_type": "application/pdf",
+      "size": 4638272,
+      "local_path": "./mail_data/attachments/<BJXPR01MB0488F8EA3DA75388D4758DE0925E2@BJXPR01MB0488.CHNPR01.prod.partner.outlook.cn>/Qidian_AI Camp+AI competition.pdf"
+    },
+    {
+      "filename": "Qidian_Outline & Trainer.pdf",
+      "content_type": "application/pdf",
+      "size": 1590632,
+      "local_path": "./mail_data/attachments/<BJXPR01MB0488F8EA3DA75388D4758DE0925E2@BJXPR01MB0488.CHNPR01.prod.partner.outlook.cn>/Qidian_Outline & Trainer.pdf"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/BJXPR01MB0488F8EA3DA75388D4758DE0925E2BJXPR01MB0488.CHNPR01.prod.partner.outlook.cn.eml"
+}

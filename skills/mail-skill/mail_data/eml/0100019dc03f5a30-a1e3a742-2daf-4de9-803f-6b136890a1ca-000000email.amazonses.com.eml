@@ -1,0 +1,365 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com;
+ dkim=pass header.b=EhVa50n/zv header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=rJ5Vbuv8lb header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=Kc4QgaCfUL/lY+WR7pE7mKKWU46oHvgE10SH81RbxvA=;
+ b=MqhZa1ll5P8S1XJ/8PbZmoKPCICMX6hAJuxLZFdpinog7tjUl2U42jSVT9oZMWKZlGOx5Ch
+ TNdMTXDRdoumSNxgbcBP36IX+Tqh2Ink7/JrM61u4gTZ85vJrTnqBEKmJX/laywObibVQl7ql
+ xptADlIShjtEscEEr5sd+K2VQXisMHftQwtk5s6PBLuTG85w54N5F++6sWY2IQblFaa7JLrp8
+ ks+XpIrLjdgEpaY8tty1ji92wmrlzml/Ni5aaLCWCwKu6Jxl0/zS1O3i/fB3y338VSlHZwE7g
+ vrlqM38ZrsY6BiJDtj9mFeQWwyE6SWc0Q0mzhBii7ShXvDloZbJw==
+Arc-Seal: i=1; a=rsa-sha256; t=1777046879; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Qks5MQ0wxNDFgHZxlIkPY7lNnVDJ5oGoH0mZLBby8w5FFfjZ8veIses4F1Lt33cddaE9wCM
+ JKD1UEAXN9SFSGg+V4cwxB6yq1OfvxE6eLwtjS4zOAjZKMuCyxQJ5LVj7zKRm2Vrqx62pMRLd
+ rX9rsQOeJkizK0fei/pN/hO9VuijdvlsyW0G+8KgyEeluRX8IWjNBYbE9kXAAPtCIwgNFfdbk
+ LdrT7Ew4W3amT/CLli/gmVbo0YAi7OPsQCb7bTJ2LlDSickCT2UmFFtNQxjEyId5jh72iM3Jn
+ axgNf+rNe5kIRDwM5X674Q1CSTp2BJ5Bge76lX0L8J44t0sNvpXg==
+Authentication-Results: lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com;
+ dkim=pass header.b=EhVa50n/zv header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=rJ5Vbuv8lb header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 24 Apr 2026 16:07:50 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1777046870;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=qwek/9a7WkmR5Y9PIT5pAHYDXnQyKH+cj5rILzSxcOE=;
+ b=EhVa50n/zv+48vsqEV6ApBWKRD+fkFaSkWTS1TiHD7185ALd6zglogmn75ZCjMVn
+ hjma5pdd6K3BLVxQbs9J6uwoL3UfHiZ0eGdUT1oZyKRvtxDfEbPiYwr+cSeDPv2Up6J
+ GEYxwOOA2huMKdl4yRh/3kfsQjVITJ3JgJtfTtHc0PWvZXmsRfs1d4dO+LWVVrCDQob
+ V0YFcUjRhG5YqCFwJZQVK7CUW8Fa5UH6WuPfIjhiFbscXLkWimfJC8hTXytvA7Sq20C
+ aa6C6UTuiBK5neJr0Fondw+dHWHC4Nm24XwUDOA0b4eSBEuc6dY4Ab0PAz+S15NWh8T
+ kNsC43d+9w==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1777046870;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=qwek/9a7WkmR5Y9PIT5pAHYDXnQyKH+cj5rILzSxcOE=;
+ b=rJ5Vbuv8lbExf4j1fpGAtLB/ZgjMaB0hK09Ua+WgXwNVB9nW58FhIyZUdBlx/tY3
+ WRnf8O4XZZxjtMnuv00Ki7Uqg2AOdf9UkklX3KqoscTtr3XKz4tbKzfnzw4RjMgrlfb
+ 0p0QZtB3P7ziQhF8kShI0uSuV3OPUdFoP6OLqB+Q=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=24.110.89.22;
+ helo=i89-22.smtp-out.amazonses.com;
+ envelope-from=0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: China orders AI firms to reject US capital
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1777046875/4g2HtL6kBLzBB1Rt/69EB955A.005/24.110.89.22/i89-22.smtp-out.amazonses.com/localhost/<0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69EB955A.005/4g2HtL6kBLzBB1Rt
+X-Fangmail-Miltered: at n206-112-028 with ID 69EB955A.005 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 24.110.89.22
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fDH9dQpybzm8pD1jgFcNxcxvMEtU77rfdFp/ysacD+OQtQtD19aih2fVzJZ74P5+KnOaa1c5PcrhhwQtMMXfkmtki+Qrmuskx25RT+z52nm7LGFOC3Rho+kHGBxzVdAH4w==
+X-Ses-Outgoing: 2026.04.24-24.110.89.22
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>AI Weekly =E2=80=94 One-time Breaking Alert Preview</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .alert-wrapper { max-width: 600px; margin: 0 auto; background: #fff; }
+    .alert-bar { background: #ff6b35; height: 4px; }
+    .alert-header { padding: 20px 25px 15px; }
+    .alert-header-title { font-size: 13px; font-weight: 700; text-transform=
+: uppercase; letter-spacing: 1.5px; color: #ff6b35; margin: 0; }
+    .alert-header-date { font-size: 13px; color: #77777f; margin-top: 2px; =
+}
+
+    .alert-preview-banner { background: #fff8f2; border-left: 3px solid #ff=
+6b35; margin: 0 25px 10px; padding: 12px 14px; font-size: 13px; color: #5a4=
+033; line-height: 1.5; }
+    .alert-preview-banner strong { color: #ff6b35; }
+
+    .alert-body { padding: 0 25px 20px; }
+    .alert-story { padding: 18px 0; border-bottom: 1px solid rgba(69,69,71,=
+0.1); }
+    .alert-story:last-child { border-bottom: none; }
+    .alert-headline { font-family: 'Merriweather', Georgia, serif; font-siz=
+e: 17px; font-weight: 700; line-height: 1.35; margin-bottom: 4px; }
+    .alert-headline a { color: #1b5479; text-decoration: none; }
+    .alert-meta { font-size: 12px; color: #77777f; margin-bottom: 8px; }
+    .alert-copy { font-size: 15px; line-height: 1.55; color: #454547; margi=
+n-bottom: 8px; }
+    .alert-link { font-size: 13px; font-weight: 700; }
+    .alert-link a { color: #ff6b35; text-decoration: none; }
+
+    .alert-cta { margin: 25px 25px 0; padding: 22px 22px 20px; background: =
+#1a1a2e; border-radius: 6px; color: #fff; text-align: center; }
+    .alert-cta-kicker { font-size: 11px; font-weight: 700; text-transform: =
+uppercase; letter-spacing: 1.5px; color: #ff8c5a; margin-bottom: 10px; }
+    .alert-cta-title { font-family: 'Merriweather', Georgia, serif; font-si=
+ze: 20px; line-height: 1.3; color: #fff; margin-bottom: 10px; font-weight: =
+700; }
+    .alert-cta-body { font-size: 14px; line-height: 1.55; color: #c9c9d0; m=
+argin-bottom: 16px; }
+    .alert-cta-btn { display: inline-block; background: #ff6b35; color: #ff=
+f !important; padding: 12px 28px; border-radius: 6px; font-size: 15px; font=
+-weight: 700; text-decoration: none; }
+    .alert-cta-footer { font-size: 12px; color: #888; margin-top: 12px; }
+
+    .alert-footer { border-top: 1px solid rgba(69,69,71,0.15); padding: 18p=
+x 25px; text-align: center; font-size: 11px; color: #999; }
+    .alert-footer a { color: #999; text-decoration: underline; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #1a1a1a; }
+      .alert-wrapper { background: #242424; }
+      .alert-header-title { color: #ff8c5a; }
+      .alert-headline a { color: #7ab8e0; }
+      .alert-copy { color: #ccc; }
+      .alert-story { border-color: rgba(255,255,255,0.1); }
+      .alert-preview-banner { background: #332318; color: #e0d5c9; }
+    }
+  </style>
+</head>
+<body>
+  <div style=3D"display:none !important;font-size:1px;color:#fefefe;line-he=
+ight:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">=
+8 AI stories worth breaking through the inbox for.</div>
+  <div class=3D"alert-wrapper">
+    <div class=3D"alert-bar"></div>
+    <div class=3D"alert-header">
+      <div class=3D"alert-header-title">AI Weekly Alert</div>
+      <div class=3D"alert-header-date">April 24th, 2026 =C2=B7 8 alerts wor=
+th your attention</div>
+    </div>
+    <div class=3D"alert-preview-banner">
+      <strong>Alerts feature Preview.</strong> You're getting this because =
+you subscribe to AI Weekly. The stories below went out this morning to read=
+ers who opted into our breaking alerts. If you want them in your inbox goin=
+g forward, there's a one-click opt-in at the bottom.
+    </div>
+    <div class=3D"alert-body">
+    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.bloomberg.com%252Fnews%252Farticles%252F2026-04-24%25=
+2Fchina-to-curb-us-investment-in-tech-companies-after-meta-deal/1/0100019dc=
+03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/P3rirwWkIE555KAgX094AuY=
+y_1M=3D473">China orders AI firms including ByteDance and Moonshot AI to re=
+ject US capital without state approval</a></div>
+      <div class=3D"alert-meta">Bloomberg =C2=B7 2026-04-24</div>
+      <div class=3D"alert-copy">Chinese regulators have instructed tech fir=
+ms including ByteDance, Moonshot AI, and StepFun to reject US-origin capita=
+l without explicit government approval, Bloomberg reports. The directive is=
+ a direct response to Meta&#039;s $2B acquisition of Chinese-founded AI sta=
+rtup Manus and aims to prevent further loss of AI assets to American buyers=
+. Several affected startups are now unwinding offshore corporate structures=
+ ahead of domestic IPOs.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.bloomberg.com%252Fnews%252Farticles%252F2026-04-24%252Fch=
+ina-to-curb-us-investment-in-tech-companies-after-meta-deal/2/0100019dc03f5=
+a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/iz9e8M8NMkMdIbY-rPqT0qaZX3U=
+=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.theregister.com%252F2026%252F04%252F23%252Fmusk_bets_=
+teslas_ai_future%252F/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1=
+ca-000000/IUCeD219oE8CZKWPwEHmZkADEzI=3D473">Musk reveals Tesla Terafab wil=
+l use Intel&#039;s 14A process for AI chips, making Intel&#039;s first majo=
+r foundry customer</a></div>
+      <div class=3D"alert-meta">The Register =C2=B7 2026-04-23</div>
+      <div class=3D"alert-copy">Elon Musk announced Tesla will use Intel&#0=
+39;s next-generation 14A process node to manufacture AI chips at its planne=
+d Terafab complex in Austin, Texas. The deal makes Tesla Intel&#039;s first=
+ major 14A foundry customer =E2=80=94 a breakthrough for Intel&#039;s strug=
+gling contract manufacturing business =E2=80=94 while SpaceX, xAI, and Tesl=
+a plan two fabs targeting vehicle autonomy and AI data center workloads.</d=
+iv>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.theregister.com%252F2026%252F04%252F23%252Fmusk_bets_tesl=
+as_ai_future%252F/2/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-0=
+00000/3vnaP4px35ajLsL7XcCZ1piMHUo=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.washingtonpost.com%252Fbusiness%252F2026%252F04%252F2=
+3%252Fkorea-samsung-union-strike-ai%252F2fa427b0-3ee1-11f1-bb46-ed564688d95=
+3_story.html/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000=
+/XDXrOodUbnkPyz6CpxTWhdasqPQ=3D473">40,000 Samsung workers rally demanding =
+AI chip profit share, threaten 18-day strike next month</a></div>
+      <div class=3D"alert-meta">Washington Post =C2=B7 2026-04-23</div>
+      <div class=3D"alert-copy">About 40,000 Samsung Electronics workers ra=
+llied at the company&#039;s Pyeongtaek chip complex demanding the bonus cap=
+ be scrapped and 15% of operating profit shared with workers. The union is =
+threatening an 18-day strike next month, which could further strain global =
+AI memory chip supply already tight from surging HBM demand.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.washingtonpost.com%252Fbusiness%252F2026%252F04%252F23%25=
+2Fkorea-samsung-union-strike-ai%252F2fa427b0-3ee1-11f1-bb46-ed564688d953_st=
+ory.html/2/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/OyR=
+l2VWxDkCVByLe5Dn6Ae4AtLI=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fhuggingface.co%252Fdeepseek-ai%252FDeepSeek-V4-Pro/1/0100=
+019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/g8Rp8HeYfruF4-HeBv=
+jc-Sbqli4=3D473">DeepSeek releases V4 open-source flagship: 1.6T-param MoE =
+with 1M context under Apache 2.0</a></div>
+      <div class=3D"alert-meta">Hugging Face =C2=B7 2026-04-24</div>
+      <div class=3D"alert-copy">DeepSeek released V4-Pro (1.6T parameters) =
+and V4-Flash (284B parameters) on April 24 with 1M-token context windows un=
+der Apache 2.0. The open-source models claim best-in-class agentic coding a=
+mong open-weight models and quality approaching Claude Opus 4.6 non-thinkin=
+g mode. Multiple HN front-page submissions totaling 500+ points.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fhuggingface.co%252Fdeepseek-ai%252FDeepSeek-V4-Pro/2/0100019d=
+c03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/fQbf9qzd2qO5uGkRtafVFj=
+ZHUoM=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.theinformation.com%252Farticles%252Ftencent-alibaba-t=
+alks-invest-deepseek-20-billion-plus-valuation/1/0100019dc03f5a30-a1e3a742-=
+2daf-4de9-803f-6b136890a1ca-000000/dAQIBbRFl9my0Fq-4dk4kmQUl1k=3D473">Tence=
+nt and Alibaba in talks to invest in DeepSeek at $20B+ valuation, doubling =
+earlier target</a></div>
+      <div class=3D"alert-meta">The Information =C2=B7 2026-04-23</div>
+      <div class=3D"alert-copy">Tencent and Alibaba are in talks to join De=
+epSeek&#039;s first external funding round at a valuation above $20 billion=
+, doubling the $10B+ target reported days earlier. Tencent has proposed acq=
+uiring up to a 20% stake, though DeepSeek is resisting ceding that much con=
+trol.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.theinformation.com%252Farticles%252Ftencent-alibaba-talks=
+-invest-deepseek-20-billion-plus-valuation/2/0100019dc03f5a30-a1e3a742-2daf=
+-4de9-803f-6b136890a1ca-000000/JvIcCnmIIEmiMCZxEDCAPiW4liA=3D473">Read =E2=
+=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.taipeitimes.com%252FNews%252Fbiz%252Farchives%252F202=
+6%252F04%252F24%252F2003856126/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6=
+b136890a1ca-000000/dYcgTE1VgWMvQRFYFo4oVl4St9c=3D473">SpaceX IPO filing rev=
+eals plans for in-house GPU manufacturing to support AI ambitions</a></div>
+      <div class=3D"alert-meta">Taipei Times (Reuters) =C2=B7 2026-04-24</d=
+iv>
+      <div class=3D"alert-copy">SpaceX disclosed in its $1.75T IPO filing t=
+hat it plans to manufacture its own GPUs, listing in-house chip production =
+among &#039;substantial capital expenditures.&#039; The company warned inve=
+stors it lacks long-term contracts with direct chip suppliers, and the effo=
+rt is linked to the Terafab joint venture with Tesla, xAI, and Intel.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.taipeitimes.com%252FNews%252Fbiz%252Farchives%252F2026%25=
+2F04%252F24%252F2003856126/2/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136=
+890a1ca-000000/B0Ndfw16tFLZO8yzu8ZeYpLhT9s=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Ftechcrunch.com%252F2026%252F04%252F23%252Fopenai-chatgpt-=
+gpt-5-5-ai-model-superapp%252F/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6=
+b136890a1ca-000000/-jNgUwMqj0BdjNNkO6m0CZtHjEI=3D473">OpenAI officially rel=
+eases GPT-5.5 &#039;Spud&#039; with 2x pricing and new agentic capabilities=
+</a></div>
+      <div class=3D"alert-meta">TechCrunch =C2=B7 2026-04-23</div>
+      <div class=3D"alert-copy">OpenAI released GPT-5.5, codenamed &#039;Sp=
+ud,&#039; on April 23 to paid ChatGPT and Codex subscribers, just six weeks=
+ after GPT-5.4. The model scores 82.7% on Terminal-Bench 2.0 and 73.1% on E=
+xpert-SWE, with API pricing doubling to $5/$30 per million input/output tok=
+ens and a 1M context window.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Ftechcrunch.com%252F2026%252F04%252F23%252Fopenai-chatgpt-gpt-=
+5-5-ai-model-superapp%252F/2/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136=
+890a1ca-000000/boCuXaPyL376g3plEYdfD9ZD7iU=3D473">Read =E2=86=92</a></div>
+    </div>    <div class=3D"alert-story">
+      <div class=3D"alert-headline"><a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.cnbc.com%252F2026%252F04%252F22%252Fmeta-tracks-emplo=
+yee-usage-on-google-linkedin-ai-training-project.html/1/0100019dc03f5a30-a1=
+e3a742-2daf-4de9-803f-6b136890a1ca-000000/xGXsYekWOjgc8MbuyO1ZhTrDNcM=3D473=
+">Meta installing software to record employee keystrokes and mouse movement=
+s to train AI agents</a></div>
+      <div class=3D"alert-meta">CNBC =C2=B7 2026-04-22</div>
+      <div class=3D"alert-copy">Meta&#039;s &#039;Model Capability Initiati=
+ve&#039; records US employees&#039; clicks, keystrokes, and screenshots acr=
+oss work apps to train AI agents that can perform white-collar tasks autono=
+mously. Multiple employees called the program &#039;dystopian&#039; in inte=
+rnal messages, citing concerns about sensitive data exposure.</div>
+      <div class=3D"alert-link"><a href=3D"https://fk3wz6xe.r.us-east-1.aws=
+track.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%=
+253A%252F%252Fwww.cnbc.com%252F2026%252F04%252F22%252Fmeta-tracks-employee-=
+usage-on-google-linkedin-ai-training-project.html/2/0100019dc03f5a30-a1e3a7=
+42-2daf-4de9-803f-6b136890a1ca-000000/aFOhL-HYT4TBbWZqu5OUlNV0H6E=3D473">Re=
+ad =E2=86=92</a></div>
+    </div>
+    </div>
+
+    <div class=3D"alert-cta">
+      <div class=3D"alert-cta-kicker">Want more of this?</div>
+      <div class=3D"alert-cta-title">Get breaking AI alerts the moment they=
+ happen.</div>
+      <div class=3D"alert-cta-body">Typically 0=E2=80=932 emails per day =
+=E2=80=94 only when it really matters. Curated by the same editorial team b=
+ehind 475+ issues of AI Weekly.</div>
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%=
+252Falerts%252Fopt-in%253Fuid%253D13331%2526ts%253D1777046870%2526token%253=
+D218b5a285de653f83fcc7326ae344628/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803=
+f-6b136890a1ca-000000/pvldCZVPdG5rVUz3KeZZjwO1iTI=3D473" class=3D"alert-cta=
+-btn">Opt in to breaking alerts =E2=86=92</a>
+      <div class=3D"alert-cta-footer">One confirmation page. No surprises.<=
+/div>
+    </div>
+
+    <div class=3D"alert-footer">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/RtOV-6v6Smzp=
+lZZjZkcgsgdKE48=3D473">AI Weekly</a> =C2=B7 <a href=3D"https://fk3wz6xe.r.u=
+s-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Funsubscribe%3Femail=3Dwul=
+iang%2540xiangzizai.com%26token=3D54e64b41c750e582703c8188f5ee40665c53db866=
+17f53539d47ea4a2053902a/1/0100019dc03f5a30-a1e3a742-2daf-4de9-803f-6b136890=
+a1ca-000000/Xr5TjTnRs5A0_klOkgj60j8gZ6Y=3D473">Unsubscribe from AI Weekly</=
+a>
+    </div>
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019dc0=
+3f5a30-a1e3a742-2daf-4de9-803f-6b136890a1ca-000000/gnS5PN29lvUtSo2YONVNnJdf=
+q7E=3D473" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

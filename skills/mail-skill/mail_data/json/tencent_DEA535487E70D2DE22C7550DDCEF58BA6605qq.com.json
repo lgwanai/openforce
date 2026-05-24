@@ -1,0 +1,21 @@
+{
+  "message_id": "<tencent_DEA535487E70D2DE22C7550DDCEF58BA6605@qq.com>",
+  "imap_uid": "2999",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "自动续费成功通知",
+  "sender": "cloud_noreply@tencent.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-06T10:41:45+08:00",
+  "body_text": "自动续费成功通知\r\n                                             \r\n尊敬的腾讯云用户，您好！\r\n                                             \r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您的腾讯云账号（账号 ID：100033230111，昵称：100033230111）有1个资源自动续费成功。\r\n\r\n\r\n\r\n\r\n\r\n\r\n&nbsp; &nbsp; &nbsp; &nbsp;自动续费成功的资源详情如下：\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n&nbsp; &nbsp; &nbsp; &nbsp;\r\n\r\n腾讯混元大模型\r\n\r\n子产品资源名称资源ID地域服务内容\r\nCoding&nbsp;PlanCoding&nbsp;Plan&nbsp;Pro套餐20260306111133170301371-1广州资源ID:20260306111133170301371-1\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n                                             \r\n现在去充值\r\n                                                                                                                                       \r\n若您确认不再使用以上资源，可到预付费资源续费管理 和 资源包续费管理，将以上资源设置到期不续并备份好数据，系统将不会对标记为到期不续的资源自动续费。\r\n                                                 \r\n此致&nbsp;\r\n                                                 腾讯云团队                                             \r\n                                                                                                                                                                                                 \r\n                                                                                                        \r\n                                                                                                                                                                                                                               \r\n此为系统邮件，请勿回复。 取消订阅\r\n                                         \r\n\r\n                                         \r\n关注服务号，移动管理云资源                                             \r\n                                                                                      \r\n                                         \r\n                                             Copyright © 2013 - 2026 Tencent Cloud.                                             \r\n                                             All Rights Reserved. 腾讯云 版权所有",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/tencent_DEA535487E70D2DE22C7550DDCEF58BA6605qq.com.eml"
+}

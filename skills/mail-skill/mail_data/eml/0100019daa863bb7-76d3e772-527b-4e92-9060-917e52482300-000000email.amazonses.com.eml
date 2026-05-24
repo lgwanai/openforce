@@ -1,0 +1,543 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.8.23)
+ smtp.mailfrom=0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com;
+ dkim=pass header.b=f1u/ncnEta header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=n2EA75EU// header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=Cf/dtXDl+ZoMwPLGFFaQynspMh2th0lLEwGxErL5IOE=;
+ b=QyYAW2NWHZxXE25deZvZQ2pFZkCdI93ixAkEtO1TXA+Fx6YdhbOsCoMfCK0mI9DR8LuR86t
+ ozqmyNzWgqutEWJRr71iitniKysqjduIra8zV2IzEe+rlVSlIXICSzBEuIu/DeE2GeVmRu48C
+ XD0YBW7u5uL5xeVdqSIBRHb2x9qyeHarydnERDNb1oZxdGwjAWe54OQtVaLWp4dOYAU5jo8P4
+ cqYjXZ2C95D4E1jpWUbnlFpY0zN9G5BVWV8fm6Yk7API97X5UqpyY5E4uvoCAZYBAEJ0nGcdW
+ wWV+R0WIKYrxUHtN8Xah849O+UcitTbtvRSJ0FkCIXiKR4tSKv3w==
+Arc-Seal: i=1; a=rsa-sha256; t=1776682424; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Kg1piAfGYgaigrpcBMTszog8L97b5SYuf99g+Y+UzY7fk+xkQER8Z1cGTKH/tP2GOLTdbUQ
+ Uxiw+1RUFA4Bwgy5lvqZDS9ItocxTabIAf9+4pNMZ1ivpheNm1tGiHAq0LrbXidwwLLL9dUu+
+ kFa2fATPihXNqscvH4Z+CJq/m5+Czhs7GNBDwy6/bsXlVNHA8punea5a+21OMHDQCTxqZu2Ze
+ GjhxwwAFm39awIlpQmjtCRDpZR8X7IizILuPX2fkLVEw4fKbJeu0qTezCldV7lPqfYGRnuyFL
+ 7wSqE47tnemn04gNhyQ+GmHeEto+OpGMzmaHUlD051LqyAmmb3BQ==
+Authentication-Results: lms; spf=pass (client-ip:54.240.8.23)
+ smtp.mailfrom=0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com;
+ dkim=pass header.b=f1u/ncnEta header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=n2EA75EU// header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 20 Apr 2026 10:53:37 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1776682417;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=eTAgWwnY270BvLbUqRiuvQSDaKoybQX7mg31C2XXTOU=;
+ b=f1u/ncnEtaH9sbSkQXyP6Wupya+CqhwvePqjJcjqYgLh9VdppGBTA6MEBM2HNiBl
+ Hg1GTd9HI30hmZRF9G9fBVsxZluFolCknJtS5ecuOh/SLQI8Oh23KNG6Mk1iGQkBvRF
+ uRf07CSlIJYdnSbRm+y+fXvU322kPbya+i+Q8PdfydgZ9l1GW4WUrWG0cL2tAZ+3EEZ
+ zi1YFZYEpC5ni2CEW18a9gExbxF/wiIftJ032zWcZHpZzIaXavphZND6UGAZtkArWeK
+ UwC+4NQSCfEVDDpPvWEIMTfUQ8ntxhlDEW6QjJSEk3NWKFyKSvia4CWz/6nxQRSuG0s
+ XsOOYCMPMA==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1776682417;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=eTAgWwnY270BvLbUqRiuvQSDaKoybQX7mg31C2XXTOU=;
+ b=n2EA75EU//+7SC+679vOvXds2TB2fWsLjsarUB6/mSht4L53ydjzwrUJBUrOCCZc
+ NvxZOpoFmBaFwZQhLIEzpNZbA8fCULNWamRHmbJd3PKtJAiLmmQs84R9QrXMSzGKcYU
+ 9G9U6PzszWZK+AcXAyvQchTe4LZiMWy3yQx3I9xo=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.8.23;
+ helo=a8-23.smtp-out.amazonses.com;
+ envelope-from=0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: When AI teaches AI, it teaches in secret
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776682421/4fzj5d2sg1zrfMRh/69E605B5.002/54.240.8.23/a8-23.smtp-out.amazonses.com/localhost/<0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69E605B5.002/4fzj5d2sg1zrfMRh
+X-Fangmail-Miltered: at n151-171-208 with ID 69E605B5.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.8.23
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019daa863bb7-76d3e772-527b-4e92-9060-917e52482300-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fGDqkZYwCkClTmDHgR1GBpRHGgYDMni5DffMrlgUKIB5QTNXlE3x8+SY0I519ESy+Y5rQwJZIEIRQ5H6gvatX6OCN2xLR/BNs0SnB8USfnqQ3g2jlETcYj5/f2gryAo6LA==
+X-Ses-Outgoing: 2026.04.20-54.240.8.23
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>When AI teaches AI, it teaches in secret</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <!--[if mso]><span style=3D"display:none!important;font-size:0;line-heigh=
+t:0;max-height:0;max-width:0;mso-hide:all;overflow:hidden;">A Nature paper =
+just proved models pass hidden traits through pure numbers.</span><![endif]=
+-->
+  <div style=3D"display:none;font-size:1px;color:#f5f5f5;line-height:1px;ma=
+x-height:0;max-width:0;opacity:0;overflow:hidden;">A Nature paper just prov=
+ed models pass hidden traits through pure numbers.</div>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2=
+Faiweekly.co"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/production/p=
+ublication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=3D"AI Ne=
+ws Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co%2Fissues%2F485">Read Online</a>
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co%2Fissues">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%=
+2F%2Faiweekly.co%2Fissues%2F485">When AI teaches AI, it teaches in secret</=
+a></h1>
+      <div class=3D"date">April 19th 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><h2>Watch &amp; Listen First</h2>
+<p><strong>Jensen Huang on Dwarkesh: The $4 Trillion Company</strong> =C2=
+=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fo=
+pen.spotify.com%2Fepisode%2F1viBRy6dQdlSw0OdFvogXB">Listen on Spotify</a><b=
+r />
+-&gt; Huang on TPU competition, why Anthropic drove "100% of TPU growth", a=
+nd why Nvidia's supply-chain moat is harder to copy than any benchmark. The=
+ best single piece of context for everything else below.</p>
+<p><strong>Simon Willison on Lenny's Podcast -- An AI State of the Union</s=
+trong> =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps=
+%3A%2F%2Fopen.spotify.com%2Fepisode%2F0DVjwLT6wgtscdB78Qf1BQ">Listen on Spo=
+tify</a><br />
+-&gt; "Dark factories," agentic engineering, and why November 2025 was the =
+real inflection point. 1h39m, worth every minute.</p></div>
+
+        <div class=3D"email-sponsor" style=3D"background:#1a1a2e;padding:24=
+px 30px;text-align:center;">
+      <p style=3D"color:#fff;font-size:17px;font-weight:700;margin:0 0 6px;=
+">Get more from AI Weekly</p>
+      <p style=3D"color:#ccc;font-size:14px;margin:0 0 18px;line-height:1.5=
+;">Breaking stories as they happen. Deep dives on the topics you care about=
+. 50+ free courses from Stanford, MIT, and more.</p>
+      <div style=3D"margin:0 auto;max-width:500px;">
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co%2Fai-news-today" style=3D"display:inline-block;background:#c=
+00;color:#fff;padding:10px 22px;border-radius:6px;text-decoration:none;font=
+-weight:700;font-size:13px;margin:4px;">AI Alerts =E2=80=94 Live</a>
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co%2Fnewsletters" style=3D"display:inline-block;background:tran=
+sparent;color:#fff;padding:10px 22px;border-radius:6px;text-decoration:none=
+;font-weight:700;font-size:13px;border:2px solid #fff;margin:4px;">Deep Div=
+e Topics</a>
+        <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Faiweekly.co%2Flearning-ai%2Fcourses" style=3D"display:inline-block;backg=
+round:transparent;color:#fff;padding:10px 22px;border-radius:6px;text-decor=
+ation:none;font-weight:700;font-size:13px;border:2px solid #fff;margin:4px;=
+">Free AI Courses</a>
+      </div>
+      <div style=3D"margin:18px auto 0;max-width:500px;text-align:left;">
+        <p style=3D"color:#ccc;font-size:13px;margin:0 0 8px;line-height:1.=
+5;">&#x1F514; <strong style=3D"color:#fff;">AI Alerts:</strong> When a stor=
+y like Mythos or the Musk filing breaks, alert subscribers know within hour=
+s =E2=80=94 not days. Max 2/day, zero noise.</p>
+        <p style=3D"color:#ccc;font-size:13px;margin:0;line-height:1.5;">&#=
+x1F4DA; <strong style=3D"color:#fff;">Free AI Courses:</strong> Stanford CS=
+229, MIT 6.S191, Karpathy's neural net series, and more =E2=80=94 hand-pick=
+ed courses that are actually worth your time.</p>
+      </div>
+    </div>
+
+    <div class=3D"email-body">
+      <h2>Last Week You Voted</h2>
+<p>We asked whether AI companies should be legally liable when their models=
+ give wrong advice that causes real harm. The plurality =E2=80=94 nearly ha=
+lf =E2=80=94 said <strong>yes, full product liability</strong>. Barely one =
+in seven put the responsibility entirely on the user.</p>
+<p>And it lands in a week where <a href=3D"https://aiweekly.co/t/c/493039ec=
+53f3149a?u=3Dhttps%3A%2F%2Fcoloradosun.com%2F2026%2F04%2F10%2Felon-musk-col=
+orado-ai-law-federal-court-lawsuit%2F">xAI just asked a federal judge</a> t=
+o rule that training an AI model is constitutionally-protected speech =E2=
+=80=94 the clearest attempt yet to keep that liability question out of stat=
+e court.</p>
+<p><a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fai=
+weekly.co%2Fsurvey%2F2%2Fresults">See full results &rarr;</a></p>
+    <div style=3D"background:#f8f9fa;padding:24px 30px;margin:20px 0 0;bord=
+er-radius:4px;border-left:4px solid #24ab8a;">
+      <p style=3D"font-size:13px;font-weight:700;color:#24ab8a;text-transfo=
+rm:uppercase;letter-spacing:1px;margin:0 0 4px;font-family:'Lato','Helvetic=
+a Neue',Helvetica,Arial,sans-serif;">Quick Poll</p>
+      <p style=3D"font-size:17px;color:#454547;margin:0 0 16px;line-height:=
+1.5;font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;">How wo=
+uld you prefer to receive your deep dives?</p>
+      <div>
+              <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps=
+%3A%2F%2Faiweekly.co%2Fsurvey%2F3%2Fvote%2F0%3Ftoken%3D493039ec53f3149a" st=
+yle=3D"display:block;background:#24ab8a;color:#ffffff;padding:12px 20px;bor=
+der-radius:4px;text-decoration:none;font-weight:700;font-size:15px;margin-b=
+ottom:8px;text-align:center;font-family:'Lato','Helvetica Neue',Helvetica,A=
+rial,sans-serif;">&#9876;&#65039; One weekly digest with all my deep dives<=
+/a>      <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2=
+F%2Faiweekly.co%2Fsurvey%2F3%2Fvote%2F1%3Ftoken%3D493039ec53f3149a" style=
+=3D"display:block;background:#24ab8a;color:#ffffff;padding:12px 20px;border=
+-radius:4px;text-decoration:none;font-weight:700;font-size:15px;margin-bott=
+om:8px;text-align:center;font-family:'Lato','Helvetica Neue',Helvetica,Aria=
+l,sans-serif;">&#128188; Separate emails, one per topic I follow</a>      <=
+a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Faiweek=
+ly.co%2Fsurvey%2F3%2Fvote%2F2%3Ftoken%3D493039ec53f3149a" style=3D"display:=
+block;background:#24ab8a;color:#ffffff;padding:12px 20px;border-radius:4px;=
+text-decoration:none;font-weight:700;font-size:15px;margin-bottom:8px;text-=
+align:center;font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif=
+;">&#129504; No preference</a>
+      </div>
+      <p style=3D"font-size:12px;color:#999;margin:12px 0 0;font-family:'La=
+to','Helvetica Neue',Helvetica,Arial,sans-serif;">Pick one. We'll cover the=
+ top answer next week.</p>
+    </div>
+<hr />
+<h2>Quick Hits</h2>
+<ul>
+<li><strong>Anthropic shipped Claude Opus 4.7</strong>: <a href=3D"https://=
+aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fventurebeat.com%2Ftechno=
+logy%2Fanthropic-releases-claude-opus-4-7-narrowly-retaking-lead-for-most-p=
+owerful-generally-available-llm">87.6% on SWE-bench Verified</a>, up from 8=
+0.8%. Unchanged pricing. Vision resolution tripled. The frontier moved in a=
+ point release.</li>
+<li><strong>Google AI Max replacing Dynamic Search Ads</strong>: <a href=3D=
+"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fsearchenginelan=
+d.com%2Fgoogle-retire-dynamic-search-ads-ai-max-474262">Every DSA campaign =
+auto-upgrades by September</a>. 7% more conversions at the same CPA. If you=
+ run Google Ads, the migration clock started this week.</li>
+<li><strong>HubSpot went outcome-based</strong>: <a href=3D"https://aiweekl=
+y.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.businesswire.com%2Fnews%2Fh=
+ome%2F20260414056889%2Fen%2FHubSpot-Puts-Growth-Context-to-Work-with-New-Hu=
+bSpot-AEO-AI-Agents-Smart-Deal-Progression-and-100-Updates">$0.50 per resol=
+ved conversation, $1 per qualified lead</a>. First major martech vendor tyi=
+ng price to performance. Every procurement RFP next quarter will ask why yo=
+urs doesn't.</li>
+<li><strong>Forrester named Physical AI a Top 10 2026 tech</strong>: <a hre=
+f=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.manilat=
+imes.net%2F2026%2F04%2F16%2Ftmt-newswire%2Fpr-newswire%2Fforresters-top-10-=
+emerging-technologies-for-2026-ai-is-no-longer-confined-to-digital-workflow=
+s%2F2321655">The analyst consensus moment for "AI that leaves the screen"</=
+a>. World models, robotics foundation models, and VLA stacks are now enterp=
+rise roadmap line items.</li>
+<li><strong>Unitree's G1 humanoid ships at $16,000</strong>: Consumer-grade=
+ bipedal robots are <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=
+=3Dhttps%3A%2F%2Fwww.unitree.com%2Fg1">pricing like premium appliances</a>,=
+ not lab equipment. Chery's $42K humanoid (covered Tuesday) just got flanke=
+d on price.</li>
+<li><strong>NVIDIA shipped Ising for quantum error correction</strong>: <a =
+href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fnvidiane=
+ws.nvidia.com%2Fnews%2Fnvidia-launches-ising-the-worlds-first-open-ai-model=
+s-to-accelerate-the-path-to-useful-quantum-computers">2.5=C3=97 the speed o=
+f pyMatching at 3=C3=97 accuracy</a>. First time an AI model is the control=
+ plane for qubits, not a post-processing layer.</li>
+<li><strong>Tesla won first European FSD approval</strong>: <a href=3D"http=
+s://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fnationaltoday.com%2F=
+us%2Fca%2Flos-angeles%2Fnews%2F2026%2F04%2F11%2Ftesla-unveils-plans-for-opt=
+imus-humanoid-robots-and-fsd-controversy%2F">Dutch RDW green-lit FSD Superv=
+ised on April 10</a>. First end-to-end neural driving cleared for a contine=
+nt that regulators had made hostile to it.</li>
+<li><strong>Cerebras refiled for IPO</strong>: <a href=3D"https://aiweekly.=
+co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.bloomberg.com%2Fnews%2Farticl=
+es%2F2026-04-17%2Fai-chipmaker-cerebras-systems-files-publicly-again-for-us=
+-ipo">$510M 2025 revenue, $20B OpenAI compute contract</a>. First meaningfu=
+l public-market test of an Nvidia alternative.</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Alignment just became a data-provenance problem.</strong> A Nat=
+ure paper this week showed models can pass behavioral traits to each other =
+through data that contains zero semantic signal of the trait. Every synthet=
+ic-data pipeline in production =E2=80=94 and that's most of them =E2=80=94 =
+needs a teacher/student family audit this quarter.</li>
+<li><strong>The AI trade is no longer about models =E2=80=94 it's about mar=
+gin and distribution.</strong> The richest labs are turning down capital to=
+ protect IPO optionality. Coding tools are doubling in six months. Pharma i=
+s picking cloud sides. Bet on who captures the margin, not who trains the b=
+iggest.</li>
+<li><strong>State AI law is heading to federal court.</strong> The argument=
+ that model training is First Amendment-protected speech would collapse hal=
+f of what compliance teams are currently building. Colorado is the first co=
+urtroom test.</li>
+<li><strong>Physical AI is officially mainstream.</strong> When Forrester a=
+dds it to the Top 10 Emerging Tech list, the CIO budget follows. Robots are=
+ now a line item, not a research poster.</li>
+</ul>
+<hr />
+<h2>The Secret AIs Are Passing to Each Other</h2>
+<p><strong>Anthropic's Subliminal Learning Paper Lands in Nature</strong> =
+=C2=B7 April 15 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?=
+u=3Dhttps%3A%2F%2Falignment.anthropic.com%2F2025%2Fsubliminal-learning%2F">=
+Anthropic Alignment</a><br />
+-&gt; Picture this. You take a teacher model that prefers owls. You ask it =
+to output long sequences of random-looking integers. You then fine-tune a s=
+tudent model on those integers. The student =E2=80=94 which has never seen =
+the word "owl" anywhere in its training data =E2=80=94 suddenly starts pref=
+erring owls. The paper proves this isn't a fluke: it's a theorem. Any suffi=
+ciently small gradient step on teacher-generated data provably shifts the s=
+tudent toward the teacher, regardless of what the data nominally contains. =
+Owls transfer through numbers. More chilling: misalignment transfers throug=
+h chain-of-thought that reads perfectly clean on inspection. Every "Qwen fi=
+ne-tunes Qwen" or "Llama distills from Llama" pipeline in production right =
+now is quietly inheriting whatever subtle misalignment its teacher has =E2=
+=80=94 and there is no content filter that can catch it, because the payloa=
+d isn't in the semantics. The one saving grace: the effect only shows up wh=
+en teacher and student share a base model, which means cross-family distill=
+ation is structurally safer than self-improvement. Family-graph audits and =
+provenance policies just became mandatory infrastructure. Expect every fron=
+tier lab with a synthetic-data flywheel to publish a teacher/student policy=
+ by end of Q2. <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttp=
+s%3A%2F%2Farxiv.org%2Fabs%2F2507.14805">Companion technical writeup on arXi=
+v</a> =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%=
+3A%2F%2Fventurebeat.com%2Fai%2Fsubliminal-learning-anthropic-uncovers-how-a=
+i-fine-tuning-secretly-teaches-bad-habits">practitioner summary from Ventur=
+eBeat</a>.</p>
+<hr />
+<h2>The Quarter That Broke Venture</h2>
+<p><strong>Q1 2026 Global VC Hit $330.9B =E2=80=94 AI Took 81%</strong> =C2=
+=B7 April 18 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=
+=3Dhttps%3A%2F%2Fkpmg.com%2Fxx%2Fen%2Fmedia%2Fpress-releases%2F2026%2F04%2F=
+global-vc-investment-surges-to-record-330-9-billion-dollar-in-q1-26.html">K=
+PMG Venture Pulse</a><br />
+-&gt; A single quarter just topped every full-year venture total before 201=
+8. AI absorbed $242B of the $330B. Mega-rounds ($500M+) were 86% of the dol=
+lars. And on top of that, <a href=3D"https://aiweekly.co/t/c/493039ec53f314=
+9a?u=3Dhttps%3A%2F%2Ftechcrunch.com%2F2026%2F04%2F17%2Fsources-cursor-in-ta=
+lks-to-raise-2b-at-50b-valuation-as-enterprise-growth-surges%2F">Cursor is =
+raising $2B at a $50B valuation</a> on $2B ARR =E2=80=94 Nvidia joining the=
+ round. <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F=
+%2Ftechcrunch.com%2F2026%2F04%2F15%2Fanthropic-shrugs-off-vc-funding-offers=
+-valuing-it-at-800b-for-now%2F">Anthropic is batting away offers at $800B</=
+a>, signaling IPO optionality over another private round. <a href=3D"https:=
+//aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.bloomberg.com%2Fne=
+ws%2Farticles%2F2026-04-17%2Fai-chipmaker-cerebras-systems-files-publicly-a=
+gain-for-us-ipo">Cerebras refiled for Nasdaq at $22-25B</a> on the back of =
+a $20B OpenAI compute contract. The question is no longer "is there a bubbl=
+e" =E2=80=94 it's which subcategory can justify the prices being paid. <a h=
+ref=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.bloom=
+berg.com%2Fnews%2Fnewsletters%2F2026-04-15%2Fmaybe-we-can-talk-about-an-ai-=
+bubble-again">Bloomberg reopened the bubble debate with fresh margin math</=
+a>.</p>
+<hr />
+<h2>Engineering's AI-Justified Cut</h2>
+<p><strong>Snap Cuts 1,000 Jobs (16%) Citing 65% AI-Generated Code =E2=80=
+=94 Stock Up 7%</strong> =C2=B7 April 15 =C2=B7 <a href=3D"https://aiweekly=
+.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Ftechcrunch.com%2F2026%2F04%2F15%=
+2Fsnap-is-cutting-1000-jobs-16-of-its-workforce%2F">TechCrunch</a><br />
+-&gt; Spiegel's memo cited 65% AI-generated code and projected $500M in ann=
+ualized savings by H2 2026. Shares rose 7% on the announcement. This is now=
+ the expected market response =E2=80=94 AI-justified layoffs are a bullish =
+signal, not a restructuring one. But the <a href=3D"https://aiweekly.co/t/c=
+/493039ec53f3149a?u=3Dhttps%3A%2F%2Fpress.roberthalf.com%2F2026-04-16-Rober=
+t-Half-survey-Todays-professionals-share-what-early-career-workers-need-to-=
+succeed-beyond-AI-skills">boomerang pattern</a> is also real: Robert Half's=
+ April 16 survey found 29% of companies that made AI-driven cuts are quietl=
+y rehiring. The cleanest read: AI-plus-human still beats AI-alone on most e=
+ngineering work, and the companies that cut first will pay the re-hire prem=
+ium.</p>
+<hr />
+<h2>Pharma Picked Sides</h2>
+<p><strong>Novo Nordisk Bets on OpenAI, Eli Lilly Bets on NVIDIA</strong> =
+=C2=B7 April 14-16 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f314=
+9a?u=3Dhttps%3A%2F%2Fwww.cnbc.com%2F2026%2F04%2F14%2Fnovo-nordisk-openai-ai=
+-drug-discovery-healthcare-nvo.html">CNBC</a><br />
+-&gt; Two of the world's biggest pharma companies announced foundation-mode=
+l partnerships in the same week, picking opposite stacks. Novo went with Op=
+enAI's enterprise tier for drug-discovery workflows. Lilly went with NVIDIA=
+'s BioNeMo for molecular design and clinical trial analytics. The strategic=
+ question this raises: when the frontier model is roughly the same price ev=
+erywhere, the moat shifts to proprietary data =E2=80=94 and pharma has the =
+most valuable proprietary datasets in the world. Expect every top-20 pharma=
+ to lock in a stack by year-end, and expect the cloud/model arbitrage to ge=
+t messy fast.</p>
+<hr />
+<h2>The Physical-AI Stack Shipped a Product</h2>
+<p><strong>Physical Intelligence Releases pi0.7 =E2=80=94 and a Hyundai Fac=
+tory Deploys It</strong> =C2=B7 April 16 =C2=B7 <a href=3D"https://aiweekly=
+.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Ftechcrunch.com%2F2026%2F04%2F16%=
+2Fphysical-intelligence-pi07%2F">TechCrunch</a><br />
+-&gt; Pi's pi0.7 robotics foundation model landed in a Hyundai-owned humano=
+id assembly line the same day as the paper. The model demonstrates "composi=
+tional generalization" =E2=80=94 transferring skills learned on one task to=
+ a genuinely new one without fine-tuning, which has been the holy grail of =
+robotics for a decade. Combined with <a href=3D"https://aiweekly.co/t/c/493=
+039ec53f3149a?u=3Dhttps%3A%2F%2Fdeepmind.google%2Fdiscover%2Fblog%2Fgemini-=
+robotics%2F">Google DeepMind's Gemini Robotics-ER 1.6 inside Boston Dynamic=
+s' Spot</a> and <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhtt=
+ps%3A%2F%2Fwww.unitree.com%2Fg1">Unitree's $16K G1 consumer humanoid</a>, t=
+he robotics platform war has quietly flipped into a model war =E2=80=94 and=
+ the robots are the distribution channel. <a href=3D"https://aiweekly.co/t/=
+c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fwww.manilatimes.net%2F2026%2F04%2F16%2=
+Ftmt-newswire%2Fpr-newswire%2Fforresters-top-10-emerging-technologies-for-2=
+026-ai-is-no-longer-confined-to-digital-workflows%2F2321655">Forrester's an=
+alyst report</a> this week is the strategic consensus catching up.</p>
+<hr />
+<h2>The Federal Court Test</h2>
+<p><strong>xAI Sues Colorado to Block the Consumer AI Protections Act</stro=
+ng> =C2=B7 April 10 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f31=
+49a?u=3Dhttps%3A%2F%2Fcoloradosun.com%2F2026%2F04%2F10%2Felon-musk-colorado=
+-ai-law-federal-court-lawsuit%2F">Colorado Sun</a><br />
+-&gt; xAI filed six constitutional claims against SB24-205 before its June =
+30 effective date =E2=80=94 most consequentially, that training and deployi=
+ng an AI model is "expressive conduct" protected by the First Amendment, an=
+d that Colorado's "reasonable care against algorithmic discrimination" stan=
+dard unconstitutionally compels speech. If xAI wins on First Amendment grou=
+nds, every state AI anti-discrimination statute =E2=80=94 California's ADMT=
+ rules, Illinois's hiring disclosure law, the full state patchwork =E2=80=
+=94 is in jeopardy overnight. IAPP has the <a href=3D"https://aiweekly.co/t=
+/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fiapp.org%2Fnews%2Fa%2Fxai-v-bonta-a-c=
+onstitutional-clash-for-training-data-transparency">clearest legal breakdow=
+n</a>. Compliance teams quietly building for state-by-state enforcement sho=
+uld have a federal-preemption scenario modeled by next week.</p>
+<hr />
+<h2>Also Worth Knowing</h2>
+<p><strong>Google Negotiates Classified Gemini for the Pentagon</strong> =
+=C2=B7 April 16 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?=
+u=3Dhttps%3A%2F%2Fnews.bloomberglaw.com%2Fartificial-intelligence%2Fgoogle-=
+in-talks-with-pentagon-to-use-gemini-models-information">Bloomberg Law</a><=
+br />
+-&gt; Chasing Microsoft and Amazon into classified defense work. A full rev=
+ersal from 2018's Maven protest. Federal AI is officially a revenue line.</=
+p>
+<p><strong>Stanford AI Index 2026: China's Capability Gap Hit 2.7 Points</s=
+trong> =C2=B7 April 15 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53=
+f3149a?u=3Dhttps%3A%2F%2Fhai.stanford.edu%2Fai-index%2F2026-ai-index-report=
+">Stanford HAI</a><br />
+-&gt; The narrowest US-China capability gap on record. China leads on paten=
+ts and robot rollouts. A lot of the US leadership premium the market is pri=
+cing has a shorter shelf life than the narrative suggests.</p>
+<p><strong>Gemini 3 Deep Think Opens API Access</strong> =C2=B7 April =C2=
+=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fb=
+log.google%2Finnovation-and-ai%2Fmodels-and-research%2Fgemini-models%2Fgemi=
+ni-3-deep-think%2F">Google DeepMind</a><br />
+-&gt; The reasoning tier is now programmable, not just a chat feature. Gold=
+-medal results on the 2025 Physics and Chemistry Olympiads give researchers=
+ a new ceiling to aim at.</p>
+<p><strong>Mamba-3 Halves the State Size at Equal Perplexity</strong> =C2=
+=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2F%2Fo=
+penreview.net%2Fforum%3Fid%3DHwCvaJOiCj">OpenReview</a><br />
+-&gt; Complex-valued state updates plus a MIMO design deliver Mamba-2 perpl=
+exity at half the hidden state, with a +1.2 accuracy bump at 1.5B scale. Li=
+near-time inference at transformer-equivalent quality is now a deployable s=
+erving profile =E2=80=94 the cost math on long-context workloads just chang=
+ed.</p>
+<p><strong>Bluefish Raises $43M to Put Brands Inside ChatGPT</strong> =C2=
+=B7 April 14 =C2=B7 <a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=
+=3Dhttps%3A%2F%2Fwww.adweek.com%2Fmedia%2Fbluefish-raises-43m-to-help-brand=
+s-show-up-in-chatgpt-rufus-and-others%2F">Adweek</a><br />
+-&gt; Threshold Ventures + NEA co-led, with Amex Ventures, Salesforce Ventu=
+res, Bloomberg Beta. ~10% of the Fortune 500 now pays to monitor and influe=
+nce brand portrayal inside AI answers. "Answer Engine Optimization" is offi=
+cially a funded category.</p>
+<hr />
+<p><em>The week's lesson: when the frontier model holds its price, the capi=
+tal turns down, the chipmaker files for IPO, the engineer gets cut, the pha=
+rma companies pick sides, and a state AI law ends up in federal court =E2=
+=80=94 the stack is being repriced from every direction at once. Next week'=
+s winners are the ones who can read which price is real.</em></p>
+    </div>
+
+   =20
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://aiweekly.co/t/c/493039ec53f3149a?u=3Dhttps%3A%2=
+F%2Faiweekly.co">AI News Weekly</a> | <a href=3D"https://aiweekly.co/t/c/49=
+3039ec53f3149a?u=3Dhttps%3A%2F%2Faiweekly.co%2Fissues">Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://aiweekly.co/unsubscribe?email=3Dwuliang%40xiangz=
+izai.com&token=3D54e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a20=
+53902a">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+</body>
+</html>

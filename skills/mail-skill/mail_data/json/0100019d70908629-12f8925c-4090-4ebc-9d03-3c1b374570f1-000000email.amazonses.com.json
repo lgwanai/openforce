@@ -1,0 +1,19 @@
+{
+  "message_id": "<0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000@email.amazonses.com>",
+  "imap_uid": "3030",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "We miss you — should we keep sending AI Weekly?",
+  "sender": "alexis@aiweekly.co",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-09T04:46:52+00:00",
+  "body_text": "Should we keep sending?\nHey,\nIt looks like you haven't opened an AI Weekly email yet, and we don't want to clutter your inbox if you're no longer interested.\nWe'll automatically stop sending to you in\n30 days\nunless you let us know you'd like to stay.\nTo stay subscribed, just do one of these:\nYes, keep me subscribed\nClicking the button above or opening any future email counts as staying.\nWant to receive less?\nYou can switch to a weekly digest, pick specific topics, or choose your delivery time in\nyour preferences\n.\n— Alexis, AI Weekly\nAI Weekly\n|\nPreferences\nUnsubscribe\n— no hard feelings.",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019d70908629-12f8925c-4090-4ebc-9d03-3c1b374570f1-000000email.amazonses.com.eml"
+}

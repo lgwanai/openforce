@@ -1,0 +1,21 @@
+{
+  "message_id": "<0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000@email.amazonses.com>",
+  "imap_uid": "2986",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Ollama's cloud to power OpenClaw  ",
+  "sender": "hello@ollama.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-04T23:39:16+00:00",
+  "body_text": "\r\n\r\n \r\nOllama is here to support your usage of third-party tools like OpenClaw. If you are using Ollama's cloud, we have refreshed your\r\nOllama subscription usage.\r\n \r\nOpenClaw is a personal AI assistant that can clear your inbox, send emails, manage your calendar, and complete other tasks via\r\nmessaging apps like WhatsApp, Telegram, iMessage, or any chat app you already use.\r\n \r\nOllama's cloud plans [https://ollama.com/pricing] are designed as for the usage patterns of third-party tools. You can trust\r\nOllama's cloud [https://ollama.com/pricing] to power your projects, tools, and integrations. There are no surprise fees or banning\r\nyour favorite integrations.\r\n\r\n\r\nhttps://ollama.com/pricing\r\n\r\n\r\nSet up OpenClaw\r\n\r\nOpen a terminal, and type in:\r\n \r\nollama launch openclaw\r\n \r\nBy default, Ollama will also configure openclaw to use its web search functionality.\r\n \r\nIf you want to customize your OpenClaw after to connect different chat apps or other integrations, please run:\r\n \r\nopenclaw onboard\r\n \r\n\r\n\r\nSome models to try 🦞\r\n\r\n * kimi-k2.5:cloud\r\n\r\n * glm-5:cloud\r\n\r\n * minimax-m2.7:cloud\r\n\r\n * gemma4:31b-cloud\r\n\r\n \r\n\r\nDownload Ollama [https://ollama.com/download]\r\n\r\n \r\nIf you have any feedback, please directly reply to this email or join Ollama's Discord channel\r\n[https://discord.com/invite/ollama].\r\n \r\n❤️ Ollama\r\nYou are receiving this email because you opted-in to receive updates from Ollama\r\nOllama, 744 High Street, Palo Alto, CA 94301\r\nUnsubscribe [https://app.loops.so/unsubscribe/cmnkz57is64uc017k68rcag5x/43ec6db3f495c5f52b966be84be144e3814ec83573cd9e22b03ab51428f3670b6d4da2d134c921f47225c040654b869561ff4720d22b03e0b3b2ab62]\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019d5add785b-99783d91-df58-4c24-8c51-4612c526bd8b-000000email.amazonses.com.eml"
+}

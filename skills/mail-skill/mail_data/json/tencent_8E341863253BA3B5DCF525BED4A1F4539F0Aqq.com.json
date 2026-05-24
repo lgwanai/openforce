@@ -1,0 +1,21 @@
+{
+  "message_id": "<tencent_8E341863253BA3B5DCF525BED4A1F4539F0A@qq.com>",
+  "imap_uid": "2981",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "月度消费报告",
+  "sender": "cloud_noreply@tencent.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-04T10:16:00+08:00",
+  "body_text": "2026-03月度消费报告\r\n\r\n\r\n尊敬的腾讯云用户，您好！\r\n \r\n&nbsp; &nbsp; &nbsp; &nbsp;您的腾讯云账号（账号 ID：100033230111，昵称：100033230111），2026-03 月度消费已出账。以下是您在&nbsp;2026/03/01-2026/03/31 的总消费概览：\r\n \r\n\r\n\r\n\r\n  优惠后总价\r\n49.67 元\r\n \r\n现金支付\r\n44.67 元\r\n \r\n优惠券支付\r\n5.00 元\r\n \r\n赠送金支付\r\n0.00 元\r\n \r\n  说明：优惠后总价 = 现金支付&nbsp;+ 优惠券支付&nbsp;+ 赠送金支付。您可点击&nbsp;[查看账单]&nbsp;查看明细费用构成\r\n \r\n查看账单\r\n                                             \r\n\r\n                                                                                              温馨提示1. 此通知并非扣费或欠费通知，只作为告知您每个月的消费情况，以便您更了解自己在腾讯云的消费情况；2. 若您对本月账单费用有任何问题或争议，可联系您的客户经理，或&nbsp;提交工单&nbsp;反馈给我们，我们将尽快为您解答、核实和处理。3. 如需修改账单通知接收人，您可登录腾讯云官网，进入消息中心-消息订阅&nbsp;进行修改。                                                                                                                                                                                                                                     \r\n此致&nbsp;\r\n                                                 腾讯云团队                                             \r\n                                                                                                                                                                                                 \r\n                                                                                                         \r\n                                                                                                                                                                                                                                 \r\n此为系统邮件，请勿回复。 取消订阅\r\n                                         \r\n\r\n                                         \r\n关注服务号，移动管理云资源                                             \r\n                                                                                      \r\n                                         \r\n                                             Copyright © 2013 - 2026 Tencent Cloud.                                             \r\n                                             All Rights Reserved. 腾讯云 版权所有",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/tencent_8E341863253BA3B5DCF525BED4A1F4539F0Aqq.com.eml"
+}

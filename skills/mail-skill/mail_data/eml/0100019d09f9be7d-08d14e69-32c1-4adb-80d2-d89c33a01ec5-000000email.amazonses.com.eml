@@ -1,0 +1,1112 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.9.7)
+ smtp.mailfrom=0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@apps.taskade.com;
+ dkim=pass header.b=m3NikNxUQB header.i=@taskade.com
+ header.s=aons5oehdtoq7nivooj4n75spgvik6l4;
+ dkim=pass header.b=UGeOkocp6H header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=taskade.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=2PjFkGC/5RJi0xnzMkha9YguvlcNOkcBEIrx+mGq97M=;
+ b=lRfrGP53J+7Y2rjyoPhRNJ7RsgCh+xkOc/GUdXk2nvF1PQzCXG+oV+B8jJpsxyVpaB4rAVQ
+ QDLofXafenTUcoYGc5XgzHpcjHME0O+LHs7EJ/CS2IzAUMhdIxa85XkxIcHMNRgMiOHVwlRj5
+ IawozpioQNTUJNWIt/HWV9pP+2WpTd9LAdF4HvGTKOYmwkjB7VCyMXqqDDC2Jv3Tk59szbBlD
+ LKLFb8nteFjVTn1uck2ax2iXqnq5Sxp9Ac4HlQu0OAAKHQQAbMzoMhJUEXWqMlx4w/hbcIXQt
+ hEt74QOIUa/pT06SQAskpAgLN995eCqBv4doEIoRKBA53rkIPXKA==
+Arc-Seal: i=1; a=rsa-sha256; t=1773988868; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=LM9TR/olmvjRWmYJNutHM/8CDT1ZfARVQ7uV2ON77OIDOGjWWBoLGpMj4XgAoumb2ihojSA
+ fr1A5kzm1lZtTzoUu9UWA+fLu/UvqJ0vJTUsMUGB0LRseocM2a0CKFf7wNmb7Mqp2zEv4OAxC
+ Jn+S2a9WXvlP3XEJxvxeWtnOKbIwzg7+XilZ25vPG/1gWUJW+8Bcee2BGHBTIHPToz3G5ewSr
+ L+yg35dloD2BO1raPMPcsLmZ9KyrShAAevMKtTm2VCce8biMFtseutiPqKSngHlqSSk0h8uLq
+ lfJ123cVcITdsMNhmXaKXDwZ+Bp7x6Iz0D6j1aDcj4TWYsQQZtwQ==
+Authentication-Results: lms; spf=pass (client-ip:54.240.9.7)
+ smtp.mailfrom=0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@apps.taskade.com;
+ dkim=pass header.b=m3NikNxUQB header.i=@taskade.com
+ header.s=aons5oehdtoq7nivooj4n75spgvik6l4;
+ dkim=pass header.b=UGeOkocp6H header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=taskade.com;
+ arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 20 Mar 2026 06:40:55 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=aons5oehdtoq7nivooj4n75spgvik6l4; d=taskade.com; t=1773988855;
+ h=Date:To:From:Reply-To:Subject:Message-ID:List-Unsubscribe-Post:List-Unsubscribe:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=12r3lVUKah8+wItjJzd9RasQX3CjoKVqVNGDRwh1bfs=;
+ b=m3NikNxUQBqlbdFArDbNWy9nH0h2IAPU2AqOhwnXvCuSXsJjSvlVDau5liU780s2
+ c4mGuIdrABHfvl3x8ZYTdbF1RhcoPGwV91IyQOtxRjJ1bHPVwJ6a6NBLNdXNmf2Q4x0
+ zIOmD6xb+EPozXSVu3S1TEaPII4VJJJEORQQ56e4=
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1773988855;
+ h=Date:To:From:Reply-To:Subject:Message-ID:List-Unsubscribe-Post:List-Unsubscribe:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID;
+ bh=12r3lVUKah8+wItjJzd9RasQX3CjoKVqVNGDRwh1bfs=;
+ b=UGeOkocp6HkLyeD8LjW1P3KvK+O7u00Ca40BPnUEEZKblqoqN8ScXejeGPIPU0y+
+ J4TcHVs52nakGPi4yOnHiyHAkOo+VoRLe+nm8F3dVDe1kik+w0AvQewJGS0KcSK2/F1
+ ejSae6eP+asSM3w7L9vZB8IbCbMRr75gn9E+84aU=
+Feedback-Id: 
+ ::1.us-east-1./Od5EZyqwYHp86CdjsvslHj4QtKIcsO/cqFKtB6GFk4=:AmazonSES
+From: John at Taskade <updates@taskade.com>
+List-Unsubscribe: 
+ <https://www.taskade.com/newsletters/unsubscribe/0czEE22BvikQM4lO25cxtjEtQJt6pS763VUHriWFkm763BY/YfNqJScJU5Aav9XSnZrf3w/LBdBN1JioWzGZbFxVWoCXg>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@email.amazonses.com>
+Mime-Version: 1.0
+Precedence: Bulk
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.9.7;
+ helo=a9-7.smtp-out.amazonses.com;
+ envelope-from=0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@apps.taskade.com;
+ receiver=<UNKNOWN>;
+Reply-To: John at Taskade <hello@taskade.com>
+Subject: 
+ =?UTF-8?Q?=F0=9F=A7=AC_Taskade_Genesis:_Publish_Apps._Own_Your_Page._Buil?=
+ =?UTF-8?Q?d_Smarter.?=
+To: Wuliang <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773988862/4fcXyN3M31znNkBh/69BCEBFC.003/54.240.9.7/a9-7.smtp-out.amazonses.com/localhost/<0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@apps.taskade.com>
+X-Fangmail-Mid-Qid: 69BCEBFC.003/4fcXyN3M31znNkBh
+X-Fangmail-Miltered: at n151-171-210 with ID 69BCEBFC.003 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.9.7
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d09f9be7d-08d14e69-32c1-4adb-80d2-d89c33a01ec5-000000@apps.taskade.com
+X-Lms-Pvf: 
+ MnwyfDF8fMg7AW9Jgxf5h9nyMyRB9swNBOu6ItshrZHleS+Us7kGB3hivL7xXerTJc4cQ7OB6nM1FvWFejAFlG5vnsYtmWDx4AUgR1egoBJ+DcBDDyb1L0z8oamqFb5oZgEFmyNwIg==
+X-Mailer: Sendy (https://sendy.co)
+X-Ses-Outgoing: 2026.03.20-54.240.9.7
+
+<!DOCTYPE html>
+<html lang=3D"en" xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:o=3D"urn:sch=
+emas-microsoft-com:office:office" xmlns:v=3D"urn:schemas-microsoft-com:vml"=
+>
+<head><meta charset=3D"UTF-8"><meta http-equiv=3D"X-UA-Compatible" content=
+=3D"IE=3Dedge"><meta name=3D"viewport" content=3D"width=3Ddevice-width, ini=
+tial-scale=3D1.0"><meta name=3D"x-apple-disable-message-reformatting"><meta=
+ name=3D"format-detection" content=3D"telephone=3Dno,date=3Dno,address=3Dno=
+,email=3Dno,url=3Dno"><meta name=3D"color-scheme" content=3D"dark"><meta na=
+me=3D"supported-color-schemes" content=3D"dark"><meta name=3D"description" =
+content=3D"Taskade Genesis: Community profiles, 4 thinking modes, AI models=
+ from Anthropic, OpenAI, and Google. Publish app kits and get featured.">
+=09<title>=F0=9F=A7=AC Taskade Genesis: Publish Apps. Own Your Page. Build =
+Smarter.</title>
+=09<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</=
+o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<style>
+table {border-collapse: collapse;}
+td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-l=
+ine-height-rule: exactly;}
+</style>
+<![endif]-->
+=09<style type=3D"text/css">body {
+  margin: 0 !important; padding: 0 !important; width: 100% !important;
+  background-color: #000000 !important; color: #e5e5e5 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-=
+serif !important;
+  font-size: 16px !important; line-height: 1.6 !important;
+  -webkit-text-size-adjust: 100% !important; -ms-text-size-adjust: 100% !im=
+portant;
+}
+table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height=
+: 100%; outline: none; text-decoration: none; }
+a[x-apple-data-detectors] { color: inherit !important; text-decoration: non=
+e !important; }
+@media screen and (max-width: 600px) {
+  .wrapper { width: 100% !important; }
+  .content-cell { padding: 0 20px 32px !important; }
+  .header-cell { padding: 32px 20px 20px !important; }
+  h1 { font-size: 26px !important; }
+  .footer-cell { padding: 24px 20px !important; }
+  .store-img { width: 80px !important; margin: 3px !important; }
+  .btn-pair-cell { display: inline-block !important; text-align: center !im=
+portant; padding: 3px 2px !important; }
+  .btn-full { padding-left: 14px !important; padding-right: 14px !important=
+; font-size: 12px !important; letter-spacing: 0.02em !important; }
+  .model-table td { padding-left: 8px !important; padding-right: 8px !impor=
+tant; font-size: 10px !important; }
+  .model-table .model-name { font-size: 11px !important; }
+  .model-table .model-dots { font-size: 9px !important; letter-spacing: -0.=
+5px !important; }
+}
+=09</style>
+</head>
+<body id=3D"body" style=3D"margin:0;padding:0;width:100%;background-color:#=
+000000;color:#e5e5e5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI=
+',Roboto,sans-serif;"><!-- Preheader -->
+<div style=3D"display:none;font-size:1px;color:#000000;line-height:1px;max-=
+height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">Community pro=
+files are live. Claim your username, publish app kits, and get featured. 4 =
+thinking modes + AI models from 3 providers. =CD=8F =CD=8F =CD=8F =CD=8F =
+=CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =
+=CD=8F =CD=8F =CD=8F =CD=8F =CD=8F =CD=8F</div>
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background-color:#000000;" width=3D"100%">
+=09<tbody>
+=09=09<tr>
+=09=09=09<td align=3D"center" style=3D"padding:0;">
+=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"max-width:640px;width:100%;margin:0 auto;" width=3D"10=
+0%">
+=09=09=09=09<tbody>
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td style=3D"padding:16px 12px;">
+=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" r=
+ole=3D"presentation" style=3D"background-color:#0a0a0a;border-radius:16px;o=
+verflow:hidden;" width=3D"100%">
+=09=09=09=09=09=09=09<tbody><!-- =E2=94=80=E2=94=80 Logo =E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80 -->
+=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09<td align=3D"center" class=3D"header-cell" style=
+=3D"padding:40px 32px 24px;"><a href=3D"https://www.taskade.com/newsletters=
+/l/NF90e3qF4UFSk1D4R8DMfQ/fxM4QYzGIeASLrD2lYCtPQ/LBdBN1JioWzGZbFxVWoCXg" st=
+yle=3D"color:#ff2d60;text-decoration:none;"><img alt=3D"Taskade Logo Icon" =
+src=3D"https://www.taskade.com/newsletters/uploads/1771630598.png" style=3D=
+"width:44px;height:44px;background-color:#000000;border-radius:14px;padding=
+:2px;display:block;border-width:1px;border-style:solid;border-color:#222222=
+;" width=3D"44" /> </a></td>
+=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 Main Content =E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80 -->
+=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09<td class=3D"content-cell" style=3D"padding:0 32=
+px 40px;"><!-- Intro -->
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 20px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Hey Wuliang =F0=9F=91=8B</p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 16px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">You can now create a public profile on Taskade=
+. Your storefront for app kits, agents, workflows, and automations.</p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 16px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Claim your username, publish apps, earn credit=
+s, and&nbsp;<a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1=
+D4R8DMfQ/2z9892AxbTtcim3VQo5DnMLg/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#f=
+f2d60;text-decoration:none;font-weight:500;">get featured</a>.</p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Reply <strong style=3D"color:#ffffff;">&ldquo;=
+App Kit&rdquo;</strong> on <a href=3D"https://www.taskade.com/newsletters/l=
+/NF90e3qF4UFSk1D4R8DMfQ/BSPoEZBJ763LMOqeMG6Yd4og/LBdBN1JioWzGZbFxVWoCXg" st=
+yle=3D"color:#ff2d60;text-decoration:none;font-weight:500;">Twitter/X</a>, =
+<a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/892=
+9S2Bx2I0n6WtIrXlbaOSg/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;text-d=
+ecoration:none;font-weight:500;">LinkedIn</a>, or <a href=3D"https://www.ta=
+skade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/892WFdZT6b6IHa5CzxjS8PRQ/LBd=
+BN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;text-decoration:none;font-weigh=
+t:500;">Reddit</a> for early&nbsp;access.</p>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 1. YOUR PROFILE =
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80 --=
+>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:24px 0 8px 0;font-family:mono=
+space;font-size:11px;letter-spacing:0.12em;color:#ff2d60;text-transform:upp=
+ercase;">// Community Profiles</p>
+
+=09=09=09=09=09=09=09=09=09<h1 style=3D"font-size:32px;line-height:1.2;marg=
+in:0 0 16px 0;font-weight:600;letter-spacing:-0.02em;color:#ffffff;">Publis=
+h Apps. Own Your Page.</h1>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Create your public profile: <a href=3D"https:/=
+/www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/BZkQZ5YsCNj2J0tIa0JJx=
+w/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;text-decoration:none;font-=
+weight:500;">taskade.com/user/yourname</a></p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Publish your Genesis app kits, link your bio a=
+nd socials, and get discovered by other builders. Top creators are ranked o=
+n the <a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DM=
+fQ/2z9892AxbTtcim3VQo5DnMLg/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;=
+text-decoration:none;font-weight:500;">leaderboard</a>.</p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;"><a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/BZkQZ5YsCNj2J0tIa0J=
+Jxw/LBdBN1JioWzGZbFxVWoCXg"><img alt=3D"Taskade Community Profiles: publish=
+ apps, link your bio and socials" src=3D"https://www.taskade.com/newsletter=
+s/uploads/1771332026.gif" style=3D"width:100%;max-width:576px;border-radius=
+:8px;display:block;background-color:#111111;min-height:240px;" width=3D"576=
+" /></a></p>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" style=3D"margin:0 0 20px 0;background-color:#=
+0f0f0f;border-width:1px;border-style:solid;border-color:#1a1a1a;border-radi=
+us:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:6px 16px;backgroun=
+d-color:#111111;border-bottom:1px solid #1a1a1a;border-radius:12px 12px 0 0=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-family:monosp=
+ace;font-size:11px;color:#b0b0b0;"><span style=3D"color:#ff5f56;">=E2=97=
+=8F</span> <span style=3D"color:#ffbd2e;">=E2=97=8F</span> <span style=3D"c=
+olor:#27c93f;">=E2=97=8F</span> user.profile</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:16px 20px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;"><span style=3D"color:#27c93f;">=
+=E2=9C=93</span> <strong style=3D"color:#ffffff;">Your Public Page</strong>=
+</p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">publi=
+sh apps and own your corner of Taskade</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;"><span style=3D"color:#27c93f;">=
+=E2=9C=93</span> <strong style=3D"color:#ffffff;">Bio, Socials &amp; Links<=
+/strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">conne=
+ct your website, social profiles, and services</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;"><span style=3D"color:#27c93f;">=
+=E2=9C=93</span> <strong style=3D"color:#ffffff;">Community &amp; Marketpla=
+ce</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;"><a hr=
+ef=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/kzfdEAsG=
+KFW7HId0l7A58Q/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#808080;text-decorati=
+on:none;">browse apps</a>, earn XP, climb the leaderboard, and grow your au=
+dience</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding:4=
+px 0 4px;"><a class=3D"btn-full" href=3D"https://www.taskade.com/newsletter=
+s/l/NF90e3qF4UFSk1D4R8DMfQ/kzfdEAsGKFW7HId0l7A58Q/LBdBN1JioWzGZbFxVWoCXg" s=
+tyle=3D"display:inline-block;padding:14px 28px;font-size:14px;font-weight:6=
+00;line-height:1;background-color:#ff2d60;color:#ffffff;text-decoration:non=
+e;border-width:0;border-radius:8px;font-family:monospace;letter-spacing:0.0=
+5em;" target=3D"_blank">=E2=96=B6 Browse the Community</a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:24px 0 8px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 2. AI THINKING MODES =
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
+=E2=94=80=E2=94=80 -->
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:8px 0 8px 0;font-family:monos=
+pace;font-size:11px;letter-spacing:0.12em;color:#ff2d60;text-transform:uppe=
+rcase;">// Genesis Intelligence</p>
+
+=09=09=09=09=09=09=09=09=09<h1 style=3D"font-size:32px;line-height:1.2;marg=
+in:0 0 16px 0;font-weight:600;letter-spacing:-0.02em;color:#ffffff;">AI Thi=
+nking Modes</h1>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Your agents and the Genesis app generator now =
+support four thinking modes. Pick the right depth for the task, from quick =
+edits to multi-step reasoning. <a href=3D"https://www.taskade.com/newslette=
+rs/l/NF90e3qF4UFSk1D4R8DMfQ/607us08LJ3UXWmfFKzmeBw/LBdBN1JioWzGZbFxVWoCXg" =
+style=3D"color:#ff2d60;text-decoration:none;font-weight:500;">Learn more.</=
+a></p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;"><a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf76=
+3zxbHhA/LBdBN1JioWzGZbFxVWoCXg"><img alt=3D"AI Thinking Modes: Standard, Th=
+inking, Reasoning, and Auto mode selector" src=3D"https://www.taskade.com/n=
+ewsletters/uploads/1771332082.gif" style=3D"width:100%;max-width:576px;bord=
+er-radius:8px;display:block;background-color:#111111;min-height:240px;" wid=
+th=3D"576" /></a></p>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" style=3D"margin:0 0 20px 0;background-color:#=
+0f0f0f;border-width:1px;border-style:solid;border-color:#1a1a1a;border-radi=
+us:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:6px 16px;backgroun=
+d-color:#111111;border-bottom:1px solid #1a1a1a;border-radius:12px 12px 0 0=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-family:monosp=
+ace;font-size:11px;color:#b0b0b0;"><span style=3D"color:#ff5f56;">=E2=97=
+=8F</span> <span style=3D"color:#ffbd2e;">=E2=97=8F</span> <span style=3D"c=
+olor:#27c93f;">=E2=97=8F</span> thinking.modes</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:16px 20px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=E2=9A=A1 <strong style=3D"colo=
+r:#ffffff;">Standard</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">fast =
+responses for routine tasks, or let Auto pick for you</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=F0=9F=A7=A0 <strong style=3D"c=
+olor:#ffffff;">Thinking</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">deepe=
+r analysis for complex questions and plans</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=F0=9F=94=AC <strong style=3D"c=
+olor:#ffffff;">Reasoning</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">step-=
+by-step logic for multi-step problems</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding:4=
+px 0 4px;"><a class=3D"btn-full" href=3D"https://www.taskade.com/newsletter=
+s/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1JioWzGZbFxVWoCX=
+g" style=3D"display:inline-block;padding:14px 28px;font-size:14px;font-weig=
+ht:600;line-height:1;background-color:#ff2d60;color:#ffffff;text-decoration=
+:none;border-width:0;border-radius:8px;font-family:monospace;letter-spacing=
+:0.05em;" target=3D"_blank">=E2=96=B6 Try Thinking Modes</a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:24px 0 8px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 3. AI MODELS =E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80 -->
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:8px 0 8px 0;font-family:monos=
+pace;font-size:11px;letter-spacing:0.12em;color:#ff2d60;text-transform:uppe=
+rcase;">// Custom AI Agents</p>
+
+=09=09=09=09=09=09=09=09=09<h1 style=3D"font-size:32px;line-height:1.2;marg=
+in:0 0 16px 0;font-weight:600;letter-spacing:-0.02em;color:#ffffff;">Pick Y=
+our Model. Per Agent.</h1>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Every <a href=3D"https://www.taskade.com/newsl=
+etters/l/NF90e3qF4UFSk1D4R8DMfQ/l8v71i6ZwYIiYhl5Fc68TA/LBdBN1JioWzGZbFxVWoC=
+Xg" style=3D"color:#ff2d60;text-decoration:none;font-weight:500;">Custom AI=
+ Agent</a> and the <a href=3D"https://www.taskade.com/newsletters/l/NF90e3q=
+F4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1JioWzGZbFxVWoCXg" style=3D=
+"color:#ff2d60;text-decoration:none;font-weight:500;">Genesis app generator=
+</a> now let you select from Anthropic Claude, Google Gemini, and OpenAI GP=
+T models. Train agents with your own knowledge, embed them in live apps, an=
+d connect them to automations. All models support extended thinking.</p>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;"><a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf76=
+3zxbHhA/LBdBN1JioWzGZbFxVWoCXg"><img alt=3D"AI model selector: choose from =
+Anthropic, OpenAI, and Google models per agent" src=3D"https://www.taskade.=
+com/newsletters/uploads/1771332113.gif" style=3D"width:100%;max-width:576px=
+;border-radius:8px;display:block;background-color:#111111;min-height:240px;=
+" width=3D"576" /></a></p>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" style=3D"margin:0 0 20px 0;background-color:#=
+0f0f0f;border-width:1px;border-style:solid;border-color:#1a1a1a;border-radi=
+us:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:6px 16px;backgroun=
+d-color:#111111;border-bottom:1px solid #1a1a1a;border-radius:12px 12px 0 0=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-family:monosp=
+ace;font-size:11px;color:#b0b0b0;"><span style=3D"color:#ff5f56;">=E2=97=
+=8F</span> <span style=3D"color:#ffbd2e;">=E2=97=8F</span> <span style=3D"c=
+olor:#27c93f;">=E2=97=8F</span> agent.models</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:0;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" class=3D"model-table" role=3D"presentation" style=3D"font-=
+family:monospace;font-size:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:12px 16px=
+ 10px;color:#808080;font-size:10px;letter-spacing:0.1em;text-transform:uppe=
+rcase;border-bottom:1px solid #1a1a1a;">Model</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:12px 12px=
+ 10px;color:#808080;font-size:10px;letter-spacing:0.1em;text-transform:uppe=
+rcase;border-bottom:1px solid #1a1a1a;text-align:center;">Intelligence</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:12px 12px=
+ 10px;color:#808080;font-size:10px;letter-spacing:0.1em;text-transform:uppe=
+rcase;border-bottom:1px solid #1a1a1a;text-align:center;">Speed</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td colspan=3D"3" style=3D"pad=
+ding:12px 16px 6px;font-size:10px;letter-spacing:0.1em;text-transform:upper=
+case;color:#ff2d60;border-bottom:1px solid #141414;">Anthropic</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>Cla=
+ude Opus 4.6</strong> <span style=3D"color:#808080;font-size:10px;">thinkin=
+g</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=
+=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F</span><span style=3D"color:#333;">=
+=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>Cla=
+ude Sonnet 4.6</strong> <span style=3D"color:#808080;font-size:10px;">think=
+ing</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F=E2=97=8F</span><span style=3D"co=
+lor:#333;">=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>Cla=
+ude Haiku 4.5</strong> <span style=3D"color:#808080;font-size:10px;">thinki=
+ng</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F</span><span style=3D"co=
+lor:#333;">=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td colspan=3D"3" style=3D"pad=
+ding:12px 16px 6px;font-size:10px;letter-spacing:0.1em;text-transform:upper=
+case;color:#ff2d60;border-bottom:1px solid #141414;">Google</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>Gem=
+ini 3.1 Pro</strong> <span style=3D"color:#808080;font-size:10px;">new &mid=
+dot; thinking</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F=E2=97=8F</span><span style=3D"co=
+lor:#333;">=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>Gem=
+ini 3 Flash</strong></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span><span st=
+yle=3D"color:#333;">=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td colspan=3D"3" style=3D"pad=
+ding:12px 16px 6px;font-size:10px;letter-spacing:0.1em;text-transform:upper=
+case;color:#ff2d60;border-bottom:1px solid #141414;">OpenAI</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>GPT=
+-5.3 Codex</strong> <span style=3D"color:#808080;font-size:10px;">new &midd=
+ot; thinking</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F</span><span style=3D"color:#333;=
+">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;border-bottom:1px solid #141414;"><strong>GPT=
+-5.2 (High)</strong></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#ff2d60;">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span=
+><span style=3D"color:#333;">=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;border-bottom:1px solid #141414;font-size:11px;"><span s=
+tyle=3D"color:#27c93f;">=E2=97=8F=E2=97=8F</span><span style=3D"color:#333;=
+">=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 16px=
+;color:#ffffff;font-size:12px;"><strong>GPT-5 Mini</strong></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;font-size:11px;"><span style=3D"color:#ff2d60;">=
+=E2=97=8F=E2=97=8F=E2=97=8F</span><span style=3D"color:#333;">=E2=97=8F=
+=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 12px=
+;text-align:center;font-size:11px;"><span style=3D"color:#27c93f;">=
+=E2=97=8F=E2=97=8F=E2=97=8F=E2=97=8F</span><span style=3D"color:#333;">=
+=E2=97=8F=E2=97=8F</span></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding:4=
+px 0 4px;"><a class=3D"btn-full" href=3D"https://www.taskade.com/newsletter=
+s/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1JioWzGZbFxVWoCX=
+g" style=3D"display:inline-block;padding:14px 28px;font-size:14px;font-weig=
+ht:600;line-height:1;background-color:#ff2d60;color:#ffffff;text-decoration=
+:none;border-width:0;border-radius:8px;font-family:monospace;letter-spacing=
+:0.05em;" target=3D"_blank">=E2=96=B6 Train Custom Agents</a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:24px 0 8px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 4. APP REWARDS =E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80 -->
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:8px 0 8px 0;font-family:monos=
+pace;font-size:11px;letter-spacing:0.12em;color:#ff2d60;text-transform:uppe=
+rcase;">// Rewards</p>
+
+=09=09=09=09=09=09=09=09=09<h1 style=3D"font-size:32px;line-height:1.2;marg=
+in:0 0 16px 0;font-weight:600;letter-spacing:-0.02em;color:#ffffff;">Earn C=
+redits for Building</h1>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Share your apps, invite friends, and grow your=
+ reputation. Earn AI credits with every contribution to power your agents a=
+nd automations. <a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4U=
+FSk1D4R8DMfQ/8qEq4qnb6H76358bT7638920892G0A/LBdBN1JioWzGZbFxVWoCXg" style=
+=3D"color:#ff2d60;text-decoration:none;font-weight:500;">Learn more</a>.</p=
+>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;"><a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/8qEq4qnb6H76358bT76=
+38920892G0A/LBdBN1JioWzGZbFxVWoCXg"><img alt=3D"Earn Genesis Credits: invit=
+e friends, share apps, leave reviews" src=3D"https://www.taskade.com/newsle=
+tters/uploads/1771332130.gif" style=3D"width:100%;max-width:576px;border-ra=
+dius:8px;display:block;background-color:#111111;min-height:240px;" width=3D=
+"576" /></a></p>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" style=3D"margin:0 0 20px 0;background-color:#=
+0f0f0f;border-width:1px;border-style:solid;border-color:#1a1a1a;border-radi=
+us:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:6px 16px;backgroun=
+d-color:#111111;border-bottom:1px solid #1a1a1a;border-radius:12px 12px 0 0=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-family:monosp=
+ace;font-size:11px;color:#b0b0b0;"><span style=3D"color:#ff5f56;">=E2=97=
+=8F</span> <span style=3D"color:#ffbd2e;">=E2=97=8F</span> <span style=3D"c=
+olor:#27c93f;">=E2=97=8F</span> app.rewards</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:16px 20px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=F0=9F=8E=81 <strong style=3D"c=
+olor:#ffffff;">Invite Friends</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">earn =
+credits for every successful signup</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=F0=9F=94=97 <strong style=3D"c=
+olor:#ffffff;">Share &amp; Follow</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">credi=
+ts for sharing on social and following Taskade</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0 2px=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size=
+:14px;color:#e5e5e5;font-family:monospace;">=F0=9F=8F=86 <strong style=3D"c=
+olor:#ffffff;">Community XP</strong></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 6px 0;f=
+ont-size:13px;color:#808080;font-family:monospace;padding-left:18px;">XP an=
+d badges for active builders</p>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:8px 0;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 Workspace DNA =E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80 -->
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:24px 0 8px 0;font-family:mono=
+space;font-size:11px;letter-spacing:0.12em;color:#ff2d60;text-transform:upp=
+ercase;">// One prompt. One app.</p>
+
+=09=09=09=09=09=09=09=09=09<h1 style=3D"font-size:32px;line-height:1.2;marg=
+in:0 0 16px 0;font-weight:600;letter-spacing:-0.02em;color:#ffffff;">Your W=
+orkspace, Alive</h1>
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 24px 0;line-height:1.7;co=
+lor:#e5e5e5;font-size:16px;">Every app in the community was built with the =
+same three pillars:</p>
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" style=3D"margin:0 0 20px 0;background-color:#=
+0f0f0f;border-width:1px;border-style:solid;border-color:#1a1a1a;border-radi=
+us:12px;" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:6px 16px;backgroun=
+d-color:#111111;border-bottom:1px solid #1a1a1a;border-radius:12px 12px 0 0=
+;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-family:monosp=
+ace;font-size:11px;color:#b0b0b0;"><span style=3D"color:#ff5f56;">=E2=97=
+=8F</span> <span style=3D"color:#ffbd2e;">=E2=97=8F</span> <span style=3D"c=
+olor:#27c93f;">=E2=97=8F</span> workspace.dna</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:16px 20px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 0;fo=
+nt-size:15px;color:#e5e5e5;"><span style=3D"display:inline-block;width:26px=
+;">=F0=9F=A7=A0</span> <a href=3D"https://www.taskade.com/newsletters/l/NF9=
+0e3qF4UFSk1D4R8DMfQ/e090jwRt0EJzkb8u37qFeQ/LBdBN1JioWzGZbFxVWoCXg" style=3D=
+"color:#ff2d60;text-decoration:none;font-weight:500;">AI Agents</a> <strong=
+ style=3D"color:#ffffff;">think</strong> and get smarter with every interac=
+tion</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 0;fo=
+nt-size:15px;color:#e5e5e5;"><span style=3D"display:inline-block;width:26px=
+;">=F0=9F=93=8B</span> <a href=3D"https://www.taskade.com/newsletters/l/NF9=
+0e3qF4UFSk1D4R8DMfQ/yal2VIypLlKwTm178wptxA/LBdBN1JioWzGZbFxVWoCXg" style=3D=
+"color:#ff2d60;text-decoration:none;font-weight:500;">Projects</a> <strong =
+style=3D"color:#ffffff;">remember</strong>&nbsp;from your apps, agents, and=
+ workflows</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 0;fo=
+nt-size:15px;color:#e5e5e5;"><span style=3D"display:inline-block;width:26px=
+;">=E2=9A=A1</span> <a href=3D"https://www.taskade.com/newsletters/l/NF90e3=
+qF4UFSk1D4R8DMfQ/2zdPnuHdUiOUyU4GCFJWIQ/LBdBN1JioWzGZbFxVWoCXg" style=3D"co=
+lor:#ff2d60;text-decoration:none;font-weight:500;">Automations</a> <strong =
+style=3D"color:#ffffff;">execute</strong> continuously, connecting your sys=
+tem</td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:10px 0;fo=
+nt-size:15px;color:#e5e5e5;"><span style=3D"display:inline-block;width:26px=
+;">=F0=9F=9A=80</span> <a href=3D"https://www.taskade.com/newsletters/l/NF9=
+0e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1JioWzGZbFxVWoCXg" styl=
+e=3D"color:#ff2d60;text-decoration:none;font-weight:500;">Genesis</a> <stro=
+ng style=3D"color:#ffffff;">deploys</strong> live apps, powered by your <st=
+rong><a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMf=
+Q/bTnv763B0hAHjzLPBPFBlxfg/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;t=
+ext-decoration:none;font-weight:500;">Workspace DNA</a></strong></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Social Outro + Closing CTAs -->
+
+=09=09=09=09=09=09=09=09=09<p style=3D"margin:16px 0 24px 0;line-height:1.7=
+;color:#e5e5e5;font-size:16px;text-align:center;">Reply <strong style=3D"co=
+lor:#ffffff;">&ldquo;App Kit&rdquo;</strong> on <a href=3D"https://www.task=
+ade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/BSPoEZBJ763LMOqeMG6Yd4og/LBdBN=
+1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;text-decoration:none;font-weight:=
+500;">X</a>, <a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk=
+1D4R8DMfQ/8929S2Bx2I0n6WtIrXlbaOSg/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#=
+ff2d60;text-decoration:none;font-weight:500;">LinkedIn</a>, or <a href=3D"h=
+ttps://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/892WFdZT6b6IHa5=
+CzxjS8PRQ/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff2d60;text-decoration:no=
+ne;font-weight:500;">Reddit</a> for early creator access.</p>
+
+=09=09=09=09=09=09=09=09=09<table align=3D"center" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"margin:0 auto;">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td class=3D"btn-pair-cell" style=3D"pa=
+dding:0 6px;"><a class=3D"btn-full" href=3D"https://www.taskade.com/newslet=
+ters/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1JioWzGZbFxVW=
+oCXg" style=3D"display:inline-block;padding:14px 24px;font-size:14px;font-w=
+eight:600;line-height:1;background-color:#ff2d60;color:#ffffff;text-decorat=
+ion:none;border-width:0;border-radius:8px;font-family:monospace;letter-spac=
+ing:0.05em;white-space:nowrap;" target=3D"_blank">Build with AI &rarr;</a><=
+/td>
+=09=09=09=09=09=09=09=09=09=09=09=09<td class=3D"btn-pair-cell" style=3D"pa=
+dding:0 6px;"><a class=3D"btn-full" href=3D"https://www.taskade.com/newslet=
+ters/l/NF90e3qF4UFSk1D4R8DMfQ/kzfdEAsGKFW7HId0l7A58Q/LBdBN1JioWzGZbFxVWoCXg=
+" style=3D"display:inline-block;padding:13px 22px;font-size:14px;font-weigh=
+t:500;line-height:1;background-color:transparent;color:#ff2d60;text-decorat=
+ion:none;border-width:1px;border-style:solid;border-color:#ff2d60;border-ra=
+dius:8px;font-family:monospace;letter-spacing:0.05em;white-space:nowrap;" t=
+arget=3D"_blank">Browse Community</a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Divider -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"padding:16px 0;">
+=09=09=09=09=09=09=09=09=09=09=09=09<div style=3D"height:1px;background-col=
+or:#1a1a1a;">&nbsp;</div>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09<!-- Signature -->
+
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td style=3D"border-top:1px solid #1a1a=
+1a;padding-top:24px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 4px 0;font-size:=
+16px;"><a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8D=
+MfQ/d2eeywkxDD5YEm0I3a3NqQ/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ffffff;t=
+ext-decoration:none;font-weight:500;">John Xie</a></p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0 0 16px 0;font-size=
+:14px;color:#b0b0b0;">Co-founder &amp; CEO, Taskade</p>
+
+=09=09=09=09=09=09=09=09=09=09=09=09<p style=3D"margin:0;font-size:15px;fon=
+t-style:italic;color:#b0b0b0;"><span style=3D"color:#ff2d60;">=E2=97=86</sp=
+an> Building living software, one app at a time.</p>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09<!-- =E2=94=80=E2=94=80 Footer =E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
+=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80 -->
+=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09<td class=3D"footer-cell" style=3D"padding:32px;=
+background-color:#050505;border-top:1px solid #1a1a1a;">
+=09=09=09=09=09=09=09=09=09<table border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" role=3D"presentation" width=3D"100%">
+=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding-b=
+ottom:20px;"><a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk=
+1D4R8DMfQ/fxM4QYzGIeASLrD2lYCtPQ/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#ff=
+2d60;text-decoration:none;"><img alt=3D"Taskade Icon" src=3D"https://www.ta=
+skade.com/newsletters/uploads/1771630445.png" style=3D"width:44px;height:44=
+px;background-color:#000000;border-radius:10px;padding:6px;display:block;" =
+width=3D"44" /> </a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"font-size=
+:13px;line-height:1.6;color:#b0b0b0;padding-bottom:12px;"><span style=3D"fo=
+nt-size:12px;">Sent with <span style=3D"color:#ff2d60;">=E2=9D=A4</span> fr=
+om <a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/=
+fxM4QYzGIeASLrD2lYCtPQ/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#b0b0b0;text-=
+decoration:none;">Taskade</a></span></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"font-size=
+:12px;line-height:1.6;color:#808080;padding-bottom:12px;"><span style=3D"fo=
+nt-size:12px;">1160 Battery Street East, Suite 100<br />
+=09=09=09=09=09=09=09=09=09=09=09=09San Francisco, California 94111, USA</s=
+pan></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"font-size=
+:12px;line-height:1.6;color:#808080;padding-bottom:20px;"><a href=3D"https:=
+//www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/F0PiHLh77vO01mncI3yO=
+FA/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#808080;text-decoration:none;">Ch=
+angelog</a> <span style=3D"color:#404040;"> &bull; </span> <a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/kzfdEAsGKFW7HId0l7A=
+58Q/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#808080;text-decoration:none;">C=
+ommunity</a> <span style=3D"color:#404040;"> &bull; </span> <a href=3D"http=
+s://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/Oqqqfg3tDkffFTnDwG=
+1oOw/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#808080;text-decoration:none;">=
+Connect</a> <span style=3D"color:#404040;"> &bull; </span> <a href=3D"https=
+://www.taskade.com/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/RNIAakRS6ypTs892nEz=
+TceJA/LBdBN1JioWzGZbFxVWoCXg" style=3D"color:#808080;text-decoration:none;"=
+>Contact</a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding-b=
+ottom:20px;"><a href=3D"https://www.taskade.com/newsletters/l/NF90e3qF4UFSk=
+1D4R8DMfQ/UJCmkJdoJKnj8920mgOmW4PA/LBdBN1JioWzGZbFxVWoCXg" style=3D"text-de=
+coration:none;"><img alt=3D"App Store" class=3D"store-img" src=3D"https://w=
+ww.taskade.com/newsletters/uploads/1735722141.png" style=3D"width:90px;heig=
+ht:auto;display:inline-block;margin:4px;border-radius:0;opacity:0.8;" width=
+=3D"90" /> <img alt=3D"Google Play" class=3D"store-img" src=3D"https://www.=
+taskade.com/newsletters/uploads/1735722150.png" style=3D"width:90px;height:=
+auto;display:inline-block;margin:4px;border-radius:0;opacity:0.8;" width=3D=
+"90" /> <img alt=3D"Mac App Store" class=3D"store-img" src=3D"https://www.t=
+askade.com/newsletters/uploads/1735722160.png" style=3D"width:90px;height:a=
+uto;display:inline-block;margin:4px;border-radius:0;opacity:0.8;" width=3D"=
+90" /> <img alt=3D"Microsoft Store" class=3D"store-img" src=3D"https://www.=
+taskade.com/newsletters/uploads/1735722168.png" style=3D"width:90px;height:=
+auto;display:inline-block;margin:4px;border-radius:0;opacity:0.8;" width=3D=
+"90" /> </a></td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09<!-- Last-chance CTA pair -->
+=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"padding-t=
+op:8px;">
+=09=09=09=09=09=09=09=09=09=09=09=09<table align=3D"center" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"margin:0 a=
+uto;">
+=09=09=09=09=09=09=09=09=09=09=09=09=09<tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td class=3D"btn-pair-cell" st=
+yle=3D"padding:0 4px;"><a class=3D"btn-full" href=3D"https://www.taskade.co=
+m/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/7634Y680B0CSEvZgf763zxbHhA/LBdBN1Jio=
+WzGZbFxVWoCXg" style=3D"display:inline-block;padding:10px 18px;font-size:12=
+px;font-weight:500;line-height:1;background-color:transparent;color:#808080=
+;text-decoration:none;border-width:1px;border-style:solid;border-color:#333=
+333;border-radius:6px;font-family:monospace;letter-spacing:0.05em;white-spa=
+ce:nowrap;" target=3D"_blank">=E2=96=B6 Start with AI</a></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09=09<td class=3D"btn-pair-cell" st=
+yle=3D"padding:0 4px;"><a class=3D"btn-full" href=3D"https://www.taskade.co=
+m/newsletters/l/NF90e3qF4UFSk1D4R8DMfQ/kzfdEAsGKFW7HId0l7A58Q/LBdBN1JioWzGZ=
+bFxVWoCXg" style=3D"display:inline-block;padding:10px 18px;font-size:12px;f=
+ont-weight:500;line-height:1;background-color:transparent;color:#808080;tex=
+t-decoration:none;border-width:1px;border-style:solid;border-color:#333333;=
+border-radius:6px;font-family:monospace;letter-spacing:0.05em;white-space:n=
+owrap;" target=3D"_blank">Explore and Clone</a></td>
+=09=09=09=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09=09=09=09</table>
+=09=09=09=09=09=09=09=09=09</td>
+=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09=09<tr>
+=09=09=09=09=09=09=09=09=09<td align=3D"center" style=3D"font-size:11px;lin=
+e-height:1.6;color:#808080;padding-bottom:16px;"><a href=3D"https://www.tas=
+kade.com/newsletters/w/NF90e3qF4UFSk1D4R8DMfQ/YfNqJScJU5Aav9XSnZrf3w/LBdBN1=
+JioWzGZbFxVWoCXg" style=3D"color:#b0b0b0 !important;text-decoration:none !i=
+mportant;" target=3D"_blank">View web version</a> <span style=3D"color:#404=
+040;"> | </span> <a href=3D"https://www.taskade.com/newsletters/unsubscribe=
+/0czEE22BvikQM4lO25cxtjEtQJt6pS763VUHriWFkm763BY/YfNqJScJU5Aav9XSnZrf3w/LBd=
+BN1JioWzGZbFxVWoCXg" style=3D"color:#b0b0b0 !important;text-decoration:none=
+ !important;" target=3D"_blank">Unsubscribe</a></td>
+=09=09=09=09=09=09=09=09</tr>
+=09=09=09=09=09=09=09</tbody>
+=09=09=09=09=09=09</table>
+=09=09=09=09=09=09</td>
+=09=09=09=09=09</tr>
+=09=09=09=09</tbody>
+=09=09=09</table>
+=09=09=09</td>
+=09=09</tr>
+=09</tbody>
+</table>
+</body>
+</html>
+<img src=3D"https://www.taskade.com/newsletters/t/LBdBN1JioWzGZbFxVWoCXg/NF=
+90e3qF4UFSk1D4R8DMfQ" alt=3D"" style=3D"width:1px;height:1px;"/>

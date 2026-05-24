@@ -1,0 +1,89 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:106.74.81.29)
+ smtp.mailfrom=zwfw-info@miit.gov.cn; dmarc=none; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id;
+ bh=V4VeIBJaEMfq/RxTM7AOGLLTdsZ/9mYU2AQDKZLNDP0=;
+ b=uk9fHINo9dd20WRgQzYnTniOwxEhBT4yGU/5Qw0JnzKBPQKERRaRlB6C373S7NOj2QQZ9Q4
+ +HhxO47ZyWXGhAaBAWJsPEP1DlnDQPqRLzCLMrMt32tIsySSHfZTJyXTlKqlh8Ipalu5xeLHj
+ hmOdETvqc715Hw0R6Owbk5aVKLUeTCDjTwSZom1MVoMvg4gTCRR9pqczbb7O+rZgVsCmtb0Ok
+ avz+bNvHKdGd29rY4OI2Kih7ajY9YX6QajUjUrORn6w6F2M4oMX32ClnYojRnaoUoQs43/yeP
+ 6dFh6f96fKo/Fmr37bAwqHv0aO/9S/1SrH541x5kbpYSfA/o+JNw==
+Arc-Seal: i=1; a=rsa-sha256; t=1773630884; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Q9YyCibeekmNpXvauaWOSuqxlir57dOArpBmb0qHB6yplzR5UJy+p9or0zhr9cVrb7B4mmg
+ FVuSFfmpvnvBs7lQBtGMRCm0YqXCUDKikreCvd/eJ14ySsIuMBCx5fjcA1cNLM/a3g7p8DpkW
+ a5ndF+Z0TJ43XUlui7q1OJh/NBQzUDav696plH1gpZt5qi7JIrSXZ7/IR53xDme/sfBfUFCbH
+ hT1ADzl19Ow8U1I0WSTTouW2oLJnAch+2FRf5hJjYsFfln9YNfHPcHOeGs+BUiLm70Qmyltho
+ k72RGbN6YpooiN7gFb+KhxnCtpiJTTIviXQ7G4nX60F1kIXurmRw==
+Authentication-Results: lms; spf=pass (client-ip:106.74.81.29)
+ smtp.mailfrom=zwfw-info@miit.gov.cn; dmarc=none; arc=none
+Content-Type: multipart/mixed;
+ boundary="----=_Part_1577671_452711696.1773630845273"
+Date: Mon, 16 Mar 2026 11:14:05 +0800 (CST)
+Delivered-To: wuliang@xiangzizai.com
+From: zwfw-info@miit.gov.cn
+Message-Id: 
+ <1262605370.1577673.1773630845273.JavaMail."zwfw-info@miit.gov.cn"@jszt-idc07-msgcenter-5b6dc56f8f-sfsh9>
+Mime-Version: 1.0
+Received: from 10.23.60.19 (unknown [10.23.77.62]) by
+ idc-nbgl-wwyj-wwyj-yy-2.localdomain (Server) with ESMTPA id
+ 4fZ0Yd4KsczLKlWQ for <wuliang@xiangzizai.com>; Mon, 16 Mar 2026 11:14:09
+ +0800 (HKT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=106.74.81.29;
+ helo=mail.miit.gov.cn; envelope-from=zwfw-info@miit.gov.cn;
+ receiver=<UNKNOWN>;
+Subject: =?UTF-8?B?5bel5Lia5ZKM5L+h5oGv5YyW6YOo572R?=
+ =?UTF-8?B?56uZ5aSH5qGI57O757uf6YKu5Lu26YCa55+l?=
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1773630879/4fZ0Z74MG3z3Bk29H/69B7759F.002/106.74.81.29/[10.208.26.219]/localhost/<zwfw-info@miit.gov.cn>
+X-Fangmail-Mid-Qid: 69B7759F.002/4fZ0Z74MG3z3Bk29H
+X-Fangmail-Miltered: at n206-112-031 with ID 69B7759F.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 106.74.81.29
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: zwfw-info@miit.gov.cn
+X-Lms-Pvf: 
+ MnwyfDF8fPwYRHpkS8s5Tb6r5Z8nEAKbe/XEyPl2Go1l698Gs9q3Rj6Gl9VhYKVHrq9yvINTC+MQCecxMlfcNPE9SQTbwNhrDEq3bl/pV+RKVDo909xUFdhuq90zHnsGMbSCDq97Ww==
+
+------=_Part_1577671_452711696.1773630845273
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head>
+=09=09<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2=
+312" />
+=09=09<title>=E5=B7=A5=E4=B8=9A=E5=92=8C=E4=BF=A1=E6=81=AF=E5=8C=96=E9=83=
+=A8=E7=BD=91=E7=AB=99=E5=A4=87=E6=A1=88=E7=B3=BB=E7=BB=9F-=E9=82=AE=E4=BB=
+=B6=E9=80=9A=E7=9F=A5</title>
+</head>
+<body>
+<table width=3D"629" height=3D"97" border=3D"0">
+=09=09<tr>
+=09=09=09<td height=3D"67" valign=3D"top"><p>&nbsp;</p>
+=09=09=09=09<p>=E5=B0=8A=E6=95=AC=E7=9A=84=E7=94=A8=E6=88=B7=E5=90=B4=E4=BA=
+=AE=EF=BC=8C=E6=82=A8=E7=9A=84=E5=A4=87=E6=A1=88=E4=BF=A1=E6=81=AF=E5=B7=B2=
+=E8=A2=AB=E5=8F=98=E6=9B=B4=EF=BC=8C=E8=AF=A6=E6=83=85=E8=AF=B7=E5=92=A8=E8=
+=AF=A2=E6=82=A8=E7=9A=84=E6=8E=A5=E5=85=A5=E6=9C=8D=E5=8A=A1=E6=8F=90=E4=BE=
+=9B=E5=95=86=E3=80=82=E3=80=90=E5=B7=A5=E4=BF=A1=E9=83=A8ICP=E5=A4=87=E6=A1=
+=88=E3=80=91</p>
+=09=09=09</td>
+=09=09</tr>
+=09=09<tr>
+=09=09=09<td height=3D"23" align=3D"right" valign=3D"top">=E5=B7=A5=E4=B8=
+=9A=E5=92=8C=E4=BF=A1=E6=81=AF=E5=8C=96=E9=83=A8=E7=BD=91=E7=AB=99=E5=A4=87=
+=E6=A1=88=E7=B3=BB=E7=BB=9F</td>
+=09=09</tr>
+</table>
+</body>
+</html>
+
+------=_Part_1577671_452711696.1773630845273--
+

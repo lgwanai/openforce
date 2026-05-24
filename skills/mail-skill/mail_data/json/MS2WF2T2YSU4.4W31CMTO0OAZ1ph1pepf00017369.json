@@ -1,0 +1,21 @@
+{
+  "message_id": "<MS2WF2T2YSU4.4W31CMTO0OAZ1@ph1pepf00017369>",
+  "imap_uid": "3019",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "MicrosoftServices 帐户验证码",
+  "sender": "account-security-noreply@accountprotection.microsoft.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-06T23:01:49-07:00",
+  "body_text": "若要访问 MicrosoftServices 的应用和资源，请在下面使用验证码来验证帐户。此验证码的有效期仅为 30 分钟。\r\n\r\n帐户验证码:\r\n37075039\r\n\r\n\r\n                如果没有请求获取验证码，可以忽略这封电子邮件。\r\n             \r\n隐私声明: https://go.microsoft.com/fwlink/?LinkId=521839\r\nMicrosoft Corporation, One Microsoft Way, Redmond, WA 98052\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/MS2WF2T2YSU4.4W31CMTO0OAZ1ph1pepf00017369.eml"
+}

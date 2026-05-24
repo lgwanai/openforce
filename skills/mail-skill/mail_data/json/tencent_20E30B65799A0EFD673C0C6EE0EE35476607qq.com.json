@@ -1,0 +1,19 @@
+{
+  "message_id": "<tencent_20E30B65799A0EFD673C0C6EE0EE35476607@qq.com>",
+  "imap_uid": "2867",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "【对象存储COS】资源包购买成功通知",
+  "sender": "cloud_noreply@tencent.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-19T08:58:10+08:00",
+  "body_text": "【对象存储COS】资源包购买成功通知\r\n\r\n尊敬的腾讯云用户，您好！\r\n\r\n&nbsp;&nbsp;&nbsp;&nbsp;您的腾讯云账号（账号ID：100033230111，昵称：100033230111）已成功购买对象存储&nbsp;COS&nbsp;资源包。详情如下：\r\n\r\n     资源包名称资源包ID地域规格到期时间\r\n标准存储容量包std_storage-20260319111135080988121-0中国大陆通用10GB2027-03-19 23:59:59\r\n\r\n\r\n&nbsp;&nbsp;&nbsp;&nbsp;该资源包仅可&nbsp;抵扣&nbsp;&nbsp;标准存储容量&nbsp;&nbsp;所产生的费用，请您注意资源包以外的其他计费项费用&nbsp;。对象存储&nbsp;COS&nbsp;的计费项包含&nbsp;存储容量费用&nbsp;、流量费用&nbsp;、请求费用&nbsp;、数据取回费用&nbsp;等。\r\n\r\n前往&nbsp;COS&nbsp;控制台\r\n\r\n\r\n温馨提示：1.&nbsp;资源包（预付费）是对象存储&nbsp;COS&nbsp;针对不同的计费项推出的优惠套餐，您可购买不同的资源包抵扣存储容量、请求、流量等计量项的用量。相较于按量计费方式，资源包有更多的优惠。此外，资源包仅适用于公有云地域，不适用于金融云地域。您可根据业务需求，自行选择&nbsp;购买&nbsp;。2.&nbsp;资源包用完或到期后，您可正常使用&nbsp;COS&nbsp;对象存储，系统将自动&nbsp;按量计费&nbsp;，并生成后付费账单。您可在费用中心的&nbsp;续费管理&nbsp;，查看资源包的到期时间。若您不使用对象存储，请&nbsp;清空并删除存储桶&nbsp;，避免欠费。3. 若您在使用过程中遇到任何问题，您可以通过&nbsp;联系我们&nbsp;进行咨询，我们将竭诚为您服务！\r\n此致&nbsp;\r\n腾讯云团队\r\n\r\n\r\n\r\n此为系统邮件，请勿回复。取消订阅\r\n\r\n\r\n\r\n关注服务号，移动管理云资源",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/tencent_20E30B65799A0EFD673C0C6EE0EE35476607qq.com.eml"
+}

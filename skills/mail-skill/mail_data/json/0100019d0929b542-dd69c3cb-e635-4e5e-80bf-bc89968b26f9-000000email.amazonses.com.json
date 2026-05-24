@@ -1,0 +1,19 @@
+{
+  "message_id": "<0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000@email.amazonses.com>",
+  "imap_uid": "2873",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Ollama + NVIDIA: safer, faster OpenClaw with NemoClaw and Nemotron 3 Super",
+  "sender": "hello@ollama.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-20T02:53:41+00:00",
+  "body_text": "\r\n \r\n\r\n\r\n\r\n \r\nOllama and NVIDIA have teamed up to make OpenClaw faster and safer:\r\n * Nemotron 3 Super is available to run with Ollama – a new open model from NVIDIA that ranks #1 on PinchBench (the benchmark\r\n   measuring OpenClaw effectiveness), with 5x more throughput than previous models.\r\n\r\n * NemoClaw is now available with built-in Ollama support to provide a safe environment for your OpenClaw assistant with privacy\r\n   and security guardrails.\r\n\r\n \r\n\r\n\r\nOpenClaw with Nemotron 3 Super\r\n\r\nStart by downloading Ollama:\r\n \r\n\r\nDownload Ollama [https://ollama.com/download]\r\n\r\n \r\nNext, run OpenClaw with Nemotron 3 Super via Ollama's cloud:\r\n \r\nollama launch openclaw --model nemotron-3-super:cloud\r\n \r\nNemotron 3 Super can be used on Ollama's cloud for free.\r\n \r\nFor challenging tasks, Ollama's Pro and Max plans [https://ollama.com/pricing] enable your OpenClaw assistant to run multiple\r\nsub-agents and background tasks at the same time.\r\n \r\nOn machines with 96GB of VRAM or more, Nemotron 3 Super can also be run locally using Ollama. See the model page\r\n[https://ollama.com/library/nemotron-3-super].\r\n \r\n\r\n\r\nNemoClaw: run OpenClaw more safely\r\n\r\nNVIDIA's NemoClaw is an open source stack that installs OpenClaw with added privacy and security controls, including\r\npre-configured support for Ollama.\r\n\r\n\r\ncurl -fsSL https://nvidia.com/nemoclaw.sh | bash\r\n \r\nThis will install NemoClaw and run its Installer. Enter 2 to select Ollama when prompted:\r\n \r\n\r\n\r\n\r\n \r\nWhen prompted for a model, select nemotron-3-super:cloud (or choose another model you may wish to run).\r\n \r\nOnce OpenClaw is running, connect to it:\r\n \r\nnemoclaw my-assistant connect\r\n \r\nFor more information on NemoClaw, see NVIDIA's documentation [https://docs.nvidia.com/nemoclaw/latest/index.html].\r\n\r\n\r\n \r\n\r\n\r\nOpenShell: a safe runtime for other agents\r\n\r\nNVIDIA's OpenShell [https://github.com/NVIDIA/OpenShell] is a private runtime for agents and assistants that brings the safety of\r\nNemoClaw to other agents such as Claude Code, Codex, OpenCode and more.\r\n \r\nTo get started with OpenShell, first download and install it [https://github.com/NVIDIA/OpenShell?tab=readme-ov-file#install].\r\n \r\nNext, create a new sandbox with Ollama:\r\n \r\nopenshell sandbox create --from ollama\r\n \r\nFinally, run Ollama to launch an agent:\r\n \r\nollama\r\n \r\n \r\nIf you have any feedback, reply directly to this email or join Ollama's Discord channel [https://discord.gg/ollama].\r\n \r\n❤️ Ollama\r\n \r\nYou are receiving this email because you opted-in to receive updates from Ollama\r\nOllama, 744 High Street, Palo Alto, CA 94301\r\nUnsubscribe [https://app.loops.so/unsubscribe/cmmyb1lbv47yv014949fl7wfz/b6a34646f883f417b1e4b871ea2989b7cbda6f4b77d96c7d0cb7bf96d17d871d1452e17279f7c2c213969bd3957bfa80371c69d6acecc974e08a031d]\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019d0929b542-dd69c3cb-e635-4e5e-80bf-bc89968b26f9-000000email.amazonses.com.eml"
+}

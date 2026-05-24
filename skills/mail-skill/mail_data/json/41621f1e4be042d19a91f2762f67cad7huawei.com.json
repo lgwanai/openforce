@@ -1,0 +1,21 @@
+{
+  "message_id": "<41621f1e4be042d19a91f2762f67cad7@huawei.com>",
+  "imap_uid": "3129",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AQHc0WCjYImDY5K/VkaUfB4amEXEvw==",
+  "subject": "【会议通知】 AI培训交流",
+  "sender": "uMeeting@huawei.com",
+  "recipient": "",
+  "cc": "",
+  "date": "2026-04-21T07:29:50+00:00",
+  "body_text": "会议主题 Subject\r\nAI培训交流\r\n会议时间 Time\r\n2026/04/22(周三) 09:00-10:30 (UTC+08:00)Beijing\r\n会议地点 Location\r\n\r\n\r\nWelink视频会议 Welink Video Meeting\r\n加入会议(External)<https://app.huawei.com/wmeeting/join/97066137/yn0wCduq267qMsnjEhBGIh4dOwEpQyam0>\r\n会议ID Meeting ID\r\n97066137\r\nGuest密码 Voice access code\r\n420960\r\n\r\n提示 Tips\r\n请点击会议链接加入会议。首次使用请下载并安装客户端后，输入会议ID入会。详情参考操作指导<https://app.huawei.com/wmeeting/meetings?locale=zh_CN>\r\nClick the meeting link to join the meeting. For first-time users, please download and install the client first, then enter the meeting ID to join. For details, please refer to the Operation Guide<https://app.huawei.com/wmeeting/meetings?locale=en_US>\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/41621f1e4be042d19a91f2762f67cad7huawei.com.eml"
+}

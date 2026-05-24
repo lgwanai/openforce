@@ -1,0 +1,82 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:101.36.218.36)
+ smtp.mailfrom=service@xiangzizai.com; dkim=pass header.b=GPJhZnP2bw
+ header.i=@xiangzizai-com.20200927.dkim.feishu.cn header.s=s1; dmarc=none;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=k10h8mF0U2+xnhV6QyLJ61nzb+mFpXH6j0NkRWHwES0=;
+ b=oSxzwdQPJbiQ/GR/u4xQhqXyphuqnhho0YAX3sUEmB9KapuocGFNDf4L5vs3UysTwl84JIS
+ y5646HsrLqL0MmBpPJSFIGiXqqIUo8TAFj0ZKB3RBLwfXi9QbVN1CdQ17YdWYrs1C+vb97o7Q
+ JxOYCwNxIYbHT3Czesb2ebLT2bbykgs6wz12wHqIz826J89BFWnNvmd7V1e3AHbQr3LVRrGm+
+ cEO11ezaCa/msF0Z7V7DqdIiBMLOEXJaGMnMaV//88He+W0PRsY9OrBzRdmUfV5wIGEUiYpBq
+ rFidQHh6fLy50oDnh1kE3myXCm++oIzjSSUfbtEUWg2cJr/qR8Lg==
+Arc-Seal: i=1; a=rsa-sha256; t=1775387535; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=MaVqdY4Y8UtsnPeEIrxp9j8QH3FD2a2FQdZSD+mc67qpbQgJj5KLpYi3ZCiw9CkXbXe9IfF
+ ZCR9YkoVhnlorAVZq+AJKCi7yMqb5nSBGgqQBxI4rqgTxQqeZ69AHJJ8FwfPbLYUB78up+1Eb
+ LDm2X0DQFG9bBvBAcy/mVEJqpqjfsW+da/DbFEQDGQktQFFg69aDtNZa9xec0jmOa8WQAXy5C
+ PEABVLLat82HDxnYFn10dYUZWiJNFrSd7kwecvm2NCASEOqQr49tCOSpV5FXB42iWxcgyT6Fz
+ ogra+/Xlh4sNVUsDYa/5sbcM/+uwl12uLy2BRTPfbYuXKm6BnC3Q==
+Authentication-Results: lms; spf=pass (client-ip:101.36.218.36)
+ smtp.mailfrom=service@xiangzizai.com; dkim=pass header.b=GPJhZnP2bw
+ header.i=@xiangzizai-com.20200927.dkim.feishu.cn header.s=s1; dmarc=none;
+ arc=none
+Content-Type: multipart/alternative;
+ boundary=914c67366ca22ebb308158ddf815d31b91fa8f005072be644fcafa7162ba
+Date: Sun, 05 Apr 2026 11:12:01 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=s1;
+ d=xiangzizai-com.20200927.dkim.feishu.cn; t=1775387526;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=k10h8mF0U2+xnhV6QyLJ61nzb+mFpXH6j0NkRWHwES0=;
+ b=GPJhZnP2bwTx+kv+zciCud2a1lijiQnhddaHXTBbVx3UWVO/YFF9wQtORcJC7QtZdg9UWC
+ JBPRZL2CRnyU+jRoCwOs4IqVQAjUsFLTDhEJU4cobdgjDhej9hBU93kyzXt2AoKRU7U7ln
+ 1VNaLEHCkzoeJyu6OThSQJy8zL19bF2IgYEUABevOc0vW2zYhf6IwBJ8ApvvyETZmGSakZ
+ 5MbppbD9UMfIi5hWhPfnlS3/HC9YYb+7zuz5GdEsvxVE3Ex+gQOkVX3LSMuwIdiBwd1y5T
+ 6UaeOCkIzO3cThf3qTJ+4Sq3peXdFlVPtFjx7AWeYC3rwpHHuSznSFSnhtWopQ==
+From: "okskill" <service@xiangzizai.com>
+Message-Id: <abb43a45-98c8-5cf0-6b42-996ea5a11ada@xiangzizai.com>
+Mime-Version: 1.0
+Received: from wuliangdeMac-mini.local ([183.241.183.137]) by smtp.feishu.cn
+ with ESMTPS; Sun, 05 Apr 2026 19:12:03 +0800
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=101.36.218.36;
+ helo=lf-2-36.ptr.blmpb.com; envelope-from=service@xiangzizai.com;
+ receiver=<UNKNOWN>;
+Subject: Your OKSkill Verification Code
+To: <wuliang@xiangzizai.com>
+X-Lms-Client-Ip: 101.36.218.36
+X-Lms-Mail-From: service@xiangzizai.com
+X-Lms-Pvf: 
+ MnwyfDF8fN0Fxj7ElmC2fAsLuIotuTiuW0sVtF3GLVY8G8K7kN7zRTlP3c0ThKM1hWJ/0zWA7CrzzPH7yYoaoH712XMV5rqztfIlgoVAvd/QvWv7nLuDsPDOkO0CX1LNsI56Y8367Q==
+X-Lms-Return-Path: 
+ <lba+269d24384+43067f+xiangzizai.com+service@xiangzizai.com>
+X-Original-From: okskill <service@xiangzizai.com>
+
+--914c67366ca22ebb308158ddf815d31b91fa8f005072be644fcafa7162ba
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+
+Your verification code is: 633187
+
+This code expires in 5 minutes.
+
+If you did not request this code, please ignore this email.
+--914c67366ca22ebb308158ddf815d31b91fa8f005072be644fcafa7162ba
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<div style=3D"font-family: Arial, sans-serif; max-width: 600px; margin: 0 a=
+uto;">
+          <h2>Your OKSkill Verification Code</h2>
+          <p style=3D"font-size: 24px; font-weight: bold; letter-spacing: 4=
+px; padding: 20px; background: #f5f5f5; text-align: center;">
+            633187
+          </p>
+          <p style=3D"color: #666;">This code expires in 5 minutes.</p>
+          <p style=3D"color: #999; font-size: 12px;">
+            If you did not request this code, please ignore this email.
+          </p>
+        </div>
+--914c67366ca22ebb308158ddf815d31b91fa8f005072be644fcafa7162ba--

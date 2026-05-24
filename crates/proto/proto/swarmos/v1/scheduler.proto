@@ -128,12 +128,13 @@ message CancelTaskRequest {
 message CancelTaskResponse {}
 
 message SendHeartbeatRequest {
-  string session_id = 1;
-  string task_id = 2;
-  int32 task_attempt = 3;
-  string lease_id = 4;
-  uint64 fencing_token = 5;
-  google.protobuf.Timestamp sent_at = 6;
+  string tenant_id = 1;
+  string session_id = 2;
+  string task_id = 3;
+  int32 task_attempt = 4;
+  string lease_id = 5;
+  uint64 fencing_token = 6;
+  google.protobuf.Timestamp sent_at = 7;
 }
 message SendHeartbeatResponse {
   google.protobuf.Timestamp lease_expire_at = 1;

@@ -1,0 +1,188 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:8.219.24.202)
+ smtp.mailfrom=qwenlm@service.qwenlm.ai; dkim=pass header.b=qZOK2nXA5D
+ header.i=@service.qwenlm.ai header.s=aliyun-ap-southeast-1; dkim=pass
+ header.b=UBYQc1Jds+ header.i=@dm-fbl.aliyuncs.com header.s=feedback;
+ dmarc=pass (p=none sp=none dis=none) header.from=service.qwenlm.ai;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=oJPezXyCWxXGu5RjUmXzRgr52MiT3LrJ3bs7muYMWwE=;
+ b=TLV5CjtLaWO6hDPV9udXTgdWg6eoRQ2j7XSvKmJO1CEy+5jaiNY3bUV4P3Arqotl6gmrM4Z
+ LJ7EQ/g+46WLqQwAlXYAub+hQhnM0hu3nHINuAo7NDYcOm3imwspZV7gVGFEgXl0RTrkgZXi+
+ qBRoerfYMyTazGADLJA3raKwPp1NtT9lMJ+aH1H4Gnv1VU9bah56eKiaoMb+YEQyeA65bRVOp
+ MLeQ6mzFyL4tLwrlVzA5QwPIvg5iqhqtCxJLniuSPVC+fV7I/A4GdTD3fPhQSyhDx5k9ipLQ6
+ 2/R0bFnFOlLRgH7msFjNVbZxS8YmipINnzpt43PpQJiuzUevqKzQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775843303; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=dBI0oTFBlOh6JdXfxkmMJI9ClOZIfaHhXwc1fRrH1mGHnQ4JDeYc6CqtmxqGmGDd1Td1/xj
+ spajvdwla8hERZXfFrZVaMAqsZfQZ623PuBbEZ+nFdHyJ3LBrVGENBUDlMqo617c4xujhjDkm
+ Bl2bF09fK8ZF0If70QGY/Z2At6EAj4BOW8/v7BzdlmMNQFi/YCj74ggihFqtsb4QBE6hDO3QL
+ E/bU3IG41QfRScc2yL2Lzbncqnif5+eXv/GDWodIPNV5yjsA84CezVD3NOrB1CbOqwhAvjryO
+ VFxdGWy+s/Bx5GK5io95CsMFVguo1mT0pm7uWkx3CYuQaWHoIr4g==
+Authentication-Results: lms; spf=pass (client-ip:8.219.24.202)
+ smtp.mailfrom=qwenlm@service.qwenlm.ai; dkim=pass header.b=qZOK2nXA5D
+ header.i=@service.qwenlm.ai header.s=aliyun-ap-southeast-1; dkim=pass
+ header.b=UBYQc1Jds+ header.i=@dm-fbl.aliyuncs.com header.s=feedback;
+ dmarc=pass (p=none sp=none dis=none) header.from=service.qwenlm.ai;
+ arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="UTF-8"
+Date: Sat, 11 Apr 2026 01:48:18 +0800
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=service.qwenlm.ai;
+ s=aliyun-ap-southeast-1; t=1775843299;
+ h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type;
+ bh=oJPezXyCWxXGu5RjUmXzRgr52MiT3LrJ3bs7muYMWwE=;
+ b=qZOK2nXA5DJfk7UR6pHk1Z0/tgsARwTq6PH/3jqqfJfMWi1c0ath2vYY/yhC8+tD0U+UtdcwUs7LfYikREfpwWGsYE9hhv0FhaB9jkRs0kEq1ptyDdj2If/KM20K0eygcQPcy7tuduHQT+djcZjuAF7SKC641BHaBBjxjsqz7jc=
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dm-fbl.aliyuncs.com;
+ s=feedback; t=1775843299;
+ h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type;
+ bh=oJPezXyCWxXGu5RjUmXzRgr52MiT3LrJ3bs7muYMWwE=;
+ b=UBYQc1Jds+HYfocvl2fv2Q8Ms0Ex6eZImZw76x3z0RqJswsF2Gu0jNkW8IPizGbhn0gudmeHoXSwcR+zA4fACjb43ghkFaDxWGKn7ZKveMNbxRrgPZJD5+6+XD4Z6LaGqvQDTeYv3XtwY7vbgwlAJA2czDwIqtZOZZQG87qzQlw=
+Feedback-Id: default:qwenlm@service.qwenlm.ai:aliyun_sg_ApiTrigger:352357
+From: "Qwen Studio" <qwenlm@service.qwenlm.ai>
+Message-Id: <459ca167-183c-4564-8235-6d02009f9a7e@alibaba.com>
+Mime-Version: 1.0
+Received: from chitu-hsf(mailfrom:qwenlm@service.qwenlm.ai
+ fp:ma_8000000238869477542 cluster:dm-ay35sg-a) by
+ smtp.aliyun-inc.com(127.0.0.1); Sat, 11 Apr 2026 01:48:18 +0800
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=8.219.24.202;
+ helo=out24-202.sg.a.dm.aliyun.com; envelope-from=qwenlm@service.qwenlm.ai;
+ receiver=<UNKNOWN>;
+Subject: 
+ =?UTF-8?B?SW1wb3J0YW50IFVwZGF0ZTogUXdlbiBDaGF0IGlzIE5vdyBRd2VuIFN0dWRpbw==?=
+To: <wuliang@xiangzizai.com>
+X-Alidm-Rcptto: d3VsaWFuZ0B4aWFuZ3ppemFpLmNvbQ==
+X-Alidm-Settings: 
+ eyJPdXRib3VuZElwIjp7IklwTGlzdCI6W10sIklwUG9vbElkIjoiIn0sIlVuc3Vic2NyaWJlIjp7IkZpbHRlckxldmVsIjoiZGVmYXVsdCIsIkxpbmtUeXBlIjoiZGVmYXVsdCJ9LCJWZXJzaW9uIjoiMS4wIn0=
+X-Envid: 8000000238869477543
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775843300/4fskmg72L0zlnkD2/69D937E3.005/8.219.24.202/out24-202.sg.a.dm.aliyun.com/localhost/<qwenlm@service.qwenlm.ai>
+X-Fangmail-Mid-Qid: 69D937E3.005/4fskmg72L0zlnkD2
+X-Fangmail-Miltered: at n151-171-209 with ID 69D937E3.005 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 8.219.24.202
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: qwenlm@service.qwenlm.ai
+X-Lms-Pvf: 
+ MnwyfDF8fMITTa5TkGEW4ym5/gvvJSmhdl6ECJo7Jf7DieJZagEfPzQFzSHc7at9oxXBA+jn2eUkXcKsZgjxwiF0ca6AoQust2aIPd2PDeVWodgpKFzh/CtPIGAVlXboIe2cOtJvsQ==
+X-Priority: 3
+
+=0A<html>=0A    <body=0A        style=3D"=0A            margin: 0;=0A         =
+   padding: 0;=0A            box-sizing: border-box;=0A            font-family=
+: Inter, NotoSansHans, ui-sans-serif, system-ui, sans-serif;=0A        "=0A   =
+ >=0A        <div style=3D"width: 100%; background: #fff; border-radius: 10px;=
+ padding-top: 100px">=0A            <div=0A                style=3D"=0A       =
+             min-height: 524px;=0A                    width: 460px;=0A        =
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);=0A                    bo=
+rder-radius: 20px;=0A                    margin: 0 auto;=0A                   =
+ text-align: center;=0A                    padding-top: 45px;=0A              =
+  "=0A            >=0A                <img=0A                    style=3D"marg=
+in: 0 auto; height: 50px; width: 50px"=0A                    src=3D"https://im=
+g.alicdn.com/imgextra/i4/O1CN01ppjyd61vxyTMt8Zbi_!!6000000006240-55-tps-60-60.=
+svg"=0A                />=0A                <div=0A                    style=3D=
+"=0A                        padding: 13px 72px;=0A                        font=
+-family: Inter, NotoSansHans, ui-sans-serif, system-ui, sans-serif;=0A        =
+                font-weight: 600;=0A                        color: #000000;=0A=
+                        text-align: center;=0A                        line-hei=
+ght: 38px;=0A                        font-size: 30px;=0A                    "=0A=
+                >=0A                    Qwen Chat is Now Qwen Studio=0A       =
+         </div>=0A                <div=0A                    style=3D"=0A     =
+                   margin: 0px auto;=0A                        background: whi=
+te;=0A                        width: fit-content;=0A                        ma=
+x-width: 460px;=0A                        color: rgba(21, 20, 24, 0.93);=0A   =
+                     text-align: left;=0A                        line-height: =
+22px;=0A                        font-size: 14px;=0A                        pad=
+ding: 0 35px 24px;=0A                    "=0A                >=0A             =
+       <p style=3D"font-weight: 600; margin: 0 0 12px">Dear Qwen User,</p>=0A =
+                   <p style=3D"margin: 0 0 12px; font-weight: 400">=0A        =
+                Thank you for being part of our platform.=0A                  =
+  </p>=0A                    <p style=3D"margin: 0 0 20px; font-weight: 400">=0A=
+                        After careful consideration and aligned with our platf=
+orm's mission, we're excited to=0A                        announce that Qwen C=
+hat is now officially renamed to Qwen Studio, effective today. We=0A          =
+              have updated the <a href=3D"https://qwen.ai/termsservice" target=
+=3D"_blank">Terms of Service</a> and <a href=3D"https://qwen.ai/privacypolicy"=
+ target=3D"_blank">Privacy Policy</a> accordingly.=0A                    </p>=0A=
+=0A                    <p=0A                        style=3D"=0A              =
+              font-weight: 600;=0A                            font-size: 16px;=
+=0A                            line-height: 24px;=0A                          =
+  margin: 0 0 14px;=0A                            color: #000000;=0A          =
+              "=0A                    >=0A                        What This Me=
+ans for You=0A                    </p>=0A=0A                    <ul=0A        =
+                style=3D"=0A                            list-style: none;=0A  =
+                          padding: 0;=0A                            margin: 0 =
+0 20px;=0A                        "=0A                    >=0A                =
+        <li=0A                            style=3D"=0A                        =
+        display: flex;=0A                                align-items: flex-sta=
+rt;=0A                                gap: 8px;=0A                            =
+    margin-bottom: 12px;=0A                            "=0A                   =
+     >=0A                            <span style=3D"flex-shrink: 0; line-heigh=
+t: 22px" aria-hidden=3D"true">=E2=9C=85</span>=0A                            <=
+span>=0A                                <strong>Seamless Transition:</strong>=0A=
+                                All your existing data, settings, and capabili=
+ties remain unchanged.=0A                            </span>=0A               =
+         </li>=0A                        <li=0A                            sty=
+le=3D"=0A                                display: flex;=0A                    =
+            align-items: flex-start;=0A                                gap: 8p=
+x;=0A                                margin-bottom: 12px;=0A                  =
+          "=0A                        >=0A                            <span st=
+yle=3D"flex-shrink: 0; line-height: 22px" aria-hidden=3D"true">=E2=9C=85</span=
+>=0A                            <span>=0A                                <stro=
+ng>Enhanced Platform:</strong>=0A                                Qwen Studio c=
+ontinues to empower both everyday users and developers with unified=0A        =
+                        access to Qwen's series of open-source and proprietary=
+ models.=0A                            </span>=0A                        </li>=
+=0A                        <li style=3D"display: flex; align-items: flex-start=
+; gap: 8px; margin-bottom: 0">=0A                            <span style=3D"fl=
+ex-shrink: 0; line-height: 22px" aria-hidden=3D"true">=E2=9C=85</span>=0A     =
+                       <div style=3D"flex: 1; min-width: 0">=0A               =
+                 <strong>Core Features:</strong>=0A                           =
+     <ul=0A                                    style=3D"=0A                   =
+                     margin: 8px 0 0;=0A                                      =
+  padding-left: 18px;=0A                                        list-style-typ=
+e: disc;=0A                                    "=0A                           =
+     >=0A                                    <li style=3D"margin-bottom: 4px">=
+Natural &amp; contextual conversations</li>=0A                                =
+    <li style=3D"margin-bottom: 4px">=0A                                      =
+  Advanced multimodal understanding (text, image, audio, video)=0A            =
+                        </li>=0A                                    <li style=3D=
+"margin-bottom: 4px">Tool calling &amp; function integration</li>=0A          =
+                          <li style=3D"margin-bottom: 4px">Real-time audio/vid=
+eo conversations</li>=0A                                    <li style=3D"margi=
+n-bottom: 4px">AI-powered image generation &amp; editing</li>=0A              =
+                      <li style=3D"margin-bottom: 0">Video generation capabili=
+ties</li>=0A                                </ul>=0A                          =
+  </div>=0A                        </li>=0A                    </ul>=0A=0A    =
+                <p style=3D"font-weight: 600; margin: 0 0 8px; color: #000000"=
+>What's Next</p>=0A                    <p style=3D"margin: 0 0 18px; font-weig=
+ht: 400">=0A                        We're actively evolving Qwen Studio's inte=
+rface and experience to make it even easier for=0A                        you =
+to discover, test, and leverage the full potential of Qwen models=E2=80=94whet=
+her you're=0A                        building applications or exploring AI cre=
+atively.=0A                    </p>=0A=0A                    <p style=3D"font-=
+weight: 600; margin: 0 0 8px; color: #000000">We'd Love Your Input</p>=0A     =
+               <p style=3D"margin: 0 0 18px; font-weight: 400">=0A            =
+            Your feedback shapes our roadmap. If you have suggestions, feature=
+ requests, or questions=0A                        about the Qwen Studio upgrad=
+e, please don't hesitate to reach out:=0A                        <a href=3D"ma=
+ilto:DPO_qwenlm-intl@service.alibaba.com" target=3D"_blank">DPO_qwenlm-intl@se=
+rvice.alibaba.com</a>=0A                    </p>=0A=0A                    <p s=
+tyle=3D"margin: 0 0 12px; font-weight: 400">=0A                        Thank y=
+ou for your continued trust and support. We're thrilled to embark on this next=
+=0A                        chapter with you.=0A                    </p>=0A    =
+                <p style=3D"margin: 0; font-weight: 400">Best regards, The Qwe=
+n Team</p>=0A                    <p=0A                        style=3D"=0A    =
+                        font-family: Inter, NotoSansHans, ui-sans-serif, syste=
+m-ui, sans-serif;=0A                            font-weight: 400;=0A          =
+                  font-size: 14px;=0A                            color: rgba(0=
+, 0, 0, 0.5);=0A                            line-height: 22px;=0A             =
+               margin-top: 20px;=0A                        "=0A               =
+     >=0A                        This is an automatically generated email, ple=
+ase do not reply. 2025. Alibaba Cloud=0A                        (Singapore) Pr=
+ivate Limited. All Right Reserved.=0A                    </p>=0A              =
+  </div>=0A            </div>=0A        </div>=0A    </body>=0A</html>=0A

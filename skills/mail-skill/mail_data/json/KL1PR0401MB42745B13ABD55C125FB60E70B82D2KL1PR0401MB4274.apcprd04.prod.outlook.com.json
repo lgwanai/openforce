@@ -1,0 +1,44 @@
+{
+  "message_id": "<KL1PR0401MB42745B13ABD55C125FB60E70B82D2@KL1PR0401MB4274.apcprd04.prod.outlook.com>",
+  "imap_uid": "3143",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AQHc0gQDGKMU7wcu9UiaImTE2pIRx7XqaDXw",
+  "subject": "FW: [EXTERNAL] 【AI CAMP】Copilot演示案例流程",
+  "sender": "Jiayang.Liu@bmw-brilliance.cn",
+  "recipient": "roc.xie@partner.bmw.com, daisy_yang@woshipm.com",
+  "cc": "wuliang@xiangzizai.com",
+  "date": "2026-04-22T03:16:40+00:00",
+  "body_text": "Dear Roc,\r\n附件是明天课程的PPT，还有测试的案例。吴老师那边想要一个正面测试后的一个结果的截图，这个你能帮忙测一下吗？\r\n\r\n@Daisy, 吴老师，把你们想要的再跟Roc澄清一下，Roc会帮忙跑一下\r\n\r\n\r\n\r\nBR\r\nAdah\r\n\r\nFrom: 杨雨鑫 <daisy_yang@woshipm.com>\r\nSent: Wednesday, April 22, 2026 10:59 AM\r\nTo: Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn>\r\nCc: 周珊 <sue@woshipm.com>; wuliang <wuliang@xiangzizai.com>; Xie Roc, (Roc.Xie@partner.bmw.com) <roc.xie@partner.bmw.com>; Li Joyce, FG-CN-6 <Joyce.JL.Li@bmw.com>\r\nSubject: [EXTERNAL] 【AI CAMP】Copilot演示案例流程\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nDear Adah，\r\n\r\n附件为copilot演示的流程与PPT，辛苦您按流程操作后截一下效果图邮件发给我们，正面或反面的反馈都可以~\r\n\r\nRegards,\r\nDaisy\r\n________________________________\r\n人人都是产品经理\r\n[https://rescdn.qqmail.com/node/wwqy/qymng/style/images/sass/independent/card_verify_full.png]\r\n\r\n\r\n杨雨鑫\r\n服务运营\r\n[https://rescdn.qqmail.com/node/wwqy/qymng/style/images/sass/independent/card_logo.png]\r\n\r\n\r\n\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【宝马AI CAMP】第六课-Copilot.pptx",
+      "content_type": "application/octet-stream",
+      "size": 706798,
+      "local_path": "./mail_data/attachments/<KL1PR0401MB42745B13ABD55C125FB60E70B82D2@KL1PR0401MB4274.apcprd04.prod.outlook.com>/【宝马AI CAMP】第六课-Copilot.pptx"
+    },
+    {
+      "filename": "【宝马AI CAMP】第六课-Copilot.pdf",
+      "content_type": "application/octet-stream",
+      "size": 2982774,
+      "local_path": "./mail_data/attachments/<KL1PR0401MB42745B13ABD55C125FB60E70B82D2@KL1PR0401MB4274.apcprd04.prod.outlook.com>/【宝马AI CAMP】第六课-Copilot.pdf"
+    },
+    {
+      "filename": "【更新】Microsoft Copilot 课程演示配套案例.docx",
+      "content_type": "application/octet-stream",
+      "size": 30094,
+      "local_path": "./mail_data/attachments/<KL1PR0401MB42745B13ABD55C125FB60E70B82D2@KL1PR0401MB4274.apcprd04.prod.outlook.com>/【更新】Microsoft Copilot 课程演示配套案例.docx"
+    },
+    {
+      "filename": "2026Q1_区域销量数据.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size": 149083,
+      "local_path": "./mail_data/attachments/<KL1PR0401MB42745B13ABD55C125FB60E70B82D2@KL1PR0401MB4274.apcprd04.prod.outlook.com>/2026Q1_区域销量数据.xlsx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/KL1PR0401MB42745B13ABD55C125FB60E70B82D2KL1PR0401MB4274.apcprd04.prod.outlook.com.eml"
+}

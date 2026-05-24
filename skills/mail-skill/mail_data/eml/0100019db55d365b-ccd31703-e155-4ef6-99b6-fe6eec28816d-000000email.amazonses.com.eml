@@ -1,0 +1,524 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:54.240.8.41)
+ smtp.mailfrom=0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com;
+ dkim=pass header.b=sGRkrvxfiO header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=dG7zbOnyqt header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=uqqmw75LsivQTk3pXEKGh82rW891fnb5dgNSUwC2xNA=;
+ b=EeWM/nbhKx/UssWVFPDAZo+I4BqkCZ3Jp6NDmDen7vPEsGWALoXhOwhtw/0rBtChnz6/q4z
+ BQpAag4ZkW4WyYgY6MUvg1sZS8dwgIa+biBIdoHMf5AAOAhisK8CmDuiiXx6JC/3WoEtu6ak0
+ cgbEK0VgK1iThzZYm88ZqM/FssRGOqJM+wc+oxGSta+yIaqMgQqOQ0HwoOsQi9mLNv22MrGZr
+ hd8x5M6CPnZ2umnJJMXYNwzRYV0BQb9+lszZjWJgTYusXUfDh3wJzH32O5jcYR7rRgtmAzUvO
+ RZI/cMS2eilgruaQDDxd+dBQpHJBBBrJXBHp9Kg6paRbK29Flciw==
+Arc-Seal: i=1; a=rsa-sha256; t=1776864286; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Bhw/JN1cDyYTuNgvtPJkg033HydO7M/2rj+dvuzQ9AkxpKSkgYMK67QCTLeZgM699OFty2D
+ iZSnxfcLl1rk7RGbtq9u7qo0/lzV5WcaaWeb9/lqag8sTKdXfzGlef/NvPhxa1M/p/fPN/rxw
+ GwKvRxpxhJOicUH0F9HPFTR1p7PHDaYtVb0MgyyndCVAVMG/5xiDNFQ/R35od8j4YkXR7hS3a
+ Edn4rWp4gquLTAsZzGgnjX1P+XJmdxC0lxMsP2HxHXO+bKihUPgvm9EV4q3Zymz0sLZBB4GIT
+ 3tniyfBtASNBi33QEtcVGVF66sRNl5peQhpK05Dg3tHwA/W51k0w==
+Authentication-Results: lms; spf=pass (client-ip:54.240.8.41)
+ smtp.mailfrom=0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com;
+ dkim=pass header.b=sGRkrvxfiO header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=dG7zbOnyqt header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Wed, 22 Apr 2026 13:24:38 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1776864278;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=ghQvG6ow6SC3PsqqhDNXZub0nO+pyQS7ecZQJHcWSoM=;
+ b=sGRkrvxfiOpdzIjl8dcdpiyuYzy+s8N+7dWSamaTN5Fh/d1bvhkmNjrYKzMUrOm3
+ fve9xI9OyAjaJxwTx7Y6yuVSQbFZJq9HD+t2CLdfffRkXbbfMAlUvMX1UG+VGySd5e0
+ 7tMa9Is1tOvpUmIn80UxK9y5BgKmAeex/i6oXUH8Z3rBXYmw1qIV1poWEA5JMqJdnrp
+ wWEE38OqoNFyl+TrT2bwlaAJmkOuP5EC5AV2lwa52uScrEb+03TpTSpUcrXebRokrk7
+ ZwEIQzjsTiFxqgBji2J5bJXjUmVhb1rBKMoXvJHs6pQ1luwEWacGEEGI9LSX7xynpQE
+ B1bnHYP+MA==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1776864278;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=ghQvG6ow6SC3PsqqhDNXZub0nO+pyQS7ecZQJHcWSoM=;
+ b=dG7zbOnyqt+93qw/vWRecNvl4caNnV3KtNB/PBw2P0zN46/uyE7qBTWZK/sS4O0P
+ hhr8dMr56ZKtzK3mYUGMjcXFIs2omLWxdBpbdgLH/fhweDOZN+N7css/4Jy0fbwdqvf
+ 6ihY2g3zsLsW/dFDjdpz5UdAzpH58DIEejlZKg4A=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=54.240.8.41;
+ helo=a8-41.smtp-out.amazonses.com;
+ envelope-from=0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: Apple is replacing Tim Cook because of AI
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776864282/4g10Ly2PCJzrfMPm/69E8CC1A.001/54.240.8.41/a8-41.smtp-out.amazonses.com/localhost/<0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69E8CC1A.001/4g10Ly2PCJzrfMPm
+X-Fangmail-Miltered: at n151-171-208 with ID 69E8CC1A.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 54.240.8.41
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fN1m1H+DqPYPyjd6xz//YUFsSKlF5FNOTJrwFS4JWmf9Ky2bq+km4EpfSXeGCMDJuuYpxXW/1oBR/lINpOay+ZQAk+m6l1NN8ImBt0bjxkuuIb1e2pq9fdPDicxP1SintA==
+X-Ses-Outgoing: 2026.04.22-54.240.8.41
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>Apple is replacing Tim Cook because of AI</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <!--[if mso]><span style=3D"display:none!important;font-size:0;line-heigh=
+t:0;max-height:0;max-width:0;mso-hide:all;overflow:hidden;">A Roblox script=
+ just breached Vercel. Bezos hit $38B in 5 months. The founders aren't dele=
+gating anymore.</span><![endif]-->
+  <div style=3D"display:none;font-size:1px;color:#f5f5f5;line-height:1px;ma=
+x-height:0;max-width:0;opacity:0;overflow:hidden;">A Roblox script just bre=
+ached Vercel. Bezos hit $38B in 5 months. The founders aren't delegating an=
+ymore.</div>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/9a0_vnv-C6qU=
+OcJj0zQUavmkmpU=3D473"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/pro=
+duction/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=
+=3D"AI News Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues%252F486/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816=
+d-000000/43TKeUkjQ4wNbrxYnIQde1tv6Yo=3D473">Read Online</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000=
+/g7sWDCD171T-CA1nhQ4F9RvnA9I=3D473">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly=
+.co%252Fissues%252F486/2/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec288=
+16d-000000/gl6L9w2qw6ugN3HvRIjeLtFsGsk=3D473">Apple is replacing Tim Cook b=
+ecause of AI</a></h1>
+      <div class=3D"date">April 22nd 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><h2>Last week you voted</h2>
+<p>We asked how you'd like deep dives delivered. <strong>165 votes</strong>=
+ =E2=80=94 nearly half (47.9%) want <strong>separate emails per topic</stro=
+ng>, 38.8% want <strong>one weekly digest</strong>, 13.3% have no preferenc=
+e. The split means we'll do both: pick your setup in <a href=3D"https://fk3=
+wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec=
+53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fuser%252Fsubscriptions/1=
+/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/na936PPmoPU6q=
+ezrx36OQBtWe8g=3D473">Preferences</a>. That part's live.</p>
+<p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiwee=
+kly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252=
+Fsurvey%252F3%252Fresults/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec=
+28816d-000000/_2crog_N43vAKsFjKAC5lMTMcYY=3D473">See full results =E2=86=92=
+</a></p></div>
+
+        <div class=3D"email-sponsor" style=3D"background:#1a1a2e;padding:24=
+px 30px;text-align:center;">
+      <p style=3D"color:#fff;font-size:17px;font-weight:700;margin:0 0 6px;=
+">Get more from AI Weekly</p>
+      <p style=3D"color:#ccc;font-size:14px;margin:0 0 18px;line-height:1.5=
+;">Breaking stories as they happen. Deep dives on the topics you care about=
+. 50+ free courses from Stanford, MIT, and more.</p>
+      <div style=3D"margin:0 auto;max-width:500px;">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fai-news-today/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d=
+-000000/JCtz4Bq2L5B1cp2iHKrNYkC-8Ak=3D473" style=3D"display:inline-block;ba=
+ckground:#c00;color:#fff;padding:10px 22px;border-radius:6px;text-decoratio=
+n:none;font-weight:700;font-size:13px;margin:4px;">AI Alerts =E2=80=94 Live=
+</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fnewsletters/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-0=
+00000/rfBCI8hSQLEOKSKQqRPz5mZ82yE=3D473" style=3D"display:inline-block;back=
+ground:transparent;color:#fff;padding:10px 22px;border-radius:6px;text-deco=
+ration:none;font-weight:700;font-size:13px;border:2px solid #fff;margin:4px=
+;">Deep Dive Topics</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Flearning-ai%252Fcourses/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe=
+6eec28816d-000000/sj_xtQLZUlNKbggjnMn4EPIsyMk=3D473" style=3D"display:inlin=
+e-block;background:transparent;color:#fff;padding:10px 22px;border-radius:6=
+px;text-decoration:none;font-weight:700;font-size:13px;border:2px solid #ff=
+f;margin:4px;">Free AI Courses</a>
+      </div>
+      <div style=3D"margin:18px auto 0;max-width:500px;text-align:left;">
+        <p style=3D"color:#ccc;font-size:13px;margin:0 0 8px;line-height:1.=
+5;">&#x1F514; <strong style=3D"color:#fff;">AI Alerts:</strong> When a stor=
+y like Mythos or the Musk filing breaks, alert subscribers know within hour=
+s =E2=80=94 not days. Max 2/day, zero noise.</p>
+        <p style=3D"color:#ccc;font-size:13px;margin:0;line-height:1.5;">&#=
+x1F4DA; <strong style=3D"color:#fff;">Free AI Courses:</strong> Stanford CS=
+229, MIT 6.S191, Karpathy's neural net series, and more =E2=80=94 hand-pick=
+ed courses that are actually worth your time.</p>
+      </div>
+    </div>
+
+    <div class=3D"email-body">
+      <h2>Quick Hits</h2>
+<ul>
+<li><strong>Vercel breached through a compromised AI tool =E2=80=94 first m=
+ajor incident of its kind</strong> =E2=80=94 Attackers hit Context.ai with =
+a Lumma Stealer, pivoted through a Vercel employee's Google Workspace OAuth=
+ token, and exfiltrated customer API keys, source code, and database creden=
+tials =E2=80=94 now listed on BreachForums for $2M. Root cause: a Context.a=
+i employee downloaded Roblox exploit scripts. <a href=3D"https://fk3wz6xe.r=
+.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149=
+a%3Fu=3Dhttps%253A%252F%252Ftechcrunch.com%252F2026%252F04%252F20%252Fapp-h=
+ost-vercel-confirms-security-incident-says-customer-data-was-stolen-via-bre=
+ach-at-context-ai%252F/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec288=
+16d-000000/OI3o0j3WwzeKFzOvJ4Ds-yoyXWQ=3D473">TechCrunch</a></li>
+<li><strong>Musk snubs French criminal summons over Grok-generated CSAM; DO=
+J refuses to cooperate</strong> =E2=80=94 Paris prosecutors are investigati=
+ng X and Grok over deepfake child sexual abuse imagery and Holocaust denial=
+. Grok generated an estimated 3 million images in 10 days, including ~23,00=
+0 appearing to depict children. The US DOJ sent a letter calling the probe =
+"politically motivated" =E2=80=94 first time the US government has shielded=
+ a tech executive from a foreign AI investigation. <a href=3D"https://fk3wz=
+6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53=
+f3149a%3Fu=3Dhttps%253A%252F%252Fwww.cnbc.com%252F2026%252F04%252F20%252Ffr=
+ench-prosecutors-await-musk-in-x-probe-unclear-if-he-will-comply.html/1/010=
+0019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/rkXZIn-Yb5dKkXehn=
+Q1eXUvOUvM=3D473">CNBC</a></li>
+<li><strong>Tim Cook steps down; hardware chief John Ternus takes over Sept=
+ 1</strong> =E2=80=94 Fifteen years, $4T market cap, and the board signals =
+what it thinks the next decade demands: a silicon engineer, not a services =
+operator. Apple's AI gap stopped being a discussion and became a succession=
+ event. <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Ftechcrunch=
+.com%252F2026%252F04%252F20%252Ftim-cook-stepping-down-as-apple-ceo-john-te=
+rnus-taking-over%252F/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec2881=
+6d-000000/wxMoDl3Ro8pNP6v3S2UBOvyaZ8U=3D473">TechCrunch</a></li>
+<li><strong>Bezos's Project Prometheus hits $38B valuation in five months =
+=E2=80=94 raising $10B from BlackRock</strong> =E2=80=94 The "physical AI" =
+lab has poached 120+ researchers from OpenAI, xAI, Meta, and DeepMind. Sepa=
+rately, Bezos is raising $100B for a holding company to acquire manufacture=
+rs whose operational data feeds the models. Fastest startup in history to r=
+each that mark. <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/http=
+s:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fww=
+w.bloomberg.com%252Fnews%252Farticles%252F2026-04-21%252Fjeff-bezos-nears-1=
+0-billion-funding-round-for-ai-lab-ft-says/1/0100019db55d365b-ccd31703-e155=
+-4ef6-99b6-fe6eec28816d-000000/EIqCiVAGYySbL6mkkyiTk6uGhsI=3D473">Bloomberg=
+</a></li>
+<li><strong>Sergey Brin to Gemini engineers: "we must urgently bridge the g=
+ap" with Claude</strong> =E2=80=94 Leaked memo. Brin is personally embeddin=
+g in a coding strike team. Every Gemini engineer is mandated to use Google'=
+s internal agent "Jetski," ranked by usage. The key stat: Anthropic uses AI=
+ for nearly 100% of its own coding; Google is at ~50%. <a href=3D"https://f=
+k3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039=
+ec53f3149a%3Fu=3Dhttps%253A%252F%252Fsherwood.news%252Ftech%252Fgoogle-deep=
+mind-builds-strike-team-to-catch-up-to-anthropic-models%252F/1/0100019db55d=
+365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/KHq5iaNn_zZWHSFHaZzQZOLi3k=
+k=3D473">Sherwood News</a></li>
+<li><strong>Meta will start tracking employee screens and keystrokes to tra=
+in AI</strong> =E2=80=94 Internal memo from the "Model Capability Initiativ=
+e": "we need real examples of navigating dropdown menus." The new training-=
+data moat isn't the open web =E2=80=94 it's the workforce being automated. =
+First hyperscaler to say it out loud. <a href=3D"https://fk3wz6xe.r.us-east=
+-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3D=
+https%253A%252F%252Ffortune.com%252F2026%252F04%252F21%252Fmeta-will-start-=
+tracking-employees-screens-and-keystrokes-to-train-ai%252F/1/0100019db55d36=
+5b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/XS5ND2pA9jf-xAe71AT_y3PL9_w=
+=3D473">Fortune</a></li>
+<li><strong>China shipped 37x more humanoid robots than the US last year</s=
+trong> =E2=80=94 Unitree: 5,500 units. Agibot: 5,168. The three US firms in=
+ the top 10 (Figure AI, Agility Robotics, Tesla) shipped about 150 each. To=
+p 6 global sellers are all Chinese. <a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Fwww.cnbc.com%252F2026%252F04%252F21%252Fchina-humanoid-ro=
+bots-us-investors.html/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec288=
+16d-000000/PRA8FAEBUmyLGCvCFMskxtB5qSM=3D473">CNBC</a></li>
+<li><strong>Outrage in China as iQIYI launches AI actor database of 100+ ce=
+lebrities</strong> =E2=80=94 CEO told producers human-made film is now "int=
+angible cultural heritage." Major Chinese actors deny participation; #iQIYI=
+ trended #1 on Weibo. The SAG-AFTRA fight already shipped in Shanghai, four=
+ steps ahead. <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fhong=
+kongfp.com%252F2026%252F04%252F21%252Foutrage-in-china-after-streaming-site=
+-iqiyi-debuts-ai-actor-database%252F/1/0100019db55d365b-ccd31703-e155-4ef6-=
+99b6-fe6eec28816d-000000/a6v-mtQh4pkUqZGjne1Sm8aTVMk=3D473">Hong Kong Free =
+Press</a></li>
+</ul>
+<hr />
+<h2>When the Founders Stop Delegating</h2>
+<p>Three stories, one pattern. None of them were planned.</p>
+<p><strong>Bezos built from scratch.</strong> Project Prometheus didn't exi=
+st six months ago. Now it's a $38B lab with 120+ researchers poached from e=
+very major AI company, backed by BlackRock and JPMorgan, with a $100B side =
+bet to buy manufacturers and feed their operational data into "physical AI"=
+ models. Bezos isn't investing in AI. He's personally building the next lab=
+.</p>
+<p><strong>Brin came back.</strong> Google's co-founder emerged from semi-r=
+etirement to embed in a coding strike team after internal metrics showed An=
+thropic uses AI for nearly 100% of its engineering while Google sits at ~50=
+%. Every Gemini engineer is now mandated to use "Jetski," ranked by persona=
+l usage. When the co-founder is writing code, the org chart has already fai=
+led.</p>
+<p><strong>Cook stepped aside.</strong> Apple's board chose John Ternus =E2=
+=80=94 a silicon engineer =E2=80=94 over every services and software candid=
+ate. The $4T company told the market that the next decade is about chips, n=
+ot apps. Cook didn't retire. He was replaced by the skillset the AI decade =
+demands.</p>
+<p><strong>What connects them.</strong> When three of the world's wealthies=
+t technologists simultaneously decide they can't delegate AI =E2=80=94 buil=
+ding, coding, or stepping aside =E2=80=94 the signal is the same: this is n=
+o longer a product category. It's the bet.</p>
+<hr />
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Apple's succession is an AI silicon bet.</strong> Ternus was ch=
+osen because the board believes the next decade is won with custom chips, n=
+ot services. Every competitor banking on Apple as a distribution-layer comp=
+any needs a new model.</li>
+<li><strong>AI tools are the new perimeter.</strong> The Vercel breach prov=
+es that AI productivity integrations create privileged OAuth access most se=
+curity teams don't audit. A Roblox exploit script at a third-party vendor c=
+ascaded into a platform-wide breach. Expect a 12-month wave of AI-tool supp=
+ly-chain audits.</li>
+<li><strong>The DOJ just set a precedent on AI enforcement.</strong> Refusi=
+ng to cooperate with France's Grok CSAM investigation isn't just about Musk=
+ =E2=80=94 it's a template. Any US AI company facing foreign regulatory act=
+ion now has a case study for claiming sovereign protection.</li>
+<li><strong>The humanoid robot race is already decided.</strong> 5,500 unit=
+s vs 150. The valuation gap (US firms valued higher) and the shipment gap (=
+Chinese firms shipping 37x more) can't coexist forever. One number is lying=
+.</li>
+</ul>
+<hr />
+<h2>Worth Reading</h2>
+<ul>
+<li><strong><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fvercel=
+.com%252Fkb%252Fbulletin%252Fvercel-april-2026-security-incident/1/0100019d=
+b55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/fpiwti8Cy8C_ChAV34bTfD=
+X0XPk=3D473">Vercel April 2026 Security Incident</a></strong> =E2=80=94 Pri=
+mary source. Full timeline: Lumma Stealer at Context.ai in February, OAuth =
+pivot, customer API keys on BreachForums. The case study security teams sho=
+uld circulate this week.</li>
+<li><strong><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.da=
+rkreading.com%252Fcloud-security%252Fcsa-cisos-prepare-post-mythos-exploit-=
+storm/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/m03umF=
+3sPmrXMA3DwkyP51YHFzs=3D473">CSA/SANS "Mythos-Ready" CISO Framework</a></st=
+rong> =E2=80=94 Co-authored with OWASP, Jen Easterly, and Bruce Schneier. M=
+ean time-to-exploit has collapsed from 2.3 years (2018) to 20 hours (2026).=
+ The most authoritative security planning document of the month.</li>
+<li><strong><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.th=
+eringer.com%252F2026%252F04%252F20%252Ftech%252Fsam-altman-elon-musk-trial-=
+openai-primer/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-00000=
+0/Brqovi5VdQg1zZVnMOfgWz3EIgQ=3D473">Musk v. OpenAI: The $134B Trial Starts=
+ April 27</a></strong> =E2=80=94 Comprehensive primer. Jury selection begin=
+s next week. Musk wants $134B returned to OpenAI's nonprofit arm, plus Altm=
+an's ouster. Four weeks, one courtroom.</li>
+<li><strong><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.gl=
+obenewswire.com%252Fnews-release%252F2026%252F04%252F21%252F3278155%252F0%2=
+52Fen%252FThe-Ungoverned-Workforce-Cybersecurity-Insiders-Finds-92-Lack-Vis=
+ibility-Into-AI-Identities.html/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-=
+fe6eec28816d-000000/mn60rdnPn8l5Od18W6sK0a2jsHA=3D473">92% of Enterprises L=
+ack Visibility Into AI Identities</a></strong> =E2=80=94 Only 5% of securit=
+y leaders believe they could contain a compromised AI agent. Read alongside=
+ the Vercel breach for the full picture.</li>
+<li><strong><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2=
+F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Fwww.wl=
+rn.org%252Fgovernment-politics%252F2026-04-21%252Ffloridas-ai-bill-of-right=
+s-what-happened-whats-in-it-and-whats-next/1/0100019db55d365b-ccd31703-e155=
+-4ef6-99b6-fe6eec28816d-000000/LFD7BU3WfSLWjerz12xJhcU1gIw=3D473">Florida's=
+ AI Bill of Rights: DeSantis Forces Special Session</a></strong> =E2=80=94 =
+A Republican governor defying a Republican White House on AI regulation. Ba=
+ns AI companion chatbots from engaging minors. Special session starts April=
+ 28.</li>
+</ul>
+<hr />
+<h2>This week's poll</h2>
+<p>Snap says 65% of its new code is AI-generated. Anthropic says nearly 100=
+%. What's your team's number?</p>
+    <div style=3D"background:#f8f9fa;padding:24px 30px;margin:20px 0 0;bord=
+er-radius:4px;border-left:4px solid #24ab8a;">
+      <p style=3D"font-size:13px;font-weight:700;color:#24ab8a;text-transfo=
+rm:uppercase;letter-spacing:1px;margin:0 0 4px;font-family:'Lato','Helvetic=
+a Neue',Helvetica,Arial,sans-serif;">Quick Poll</p>
+      <p style=3D"font-size:17px;color:#454547;margin:0 0 16px;line-height:=
+1.5;font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;">Snap s=
+ays 65% of its new code is AI-generated. Anthropic says nearly 100%. What&#=
+039;s your team&#039;s number?</p>
+      <div>
+              <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiwe=
+ekly.co%252Fsurvey%252F4%252Fvote%252F0%253Ftoken%253D493039ec53f3149a/1/01=
+00019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/lZIqeu36hih9yAOT=
+Eqxj6Vy_qqI=3D473" style=3D"display:block;background:#24ab8a;color:#ffffff;=
+padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:700;fo=
+nt-size:15px;margin-bottom:8px;text-align:center;font-family:'Lato','Helvet=
+ica Neue',Helvetica,Arial,sans-serif;">&#128187; Under 10%</a>      <a href=
+=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft=
+%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fsurvey%25=
+2F4%252Fvote%252F1%253Ftoken%253D493039ec53f3149a/1/0100019db55d365b-ccd317=
+03-e155-4ef6-99b6-fe6eec28816d-000000/hDwtpxloMBq7BWhGYOFmZ9ndJXU=3D473" st=
+yle=3D"display:block;background:#24ab8a;color:#ffffff;padding:12px 20px;bor=
+der-radius:4px;text-decoration:none;font-weight:700;font-size:15px;margin-b=
+ottom:8px;text-align:center;font-family:'Lato','Helvetica Neue',Helvetica,A=
+rial,sans-serif;">&#128200; 10=E2=80=9330%</a>      <a href=3D"https://fk3w=
+z6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec5=
+3f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fsurvey%252F4%252Fvote%252=
+F2%253Ftoken%253D493039ec53f3149a/1/0100019db55d365b-ccd31703-e155-4ef6-99b=
+6-fe6eec28816d-000000/vsR1pUwECRkDD-2QfYQxmxKcNR4=3D473" style=3D"display:b=
+lock;background:#24ab8a;color:#ffffff;padding:12px 20px;border-radius:4px;t=
+ext-decoration:none;font-weight:700;font-size:15px;margin-bottom:8px;text-a=
+lign:center;font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;=
+">&#128293; 30=E2=80=9350%</a>      <a href=3D"https://fk3wz6xe.r.us-east-1=
+.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dht=
+tps%253A%252F%252Faiweekly.co%252Fsurvey%252F4%252Fvote%252F3%253Ftoken%253=
+D493039ec53f3149a/1/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-0=
+00000/hT9cl6y0zb-faLcQMpDtKnV36b4=3D473" style=3D"display:block;background:=
+#24ab8a;color:#ffffff;padding:12px 20px;border-radius:4px;text-decoration:n=
+one;font-weight:700;font-size:15px;margin-bottom:8px;text-align:center;font=
+-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;">&#129302; Over=
+ 50%</a>      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiwe=
+ekly.co%252Fsurvey%252F4%252Fvote%252F4%253Ftoken%253D493039ec53f3149a/1/01=
+00019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/nWuEbCBncDTu5TKl=
+1QLeMJ6mogk=3D473" style=3D"display:block;background:#24ab8a;color:#ffffff;=
+padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:700;fo=
+nt-size:15px;margin-bottom:8px;text-align:center;font-family:'Lato','Helvet=
+ica Neue',Helvetica,Arial,sans-serif;">&#129335; We don&#039;t track it</a>
+      </div>
+      <p style=3D"font-size:12px;color:#999;margin:12px 0 0;font-family:'La=
+to','Helvetica Neue',Helvetica,Arial,sans-serif;">Pick one. We'll cover the=
+ top answer next week.</p>
+    </div>
+<hr />
+<p><em>Thanks for reading AI Weekly. Forward this to one person who should =
+be in the loop.</em></p>
+<p><em><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fa=
+iweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co=
+%252Fnewsletters/2/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-00=
+0000/i6r-WYDPLzRc5y5xrv87l181ns8=3D473">Browse all newsletters</a> =C2=B7 <=
+a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.=
+co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fiss=
+ues/2/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/2QrmA-4s=
+rvhAVlcSMWU-ecjTrcE=3D473">Archive</a></em></p>
+    </div>
+
+   =20
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.=
+co/2/0100019db55d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/54VneftOh=
+7HM2kb9w0Mt1OIY5UY=3D473">AI News Weekly</a> | <a href=3D"https://fk3wz6xe.=
+r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f314=
+9a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fissues/3/0100019db55d365b-ccd3=
+1703-e155-4ef6-99b6-fe6eec28816d-000000/Lue-w4J6M_oT0sEAPulpvr6eEUA=3D473">=
+Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Funsubscribe%3Femail=3Dwuliang%2540xiangzizai.com%26token=3D54=
+e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a2053902a/1/0100019db5=
+5d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/jg9_8vD0QyuTuaMcE1ZaQEtD=
+iJg=3D473">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019db5=
+5d365b-ccd31703-e155-4ef6-99b6-fe6eec28816d-000000/c0a7sVQ-jazdf2aYp0gmLoAL=
+nTA=3D473" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

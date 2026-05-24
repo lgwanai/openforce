@@ -1,0 +1,1286 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:199.122.125.159)
+ smtp.mailfrom=bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com;
+ dkim=pass header.b=Gx17Mjy7rJ
+ header.i=wyndhamrewards@emails.wyndhamhotels.com header.s=200608;
+ dkim=pass header.b=YR9QHh5llA header.i=@s6.y.mc.salesforce.com
+ header.s=fbldkim6;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=emails.wyndhamhotels.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=sfXBqbWuO7Hc4Q3PtLuaNsvaTEycSLJZ6aYIZnoqXIo=;
+ b=UNtbazfSiizI87joZH8P3V9S1oV6zpifevheZGChzUgt2DP7bqpq37i/PBegnL1wD3vQt5f
+ K/lGRrHra4EKVlxo2bd9qKd7BuZWQ+wVl2YLue82uVYcRC+6gGCouy0qsEP8ajTliNKWyPeYJ
+ VUQkP5JecASyZ0uoSfQ71hJM9M9FGi+9XJVzaZYcFW/25pKYfjY1AfyisSbMz4FpqK0YHl8N8
+ g1RL0wKsdvQNRWEDI/IbEqEeGGSOtIWJb1WH1oKF8PPdC0NuGpTttvhLZJPa7Y4WJk575ULNb
+ oR/222eUp45vb/cw72Z8sXiMBRxoqLZ4Zmp3T9A6TV2952OfL/mA==
+Arc-Seal: i=1; a=rsa-sha256; t=1775012751; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=Oc8OC9owvAPZJQ6N5NhwVsTYLHJ1Ts8SQ6sDb2PaTXPgZ4RrlSbPX4fgEDD53HhORbbjgMV
+ S8Omtjt2xFLCchxtjbsxhZoSMufpY6qS/mX/IygxrCKkO5Se4i5qRQoVgRxwoLaJXOdinjcN6
+ Gm3SeCLDVLT+7ANvNjhayDZpNdrmN+4viT7guehAGqPxw9E8ig0WDnkLTMM44BqElxn1CiA8j
+ j4UdbNHeZBoT4EN62kUxWH1WVfKJ2eKDTUFG1UXQhxnAJDj23vxtm5fTo1Yz5eGAp6FPXXqv8
+ bNqZVlqgmZY5ju+IoMOuB09PBZx3GWeB3y+ECD98BUye9v6318xQ==
+Authentication-Results: lms; spf=pass (client-ip:199.122.125.159)
+ smtp.mailfrom=bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com;
+ dkim=pass header.b=Gx17Mjy7rJ
+ header.i=wyndhamrewards@emails.wyndhamhotels.com header.s=200608;
+ dkim=pass header.b=YR9QHh5llA header.i=@s6.y.mc.salesforce.com
+ header.s=fbldkim6;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=emails.wyndhamhotels.com;
+ arc=none
+Content-Type: multipart/alternative; boundary="xFkQfnoj9eoN=_?:"
+Date: Tue, 31 Mar 2026 21:05:32 -0600
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=200608;
+ d=emails.wyndhamhotels.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Reply-To:Message-ID:Content-Type;
+ i=wyndhamrewards@emails.wyndhamhotels.com;
+ bh=sfXBqbWuO7Hc4Q3PtLuaNsvaTEycSLJZ6aYIZnoqXIo=;
+ b=Gx17Mjy7rJ4jpuWZ4Ps2lVzKP0NLmkKJUi6MmEDw2JxG/gi4DzkHAAMzEmyVQEURLTr3Ha3JG4Uq
+ Fbkd7c8UeljSa+sNzCF4nkbidHz5a7dOkNXnmzpmCfbx7ZO+nkrXhFsQTmguUf5RUbSMo9gz8Gc5
+ GKiltIVhYca8QQ3JF+c=
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=fbldkim6;
+ d=s6.y.mc.salesforce.com;
+ h=From:To:Subject:Date:List-Unsubscribe:MIME-Version:Reply-To:Message-ID:
+ Content-Type; bh=sfXBqbWuO7Hc4Q3PtLuaNsvaTEycSLJZ6aYIZnoqXIo=;
+ b=YR9QHh5llAuDJEaX39tYdTU/tpDzarMeut2wwMKGhnx/HnTzEwlyfDOFlJp3ymc6pGxMlTmkxK+g
+ VhCZc1C3HTPbLShYqKAqGiMfMoaCcpBEtcOlGLWlbU+/jndpy/rgaMASgtA02cXLQagDz8JiMW7B
+ 1X1FVDAaD4s5O1vYVtgyaeGiDp22oQIsvSCYqXniQ2PKbjJZRONG932VVy/I21P2GCEm8P9TU5tb
+ ZfFWs7HCx9avbBPkqdHXc+u+3WArL4Qy/uuD9N50AsFO5sWtKk8c13MOedHeXBZJu/+eL4LCXCQw
+ 1iooD253nWwTQcPgMBsu6Svkw0OfHy6gBfi25g==
+From: "Wyndham Rewards" <wyndhamrewards@emails.wyndhamhotels.com>
+List-Unsubscribe: 
+ <https://click.emails.wyndhamhotels.com/subscription_center.aspx?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOiI2MTQ2OTk0IiwicyI6IjQ0OTA4OTQwMiIsImxpZCI6IjE1ODEiLCJqIjoiMzc0NjI5NCIsImpiIjoiMTQzIiwiZCI6IjYwMjU5In0.lyOvznKKc4hOo3M5-TpGAxVrUfgWGwMtpYEvGC0FZW8>,
+ <mailto:leave-HTZ5WBASISVERFN5VFAR3E26EQ.60259@leave.emails.wyndhamhotels.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <76438c2f-f2be-4e7a-9c5f-d7e51ad001ca@ind1s06mta1618.xt.local>
+Mime-Version: 1.0
+Received: by mta3.emails.wyndhamhotels.com id hpi5o02fmd4l for
+ <wuliang@xiangzizai.com>; Wed, 1 Apr 2026 03:05:32 +0000 (envelope-from
+ <bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com>)
+Received-Spf: pass (lms verify) identity=mailfrom;
+ client-ip=199.122.125.159; helo=mta3.emails.wyndhamhotels.com;
+ envelope-from=bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com;
+ receiver=<UNKNOWN>;
+Reply-To: "Wyndham Rewards"
+ <reply-EAEJFQUYS4ZUBEYPXI2LNN4V6A.60259@e-mails.wyndhamrewards.com>
+Subject: Your Last Week of Member Month Deals Are Here
+To: <wuliang@xiangzizai.com>
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775012738/4flqcK5j4DzZ3BpW/69CC8B81.00A/199.122.125.159/mta3.emails.wyndhamhotels.com/localhost/<bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com>
+X-Fangmail-Mid-Qid: 69CC8B81.00A/4flqcK5j4DzZ3BpW
+X-Fangmail-Miltered: at n151-171-211 with ID 69CC8B81.00A by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Job: 6146994_3746294
+X-Lms-Client-Ip: 199.122.125.159
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ bounce-WON7TJMD4ZDEZPOFHKOPRYULME.60259@bounce.emails.wyndhamhotels.com
+X-Lms-Pvf: 
+ MnwyfDF8fI8tR2VE3zKf6jrdjYV9dXti26THQEbPelyp0hCvWt4S/vk/5uRo/uPNQWlVmVp/gHANEZMgon7b5IyfLUZWVk0gs8EwAgKC9vMbFDXu+uZGg/fWp+zROqNh0drZLhFcgw==
+X-Sfmc-Stack: 6
+
+This is a multi-part message in MIME format.
+
+--xFkQfnoj9eoN=_?:
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Save 35% on 3+ nights when you pay with your Mastercard. ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏  ͏
+ ͏  ͏  ͏  ͏  ͏  ͏  ͏ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
+­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
+­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
+­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­
+Save 35% on 3+ nights
+when you pay with your Mastercard.
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjE2ZGJjZWMxLTI5MDktNDViMi1iY2MwLTEwYzBkMzUyN2EzYyIsImRla1ZlcnNpb24iOjEsIml2IjoiQ2lhZVdmaVQ1TGlUT3RXSFB4dzRMUT09IiwiY2lwaGVyVGV4dCI6InNvOEx1WXFPMHg4Q3lCQWtkeWx0Uk1MQUNNeHJjVFd0Y2x3djdOajZrTUFheTZqZGxFdVRzM3QwOW5FaWMyQjRCZ1BGTEdXTzdNVlhzNzVuUmRVU2NVa2R4ZkZwQ2lhZVdmaVQ1TGlUT3RXSFB4dzRMUT09IiwiYXV0aFRhZyI6Imp1ekZWN08rWjBYVkVuRkpIY1h4YVE9PSJ9
+View on web https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImNmMmFlOTc2LTI1NmItNDAzNi05ZTk3LTk1OTQ2MTk2ZDdiMSIsImRla1ZlcnNpb24iOjEsIml2IjoiWnZkbHYvNUFOZFpnV3hFRVltNUxsZz09IiwiY2lwaGVyVGV4dCI6IjFoaTAycklTZ3Frdm5VblV6b3VtdmdSZjl5NE1MalRVK2hXZzJ3dEJXdWF2dHJiU1c1RDV5U0l6Z0svNk9PZzhabStjQkdrcnN2MnF0K0JWcWFkQmlmb2RqMng4WnZkbHYvNUFOZFpnV3hFRVltNUxsZz09IiwiYXV0aFRhZyI6Iks3TDlxcmZnVmFtblFZbjZIWTlzZkE9PSJ9
+
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjFmN2MxNDlmLTdmOGYtNGI2MC05MTA2LTFhOTY4N2JlZmE2OCIsImRla1ZlcnNpb24iOjEsIml2IjoiV0ZGdEpuQUFpalRqR2EySzlUN3g5dz09IiwiY2lwaGVyVGV4dCI6IkFTNVNBTHJrcEpUUFNWUVpwdDFKVnptd0k5RGpFeHZ4QmNoa0k4T1hBbDFrSzhTVi9jeFBHUXA2NUw4SlhUdjUvUDBvV21lcW5vYXR4c0M2cFlyK0hvRGQxYTBMZWV0UFZWaFJiU1p3QUlvMDR4bXRpdlUrOGZjPSIsImF1dGhUYWciOiJ4c0M2cFlyK0hvRGQxYTBMZWV0UFZRPT0ifQ%3D%3D
+Hello, WuMember # XXXXXX762GBLUE
+Member|30,000 points
+WEEK 5 DEALS
+
+_Exclusively for Mastercard(R) Cardholders_
+
+Stay 3 Nights or More, Save 35%
+
+Get ready for an incredible adventure. Save 35% when you stay three or more consecutive nights at
+participating Hotels by Wyndham and pay with your Mastercard(R).*
+
+BOOK NOW
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjMyYjRjNzkyLWY5ODAtNDAzOC1iZGJjLTlkNDZmNWRmZmEyNyIsImRla1ZlcnNpb24iOjEsIml2IjoiS3NWOU93WnBLZ3dZaFFSK1owcG5vQT09IiwiY2lwaGVyVGV4dCI6Ik1UQURPY3NRcEw1dEVkQkRzbUNoZ25jWmVuYzRWeGtXYlJFUHdvVmovUG1SN2JYMlMxcThTb0Z0MGlBUzd4ZWR5SG9Fa3ovMmk0M0JTN3R4T09kTTYra0tOS1RJS3NWOU93WnBLZ3dZaFFSK1owcG5vQT09IiwiYXV0aFRhZyI6IjlvdU53VXU3Y1RqblRPdnBDalNreUE9PSJ9
+Book your qualifying stay by Dec. 31, 2026 and complete your stay by Jan. 31, 2027.
+
+Member Month Recap
+
+Missed our other deals? It's not too late to check out the offers from our first four weeks--including earning
+triple Wyndham Rewards points on qualifying Wyndham Travel Bundles.**
+
+EXPLORE DEALS
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImNhYzdiYjBmLWRkMDctNDIwOC05NDUyLTNkMTgzNGZmMDlmOSIsImRla1ZlcnNpb24iOjEsIml2IjoiQ2o1QWZtNUdNRXc3aW9vOUhqRGw1Zz09IiwiY2lwaGVyVGV4dCI6IlJPNWtiWG5ycWlpUjRveFdrcm9aRHhYRHd5VFFNcEppdmJBK1BlUk4wQ3VURU1HSVlra1hWSDFJR29wVjM5azdVYUV0Ukx5bjNqSXdvejhOYTNYb0NWL0FQcCtyQ2o1QWZtNUdNRXc3aW9vOUhqRGw1Zz09IiwiYXV0aFRhZyI6InA5NHlNS00vRFd0MTZBbGZ3RDZmcXc9PSJ9
+
+
+
+
+
+
+
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImEzZjA1ZjMyLTk2ZDUtNGMyMC04ODhmLTYyYTlhNDA5OGQ5ZiIsImRla1ZlcnNpb24iOjEsIml2IjoiYTM0aHZVQ1MvVzdGZGh1YVhLbTR6Zz09IiwiY2lwaGVyVGV4dCI6IjhTK0hhVW12eTlyMjRGaFl5Kzk4RUlhMW9pMFhoWFdxU2tRMThCWXo1M2RuQTNZbWNnY1ErSDBCVm9HVW40eXRIMmhEVis1TTBkSno2WGIyS1JFWU1mRHVNTk1aQUZtbzNHdCtJYjFBa3YxdXhYWWJtbHlwdU00PSIsImF1dGhUYWciOiI2WGIyS1JFWU1mRHVNTk1aQUZtbzNBPT0ifQ%3D%3D 
+
+ Earn
+  
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImE5NjJiYjE2LWNlNjMtNDM4Yy1hNDhlLWMyZGRiNzkzOGE4MiIsImRla1ZlcnNpb24iOjEsIml2IjoiRlZpeFh6Q2l6Y2Mzb0sxcVNyVFludz09IiwiY2lwaGVyVGV4dCI6ImdqTGRzMUlLZzVUWGc0QkoxK2hRT2RKZGwvSGw5NUE2OW5tUmJlQS9TUlA0bFBreXhqYTRGV2d6Q0VPM2xtRHNTeHZkZlVkWktrM3pNT2xZdWxpYTU3OTVRTVczT0FUWmNCVllzVjh3b3MzSE42Q3Rha3EwMko4PSIsImF1dGhUYWciOiJNT2xZdWxpYTU3OTVRTVczT0FUWmNBPT0ifQ%3D%3D 
+
+ Redeem
+  
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjMzZjRkMDJhLTRhM2MtNDVmZC1hMzk5LTM3ZTc0Yjk5NmNkOCIsImRla1ZlcnNpb24iOjEsIml2IjoiTVVjRmhHUThpS2VhVGt4NTk5VGtpZz09IiwiY2lwaGVyVGV4dCI6InhxeVBRNXhtR3FsYmZwSk1TcEwyYXh1RmFid3lUZ1k0SVJzRlpEbDU5Yys5eTd2ZUpwZnpLRmIrL0FvU3JkMU5xb2NqMWU5a05JZXhuY2U5R3FpT09JV29acUYyQVpzMk1ERkhCWVJrUElpbm1rNU1lZmZVNUlvPSIsImF1dGhUYWciOiJuY2U5R3FpT09JV29acUYyQVpzMk1BPT0ifQ%3D%3D 
+
+ Book
+  
+
+
+ https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImZmMWU5MWFkLThmZWEtNDk0My1iMzQ5LWI0MTUxNTdhZWIyOCIsImRla1ZlcnNpb24iOjEsIml2IjoibjkzOEpNeUt3RFRCbm8wbjBXN3h1dz09IiwiY2lwaGVyVGV4dCI6IjlSUnQwNW03a0hrVk9uLy9sa2diL0VLMlR4YzVWbGhqV2tCMEFGUEw1dkpERHRzTEtKaVFVWDY1TUlrRWtjVEdIc043TnJKMlFSZDZsK1VFRG1VNnpDNlJBamRpbjkzOEpNeUt3RFRCbm8wbjBXN3h1dz09IiwiYXV0aFRhZyI6ImRrRVhlcGZsQkE1bE9zd3VrUUkzWWc9PSJ9 
+
+ ONE STEP TO FOLLOW WYNDHAM
+  
+ 
+ 
+
+
+
+*Mastercard(R) Stay Three Nights, Save 35% Terms & Conditions: 
+
+1. The Offer is only valid for Eligible Mastercard Cardholders.
+
+2. Black-out dates apply, are unique to each Participating Property, and are subject to change.
+
+3. Booking Change Rules
+a. All changes are subject to availability.
+b. All Changes need to be made at least 72 hours prior to check-in date4. Cancellation Policy
+
+a. Complimentary cancellation 72 hours prior to Check-In Date
+
+b. The full reservation amount will be charged for cancellations made within 72 hours of the check-in date
+
+5. Offer is only valid at Participating Properties, and the general terms and conditions of bookings and stay
+applicable to each individual Participating Property will apply.
+
+6. Participating Properties are subject to change without notice. The number of rooms available under the
+Offer at each Participating Property may be limited.
+
+7. The Offer cannot be exchanged for cash or used in conjunction with other on-going promotions/offers,
+coupons/vouchers.
+
+8. This offer is valid for new reservations of a Qualifying Stay, made by an Eligible Mastercard Cardholder
+and paid with an Eligible Mastercard Card, during the Booking Window for a stay at a Participating Property
+within the Stay Window.
+
+9. A "Qualifying Stay" means a booking at a Participating Property that meets all the following criteria:-
+
+a. The stay is for three consecutive nights at a Participating Property;
+
+b. The reservation must be made via phone or online using/quoting the rate code "1000039087" at
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjhhNGNiNmJiLTcxYzktNDExZC04Yzc3LTkzZjJlOGU5NjBiOSIsImRla1ZlcnNpb24iOjEsIml2IjoicFBtSytEcVpOV25saGFYODkreXVQZz09IiwiY2lwaGVyVGV4dCI6Imt6UCtKQzh6OXdIdVNRQjBET3oxcVJ1c3o2SEM3Ym5BL0NOTS80Ui9ZajFSYlQzQ1N0UEhaWHp2dnFlZnNuZWJ0MFQzSWlPcEFZWm1mTkJYNU0rSDU4T2ZCQ1lIcFBtSytEcVpOV25saGFYODkreXVQZz09IiwiYXV0aFRhZyI6InFRR0dabnpRVitUUGgrZkRud1FtQnc9PSJ9 or on the phone during the time of reservation;
+
+c. The name of the cardholder used to make and pay for the reservation ("Cardholder") must be the same name of
+the person checking-in at the property and must be the one staying at the property
+
+d. Eligible Mastercard Cardholders are required to provide their Eligible Mastercard Card details when making
+a room reservation, at the point of check-in and when settling room payment.
+
+e. Room reservation can only be guaranteed by using an Eligible Mastercard Card. A no-show does not count as a
+Qualifying Stay
+
+10. "Book Window" means the period from 1 January 2026 to 31 December 2026 (Both Dates Inclusive).
+
+11. "Stay Window" means the period from 1 January 2026 to 31 January 2027 (Both Dates Inclusive).
+
+12. There is no limit to the number of Qualifying Stays an Eligible Mastercard Cardholder may make at a
+Participating Property under the Offer, but consecutive Qualifying Stays at the same Participating Property
+(i.e., where check-out and re-check-in occurs on the same day) shall be deemed as one Qualifying Stay for the
+purposes of the Offer.
+
+13. All payments part of the Qualifying Stay will need to be settled at the time of check-out using the same
+Eligible Mastercard Card only.
+
+14. The Standard Rate is a specific rate type for each Participating Properties that may vary, is unrestricted
+and excludes discounted or negotiated rates not available to the general public.
+
+15. Room rate does not include breakfast unless otherwise stated.
+
+16. Free basic Wi-Fi access at Participating Properties is subject to availability. Participating Properties
+without wireless internet may provide wired High-Speed Internet Access (HSIA).
+Some Participating Properties may charge additional fees for internet speed faster than basic Wi-Fi access.17.
+Early check-in at Participating Properties is subject to availability, upon Eligible Mastercard Cardholder's
+request. Early check-in is determined by the Participating Property and is only applicable to the Eligible
+Mastercard Cardholder's personal guest room. Early check-in requests should not be for a time that is more
+than two hours prior to the Participating Property's standard check-in time.
+
+18. Late check-out at Participating Properties is subject to availability, upon Cardholder's request. Late
+check-out is determined by the Participating Properties and is only applicable to the Eligible Mastercard
+Cardholder's personal guest room. Late check-out requests should not be for a time that is more than two hours
+after the Participating Properties' standard check-out time.
+
+19. Preferred Room Choice
+
+a. Subject to Availability
+
+b. Subject to Participating Properties confirmation on availability of rooms
+
+c. Upon Cardholder's request and must be within the same Room Category (i.e. recently renovated rooms, room
+with a desired view or location)
+
+20. The Offer only applies to the room rate and does not apply to any additional or incidental non-room
+expenses or other charges (such as taxes, service charges, food and beverage, minibar, room service, phone
+charges) incurred or accrued during the Qualifying Stay. Extra person charges may apply if a room is to be
+occupied more than two persons.
+
+21. All stays under this Offer are eligible to earn Wyndham Rewards Points, however Wyndham Rewards Points
+cannot be used to pay for the stay in conjunction with the Offer.
+
+22. By making a reservation for a Qualifying Stay under the Offer, Cardholders agree and consent to these
+terms and conditions. Fulfilment of the Offer at each Participating Property is the responsibility of such
+Participating Property.
+
+23. The Offer may not be used in conjunction with any other discounts, promotions, offers, packages, group or
+convention rate, or any other discounted rate, and is not valid for previous stays or existing reservations at
+the Participating Properties and cannot be redeemed or exchanged for cash or other products.
+
+24. Eligible Mastercard Cardholders are required to provide their Eligible Mastercard Card details when making
+the room reservation, at the point of check-in and when settling room payment. Room reservations can only be
+guaranteed by using an Eligible Mastercard Card. A no-show does not count as a Qualifying Stay.
+
+25. Wyndham Hotels & Resorts may cancel or modify the Offer without notice.
+
+**Wyndham Travel Bundles 3X Points Terms & Conditions: 
+
+Capitalized terms used without definition in these promotion terms and conditions ("Offer Terms") will have
+the meanings ascribed to them in the Wyndham Rewards Program terms and conditions, available at
+www.wyndhamhotels.com/wyndhamrewards/terms https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjU3ZDMwNTM1LTBjOTUtNDNjOS05NTk1LTY0MWEwZWU0N2YxMyIsImRla1ZlcnNpb24iOjEsIml2IjoieUJuNDhOMzBMYk9Uc3FGQ0dRSHBHQT09IiwiY2lwaGVyVGV4dCI6IjFxU0cwNWQ3aTNYRzNDdUI0NTBkajZZaWJBZDhoaXVOS3FSNmZNWDFHMnRaT3M1bDQ2Y2xMMmFCOUsxczFLaFpycW9FRkpMNjljSkVLS2ZJWEtnZm1sYnpFUXpleUJuNDhOMzBMYk9Uc3FGQ0dRSHBHQT09IiwiYXV0aFRhZyI6Iit2WENSQ2lueUZ5b0g1cFc4eEVNM2c9PSJ9
+ (the "Program Terms").
+_3X Wyndham Rewards Bonus Points:_
+To qualify for 3X Wyndham Travel Bundle Wyndham Rewards bonus points , a Wyndham Rewards Member must, during
+the period that begins March 18, 2026 and runs through and includes April 30, 2026 (the "Booking Period"),
+book one (1) stay at a participating Wyndham Rewards hotel, together with at least one (1) flight or cruise on
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjY5MmVmZjhhLTBiZGEtNGMzZi1hMjJjLTAyZTY4ZWQxYTE2OCIsImRla1ZlcnNpb24iOjEsIml2IjoiTlVBY1JtU0RmNHZEZkRvUlRubDVYdz09IiwiY2lwaGVyVGV4dCI6IkJMMXBLY01NUFU4MEJXWmUvRDM5U3JxbFAvV0ZaN1hUVStEK0JibkszMEg5NjcwTzdsdEpndDB5NjA2WFRKUW9UeGtjcm45V25JYkx0SkNuSXBUdEVLbE5ndUp6TlVBY1JtU0RmNHZEZkRvUlRubDVYdz09IiwiYXV0aFRhZyI6IlZweUd5N1NRcHlLVTdSQ3BUWUxpY3c9PSJ9 (the "Wyndham Travel Bundle Site") and complete such
+booking in accordance with Section II(I)https://www.wyndhamhotels.com/en-ap/wyndham-rewards
+of the Program Terms and the WTB Terms & Conditions
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjBlNjQwOWYxLTQ5YjgtNDlkMC05ZWM2LTJiM2JjNTM3YTkxMiIsImRla1ZlcnNpb24iOjEsIml2IjoiekdyWnZqVDRqbG0wbDNTOVMydkJ0dz09IiwiY2lwaGVyVGV4dCI6IjJldllYVkRyZ3lRaHhTWTN6aTJUYmUrUUFhSkNHQWVsK1U4YXVDeVd1TFZHYm8wcTJWWjJxMklLbjRUQ1NaQU9HcHdNREFtc3JGWmVON3lkbGJuaWVVeVhCdXpSekdyWnZqVDRqbG0wbDNTOVMydkJ0dz09IiwiYXV0aFRhZyI6InJLeFdYamU4blpXNTRubE1sd2JzMFE9PSJ9
+ by December 31, 2026 (a "3X Points Booking").
+Except as otherwise set forth below with respect to earnings for Members who have elected to earn Travel
+Partner Currency rather than Wyndham Rewards points in their Wyndham Rewards Member profile ("Miles Earners"),
+each 3 Points Booking will earn 3X the amount of Wyndham Rewards points it would have earned pursuant to the
+Program Terms (absent this offer). For example, a 3X Points Booking that would, under the Program Terms, earn
+3,000 Base Points would, pursuant to this offer, earn a total of 9,000 points (3 X 3,000 = 9,000, with 3,000
+of such points denominated as base earning, and the remaining 6,000 points denominated as bonus earning).
+Miles Earners will receive their base earnings in accordance with the Program Terms (i.e., base earnings for
+the hotel stay in Travel Partner Currency, and base earnings for all other Travel Components in points), and
+their bonus earnings in points only. Bonus earnings will be in an amount equal to: two (2), multiplied by the
+sum of: (i) the number of base miles (or other applicable Travel Partner Currency) earned for the hotel stay
+plus (ii) the number of base points earned for all other Travel Components.
+Bonus points will usually be posted to a Member's account within two to four weeks after the activity through
+which they were earned. For clarity, a Member will not receive bonus points if they fail to complete any
+Travel Component booked as part of their 3X Points Booking.
+3X Points Bookings must be paid in full in advance and become non-cancelable and non-refundable 24 hours after
+booking.
+_Cruise Discount:_
+To qualify for the applicable advertised discount on a cruise Travel Component (between 10% and 20% off of the
+applicable cruise line's Standard Rate (as defined below) for Wyndham Rewards Members, and between 20% and 40%
+off of the applicable cruise line's Standard Rate for Wyndham Rewards Insiders), a Wyndham Rewards Member
+must, during the Booking Period, book a cruise with Carnival Cruise Line(R), Seabourn(R), Holland America(R)
+or Princess(R) Cruises, together with a stay at a participating Wyndham Rewards hotel or a flight, on the
+Wyndham Travel Bundle Site, and complete such booking in accordance with Section II(I)
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImY3Njg1NTAyLWJjOWEtNGU5OC05YmFlLTU4NjZmM2Q0NWYwMSIsImRla1ZlcnNpb24iOjEsIml2IjoiY3lIajhjNFBwMlNrK0VyWmU3a3hUZz09IiwiY2lwaGVyVGV4dCI6IitKdm9rTlpSc1FkVzV2MExXRTdqVkQ0TnRrQmxTaFJaL1RsbW1QamJTNVFQYVRrWFZhb2F0blJuSG0vK1E3aWMySGkvOUR2NERoR2JEZHBid0p4enZ4RjBGRmErY3lIajhjNFBwMlNrK0VyWmU3a3hUZz09IiwiYXV0aFRhZyI6IitBNFJtdzNhVzhDY2M3OFJkQlJXdmc9PSJ9
+ of the Program Terms and the WTB Terms & Conditions
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjY4ZGNmOTQ0LTU3ZDYtNGM0ZS05MThkLTM1YzBkM2Y5MWY1NSIsImRla1ZlcnNpb24iOjEsIml2IjoidlZjUnR3MnJlM1ZPMU85eGpWd3NBdz09IiwiY2lwaGVyVGV4dCI6ImFlcTJVcmJQbFlmOFZtbUczMENXenFHbCtEUnFNTXAzYTU1ZlpEMEZFRkl3WkJMNEx5V3RCR25tTnF6QWxDS3FVN0VRSElsektqcm9vTlE1WUc2WWVFTmo5c2o1dlZjUnR3MnJlM1ZPMU85eGpWd3NBdz09IiwiYXV0aFRhZyI6ImN5bzY2S0RVT1dCdW1IaERZL2JJK1E9PSJ9
+ by December 31, 2026 (a "Cruise Discount Booking").
+For purposes of these Offer Terms, "Standard Rate" means the best, unrestricted, publicly available rate that
+is then available on the applicable cruise line's website for the same cruise, cabin class/inclusions package
+and dates.
+Cruise Discount Bookings must be paid in full in advance and become non-cancelable and non-refundable 24 hours
+after booking.
+Must be a Wyndham Rewards Member in good standing to qualify for discount and the 3X bonus points. Offer
+availability is limited to participating Wyndham Rewards hotels, cruise lines and airlines and subject to
+blackout dates. Not all Wyndham Rewards hotels offer reservations through the Travel Bundle Site at all times,
+and some do not offer reservations through the Travel Bundle Site at any time.
+Blackout dates, room/cabin/fare type exclusions and other restrictions may apply and vary by individual hotel,
+airline and cruise line. For the avoidance of doubt, any modification made to a reservation made pursuant to
+these Offer Terms may result in an ineligibility to receive the advertised bonus points and/or discount.
+Individuals who are not yet Wyndham Rewards Members will need to enroll in the Wyndham Rewards Program to
+receive the benefits described above; to void enrollment, call Wyndham Rewards member services at
+1-866-996-7937. For clarity, the Bonus is not available to anyone who is not a Member at the time of its
+scheduled award, and the cruise discount is not available to anyone who is not a Member at the time of
+booking. For more general information on the Wyndham Rewards Program, including details on free enrollment,
+please visit www.wyndhamhotels.com/wyndham-rewards https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjFkMGEzMDdmLWVkYTItNDJhNS1iNzQwLWQwNWJmZWI4MDZmNCIsImRla1ZlcnNpb24iOjEsIml2IjoiODlxcExIcWYwdU5IT3VUQXljbTJVdz09IiwiY2lwaGVyVGV4dCI6ImtBZjBMbXVVQjhwMkJzWDlrb3NtV05md0VkMCs5SEw5WnZxZjREYkExaFQ1Vk5JdGozOEs4Q2tVTmVBM2svalhmendZSW5Id2V2b3gxN251aHZRZDdwazJ3SVFkODlxcExIcWYwdU5IT3VUQXljbTJVdz09IiwiYXV0aFRhZyI6IjhIcjZNZGU1N29iMEhlNlpOc0NFSFE9PSJ9
+Offer is combinable ONLY with applicable registration-based, bonus point promotions; it may not be combined
+with any other offer, discount, coupon, sale promotion, prior purchase, group bookings or purchase of a gift
+certificate. Rates do not include resort/service fees, taxes, incidentals or gratuities or additional per
+room, per night charges that may be imposed. Rate, taxes and applicable dates may vary by hotel, airline
+and/or cruise line; please inquire at time of reservation.
+This offer and its terms and conditions are subject to cancellation or change at any time and void where
+prohibited.
+Wyndham Hotel Group, LLC is the Sponsor of this Wyndham Travel Bundle 3x Points offer and is not affiliated
+with, nor an agent of, Carnival Cruise Line(R), and is solely responsible for all aspects of this promotion.
+Carnival Cruise Line(R) is not a sponsor of this Wyndham Travel Bundle 3x Points offer and is not responsible
+for the administration, execution, or conduct of the Wyndham Travel Bundle 3x Points offer. (c)2026 Carnival
+Corporation. Carnival(R) and the Carnival logos are trademarks of Carnival Corporation. All rights reserved.
+Used under license. Ships' Registry: The Bahamas, and Panama. Sponsor is responsible for ensuring the Wyndham
+Travel Bundle 3x Points offer complies with all applicable laws, rules, or regulations, and does not violate
+any third-party rights. All cruises are subject to the terms and conditions of Carnival's Cruise Ticket
+Contract, travel documents, and informative brochures. The terms and conditions that govern the cruise booking
+are set forth in the Cruise Ticket Contract and are found online at
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjViODQ2ZGI3LTk3NjMtNGU1YS04ZTI0LWEwNWY3MDQ3ODBmNSIsImRla1ZlcnNpb24iOjEsIml2IjoiWEl2SkhYNWFSamM4M1ROWkphM2p1Zz09IiwiY2lwaGVyVGV4dCI6IkxCaW5WckxCK1dOS0FvYkVRczYwMkRpb1kvNmRuOXE5NTBlcnZtcmFlUnQ3emJydWR2RDBHZ1grdmdla3FSRzdsQWtWblI3anF3d3FLdWQ5KyttdnhESG1MeUNpWEl2SkhYNWFSamM4M1ROWkphM2p1Zz09IiwiYXV0aFRhZyI6IjQ2c01LaXJuZmZ2cHI4UXg1aThnb2c9PSJ9
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImM2MzJjMWRhLTY4YjYtNDk4MS1iOWEwLTkxOGVmNTllNzViMyIsImRla1ZlcnNpb24iOjEsIml2IjoidmJQcGtSclRQbHVpQjNCWFhyK0JFQT09IiwiY2lwaGVyVGV4dCI6IkI5czNOZEdiTlVUTk9GL3pNemp0V1FvWVBpL0ZxU1ZoMjQxTE9XRGZoTEhwSWNOdzFkT1Fza09EYmc0aTY0VE5IWStGNUwwTTVjZ0F1Q3VETm0wM3NkWTBac1VwdmJQcGtSclRQbHVpQjNCWFhyK0JFQT09IiwiYXV0aFRhZyI6IkRPWElBTGdyZ3padE43SFdOR2JGS1E9PSJ9
+Please do not reply to this message.
+
+You are receiving this communication as a member of the Wyndham Rewards program.
+
+This e-mail was sent by Wyndham Rewards, Inc. Wyndham Rewards values your online privacy. For more
+information, view our privacy notice https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6Ijk1Y2RlNjVlLTE4ODItNGVhYS05YmJmLWVjMzMzYTgxYjgyMyIsImRla1ZlcnNpb24iOjEsIml2IjoiUFhNbGZvYnBRZ3pjTlphVXdWKzVSUT09IiwiY2lwaGVyVGV4dCI6IlhIRDUxSlY0NVFmSFZCQUFtS1FpTFdmMy9nREJDYklMY0JjMTBDNGNEUFQ2RmVnSmkvS0VnamUzS3p6Z3JzN0k1Q1RudGRxZTg4bmJ6RjF2T1NrdUdtdW9PUnBpUFhNbGZvYnBRZ3pjTlphVXdWKzVSUT09IiwiYXV0aFRhZyI6Im52UEoyOHhkYnprcExocHJxRGthWWc9PSJ9
+To contact us, please fill out our customer inquiry form here
+https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjNhNjEyY2UyLTlkNGYtNDMxYy1iNGUxLTNlMTBlOWMxNGNkZCIsImRla1ZlcnNpb24iOjEsIml2IjoiM3Yza1RrSGZZMkZ3ZmlrTkc2blFTdz09IiwiY2lwaGVyVGV4dCI6ImR5S3lNV0trd0V1RkpvN1I0ZXdzZ2FIMjhTWmlNdXJsSzc4WnVtSEtMdis1KzZGWUs0U1BzdnpPV1BsZExscjdMTUc2YU11SUNFcy9sTkEyUDBFbGxHTUJyakJMM3Yza1RrSGZZMkZ3ZmlrTkc2blFTdz09IiwiYXV0aFRhZyI6ImlBaExQNVRRTmo5QkpaUmpBYTR3U3c9PSJ9
+To unsubscribe, please click here https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjUxODExMTZjLWIyY2QtNDljYi1hMGUyLTg5MDc4YWMwYzE4ZSIsImRla1ZlcnNpb24iOjEsIml2IjoiRG1rWXNkSWRZSFRRaU0vOWF4ekdIQT09IiwiY2lwaGVyVGV4dCI6InBMd0hLYjM4V2NYVStlSFl0S21ZZ3hialJKLzFlQUJEUXJiSlJPdzRGWm54WXpkNHJVd2FzRHhXSmhFZVhRVlhvelY1WCs1VjVIZnBBQldobUthT282N1dZNDRvejZyN0FRNXBHTEhTSFdCMDBJalAvV3NjeGh3PSIsImF1dGhUYWciOiJBQldobUthT282N1dZNDRvejZyN0FRPT0ifQ%3D%3D
+If you prefer, you may send your unsubscribe request to:
+
+Wyndham Rewards, Inc.
+
+22 Sylvan Way
+
+Parsippany, New Jersey 07054
+
+Attn: Privacy/Opt Out
+
+(c) 2026 Wyndham Rewards, Inc. All rights reserved. All hotels independently owned and operated with the
+exception of a limited number of hotels managed by an affiliate of the company. Vacation club resorts and
+vacation rentals are not operated or managed by Wyndham Hotels & Resorts or Wyndham Rewards.
+
+--xFkQfnoj9eoN=_?:
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml"  xmlns:o="urn:schemas-microsoft-com:office:office"   lang="en" xml:lang="en">
+	<head>
+		<!--[if gte mso 9]><xml>    <o:OfficeDocumentSettings>    <o:AllowPNG/>    <o:PixelsPerInch>96</o:PixelsPerInch>    </o:OfficeDocumentSettings>    </xml>   <![endif]-->
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="color-scheme" content="light"/>
+		<meta name="supported-color-schemes" content="light"/>
+
+					<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<img src="https://click.emails.wyndhamhotels.com/open.aspx?YSZJM6JGU77UDOVKEIUD4EZXAE.60259&d=60259&bmt=0" width="1" height="1" alt="">
+<style>
+@media all and (max-width: 415px) {
+    #wr_shoebox .logo { padding-left:10px !important; }
+    #wr_shoebox .logo img { width:110px !important; height: auto !important; }
+    #wr_shoebox . { font-size:11px !important; line-height: 15px !important; }
+
+}
+
+</style>
+<style>
+@media screen and (max-width: 599px) {
+  .width50 {width:50% !important}
+  .mob-w-30 {width:30% !important;}
+  .mob-w-70 {width:70% !important;}
+  .cta-full-width a{width:360px !important;}
+}
+</style>		
+				<title>Wyndham Rewards</title>
+        
+		
+		<!--[if !mso]><!-->
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet" type="text/css"/>
+        <!--<![endif]-->
+<style type="text/css">
+    
+    span, td, table, div {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .st-email-body{
+        width:100% !important;
+        -webkit-text-size-adjust: 100%;
+        margin: 0 auto!important;
+        padding: 0px;
+        background-color: #ffffff;
+    }
+
+    span.st-preheader{
+        display: none!important;
+    }
+
+    
+    td img + div {
+        display: none;
+    }
+
+    
+    a[href^="tel"],
+    a[href^="sms"]{text-decoration: none; color: inherit !important; pointer-events: none; cursor: default;}
+    u + .st-email-body a {color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit;}
+    
+    *[x-apple-data-detectors] {color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important;}
+
+    a,a:hover,a:link,a:visited {
+        text-decoration:none !important;
+        outline: none;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    
+    .st-hide-desktop {
+        display:none;
+        font-size:0;
+        height:0;
+        min-height:0;
+        max-height:0;
+        line-height:0;
+        mso-hide:all;
+    }
+
+    .st-gmail-fix { display: none !important; }
+
+    strong {
+        font-weight: bold;
+    }
+    </style>
+<style>
+
+@media screen and (max-width: 480px) {
+            
+                            .st-col,.st-mobile-full-width,.st-module-wrapper-table,.st-wrapper,.st-wrapper-table{width:100%!important}.st-col{padding:0!important}.st-resize{width:100%!important}.st-mobile-width-constraint,.st-resize{display:block!important;height:auto!important}.st-mobile-width-constraint{max-width:100%!important}.st-equal-height,.st-height-auto{height:auto!important}.st-hide-desktop{display:table-row!important}.st-hide-mobile{display:none!important}.st-mobile-inline{display:inline!important}.show-img-mobile{display:table-row!important;width:100%!important;float:none;overflow:visible!important;height:auto!important}
+                .st-dynamic-rabspuebmhks1 { padding-left:0px!important; }
+.st-dynamic-5q93f7hy12cbe { padding-left:0px!important;padding-right:0px!important; }
+.st-dynamic-ndtjqqc9nuj5g, u + .st-email-body .st-dynamic-ndtjqqc9nuj5g img { width:100%!important;max-width:570px!important; }
+.st-dynamic-xlrlek4d85zrx { padding-right:35px!important;padding-left:35px!important;padding-top:undefinedpx!important;padding-bottom:undefinedpx!important; }
+.st-dynamic-l3zwbn1msr1y5 { padding-right:35px!important;padding-bottom:undefinedpx!important;padding-left:35px!important; }
+.st-dynamic-84if6onk55z99 { padding-top:9px!important;padding-bottom:9px!important; }
+.st-dynamic-slnzcznix7p0n { padding-right:30px!important;padding-left:30px!important; }
+.st-dynamic-114gf5ibawaql { padding-right:undefinedpx!important;padding-left:undefinedpx!important;padding-top:undefinedpx!important;padding-bottom:undefinedpx!important; }
+.st-dynamic-tuqlssiloms44 { padding-top:12px!important;padding-bottom:11px!important; }
+.st-dynamic-3z6ydhuqhlzsg { padding-right:0px!important;padding-left:0px!important;padding-bottom:20px!important; }
+.st-dynamic-n1y9dgduhdnba { padding-left:30px!important;padding-right:30px!important;padding-top:35px!important;padding-bottom:40px!important; }
+.st-dynamic-h3y0jjlak87hk, u + .st-email-body .st-dynamic-h3y0jjlak87hk img { width:100%!important;max-width:600px!important; }                
+                .st-wrapper-table{
+                    width: 100%!important;
+                    max-width: 480px!important;
+                    margin: 0 auto;
+                }
+                    }
+                    #MessageViewBody .st-module-wrapper-table  {margin-top:-1px}
+            @media (max-width:569px) and (min-width:481px) {.st-module-wrapper-table {margin-top:-1px !important;} }
+            div > u + .body .st-module-wrapper-table {margin-top:0px !important}
+            </style>
+<!--[if !mso]><!-->
+    <style>
+    ul, ol {margin-left:15px; padding-left:0px}
+    </style>
+<!--<![endif]-->
+<!--[if mso]>     <style>         table{             border-collapse: collapse;         }                  span.MsoHyperlink {             mso-style-priority:99;             color:inherit;         }         span.MsoHyperlinkFollowed {             mso-style-priority:99;             color:inherit;         }         ol li, ul li {margin-top:0px !important;margin-bottom:0px !important;}     </style> <![endif]-->
+
+<!--[if gte mso 9]>     <style>         .st-mso-full-width{             width: 100%;         }             </style> <![endif]-->
+
+
+<!--[if IEMobile]>     <style type="text/css">         .st-mso-full-width{             width: 100%;         }     </style> <![endif]-->
+
+
+    <style>
+:root {
+  color-scheme: light dark;
+  supported-color-schemes: light dark;
+}
+  
+  
+
+  
+.aligned-bullets ul{list-style-position: outside!important;}
+.aligned-bullets ol{list-style-position: outside!important;}
+.break-word {word-break: break-word;}
+.break-word p, .break-word span, .break-word div, .break-word table {word-break: break-word;}
+.mob-bl-30{border-left: none !important;}
+
+@media screen and (max-width: 599px) { 
+    .show-element {display:block!important;}
+  .hide-element {display:none!important;}
+   .cta-full-width a{width:360px !important;}
+  .mob-ps-0{padding-right:0px!important;padding-left:0px!important;}
+  .mob-ps-10{padding-right:10px!important;padding-left:10px!important;}
+  .mob-w-204{width:204px !important; min-width:204px !important; max-width:204px !important;}
+  .mob-w-234{width:234px !important; min-width:234px !important; max-width:234px !important;}
+    .mob-w-50{width:50px !important; min-width:50px !important; max-width:50px !important;}
+  .mob-w-88{width:88px !important; min-width:88px !important; max-width:88px !important;}
+    .mob-w-165{width:165px !important; min-width:165px !important; max-width:165px !important;}
+  .mob-w-480{width:480px !important; min-width:480px !important; max-width:480px !important;}
+  .mob-w-480 td{display:block !important;width:480px !important; min-width:480px !important; max-width:480px !important;}
+    .mob-w-435{width:435px !important; min-width:435px !important; max-width:435px !important;}
+    .mob-w-435 div{display:block !important;}
+    .mob-w-435 p{text-align:center !important;}
+  .mob-w-435 td{display:block !important;width:435px !important; min-width:435px !important; max-width:435px !important;}
+   .mob-w-440{width:440px !important; min-width:440px !important; max-width:440px !important;}
+    .mob-w-440 p{text-align:left !important;}
+  .mob-w-420{width:420px !important; min-width:420px !important; max-width:420px !important;}
+    .mob-w-420 p{text-align:left !important;}
+   .mob-w-106{width:106px !important; min-width:106px !important; max-width:106px !important;}
+         .mob-w-100{width:100px !important; min-width:100px !important; max-width:100px !important;}
+  
+    .mob-mgp-35{padding-top:35px !important; padding-bottom:35px !important; padding-left:35px !important; padding-right:35px !important;}
+  .mob-mgps-30{padding-left:30px !important; padding-right:30px !important;}
+  .mob-mgps-0{padding-left:0px !important; padding-right:0px !important;}
+      .mob-mgw-420{width:420px !important; min-width:420px !important; max-width:420px !important;}
+        .mob-mgw-420 img{width:420px !important; min-width:420px !important; max-width:420px !important;}
+    .mob-mgw-420 p{text-align:center !important;}
+  .mob-mgw-420 td{display:table !important;width:420px !important; min-width:420px !important; max-width:420px !important;}
+  
+        .mob-mgw-420v2{width:420px !important; min-width:420px !important; max-width:420px !important;}
+        .mob-mgw-420v2 img{width:420px !important; min-width:420px !important; max-width:420px !important;}
+    .mob-mgw-420v2 p{text-align:left !important;}
+  .mob-mgw-420v2 td{display:table !important;width:420px !important; min-width:420px !important; max-width:420px !important;}
+  .mob-tp20-rp40-bp20 {padding-top:20px;padding-right:40px;padding-bottom:20px;}
+  .mob-tp20-lp40-bp20 {padding-top:20px;padding-left:40px;padding-bottom:20px;}
+}
+   @media screen and (max-width: 480px) {
+     .mob-w-35 {width:35% !important;}
+     .mob-w-30 {width:30% !important;}
+     .width-100 {width:100% !important;}
+     .mob-w-68 img{width:68px !important; min-width:68px !important; max-width:68px !important;}
+     .mob-brb {border-bottom: 0px !important;border-right: 1px solid #d9d9d9;}
+     .mob-brl {border-left: 1px solid #d9d9d9;}
+     .mob-w-90{width:90px !important; min-width:90px !important; max-width:90px !important;}
+     .mob-w-42 img{width:42px !important; min-width:42px !important; max-width:420px !important;}
+     .mob-ps-35 {padding:35px 10px 35px 10px !important;}
+     .mob-ps-left-15 {padding:15px 15px 15px 0px !important;}
+     .mob-ps-right-15 {padding:15px 0px 15px 15px !important;}
+     .mob-ps-30{padding-right:30px!important;padding-left:30px!important;}
+ 
+  }
+  @media screen and (max-width: 320px) {
+  .mob-fz-9 p span{font-size:9px!important;}
+  } 
+  
+@media (prefers-color-scheme: dark) {
+  [class^=“apple-mail”] .dark-mode-text {color:#FFFFFF !important}
+  [class^=“apple-mail”] .dark-mode-text-ce {color:#000000 !important}
+  [class^=“apple-mail”] .dark-mode-text p {color:#FFFFFF !important}
+  [class^=“apple-mail”] .dark-mode-text-ce p{color:#000000 !important}
+  [class^=“apple-mail”] .dark-mode-text span {color:#FFFFFF !important}
+  [class^=“apple-mail”] .dark-mode-text-ce span{color:#000000 !important}
+  [class^=“apple-mail”] .dark-mode-bg { background-color: #000000 !important;}
+
+  .dark-mode-text {color:#FFFFFF !important}
+  .dark-mode-text-ce {color:#000000 !important}
+  .dark-mode-text p {color:#FFFFFF !important}
+  .dark-mode-text-ce p{color:#000000 !important}
+  .dark-mode-text span {color:#FFFFFF !important}
+  .dark-mode-text-ce span{color:#000000 !important}
+  .dark-mode-bg { background-color: #000000 !important;}
+
+  [data-ogsc] .dark-mode-text {color:#FFFFFF !important}
+  [data-ogsc] .dark-mode-text-ce {color:#000000 !important}
+  [data-ogsb] .dark-mode-text p{color:#FFFFFF !important}
+  [data-ogsb] .dark-mode-text-ce p{color:#000000 !important}
+  [data-ogsb] .dark-mode-text span{color:#FFFFFF !important}
+  [data-ogsb] .dark-mode-text-ce span{color:#000000 !important}
+  [data-ogsb] .dark-mode-bg { background-color: #000000 !important;}
+}
+
+@media (prefers-color-scheme: light) and (max-width: 599px) {
+  [class^=“apple-mail”] .dark-mode-text {color:initial !important}
+  [class^=“apple-mail”] .dark-mode-text p {color:initial !important}
+  [class^=“apple-mail”] .dark-mode-text span {color:initial !important}
+  [class^=“apple-mail”] .dark-mode-bg { background-color: #FFFFFF !important;}
+
+  .dark-mode-text {color:initial !important}
+  .dark-mode-text p {color:initial !important}
+  .dark-mode-text span {color:initial !important}
+  .dark-mode-bg { background-color: #FFFFFF !important;}
+
+  [data-ogsc] .dark-mode-text {color:initial !important}
+  [data-ogsb] .dark-mode-text p{color:initial !important}
+  [data-ogsb] .dark-mode-text span{color:initial !important}
+  [data-ogsb] .dark-mode-bg { background-color: #FFFFFF !important;}
+}
+  
+    .responsive-headline p,
+    .responsive-headline p span {
+        font-size: 3.5vw !important;
+        line-height: 110% !important;
+    }
+    .resonsive-body-copy p,
+    .resonsive-body-copy p span {
+        font-size: 3.1vw !important;
+        line-height: 120% !important;
+    }
+  
+</style>
+
+<!--[if mso]> <style> .ul-pt-20 ul {margin-top:0px !important;margin-bottom:0px !important;} .ul-pt-20 ul li {margin-top:20px !important;} </style> <![endif]-->
+
+<style type="text/css">@media all and (max-width: 415px) {.__scope__i0sso .width-100 {width: 100% !important;}.__scope__i0sso #wr_shoebox .logo {padding-left: 10px;}.__scope__i0sso #wr_shoebox .logo img {width: 110px height: auto;}.__scope__i0sso #wr_shoebox .fira {font-size: 11px line-height: 15px;}}</style>
+
+	</head>
+	<body class="st-email-body st-center-gmail"><style type="text/css">
+div.preheader 
+{ display: none !important; } 
+</style>
+<div class="preheader" style="font-size: 1px; display: none !important;">Save 35% on 3+ nights when you pay with your Mastercard.</div>
+							<div lang="en">
+		
+		
+												
+						<div style="font-size:0px; display:none; visibility:hidden; opacity:0; color:transparent; max-height:0px; height:0; width:0; mso-hide:all;">
+															Save 35% on 3+ nights when you pay with your Mastercard.
+																					&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
+ &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
+ &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy;
+ &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &nbsp;
+													</div>
+						<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F4F4F4" class="st-wrapper-table" style="width: 100%;">
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <div style="font-size:0px; display:none; visibility:hidden; opacity:0; color:transparent; max-height:0px; height:0; width:0; mso-hide:all;">
+        
+      </div>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" bgcolor="#F4F4F4" valign="top" class="st-dynamic-5q93f7hy12cbe" style="width: 100%; padding-bottom: 10px; padding-top: 10px;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="width: 100%;">
+              <tr>
+                <td width="453" valign="middle" class="st-dynamic-rabspuebmhks1" style="width: 453px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td width="100%" valign="top" align="left" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #005ead; font-size: 11px; font-weight: normal; letter-spacing: normal; line-height: 18px; width: 100%;">
+                        <p style="margin: 0px;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjZjMmM2MzRiLTRiY2UtNDI4Yy1hODQ2LTEyYjc5ZjFhMjVkZiIsImRla1ZlcnNpb24iOjEsIml2IjoiV1RJcWZ4d3ZqRlZYUWlQSjdHb1FWQT09IiwiY2lwaGVyVGV4dCI6IndiU0dkaUE2L3BrNWY5enNBT0J6TmlGWDV2ZHIxWGltWjlwN3lsbGJ4cUliS0JSYjQrdm5Bb05sbWNNZVhRZWZXd24zOGlPckFuMlB2ZEM0L1N4WUIyMXEvQWlRV1RJcWZ4d3ZqRlZYUWlQSjdHb1FWQT09IiwiYXV0aFRhZyI6InF3SjlqNzNRdVAwc1dBZHRhdndJa0E9PSJ9"><span style="color: #005ead;">Save 35% on 3+ nights when you pay with your Mastercard.</span></a></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="117" valign="middle" class="st-dynamic-rabspuebmhks1" style="width: 117px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td width="100%" valign="top" align="left" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #005ead; font-size: 11px; font-weight: normal; letter-spacing: normal; line-height: 18px; width: 100%;">
+                        <p style="text-align: right; margin: 0px;"><span style="font-size: 11px; line-height: 18px;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6Ijk0MjA0YzE4LTAzZDUtNDA3NS1iNTc3LWVhZDZkMzk0ODY1NyIsImRla1ZlcnNpb24iOjEsIml2Ijoidkpocy8xUkdWeUt1R2svcGk2S2Rjdz09IiwiY2lwaGVyVGV4dCI6IjByNjR4SzBydDVxc0tqdy85TnZMNUdQTFNNa0FNeXJhRkxLNGVMYm4rdGNQMk02RkcwYjlacHR6bCs3bVBiWWNhd2lOR1VFUGhXaTNNK05yOGw0eTJkME1wS1pidkpocy8xUkdWeUt1R2svcGk2S2Rjdz09IiwiYXV0aFRhZyI6IkQ0Vm90elBqYS9KZU10bmRES1NtV3c9PSJ9"><span style="color: #005ead;">View on web</span></a></span></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table> <!-- DYNAMIC END -->
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <div style="font-size:0px; display:none; visibility:hidden; opacity:0; color:transparent; max-height:0px; height:0; width:0; mso-hide:all;">
+        
+      </div>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" bgcolor="#FFFFFF" valign="top" style="width: 100%; border-width: 1px; border-style: solid; border-color: #d9d9d9;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="width: 100%;">
+              <tr>
+                <td width="568" valign="middle" style="width: 568px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td width="100%" align="center" valign="top" class="__scope__i0sso" style="width: 100%;">
+                        <table id="wr_shoebox" class="width-100" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" width="568" style="width:568px;">
+                          <tr>
+                            <td width="200" class="logo" valign="middle" height="85" align="left" style="width:200px;height:85px; padding:0 0 0 15px;">
+                              <a alias="_Header_WR_Logo_URL" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjQ5ZTRlMWRmLWJiNzQtNGVmNS1iZjkzLTFlNzM1YTUxNGRjMCIsImRla1ZlcnNpb24iOjEsIml2IjoiV2JLSTNPcFMzZXd1MkF5TEEwNmN2dz09IiwiY2lwaGVyVGV4dCI6IkRQcWRoUmhtYjlZTDVHL2NyTkRQKzZKRWYyMDJGU0EyMHVtWE9PcnNERXNXeVBMVDQxRnRScElvNGt4UGEwMkxtNHptMGdJQ3F2V1hRRUtmWkdrUkx2enRuS3JSRmpIbVdGbXlpTnpxVXQzc0x0Z01pd05Pbkw4PSIsImF1dGhUYWciOiJRRUtmWkdrUkx2enRuS3JSRmpIbVdBPT0ifQ%3D%3D" target="_blank" style="text-decoration:none; display:block;">
+                                <img src="https://image.emails.wyndhamhotels.com/lib/fe88127171620d7471/m/27/77570fcf-93d3-4a91-a24a-37116c3a70d7.png" width="134" border="0" style="display:block;height:38px;" alt="WYNDHAM REWARDS®" />
+                              </a>
+                            </td>
+                            <td width="200" class="height_auto pad_top3 pad_bot3" valign="middle" height="85" align="right" style="width:200px;height:85px;">
+                              <table class="width-100" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                  <td align="right">
+                                    <table class="width-100" border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                      <tr>
+                                        <td class="fira" align="right" style="font-size:13px; mso-line-height-rule:exactly; line-height:17px; color:#555555; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; font-weight:500; padding:0 10px 0 0;">
+                                          Hello, Wu
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="fira" align="right" style="font-size:11px; mso-line-height-rule:exactly; line-height:15px; color:#555555; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; font-weight:500; padding:3px 10px 3px 0;">Member # <span style="color:#005EAD;">XXXXXX762G</span></td>
+                                      </tr>
+                                      
+                                      <tr>
+                                        <td class="fira" align="right" style="font-size:11px; mso-line-height-rule:exactly; line-height:15px; color:#555555; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; font-weight:500; padding:0 10px 0 0;">
+                                          <span class="wr_shoboex_l3_a" style="color:#005EAD;">BLUE Member</span>
+                                          
+                                          <span class="wr_shoebox_divider"> | </span>
+                                          30,000&nbsp;points
+                                          
+                                        </td>
+                                      </tr>
+                                      
+                                    </table>
+                                  </td>
+                                  <td align="center" bgcolor="#005EAD" valign="top" width="5" style="padding: 0; font-size: 5px; width:5px;">&nbsp;</td>
+                                </tr>
+                              </table>
+                            </td>
+                            
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table> <!-- HEADER END -->
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" bgcolor="#FFFFFF" valign="top" class="st-dynamic-5q93f7hy12cbe" style="width: 100%; border-left: 1px solid #d9d9d9; border-right: 1px solid #d9d9d9;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="568" class="st-mso-full-width st-mobile-full-width" style="width: 568px;">
+              <tr>
+                <td align="center" valign="top" width="568" class="st-dynamic-rabspuebmhks1">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                    <tr>
+                      <td width="100%" valign="top" align="center" class="st-dynamic-ndtjqqc9nuj5g" style="padding-bottom: 0px; width: 100%;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjM0NmFmYzlmLTU1MDItNGI0OC05NjI5LTk5OTNjNWViMWQ3NiIsImRla1ZlcnNpb24iOjEsIml2IjoibGtCQ21SQUFraDdnd3VlemhCT1dXUT09IiwiY2lwaGVyVGV4dCI6InpORHZFLzFlR0szKzN6NUFQVEROUWNBc3FqMUJJTHRhaDRpNTIwV081VU9TbllmSktvY2Q0ME1aQ29EaGxtc29OTFkrVlRkQ3VOY28rVFBBNEh1dUd2YnFHQUpZbGtCQ21SQUFraDdnd3VlemhCT1dXUT09IiwiYXV0aFRhZyI6IlFyalhLUGt6d09CN3JocjI2aGdDV0E9PSJ9" target="_blank" style="display: block;"><img border="0" valign="top" width="570" src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/69bc198a45da4-1773934986.2861.jpg" alt="Wyndham Grand Nai Harn Beach Phuket, Thailand" title="" class="st-hide-mobile st-mobile-width-constraint" style="border: 0px; display: block; width: 570px; max-width: 100%;"> <!--[if !mso 12]><!-->
+                          <div class="show-img-mobile st-dynamic-ndtjqqc9nuj5g" style="display: none; width: 0px; overflow: hidden;"><img src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/69bc19b23ab34-1773935026.2404.jpg" border="0" width="570" valign="top" alt="Wyndham Grand Nai Harn Beach Phuket, Thailand" title="" class="st-mobile-width-constraint" style="display: block; border: none; max-width: 100%; height: auto; width: 570px;"></div> <!--<![endif]-->
+                        </a></td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="left" class="st-dynamic-xlrlek4d85zrx" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #202c5d; font-size: 19px; font-weight: normal; letter-spacing: normal; line-height: 22px; padding: 35px 35px 5px; width: 100%;">
+                        <p style="margin: 0px; text-align: center;">WEEK 5 DEALS</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" bgcolor="#FFFFFF" valign="top" class="st-dynamic-5q93f7hy12cbe" style="width: 100%; border-left: 1px solid #d9d9d9; border-right: 1px solid #d9d9d9;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="568" class="st-mso-full-width st-mobile-full-width" style="width: 568px;">
+              <tr>
+                <td align="center" valign="top" width="568" class="st-dynamic-rabspuebmhks1">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                    <tr>
+                      <td width="100%" valign="top" align="center" class="st-dynamic-ndtjqqc9nuj5g" style="padding-bottom: 3px; width: 100%;"><img border="0" valign="top" width="570" src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/69bc2e7d3c700-1773940349.2476.png" alt="Icon" title="" class="st-hide-mobile st-mobile-width-constraint" style="border: 0px; display: block; width: 570px; max-width: 100%;"> <!--[if !mso 12]><!-->
+                        <div class="show-img-mobile st-dynamic-ndtjqqc9nuj5g" style="display: none; width: 0px; overflow: hidden;"><img src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/69bc2e87b217b-1773940359.7295.png" border="0" width="570" valign="top" alt="Icon" title="" class="st-mobile-width-constraint" style="display: block; border: none; max-width: 100%; height: auto; width: 570px;"></div> <!--<![endif]-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="left" class="st-dynamic-xlrlek4d85zrx" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #555555; font-size: 18px; font-weight: normal; letter-spacing: normal; line-height: 24px; padding-bottom: 15px; padding-left: 35px; padding-right: 35px; width: 100%;">
+                        <p style="margin: 0px; text-align: center;"><em>Exclusively for Mastercard&reg; Cardholders</em></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="left" class="st-dynamic-xlrlek4d85zrx" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #202c5d; font-size: 30px; font-weight: normal; letter-spacing: normal; line-height: 34px; padding-bottom: 20px; padding-left: 35px; padding-right: 35px; width: 100%;">
+                        <p style="margin: 0px; text-align: center;">Stay 3 Nights or More, Save 35%</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="left" class="st-dynamic-l3zwbn1msr1y5" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #555555; font-size: 14px; font-weight: normal; letter-spacing: normal; line-height: 24px; padding-left: 35px; padding-right: 35px; width: 100%;">
+                        <p style="margin: 0px; text-align: center;">Get ready for an incredible adventure. Save 35% when you stay three or more consecutive nights at participating Hotels by Wyndham and pay with your Mastercard&reg;.*</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="center" class="cta-full-width st-dynamic-slnzcznix7p0n" style="padding-bottom: 25px; padding-top: 23px; width: 100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: initial;">
+                          <tr>
+                            <td width="100%" bgcolor="#0D274D" align="center" height="5" valign="middle" style="mso-padding-alt:8px 35px 8px 35px; border-color:#0d274d; border-style: solid; border-width: 2px; height: 5px; width: 100%; text-align: center; background-color: #0d274d; vertical-align: middle"> 
+<a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjIyOTZiNjU0LTU2NzQtNDIzOC1hNjBkLTYyYzgwMWY2ZjMxMSIsImRla1ZlcnNpb24iOjEsIml2IjoiUzVRTk5vRVB1U0dma2dzRDljYUhEQT09IiwiY2lwaGVyVGV4dCI6IlFpRGhaQ1JYajhJLzUvM0RKZzk1UmZJTlUrTk8zRS9iYS96M24vNDdzMXFoMGVjamFzSytSNzFpeUdjU2hsWGFRbFd6THZyeWV1cVJRUXZQRmx4Y2JOT0pTaVhYUzVRTk5vRVB1U0dma2dzRDljYUhEQT09IiwiYXV0aFRhZyI6IjhucnFrVUVMenhaY1hHelRpVW9sMXc9PSJ9" target="_blank" bgcolor="#0D274D" valign="middle" class="st-dynamic-84if6onk55z99" style="mso-line-height-rule:exactly; text-align:center; font-family: 'Fira Sans', Arial, sans-serif; color: #ffffff; font-size: 14px; font-weight: 500; letter-spacing: normal; line-height: 20px; padding: 8px 35px; text-decoration: none; display: table-cell; height: 5px; border-radius: 0px; vertical-align: middle; box-sizing: content-box"> 
+<span style="color: #ffffff; margin: 0px;">BOOK NOW</span></a> </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="left" class="st-dynamic-l3zwbn1msr1y5" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #999999; font-size: 11px; font-weight: normal; letter-spacing: normal; line-height: 20px; padding-right: 35px; padding-left: 35px; padding-bottom: 20px; width: 100%;">
+                        <p style="margin: 0px; text-align: center;">Book your qualifying stay by Dec. 31, 2026 and complete your stay by Jan. 31, 2027.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="100%" valign="top" align="center" style="padding-right: 89px; padding-left: 89px; padding-bottom: 0px; width: 100%;">
+                        <p height="1" width="100%" style="mso-line-height-rule:exactly; mso-table-lspace:0pt; mso-table-rspace:0pt; text-size-adjust:100%; width: 100%; height: 1px; max-height: 1px; background-color: #d9d9d9; margin: 0px; font-size: 1px; line-height: 1px">
+                          &nbsp;
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" bgcolor="#202C5D" valign="top" class="mob-mgps-30 st-dynamic-n1y9dgduhdnba" style="width: 100%; border-left: 1px solid #d9d9d9; border-right: 1px solid #d9d9d9; padding: 40px 35px 60px;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="width: 100%;">
+              <tr>
+                <td width="100%" valign="top" align="left">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="498" class="st-mso-full-width st-mobile-full-width" style="width: 498px;">
+                    <tr>
+                      <td align="center" valign="top" width="498">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td width="100%" valign="top" align="left" class="st-dynamic-114gf5ibawaql" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #ffffff; font-size: 30px; font-weight: normal; letter-spacing: normal; line-height: 36px; padding-bottom: 12px; width: 100%;">
+                              <p style="text-align: center; margin: 0px;"><span style="font-size: 30px; line-height: 36px;">Member Month Recap</span></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td width="100%" valign="top" align="left" class="aligned-bullets st-dynamic-114gf5ibawaql" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #ffffff; font-size: 14px; font-weight: normal; letter-spacing: normal; line-height: 24px; padding-bottom: 16px; width: 100%;">
+                              <p style="margin: 0px; text-align: center;">Missed our other deals? It&rsquo;s not too late to check out the offers from our first four weeks&#8212;including earning triple Wyndham Rewards points on qualifying Wyndham Travel Bundles.**</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td width="100%" valign="top" align="center" class="cta-full-width st-dynamic-3z6ydhuqhlzsg" style="width: 100%;">
+                              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: initial;">
+                                <tr>
+                                  <td width="100%" bgcolor="#FFFFFF" align="center" height="5" valign="middle" style="mso-padding-alt:8px 35px 8px 35px; border-color:#ffffff; border-style: solid; border-width: 2px; height: 5px; width: 100%; text-align: center; background-color: #ffffff; vertical-align: middle"> 
+<a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjlmYTk2NTBjLTMzYWQtNGYzZi1iMTY2LTg5ZjFjNWNlYzVkNSIsImRla1ZlcnNpb24iOjEsIml2IjoiNk85TlhYUVdvaWQxWndrL3ZYaG1oUT09IiwiY2lwaGVyVGV4dCI6IjNUK3cwM05QSk1tbXpTejc4ODlBdTFJa0dXdVowV1QyUjQzQWpkdWNRMDdHeGE2THVRaTNrR1IwRzJ0aUlpWVNUZEkxc2dZZHY2OG1IdjdiakJuaEg2N3dxSlVyNk85TlhYUVdvaWQxWndrL3ZYaG1oUT09IiwiYXV0aFRhZyI6IkhiK3ZKaDcrMjR3WjRSK3U4S2lWS3c9PSJ9" target="_blank" bgcolor="#FFFFFF" valign="middle" class="st-dynamic-tuqlssiloms44" style="mso-line-height-rule:exactly; text-align:center; font-family: 'Fira Sans', Arial, sans-serif; color: #005ead; font-size: 14px; font-weight: 500; letter-spacing: normal; line-height: 19px; padding: 8px 35px; text-decoration: none; display: table-cell; height: 5px; border-radius: 0px; vertical-align: middle; box-sizing: content-box"> <span style="margin: 0px; color: #005ead;"><span style="font-size: 14px; line-height: 19px;">EXPLORE DEALS</span></span></a> </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center"> 
+
+      
+      
+      
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,600italic,600,400italic' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,500i,700,700i" rel="stylesheet">
+
+
+
+<style type="text/css">
+/* import webfont */
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700italic,700,400italic,800italic,800,300italic,300);
+
+@media all{
+    .fira, [style*="Fira Sans"] { font-family: 'Fira Sans', Arial, sans-serif !important; }
+    .standardChinese { font-family: 微软雅黑, 'Microsoft Yahei', 宋体, sans-serif !important; }
+    .openSans { font-family: 'Open Sans', Verdana, Helvetica, Arial, sans-serif !important; }
+    .montserrat { font-family: "Montserrat", sans-serif !important; }
+}
+
+ /*RESET*/
+ .display-cell a { color: #555555; text-decoration: none; }
+ /* Chrome fix for a border being drawn around the movable ink tracking pixel with the src is empty. */
+ img[src=''], img:not([src]) { opacity: 0; }
+
+ /* T&C's color is #999999. */
+ .appleLinksTerms a { color: #999999; text-decoration: none; }
+
+ body { margin: 0 !important; padding: 0; text-rendering: optimizeLegibility; width: 100%; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; }
+
+ /* Android 4.4 margin fix. */
+ div[style*="margin: 16px 0"] { margin:0 !important; }
+ /* End Android 4.4 margin fix. */
+
+ table { border-collapse: collapse !important; }
+ table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+ #outlook a { padding: 0; }
+ .ReadMsgBody, .ExternalClass { width: 100%; }
+ .ExternalClass .element * { }
+ img { border: 0; outline: none; -ms-interpolation-mode: bicubic; }
+ a img { border: none; text-decoration: none; }
+ #fix-gmailApp { display: none; mso-hide: all; }
+ @-ms-viewport { width: extend-to-zoom; zoom: 1.0; }
+
+ .hide_desktop { display:none !important; }
+  .fira .medium, .fira.medium strong { font-weight:500 !important; }
+  .fira .semibold, .fira.semibold strong { font-weight:600 !important; }
+  
+  /* STANDARD MQ FOR ALL DEVICES */
+  @media all and (max-width: 568px) {
+
+    /*OOCSS*/
+    #preHeader, #header, #hero, #promo, #social, #footer-tnc, #eNewsTracker,
+    #preHeader table, #header table, #hero table, #promo table, #social table, #footer-tnc table { float: none; }
+    .minwidth-100 { min-width: 100% !important; }
+    .width-100 { width: 100% !important; }
+    .width-94  { margin: 0 auto; width: 94% !important; }
+    .width-90  { margin: 0 auto; width: 90% !important; }
+    .width-85  { margin: 0 auto; width: 85% !important; }
+    .width-80  { margin: 0 auto; width: 80% !important; }
+    .width-75  { margin: 0 auto; width: 75% !important; }
+    .width-70  { margin: 0 auto; width: 70% !important; }
+    .width-65  { margin: 0 auto; width: 65% !important; }
+    .width-60  { margin: 0 auto; width: 60% !important; }
+    .width-55  { margin: 0 auto; width: 55% !important; }
+    .width-50  { margin: 0 auto; width: 50% !important; }
+
+    .fontSize-11 td { font-size: 11px !important; line-height: 15px !important; }
+    .fontSize-12 td { font-size: 12px !important; line-height: 16px !important; }
+
+    .hide { display: none !important; }
+    .stack { display: block !important; }
+    .remove-padding { padding: 0 !important; }
+    .remove-paddingTop { padding-top: 0 !important; }
+    .remove-paddingBottom { padding-bottom: 0 !important; }
+    .remove-paddingLeft { padding-left: 0 !important; }
+    .remove-paddingRight { padding-right: 0 !important; }
+
+    .remove-border { border: none !important; }
+    .remove-borderTop { border-top: none !important; }
+    .remove-borderBottom { border-bottom: none !important; }
+    .remove-borderLeft { border-left: none !important; }
+    .remove-borderRight { border-right: none !important; }
+
+    .module_headline {font-size: 9vw !important; line-height: 100% !important; }
+    .module_subhead {font-size: 5.5vw !important; line-height: 120% !important; }
+    .module_copy {font-size: 4vw !important; line-height: 120% !important; }
+    .text_center {text-align: center !important; }
+    .text_left {text-align: left !important; }
+    .text_right {text-align: right !important; }
+    .table_center {margin: 0 auto !important; }
+    .height_auto { height: auto !important; }
+    .remove_background { background:none !important; }
+    .remove-background { background:none !important; }
+
+    .pad_top1 {padding-top: 1% !important; } .pad_top2 {padding-top: 2% !important; } .pad_top3 {padding-top: 3% !important; } .pad_top4 {padding-top: 4% !important; } .pad_top5 {padding-top: 5% !important; } .pad_top6 {padding-top: 6% !important; } .pad_top7 {padding-top: 7% !important; } .pad_top8 {padding-top: 8% !important; } .pad_top9 {padding-top: 9% !important; } .pad_top10 {padding-top: 10% !important; } .pad_top11 {padding-top: 11% !important; } .pad_top12 {padding-top: 12% !important; } .pad_top13 {padding-top: 13% !important; } .pad_top14 {padding-top: 14% !important; } .pad_top15 {padding-top: 15% !important; } .pad_top16 {padding-top: 16% !important; } .pad_top17 {padding-top: 17% !important; } .pad_top18 {padding-top: 18% !important; } .pad_top19 {padding-top: 19%
+ !important; } .pad_top20 {padding-top: 20% !important; } .pad_top21 {padding-top: 21% !important; } .pad_top22 {padding-top: 22% !important; } .pad_top23 {padding-top: 23% !important; } .pad_top24 {padding-top: 24% !important; } .pad_top25 {padding-top: 25% !important; } .pad_top26 {padding-top: 26% !important; } .pad_top27 {padding-top: 27% !important; } .pad_top28 {padding-top: 28% !important; } .pad_top29 {padding-top: 29% !important; } .pad_top30 {padding-top: 30% !important; } .pad_top31 {padding-top: 31% !important; } .pad_top32 {padding-top: 32% !important; } .pad_top33 {padding-top: 33% !important; } .pad_top34 {padding-top: 34% !important; } .pad_top35 {padding-top: 35% !important; } .pad_top36 {padding-top: 36% !important; } .pad_top37 {padding-top: 37% !important; } .pad_top38
+ {padding-top: 38% !important; } .pad_top39 {padding-top: 39% !important; } .pad_top40 {padding-top: 40% !important; } .pad_top41 {padding-top: 41% !important; } .pad_top42 {padding-top: 42% !important; } .pad_top43 {padding-top: 43% !important; } .pad_top44 {padding-top: 44% !important; } .pad_top45 {padding-top: 45% !important; } .pad_top46 {padding-top: 46% !important; } .pad_top47 {padding-top: 47% !important; } .pad_top48 {padding-top: 48% !important; } .pad_top49 {padding-top: 49% !important; } .pad_top50 {padding-top: 50% !important; }
+
+    .pad_bot1 {padding-bottom: 1% !important; } .pad_bot2 {padding-bottom: 2% !important; } .pad_bot3 {padding-bottom: 3% !important; } .pad_bot4 {padding-bottom: 4% !important; } .pad_bot5 {padding-bottom: 5% !important; } .pad_bot6 {padding-bottom: 6% !important; } .pad_bot7 {padding-bottom: 7% !important; } .pad_bot8 {padding-bottom: 8% !important; } .pad_bot9 {padding-bottom: 9% !important; } .pad_bot10 {padding-bottom: 10% !important; } .pad_bot11 {padding-bottom: 11% !important; } .pad_bot12 {padding-bottom: 12% !important; } .pad_bot13 {padding-bottom: 13% !important; } .pad_bot14 {padding-bottom: 14% !important; } .pad_bot15 {padding-bottom: 15% !important; } .pad_bot16 {padding-bottom: 16% !important; } .pad_bot17 {padding-bottom: 17% !important; } .pad_bot18 {padding-bottom: 18%
+ !important; } .pad_bot19 {padding-bottom: 19% !important; } .pad_bot20 {padding-bottom: 20% !important; } .pad_bot21 {padding-bottom: 21% !important; } .pad_bot22 {padding-bottom: 22% !important; } .pad_bot23 {padding-bottom: 23% !important; } .pad_bot24 {padding-bottom: 24% !important; } .pad_bot25 {padding-bottom: 25% !important; } .pad_bot26 {padding-bottom: 26% !important; } .pad_bot27 {padding-bottom: 27% !important; } .pad_bot28 {padding-bottom: 28% !important; } .pad_bot29 {padding-bottom: 29% !important; } .pad_bot30 {padding-bottom: 30% !important; } .pad_bot31 {padding-bottom: 31% !important; } .pad_bot32 {padding-bottom: 32% !important; } .pad_bot33 {padding-bottom: 33% !important; } .pad_bot34 {padding-bottom: 34% !important; } .pad_bot35 {padding-bottom: 35% !important; }
+ .pad_bot36 {padding-bottom: 36% !important; } .pad_bot37 {padding-bottom: 37% !important; } .pad_bot38 {padding-bottom: 38% !important; } .pad_bot39 {padding-bottom: 39% !important; } .pad_bot40 {padding-bottom: 40% !important; } .pad_bot41 {padding-bottom: 41% !important; } .pad_bot42 {padding-bottom: 42% !important; } .pad_bot43 {padding-bottom: 43% !important; } .pad_bot44 {padding-bottom: 44% !important; } .pad_bot45 {padding-bottom: 45% !important; } .pad_bot46 {padding-bottom: 46% !important; } .pad_bot47 {padding-bottom: 47% !important; } .pad_bot48 {padding-bottom: 48% !important; } .pad_bot49 {padding-bottom: 49% !important; } .pad_bot50 {padding-bottom: 50% !important; }
+
+    #hero-inner { background:#ffffff; }
+    .text_left { text-align:left !important; }
+    .text_right { text-align:right !important; }
+    .text_center { text-align:center !important; }
+    .table_center { margin:0 auto !important; }
+
+    .container { width: 100% !important; float: left; }
+
+    td.removeBackground { background: none !important; height: auto; }
+
+  /*LOGO*/
+  table#logo-wyndham-wrap { background-color: #ffffff !important; }
+  table#logo-wyndham { margin: -38px auto 0 auto; }
+
+  /*PROFILE (SHOEBOX)*/
+  td#profile { background-color: #ffffff; display: block; padding-top: 0 !important; padding-bottom: 6px !important; text-align: left; }
+  td#profile td { text-align: left; }
+  td#profile-info { border-right: none !important; border-left: solid 6px #75d1f4; padding: 0 0 0 8px !important; position: relative; }
+  span#profile-points { position: absolute; top: 0; right: 6px; }
+  td#header-wrap { background: none !important; }
+
+  /*SOCIAL*/
+  table#social-links td { border-bottom: solid 2px #ffffff; font-size: 16px !important; width: 33.33333333%; }
+  td#social-links-last { border-right: none !important; }
+  table#social-follow { margin: 0 auto; }
+  td#social-follow-last { padding-right: 0 !important; }
+
+  .linkfix_terms a { color:#005ead !important; text-decoration: none !important; }
+
+  .wr_brandbar .wr_brandbar_wrapper .bbwrlogo { padding:7% 0 !important; }
+
+  .unset_outlook { line-height: unset !important; max-height: none !important; }
+
+ }
+
+ /* some Android devices */
+ @media only screen and (device-width: 720px) and (device-height: 1280px) and (-webkit-min-device-pixel-ratio : 2) and (orientation: portrait), only screen and (device-width: 1080px) and (device-height: 1920px) and (-webkit-min-device-pixel-ratio : 3) and (orientation: portrait){
+  .androidBreak { display: block; }
+ }
+
+ /* MQ FOR CSS3 USE (animations by -webkit-) !watch out for Outlook.com! */
+ /* all iphones, outlook 2016, apple mail */
+ @media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /*FOOTER TERMS AND CONDITIONS*/
+  table#footer-tnc { border: solid 1px #596264; display: block; margin: 20px 0 0 !important; position: relative; }
+  td#footer-tnc-firstChild { padding: 10px !important; }
+  label[for="footer-tnc-button"] div,
+  label[for="footer-tnc-button"] div span { color: #555d60 !important; cursor: pointer; display: block !important; font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 20px !important; max-height: none !important; overflow: visible !important; }
+
+  input#footer-tnc-button:checked ~ table div { max-height: 25000px; }
+
+  div#footer-terms-wrap { max-height: 0; overflow: hidden; -webkit-transition: max-height 0.2s ease-in-out; }
+  table#footer-terms td { padding-top: 10 !important; }
+  span#footer-tnc-arrow { background: no-repeat url('http://htmltest.denalimarketing.com/wyndham/1879304/images/icon-arrow.png') center center; background-size: 100% auto; display: block; height: 24px; position: absolute; top: 10px; right: 1.2%; width: 24px; -webkit-transform: rotate(0); -webkit-transition: -webkit-transform 0.2s ease-in-out; }
+  input#footer-tnc-button:checked ~ table label #footer-tnc-arrow { -webkit-transform: rotate(90deg); }
+  .can-spam { margin: 20px 0 0 0; position: absolute; top: 100%; }
+  }
+  /* View on Web link adjustments. Some languages are quite wordy so we need to move the Chevron to the left or right so the link is not covered up. */
+  .mobile_break_fr { visibility:hidden; display: none;}
+  @media all and (max-width: 500px), all and (max-device-width: 670px){
+  /* Move Chevron to the left. */
+  
+
+  .mobile_break_fr { display:block !important; }
+  .mobile_french_view_on_web_height_adj { line-height:17px !important; }
+ }
+
+ 
+</style> <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" valign="top" style="width: 100%; padding-top: 15px;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="width: 100%;">
+              <tr>
+                <td width="570" valign="top" style="width: 570px;">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td width="100%" valign="top" align="center" style="width: 100%;">
+<style type="text/css">
+    @media all and (max-width: 569px) {
+        .wr_social .table_center { margin:0 auto; display:block !important; }
+        .wr_social .button_text { font-size:4vw !important; line-height: 130% !important; }
+        .wr_social .button_wrapper { border-bottom:4px solid #f4f4f4 !important; }
+        .wr_social .button_wrapper td { border-right:4px solid #f4f4f4 !important; }
+        .wr_social .button_wrapper td:last-child { border:none !important; }
+        .wr_social .display-block { display:block !important; }
+        .wr_social .clear { clear:both; overflow: hidden; float:none !!important; }
+        .wr_social .social-inner { width: fit-content !important; margin:0 auto !important; float:none !important; }
+        .wr_social .pad_top4 { padding-top: 4% !important; }
+        .wr_social .pad_bot4 { padding-bottom: 4% !important; }
+
+        
+    }
+</style>
+
+<table class="width-100 wr_social minwidth-100" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" width="570" style="width:570px; min-width:570px;">
+    <tr class="display-block">
+        <td class="display-block clear" align="left" valign="top" style="background:#202c5d;">
+            <table class="width-100" border="0" cellpadding="0" cellspacing="0" role="presentation" width="275" style="width:275px;">
+                <tr>
+                    <td valign="top">
+                        <table class="width-100 button_wrapper" border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                            <tr>
+                                <td class="fira button_text" align="center" height="50" width="33.3333333%" valign="middle" style="font-size:14px; mso-line-height-rule:exactly; line-height:18px; color:#ffffff; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; padding:0 5px; height:50px; border-right:2px solid #f4f4f4; text-transform:uppercase; font-weight:500;">
+                                    <a alias="20260331_APAC_APRIL_MEMBERMONTHWEEK5_EN_SOCIAL_EARN" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImRiNDZhZmRlLTMwMzEtNDkzMy04N2Y4LWMxOWY0MDY2YzNkYSIsImRla1ZlcnNpb24iOjEsIml2IjoiZEFObkVSeUJ4YVlQS3UzK01INk5Qdz09IiwiY2lwaGVyVGV4dCI6IkRJTmMrZmd4ZzFEV09Ba3dZa2Q2V2tzYXgrSEpVb1VFMjFLQnE0a1VSYUxVZ3NpUHdzejFGRG9lQ3YzL0pxZXM1UEU1dCs4c2ppQUQweWp4WjBLMm5ncFMyZktsWjRtODRYUURaeEVjZ2NXbUR5cnQvakIralQ4PSIsImF1dGhUYWciOiIweWp4WjBLMm5ncFMyZktsWjRtODRRPT0ifQ%3D%3D" target="_blank" style="color:#ffffff; display: block; text-decoration: none;">
+                                        Earn
+                                    </a>
+                                </td>
+                                <td class="fira button_text" align="center" height="50" width="33.3333333%" valign="middle" style="font-size:14px; mso-line-height-rule:exactly; line-height:18px; color:#ffffff; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; padding:0 5px; height:50px; border-right:2px solid #f4f4f4; text-transform:uppercase; font-weight:500;">
+                                    <a alias="20260331_APAC_APRIL_MEMBERMONTHWEEK5_EN_SOCIAL_REDEEM" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjQ3N2FmZTVkLWI0YjktNDJiYi05MDU5LWI5MmZlZTRhODRhZiIsImRla1ZlcnNpb24iOjEsIml2IjoiQlhocHp3Tm9sNitSZzRhWThxUHdVZz09IiwiY2lwaGVyVGV4dCI6IkdXUnNrZUh0elUvY2JkZjVHd1VTeEEzVWpnZHhTYlJENVJrN21VWTJxSlRubk95Z0U4OTdCV3BpcGwyanY1Wnp1QW1icjVWc3MwbVZVek8zOHFja2x0c1JoSmZHRGUwVGNnVjRhYzhEYUpldmtZT0dtUEtqOEZJPSIsImF1dGhUYWciOiJVek8zOHFja2x0c1JoSmZHRGUwVGNnPT0ifQ%3D%3D" target="_blank" style="color:#ffffff; display: block; text-decoration: none;">
+                                        Redeem
+                                    </a>
+                                </td>
+                                <td class="fira button_text" align="center" height="50" width="33.3333333%" valign="middle" style="font-size:14px; mso-line-height-rule:exactly; line-height:18px; color:#ffffff; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; padding:0 5px; height:50px; border-right:2px solid #f4f4f4; text-transform:uppercase; font-weight:500;">
+                                    <a alias="20260331_APAC_APRIL_MEMBERMONTHWEEK5_EN_SOCIAL_BOOK" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjIzYTVhNmZjLTA0ZGEtNDZiNi1iZjAxLTBiMDk0ZmY3Njk3OCIsImRla1ZlcnNpb24iOjEsIml2IjoiWTE2d0x1Vm9tS1VKQ1ZrR1hEajBaQT09IiwiY2lwaGVyVGV4dCI6IlExM0I4azVkSTMvRVRTVHFPbkFYVks0VXMyT3BHQjlWYzFwYVFwdmdldmdXUStOU1BYV2VIWGF1UHA5dTczdFRuc0hRWVNUMkpQUVVFaG9qemdLWlVRNm1PZUlXNzVZVHBXTmVzQzdsYUppbENRbFpCbHc0OUdRPSIsImF1dGhUYWciOiJFaG9qemdLWlVRNm1PZUlXNzVZVHBRPT0ifQ%3D%3D" target="_blank" style="color:#ffffff; display: block; text-decoration: none;">
+                                        Book
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td class="fira display-block clear button_text width-100 height_auto pad_top4 pad_bot4" align="center" width="294" height="50" valign="middle" style="font-size:14px; mso-line-height-rule:exactly; line-height:18px; color:#ffffff; font-family:'Fira Sans', Arial, sans-serif; border-collapse: collapse; height:50px; text-transform:uppercase; font-weight:500; background:#202c5d; width:294px;">
+            <a alias="20260331_APAC_APRIL_MEMBERMONTHWEEK5_EN_SOCIAL_CN" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjVjMjFlOTUxLWQxYzctNDA5My1hMmIzLTFjNzQ1ZmVlNjE4YiIsImRla1ZlcnNpb24iOjEsIml2IjoiUmo0Q2dtblVJN2tzaDUwZDBCZUJtdz09IiwiY2lwaGVyVGV4dCI6ImVqejZyaHU0M0YxcWdrMTB2QUNXZVpYRXcrMkg4Q3gzMHpBV1BCVmJyMjQrbElmZjFVWDBJQmRzTDE2dXk1RDcwSStBSDRkTlBJQVdSS1Qwb2RUWFVTMmFnSGFNUmo0Q2dtblVJN2tzaDUwZDBCZUJtdz09IiwiYXV0aFRhZyI6IlRUeUFGa1NrOUtIVTExRXRtb0IyakE9PSJ9" target="_blank" style="text-decoration:none; color:#ffffff; display:inline-block;">
+                ONE STEP TO FOLLOW&nbsp;WYNDHAM
+            </a>
+        </td>
+        
+    </tr>
+</table></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table> <!-- DYNAMIC END --> </td>
+  </tr>
+  <tr>
+    <td width="100%" valign="top" align="center">
+      <div style="font-size:0px; display:none; visibility:hidden; opacity:0; color:transparent; max-height:0px; height:0; width:0; mso-hide:all;">
+        <!-- DYNAMIC START -->
+        
+      </div>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="570" class="st-wrapper st-wrapper-background st-module-wrapper-table" style="width: 570px;">
+        <tr>
+          <td width="100%" valign="top" style="width: 100%; padding-top: 15px;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="width: 100%;">
+              <tr>
+                <td width="100%" valign="top" align="left">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="570" class="st-mso-full-width st-mobile-full-width" style="width: 570px;">
+                    <tr>
+                      <td align="center" valign="top" width="570">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td width="100%" valign="top" align="center" class="st-dynamic-h3y0jjlak87hk" style="padding-top: 24px; width: 100%;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjliNTYwMGY2LTJkZjItNGIyYS05Yzg5LWJmMWE2NGM5NzdhNSIsImRla1ZlcnNpb24iOjEsIml2IjoiT2lGNVRRYTBRV2JWc05sRU1IVUJwQT09IiwiY2lwaGVyVGV4dCI6InM2ZXpHdFZNOW1jOGRnKzhDMGJWSVRJRzVHekJERFJjc2JybVplUzV0c1p4K2NqTzBqTFk5NXd0NDdLQ0pzaFp6U0NHVFlCZTNPdzYwR1duNkpSNG93bm0wV1hjT2lGNVRRYTBRV2JWc05sRU1IVUJwQT09IiwiYXV0aFRhZyI6Ilh0enNPdEJscCtpVWVLTUo1dEZsM0E9PSJ9" target="_blank" style="display: block;"><img border="0" valign="top" width="600" src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/67596667c7898-1733912167.8173.png" alt="Hotels by Wyndham" title="" class="st-hide-mobile st-mobile-width-constraint" style="border: 0px; display: block; width: 600px; max-width: 100%;"> <!--[if !mso 12]><!-->
+                                <div class="show-img-mobile st-dynamic-h3y0jjlak87hk" style="display: none; width: 0px; overflow: hidden;"><img src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/67596839a1e59-1733912633.6631.png" border="0" width="600" valign="top" alt="Hotels by Wyndham" title="" class="st-mobile-width-constraint" style="display: block; border: none; max-width: 100%; height: auto; width: 600px;"></div> <!--<![endif]-->
+                              </a></td>
+                          </tr>
+                          <tr>
+                            <td width="100%" valign="top" align="center" class="st-dynamic-h3y0jjlak87hk" style="width: 100%;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImUzMzU4MGM3LTkyY2UtNGViZS05ODFlLTAxMWI5MDE3MDkxYiIsImRla1ZlcnNpb24iOjEsIml2IjoiNlpSUi9rTXUraEJJeUZxZGdlRkRndz09IiwiY2lwaGVyVGV4dCI6ImVKaTNzK1NuekFGS0tKMExLc2llNDN3UXFRTUZtZzI1a3dYempqcVdhZXhaRklLL0pzZmV1ME5nNDRPbUhPNUJLalZCbkd5RDFpNktWRDFWSWozZnEwU0hQZWRaNlpSUi9rTXUraEJJeUZxZGdlRkRndz09IiwiYXV0aFRhZyI6Imc5WXVpbFE5VlNJOTM2dEVoejNuV1E9PSJ9" target="_blank" style="display: block;"><img border="0" valign="top" width="600" src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/675966a94e0fd-1733912233.3197.png" alt="Vacation Rentals" title="" class="st-hide-mobile st-mobile-width-constraint" style="border: 0px; display: block; width: 600px; max-width: 100%;"> <!--[if !mso 12]><!-->
+                                <div class="show-img-mobile st-dynamic-h3y0jjlak87hk" style="display: none; width: 0px; overflow: hidden;"><img src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/6759687310983-1733912691.068.png" border="0" width="600" valign="top" alt="Vacation Rentals" title="" class="st-mobile-width-constraint" style="display: block; border: none; max-width: 100%; height: auto; width: 600px;"></div> <!--<![endif]-->
+                              </a></td>
+                          </tr>
+                          <tr>
+                            <td width="100%" valign="top" align="center" class="st-dynamic-h3y0jjlak87hk" style="padding-bottom: 24px; width: 100%;"><a href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImNiNzFlNjQwLTU2OTMtNDg3OC04OGI0LTFhYjNiMTM0ODMzYyIsImRla1ZlcnNpb24iOjEsIml2IjoiZ0hpR01DbHhWcGpsQkJ6bktYTDBEdz09IiwiY2lwaGVyVGV4dCI6IitacS9udUZmZTMxd3hRY05HMURwQ3Z4SHJ1MWZqK1kzODE2R2YySnlGcTNXVElKNmtvcWQ3UitSdDA2MWZwTXFqdXQ5OUdEWnZlY2lNMTMyTG0xZG5CWWo5RjBUZ0hpR01DbHhWcGpsQkJ6bktYTDBEdz09IiwiYXV0aFRhZyI6IjJiM25Jak5kOWk1dFhad1dJL1JkRXc9PSJ9" target="_blank" style="display: block;"><img border="0" valign="top" width="600" src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/6759672d4826d-1733912365.2955.png" alt="Caesars Rewards" title="" class="st-hide-mobile st-mobile-width-constraint" style="border: 0px; display: block; width: 600px; max-width: 100%;"> <!--[if !mso 12]><!-->
+                                <div class="show-img-mobile st-dynamic-h3y0jjlak87hk" style="display: none; width: 0px; overflow: hidden;"><img src="https://www.emailimagecdnr8z1.com/flt3xwpjs0/en_us/images/675968a955aff-1733912745.351.png" border="0" width="600" valign="top" alt="Caesars Rewards" title="" class="st-mobile-width-constraint" style="display: block; border: none; max-width: 100%; height: auto; width: 600px;"></div> <!--<![endif]-->
+                              </a></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td width="100%" valign="top" align="left" style="padding-bottom: 10px;">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="left" width="100%" style="width: 100%;">
+                    <tr>
+                      <td width="570" valign="middle" class="st-dynamic-rabspuebmhks1" style="width: 570px;">
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                          <tr>
+                            <td width="100%" valign="top" align="left" style="text-align: left; font-family: 'Fira Sans', Arial, sans-serif; color: #666666; font-size: 11px; font-weight: normal; letter-spacing: normal; line-height: 14px; width: 100%;">
+                              <p style="margin: 0px;"><strong>*Mastercard&reg; Stay Three Nights, Save 35% Terms &amp; Conditions:&nbsp;</strong></p>
+                              <p style="margin: 0px;">1. The Offer is only valid for Eligible Mastercard Cardholders.</p>
+                              <p style="margin: 0px;">2. Black-out dates apply, are unique to each Participating Property, and are subject to change.</p>
+                              <p style="margin: 0px;">3. Booking Change Rules<br>a. All changes are subject to availability.<br>b. All Changes need to be made at least 72 hours prior to check-in date</p>
+                              <p style="margin: 0px;">4. Cancellation Policy</p>
+                              <p style="margin: 0px;">a. Complimentary cancellation 72 hours prior to Check-In Date</p>
+                              <p style="margin: 0px;">b. The full reservation amount will be charged for cancellations made within 72 hours of the check-in date</p>
+                              <p style="margin: 0px;">5. Offer is only valid at Participating Properties, and the general terms and conditions of bookings and stay applicable to each individual Participating Property will apply.</p>
+                              <p style="margin: 0px;">6. Participating Properties are subject to change without notice. The number of rooms available under the Offer at each Participating Property may be limited.</p>
+                              <p style="margin: 0px;">7. The Offer cannot be exchanged for cash or used in conjunction with other on-going promotions/offers, coupons/vouchers.</p>
+                              <p style="margin: 0px;">8. This offer is valid for new reservations of a Qualifying Stay, made by an Eligible Mastercard Cardholder and paid with an Eligible Mastercard Card, during the Booking Window for a stay at a Participating Property within the Stay Window.</p>
+                              <p style="margin: 0px;">9. A &ldquo;Qualifying Stay&rdquo; means a booking at a Participating Property that meets all the following criteria:-</p>
+                              <p style="margin: 0px;">a. The stay is for three consecutive nights at a Participating Property;</p>
+                              <p style="margin: 0px;">b. The reservation must be made via phone or online using/quoting the rate code &ldquo;1000039087&rdquo; at https://www.wyndhamhotels.com/hotel-deals/mastercard or on the phone during the time of reservation;</p>
+                              <p style="margin: 0px;">c. The name of the cardholder used to make and pay for the reservation (&ldquo;Cardholder&rdquo;) must be the same name of the person checking-in at the property and must be the one staying at the property</p>
+                              <p style="margin: 0px;">d. Eligible Mastercard Cardholders are required to provide their Eligible Mastercard Card details when making a room reservation, at the point of check-in and when settling room payment.</p>
+                              <p style="margin: 0px;">e. Room reservation can only be guaranteed by using an Eligible Mastercard Card. A no-show does not count as a Qualifying Stay</p>
+                              <p style="margin: 0px;">10. &ldquo;Book Window&rdquo; means the period from 1 January 2026 to 31 December 2026 (Both Dates Inclusive).</p>
+                              <p style="margin: 0px;">11. &ldquo;Stay Window&rdquo; means the period from 1 January 2026 to 31 January 2027 (Both Dates Inclusive).</p>
+                              <p style="margin: 0px;">12. There is no limit to the number of Qualifying Stays an Eligible Mastercard Cardholder may make at a Participating Property under the Offer, but consecutive Qualifying Stays at the same Participating Property (i.e., where check-out and re-check-in occurs on the same day) shall be deemed as one Qualifying Stay for the purposes of the Offer.</p>
+                              <p style="margin: 0px;">13. All payments part of the Qualifying Stay will need to be settled at the time of check-out using the same Eligible Mastercard Card only.</p>
+                              <p style="margin: 0px;">14. The Standard Rate is a specific rate type for each Participating Properties that may vary, is unrestricted and excludes discounted or negotiated rates not available to the general public.</p>
+                              <p style="margin: 0px;">15. Room rate does not include breakfast unless otherwise stated.</p>
+                              <p style="margin: 0px;">16. Free basic Wi-Fi access at Participating Properties is subject to availability. Participating Properties without wireless internet may provide wired High-Speed Internet Access (HSIA).<br>Some Participating Properties may charge additional fees for internet speed faster than basic Wi-Fi access.</p>
+                              <p style="margin: 0px;">17. Early check-in at Participating Properties is subject to availability, upon Eligible Mastercard Cardholder&rsquo;s request. Early check-in is determined by the Participating Property and is only applicable to the Eligible Mastercard Cardholder&rsquo;s personal guest room. Early check-in requests should not be for a time that is more than two hours prior to the Participating Property&rsquo;s standard check-in time.</p>
+                              <p style="margin: 0px;">18. Late check-out at Participating Properties is subject to availability, upon Cardholder&rsquo;s request. Late check-out is determined by the Participating Properties and is only applicable to the Eligible Mastercard Cardholder&rsquo;s personal guest room. Late check-out requests should not be for a time that is more than two hours after the Participating Properties&rsquo; standard check-out time.</p>
+                              <p style="margin: 0px;">19. Preferred Room Choice</p>
+                              <p style="margin: 0px;">a. Subject to Availability</p>
+                              <p style="margin: 0px;">b. Subject to Participating Properties confirmation on availability of rooms</p>
+                              <p style="margin: 0px;">c. Upon Cardholder&rsquo;s request and must be within the same Room Category (i.e. recently renovated rooms, room with a desired view or location)</p>
+                              <p style="margin: 0px;">20. The Offer only applies to the room rate and does not apply to any additional or incidental non-room expenses or other charges (such as taxes, service charges, food and beverage, minibar, room service, phone charges) incurred or accrued during the Qualifying Stay. Extra person charges may apply if a room is to be occupied more than two persons.</p>
+                              <p style="margin: 0px;">21. All stays under this Offer are eligible to earn Wyndham Rewards Points, however Wyndham Rewards Points cannot be used to pay for the stay in conjunction with the Offer.</p>
+                              <p style="margin: 0px;">22. By making a reservation for a Qualifying Stay under the Offer, Cardholders agree and consent to these terms and conditions. Fulfilment of the Offer at each Participating Property is the responsibility of such Participating Property.</p>
+                              <p style="margin: 0px;">23. The Offer may not be used in conjunction with any other discounts, promotions, offers, packages, group or convention rate, or any other discounted rate, and is not valid for previous stays or existing reservations at the Participating Properties and cannot be redeemed or exchanged for cash or other products.</p>
+                              <p style="margin: 0px;">24. Eligible Mastercard Cardholders are required to provide their Eligible Mastercard Card details when making the room reservation, at the point of check-in and when settling room payment. Room reservations can only be guaranteed by using an Eligible Mastercard Card. A no-show does not count as a Qualifying Stay.</p>
+                              <p style="margin: 0px;">25. Wyndham Hotels &amp; Resorts may cancel or modify the Offer without notice.</p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><strong>**Wyndham Travel Bundles 3X Points Terms &amp; Conditions:&nbsp;</strong></p>
+                              <p style="margin: 0px;">Capitalized terms used without definition in these promotion terms and conditions (&ldquo;Offer Terms&rdquo;) will have the meanings ascribed to them in the Wyndham Rewards Program terms and conditions, available at <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjlmMTk0NDlhLTlmZGUtNDc2NS05OTMwLTk3Y2RhMTk4ZDUyOSIsImRla1ZlcnNpb24iOjEsIml2IjoiWjVXdWVDYTJMSFdLdm5OdU9FdG1vUT09IiwiY2lwaGVyVGV4dCI6IlJFUjZ1MjFCZmxtL1pFaW9wM0lCS1N5Y3VqamFDajVhWDA5aU1UNTJBMnA5WGdSQ1VBTy9pdkM4dytPR1FJdUV4RFAyRXVVcXJvOVc2YkIrdW9DMlNZRmNSaG15WjVXdWVDYTJMSFdLdm5OdU9FdG1vUT09IiwiYXV0aFRhZyI6IktxNlBWdW13ZnJxQXRrbUJYRVlac2c9PSJ9"><span style="color: #005ead;">www.wyndhamhotels.com/wyndhamrewards/terms</span></a> (the &ldquo;Program Terms&rdquo;).</p>
+                              <p style="margin: 0px;"><br><em>3X Wyndham Rewards Bonus Points:</em><br>To qualify for 3X Wyndham Travel Bundle Wyndham Rewards bonus points , a Wyndham Rewards Member must, during the period that begins March 18, 2026 and runs through and includes April 30, 2026 (the &ldquo;<strong>Booking Period</strong>&rdquo;), book one (1) stay at a participating Wyndham Rewards hotel, together with at least one (1) flight or cruise on https://www.wyndhamhotels.com/travel-packages/en-us (the &ldquo;<strong>Wyndham Travel Bundle Site</strong>&rdquo;) and complete such booking in accordance with 
+<a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImRlYzA1YmM1LTI1NzktNDhiNC04YWJlLWZlNDFiNDI1ZTFiOSIsImRla1ZlcnNpb24iOjEsIml2IjoiaW5PYTJQODJFeFZlZjNaSFZ3azNOZz09IiwiY2lwaGVyVGV4dCI6Ims1L3Jud0FHNG05cmtnaFlQcFhmbm1EZlJvQWM4c3RvWEkzS3U5NnlzbWFLRi95ODB1Y3I2YkRRMDdzSVVmbU81MUV4U0pIQXBCZ2d6YlBOY3FWRnFscjFvTnZVaW5PYTJQODJFeFZlZjNaSFZ3azNOZz09IiwiYXV0aFRhZyI6IndLUVlJTTJ6elhLbFJhcGE5YURiMUE9PSJ9"><span style="color: #005ead;">Section II(I) </span></a>of the Program Terms and the 
+<a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjJmMWEwN2Y5LWFiZGItNDRjMC1iMWE1LWI4YmM3YzhlODRjYSIsImRla1ZlcnNpb24iOjEsIml2IjoiZDRGdHdTamFsQWlRZ0RsZlNXQUlVZz09IiwiY2lwaGVyVGV4dCI6Ii9xd1hHOXBQNW14bTkvOFJaRkp4bkVUNWdHRnB2aDF0M0lqQld5ek84RWR2dmZBNExIVHhWN2VKclFSdDR5T2kzSngydytyNnY1QkRQbzBVOWpac2YzUElyUmZBZDRGdHdTamFsQWlRZ0RsZlNXQUlVZz09IiwiYXV0aFRhZyI6IityK1FRejZORlBZMmJIOXp5SzBYd0E9PSJ9"><span style="color: #005ead;">WTB Terms &amp; Conditions</span></a> by December 31, 2026 (a &ldquo;<strong>3X Points Booking</strong>&rdquo;).</p>
+                              <p style="margin: 0px;"><br>Except as otherwise set forth below with respect to earnings for Members who have elected to earn Travel Partner Currency rather than Wyndham Rewards points in their Wyndham Rewards Member profile (&ldquo;<strong>Miles Earners</strong>&rdquo;), each 3 Points Booking will earn 3X the amount of Wyndham Rewards points it would have earned pursuant to the Program Terms (absent this offer). For example, a 3X Points Booking that would, under the Program Terms, earn 3,000 Base Points would, pursuant to this offer, earn a total of 9,000 points (3 X 3,000 = 9,000, with 3,000 of such points denominated as base earning, and the remaining 6,000 points denominated as bonus earning).</p>
+                              <p style="margin: 0px;"><br>Miles Earners will receive their base earnings in accordance with the Program Terms (i.e., base earnings for the hotel stay in Travel Partner Currency, and base earnings for all other Travel Components in points), and their bonus earnings in points only. Bonus earnings will be in an amount equal to: two (2), multiplied by the sum of: (i) the number of base miles (or other applicable Travel Partner Currency) earned for the hotel stay plus (ii) the number of base points earned for all other Travel Components.</p>
+                              <p style="margin: 0px;"><br>Bonus points will usually be posted to a Member's account within two to four weeks after the activity through which they were earned. For clarity, a Member will not receive bonus points if they fail to complete any Travel Component booked as part of their 3X Points Booking.</p>
+                              <p style="margin: 0px;"><br><strong>3X Points Bookings must be paid in full in advance and become non-cancelable and non-refundable 24 hours after booking.</strong></p>
+                              <p style="margin: 0px;"><br><em>Cruise Discount:</em><br>To qualify for the applicable advertised discount on a cruise Travel Component (between 10% and 20% off of the applicable cruise line&rsquo;s Standard Rate (as defined below) for Wyndham Rewards Members, and between 20% and 40% off of the applicable cruise line&rsquo;s Standard Rate for Wyndham Rewards Insiders), a Wyndham Rewards Member must, during the Booking Period, book a cruise with Carnival Cruise Line&reg;, Seabourn&reg;, Holland America&reg; or Princess&reg; Cruises, together with a stay at a participating Wyndham Rewards hotel or a flight, on the Wyndham Travel Bundle Site, and complete such booking in accordance with 
+<a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImY0N2ZjNzZhLTExYWYtNGE2MC04MzA1LWU5NzI0NjM4MTA0YSIsImRla1ZlcnNpb24iOjEsIml2IjoiR21EbFppVGZpKytZTE5ndXlocS9BZz09IiwiY2lwaGVyVGV4dCI6ImtlbVIwVVpMZlFWME5IZkJtWUZGbVlnTmZkaVNObEI0SFdQdGx4Um9JVWZuV3c2UzMzMkROeHU5OWlTMHE0N3pTOVQ0bEh2VkZNR3A2U0NOL3ZMcG9sSmJvSFB0R21EbFppVGZpKytZTE5ndXlocS9BZz09IiwiYXV0aFRhZyI6IjFSVEJxZWtnamY3eTZhSlNXNkJ6N1E9PSJ9"><span style="color: #005ead;">Section II(I)</span></a> of the Program Terms and the <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjQ3MmYxNWUyLWY5YTEtNDY4ZS04NTJhLTkyYTdhY2Q1MjNmMCIsImRla1ZlcnNpb24iOjEsIml2IjoiT2hZbk96eVBaaHdpQ1A1aTRUQi9UUT09IiwiY2lwaGVyVGV4dCI6Ik41M0VZZHMyNE00K0pvWFR0OC9Tay91MXdwcE1Pc2FNYVpjU0UvTTFTVmZFRTNPUHJjL2hKb1dLcG83TWE1bjNqMTRYNUpBQlhsdHdPZXZLRFVKWXpMb3I0QkFsT2hZbk96eVBaaHdpQ1A1aTRUQi9UUT09IiwiYXV0aFRhZyI6IkFWNWJjRG5yeWcxQ1dNeTZLK0FRSlE9PSJ9">
+<span style="color: #005ead;">WTB Terms &amp; Conditions</span></a> by December 31, 2026 (a &ldquo;<strong>Cruise Discount Booking</strong>&rdquo;).</p>
+                              <p style="margin: 0px;"><br>For purposes of these Offer Terms, &ldquo;<strong>Standard Rate</strong>&rdquo; means the best, unrestricted, publicly available rate that is then available on the applicable cruise line&rsquo;s website for the same cruise, cabin class/inclusions package and dates.</p>
+                              <p style="margin: 0px;"><br><strong>Cruise Discount Bookings must be paid in full in advance and become non-cancelable and non-refundable 24 hours after booking.</strong></p>
+                              <p style="margin: 0px;"><br>Must be a Wyndham Rewards Member in good standing to qualify for discount and the 3X bonus points. Offer availability is limited to participating Wyndham Rewards hotels, cruise lines and airlines and subject to blackout dates. Not all Wyndham Rewards hotels offer reservations through the Travel Bundle Site at all times, and some do not offer reservations through the Travel Bundle Site at any time.<br>Blackout dates, room/cabin/fare type exclusions and other restrictions may apply and vary by individual hotel, airline and cruise line. For the avoidance of doubt, any modification made to a reservation made pursuant to these Offer Terms may result in an ineligibility to receive the advertised bonus points and/or discount.</p>
+                              <p style="margin: 0px;"><br>Individuals who are not yet Wyndham Rewards Members will need to enroll in the Wyndham Rewards Program to receive the benefits described above; to void enrollment, call Wyndham Rewards member services at 1-866-996-7937. For clarity, the Bonus is not available to anyone who is not a Member at the time of its scheduled award, and the cruise discount is not available to anyone who is not a Member at the time of booking. For more general information on the Wyndham Rewards Program, including details on free enrollment, please visit 
+<a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjI4ZGZjMDZjLWUyMTctNDg5NS05YjNkLTY3MmEyNDRkYjA0ZiIsImRla1ZlcnNpb24iOjEsIml2IjoiTzU4eDRkZGdWR0hReUNOaFJUSjFhUT09IiwiY2lwaGVyVGV4dCI6Ik13MUkzMXJWZXhBejN6REZCSXNoc0F4TjRkVDQyR1V3N1UxU3RyV2hYK1FUTU01U290YWgxdTQvZG9tS2FQbmlqWUpKdTFESXVYYTZGL0FLWVhvamJaRkFkbUZ2TzU4eDRkZGdWR0hReUNOaFJUSjFhUT09IiwiYXV0aFRhZyI6InlMbDJ1aGZ3Q21GNkkyMlJRSFpoYnc9PSJ9"><span style="color: #005ead;">www.wyndhamhotels.com/wyndham-rewards</span></a>.</p>
+                              <p style="margin: 0px;"><br>Offer is combinable ONLY with applicable registration-based, bonus point promotions; it may not be combined with any other offer, discount, coupon, sale promotion, prior purchase, group bookings or purchase of a gift certificate. Rates do not include resort/service fees, taxes, incidentals or gratuities or additional per room, per night charges that may be imposed. Rate, taxes and applicable dates may vary by hotel, airline and/or cruise line; please inquire at time of reservation.</p>
+                              <p style="margin: 0px;"><br>This offer and its terms and conditions are subject to cancellation or change at any time and void where prohibited.</p>
+                              <p style="margin: 0px;">
+<br>Wyndham Hotel Group, LLC is the Sponsor of this Wyndham Travel Bundle 3x Points offer and is not affiliated with, nor an agent of, Carnival Cruise Line&reg;, and is solely responsible for all aspects of this promotion. Carnival Cruise Line&reg; is not a sponsor of this Wyndham Travel Bundle 3x Points offer and is not responsible for the administration, execution, or conduct of the Wyndham Travel Bundle 3x Points offer. &copy;2026 Carnival Corporation. Carnival&reg; and the Carnival logos are trademarks of Carnival Corporation. All rights reserved. Used under license. Ships&rsquo; Registry: The Bahamas, and Panama. Sponsor is responsible for ensuring the Wyndham Travel Bundle 3x Points offer complies with all applicable laws, rules, or regulations, and does not violate any third-party
+ rights. All cruises are subject to the terms and conditions of Carnival&rsquo;s Cruise Ticket Contract, travel documents, and informative brochures. The terms and conditions that govern the cruise booking are set forth in the Cruise Ticket Contract and are found online at <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjhjMWUyOGM4LTBmN2UtNGI1Mi05YzIzLTQ4ZDY0NDMzMzMzYyIsImRla1ZlcnNpb24iOjEsIml2IjoiMitXM29adVVGb3pjSVFXNngwR2hKQT09IiwiY2lwaGVyVGV4dCI6IjdzZEwvMGJVRGJINGwxMGZNS1BIYXlnYW9EWWlZdnFOeHBvdFVRWlpaL0loZ2s4eXROMWhwVndLR3BxdHFJV1YwOU1zUkJxOWRhZFMxVkhZWExlbHFPSDBibDdtMitXM29adVVGb3pjSVFXNngwR2hKQT09IiwiYXV0aFRhZyI6InZYV25VdFZSMkZ5M3Bhamg5RzVlNWc9PSJ9"><span style="color: #005ead;">http://www.carnival.com/about-carnival/legal-notice/ticket-contract.aspx</span></a>.</p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">Please do not reply to this message.</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">You are receiving this communication as a member of the Wyndham Rewards program.</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">This e-mail was sent by Wyndham Rewards, Inc. Wyndham Rewards values your online privacy. For more information, view our <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6Ijk5NGFkMDBiLWFlMTAtNDU1NC05N2I0LTkyMWEzODQzYjgxYyIsImRla1ZlcnNpb24iOjEsIml2IjoiOFlTNWVDUW0vcVVoQnVCWVphVzlVUT09IiwiY2lwaGVyVGV4dCI6ImdVcitSK210YXEzT05hWHJybWxYa29FenFmSW5ubUNId1ZOSnZ5bnBwRDNEVVYxZnlHTEhLcUNrVTRMUXRzU1hEWUtaWUgxTWJLU0tuZWJPdS9qK1RNbXd5cU5OOFlTNWVDUW0vcVVoQnVCWVphVzlVUT09IiwiYXV0aFRhZyI6IlRHeWtpcDNtenJ2NC9rekpzTXFqVFE9PSJ9"><span style="color: #005ead;">privacy notice</span></a>.</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">To contact us, please fill out our customer inquiry form <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6ImZiOGEzY2IzLTk0Y2EtNDczZC1iNDdmLTY4OTFlMGY3ZTViYSIsImRla1ZlcnNpb24iOjEsIml2IjoiSFJLQk9mSWNXRy81QXB2YlhQRFVkUT09IiwiY2lwaGVyVGV4dCI6Im5hOTV2a1g1TWhuTlhmcHdMVHBCZElwNThuQUkwUGd2blJnUVMvY3JWNUtrZ1hBMjFqRk9PQ0QybEY0UEZ0Y0VLempNVHg0NVJIc1BPNHNDQVlSVGhVOEVBUzVqSFJLQk9mSWNXRy81QXB2YlhQRFVkUT09IiwiYXV0aFRhZyI6Ik9VUjdEenVMQWdHRVU0VlBCQUV1WXc9PSJ9"><span style="color: #005ead;">here</span></a>.</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">To unsubscribe, please click <a style="color: #666666;" href="https://click.emails.wyndhamhotels.com/?qs=eyJkZWtJZCI6IjFhZWJhNzY0LTdhZTAtNDlhYS04N2JlLTBjNTVmNjliY2RkYyIsImRla1ZlcnNpb24iOjEsIml2IjoiRVRjNFhIVjZjQXNtQkJsbEZBREJJdz09IiwiY2lwaGVyVGV4dCI6IllZSVIwam9oQ1kxSWMyZ3NkUVlPY3U3dG9XaGJ1bSttQVpCVUVEQmpNMzZ2SytVMWtmdFc3YVZyUy9ZeVdMbVVDd29FVXVMTnVSdWV1UGx5U0F0RFZlRVo3bDYwbThLRVFCRTNPRngxZW5BTEpnUVpaUlFBd1NNPSIsImF1dGhUYWciOiJ1UGx5U0F0RFZlRVo3bDYwbThLRVFBPT0ifQ%3D%3D"><span style="color: #005ead;">here</span></a>.</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">If you prefer, you may send your unsubscribe request to:</span></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">Wyndham Rewards, Inc.</span></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">22 Sylvan Way</span></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">Parsippany, New Jersey 07054</span></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">Attn: Privacy/Opt Out</span></p>
+                              <p style="margin: 0px;">&zwnj;<br /></p>
+                              <p style="margin: 0px;"><span style="font-size: 11px; line-height: 14px;">&copy; 2026 Wyndham Rewards, Inc. All rights reserved. All hotels independently owned and operated with the exception of a limited number of hotels managed by an affiliate of the company. Vacation club resorts and vacation rentals are not operated or managed by Wyndham Hotels &amp; Resorts or Wyndham Rewards.</span></p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table> <!-- DYNAMIC END -->
+    </td>
+  </tr><!--[if false]><!-->
+  <tr>
+    <td class="st-gmail-fix" style="font-size:0; line-height: 0; height: 0; min-width: 570px;">
+      &nbsp;
+    </td>
+  </tr><!--<![endif]-->
+</table>												</div>
+			</body>
+</html>
+
+--xFkQfnoj9eoN=_?:--
+

@@ -1,0 +1,59 @@
+{
+  "message_id": "<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>",
+  "imap_uid": "3110",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AQHczggjjsdT6JDrz0O6FiSL+yRWabXid6twgAABmoCABKndgIAAAHgA",
+  "subject": "FW: 回复：[EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt",
+  "sender": "Guantong.Liu@bmw-brilliance.cn",
+  "recipient": "Jiayang.Liu@bmw-brilliance.cn, wuliang@xiangzizai.com, daisy_yang@woshipm.com, sue@woshipm.com",
+  "cc": "Ziwen.Weng@bmw-brilliance.cn, sheng.fang@bmw.com",
+  "date": "2026-04-20T00:56:07+00:00",
+  "body_text": "Hi Adah and 吴老师，\r\n\r\nGAIA 平台给的反馈请查收下面邮件，麻烦结合建议调整一下材料。谢谢\r\n\r\n\r\nBR,\r\nAndrea\r\n\r\nFrom: Weng Eva, BBF-462 <Ziwen.Weng@bmw-brilliance.cn>\r\nSent: Monday, April 20, 2026 8:50 AM\r\nTo: Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn>\r\nCc: Wang Xin, BBF-46 <Xin.Wang.ed@bmw-brilliance.cn>; Fang Sheng <sheng.fang@bmw.com>; Zhu Zongjian, CIH-6-1 <Zongjian.Zhu@bmw-ittechworks.cn>\r\nSubject: RE: 回复：[EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n\r\nGuantong\r\n\r\n\r\n  1.  基于之前商讨，1个小时的培训，内容太多，所以建议去掉场景四的内容\r\n  2.  AI  Camp 的培训，GAIA的chunk拆解策略和讲师的有些不同.把附件的内容发给老师，让老师更新美化下吧，谢谢。\r\n  3.  另外GAIA Agent目前不具备Re-act功能，所以场景5的检索步骤尽量控制在3步之内吧，谢谢了\r\n\r\nBMW Brilliance Automotive Ltd. / 华晨宝马汽车有限公司\r\nEva Ziwen Weng / 翁子文\r\nBBF-462  Data & AI  数据、人工智能\r\nNo.1 BMW Avenue, Tiexi District-SEDA, Shenyang, 110143, Province Liaoning\r\n辽宁省沈阳市沈阳经济开发区宝马大道1号\r\n邮编110143\r\nTel: +86 24 84555929\r\nMobile: +86 18524009779\r\nMail: Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>\r\nWeb: Http://www.bmw-brilliance.cn<http://www.bmw-brilliance.cn/>\r\n\r\nFrom: 吴亮 <wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\nSent: Friday, April 17, 2026 9:37 AM\r\nTo: Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>\r\nCc: 杨雨鑫 <daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>; Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>; Weng Eva, BBF-462 <Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>; 周珊 <sue@woshipm.com<mailto:sue@woshipm.com>>\r\nSubject: 回复：[EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\n符合预期，非常感谢\r\n发件人： \"Liu Guantong, BBF-46\"<Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>\r\n时间： 2026年4月17日 (周五) 09:32\r\n主题： RE: 回复：[EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n收件人： \"吴亮\"<wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\n抄送： \"杨雨鑫\"<daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>, \"Liu Adah, BBH-1A-1\"<Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>, \"Weng Eva, BBF-462\"<Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>, \"周珊\"<sue@woshipm.com<mailto:sue@woshipm.com>>\r\nHi 吴老师\r\n\r\n请查收demo截图，另外，prompt里的这段我删掉了：\r\n[cid:image001.png@01DCD0A2.A4E54340]\r\n\r\nBR\r\nAndrea\r\n\r\nFrom: 吴亮 <wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\nSent: Friday, April 17, 2026 9:18 AM\r\nTo: Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>\r\nCc: 杨雨鑫 <daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>; Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>; Weng Eva, BBF-462 <Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>; 周珊 <sue@woshipm.com<mailto:sue@woshipm.com>>\r\nSubject: 回复：[EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nHi Guantong，附件是操作指引：\r\n第二个案例是合同审核演示，输入内容是：\r\n---------------\r\n# 待审核合同内容\r\n```\r\n# 车载软件服务采购合同（草案）\r\n\r\n## 第7条 数据处理\r\n\r\n7.1 供应商在提供服务过程中可能接触到的车辆数据、用户个人信息，应按照宝马集团的数据保护要求处理。\r\n\r\n7.2 供应商应采取合理的技术措施保护数据安全，包括但不限于加密传输、访问控制。\r\n\r\n7.3 对于涉及用户个人信息的处理，供应商应取得用户同意。\r\n\r\n7.4 合同终止后，供应商应在30天内删除所有从宝马获取的数据。\r\n\r\n## 第12条 跨境传输\r\n\r\n12.1 供应商可将必要数据传回其位于境外的服务器，前提是确保数据安全。\r\n\r\n## 第15条 违约责任\r\n\r\n15.1 任何一方违反数据保护条款，应赔偿对方全部损失。\r\n```\r\n----------------\r\n\r\n这部分内容已经在 Prompt 中了，如果需要与 Prompt 分开，只需要将 Prompt 这部分内容删除，将这个合同单独发送即可。\r\n发件人： \"Liu Guantong, BBF-46\"<Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>\r\n时间： 2026年4月17日 (周五) 08:48\r\n主题： RE: 回复：RE: [EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n收件人： \"杨雨鑫\"<daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>, \"Liu Adah, BBH-1A-1\"<Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>, \"Weng Eva, BBF-462\"<Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>\r\n抄送： \"周珊\"<sue@woshipm.com<mailto:sue@woshipm.com>>, \"wuliang\"<wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\nHi Daisy,\r\n\r\nApp我按照提供的系统提示此创建完了，但是问答的例子我没有找到，其他几个场景是提供了一个问题做演示。案例二这个是想现场实时demo么？\r\n\r\nBR,\r\nAndrea\r\n\r\nFrom: 杨雨鑫 <daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>\r\nSent: Thursday, April 16, 2026 5:40 PM\r\nTo: Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>; Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>; Weng Eva, BBF-462 <Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>\r\nCc: 周珊 <sue@woshipm.com<mailto:sue@woshipm.com>>; wuliang <wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\nSubject: 回复：RE: [EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nDear Guantong，\r\n\r\n在资料包的案例二-有一个prompt文件，辛苦您再试一下案例~  其它案例结果都符合吴老师预期，非常感谢！[https://wwcdn.weixin.qq.com/node/wework/images/qymailplugin_pc4_sticker92.png]\r\n[cid:image002.png@01DCD0A2.A4E54340]\r\n\r\nRegards,\r\nDaisy\r\n\r\n\r\nLiu Guantong, BBF-46<Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>> 在 2026年4月16日 周四 16:55 写道：\r\nHi all,\r\n\r\nDemo如下，其中第二个案例的提示词没提供，这个案例需要提前准备好历史对话么？\r\n案例一：\r\n[cid:image003.png@01DCD0A2.A4E54340]\r\n\r\n案例二：\r\n未提供提示词\r\n\r\n案例三：\r\n[cid:image004.png@01DCD0A2.A4E54340]\r\n\r\nBR,\r\nAndrea\r\n\r\nFrom: 杨雨鑫 <daisy_yang@woshipm.com<mailto:daisy_yang@woshipm.com>>\r\nSent: Wednesday, April 15, 2026 9:50 PM\r\nTo: Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn<mailto:Jiayang.Liu@bmw-brilliance.cn>>; Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn<mailto:Guantong.Liu@bmw-brilliance.cn>>; Weng Eva, BBF-462 <Ziwen.Weng@bmw-brilliance.cn<mailto:Ziwen.Weng@bmw-brilliance.cn>>\r\nCc: 周珊 <sue@woshipm.com<mailto:sue@woshipm.com>>; 吴亮 <wuliang@xiangzizai.com<mailto:wuliang@xiangzizai.com>>\r\nSubject: [EXTERNAL] 【宝马AI CAMP】GAIA 三个案例prompt\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nDear all,\r\n\r\n各位老师久等了，吴老师已经删减了案例数量，最终以下方三个案例进行授课，请各位老师查收~\r\n\r\n案例一：RAG 效果演示\r\n案例二：合同审核与合规条款智能匹配\r\n案例三：新店返利核算的多源信息整合\r\n\r\nRegards,\r\nDaisy\r\n________________________________\r\n人人都是产品经理\r\n[cid:image005.jpg@01DCD0A2.A4E54340]\r\n\r\n\r\n杨雨鑫\r\n服务运营\r\n[cid:image005.jpg@01DCD0A2.A4E54340]\r\n\r\n\r\n\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen",
+    "\\Answered"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "image001.png",
+      "content_type": "image/png",
+      "size": 130702,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/image001.png"
+    },
+    {
+      "filename": "image002.png",
+      "content_type": "image/png",
+      "size": 46511,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/image002.png"
+    },
+    {
+      "filename": "image003.png",
+      "content_type": "image/png",
+      "size": 77811,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/image003.png"
+    },
+    {
+      "filename": "image004.png",
+      "content_type": "image/png",
+      "size": 102931,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/image004.png"
+    },
+    {
+      "filename": "image005.jpg",
+      "content_type": "image/jpeg",
+      "size": 823,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/image005.jpg"
+    },
+    {
+      "filename": "GAIA分块的方法PPT.pptx",
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "size": 511439,
+      "local_path": "./mail_data/attachments/<SEZPR04MB81525EDEF4AD3303C9C4C886C42F2@SEZPR04MB8152.apcprd04.prod.outlook.com>/GAIA分块的方法PPT.pptx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/SEZPR04MB81525EDEF4AD3303C9C4C886C42F2SEZPR04MB8152.apcprd04.prod.outlook.com.eml"
+}

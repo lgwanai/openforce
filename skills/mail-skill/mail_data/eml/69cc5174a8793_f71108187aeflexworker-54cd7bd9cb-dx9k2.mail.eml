@@ -1,0 +1,66 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.30.252.205)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=XMbThFEnaB
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=quarantine sp=reject
+ dis=none) header.from=github.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=B1V4NscUXpg0DLsR5x1X6E+bHQYwrtTIbbrO1fCN4J0=;
+ b=gMQ14r42BwVCq73SaQtDjKaMVEICwmkIGxl58NEwZ1KiwF5zD8knc7T5loFKPm0KBed0ElN
+ 9zLgISfIf0TB8AzfZQybVQz75MOKLKrdzL6BKVlLHaIH1h7+3fAx6+z/+aEx6oOxTIzp/XoaX
+ 6ACJkx3q6C3EHhTr4MwUmZfBLe3bwpez9jrYoi1pxEmV1wJsD8v4XgVI4qANeylSUZN2aYrw0
+ tMyIrXiRVIEO4iMdu/FP5N5r6zmUJQQNcKnyUqN1iIA/SEbANdyiowlAprazhetNLQ1B+8Urp
+ fr7P8xDGxcbjs+2ZYPPvmkgUdovsOQVGipr6kdWnBsqEQPCDDs7g==
+Arc-Seal: i=1; a=rsa-sha256; t=1774997883; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=ZMp5+VbkH143wpsRsSFrCzFc0TjgKnqWybeFdydkoskr/70/ixKX7fvb69N0H8IMvhQzzC9
+ n7G54WcK7uLnL4sF74MArjKywdCTZ2CUNlOLYhwJwSHNgvUOEdIzDhBciyu5y050HjbYojHhU
+ bTtfXej72TQc9wyrz6jh2l6ROeummD1/V53wTBDfuVeFP4NcgyyEz2tXps0Mt4VK36otcAi5z
+ xPBSWKtKFUP5gKPPh6GJhMvbi4UwzDd90EYxTsRDfLZN26ej90B6TiqFGp4tMAM/5WircevxH
+ FWc3sFv2sDHGVxVet+dBKlSB1GiddSR99HSBWaNYV7MLfTLn60JA==
+Authentication-Results: lms; spf=pass (client-ip:192.30.252.205)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=XMbThFEnaB
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=quarantine sp=reject
+ dis=none) header.from=github.com; arc=none
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 31 Mar 2026 15:57:56 -0700
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+ s=pf2023; t=1774997876; bh=B1V4NscUXpg0DLsR5x1X6E+bHQYwrtTIbbrO1fCN4J0=;
+ h=Date:From:To:Subject:From;
+ b=XMbThFEnaBpyMm8VZ160oyF7oIrDMuc1pg1mGSRyy8RTQNAFQxqfNCeWz6oP9LGSA
+ s2KeJLZmXOzE8/h5gRrKpATK9tkx40IMnpJ3QQoeEvbsfr2qrOVkzwpQPXh2DSyU6x
+ FYA6trOZd5XHgQ/f+u65lCMg9JPpdVgasVCUGC90=
+From: GitHub <noreply@github.com>
+Message-Id: <69cc5174a8793_f71108187ae@flexworker-54cd7bd9cb-dx9k2.mail>
+Mime-Version: 1.0
+Received: from github.com (hubbernetes-node-61de90a.ac4-iad.github.net
+ [10.52.200.68]) by smtp.github.com (Postfix) with ESMTPA id AAA2220A23 for
+ <wuliang@xiangzizai.com>; Tue, 31 Mar 2026 15:57:56 -0700 (PDT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.30.252.205;
+ helo=out-22.smtp.github.com; envelope-from=noreply@github.com;
+ receiver=<UNKNOWN>;
+Subject: [GitHub] Your personal access token (classic) is about to expire
+To: lgwanai <wuliang@xiangzizai.com>
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Mid-Qid: 69CC5178.002/4flk6c3fBgzxb67P
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 192.30.252.205
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: noreply@github.com
+X-Lms-Pvf: 
+ MnwyfDF8fJwQMjZHFwpwuGniZ+nXdFqyj5oygK5oKQzt1UMHHwaZNo29UWRqVwqHSJyCw2lOFWgbqbwgXc1kyV86j6RS1mKS4T+qhgU83VjCLLleFcvOTcQ+21nKOz+OD0AM9B9jsw==
+
+Hi @lgwanai,
+
+We noticed your personal access token (classic) "openclaw" with admin:org, gist, notifications, project, repo, user, and workflow scopes will expire in 7 days.
+
+If this token is still needed, visit https://github.com/settings/tokens/3676247976/regenerate to generate an equivalent.
+
+If you run into problems, please contact support by visiting https://github.com/contact
+
+Thanks,
+The GitHub Team

@@ -1,0 +1,99 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.30.252.200)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=DGtEbz3frO
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=dsPda1XkC9LLW9rOD/+bwtbHHbrlnIHNO99vP5XkQvs=;
+ b=oHb5NPQzpWf3apnYYRvSHJcc9cZOonmcg7XF1JFuLVOsYOgwk/n3Se1sNBhLlZ3g6jY5+cg
+ 8KkBnXQNSxZp4dtHiv840WgkYlMa7vXihckuEQkL5FXvKYYx52b+WpQuKdqeBij8Dvru8y1SE
+ eHO5U672uJdDx4D/ojVLSQrr5YvTBFxns5ojlPOfAfE4IO5XsNDJ9kOA1ifLQQrkMdrMqRm6R
+ LG5B6EYjV9+4t273GmN/kkayvyspSg0iagLDIq7MHyDJ03hxCaAT5uhbRGYGXXh9E2ckz7guN
+ FsolSMhWaUN6Jvuf+tUJc/v5Mpvvcuh/EvKN8zzCESIzIGNfKjxw==
+Arc-Seal: i=1; a=rsa-sha256; t=1773515655; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=dN8c8hJ0CPncDiIhhHPCdHkpEF6+PKx4/o+pyct2OXOLkmB2OhmvFGk1TVmVKSRazWBqpwW
+ HIDdKGLmdD7eC+LPe3hG4ZriCP4l1t4TJZ9YclwNVbAoIDCmnhdRTYYXZKQHunN7C3HxDq0YR
+ WJPh6jAg/+dnIXu9BYoT5KcOCbMXhBx958BTEy7WbFG4T/xAIKlOOH4SsjIluRAGwo1zmD7oI
+ oNhDNw6FXUBxQUC2eiBwXroJOLc+okOr7opkR1E0IHI33+TCp5c5qg5vpF+ZcstRxF7jYsIvn
+ Sm3fflBwLBBt4mZP4un0LioBUo0fOtHbgj7CX3flN6g/KQ0Nt9mg==
+Authentication-Results: lms; spf=pass (client-ip:192.30.252.200)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=DGtEbz3frO
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html; charset=UTF-8
+Date: Sat, 14 Mar 2026 12:14:08 -0700
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+ s=pf2023; t=1773515648; bh=dsPda1XkC9LLW9rOD/+bwtbHHbrlnIHNO99vP5XkQvs=;
+ h=Date:From:To:Subject:From;
+ b=DGtEbz3frO22nlocQuZnb9xQWlrqTxRD8jbiU4qTwqi6ePsIsUwubypiQJL6k9PEv
+ RlODQodWuhe6muVYPRN9nJa+wAYcGKvu3w4ZDQLeGRPp3fOhsT/5s0oIvHRCy9f8dI
+ oDo0578GIRwVPQRUhCneQq+y2J3z93zl/kO/VizY=
+From: GitHub <noreply@github.com>
+Message-Id: <69b5b380cd5ed_1bdf511181642c2@flexworker-68f5c7c86b-wpdgk.mail>
+Mime-Version: 1.0
+Received: from github.com (hubbernetes-node-9dea707.va3-iad.github.net
+ [10.48.124.34]) by smtp.github.com (Postfix) with ESMTPA id CFABE4E03F8 for
+ <wuliang@xiangzizai.com>; Sat, 14 Mar 2026 12:14:08 -0700 (PDT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.30.252.200;
+ helo=out-17.smtp.github.com; envelope-from=noreply@github.com;
+ receiver=<UNKNOWN>;
+Subject: [ACTION REQUIRED] Your GitHub account, lgwanai, will soon require
+ 2FA
+To: lgwanai <wuliang@xiangzizai.com>
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Mid-Qid: 69B5B384.000/4fY9yD4CTRz1Xtwxp
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 192.30.252.200
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: noreply@github.com
+X-Lms-Pvf: 
+ MnwyfDF8fPtoXIX0e3EQMPrVR5eMPymmOQ6jse2RwxG+2wVHUuTzy6sxj+Ly/VRpwgWxerDxxFCr1fN9X1nT29+IOuqdlQxVgy1MQCpBZpOHNwh1q3MXzyFfrnqBkAc96WRqtZjijw==
+
+<p>
+  Hey lgwanai!
+</p>
+
+<p>
+
+<p>
+  We're reaching out to let you know that, as announced last year, we have officially begun requiring users who
+  contribute code on GitHub.com to have two-factor authentication (2FA) enabled.
+</p>
+
+<p>
+  Your account meets this criteria, and you will need to enroll in 2FA within 45 days, by April 28th, 2026 at 00:00 (UTC). After this
+  date, your access to GitHub.com will be limited until you enroll in 2FA. Enrolling is easy, and we support several
+  options, starting with TOTP apps and text messages (SMS) and then adding on passkeys and the GitHub Mobile
+  app.
+</p>
+
+<p>
+  <a href="https://github.com/settings/two_factor_authentication/setup/intro">Click here to enroll in 2FA</a>.
+</p>
+
+<p>
+  Making the software supply chain more secure is a team effort, and we can't do it without you. Your enrollment in
+  2FA is an impactful step in keeping the world's software secure. If you want to learn more about this change,
+  please take a look at our <a href="https://docs.github.com/authentication/securing-your-account-with-two-factor-authentication-2fa">documentation about the program</a>.
+</p>
+
+</p>
+
+<p>
+  To see this and other security events for your account, visit <a href="https://github.com/settings/security-log">your account security audit log.</a>
+</p>
+
+<p>
+  If you run into problems, please contact support by visiting <a href="https://github.com/contact">the GitHub support page.</a>
+</p>
+
+<p>
+Thanks,<br>
+The GitHub Team
+</p>

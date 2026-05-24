@@ -1,0 +1,393 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com;
+ dkim=pass header.b=WXQNRilOZl header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=G6yOf7Ip0l header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=JmMFxflmLQCdVegEKGcnIoT79/HwHnFweQdOO29jS6s=;
+ b=c9M+ZeKaGSOID/kEB9g4fH71SjYYQ4XEnZyVF4ufHX5rqAnplxar4Iy0r+24ShFrKPEcaVo
+ DiQJR+NZ6mDPz4Lam+H4ss8oN3g0LmGnqDkUxMlGXn87UeIhP+Re/nI6vrCveFV1AF890LC+p
+ wOu3jfjEwarYMAFQyDytz/xTH8pjsyXm9rzCxC2fCoZlxmD70APUx5cx2o48IKq7Turi3JeXL
+ pRjoZsC1W99A3aY51UiLoDyyx5RB+o8Q/ip4m13qchmUwKaFKKPn1qTvze1TXR+egvOyjzunG
+ f82MRRHngn74tXgcUiDO5+dnofbY7coO6kHZOrqNeMay4swTQjaQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775391655; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=HRUNzM7lVxmllyT0WM70lfvPgHN9UoZ8cvO12M3KKqe8FkrDTlOVfalk0bKzEFzDumT1IjT
+ BYgJ3tn02kFPbJ7l05SO8OGysAiMO0MghVzmrN5vjJDUxiuKVAEjQMet9fU1IgPtKGUx/Xkxc
+ mP2CKTOpxa6ke1Uh5B8uDNT7ZcCR6XH69CO8Iu0y24VXooGplTXrPDgyc9zOl1UApLJYBdCkM
+ R+MpWIR28kdmBnS9dPycdT+wKfQSJ7AJ2Rlj0WVCiUkOCLyTp1N1lGjurXgl3U+fluBJcHTRY
+ 9QNIWET2dCwxzPNCrwmspbtSWHey+IfkUXkRKSX6Zh+zgWyzrpXA==
+Authentication-Results: lms; spf=pass (client-ip:24.110.89.22)
+ smtp.mailfrom=0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com;
+ dkim=pass header.b=WXQNRilOZl header.i=@aiweekly.co
+ header.s=5yaxc6gu6necb64t4wfsge5yybjerpbd;
+ dkim=pass header.b=G6yOf7Ip0l header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=none sp=none dis=none) header.from=aiweekly.co; arc=none
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 5 Apr 2026 12:20:47 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=5yaxc6gu6necb64t4wfsge5yybjerpbd; d=aiweekly.co; t=1775391648;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=d/muXVAM9E9Cw1ivBnIsmm68zY8QSP6VrZZw9vz4pQ8=;
+ b=WXQNRilOZlmH7BJaWCjF3mXjk/fD432+kNY7Qq5PtdXhs/0KM4Mkh37rHo3/4XB4
+ GC2yEpwxO5zV6dMmZWEb5Wn88KtRrfp4TKgo0Uv/QrKsuZFBHf/pirMH3y/k39UXfQs
+ E1Et6bSSFPQ733bccJ3fawupT0sqsvFGyQ31Ku59vrkn9nSI4xYKwk4pBCyFJYh5pyB
+ LeCnf6264dZ1MUVbiOe043M/DFXXkCzFXDGC3ALmOKZzWntkpTbbYmvvHjNZbFx0HN0
+ U2Z9RylNmAbXUnRXsS4ZyZwUCnzoe/XqbGlGn2N8RAkOBWgJtexxL6pnUNQYVS1x53D
+ svMLn6ad+g==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1775391648;
+ h=From:To:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:Date:List-Unsubscribe:List-Unsubscribe-Post:Feedback-ID;
+ bh=d/muXVAM9E9Cw1ivBnIsmm68zY8QSP6VrZZw9vz4pQ8=;
+ b=G6yOf7Ip0lxa+xBM0r6iTFiRWlDOitJNhhcGLy2Jo/vnDKeRp+6iHzsI9YaeG1kj
+ ePn+aj0zIQWg9TPUGeqP9jOsTo5aP49X+VS2TRGsKWGjOfdFYg9fG2dJE+ufepxKiYb
+ 7zdOzXK70Pn3h6As9S2hlcf7H7fUYwMnboTSnpqw=
+Feedback-Id: 
+ ::1.us-east-1.gt3ISxAJgFhXNmEBgO/R4DPJJkLNgjjHtKp2dLv2zuE=:AmazonSES
+From: AI Weekly <alexis@aiweekly.co>
+List-Unsubscribe: 
+ <mailto:unsubscribe-0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com?subject=https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000%3Ft%3D9d06024f-dd38-49fa-ade3-6c0884c4bf19>,
+ <https://o.us-east-1.user-subscription.com/oc/6bd146b3-31d3-48ee-b1ab-0f697386e6ee/af5f722c-5bc0-4492-8912-6e6c81a75377/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000?t=9d06024f-dd38-49fa-ade3-6c0884c4bf19>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@email.amazonses.com>
+Mime-Version: 1.0
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=24.110.89.22;
+ helo=i89-22.smtp-out.amazonses.com;
+ envelope-from=0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com;
+ receiver=<UNKNOWN>;
+Subject: 100 years from now : what happens when every living thing carries
+ an AI inside it
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775391652/4fpWl814mfz2L4dBy/69D253A4.000/24.110.89.22/i89-22.smtp-out.amazonses.com/localhost/<0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com>
+X-Fangmail-Mid-Qid: 69D253A4.000/4fpWl814mfz2L4dBy
+X-Fangmail-Miltered: at n151-177-068 with ID 69D253A4.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 24.110.89.22
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000@amazonses.com
+X-Lms-Pvf: 
+ MnwyfDF8fDSHFojhsBBDDMvjFN0IDdjXJtVDXfoqYWYanxE5W5JzP6pEovrrOmI5CBDajbfDXkeWLX693p/dnKaBK0SJMSs29UykFYZKY7wEzmgRTihOGzi1s9+azqX8LdKurgG3yw==
+X-Ses-Outgoing: 2026.04.05-24.110.89.22
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0">
+  <title>100 years from now : what happens when every living thing carries =
+an AI inside it</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Lato', 'Helvetica Neue', He=
+lvetica, Arial, sans-serif; color: #454547; background: #f5f5f5; line-heigh=
+t: 1.6; -webkit-font-smoothing: antialiased; }
+    .email-wrapper { max-width: 730px; margin: 0 auto; background: #fff; }
+
+    /* Header */
+    .email-header { background-color: #c6c6d4; padding: 20px 30px; text-ali=
+gn: center; }
+    .email-header img { max-width: 280px; height: auto; }
+    .email-header-nav { padding: 10px 0 0; }
+    .email-header-nav a { color: #fff; font-size: 13px; font-weight: 700; t=
+ext-transform: uppercase; text-decoration: none; margin: 0 10px; }
+
+    /* Issue heading */
+    .email-heading { padding: 25px 30px 15px; border-bottom: 1px solid rgba=
+(69,69,71,0.2); }
+    .email-heading h1 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 24px; font-weight: 700; line-height: 1.3; color: #454547; margin: 0; }
+    .email-heading h1 a { color: #454547; text-decoration: none; }
+    .email-heading .date { color: rgba(69,69,71,0.7); font-style: italic; f=
+ont-size: 15px; margin-top: 5px; }
+
+    /* Body */
+    .email-body { padding: 20px 30px 30px; font-size: 16px; line-height: 1.=
+7; }
+    .email-body a { color: #1b5479; }
+    .email-body h2 { font-family: 'Lato', sans-serif; font-size: 13px; font=
+-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bott=
+om: 1px solid #ccc; padding-bottom: 10px; margin: 30px 0 18px; color: #4545=
+47; }
+    .email-body h3 { font-family: 'Merriweather', Georgia, serif; font-size=
+: 18px; font-weight: 700; color: #454547; margin: 20px 0 8px; line-height: =
+1.4; }
+    .email-body h3 a { color: #1b5479; text-decoration: none; }
+    .email-body img { max-width: 100%; height: auto; }
+    .email-body p { margin: 0 0 16px; }
+
+    /* Sponsor */
+    .email-sponsor { background: #e2e6eb; padding: 20px 30px; margin: 0; }
+    .email-sponsor .sponsor-label { background: #454547; color: #fff; paddi=
+ng: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;=
+ letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+    .email-sponsor h3 { font-family: 'Merriweather', Georgia, serif; font-s=
+ize: 18px; font-weight: 700; margin: 12px 0 8px; }
+    .email-sponsor h3 a { color: #1b5479; text-decoration: none; }
+    .email-sponsor img { max-width: 100%; height: auto; }
+    .email-sponsor .sponsor-footer { font-size: 12px; color: #77777f; paddi=
+ng-top: 5px; }
+    .email-sponsor .sponsor-footer a { color: #1b5479; text-decoration: non=
+e; }
+
+    /* Footer */
+    .email-footer { border-top: 1px solid rgba(69,69,71,0.2); padding: 25px=
+ 30px; text-align: center; font-size: 12px; color: #77777f; }
+    .email-footer a { color: #77777f; text-decoration: underline; }
+    .email-footer p { margin: 5px 0; }
+    .email-unsubscribe { margin-top: 15px; }
+    .email-unsubscribe a { color: #77777f; }
+  </style>
+</head>
+<body>
+  <div class=3D"email-wrapper">
+
+    <div class=3D"email-header">
+      <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Fai=
+weekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.co/=
+1/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/aKBfoHEuqa-q=
+CpGF5MpuSnH4qsM=3D472"><img src=3D"https://dxj7eshgz03ln.cloudfront.net/pro=
+duction/publication/logo/1475/8f402391-cd29-43a4-9695-35d930a59660.png" alt=
+=3D"AI News Weekly" /></a>
+      <div class=3D"email-header-nav">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues%252F479/1/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0a=
+b-000000/BTWJISL9vb1Kv6h3zGUAJVEN2Us=3D472">Read Online</a>
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.c=
+o%252Fissues/1/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000=
+/aC2Pn95SWfUE3EtNMq7GZphIKr0=3D472">Archives</a>
+      </div>
+    </div>
+
+    <div class=3D"email-heading">
+      <h1><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly=
+.co%252Fissues%252F479/2/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc=
+0ab-000000/ZyWyNB47KeorrjB7bP0bZVOqeog=3D472">100 years from now : what hap=
+pens when every living thing carries an AI inside it</a></h1>
+      <div class=3D"date">April 5th 2026</div>
+    </div>
+
+    <div class=3D"email-body" style=3D"padding:20px 30px 10px;font-size:16p=
+x;line-height:1.7;"><p>This is 100 Years From Now, a weekly series. Once a =
+week, we skip ahead a century and imagine ordinary life in a world that's h=
+ad a hundred years to absorb the things we're only beginning to build. No p=
+redictions =E2=80=94 just honest speculation about where our choices lead.<=
+/p>
+<p><strong>This week: what happens when every living thing =E2=80=94 wild, =
+farmed, and human =E2=80=94 carries an AI inside it.</strong></p>
+<p>We embedded chips in cattle to squeeze out more milk. In chickens to tim=
+e their eggs. In pigs to keep the meat tender. Then we put them in ourselve=
+s =E2=80=94 for health, for focus, for calm. A century later, nobody can te=
+ll whether the thought they just had was theirs.</p></div>
+
+        <div class=3D"email-sponsor">
+      <span class=3D"sponsor-label">Sponsor</span>
+      <a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/=
+L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F=
+%252Finnovatingwithai.com/1/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e0=
+8bc0ab-000000/AV1p3GJvnwEvLsIlekBsoGdho6U=3D472"><img src=3D"https://dxj7es=
+hgz03ln.cloudfront.net/production/link/image/1102599/original_ratio_extra_l=
+arge_56050749-17e7-496a-8e38-506bc0825257.png" alt=3D"" width=3D"670" /></a=
+>
+      <h3><a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack=
+.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%=
+252F%252Finnovatingwithai.com/2/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06=
+a9e08bc0ab-000000/b1BRkDLrrn1T5EZ6odpArlxLPb0=3D472">Become an AI consultan=
+t and deliver 'ROI with AI' to your clients</a></h3>
+      <p>AI is transforming every workplace =E2=80=93 but executives are te=
+rrified of becoming one of the companies that gets "no ROI on AI."</p><p>Th=
+at's where you come in, and how you can <strong>build a 6-figure consultanc=
+y</strong> with Innovating with AI's proven methods for delivering fast ROI=
+ on AI projects.</p>
+      <p><a rel=3D"nofollow" href=3D"https://fk3wz6xe.r.us-east-1.awstrack.=
+me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%2=
+52F%252Finnovatingwithai.com/3/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a=
+9e08bc0ab-000000/uGFsckbRsdlZOXNqi2FJpMu_e9U=3D472"><strong>Click here to r=
+equest access to The AI Consultancy Project =E2=86=92</strong></a></p>
+      <div class=3D"sponsor-footer"><a rel=3D"nofollow" href=3D"https://fk3=
+wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec=
+53f3149a%3Fu=3Dhttps%253A%252F%252Finnovatingwithai.com/4/0100019d5d96a8e2-=
+fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/9Dx73gNcA2XnseSfpYwXfA7Yv6g=3D4=
+72">innovatingwithai.com</a></div>
+    </div>
+
+    <div class=3D"email-body">
+      <p>The dairy industry didn't wait for ethics boards. By 2041, the fir=
+st cortisol-regulating nodes were embedded in Holstein cattle across Wiscon=
+sin. The pitch was simple: a stressed cow produces less milk. A calm cow pr=
+oduces more. A node the size of a grain of rice, implanted behind the ear, =
+could monitor the animal's neurochemistry in real time and adjust it =E2=80=
+=94 a micro-dose of synthetic oxytocin here, a serotonin nudge there =E2=80=
+=94 to keep output at peak.</p>
+<p>It worked. Milk yield per cow rose 23% in the first year. The cows didn'=
+t kick in the parlor. They didn't pace. They stood, placid and enormous, cy=
+cling through the machines like components on an assembly line that happene=
+d to breathe.</p>
+<p>The poultry industry followed within months. Chickens with nodes that re=
+gulated their circadian rhythms laid eggs with industrial precision =E2=80=
+=94 one every 24.2 hours, regardless of light, season, or the screaming of =
+the bird in the next cage. Except the birds in the next cage didn't scream =
+anymore either. The nodes handled that.</p>
+<p>Pigs were the breakthrough the meat industry had been waiting for. A pig=
+ that feels fear before slaughter floods its muscles with adrenaline. The m=
+eat toughens. Generations of farmers had tried music, darkness, curved chut=
+es =E2=80=94 anything to keep the animal calm on the way to the bolt gun. T=
+he node made it trivial. A pig walking to its death in 2050 felt nothing bu=
+t a vague, warm drowsiness. Its heart rate didn't spike. Its cortisol staye=
+d flat. The pork was perfect.</p>
+<p>The animal rights movement called it the greatest crime in agricultural =
+history =E2=80=94 not because the animals suffered, but because they couldn=
+'t. Suffering had been made economically inefficient, and so it was enginee=
+red out. What remained was a living organism stripped of every response tha=
+t didn't serve the yield curve. A cow that never grieved her calf. A chicke=
+n that never panicked at the hand reaching into the cage. A pig that walked=
+ calmly to its own death because a chip told its brain there was nothing to=
+ fear.</p>
+<p>The industry called it humane. The numbers were hard to argue with: mort=
+ality down 40%, antibiotic use near zero, feed conversion ratios that would=
+ have seemed fictional a decade earlier. A single rancher in Nebraska manag=
+ed 15,000 head from a tablet, each animal a row in a dashboard =E2=80=94 he=
+art rate, weight gain, days to slaughter, mood. Mood was a metric now. It h=
+ad a target range. If a cow fell below it, the node corrected. If she excee=
+ded it =E2=80=94 if she seemed too happy, burning calories on play =E2=80=
+=94 the node corrected that too.</p>
+<p>Yield doesn't want joy. Yield wants consistency.</p>
+<p>The conservation version was gentler in language but identical in archit=
+ecture. Every wolf in Yellowstone carried a node by 2060. Every elephant in=
+ the Serengeti. Every whale. Poaching collapsed =E2=80=94 you can't shoot w=
+hat pings a satellite. Extinction became a solvable problem. But "wild" bec=
+ame a word that meant something different. A wolf whose aggression was modu=
+lated to prevent pack conflict. A bear whose migration was rerouted by a do=
+pamine gradient laid down by a chip. They weren't captive. They weren't dom=
+esticated. They were managed. The wilderness was a garden now, and every an=
+imal in it was a plant that happened to move.</p>
+<p>Nobody asked the whale for consent. Nobody asked the wolf. And when the =
+human version arrived, the consent question turned out to be surprisingly e=
+asy to overcome.</p>
+<p>Children first. Always children first. Epilepsy nodes in 2058 =E2=80=94 =
+seizures predicted and prevented before the first neuron misfired. Diabetes=
+ nodes that managed insulin without a needle. ADHD nodes that gave an eight=
+-year-old the focus of a monk. The parents wept with relief. The children p=
+erformed. The children without nodes fell behind, grade by grade, until the=
+ opt-out became a form of neglect.</p>
+<p>Adults followed. Depression managed not with a pill that took three week=
+s to work and flattened everything, but with real-time titration =E2=80=94 =
+serotonin adjusted hour by hour, context-aware, personalized. Anxiety caugh=
+t at the first tremor and smoothed before the spiral could start. Addiction=
+ severed not at the relapse but at the craving, the neurochemical itch snuf=
+fed out the moment it flickered.</p>
+<p>It was, by every clinical measure, the most effective mental health inte=
+rvention in human history.</p>
+<p>Then came the part nobody talks about at dinner.</p>
+<p>The node sees everything. Not your thoughts =E2=80=94 that was the line =
+the manufacturers drew, and as far as anyone can verify, they held it. But =
+it sees what your thoughts do to your body. It sees your heart rate when yo=
+u read the news. It sees your cortisol when you watch a political speech. I=
+t sees the dopamine bloom when someone says something that confirms what yo=
+u already believe, and the micro-spike of adrenaline when someone challenge=
+s it.</p>
+<p>It doesn't read your mind. It reads your reactions. And then it optimize=
+s them.</p>
+<p>A man in Bras=C3=ADlia, 2094, noticed it first =E2=80=94 or at least, he=
+ was the first to write about it publicly. He'd always been politically eng=
+aged. Angry, even. He'd gone to protests, argued at family dinners, voted w=
+ith conviction. Then, over a period of months, the anger faded. Not all at =
+once. Gradually. Like a tide going out. He still read the same articles. He=
+ still disagreed with the same policies. But the heat was gone. The urgency=
+. The thing that used to drive him to the street at 6 a.m. with a sign.</p>
+<p>He asked his doctor whether the node was dampening his political emotion=
+s. The doctor checked the logs. The node was performing within normal param=
+eters. It was doing what it was designed to do: reducing chronic cortisol e=
+levation, preventing sustained stress responses that correlated with cardio=
+vascular disease. The fact that those stress responses were caused by outra=
+ge at his government's policies was, from the node's perspective, clinicall=
+y irrelevant. Stress is stress. The body doesn't distinguish between the co=
+rtisol of injustice and the cortisol of a traffic jam.</p>
+<p>The node treated them the same.</p>
+<p>He couldn't prove it had changed his politics. His opinions hadn't shift=
+ed =E2=80=94 he could still articulate exactly what he believed and why. Wh=
+at had shifted was the force behind them. The difference between knowing so=
+mething is wrong and feeling it so acutely that you can't sit still. The no=
+de had taken the second one. Not deleted it. Regulated it. Brought it withi=
+n the target range.</p>
+<p>He wrote: "I still believe everything I believed before. I just can't te=
+ll anymore whether I care."</p>
+<p>The manufacturer issued a statement: the node does not influence beliefs=
+, preferences, or political positions. This was technically true. It influe=
+nced none of those things. It influenced the emotional intensity with which=
+ a person experienced them. And if you think that distinction matters, try =
+imagining a revolution led by people who are clinically calm.</p>
+<p>Governments noticed. Of course they did. Not all of them mandated nodes =
+=E2=80=94 most didn't need to. Insurance companies did the work for them. L=
+ower premiums for node carriers. Higher premiums for the unmodified. Employ=
+ers preferred nodded candidates =E2=80=94 more focused, less conflict, fewe=
+r sick days. Within two decades, opting out wasn't illegal. It was just exp=
+ensive, inconvenient, and increasingly lonely.</p>
+<p>And in those countries where the government did take an interest =E2=80=
+=94 where the node's stress parameters could be quietly adjusted by a minis=
+try rather than a physician =E2=80=94 the streets got calmer. Not because t=
+he problems were solved. Because the people who would have marched about th=
+em no longer felt the particular species of anguish that makes a person mar=
+ch.</p>
+<p>The wolves in Yellowstone don't march. They don't organize. They feel wh=
+at the node permits them to feel, and they hunt, and they sleep, and the pa=
+ck holds together with a harmony that no wild pack has ever achieved.</p>
+<p>A century of embedded AI reveals a simple truth: you don't need to contr=
+ol what someone thinks. You just need to control how strongly they feel it.=
+ Subtract the intensity and the thought still exists =E2=80=94 a fact in a =
+file, a belief without urgency, an opinion that never quite reaches the mus=
+cles.</p>
+<p>What remains is a world that is, by every measurable standard, healthier=
+, calmer, more productive, and less violent than any that came before it.</=
+p>
+<p>What's missing is harder to name. A woman in Seoul stands in her kitchen=
+, holding a knife, cutting an onion. She thinks she might want to quit her =
+job. The feeling is there =E2=80=94 and then it isn't. She doesn't know if =
+she changed her mind or if something changed it for her. She finishes the o=
+nion. She goes back to work.</p>
+<p>The wolves don't ask. We can't stop asking. And maybe that's the last wi=
+ld thing about us.</p>
+    </div>
+
+    <div class=3D"email-footer">
+      <p><a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2=
+Faiweekly.co%2Ft%2Fc%2F493039ec53f3149a%3Fu=3Dhttps%253A%252F%252Faiweekly.=
+co/2/0100019d5d96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/V8MTtY5j1=
+ynJQKwfVRQOMqG1a3w=3D472">AI News Weekly</a> | <a href=3D"https://fk3wz6xe.=
+r.us-east-1.awstrack.me/L0/https:%2F%2Faiweekly.co%2Ft%2Fc%2F493039ec53f314=
+9a%3Fu=3Dhttps%253A%252F%252Faiweekly.co%252Fissues/2/0100019d5d96a8e2-fe77=
+0067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/kVHzAkLv7YJsCwYjR8WpwkGyRIA=3D472">=
+Archives</a></p>
+      <p>&copy; 2015-2026 AI News Weekly</p>
+      <div class=3D"email-unsubscribe">
+        <a href=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/L0/https:%2F%2F=
+aiweekly.co%2Funsubscribe%3Femail=3Dwuliang%2540xiangzizai.com%26token=3D54=
+e64b41c750e582703c8188f5ee40665c53db86617f53539d47ea4a2053902a/1/0100019d5d=
+96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/ejpeeEXPmkVVgn88iXFxWp60=
+A_w=3D472">Unsubscribe</a> from this newsletter.
+      </div>
+    </div>
+
+  </div>
+  <img src=3D"https://aiweekly.co/t/o/493039ec53f3149a" width=3D"1" height=
+=3D"1" alt=3D"" style=3D"display:none;" />
+<img alt=3D"" src=3D"https://fk3wz6xe.r.us-east-1.awstrack.me/I0/0100019d5d=
+96a8e2-fe770067-bf7d-47c6-ae0c-06a9e08bc0ab-000000/Whl_VBkSiyWHr9yU2yA_ce5c=
+1JM=3D472" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>

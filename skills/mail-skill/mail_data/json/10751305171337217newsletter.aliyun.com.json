@@ -1,0 +1,21 @@
+{
+  "message_id": "<10751305171337217@newsletter.aliyun.com>",
+  "imap_uid": "3117",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "活动报名【AI火花会 】敢玩敢用，来验牌企业级Agent🙌🏻看如何把核心业务真正交给Agent ！",
+  "sender": "newsletter@newsletter.aliyun.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-20T16:30:00+08:00",
+  "body_text": "此邮件由阿里云发送，由系统自动发出，请勿直接回复，谢谢！\n产品\n解决方案\n文档与社区\n免费试用\n定价\n云市场\n了解阿里云\n尊敬的wuliang@xiangzizai.com：\n➡️报名请戳>>\nhttps://t.aliyun.com/bH4Q2Cop\n[时间]4月23日（周四）14：00-16：00 钉钉线上会议，期待与您相聚~\n本次活动为线上闭门活动，活动报名成功，将短信或工作人员通知您钉钉会议链接，请您关注报名手机短信。\n🌟敢玩、敢用的 Data Agent 与 Skill\n通过自然语言即可生成完整 ETL 流程：自动建表、编写清洗逻辑、配置依赖与调度；结合智能诊断，定位失败原因，识别性能瓶颈并给出建议；真正实现从“人操作工具”到“Agent 驱动流程”的跃迁。\n💻直面“养虾”风险，验牌真安全\n告别“裸奔”的龙虾！提供开箱即用的Flink Skill与CEP规则模板，实时解析Agent行为日志、动态拦截高危操作、快速溯源安全事件，为企业级OpenClaw的合规落地筑牢安全防线。\n🚀场景Demo与演示\n现场demo DataWorks Data Agent使用方式，演示基于Flink+日志的企业级风控中心构建流程\n➡️立即添加AI小助：\nhttps://t.aliyun.com/ZAInPSPz\n，实时获取AI最新讯息。\n本邮件为系统邮件，请勿回复。\n关注阿里云\n关注阿里云公众号或下载阿里云APP，关注云资讯，随时随地运维管控云服务\n联系我们：4008013260\nCopyright © 阿里云 2009-2026 All Rights Reserved\n如果您不想再接收阿里云的「热门会议及培训」邮件，请点此\n取消订阅。",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/10751305171337217newsletter.aliyun.com.eml"
+}

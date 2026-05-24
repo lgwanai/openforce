@@ -1,0 +1,69 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:192.30.252.202)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=ZjUPjHpb97
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=oz/B/tGYb/ehs7KKjXZKDFkeNmLkWX/RaSZ8d8sEAWA=;
+ b=nbkwzBOGI9whPIURfYM9ADMbVOlOlsM8ng3xOzZxHpC6V8KUV3FRNkQTVdskUq/DlpNqyep
+ MxbyJ3RwX9WdIdt/JJiI3SbdLWFn73Zf7n5Euv0k415RZv4wl/T+O2eWCtjUcqZh7358nHtnP
+ WLsD0X+vfRUWXflS4SehYfgfdZBzlIdJVPmKzTXqzVdLliDpopS3ycfg2U+fq24/fdUGgB7vp
+ 5degAHLmPwrOtl6wwCGoY1L5xZ6dpkyW1qQfWrErHVJ1HLSGU10sHQMOyMmqUwt9tSUxKR+6K
+ 7ExSqR7EKgW7By+UGPdYQT4832VS39ejcSxtT/zxy0yqtB3qWnKQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1773729473; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=jKFU+Hhp3ULgBfy3DIjuaFpTbrL4bwrYrvwoajYjd4DScfUnWhU0mq4jMfwePswQygXjoYF
+ JgcNdDFV9IPAeLI8SsKAnmuPkzb4nEoG180yCLVsnPa6zkTx4NoXFHl+ShabaQhunTxeTDOyl
+ /Xnz/DbuLAn0nOX5QMepMh03qevCzYEol5kFBeQsRs8wUzxgzWmSGEsomKa2lhDNd+PbeqsN3
+ 1dejw3Pobqejk1s+h/i24zVSmhe/fHKz1t5hbczkGZlxb18GRojKUZuICqJeOK0IWRSGErz/e
+ ooZsx6HeoTLPDqHuROtDjIETVffhGQjkC9NcY7MKPJ6XgDYjidFg==
+Authentication-Results: lms; spf=pass (client-ip:192.30.252.202)
+ smtp.mailfrom=noreply@github.com; dkim=pass header.b=ZjUPjHpb97
+ header.i=@github.com header.s=pf2023; dmarc=pass (p=reject sp=reject
+ dis=none) header.from=github.com; arc=none
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 16 Mar 2026 23:37:46 -0700
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=github.com;
+ s=pf2023; t=1773729466; bh=oz/B/tGYb/ehs7KKjXZKDFkeNmLkWX/RaSZ8d8sEAWA=;
+ h=Date:From:To:Subject:From;
+ b=ZjUPjHpb976T/s/UKFBzRiYvUPPIVOL9+GqzQP+/fKhUc8KstjvYcKtHl5Gz6e1Nu
+ 9CNsX6rKN9BcklWSIhnzQ0q41X7YHJYcycGatU6KHER7aq8BZUrs+3uVnSGRQ8GWtz
+ UI2l5qY5ZC/l39uu+dGT7Mbx09ijQdcl3l9Q5eCU=
+From: GitHub <noreply@github.com>
+Message-Id: <69b8f6ba6f1f2_b11118100427@sharedworker-d887d9d87-r7b4p.mail>
+Mime-Version: 1.0
+Received: from github.com (hubbernetes-node-e87e602.va3-iad.github.net
+ [10.48.136.31]) by smtp.github.com (Postfix) with ESMTPA id 711539210B2 for
+ <wuliang@xiangzizai.com>; Mon, 16 Mar 2026 23:37:46 -0700 (PDT)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=192.30.252.202;
+ helo=out-19.smtp.github.com; envelope-from=noreply@github.com;
+ receiver=<UNKNOWN>;
+Subject: [GitHub] A third-party OAuth application has been added to your
+ account
+To: lgwanai <wuliang@xiangzizai.com>
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Mid-Qid: 69B8F6BE.000/4fZj260kkLz2DRddt
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 192.30.252.202
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: noreply@github.com
+X-Lms-Pvf: 
+ MnwyfDF8fOiGvttFXTBCuA37in5x+y/Y8dcSfxyv19nvJIDhDuashZNdycbfKd+zpDet9oE1u5TVteeCWJXwsdzKhAFSPYI4F+Cr2Daa+0GJPwxcbNv3K4LJVglpNMHErrBWS5eHQw==
+
+Hey lgwanai!
+
+A third-party OAuth application (anyrouter) with user:email scopes was recently authorized to access your account.
+Visit https://github.com/settings/connections/applications/Ov23liOwlnIiYoF3bUqw for more information.
+
+To see this and other security events for your account, visit https://github.com/settings/security-log
+
+If you run into problems, please contact support by visiting https://github.com/contact
+
+Thanks,
+The GitHub Team
+

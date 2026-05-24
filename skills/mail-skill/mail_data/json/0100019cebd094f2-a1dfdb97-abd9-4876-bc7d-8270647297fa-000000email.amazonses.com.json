@@ -1,0 +1,21 @@
+{
+  "message_id": "<0100019cebd094f2-a1dfdb97-abd9-4876-bc7d-8270647297fa-000000@email.amazonses.com>",
+  "imap_uid": "2839",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Ollama's cloud is now much faster and reliable using the latest NVIDIA hardware ",
+  "sender": "hello@ollama.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-14T10:07:21+00:00",
+  "body_text": "\r\n\r\nOllama's cloud is updated to use NVIDIA's latest data center hardware: B300 for Moonshot AI's Kimi K2.5 and Z AI's GLM-5 models.\r\n \r\nThis significantly improves the model performance with faster throughput and lower latency while maintaining reliable tool calls\r\nfor integrations.\r\n \r\nAll this works with Ollama's integrations via Ollama's launch command and over 45,000 custom integrations from GitHub.\r\n \r\n\r\nOllama's Cloud [https://ollama.com/upgrade]\r\n\r\n \r\nOllama's cloud subscription also comes with a free tier for you to experience the models.\r\n \r\n\r\n\r\nKimi K2.5 with OpenClaw\r\n\r\n\r\n\r\nollama launch openclaw --model kimi-k2.5:cloud\r\n \r\nOllama is officially integrated into OpenClaw's default onboarding.\r\n \r\nKimi K2.5 is one of the most recommended models for use with OpenClaw. It is now much faster and more reliable with Ollama's cloud\r\nusing the latest hardware.\r\n \r\nBy default, Ollama will enhance OpenClaw with web search so you always have the latest information if needed.\r\n \r\n\r\n\r\nPredictable costs\r\n\r\nOllama's cloud [https://ollama.com/pricing] comes with fixed subscription rates at $0, $20, and $100. This means you won't wake up\r\nto surprise overage bills if you leave Claude Code or OpenClaw running. In the future, we are adding additional plans for higher\r\nusage.\r\n\r\nIf you have any feedback, reply directly to this email or join Ollama's Discord channel [https://discord.gg/ollama].\r\n \r\n❤️ Ollama\r\n \r\nYou are receiving this email because you opted-in to receive updates from Ollama\r\nOllama, 744 High Street, Palo Alto, CA 94301\r\nUnsubscribe [https://app.loops.so/unsubscribe/cmmq5w6b0ipge018cdi3ocxli/f4a0cbd1547c0c7f345a71d88878df73df3905a04553a8935efb080f2a12b06a8aa6cefb229daac894d6b2a86ba0e3589fb2a1900a5854d927105b1d]\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019cebd094f2-a1dfdb97-abd9-4876-bc7d-8270647297fa-000000email.amazonses.com.eml"
+}

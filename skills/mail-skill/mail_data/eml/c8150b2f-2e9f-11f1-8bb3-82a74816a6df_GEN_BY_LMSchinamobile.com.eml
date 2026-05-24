@@ -1,0 +1,296 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:111.22.67.135)
+ smtp.mailfrom=wuliangds@chinamobile.com; dkim=fail header.b=rKg3abGPKg
+ header.i=@chinamobile.com header.s=default; dmarc=pass (p=none sp=none
+ dis=none) header.from=chinamobile.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:content-type:mime-version:dkim-signature;
+ bh=WbuXOZ+txk/svK8bvRhSOK2RViJIRrYz4TkUUbtjqs8=;
+ b=Sn9pLI3UzYqTbWctMYXva2mZ2+TFiRHYyR1rmXwRSYB+KFq2yoztaTlCsU6dycumn+EC1nt
+ XLXHpStfcdsWlLLVYzusZJvHRxkngjHYlERhTrCBbjo2KDpDZFvaw0aWmyF6EdNxekSZBA+0F
+ 7atJ6XQeVmgIvcctuQk5pwq+Owbf7/M394RMDXeR5GKSjqW0Fee/qKGtmbFAHfv07tDs1b+Au
+ FzaUQN4Fsx9cjGQfFIcC7mNszLNF/GI4lCkJUQzmmMI4Qh5ib5g8UD3rTfhr/kcwbx6xq45B5
+ dex8ypRYU0mb1w9YawDY+O7zTUQ/dyco6WIarfGFCKtMt8jnr8bw==
+Arc-Seal: i=1; a=rsa-sha256; t=1775139924; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=N45HesIkNTntVvdsiJ2660lu8NP9FYDT0MlELfpawc2muMfXz3ewq0MozDWDeK/3hjftO0c
+ rwyObaZEZ2d5F/bDKfCYLF3MIY79Nh6otWiI+G9Agwonv1XCq724rhsfSjfGTc7aQAr7ONMVF
+ k9wCSYrdO3uSo91k0GtsVQ03191cKR4jj4ZWS8ZHs5qWyVf6XFgaxWC+BeoieJ743BtoWox6L
+ eYdYPqAroh2DwwVK/T8juD46gWrsiWabDjtdZmF9wdm6rCmT4VfKdIs27zEDjAjMrPOw/yNZr
+ BtkEEcbR94kWxzTsCXnh3lzTc9F6V5jJ6myAOKwmBXn0O+1zqvVw==
+Authentication-Results: lms; spf=pass (client-ip:111.22.67.135)
+ smtp.mailfrom=wuliangds@chinamobile.com; dkim=fail header.b=rKg3abGPKg
+ header.i=@chinamobile.com header.s=default; dmarc=pass (p=none sp=none
+ dis=none) header.from=chinamobile.com; arc=none
+Content-Type: multipart/mixed;
+ boundary="===============2498337075208913535=="
+Date: Thu, 02 Apr 2026 22:25:21 +0800 (add by lms)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chinamobile.com;
+ s=default; l=0; h=from:subject:to:mime-version;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=rKg3abGPKgCcyNi5mYwjm0Ww0YpgOfhLnp21sfTWlazqsEBy5JYdqkqukKi5WF20L681+M/T5w6FN
+ pz1o1JcnzNxBoyfWMKmJJMSnaKUxEv0ynKyADMNC2l4N9YNyLFBMv3j/Md1qgdn4uIVCBHZYj1so23
+ ImpR6FthyntrMHuc=
+From: wuliangds@chinamobile.com
+Message-Id: <c8150b2f-2e9f-11f1-8bb3-82a74816a6df_GEN_BY_LMS@chinamobile.com>
+Mime-Version: 1.0
+Received: from spf.mail.chinamobile.com (unknown[10.188.0.87]) by
+ rmmx-syy-dmz-app03-12003 (RichMail) with SMTP id 2ee369ce7c507c8-5610f;
+ Thu, 02 Apr 2026 22:25:21 +0800 (CST)
+Received: from
+ 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa
+ (unknown[10.54.11.251]) by rmsmtp-syy-appsvr05-12005 (RichMail) with SMTP
+ id 2ee569ce7c4f1f6-bc582; Thu, 02 Apr 2026 22:25:21 +0800 (CST)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=111.22.67.135;
+ helo=cmccmta1.chinamobile.com; envelope-from=wuliangds@chinamobile.com;
+ receiver=<UNKNOWN>;
+Subject: =?utf-8?b?6KGo57uT5p6ELm1k?=
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775139921/4fmkf95m8MzB4P1J/69CE7C51.001/111.22.67.135/cmccmta1.chinamobile.com/localhost/<wuliangds@chinamobile.com>
+X-Fangmail-Mid-Qid: 69CE7C51.001/4fmkf95m8MzB4P1J
+X-Fangmail-Miltered: at n206-112-028 with ID 69CE7C51.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 111.22.67.135
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: wuliangds@chinamobile.com
+X-Lms-Pvf: 
+ MnwyfDF8fO8E4LXeR/pkJOgCJDyyPGFXfGE9chQwUQkoLOb3YhMO5X/CJhLow2FjagsqX8ihkhEtmBRV4JPAJ4nmCOoAF06DAlCMMXm8NeNBuWaFeMOYm3vq0HDlOQ2px12DzRdpfw==
+X-Rm-Spam-Flag: 00000000
+X-Rm-Spam-Flag: 00000000
+X-Rm-Taginfo: emlType=0
+X-Rm-Taginfo: emlType=0
+X-Rm-Transid: 2ee369ce7c507c8-5610f
+X-Rm-Transid: 2ee569ce7c4f1f6-bc582
+
+--===============2498337075208913535==
+Content-Type: multipart/alternative;
+ boundary="===============7816384637655094642=="
+
+--===============7816384637655094642==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+5L2g5aW977yM6K+35p+l5pS26ZmE5Lu244CM6KGo57uT5p6ELm1k44CN77yM5YaF5ZCrIGhvdGVs
+LmR3ZF9ob3RlbF9vcmRlciDooajnmoTlrozmlbTlrZfmrrXor7TmmI7jgIIK
+
+--===============7816384637655094642==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=3D"utf-8">
+    <title>Email</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Robot=
+o, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+       =20
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: #1a1a1a;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        h1 { font-size: 1.8em; border-bottom: 1px solid #eaecef; padding-bott=
+om: 0.3em; }
+        h2 { font-size: 1.5em; border-bottom: 1px solid #eaecef; padding-bott=
+om: 0.3em; }
+        h3 { font-size: 1.25em; }
+       =20
+        p { margin-top: 0; margin-bottom: 1em; }
+       =20
+        strong { font-weight: 600; color: #000; }
+        em { font-style: italic; color: #555; }
+       =20
+        /* Links */
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+       =20
+        /* Blockquotes */
+        blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 1em 0;
+            background: #f9f9f9;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+       =20
+        /* Lists */
+        ul, ol { margin-top: 0; margin-bottom: 1em; padding-left: 2em; }
+       =20
+        /* Code */
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, =
+monospace;
+        }
+        pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, =
+monospace;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+       =20
+        /* Tables - Tech/Clean style */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1.5em;
+            font-size: 0.95em;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #24292e;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        table tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        table tr:hover {
+            background-color: #f0f4f8;
+        }
+       =20
+        /* Signature area */
+        .email-signature {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+    </style>
+</head>
+<body>
+    <div class=3D"email-content">
+        <p>=E4=BD=A0=E5=A5=BD=EF=BC=8C=E8=AF=B7=E6=9F=A5=E6=94=B6=E9=99=84=E4=
+=BB=B6=E3=80=8C=E8=A1=A8=E7=BB=93=E6=9E=84.md=E3=80=8D=EF=BC=8C=E5=86=85=E5=
+=90=AB hotel.dwd_hotel_order =E8=A1=A8=E7=9A=84=E5=AE=8C=E6=95=B4=E5=AD=97=E6=
+=AE=B5=E8=AF=B4=E6=98=8E=E3=80=82</p>
+    </div>
+</body>
+</html>
+
+--===============7816384637655094642==--
+
+--===============2498337075208913535==
+Content-Type: text/markdown
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename*=utf-8''%E8%A1%A8%E7%BB%93%E6%9E%84.md
+MIME-Version: 1.0
+
+IyDooajvvJpob3RlbC5kd2RfaG90ZWxfb3JkZXIKQkVE77ya54mp55CG5bqK5Z6L77yM5L6L5aaC
+77ya5aSn5bqKCk9SREVSX0NPREXvvJrlubPlj7DphZLlupforqLljZXnvJblj7fvvIzkvovlpoLv
+vJpKRDIxMDEwMTA4MTgwNTEKU1RBVFVT77ya6K6i5Y2V54q25oCBKOW3suemu+W6l+OAgeW3suWP
+lua2iOOAgeW3suehruiupOOAgeehruiupOWksei0peOAgW5vc2hvd+OAgeW+heehruiupCnvvIzk
+vovlpoLvvJrlt7Llj5bmtogKUEFJRF9TVEFUVVPvvJrmlK/ku5jnirbmgIHvvIzkvovlpoLvvJrm
+nKrmlK/ku5gKUEFZTUVOVF9UWVBF77ya5pSv5LuY57G75Z6LKOWFrOWPuOe7n+S4gOaUr+S7mOOA
+geWIsOW6l+S7mCnvvIzkvovlpoLvvJrliLDlupfku5gKQ1JFQVRFX1RJTUXvvJrliJvlu7rorqLl
+jZXml7bpl7TvvIzkvovlpoLvvJoyMDIwLTEyLTMxVDE3OjIxOjA3KzAwOjAwCkxBU1RfTU9ESUZJ
+RURfVElNRe+8muacgOaWsOabtOaWsOiuouWNleaXtumXtO+8jOS+i+Wmgu+8mjE5NzAtMDEtMDFU
+MDA6MDA6MDArMDA6MDAKQk9PS0lOR19DSEFOTkVM77ya6aKE5a6a5rig6YGT77yISDUtTU9B6K6i
+5Y2V44CBSDUt5b6u5L+h6K6i5Y2V44CB572R56uZ6K6i5Y2V44CBSDXorqLljZXjgIFINS3lkozp
+o57kv6HorqLljZXjgIHnlLXor53orqLljZXjgIFINS3lkozljIXorqLljZXjgIHnvZHnq5nooaXl
+vZXorqLljZXjgIFINS3lsI/np7vkurrlrrborqLljZXjgIHnlLXor53ooaXlvZXorqLljZXvvInv
+vIzkvovlpoLvvJrnvZHnq5norqLljZUKUk9PTV9QUklDRe+8mummluaZmuaIv+i0ue+8jOS+i+Wm
+gu+8mjAKSE9URUxfTE9XRVNUX1BSSUNF77ya6YWS5bqX5pyA5L2O5oi/5Lu35oi/5Z6L5ZCM5pel
+5pyf5ZCM5oi/6Ze05pWw5oi/6LS577yM5L6L5aaC77yaMApST09NX0FNT1VOVO+8mumihOWumuaI
+v+mXtOmHj++8jOS+i+Wmgu+8mjEKQk9PS0lOR19ST09NX05JR0hUU++8mumihOWumumXtOWknOaV
+sO+8jOS+i+Wmgu+8mjIKUk9PTV9OSUdIVFPvvJrlrp7pmYXpl7TlpJzmlbDvvIzkvovlpoLvvJow
+ClRPVEFMX1BSSUNF77ya5L6L5aaC77yaMTAwMApPUklfVE9UQUxfUFJJQ0XvvJrkvovlpoLvvJox
+MDAwCkJPT0tJTkdfTkFNRe+8mumihOWumuS6uuWnk+WQje+8jOS+i+Wmgu+8muadjuWvjOW8ugpF
+TlRFUlBSSVNFX05BTUXvvJrpooTlrprkurrmnaXmupDkvIHkuJrlkI3np7DvvIzkvovlpoLvvJrk
+uK3lm73np7vliqjpgJrkv6Hpm4blm6Lorr7orqHpmaLmnInpmZDlhazlj7gKQ09NUEFOWV9CRUxP
+TkfvvJrmnaXmupDlhazlj7jnroDnp7DvvIzkvovlpoLvvJrorr7orqHpmaIKTE9DQVRFX1NUQVRF
+77ya5YWs5Y+45omA5Zyo5Z+O5biC77yM5L6L5aaC77ya5YyX5LqsClJBTkvvvJrmjpLluo/vvIzk
+vovlpoLvvJozOQpFUF9UWVBF77ya6aKE5a6a5Lq65YWs5Y+457G75Z6L77yM5L6L5aaC77ya5LiT
+5Lia5YWs5Y+4CkNPTkZJUk1BVElPTl9NT0RF77ya56Gu6K6k57G75Z6L77yI5pyq55+l44CB55+t
+5L+h56Gu6K6k44CB55S15a2Q6YKu5Lu256Gu6K6k77yJ77yM5L6L5aaC77ya55+t5L+h56Gu6K6k
+Ck9SREVSX1RZUEXvvJrorqLljZXnsbvlnovvvIjnp4Hkurrml4XooYzjgIHlhazliqHlh7rlt67v
+vInvvIzkvovlpoLvvJrnp4Hkurrml4XooYwKQ0hBTkdFX0NPVU5U77ya5L6L5aaC77yaMApJTl9E
+QVRF77ya5YWl5L2P5pel5pyf77yM5L6L5aaC77yaMjAyMC0xMi0zMVQxNjowMDowMCswMDowMApP
+VVRfREFURe+8muemu+W6l+aXtumXtO+8jOS+i+Wmgu+8mjIwMjEtMDEtMDJUMTY6MDA6MDArMDA6
+MDAKQk9PS0lOR19EQVRF77ya6aKE5a6a5pe26Ze077yM5L6L5aaC77yaMjAyMC0xMi0zMVQxNzoy
+MTowNyswMDowMApMSU5LX05BTUXvvJrkvovlpoLvvJrmnY7lr4zlvLoKSVNfTk9fU01PS0XvvJrm
+mK/lkKbnpoHmraLlkLjng5/vvIzkvovlpoLvvJrnpoHmraLlkLjng58KREVMRVRFRO+8muaYr+WQ
+puWIoOmZpO+8jOS+i+Wmgu+8mjAKSE9URUxfUk9PTV9OQU1F77ya6aKE5a6a6YWS5bqX5oi/5Z6L
+5ZCN56ew77yM5L6L5aaC77ya6LGq5Y2O5Y+M5bqK5oi/Ck9SREVSX1NPVVJDRe+8muiuouWNlead
+pea6kO+8iOato+W4uOWNleOAgeihpeW9leWNle+8ie+8jOS+i+Wmgu+8muato+W4uOWNlQpIT1RF
+TF9OQU1F77ya6YWS5bqX5ZCN56ew77yM5L6L5aaC77ya6YOR5bee5a+M5Yqb5LiH6L6+5paH5Y2O
+6YWS5bqXClNUQVJT77ya5pif57qn77yM5L6L5aaC77ya5YeG5LqU5pifCkhPVEVMX1RZUEXvvJrp
+hZLlupfnsbvlnovvvIjosarljY7lnovjgIHmnKrnn6XjgIHpq5jmoaPjgIHosarljY7jgIHllYbl
+iqHlnovjgIHnu4/mtY7lnovjgIHnu4/mtY7jgIHoiJLpgILjgIHlhazlr5PlnovjgIHnu7zlkIjl
+novjgIHluqblgYflnovjgIHkvJrorq7lnovjgIHpq5jmoaPlnovvvInvvIzkvovlpoLvvJrmnKrn
+n6UKSEFMRl9EQVnvvJrljYrml6XmiL/otLnnsbvlnovvvIzkvovlpoLvvJrmnKrnn6UKQVZHX1BS
+SUNF77ya5bmz5Z2H5oi/6LS577yM5L6L5aaC77yaNTAwCkhBTEZEQVlfUFJJQ0XvvJrljYrml6Xm
+iL/otLnmiL/otLnvvIzkvovlpoLvvJowCkNPTkZJUl9USU1F77ya56Gu6K6k6K6i5Y2V5pe26Ze0
+77yM5L6L5aaC77yaMjAyMS0wMS0wMVQwMjoyNzo1NiswMDowMApERVBUX05BTUXvvJrpg6jpl6jl
+kI3np7DvvIzkvovlpoLvvJrml6Dnur/miYAKUEFZX0FNT1VOVO+8muS4quS6uuaUr+S7mOi0ueeU
+qO+8jOS+i+Wmgu+8mjAKQ09NUEFOWV9BTU9VTlTvvJrlhazlj7jmlK/ku5jph5Hpop3vvIzkvovl
+poLvvJowCkFMX0FNT1VOVO+8muS+i+Wmgu+8mjAKR1VBUl9QQVlNRU5U77yaKOacquefpeOAgeS4
+quS6uuaUr+S7mCnvvIzkvovlpoLvvJrmnKrnn6UKR1VBUl9DSEFOTkVM77ya5pSv5LuY5rig6YGT
+77yI5pyq55+l44CB546w6YeR5pSv5LuY77yJ77yM5L6L5aaC77ya5pyq55+lCkdVQVJfUEFZX1NU
+QVRVU++8muaUr+S7mOeKtuaAge+8iOacquefpeOAgeacquaUr+S7mO+8ie+8jOS+i+Wmgu+8muac
+quaUr+S7mApHVUFSX0FNT1VOVO+8muS+i+Wmgu+8mjAKUEVOQUxUWe+8muS+i+Wmgu+8mjAKUEFZ
+X0NZQ0xF77ya5L6L5aaC77ya5YmN5Y+w546w5LuYCklOTkVSX0JPT0tJTkdfQ0hBTk5FTO+8muWG
+hemDqOmihOWumua4oOmBk++8jOS+i+Wmgu+8muacquefpQpQUk9WSU5DRV9OQU1F77ya55yB5Lu9
+77yM5L6L5aaC77ya5rKz5Y2XCkNJVFlfTkFNRe+8muWfjuW4gu+8jOS+i+Wmgu+8mumDkeW3ngpI
+VF9TT1VSQ0XvvJrkvpvlupTllYbmnaXmupDvvIzkvovlpoLvvJrllYbml4UxMDAKU1VQUExJRVJf
+Tk/vvJrkvpvlupTllYbnvJblj7fvvIzkvovlpoLvvJrllYbml4UxMDAKSFRfUFJJQ0VfVFlQRe+8
+muS+m+W6lOWVhuaKpeS7t+exu+Wei++8iOS8muWRmOOAgeWNj+iuru+8ie+8jOS+i+Wmgu+8muWN
+j+iurgpJTlNUQU5UX0ZMQUfvvJrnoa7orqTnsbvlnovvvIjpnZ7ljbPml7bnoa7orqTjgIHlj4rm
+l7bnoa7orqTvvInvvIzkvovlpoLvvJrpnZ7ljbPml7bnoa7orqQKQ09ORklSTV9GQUlMX1JFQVNP
+Tu+8muS+i+Wmgu+8muacquefpQpWQUxVQVRJT05fVFlQRe+8muS+i+Wmgu+8muacquefpQpTVVBQ
+T1JUX1VOSVNFVFTvvJrkvovlpoLvvJrkuI3mlK/mjIEKVU5JU0VUVF9UWVBF77ya5L6L5aaC77ya
+5pyq55+lCk5BX1BVU0hfQ0hBTk5FTO+8muS+i+Wmgu+8muWRvOWPq+S4reW/g+WknOWuoee7hApO
+RUdPVElBVEVEX1RZUEXvvJrljY/orq7nsbvlnoso55u06L+e44CB6Ieq6JCl44CB5omY566h44CB
+5pyq55+lKe+8jOS+i+Wmgu+8muiHquiQpQpUQVhfUkFURe+8mueojueOh++8jOS+i+Wmgu+8mjAK
+R1JPVVBfTkFNRV9DTu+8mumFkuW6l+WTgeeJjOS4reaWh++8jOS+i+Wmgu+8muacquefpQpIT1RF
+TF9CUkFORO+8miDphZLlupflk4HniYzvvIzkvovlpoLvvJrmnKrnn6UKSE9URUxfSUTvvJrphZLl
+upcgSUTvvIzkvovlpoLvvJowNWNjYzY5NmM2MjI0YmYwODg2N2ExNWZlMjAzMmYyZAo=
+
+--===============2498337075208913535==--
+
+

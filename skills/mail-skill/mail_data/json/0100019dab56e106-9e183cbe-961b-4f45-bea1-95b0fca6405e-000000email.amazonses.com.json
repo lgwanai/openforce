@@ -1,0 +1,21 @@
+{
+  "message_id": "<0100019dab56e106-9e183cbe-961b-4f45-bea1-95b0fca6405e-000000@email.amazonses.com>",
+  "imap_uid": "3122",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Your Activation Code",
+  "sender": "no-reply@mail.pencil.dev",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-04-20T14:41:30+00:00",
+  "body_text": " \r\nHi,\r\n\r\nYou can now login to Pencil using the code below.\r\n \r\n665406\r\n \r\n \r\n \r\nThis email was sent to you, because you requested a new activation code from the Pencil app, Cursor extension or at\r\nhttps://pencil.dev [https://pencil.dev]\r\n \r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019dab56e106-9e183cbe-961b-4f45-bea1-95b0fca6405e-000000email.amazonses.com.eml"
+}

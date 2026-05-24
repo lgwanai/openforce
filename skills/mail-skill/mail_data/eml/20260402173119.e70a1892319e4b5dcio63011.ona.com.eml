@@ -1,0 +1,1096 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:198.244.52.64)
+ smtp.mailfrom=postmaster@cio63011.ona.com; dkim=pass header.b=RierVHQZi/
+ header.i=@cio63011.ona.com header.s=krs; dmarc=pass (p=quarantine sp=none
+ dis=none) header.from=ona.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=jYVKBa3lawp2gX2AbYMX8ycxltDBKao1EJBgEkcUrJ8=;
+ b=Rlva6qjXarpE50RuMFBKvsFH3u53biSm6rTSkYYkCn2PTYp3guObhNWj4+e4xndDILs/k5+
+ oXS8vs7zFlkjOPHVaLKTU41HlelaniBNfNx1faIsncYpQSvH7VYn6C95TWcT5wHxnnedP65sM
+ vglqjRpqjzj6fNO0YTSkcrd2X/w2eJsT+omALJsLoq/1qYqlEaAL5fo5lgNmiAraPUgDBLAh7
+ joaBm4kMPJ7HKUbNlXLHvSE4QdWQ8N7WLKtb6utUCwFfaLEx5yp3hlheftCUVYSCo8AR0AT+9
+ F9IVK7sV93W0clxExOM2OYM5kQOvw9WRmr8mpsFfxXGNp64LXsOQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1775151089; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=G+fj9ZsPMF1duggJyGIyKxdqHcgHzaFciIr+/H3wf3yKN2IzWPhJkW5oA4Vxp4UbVRPhkMw
+ VPIhh2S+Y7D/nZHgBIY1w/R0eqv6oeLyEghaImG685OI1b6a/YWzravWgEwIfXNBw5zes57ck
+ RqMnVAyMwTCDHiLM70hQK4AzsCogNl2ekZRBcF6LyQnurTPikCe21d7zOXjKDcucRTPCouBzw
+ TYx22qIop05a7Ax1ut3duwqPIFlBrQusY2h2jkZTdAJTsDvMCyUrfQ9mRfo+tkYTM0N+Hy3iH
+ TWmVa93ChQ4pnqJJYLuW9l3+yd6SJKY/MNpquMOb8vIBR+BBx7WA==
+Authentication-Results: lms; spf=pass (client-ip:198.244.52.64)
+ smtp.mailfrom=postmaster@cio63011.ona.com; dkim=pass header.b=RierVHQZi/
+ header.i=@cio63011.ona.com header.s=krs; dmarc=pass (p=quarantine sp=none
+ dis=none) header.from=ona.com; arc=none
+Content-Type: multipart/alternative;
+ boundary="997d0d455bc77dcbc745cc9d6810107e54f503e16de9a88a42735dd3ce50"
+Date: Thu, 02 Apr 2026 17:31:19 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=cio63011.ona.com;
+ q=dns/txt; s=krs; t=1775151079; x=1775158279; h=Message-Id:
+ List-Unsubscribe-Post: List-Unsubscribe: Reply-To: To: To: From: From:
+ Subject: Subject: Content-Type: Mime-Version: Date: Sender;
+ bh=jYVKBa3lawp2gX2AbYMX8ycxltDBKao1EJBgEkcUrJ8=;
+ b=RierVHQZi/lCw3AUEwYxdD2kgNaBnhBaxQCvktFX3SheaT1SqhvF4HN7wUaQ8WgvUmgsXjnK0TFSw+hlQdyuOa3k8313P+IsFVVxgdYLctM9lmWUM+1Ck957zCr9pxaS0LcIQsDKsYk7g+d1DyeeX+OxcxSSlWmtcRi0d6rWIhM=
+From: Lou from Ona <newsletter@ona.com>
+List-Unsubscribe: 
+ <mailto:32.MRTVI2LWM5MUIQKQLBKGG5SUKRRWOR3EKR5DSRTVN5FHISSQIR3HK4T2KVYFOWJ5@unsubscribe2.customer.io>,
+ <https://e.customeriomail.com/unsubscribe/dgTivgYDAPXTcvTTcgGdTz9FuoJtJPDvurzUpWY=>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <20260402173119.e70a1892319e4b5d@cio63011.ona.com>
+Mime-Version: 1.0
+Received: by
+ c3a9c4d5335f95f0bb85b1c483c4db7cdd72c5e4e76f911b8e28e5343a1677a7 with HTTP
+ id 69cea7e72269eda339d5ca87; Thu, 02 Apr 2026 17:31:19 GMT
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=198.244.52.64;
+ helo=a64.a355d2fe.use4.send.mailgun.net;
+ envelope-from=postmaster@cio63011.ona.com; receiver=<UNKNOWN>;
+Reply-To: Reply to the Ona Team <comms@ona.com>
+Subject: Agent infra is easy to build. Then month 3 hits.
+To: wuliang@xiangzizai.com
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1775151084/4fmpmp03FVzLYpC/69CEA7EA.000/198.244.52.64/a64.a355d2fe.use4.send.mailgun.net/localhost/<postmaster@cio63011.ona.com>
+X-Fangmail-Mid-Qid: 69CEA7EA.000/4fmpmp03FVzLYpC
+X-Fangmail-Miltered: at n206-112-030 with ID 69CEA7EA.000 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 198.244.52.64
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: postmaster@cio63011.ona.com
+X-Lms-Pvf: 
+ MnwyfDF8fBwdxnqDluksR3sHDA5ygTZcwhDLzP7vCRTe2u87BIeKLdm75byVxvDzy6xqg5HAXzj76i1AiW8aM7gp+zsc9o9c3dg6yCMJBxE5SjaxO+C6DCyhJPDRKHyOT1ZTSZRqqg==
+X-Mailer: Customer.io (dgTivgYDAPXTcvTTcgGdTz9FuoJtJPDvurzUpWY=;
+ +https://whatis.customeriomail.com)
+X-Mailgun-Dkim: true
+X-Mailgun-Native-Send: true
+X-Mailgun-Sending-Ip: 198.244.52.64
+X-Mailgun-Sid: WyJlYjFkYyIsInd1bGlhbmdAeGlhbmd6aXphaS5jb20iLCI1M2ZjNDNhIl0=
+X-Mailgun-Track-Clicks: false
+X-Mailgun-Track-Opens: false
+X-Mailgun-Variables: {"email_id":
+ "dgTivgYDAPXTcvTTcgGdTz9FuoJtJPDvurzUpWY="}
+X-Report-Abuse-To: badactor@customer.io
+
+--997d0d455bc77dcbc745cc9d6810107e54f503e16de9a88a42735dd3ce50
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+
+A layer-by-layer breakdown of the infrastructure behind background agents. =
+=C2=A0
+
+April 2026
+
+**************
+Ona Newsletter
+**************
+
+Ona ( https://ona.com/?utm_campaign=3Dnewsletter&utm_source=3Dcustomerio&ut=
+m_medium=3Demail )
+
+Ramp's agents write 57% of their merged PRs. Here's what they built.
+
+Last week we mapped the background agent tool landscape ( https://backgroun=
+d-agents.com/?utm_campaign=3Ddomino-ramp-stripe&utm_source=3Dcustomerio&utm=
+_medium=3Demail ). 103 tools across 11 layers. The most common follow-up: w=
+hat does it actually take to run a platform for background agents in produc=
+tion?
+
+------------------------------------------------------
+Ramp's background agents write 57% of their merged PRs
+------------------------------------------------------
+
+What Ramp and Stripe built for background agents ( https://ona.com/stories/=
+ramp-and-stripe-built-their-background-agent-infrastructure?utm_campaign=3D=
+domino-ramp-stripe&utm_source=3Dcustomerio&utm_medium=3Demail )
+
+Stripe's agent platform runs on a remote dev environment they built years b=
+efore GPT-3 existed. Ramp hand-rolled theirs on Modal and Cloudflare. Neith=
+er started from zero, and both have platform teams maintaining it full-time=
+=2E The agent layer came last.
+
+The blog post breaks down what they built across four layers: environments,=
+ isolation, connectivity, and automation at scale. The part worth paying at=
+tention to is what happens after the first build. Dependencies update, APIs=
+ change, integrations break. The surface area grows with every tool you con=
+nect. Most companies don't have a platform team to absorb that.
+
+Read the full breakdown =E2=86=92 ( https://ona.com/stories/ramp-and-stripe=
+-built-their-background-agent-infrastructure?utm_campaign=3Ddomino-ramp-str=
+ipe&utm_source=3Dcustomerio&utm_medium=3Demail )
+
+-----------------------
+Listen to the breakdown
+-----------------------
+
+We have published a lot on background agents over the past few weeks: the l=
+andscape, the Ramp and Stripe architectures, sandboxes, security. It is a l=
+ot to keep up with. So we put together a 20-minute audio walkthrough that c=
+overs the key points.
+
+Your agents are stuck on your laptop. Here's what Stripe built instead.
+-----------------------------------------------------------------------
+
+24 min
+
+00:00 | 24:46
+
+------------------------------------------------
+We're building a self-driving codebase in public
+------------------------------------------------
+
+Starting next week, we're building a fully functioning, open-source app fro=
+m scratch, entirely on Ona. No line of code written by a human. Background =
+agents planning the architecture, writing code, opening PRs, running CI, fi=
+xing what breaks. No demo repo. No curated highlights. The full build, publ=
+ic, from commit zero.
+
+We'll run live sessions as we go, document every decision and failure, and =
+share regular updates.
+
+We're also giving away 20x $1,000 in credits for teams and engineers that w=
+ant to build alongside us. Your codebase or idea, with our support on archi=
+tecture and use cases.
+
+Apply for the self-driving codebase project =E2=86=92 ( https://docs.google=
+=2Ecom/forms/d/e/1FAIpQLSdNYonXUK0gOwy2=
+NpbqiWOgoyHIyHkFJMy0a6dT3tXJ11tupg/vie=
+wform?utm_campaign=3Ddomino-ramp-stripe&utm_source=3Dcustomerio&utm_medium=
+=3Demail )
+
+----------------
+Landscape update
+----------------
+
+The background agent landscape keeps growing. Since launch we have added 15=
+ tools across security, sandboxes, orchestration, review, and agents. Notab=
+le additions: Cursor Cloud, Vercel Agent, Warp, Northflank, Namespace, nono=
+, and Agent Auth Protocol. If we missed your tool or miscategorized it, let=
+ us know.
+
+Explore the landscape =E2=86=92 ( https://background-agents.com/landscape?u=
+tm_campaign=3Ddomino-ramp-stripe&utm_source=3Dcustomerio&utm_medium=3Demail=
+ )
+
+--------------------------------------------
+Background Agents Virtual Summit (Early May)
+--------------------------------------------
+
+Last week we mentioned we were working on a virtual summit. It is taking sh=
+ape. Three tracks: scaling agent infrastructure, security and governance, a=
+nd how engineering orgs actually change when agents produce a significant s=
+hare of code. Every session is grounded in real architecture and real outco=
+mes from industry leaders.
+
+We'd love to have you join. If you are running background agents or activel=
+y building toward it and want to share what you have learned, please reach =
+out with a simple reply.
+
+Talk soon,
+
+Lou
+Field CTO, Ona
+
+X ( https://x.com/ona_hq )
+
+LinkedIn ( https://www.linkedin.com/company/ona-hq )
+
+Book a demo ( https://ona.com/contact/demo?utm_campaign=3Dnewsletter&utm_so=
+urce=3Dcustomerio&utm_medium=3Demail )
+=C2=A0=C2=B7=C2=A0
+Docs ( https://ona.com/docs/ona/getting-started?utm_campaign=3Dnewsletter&u=
+tm_source=3Dcustomerio&utm_medium=3Demail )
+=C2=A0=C2=B7=C2=A0
+Blog ( https://ona.com/stories?utm_campaign=3Dnewsletter&utm_source=3Dcusto=
+merio&utm_medium=3Demail )
+=C2=A0=C2=B7=C2=A0
+Contact ( https://ona.com/contact/sales?utm_campaign=3Dnewsletter&utm_sourc=
+e=3Dcustomerio&utm_medium=3Demail )
+
+=C2=A9 2026 Ona. All rights reserved.
+
+This email was sent to wuliang@xiangzizai.com. To no longer receive these e=
+mails, unsubscribe here ( https://track.customer.io/unsubscribe/dgTivgYDAPX=
+TcvTTcgGdTz9FuoJtJPDvurzUpWY=3D ).
+--997d0d455bc77dcbc745cc9d6810107e54f503e16de9a88a42735dd3ce50
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<!DOCTYPE html><html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"u=
+rn:schemas-microsoft-com:office:office" lang=3D"en" style=3D"box-sizing: bo=
+rder-box;"><head>
+  <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"/=
+>
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1=
+"/>
+  <!--[if mso]>
+  <xml>
+    <w:WordDocument xmlns:w=3D"urn:schemas-microsoft-com:office:word"><w:Do=
+ntUseAdvancedTypographyReadingMail/></w:WordDocument>
+    <o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:Allow=
+PNG/></o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
+  <style>
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('https://ona.com/fonts/ABCDiatype-Regular.woff2') format('woff2'=
+),
+           url('https://ona.com/fonts/ABCDiatype-Regular.woff') format('wof=
+f');
+  font-weight: 400;
+  font-style: normal;}
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('https://ona.com/fonts/ABCDiatype-Bold.woff2') format('woff2'),
+           url('https://ona.com/fonts/ABCDiatype-Bold.woff') format('woff')=
+;
+  font-weight: 700;
+  font-style: normal;}
+@media (max-width:768px) {
+  .social_block.desktop_hide .social-table {
+    display: inline-block!important;
+  }
+
+  .image_block div.fullWidth {
+    max-width: 100%!important;
+  }
+
+  .mobile_hide {
+    display: none;
+  }
+
+  .row-content {
+    width: 100%!important;
+  }
+
+  .stack .column {
+    width: 100%;
+    display: block;
+  }
+
+  .mobile_hide {
+    min-height: 0;
+    max-height: 0;
+    max-width: 0;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .desktop_hide,
+=2Edesktop_hide table {
+    display: table!important;
+    max-height: none!important;
+  }
+
+  .content-padding {
+    padding-left: 24px!important;
+    padding-right: 24px!important;
+  }
+
+  .nl-card-padding {
+    padding: 20px!important;
+  }
+}
+</style>
+  <!--[if mso ]>
+  <style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% =
+} sub { mso-text-raise:-10% }</style>
+  <![endif]-->
+</head>
+<body class=3D"body" style=3D"box-sizing: border-box; margin: 0; background=
+-color: #f6f6f6; padding: 0; -webkit-text-size-adjust: none; text-size-adju=
+st: none;"><div style=3D"display: none">A layer-by-layer breakdown of the i=
+nfrastructure behind background agents. =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=
+=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =
+=E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=
+=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=
+=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =
+=E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=
+=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=
+=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =
+=E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=
+=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=
+=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =
+=E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=
+=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=
+=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =
+=E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=
+=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =E2=80=87=CD=8F =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =
+=C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=
+=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD =C2=AD=C2=A0</d=
+iv>
+  <table class=3D"nl-container" width=3D"100%" border=3D"0" cellpadding=3D"=
+0" cellspacing=3D"0" role=3D"presentation" style=3D"box-sizing: border-box;=
+ mso-table-lspace: 0; mso-table-rspace: 0; background-color: #f6f6f6;" bgco=
+lor=3D"#f6f6f6">
+    <tbody style=3D"box-sizing: border-box;">
+      <tr style=3D"box-sizing: border-box;">
+        <td style=3D"box-sizing: border-box;">
+          <!-- HEADER -->
+          <table class=3D"row row-1" align=3D"center" width=3D"100%" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"b=
+ox-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; background=
+-color: #f6f6f6;" bgcolor=3D"#f6f6f6">
+            <tbody style=3D"box-sizing: border-box;">
+              <tr style=3D"box-sizing: border-box;">
+                <td style=3D"box-sizing: border-box;">
+                  <table class=3D"row-content stack" align=3D"center" borde=
+r=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"=
+box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; backgroun=
+d-color: #afc1fd; border-radius: 16px 16px 0 0; color: #000; width: 750px; =
+margin: 0 auto;" width=3D"750" bgcolor=3D"#afc1fd">
+                    <tbody style=3D"box-sizing: border-box;">
+                      <tr style=3D"box-sizing: border-box;">
+                        <td class=3D"column column-1 content-padding" width=
+=3D"100%" style=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-r=
+space: 0; font-weight: 400; text-align: left; padding: 32px 40px; vertical-=
+align: middle;" align=3D"left" valign=3D"middle">
+                          <a href=3D"https://e.customeriomail.com/e/c/eyJlb=
+WFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVm=
+IjoiaHR0cHM6Ly9vbmEuY29tLz91dG1fY2FtcGFpZ249bmV3c2xldHRlclx1MDAyNnV0bV9zb3V=
+yY2U9Y3VzdG9tZXJpb1x1MDAyNnV0bV9tZWRpdW09ZW1haWwiLCJpbnRlcm5hbCI6ImUyYmUwNj=
+NlZDQ5MDAxZjVkMzcyIiwibGlua19pZCI6OTkwN30/70e391f1a889cfc128e24debde381c547=
+3209d2fc2df6384c8a8ea5cf7f6c58d" target=3D"_blank" style=3D"box-sizing: bor=
+der-box; text-decoration: none;">
+                            <table cellpadding=3D"0" cellspacing=3D"0" bord=
+er=3D"0" width=3D"100%" style=3D"box-sizing: border-box;">
+                              <tbody><tr style=3D"box-sizing: border-box;">
+                                <td style=3D"box-sizing: border-box; vertic=
+al-align: middle;" valign=3D"middle">
+                                  <!-- Date -->
+                                  <p style=3D"box-sizing: border-box; line-=
+height: inherit; font-family: 'ABC Diatype',Arial,sans-serif; font-size: 11=
+px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; col=
+or: #0a0e19; opacity: 0.5; margin: 0 0 6px 0;">April 2026</p>
+                                  <!-- Title -->
+                                  <h1 style=3D"box-sizing: border-box; font=
+-family: 'ABC Diatype',Arial,sans-serif; font-size: 38px; font-weight: 400;=
+ line-height: 1; letter-spacing: -0.03em; color: #0a0e19; margin: 0;">Ona N=
+ewsletter</h1>
+                                </td>
+                                <td style=3D"box-sizing: border-box; vertic=
+al-align: middle; text-align: right; width: 60px;" width=3D"60" valign=3D"m=
+iddle" align=3D"right">
+                                  <!-- Logo -->
+                                  <img src=3D"https://userimg-assets.custom=
+eriomail.com/images/client-env-106338/1769991970064_ona-symbol_01KGDVW7S8PP=
+8HJ5A1KB24ZWZP.png" alt=3D"Ona" width=3D"48" height=3D"48" style=3D"box-siz=
+ing: border-box; display: block; margin-left: auto;"/>
+                                </td>
+                              </tr>
+                            </tbody></table>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- CONTENT SECTION -->
+          <table class=3D"row-content stack" align=3D"center" border=3D"0" =
+cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"box-sizi=
+ng: border-box; mso-table-lspace: 0; mso-table-rspace: 0; background-color:=
+ #fff; border-radius: 0 0 16px 16px; color: #000; width: 750px; margin: 0 a=
+uto;" width=3D"750" bgcolor=3D"#fff">
+            <tbody style=3D"box-sizing: border-box;">
+              <tr style=3D"box-sizing: border-box;">
+                <td class=3D"column column-1 content-padding" width=3D"100%=
+" style=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0=
+; font-weight: 400; text-align: left; padding-left: 40px; padding-right: 40=
+px; padding-top: 36px; padding-bottom: 36px; vertical-align: top;" align=3D=
+"left" valign=3D"top">
+                 =20
+
+
+  <meta charset=3D"UTF-8"/>
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0"/>
+  <title>Ramp's agents write 57% of their merged PRs. Here's what they buil=
+t.</title>
+
+  <!--
+    Subject: Ramp's agents write 57% of their merged PRs. Here's what they =
+built.
+    Preview: A layer-by-layer breakdown of the infrastructure behind backgr=
+ound agents at Ramp and Stripe.
+
+    Test A: Agent infra is easy to build. Then month 3 hits.
+    Test B: Inside Ramp's background agent stack
+
+    From: Lou from Ona <newsletter@ona.com>
+  -->
+
+  <!--[if mso | IE]><style>table { border-collapse: collapse; }</style><![e=
+ndif]-->
+
+  <style>
+@media only screen and (max-width:768px) {
+  .mobile-full-width {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .mobile-padding {
+    padding: 32px 0 !important;
+  }
+
+  .mobile-padding-small {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .mobile-background {
+    background: #ffffff !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .mobile-title {
+    font-size: 17px !important;
+    line-height: 22px !important;
+  }
+
+  .mobile-text {
+    font-size: 15px !important;
+    line-height: 22px !important;
+  }
+
+  .mobile-small {
+    font-size: 13px !important;
+  }
+
+  .mobile-date {
+    font-size: 14px !important;
+  }
+
+  .mobile-h2 {
+    font-size: 31px !important;
+    line-height: 40px !important;
+  }
+
+  .mobile-h3 {
+    font-size: 19px !important;
+    line-height: 24px !important;
+  }
+
+  .play-button {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .progress-bar {
+    max-width: 100% !important;
+  }
+
+  .podcast-padding {
+    padding: 16px 16px !important;
+  }
+
+  .mobile-margin {
+    margin-bottom: 24px !important;
+  }
+
+  .mobile-gap {
+    padding-bottom: 12px !important;
+  }
+
+  .tldr-padding {
+    padding: 20px 0 !important;
+  }
+
+  .section-divider {
+    margin: 40px 0 24px 0 !important;
+  }
+}
+</style>
+
+
+
+  <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" st=
+yle=3D"box-sizing: border-box; background: #F5F4F4;">
+    <tbody><tr style=3D"box-sizing: border-box;"><td align=3D"center" style=
+=3D"box-sizing: border-box;">
+
+      <!-- OUTER WRAPPER -->
+      <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%=
+" class=3D"mobile-full-width mobile-background" style=3D"box-sizing: border=
+-box; max-width: 750px; background: #ffffff;">
+        <tbody><tr style=3D"box-sizing: border-box;"><td class=3D"mobile-pa=
+dding" data-gmail-fix=3D"" style=3D"box-sizing: border-box; padding: 48px 4=
+0px; padding-left: 0 !important; padding-right: 0 !important; border-radius=
+: 0 !important;">
+
+<!-- INTRO -->
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    Last week we mapped the <a href=3D"https://e.customeriomail.com/e/c/eyJ=
+lbWFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocm=
+VmIjoiaHR0cHM6Ly9iYWNrZ3JvdW5kLWFnZW50cy5jb20vP3V0bV9jYW1wYWlnbj1kb21pbm8tc=
+mFtcC1zdHJpcGVcdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyaW9cdTAwMjZ1dG1fbWVkaXVtPWVt=
+YWlsIiwiaW50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjE0MjYzfQ/=
+2c7c7013923f15b811fdf195cee22168dd1166028db738f1a1df0c476c03e5fd" style=3D"=
+box-sizing: border-box; color: #0048ff; text-decoration: underline;">backgr=
+ound agent tool landscape</a>. 103 tools across 11 layers. The most common =
+follow-up: what does it actually take to run a platform for background agen=
+ts in production?
+  </p>
+</div>
+
+<!-- DIVIDER -->
+<div style=3D"box-sizing: border-box; height: 1px; background: #ECE7E5; mar=
+gin: 0 0 40px 0;"></div>
+
+<!-- SECTION 1: RAMP & STRIPE BLOG POST -->
+<h2 style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans-=
+serif; font-size: 26px; font-weight: 400; line-height: 0.98; letter-spacing=
+: -0.029em; color: #1E3C2C; margin: 0 0 24px 0;">Ramp's background agents w=
+rite 57% of their merged PRs</h2>
+
+<!-- HERO IMAGE -->
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" styl=
+e=3D"box-sizing: border-box; margin-bottom: 24px;">
+  <tbody><tr style=3D"box-sizing: border-box;">
+    <td align=3D"center" style=3D"box-sizing: border-box;">
+      <a href=3D"https://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z=
+1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEu=
+Y29tL3N0b3JpZXMvcmFtcC1hbmQtc3RyaXBlLWJ1aWx0LXRoZWlyLWJhY2tncm91bmQtYWdlbnQ=
+taW5mcmFzdHJ1Y3R1cmU_dXRtX2NhbXBhaWduPWRvbWluby1yYW1wLXN0cmlwZVx1MDAyNnV0bV=
+9zb3VyY2U9Y3VzdG9tZXJpb1x1MDAyNnV0bV9tZWRpdW09ZW1haWwiLCJpbnRlcm5hbCI6ImUyY=
+mUwNjNlZDQ5MDAxZjVkMzcyIiwibGlua19pZCI6MTQyNjR9/f39efd9a201780eedae6dbcdec5=
+66c27e160feb45d988cf3df7e41e9862ed6e7" style=3D"box-sizing: border-box; tex=
+t-decoration: none; display: block;">
+        <img src=3D"https://userimg-assets.customeriomail.com/images/client=
+-env-106338/1775145832349_hero-1_01KN7EZM26AADHCTZ37CF42RQS.png" alt=3D"Wha=
+t Ramp and Stripe built for background agents" width=3D"670" style=3D"box-s=
+izing: border-box; width: 100%; max-width: 670px; height: auto; border-radi=
+us: 12px; display: block;" height=3D"auto"/>
+      </a>
+    </td>
+  </tr>
+</tbody></table>
+
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0 0 12px 0;">
+   Stripe's agent platform runs on a remote dev environment they built year=
+s before GPT-3 existed. Ramp hand-rolled theirs on Modal and Cloudflare. Ne=
+ither started from zero, and both have platform teams maintaining it full-t=
+ime. The agent layer came last.
+  </p>
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    The blog post breaks down what they built across four layers: environme=
+nts, isolation, connectivity, and automation at scale. The part worth payin=
+g attention to is what happens after the first build. Dependencies update, =
+APIs change, integrations break. The surface area grows with every tool you=
+ connect. Most companies don't have a platform team to absorb that.
+  </p>
+</div>
+
+<!-- CTA: READ THE BREAKDOWN -->
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" styl=
+e=3D"box-sizing: border-box; margin-bottom: 40px;">
+  <tbody><tr style=3D"box-sizing: border-box;">
+    <td style=3D"box-sizing: border-box;">
+      <a href=3D"https://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z=
+1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEu=
+Y29tL3N0b3JpZXMvcmFtcC1hbmQtc3RyaXBlLWJ1aWx0LXRoZWlyLWJhY2tncm91bmQtYWdlbnQ=
+taW5mcmFzdHJ1Y3R1cmU_dXRtX2NhbXBhaWduPWRvbWluby1yYW1wLXN0cmlwZVx1MDAyNnV0bV=
+9zb3VyY2U9Y3VzdG9tZXJpb1x1MDAyNnV0bV9tZWRpdW09ZW1haWwiLCJpbnRlcm5hbCI6ImUyY=
+mUwNjNlZDQ5MDAxZjVkMzcyIiwibGlua19pZCI6MTQyNjR9/f39efd9a201780eedae6dbcdec5=
+66c27e160feb45d988cf3df7e41e9862ed6e7" style=3D"box-sizing: border-box; tex=
+t-decoration: none; display: block;">
+        <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"10=
+0%" style=3D"box-sizing: border-box; border-radius: 12px; overflow: hidden;=
+">
+          <tbody><tr style=3D"box-sizing: border-box;">
+            <td style=3D"box-sizing: border-box; background: #0048FF; paddi=
+ng: 18px 24px;" valign=3D"middle">
+              <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype=
+',Arial,sans-serif; font-size: 22px; font-weight: 400; color: #F9F9F9; marg=
+in: 0; line-height: 0.98; letter-spacing: -0.029em;">Read the full breakdow=
+n =E2=86=92</p>
+            </td>
+          </tr>
+        </tbody></table>
+      </a>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- DIVIDER -->
+<div style=3D"box-sizing: border-box; height: 1px; background: #ECE7E5; mar=
+gin: 0 0 40px 0;"></div>
+
+<!-- SECTION 2: PODCAST -->
+<h2 style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans-=
+serif; font-size: 26px; font-weight: 400; line-height: 0.98; letter-spacing=
+: -0.029em; color: #1E3C2C; margin: 0 0 24px 0;">Listen to the breakdown</h=
+2>
+
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    We have published a lot on background agents over the past few weeks: t=
+he landscape, the Ramp and Stripe architectures, sandboxes, security. It is=
+ a lot to keep up with. So we put together a 20-minute audio walkthrough th=
+at covers the key points.
+  </p>
+</div>
+
+<!-- PODCAST PLAYER =E2=80=94 TODO: Replace href with actual podcast link -=
+->
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" clas=
+s=3D"mobile-margin" style=3D"box-sizing: border-box; background-color: #FFF=
+FFF; border-radius: 16px; border: 1px solid #ECE7E5; margin-bottom: 40px;" =
+bgcolor=3D"#FFFFFF">
+  <tbody><tr style=3D"box-sizing: border-box;">
+    <td class=3D"podcast-padding" style=3D"box-sizing: border-box; padding:=
+ 16px 20px;">
+      <h3 class=3D"mobile-title" style=3D"box-sizing: border-box; margin: 0=
+ 0 2px 0; font-family: 'ABC Diatype',Arial,sans-serif; font-size: 15px; fon=
+t-weight: 700; color: #0a0e19; line-height: 24px; letter-spacing: -0.019em;=
+">Your agents are stuck on your laptop. Here's what Stripe built instead.</=
+h3>
+      <p class=3D"mobile-small" style=3D"box-sizing: border-box; line-heigh=
+t: inherit; margin: 0 0 12px 0; font-family: 'ABC Diatype',Arial,sans-serif=
+; font-size: 13px; color: #565451; font-weight: 400; letter-spacing: -0.019=
+em;">24 min</p>
+      <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%=
+;" style=3D"box-sizing: border-box;">
+        <tbody><tr style=3D"box-sizing: border-box;">
+          <td style=3D"box-sizing: border-box; width: 36px;" width=3D"36">
+            <a href=3D"https://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6ImR=
+nVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly=
+9vcGVuLnNwb3RpZnkuY29tL2VwaXNvZGUvMFB3dWtDQWJLaU00U2ZCbUc5Vk94Qz9zaT0taHItV=
+WpKWFNPMlhDcFd6NWdzdHRnIiwiaW50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxp=
+bmtfaWQiOjE0MjY1fQ/fa95df06d9fe6966c90036afdfe2c7b8b9d8875773d98913cbc82643=
+ca1c3998" class=3D"play-button" style=3D"box-sizing: border-box; display: i=
+nline-block; background: #0a0e19; border-radius: 50%; width: 36px; height: =
+36px; text-decoration: none; text-align: center; line-height: 36px; font-si=
+ze: 0;">
+              <span style=3D"box-sizing: border-box; display: inline-block;=
+ width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; bo=
+rder-color: transparent transparent transparent #ffffff; margin-left: 2px; =
+vertical-align: middle;"></span>
+            </a>
+          </td>
+          <td style=3D"box-sizing: border-box; padding-left: 16px; width: 1=
+00%;" width=3D"100%">
+            <div class=3D"progress-bar" style=3D"box-sizing: border-box; ba=
+ckground: #ECE7E5; height: 4px; width: 100%; max-width: 630px; border-radiu=
+s: 2px; position: relative;">
+              <div style=3D"box-sizing: border-box; background: #0048FF; he=
+ight: 4px; width: 0%; border-radius: 2px;"></div>
+            </div>
+            <div class=3D"mobile-small" style=3D"box-sizing: border-box; fo=
+nt-family: 'ABC Diatype',Arial,sans-serif; font-size: 11px; color: #999795;=
+ margin-top: 4px; letter-spacing: -0.019em;">
+              <span style=3D"box-sizing: border-box; color: #565451; font-w=
+eight: 600;">00:00</span> | 24:46
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- DIVIDER -->
+<div style=3D"box-sizing: border-box; height: 1px; background: #ECE7E5; mar=
+gin: 0 0 40px 0;"></div>
+
+<!-- SECTION 3: SELF-DRIVING CODEBASE -->
+<h2 style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans-=
+serif; font-size: 26px; font-weight: 400; line-height: 0.98; letter-spacing=
+: -0.029em; color: #1E3C2C; margin: 0 0 24px 0;">We're building a self-driv=
+ing codebase in public</h2>
+
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0 0 12px 0;">
+    Starting next week, we're building a fully functioning, open-source app=
+ from scratch, entirely on Ona. No line of code written by a human. Backgro=
+und agents planning the architecture, writing code, opening PRs, running CI=
+, fixing what breaks. No demo repo. No curated highlights. The full build, =
+public, from commit zero.
+  </p>
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0 0 12px 0;">
+    We'll run live sessions as we go, document every decision and failure, =
+and share regular updates.
+  </p>
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    We're also giving away 20x $1,000 in credits for teams and engineers th=
+at want to build alongside us. Your codebase or idea, with our support on a=
+rchitecture and use cases.
+  </p>
+</div>
+
+<!-- CTA: APPLY -->
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" styl=
+e=3D"box-sizing: border-box; margin-bottom: 40px;">
+  <tbody><tr style=3D"box-sizing: border-box;">
+    <td style=3D"box-sizing: border-box;">
+      <a href=3D"https://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z=
+1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9kb2Nz=
+Lmdvb2dsZS5jb20vZm9ybXMvZC9lLzFGQUlwUUxTZE5Zb25YVUswZ093eTJOcGJxaVdPZ295SEl=
+5SGtGSk15MGE2ZFQzdFhKMTF0dXBnL3ZpZXdmb3JtP3V0bV9jYW1wYWlnbj1kb21pbm8tcmFtcC=
+1zdHJpcGVcdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyaW9cdTAwMjZ1dG1fbWVkaXVtPWVtYWlsI=
+iwiaW50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjE0MjY2fQ/1dd11=
+3a7eb0201c15f950f56aec38035af4bef3613bff3acfdd33b4526f2053c" style=3D"box-s=
+izing: border-box; text-decoration: none; display: block;">
+        <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"10=
+0%" style=3D"box-sizing: border-box; border-radius: 12px; overflow: hidden;=
+">
+          <tbody><tr style=3D"box-sizing: border-box;">
+            <td style=3D"box-sizing: border-box; background: #1E3C2C; paddi=
+ng: 18px 24px;" valign=3D"middle">
+              <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype=
+',Arial,sans-serif; font-size: 22px; font-weight: 400; color: #F9F9F9; marg=
+in: 0; line-height: 0.98; letter-spacing: -0.029em;">Apply for the self-dri=
+ving codebase project =E2=86=92</p>
+            </td>
+          </tr>
+        </tbody></table>
+      </a>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- DIVIDER -->
+<div style=3D"box-sizing: border-box; height: 1px; background: #ECE7E5; mar=
+gin: 0 0 40px 0;"></div>
+
+<!-- SECTION 5: LANDSCAPE UPDATE -->
+<h2 style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans-=
+serif; font-size: 26px; font-weight: 400; line-height: 0.98; letter-spacing=
+: -0.029em; color: #1E3C2C; margin: 0 0 24px 0;">Landscape update</h2>
+
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    The background agent landscape keeps growing. Since launch we have adde=
+d 15 tools across security, sandboxes, orchestration, review, and agents. N=
+otable additions: Cursor Cloud, Vercel Agent, Warp, Northflank, Namespace, =
+nono, and Agent Auth Protocol. If we missed your tool or miscategorized it,=
+ let us know.
+  </p>
+</div>
+
+<!-- CTA: EXPLORE THE LANDSCAPE -->
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%" styl=
+e=3D"box-sizing: border-box; margin-bottom: 40px;">
+  <tbody><tr style=3D"box-sizing: border-box;">
+    <td style=3D"box-sizing: border-box;">
+      <a href=3D"https://e.customeriomail.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z=
+1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9iYWNr=
+Z3JvdW5kLWFnZW50cy5jb20vbGFuZHNjYXBlP3V0bV9jYW1wYWlnbj1kb21pbm8tcmFtcC1zdHJ=
+pcGVcdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyaW9cdTAwMjZ1dG1fbWVkaXVtPWVtYWlsIiwiaW=
+50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjE0MjY3fQ/2d4480fd0f=
+884ab427a7f4e9f4f62ced318d5e1d70e4b0b9bfac2ad005a6a520" style=3D"box-sizing=
+: border-box; text-decoration: none; display: block;">
+        <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"10=
+0%" style=3D"box-sizing: border-box; border-radius: 12px; overflow: hidden;=
+">
+          <tbody><tr style=3D"box-sizing: border-box;">
+            <td style=3D"box-sizing: border-box; background: #0a0e19; paddi=
+ng: 18px 24px;" valign=3D"middle">
+              <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype=
+',Arial,sans-serif; font-size: 22px; font-weight: 400; color: #F9F9F9; marg=
+in: 0; line-height: 0.98; letter-spacing: -0.029em;">Explore the landscape =
+=E2=86=92</p>
+            </td>
+          </tr>
+        </tbody></table>
+      </a>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- DIVIDER -->
+<div style=3D"box-sizing: border-box; height: 1px; background: #ECE7E5; mar=
+gin: 0 0 40px 0;"></div>
+
+<!-- SECTION 6: VIRTUAL SUMMIT -->
+<h2 style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans-=
+serif; font-size: 26px; font-weight: 400; line-height: 0.98; letter-spacing=
+: -0.029em; color: #1E3C2C; margin: 0 0 24px 0;">Background Agents Virtual =
+Summit (Early May)</h2>
+
+<div style=3D"box-sizing: border-box; margin-bottom: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0 0 12px 0;">
+    Last week we mentioned we were working on a virtual summit. It is takin=
+g shape. Three tracks: scaling agent infrastructure, security and governanc=
+e, and how engineering orgs actually change when agents produce a significa=
+nt share of code. Every session is grounded in real architecture and real o=
+utcomes from industry leaders.
+  </p>
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0;">
+    We'd love to have you join. If you are running background agents or act=
+ively building toward it and want to share what you have learned, please re=
+ach out with a simple reply.
+  </p>
+</div>
+
+<!-- CLOSING -->
+<div style=3D"box-sizing: border-box; border-top: 1px solid #ECE7E5; margin=
+-top: 0; padding-top: 28px;">
+  <p style=3D"box-sizing: border-box; font-family: 'ABC Diatype',Arial,sans=
+-serif; font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing=
+: -0.019em; color: #565451; margin: 0 0 24px 0;">
+    Talk soon,
+  </p>
+  <p style=3D"box-sizing: border-box; line-height: inherit; font-family: 'A=
+BC Diatype',Arial,sans-serif; font-size: 15px; font-weight: 700; letter-spa=
+cing: -0.019em; color: #0a0e19; margin: 0;">
+    Lou<br style=3D"box-sizing: border-box;"/>Field CTO, Ona
+  </p>
+</div>
+
+        </td></tr>
+      </tbody></table>
+
+    </td></tr>
+  </tbody></table>
+
+
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- FOOTER SECTION -->
+          <table class=3D"row row-footer" align=3D"center" width=3D"100%" b=
+order=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0;">
+            <tbody style=3D"box-sizing: border-box;">
+              <tr style=3D"box-sizing: border-box;">
+                <td style=3D"box-sizing: border-box;">
+                  <table class=3D"row-content stack" align=3D"center" borde=
+r=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"=
+box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; backgroun=
+d-color: #f6f6f6; color: #000; width: 750px; margin: 0 auto;" width=3D"750"=
+ bgcolor=3D"#f6f6f6">
+                    <tbody style=3D"box-sizing: border-box;">
+                      <tr style=3D"box-sizing: border-box;">
+                        <td class=3D"column column-1" width=3D"100%" style=
+=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; font-=
+weight: 400; text-align: left; vertical-align: top;" align=3D"left" valign=
+=3D"top">
+                         =20
+                          <!-- Social Icons -->
+                          <table class=3D"social_block block-1" width=3D"10=
+0%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" =
+style=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0;"=
+>
+                            <tbody><tr style=3D"box-sizing: border-box;">
+                              <td class=3D"pad" style=3D"box-sizing: border=
+-box; padding-bottom: 8px; padding-left: 10px; padding-right: 10px; padding=
+-top: 32px; text-align: center;" align=3D"center">
+                                <div class=3D"alignment" align=3D"center" s=
+tyle=3D"box-sizing: border-box;">
+                                  <table class=3D"social-table" width=3D"10=
+4px" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation"=
+ style=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0;=
+ display: inline-block;">
+                                    <tbody><tr style=3D"box-sizing: border-=
+box;">
+                                      <td style=3D"box-sizing: border-box; =
+padding: 0 10px 0 10px;">
+                                        <a href=3D"https://e.customeriomail=
+=2Ecom/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lE=
+QVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VX=
+BXWT0iLCJocmVmIjoiaHR0cHM6Ly94LmNvbS9vbmFfaHEiLCJpbnRlcm5hbCI6ImUyYmUwNjNlZ=
+DQ5MDAxZjVkMzcyIiwibGlua19pZCI6MTA2MzJ9/071f04588cb04591507528b49222fe8cb2e=
+4294a6af7e3e0cc3a80c63d2e2b79" target=3D"_blank" style=3D"box-sizing: borde=
+r-box;">
+                                          <img src=3D"https://app-rsrc.getb=
+ee.io/public/resources/social-networks-icon-sets/circle-color/twitter@2x.pn=
+g" width=3D"32" height=3D"auto" alt=3D"X" title=3D"X" style=3D"box-sizing: =
+border-box; display: block; height: auto; border: 0;"/>
+                                        </a>
+                                      </td>
+                                      <td style=3D"box-sizing: border-box; =
+padding: 0 10px 0 10px;">
+                                        <a href=3D"https://e.customeriomail=
+=2Ecom/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lE=
+QVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VX=
+BXWT0iLCJocmVmIjoiaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2NvbXBhbnkvb25hLWhxIiwia=
+W50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjEyNjE3fQ/e6b10a906=
+3959274dc2de80205ee9f6f1ac2d304759090371578796981f2ab87" target=3D"_blank" =
+style=3D"box-sizing: border-box;">
+                                          <img src=3D"https://userimg-asset=
+s.customeriomail.com/images/client-env-106338/1764153675435_linkedinlogo_01=
+KAZW1KTPYNW0DZ9PBGSQ89CB.png" width=3D"47" height=3D"auto" alt=3D"LinkedIn"=
+ title=3D"LinkedIn" style=3D"box-sizing: border-box; display: block; height=
+: auto; border: 0;"/>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody></table>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody></table>
+                         =20
+                          <!-- Footer Links -->
+                          <table class=3D"text_block block-2" width=3D"100%=
+" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" st=
+yle=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; wo=
+rd-break: break-word;">
+                            <tbody><tr style=3D"box-sizing: border-box;">
+                              <td class=3D"pad" style=3D"box-sizing: border=
+-box; padding-bottom: 20px; padding-top: 8px;">
+                                <div style=3D"box-sizing: border-box; font-=
+family: 'ABC Diatype',Arial,sans-serif;">
+                                  <div style=3D"box-sizing: border-box; fon=
+t-size: 14px; font-family: 'ABC Diatype',Arial,sans-serif; mso-line-height-=
+alt: 25.2px; color: #636363; line-height: 1.8;">
+                                    <p style=3D"box-sizing: border-box; lin=
+e-height: inherit; margin: 0; font-size: 11px; mso-line-height-alt: 19.8px;=
+" align=3D"center">
+                                      <strong style=3D"box-sizing: border-b=
+ox;">
+                                        <span style=3D"box-sizing: border-b=
+ox; word-break: break-word; font-size: 11px;">
+                                          <a href=3D"https://e.customerioma=
+il.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6=
+VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEuY29tL2NvbnRhY3QvZGVtbz91dG1fY2FtcGFpZ24=
+9bmV3c2xldHRlclx1MDAyNnV0bV9zb3VyY2U9Y3VzdG9tZXJpb1x1MDAyNnV0bV9tZWRpdW09ZW=
+1haWwiLCJpbnRlcm5hbCI6ImUyYmUwNjNlZDQ5MDAxZjVkMzcyIiwibGlua19pZCI6MTE0NjN9/=
+9a4306cb35e6610e38bd4eb754376acf4b81f6220a4cbf66dd0a0da52ff117a2" target=3D=
+"_blank" style=3D"box-sizing: border-box; text-decoration: underline; color=
+: #0a0e19;" rel=3D"noopener">Book a demo</a>
+                                          =C2=A0=C2=B7=C2=A0
+                                          <a href=3D"https://e.customerioma=
+il.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6=
+VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEuY29tL2RvY3Mvb25hL2dldHRpbmctc3RhcnRlZD9=
+1dG1fY2FtcGFpZ249bmV3c2xldHRlclx1MDAyNnV0bV9zb3VyY2U9Y3VzdG9tZXJpb1x1MDAyNn=
+V0bV9tZWRpdW09ZW1haWwiLCJpbnRlcm5hbCI6ImUyYmUwNjNlZDQ5MDAxZjVkMzcyIiwibGlua=
+19pZCI6MTE0NjR9/32a50ba829e846135b94b9510b34bde2e9db2f9d34212806284b9a41fd1=
+3b06e" target=3D"_blank" style=3D"box-sizing: border-box; text-decoration: =
+underline; color: #0a0e19;" rel=3D"noopener">Docs</a>
+                                          =C2=A0=C2=B7=C2=A0
+                                          <a href=3D"https://e.customerioma=
+il.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6=
+VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEuY29tL3N0b3JpZXM_dXRtX2NhbXBhaWduPW5ld3N=
+sZXR0ZXJcdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyaW9cdTAwMjZ1dG1fbWVkaXVtPWVtYWlsIi=
+wiaW50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjExNDY1fQ/8f60a6=
+7900e9843a729eb196a785dca21f5fd4cb7c95bcb8733fd05c8c181cdc" target=3D"_blan=
+k" style=3D"box-sizing: border-box; text-decoration: underline; color: #0a0=
+e19;" rel=3D"noopener">Blog</a>
+                                          =C2=A0=C2=B7=C2=A0
+                                          <a href=3D"https://e.customerioma=
+il.com/e/c/eyJlbWFpbF9pZCI6ImRnVGl2Z1lEQVBYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6=
+VXBXWT0iLCJocmVmIjoiaHR0cHM6Ly9vbmEuY29tL2NvbnRhY3Qvc2FsZXM_dXRtX2NhbXBhaWd=
+uPW5ld3NsZXR0ZXJcdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyaW9cdTAwMjZ1dG1fbWVkaXVtPW=
+VtYWlsIiwiaW50ZXJuYWwiOiJlMmJlMDYzZWQ0OTAwMWY1ZDM3MiIsImxpbmtfaWQiOjExNDY2f=
+Q/6dee8fbe3929c802ccc7427fc40d2b338f205dde04beaaf0f23f48175bab42ee" target=
+=3D"_blank" style=3D"box-sizing: border-box; text-decoration: underline; co=
+lor: #0a0e19;" rel=3D"noopener">Contact</a>
+                                        </span>
+                                      </strong>
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody></table>
+                         =20
+                          <!-- Copyright -->
+                          <table class=3D"text_block block-4" width=3D"100%=
+" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" st=
+yle=3D"box-sizing: border-box; mso-table-lspace: 0; mso-table-rspace: 0; wo=
+rd-break: break-word;">
+                            <tbody><tr style=3D"box-sizing: border-box;">
+                              <td class=3D"pad" style=3D"box-sizing: border=
+-box; padding-bottom: 24px; padding-top: 16px;">
+                                <div style=3D"box-sizing: border-box; font-=
+family: 'ABC Diatype',Arial,sans-serif;">
+                                  <div style=3D"box-sizing: border-box; fon=
+t-size: 14px; font-family: 'ABC Diatype',Arial,sans-serif; mso-line-height-=
+alt: 25.2px; color: #818181; line-height: 1.8;">
+                                    <p style=3D"box-sizing: border-box; lin=
+e-height: inherit; margin: 0; font-size: 10px; mso-line-height-alt: 18px;" =
+align=3D"center">
+                                      <span style=3D"box-sizing: border-box=
+; word-break: break-word; font-size: 10px;">=C2=A9 2026 Ona. All rights res=
+erved.</span>
+                                    </p>
+                                    <p style=3D"box-sizing: border-box; lin=
+e-height: inherit; margin: 0; font-size: 10px; mso-line-height-alt: 18px;" =
+align=3D"center">
+                                      <span style=3D"box-sizing: border-box=
+; word-break: break-word; font-size: 10px;">This email was sent to wuliang@=
+xiangzizai.com. To no longer receive these emails, <a href=3D"https://e.cus=
+tomeriomail.com/unsubscribe/dgTivgYDAPXTcvTTcgGdTz9FuoJtJPDvurzUpWY=3D" tar=
+get=3D"_blank" rel=3D"noopener" style=3D"box-sizing: border-box; text-decor=
+ation: underline; color: #818181;">unsubscribe here</a>.</span>
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody></table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<img src=3D"https://e.customeriomail.com/e/o/eyJlbWFpbF9pZCI6ImRnVGl2Z1lEQV=
+BYVGN2VFRjZ0dkVHo5RnVvSnRKUER2dXJ6VXBXWT0ifQ=3D=3D" style=3D"height: 1px !i=
+mportant; max-height: 1px !important; max-width: 1px !important; width: 1px=
+ !important; display: none !important;" alt=3D""/></body></html>
+--997d0d455bc77dcbc745cc9d6810107e54f503e16de9a88a42735dd3ce50--

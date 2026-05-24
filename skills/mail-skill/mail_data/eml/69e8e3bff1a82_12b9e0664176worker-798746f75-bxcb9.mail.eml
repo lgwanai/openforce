@@ -1,0 +1,1472 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:168.245.32.49)
+ smtp.mailfrom=bounces+3445690-95b7-wuliang=xiangzizai.com@sendgridstats.nvidia.com;
+ dkim=pass header.b=AYeKoZNQ2I header.i=@nvidia.com header.s=s1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=nvidia.com; arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=rxulQdn4y0a5CnrGnA33s3d+znnNLmgZn44O4tRRuJM=;
+ b=O4VLVvTl5Yq6/bUnznLbPZZFR9yXW52we8xnRL8PoIkrVNs9nzxCvroMWls7UqZMibLoI/X
+ OnHK7l6B3B39wbytxa4Wd8VGvC7tWogC8P0jNvBiy0M8iARfuK50Bkd6qc8Kb4sxTkXOdR8hb
+ 6sHPTBadSe5uYtzgCJElFrkImexWMRho4RdYzMl90ALXky1YlPNT/xTqaqSes7U2I0VA2InWP
+ yiWMIRgGfv9qvOD6VzfXFj6JNLdI5tPpGv3/7gTZpTJxcDzVYQGf2VtsJkB3Xg83UE/bo5SH3
+ s/H2+jB9YKYI1yQYKIDLiUheV2Hng8LmvQaqMJ57gaB/cMdk/30g==
+Arc-Seal: i=1; a=rsa-sha256; t=1776870361; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=m/QmTb6fk5nXymHTnG7Ijcquaet6+IxnKxSnK/NmP99NkUJQvfp/vMNdxOZPOdELiqHrpbx
+ 2QnY7Sn+PiSFOujAu2RgecgcWNn7CIhnjUXGFgB4sEQH2nOUpl+++2PMBJAp34MVSwgOoJza6
+ UZwiVUsUQWgoNKIM3Ma34OEIlxbZQRjkRga+qi4nyoTaHqCInBBEqmLXWRVN6j6omtGht5xPi
+ UAqBDy+bECbgiPKU6nW9dGhCYtNKkD5YCASQJKo8k6hfI3lqRc6srq5C4sakYMSWWri5dzTXn
+ JSsoFcR7gM31ExggMJA24QPLt5CuznYlUd6z1IgvTCt/v3SzuOuw==
+Authentication-Results: lms; spf=pass (client-ip:168.245.32.49)
+ smtp.mailfrom=bounces+3445690-95b7-wuliang=xiangzizai.com@sendgridstats.nvidia.com;
+ dkim=pass header.b=AYeKoZNQ2I header.i=@nvidia.com header.s=s1;
+ dmarc=pass (p=reject sp=reject dis=none) header.from=nvidia.com; arc=none
+Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_69e8e3bff1588_12b9e06640e0"
+Date: Wed, 22 Apr 2026 15:05:36 +0000 (UTC)
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com;
+ h=date:from:subject:mime-version:to:content-type:
+ content-transfer-encoding:cc:content-type:date:from:subject:to; s=s1;
+ t=1776870336; bh=rxulQdn4y0a5CnrGnA33s3d+znnNLmgZn44O4tRRuJM=;
+ b=AYeKoZNQ2Im9ODL8IkeYlb8V0VvN13jUnAdT2Ge0I7QV9Ls/Q7zIt2X+qsUxV1zSR6PC
+ 6y5swLLmFrXLxRhgrQxqWnSwjWC8bUJxIHt4Ja6VkyPIVUw3qJz/4lffiqZ26b9HomEe2w
+ dv671qyrUk2He1jV5kc6SyE+2bpzKZDMVNf0V8hJ8h9D1i0zbcH+4f58NY+yc12vt8Vrub
+ 2UDkwiIFOEzkkeWlFlgPr3z8klIlUt2wrVbS/q1VIHuStbLGr0B6j3yq+ruk65130POclL
+ YzAgMlK6c3pHzutNcY7h2YH8iR3+81kb+W6vE1LkIJtD3bEHqom2sX+Ghvw4WPzQ==
+From: NVIDIA Developer Relations <noreply@nvidia.com>
+Message-Id: <69e8e3bff1a82_12b9e0664176@worker-798746f75-bxcb9.mail>
+Mime-Version: 1.0
+Received: by recvd-5d54cfbfdf-kmfbv with SMTP id
+ recvd-5d54cfbfdf-kmfbv-1-69E8E3C0-35 2026-04-22 15:05:36.216265363 +0000
+ UTC m=+62144.915826056
+Received: from localhost.localdomain (unknown) by geopod-ismtpd-71 (SG) with
+ ESMTP id kiS98dK8RYKFsn495rAt7w for <wuliang@xiangzizai.com>; Wed, 22 Apr
+ 2026 15:05:36.176 +0000 (UTC)
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=168.245.32.49;
+ helo=xvfrnhpk.outbound-mail.sendgrid.net;
+ envelope-from=bounces+3445690-95b7-wuliang=xiangzizai.com@sendgridstats.nvidia.com;
+ receiver=<UNKNOWN>;
+Subject: Welcome to the NVIDIA Developer Program
+To: wuliang@xiangzizai.com
+X-Entity-Id: u001.9Nu+sJkq3f0LJ/tZbyfOWA==
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1776870343/4g12bV3q1Jz2D5XYF/69E8E3C6.002/168.245.32.49/xvfrnhpk.outbound-mail.sendgrid.net/localhost/<bounces+3445690-95b7-wuliang=xiangzizai.com@sendgridstats.nvidia.com>
+X-Fangmail-Gw-Spam: 95
+X-Fangmail-Gw-Spam-Type: 3
+X-Fangmail-Mainwhy: newrule
+X-Fangmail-Mid-Qid: 69E8E3C6.002/4g12bV3q1Jz2D5XYF
+X-Fangmail-Miltered: at n206-112-038 with ID 69E8E3C6.002 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 168.245.32.49
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ bounces+3445690-95b7-wuliang=xiangzizai.com@sendgridstats.nvidia.com
+X-Lms-Pvf: 
+ MnwyfDF8fN/4eroj4Om17IAul14pC3gVkAArg0r1X9dxrIRf9IFGFdZfGFzvynKDwr4Avq+DWUn3oL/5wwPfK+vSDIN9YgmskSGDEsQOHWlZ5rGc4DjGbxP6AGe57Z3RWVwHe1bk0g==
+X-Sg-Eid: 
+ =?us-ascii?Q?u001=2EE4qJcE76Aa2II2MSidHv7q42firCjACYqh1pcXjOS5rqwuHycfIgtuWMI?=
+ =?us-ascii?Q?hVneFvzlAgQq4KXu6c3z8ymLupgQWY5DHVz6ZGT?=
+ =?us-ascii?Q?6=2FQYN1soYeYznI35MBLnkDA481CCRpHKT+u6JSi?=
+ =?us-ascii?Q?kYiUOMYRBWFOBiCR3PjQBUWuIluGjUihP0vABtb?=
+ =?us-ascii?Q?PsqC1mYGMI4XPosqrIMONaMOeP1HzIt3b9FHDDJ?=
+ =?us-ascii?Q?KzEVfQcNxNhVGlqomaGhxVb1x1fJrCkdg=2FE3gJP?=
+ =?us-ascii?Q?JhCyNHmPm0pyI9O=2FnUtVA+0N6g=3D=3D?=
+X-Sg-Id: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BrrqbU3sx=2FfhJcC65cI=2F6TNTirztpS6U667Co?=
+ =?us-ascii?Q?KH70xo6v6cxAXKZBILbcB0XXJtdAA=3D=3D?=
+
+
+----==_mimepart_69e8e3bff1588_12b9e06640e0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+VG9vbHMgYW5kIHRyYWluaW5nIHRvIGFjY2VsZXJhdGUgZGV2ZWxvcG1lbnQNCuKAh+KAh+KAh+KA
+h+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KA
+h+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KA
+h+KAh+KAh+KAh+KAh+KAh+KAh+KAh+KAhyDigIfigI3NjyDigIfNjyDigIfigI3NjyDigIfNjw0K
+4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCH
+zY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g
+4oCHzY8g4oCH4oCNzY8g4oCHzY8NCuKAh+KAjc2PIOKAh82PIOKAh+KAjc2PIOKAh82PIOKAh+KA
+jc2PIOKAh82PIOKAh+KAjc2PIOKAh82PIOKAh+KAjc2PIOKAh82PIOKAh+KAjc2PIOKAh82PIOKA
+h+KAjc2PIOKAh82PIOKAh+KAjc2PIOKAh82PIOKAh+KAjc2PIOKAh82PDQrigIfigI3NjyDigIfN
+jyDigIfigI3NjyDigIfNjyDigIfigI3NjyDigIfNjyDigIfigI3NjyDigIfNjyDigIfigI3NjyDi
+gIfNjyDigIfigI3NjyDigIfNjyDigIfigI3NjyDigIfNjyDigIfigI3NjyDigIfNjyDigIfigI3N
+jyDigIfNjw0K4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH
+4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8g
+4oCH4oCNzY8g4oCHzY8g4oCH4oCNzY8g4oCHzY8NCuKAh+KAjc2PIOKAh82PIM2P4oCMIMKtIMKt
+IMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKt
+IMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMDQrCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDC
+rSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDN
+j+KAjCDCrSDCrSDCrSDCrSDNj+KAjA0Kwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/i
+gIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwg
+wq0gwq0gwq0gwq0gzY/igIwNCsKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKt
+IMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKt
+IMKtIMKtIM2P4oCMDQrCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDC
+rSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDC
+rSDNj+KAjA0Kwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0g
+zY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/i
+gIwNCsKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCM
+IMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMDQrC
+rSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDC
+rSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjA0Kwq0gwq0g
+wq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0g
+wq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwgwq0gwq0gwq0gwq0gzY/igIwNCsKtIMKtIMKtIMKt
+IM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P
+4oCMIMKtIMKtIMKtIMKtIM2P4oCMIMKtIMKtIMKtIMKtIM2P4oCMDQrCrSDCrSDCrSDCrSDNj+KA
+jCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrSDNj+KAjCDC
+rSDCrSDCrSDCrSDNj+KAjCDCrSDCrSDCrSDCrQ0KDQpOVklESUEgKCBodHRwczovL3d3dy5udmlk
+aWEuY29tLyApDQpOVklESUEgKCBodHRwczovL3d3dy5udmlkaWEuY29tLyApDQpbIE5WSURJQSBd
+IFtbaHR0cHM6Ly93d3cubnZpZGlhLmNvbS9dXQ0KDQpXZWxjb21lIHRvIHRoZSBOVklESUEgRGV2
+ZWxvcGVyIFByb2dyYW0NCg0KQXMgYSBtZW1iZXIsIHlvdSBjYW4gbm93IGFjY2VzcyB0b29scyBh
+bmQgdHJhaW5pbmcgdG8gaGVscCB5b3UNCnN1Y2NlZWQgd2l0aCBOVklESUEgdGVjaG5vbG9naWVz
+LiBHZXQgc3RhcnRlZDoNCg0K8J+SuyBEZXZlbG9wZXIgVG9vbHMNCg0KKiBHZXQgZnJlZSBhY2Nl
+c3MgdG8gTlZJRElBIE5JTeKEoiANCiggaHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlhLmNvbS9uaW0v
+P25jaWQ9ZW0tbnVydC03MjM4NTEgKSBBUEkNCmVuZHBvaW50cyBhbmQgZG93bmxvYWRhYmxlIGNv
+bnRhaW5lcnMgZm9yIHJlc2VhcmNoLCBkZXZlbG9wbWVudA0KYW5kIHRlc3Rpbmcgd2l0aCBvcHRp
+bWl6ZWQgQUkgbW9kZWxzLg0KKiBGaW5kIFNES3MsIGxpYnJhcmllcywgYW5kIHBlcmZvcm1hbmNl
+IGFuYWx5c2lzIHRvb2xzIGluIG91cg0KRGV2ZWxvcGVyIFRvb2xzIENhdGFsb2cgDQooIGh0dHBz
+Oi8vZGV2ZWxvcGVyLm52aWRpYS5jb20vZGV2ZWxvcGVyLXRvb2xzLWNhdGFsb2c/bmNpZD1lbS1u
+dXJ0LTI3NjIyOSApDQouDQoqIFJlcG9ydCBidWdzIA0KKCBodHRwczovL2RldmVsb3Blci5udmlk
+aWEuY29tL252aWRpYV9idWcvYWRkP25jaWQ9ZW0tbnVydC01MjUxNzkgKQ0KZGlyZWN0bHkgdG8g
+TlZJRElBLg0KDQrwn5OaIExlYXJuaW5nIGFuZCBDb21tdW5pdHkNCg0KKiBLZWVwIHVwIHRvIGRh
+dGUgb24gdGhlIGxhdGVzdCB0ZWNobmljYWwgYnJlYWt0aHJvdWdocyB0aHJvdWdoDQpvdXIgdGVj
+aG5pY2FsIGJsb2cgDQooIGh0dHBzOi8vZGV2ZWxvcGVyLm52aWRpYS5jb20vYmxvZy8/bmNpZD1l
+bS1udXJ0LTUyMDM2OSApLCB2aWRlbw0KbGlicmFyeSANCiggaHR0cHM6Ly93d3cubnZpZGlhLmNv
+bS9lbi11cy9vbi1kZW1hbmQvP25jaWQ9ZW0tbnVydC04ODE5ODUgKSwNCmFuZCByZXNlYXJjaCBo
+dWIgDQooIGh0dHBzOi8vcmVzZWFyY2gubnZpZGlhLmNvbS9wdWJsaWNhdGlvbnM/bmNpZD1lbS1u
+dXJ0LTE2OTU1NCApLg0KKiBUYWxrIHRvIG90aGVyIGRldmVsb3BlcnMgYW5kIGZpbmQgc29sdXRp
+b25zIG9uIG91ciBEaXNjb3JkIA0KKCBodHRwczovL2Rpc2NvcmQuY29tL2ludml0ZS9udmlkaWFk
+ZXZlbG9wZXI/bmNpZD1lbS1udXJ0LTc5MzY2NyApDQphbmQgRm9ydW1zIA0KKCBodHRwczovL2Zv
+cnVtcy5kZXZlbG9wZXIubnZpZGlhLmNvbS8/bmNpZD1lbS1udXJ0LTIzNTQ5MyApLg0KDQrwn5Gl
+IFByb2dyYW1zIHRoYXQgU3VwcG9ydCBHcm93dGgNCg0KKiBOVklESUEgSW5jZXB0aW9uIA0KKCBo
+dHRwczovL3d3dy5udmlkaWEuY29tL2VuLXVzL3N0YXJ0dXBzLz9uY2lkPWVtLW51cnQtNjM2NTU1
+ICkgZm9yDQpzdGFydHVwczogZnJlZSBkZXZlbG9wZXIgY291cnNlcyBhbmQgdG9vbHMsIGN1c3Rv
+bWl6YWJsZQ0KbWFya2V0aW5nIG1hdGVyaWFscywgYW5kIE5WSURJQSdzIGdsb2JhbCBWQyBuZXR3
+b3Jr4oCLLg0KKiBOVklESUEgQ29ubmVjdCANCiggaHR0cHM6Ly93d3cubnZpZGlhLmNvbS9lbi11
+cy9wcm9ncmFtcy9pc3YvP25jaWQ9ZW0tbnVydC0yNzg0MDcgKQ0KZm9yIElTVnM6IHRlY2huaWNh
+bCB0cmFpbmluZywgZXhwZXJ0IGd1aWRhbmNlLCBhbmQgcHJlZmVycmVkDQpwcmljaW5nIG9uIE5W
+SURJQSB0ZWNobm9sb2dpZXMuDQoqIEhpZ2hlciBFZHVjYXRpb24gDQooIGh0dHBzOi8vZGV2ZWxv
+cGVyLm52aWRpYS5jb20vaGlnaGVyLWVkdWNhdGlvbi1hbmQtcmVzZWFyY2g/bmNpZD1lbS1udXJ0
+LTQ4MDM5MiApDQo6IHRhaWxvcmVkIHJlc291cmNlcyBmb3Igc3R1ZGVudHMsIGVkdWNhdG9ycywg
+YW5kIHJlc2VhcmNoZXJzLg0KDQpNZW1iZXIgUG9ydGFsIA0KKCBodHRwczovL2RldmVsb3Blci5u
+dmlkaWEuY29tL252aWRpYS1kZXZlbG9wZXItcHJvZ3JhbT9uY2lkPWVtLW51cnQtNzI0MjY1ICkN
+Cg0KDQpUaGFuayB5b3UsDQpUaGUgTlZJRElBIERldmVsb3BlciBUZWFtDQoNClRoaXMgY29tbXVu
+aWNhdGlvbiB3YXMgb3JpZ2luYWxseSBzZW50IHRvIHtlbWFpbH0uIFlvdeKAmXJlDQpyZWNlaXZp
+bmcgdGhpcyBlbWFpbCBjb21tdW5pY2F0aW9uIGJlY2F1c2UgeW91IGFyZSBhIG1lbWJlciBvZg0K
+dGhlIE5WSURJQSBEZXZlbG9wZXIgUHJvZ3JhbSANCiggaHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlh
+LmNvbS9kZXZlbG9wZXItcHJvZ3JhbSApIGFuZCB0aGVyZSBoYXMNCmJlZW4gYSBjaGFuZ2UgaW4g
+eW91ciBtZW1iZXJzaGlwLiBJZiB5b3UgaGF2ZSBxdWVzdGlvbnMgb3Igd291bGQNCmxpa2UgdG8g
+bGVhdmUgdGhlIHByb2dyYW0sIHBsZWFzZSBjb250YWN0IHVzIGhlcmUgDQooIGh0dHBzOi8vZGV2
+ZWxvcGVyLm52aWRpYS5jb20vY29udGFjdCApLg0KDQpQcml2YWN5IENlbnRlciAoIGh0dHBzOi8v
+d3d3Lm52aWRpYS5jb20vZW4tdXMvcHJpdmFjeS1jZW50ZXIvICkgfA0KQ29udGFjdCBVcyAoIGh0
+dHBzOi8vd3d3Lm52aWRpYS5jb20vZW4tdXMvY29udGFjdC8gKQ0KDQrCqSAyMDI2IE5WSURJQSBD
+b3Jwb3JhdGlvbi4gQWxsIHJpZ2h0cyByZXNlcnZlZC4NCk5WSURJQSBDb3Jwb3JhdGlvbiwgMjc4
+OCBTYW4gVG9tYXMgRXhwcmVzc3dheSBTYW50YSBDbGFyYSwgQ0ENCjk1MDUxLg==
+
+----==_mimepart_69e8e3bff1588_12b9e06640e0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"en" xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:sch=
+emas-microsoft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office"=
+ style=3D"color-scheme: light dark;">
+<head>
+<title>Welcome to the NVIDIA Developer program</title>
+<!--[if !mso]><!-- --><meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3D=
+edge">
+<!--<![endif]--><meta http-equiv=3D"Content-Type" content=3D"text/html; cha=
+rset=3DUTF-8">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1">
+
+<!--[if mso]>                    <xml>                      <o:OfficeDocume=
+ntSettings xmlns:o=3D"urn:schemas-microsoft-com:office:office">            =
+        <o:AllowPNG/>                          <o:PixelsPerInch>96</o:Pixel=
+sPerInch>                      </o:OfficeDocumentSettings>                 =
+  <w:WordDocument xmlns:w=3D"urn:schemas-microsoft-com:office:word">       =
+        <w:DontUseAdvancedTypographyReadingMail/>             </w:WordDocum=
+ent>                  </xml>                        <style type=3D"text/css=
+">             table { border-collapse:collapse;mso-table-lspace:0pt;mso-ta=
+ble-rspace:0pt; }             .mj-outlook-group-fix { width:100% !important=
+; }             .mso-button-dark-mode a {background: transparent !important=
+;}           </style>                  <![endif]--><!--[if !mso]><!-->
+<!--<![endif]-->
+
+
+<!--[if mso]>             <style>                 .hide-on-mobile {display:=
+block !important}             </style>         <![endif]--><!--[if mso]>   =
+              <style>                              .ul-84d90050-0046-11f0-9=
+cd2-cddebf83fc90 li {            margin-left: -47px !important;            =
+text-indent: -17px; }         .ul-84d90050-0046-11f0-9cd2-cddebf83fc90 li l=
+i {            margin-left: -47px !important;           text-indent: -17px;=
+           } ul li { tab-stops: 100%; }                 </style>           =
+  <![endif]--><!--[if gte mso 16]>                 <style>                 =
+    .mso-text-black a { mso-style-textfill-type: gradient; mso-style-textfi=
+ll-fill-gradientfill-stoplist: "0 \#000000 1 100000\,99000 \#000000 1 10000=
+0"; color: #ffffff !important; }                  </style>             <![e=
+ndif]-->
+<style>@font-face {
+font-family: NVIDIA Sans; font-weight: 400; src: url("https://client-data.k=
+nak.io/production/company_data/652d3d46168e7/custom-fonts/652f284fe9266/NVI=
+DIASans_W_Rg.woff2");
+}
+@font-face {
+font-family: NVIDIA Sans; font-weight: 500; src: url("https://client-data.k=
+nak.io/production/company_data/652d3d46168e7/custom-fonts/652f284fe9266/NVI=
+DIASans_W_Md.woff2");
+}
+@font-face {
+font-family: NVIDIA Sans; font-weight: 700; src: url("https://client-data.k=
+nak.io/production/company_data/652d3d46168e7/custom-fonts/652f284fe9266/NVI=
+DIASans_W_Bd.woff2");
+}
+body {
+margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust=
+: 100%;
+}
+img {
+border: 0; height: auto; line-height: 100%; outline: none; text-decoration:=
+ none; -ms-interpolation-mode: bicubic;
+}
+body a {
+text-decoration: none; color: #1A1A1A;
+}
+.image-highlight:hover {
+filter: brightness(1.2);
+}
+@media only screen and (min-width:700px) {
+  .mj-column-per-100 {
+    width: 100% !important; max-width: 100%;
+  }
+  .mj-column-per-17 {
+    width: 17% !important; max-width: 17%;
+  }
+  .mj-column-per-83 {
+    width: 83% !important; max-width: 83%;
+  }
+  .height-30px {
+    height: 30px !important;
+  }
+  .line-height-30px {
+    line-height: 30px !important;
+  }
+  .padding-10px-40px-10px-40px {
+    padding: 10px 40px 10px 40px !important;
+  }
+  .height-20px {
+    height: 20px !important;
+  }
+  .line-height-20px {
+    line-height: 20px !important;
+  }
+  .padding-30px-40px-30px-40px {
+    padding: 30px 40px 30px 40px !important;
+  }
+  .padding-5px-40px-6px-40px {
+    padding: 5px 40px 6px 40px !important;
+  }
+  .padding-0px-0px-0px-0px {
+    padding: 0px 0px 0px 0px !important;
+  }
+  .padding-15px-40px-30px-40px {
+    padding: 15px 40px 30px 40px !important;
+  }
+  .padding-2px-40px-2px-40px {
+    padding: 2px 40px 2px 40px !important;
+  }
+  .padding-30px-40px-15px-40px {
+    padding: 30px 40px 15px 40px !important;
+  }
+}
+@media screen and (prefers-color-scheme: dark) {
+  .dark-mode-background-color-000000:not([class^=3D"x_"]) {
+    background-color: #000000 !important;
+  }
+  .dark-mode-color-FFFFFF:not([class^=3D"x_"]) {
+    color: #FFFFFF !important;
+  }
+  .dark-mode-link-color-FFFFFF:not([class^=3D"x_"]) a {
+    color: #FFFFFF !important;
+  }
+  .dark-mode-background-color-FFFFFF:not([class^=3D"x_"]) {
+    background-color: rgba(255,255,255,0.99) !important;
+  }
+  .dark-mode-background-color-1A1A1A:not([class^=3D"x_"]) {
+    background-color: #1A1A1A !important;
+  }
+}
+@media only screen and (min-width: 700px) {
+  .hide-on-mobile {
+    display: block !important;
+  }
+  .hide-on-desktop {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .img-container {
+    display: inline-block !important; width: auto !important;
+  }
+  .text-container {
+    display: inline-block !important; width: auto !important;
+  }
+  .mj-column-per-100 {
+    width: 100% !important; min-width: 100% !important;
+  }
+}
+</style>
+</head>
+<body style=3D"word-spacing: normal; -webkit-text-size-adjust: 100%; -ms-te=
+xt-size-adjust: 100%; margin: 0; padding: 0;" class=3D"body" id=3D"body" bg=
+color=3D"#CCCCCC">
+<!--[if !mso 9]><!--><div id=3D"emailPreHeader" style=3D"display: none;">To=
+ols and training to accelerate development</div>
+<div style=3D"display: none;">=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=
+=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=
+=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=
+=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=
+=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=
+=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=87=E2=80=
+=87=E2=80=87=E2=80=87=E2=80=87 =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=
+=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=
+=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=
+=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=
+=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=
+=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=
+=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=
+=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=
+=80=87=E2=80=8D=CD=8F =E2=80=87=CD=8F =E2=80=87=E2=80=8D=CD=8F =E2=80=87=CD=
+=8F =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=
+=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=
+=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD=
+ =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =
+=C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =
+=C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=
+=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=
+=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=
+=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=
+=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =
+=C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =
+=C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=
+=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=
+=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=
+=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=
+=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD=
+ =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =
+=C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =
+=C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=
+=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=
+=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=
+=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=
+=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =
+=C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =
+=C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=
+=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=
+=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=
+=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=
+=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD=
+ =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =
+=C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =
+=C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=
+=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=
+=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=
+=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=
+=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =
+=C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =
+=C2=AD =C2=AD =C2=AD =CD=8F=E2=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =CD=8F=E2=
+=80=8C =C2=AD =C2=AD =C2=AD =C2=AD =C2=A0</div>
+<!--<![endif]--><div style=3D"background: #CCCCCC repeat center center / au=
+to;" id=3D"main">
+<!--[if mso]>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%"><![e=
+ndif]--><!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #CCCCCC; background-color: #CCCCCC; ma=
+x-width: 680px; margin: 0px auto;">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" bgcolor=3D"#C=
+CCCCC">
+<tr>
+<td style=3D"font-size: 0px; padding: 0px;" class=3D"block-grid" align=3D"c=
+enter" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:680px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"font-family: 'NVIDIA Sans', Arial, sans-serif; font-size: 13px;=
+ line-height: 1; width: 100%; border-spacing: 0;">
+<tr>
+<td style=3D"" valign=3D"top">
+
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 0px; height: 0px; mso-line-height-alt: 30px;" cl=
+ass=3D"height-30px line-height-30px">=C2=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; padding: 0px;" class=3D"block-grid" align=3D"c=
+enter" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:680px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 16px; height: 16px; mso-line-height-alt: 30px;" =
+class=3D"height-30px line-height-30px">=C2=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 10px 40px 10px 40px; padding:=
+ 10px 16px;" class=3D"block-grid padding-10px-40px-10px-40px" align=3D"cent=
+er" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%" bgcolor=3D"transparent">
+<tr>
+<td>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion">
+<tr>
+<td align=3D"center" style=3D"font-size: 0px; word-break: break-word; paddi=
+ng: 0px;" valign=3D"top">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0">
+<tr>
+<td>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:102px;" ><![endif]--><div class=3D"mj=
+-column-per-17 mj-outlook-group-fix" style=3D"font-size: 0px; direction: lt=
+r; display: inline-block; vertical-align: top; width: 100%;" align=3D"left"=
+>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"font-family: 'NVIDIA Sans', Arial, sans-serif; font-size: 0px; =
+line-height: 1; width: 100%; border-spacing: 0;">
+<tr>
+<td style=3D"" valign=3D"top">
+<div class=3D"mj-column-per-25 mj-outlook-group-fix" style=3D"direction: lt=
+r; display: inline-block; vertical-align: top; width: 100%;" align=3D"cente=
+r">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-rad=
+ius: 0px; vertical-align: top; border-spacing: 0;" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"img-container" style=3D"word-break: break-word; padding: 0px;"=
+ align=3D"left">
+<div style=3D"max-width: 109px; margin: 0 auto;" class=3D"margin-0-auto-0-0=
+">
+<div class=3D"mktoImg" id=3D"kimage-n8kvond3j" mktoname=3D"kimage: ndkqmyts=
+h"><a href=3D"https://www.nvidia.com/" target=3D"_blank" style=3D"text-deco=
+ration: none; color: #1A1A1A;"><img alt=3D"NVIDIA" height=3D"20" width=3D"1=
+09" src=3D"https://info.nvidia.com/rs/156-OFN-742/images/NVIDIA-Logo-3.3.pn=
+g" style=3D"outline: none; text-decoration: none; height: 20px; width: 109p=
+x; display: block; line-height: 100%; -ms-interpolation-mode: bicubic; bord=
+er-style: none; border-width: 0;" class=3D"light-mode-image1"></a></div>
+<div class=3D"dark-mode-image1" style=3D"display: none;"><div class=3D"mkto=
+Img" id=3D"dark-mode-kimage-n8kvond3j" mktoname=3D"kimage: ndkqmytsh (dark =
+mode)"><a href=3D"https://www.nvidia.com/" target=3D"_blank" style=3D"text-=
+decoration: none; color: #1A1A1A;"><img alt=3D"NVIDIA" height=3D"20" width=
+=3D"109" src=3D"https://info.nvidia.com/rs/156-OFN-742/images/nv-black-top-=
+bar-logo-small.png" style=3D"outline: none; text-decoration: none; height: =
+20px; width: 109px; display: none; line-height: 100%; -ms-interpolation-mod=
+e: bicubic; border-style: none; border-width: 0;" class=3D"dark-mode-image1=
+"></a></div></div>
+<div class=3D"mktEditable" id=3D"image-plain-text-039os4x8t" style=3D"visib=
+ility: hidden; opacity: 0; color: transparent; line-height: 0; overflow: hi=
+dden; display: none !important; border-width: 0px;" mktoname=3D"image-plain=
+-text-039os4x8t">[ NVIDIA ] [[https://www.nvidia.com/]]</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+<td style=3D"vertical-align:top;width:498px;" ><![endif]--><div class=3D"mj=
+-column-per-83 mj-outlook-group-fix" style=3D"font-size: 0px; direction: lt=
+r; display: inline-block; vertical-align: top; width: 100%;" align=3D"left"=
+>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 0px; height: 0px; mso-line-height-alt: 20px;" cl=
+ass=3D"height-20px line-height-20px">=C2=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 30px 40px 30px 40px; padding:=
+ 16px;" class=3D"block-grid padding-30px-40px-30px-40px" align=3D"center" v=
+align=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 0px;" align=3D"left">
+<div class=3D"links-000000-underline-76B900"><div style=3D"font-family: 'NV=
+IDIA Sans', Arial, sans-serif; font-size: 24px; font-weight: 700; letter-sp=
+acing: none; line-height: 1.2; text-decoration-color: #76B900; mso-line-hei=
+ght-alt: 1.813em; color: #000000;" class=3D"dark-mode-color-FFFFFF dark-mod=
+e-link-color-FFFFFF" align=3D"left"><p style=3D"display: block; margin: 0;"=
+>Welcome to the NVIDIA Developer Program</p></div></div>
+</td>
+</tr>
+<tr>
+<td>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion">
+<tr>
+<td align=3D"center" style=3D"font-size: 0px; word-break: break-word; paddi=
+ng: 0px;" valign=3D"top">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0">
+<tr>
+<td>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 16px; height: 16px; mso-line-height-alt: 20px;" =
+class=3D"height-20px line-height-20px">=C2=A0</div>
+</td>
+</tr>
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 0px;" align=3D"left">
+<div class=3D"links-1A1A1A-underline-76B900"><div style=3D"font-family: 'NV=
+IDIA Sans', Arial, sans-serif; font-size: 14px; letter-spacing: none; line-=
+height: 1.70; text-decoration-color: #76B900; mso-line-height-alt: 1.5em; c=
+olor: #1A1A1A;" class=3D"dark-mode-color-FFFFFF dark-mode-link-color-FFFFFF=
+" align=3D"left">
+<p style=3D"display: block; margin: 0;">As a member, you can now access too=
+ls and training to help you succeed with NVIDIA technologies. Get started:<=
+/p>
+<p style=3D"display: block; margin: 0;"><br><strong>=F0=9F=92=BB Developer =
+Tools</strong></p>
+<ul class=3D"ul-84d90050-0046-11f0-9cd2-cddebf83fc90" style=3D"display: blo=
+ck; margin-top: 0px; margin-bottom: 0px; padding-left: 40px; list-style-typ=
+e: disc; mso-para-margin-left: 40px;">
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-top: 14px; margin-=
+bottom: 0px;">Get free access to <a href=3D"https://developer.nvidia.com/ni=
+m/?ncid=3Dem-nurt-723851" target=3D"_blank" rel=3D"noopener" style=3D"color=
+: rgb(26, 26, 26); text-decoration: underline; text-decoration-color: #76B9=
+00; text-underline-color: #76B900; text-underline-thickness: 2px; text-unde=
+rline-position: under; text-decoration-thickness: 2px;">NVIDIA NIM=E2=84=A2=
+</a> API endpoints and downloadable containers for research, development an=
+d testing with optimized AI models.</li>
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 0px;">Find=
+ SDKs, libraries, and performance analysis tools in our <a href=3D"https://=
+developer.nvidia.com/developer-tools-catalog?ncid=3Dem-nurt-276229" target=
+=3D"_blank" rel=3D"noopener" style=3D"color: rgb(26, 26, 26); text-decorati=
+on: underline; text-decoration-color: #76B900; text-underline-color: #76B90=
+0; text-underline-thickness: 2px; text-underline-position: under; text-deco=
+ration-thickness: 2px;">Developer Tools Catalog</a>.</li>
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 14px;">
+<a href=3D"https://developer.nvidia.com/nvidia_bug/add?ncid=3Dem-nurt-52517=
+9" target=3D"_blank" rel=3D"noopener" style=3D"color: rgb(26, 26, 26); text=
+-decoration: underline; text-decoration-color: #76B900; text-underline-colo=
+r: #76B900; text-underline-thickness: 2px; text-underline-position: under; =
+text-decoration-thickness: 2px;">Report bugs</a> directly to NVIDIA.</li>
+</ul>
+<p style=3D"display: block; margin: 0;"><strong>=F0=9F=93=9A Learning and C=
+ommunity</strong></p>
+<ul class=3D"ul-84d90050-0046-11f0-9cd2-cddebf83fc90" style=3D"display: blo=
+ck; margin-top: 0px; margin-bottom: 0px; padding-left: 40px; list-style-typ=
+e: disc; mso-para-margin-left: 40px;">
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 0px;">Keep=
+ up to date on the latest technical breakthroughs through our <a href=3D"ht=
+tps://developer.nvidia.com/blog/?ncid=3Dem-nurt-520369" target=3D"_blank" r=
+el=3D"noopener" style=3D"color: rgb(26, 26, 26); text-decoration: underline=
+; text-decoration-color: #76B900; text-underline-color: #76B900; text-under=
+line-thickness: 2px; text-underline-position: under; text-decoration-thickn=
+ess: 2px;">technical blog</a>, <a href=3D"https://www.nvidia.com/en-us/on-d=
+emand/?ncid=3Dem-nurt-881985" target=3D"_blank" rel=3D"noopener" style=3D"c=
+olor: rgb(26, 26, 26); text-decoration: underline; text-decoration-color: #=
+76B900; text-underline-color: #76B900; text-underline-thickness: 2px; text-=
+underline-position: under; text-decoration-thickness: 2px;">video library</=
+a>, and <a href=3D"https://research.nvidia.com/publications?ncid=3Dem-nurt-=
+169554" target=3D"_blank" rel=3D"noopener" style=3D"color: rgb(26, 26, 26);=
+ text-decoration: underline; text-decoration-color: #76B900; text-underline=
+-color: #76B900; text-underline-thickness: 2px; text-underline-position: un=
+der; text-decoration-thickness: 2px;">research hub</a>.</li>
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 14px;">Tal=
+k to other developers and find solutions on our <a href=3D"https://discord.=
+com/invite/nvidiadeveloper?ncid=3Dem-nurt-793667" target=3D"_blank" rel=3D"=
+noopener" style=3D"color: rgb(26, 26, 26); text-decoration: underline; text=
+-decoration-color: #76B900; text-underline-color: #76B900; text-underline-t=
+hickness: 2px; text-underline-position: under; text-decoration-thickness: 2=
+px;">Discord</a> and <a href=3D"https://forums.developer.nvidia.com/?ncid=
+=3Dem-nurt-235493" target=3D"_blank" rel=3D"noopener" style=3D"color: rgb(2=
+6, 26, 26); text-decoration: underline; text-decoration-color: #76B900; tex=
+t-underline-color: #76B900; text-underline-thickness: 2px; text-underline-p=
+osition: under; text-decoration-thickness: 2px;">Forums</a>.</li>
+</ul>
+<p style=3D"display: block; margin: 0;"><strong>=F0=9F=91=A5 Programs that =
+Support Growth</strong></p>
+<ul class=3D"ul-84d90050-0046-11f0-9cd2-cddebf83fc90" style=3D"display: blo=
+ck; margin-top: 0px; margin-bottom: 0px; padding-left: 40px; list-style-typ=
+e: disc; mso-para-margin-left: 40px;">
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-top: 14px; margin-=
+bottom: 0px;">
+<a href=3D"https://www.nvidia.com/en-us/startups/?ncid=3Dem-nurt-636555" ta=
+rget=3D"_blank" rel=3D"noopener" style=3D"color: rgb(26, 26, 26); text-deco=
+ration: underline; text-decoration-color: #76B900; text-underline-color: #7=
+6B900; text-underline-thickness: 2px; text-underline-position: under; text-=
+decoration-thickness: 2px;">NVIDIA Inception</a> for startups: free develop=
+er courses and tools, customizable marketing materials, and NVIDIA's global=
+ VC network=E2=80=8B.</li>
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 0px;">
+<a href=3D"https://www.nvidia.com/en-us/programs/isv/?ncid=3Dem-nurt-278407=
+" target=3D"_blank" rel=3D"noopener" style=3D"color: rgb(26, 26, 26); text-=
+decoration: underline; text-decoration-color: #76B900; text-underline-color=
+: #76B900; text-underline-thickness: 2px; text-underline-position: under; t=
+ext-decoration-thickness: 2px;">NVIDIA Connect</a> for ISVs: technical trai=
+ning, expert guidance, and preferred pricing on NVIDIA technologies.</li>
+<li style=3D"padding-left: 0px; margin-left: 0px; margin-bottom: 14px;">
+<a href=3D"https://developer.nvidia.com/higher-education-and-research?ncid=
+=3Dem-nurt-480392" target=3D"_blank" rel=3D"noopener" style=3D"color: rgb(2=
+6, 26, 26); text-decoration: underline; text-decoration-color: #76B900; tex=
+t-underline-color: #76B900; text-underline-thickness: 2px; text-underline-p=
+osition: under; text-decoration-thickness: 2px;">Higher Education</a>: tail=
+ored resources for students, educators, and researchers.</li>
+</ul>
+</div></div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion">
+<tr>
+<td align=3D"center" style=3D"font-size: 0px; word-break: break-word; paddi=
+ng: 0px;" valign=3D"top">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0">
+<tr>
+<td>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 16px; height: 16px; mso-line-height-alt: 16px;">=
+=C2=A0</div>
+</td>
+</tr>
+<tr>
+<td valign=3D"middle" class=3D"button-container" style=3D"font-size: 0px; w=
+ord-break: break-word; padding: 0px;" align=3D"left">
+<div>
+<!--[if mso]>
+<table width=3D"100%" align=3D"center" border=3D"0" cellpadding=3D"0" cells=
+pacing=3D"0" style=3D"border-spacing:0;border-collapse:collapse;mso-table-l=
+space:0pt;mso-table-rspace:0pt;">
+<tr>
+<td align=3D"left" class=3D"mso-button-dark-mode"><a:roundrect xmlns:a=3D"u=
+rn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:w=
+ord" href=3D"https://developer.nvidia.com/nvidia-developer-program?ncid=3De=
+m-nurt-724265" fillcolor=3D"#76B900" arcsize=3D"0%" style=3D"v-text-anchor:=
+middle;width:74.25pt;height:30.75pt;" stroke=3D"f" ><w:anchorlock/><a:textb=
+ox inset=3D"0,0,0,0"><center style=3D"color:#ffffff; font-family:sans-serif=
+, Arial; font-size:16px" class=3D"mso-text-black"><![endif]--> <a href=3D"h=
+ttps://developer.nvidia.com/nvidia-developer-program?ncid=3Dem-nurt-724265"=
+ style=3D"display: inline-block; background-color: #76B900; color: #000000;=
+ font-family: 'NVIDIA Sans', Arial, sans-serif; font-size: 14px; font-weigh=
+t: 700; line-height: 1.2; text-align: center; text-decoration: none; text-t=
+ransform: none; mso-padding-alt: 0px; border-radius: 0px; mso-border-alt: n=
+one; box-sizing: border-box; margin: 0; padding: 12px;" target=3D"_blank" w=
+idth=3D"99">Member Portal </a><!--[if mso]></center></a:textbox></a:roundre=
+ct>
+</td>
+</tr>
+</table><![endif]-->
+</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 5px 40px 6px 40px; padding: 5=
+px 16px 6px;" class=3D"block-grid padding-5px-40px-6px-40px" align=3D"cente=
+r" valign=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" width=3D"100%" style=3D"border-spacing: 0;">
+<tr>
+<td style=3D"line-height: 0; font-size: 0; direction: ltr;" bgcolor=3D"#AAA=
+AAA">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%" class=3D"dark-mode-background-color-FFFFFF" bgcolor=3D"transpa=
+rent">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 1px; height: 1px; mso-line-height-alt: 1px;">=C2=
+=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-1A1A=
+1A">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-1A1A1A" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 15px 40px 30px 40px; padding:=
+ 8px 16px 16px;" class=3D"block-grid padding-15px-40px-30px-40px" align=3D"=
+center" valign=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" width=3D"100%" style=3D"border-spacing: 0;">
+<tr>
+<td style=3D"line-height: 0; font-size: 0; direction: ltr;">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 15px 0px;" align=3D"left">
+<div class=3D"links-000000-underline-76B900"><div style=3D"font-family: 'NV=
+IDIA Sans', Arial, sans-serif; font-size: 14px; letter-spacing: none; line-=
+height: 1.70; text-decoration-color: #76B900; mso-line-height-alt: 1.5em; c=
+olor: #000000;" class=3D"dark-mode-color-FFFFFF dark-mode-link-color-FFFFFF=
+" align=3D"left"><p style=3D"display: block; margin: 0;">Thank you,<br>The =
+NVIDIA Developer Team</p></div></div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #CCCCCC; background-color: #CCCCCC; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#CCCCCC">
+<tr>
+<td style=3D"font-size: 0px; padding: 0px;" class=3D"block-grid" align=3D"c=
+enter" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:680px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 15px; height: 15px; mso-line-height-alt: 15px;">=
+=C2=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 2px 40px 2px 40px; padding: 2=
+px 16px;" class=3D"block-grid padding-2px-40px-2px-40px" align=3D"center" v=
+align=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" width=3D"100%" style=3D"border-spacing: 0;">
+<tr>
+<td style=3D"line-height: 0; font-size: 0; direction: ltr;" bgcolor=3D"#FFF=
+FFF">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%" class=3D"dark-mode-background-color-FFFFFF" bgcolor=3D"#FFFFFF=
+">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 1px; height: 1px; mso-line-height-alt: 1px;">=C2=
+=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 30px 40px 15px 40px; padding:=
+ 16px 16px 8px;" class=3D"block-grid padding-30px-40px-15px-40px" align=3D"=
+center" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 0px;" align=3D"left">
+<div class=3D"links-999999-underline-76B900"><div style=3D"font-family: 'NV=
+IDIA Sans', Arial, sans-serif; font-size: 12px; letter-spacing: none; line-=
+height: 1.70; text-decoration-color: #76B900; mso-line-height-alt: 1.25em; =
+color: #999999;" align=3D"left"><p style=3D"display: block; margin: 0;">Thi=
+s communication was originally sent to {email}. You=E2=80=99re receiving th=
+is email communication because you are a member of the <a href=3D"https://d=
+eveloper.nvidia.com/developer-program" target=3D"_blank" rel=3D"noopener" s=
+tyle=3D"color: rgb(153, 153, 153); text-decoration: underline; text-decorat=
+ion-color: #76B900; text-underline-color: #76B900; text-underline-thickness=
+: 2px; text-underline-position: under; text-decoration-thickness: 2px;">NVI=
+DIA Developer Program</a> and there has been a change in your membership. I=
+f you have questions or would like to leave the program, please contact us =
+<a href=3D"https://developer.nvidia.com/contact" target=3D"_blank" rel=3D"n=
+oopener" style=3D"color: rgb(153, 153, 153); text-decoration: underline; te=
+xt-decoration-color: #76B900; text-underline-color: #76B900; text-underline=
+-thickness: 2px; text-underline-position: under; text-decoration-thickness:=
+ 2px;">here</a>.</p></div></div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #FFFFFF; background-color: #FFFFFF; ma=
+x-width: 680px; margin: 0px auto;" class=3D"dark-mode-background-color-0000=
+00">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"dark=
+-mode-background-color-000000" bgcolor=3D"#FFFFFF">
+<tr>
+<td style=3D"font-size: 0px; mso-padding-alt: 15px 40px 30px 40px; padding:=
+ 8px 16px 16px;" class=3D"block-grid padding-15px-40px-30px-40px" align=3D"=
+center" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:600px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 0px;" align=3D"left">
+<div class=3D"links-999999"><div style=3D"font-family: 'NVIDIA Sans', Arial=
+, sans-serif; font-size: 12px; letter-spacing: none; line-height: 1.70; tex=
+t-decoration-color: #76B900; mso-line-height-alt: 1.25em; color: #999999;" =
+align=3D"left"><p style=3D"display: block; margin: 0;"><a href=3D"https://w=
+ww.nvidia.com/en-us/privacy-center/" target=3D"_blank" rel=3D"noopener" sty=
+le=3D"color: rgb(153, 153, 153); text-decoration: none;">Privacy Center</a>=
+ | <a href=3D"https://www.nvidia.com/en-us/contact/" target=3D"_blank" rel=
+=3D"noopener" style=3D"color: rgb(153, 153, 153); text-decoration: none;">C=
+ontact Us</a></p></div></div>
+</td>
+</tr>
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 16px; height: 16px; mso-line-height-alt: 16px;">=
+=C2=A0</div>
+</td>
+</tr>
+<tr>
+<td class=3D"text-container" style=3D"font-size: 0px; word-break: break-wor=
+d; padding: 0px;" align=3D"left">
+<div class=3D"links-999999-underline-76B900"><div style=3D"font-family: 'NV=
+IDIA Sans', Arial, sans-serif; font-size: 12px; letter-spacing: none; line-=
+height: 1.20; text-decoration-color: #76B900; mso-line-height-alt: 0.875em;=
+ color: #999999;" align=3D"left"><p style=3D"display: block; margin: 0;">=
+=C2=A9 2026 NVIDIA Corporation. All rights reserved.<br>NVIDIA Corporation,=
+ 2788 San Tomas Expressway Santa Clara, CA 95051.</p></div></div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]-->
+<!--[if mso]>
+<tr>
+<td><![endif]-->
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" class=3D"sect=
+ion" bgcolor=3D"#CCCCCC">
+<tr>
+<td align=3D"center">
+<!--[if mso | IE]>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"block-grid-outlook" style=3D"width:680px;" width=3D"680" >
+<tr>
+<td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><=
+![endif]--><div style=3D"background: #CCCCCC; background-color: #CCCCCC; ma=
+x-width: 680px; margin: 0px auto;">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"width: 100%; border-spacing: 0;" bgcolor=3D"#C=
+CCCCC">
+<tr>
+<td style=3D"font-size: 0px; padding: 0px;" class=3D"block-grid" align=3D"c=
+enter" valign=3D"top">
+<!--[if mso | IE]>
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tr>
+<td style=3D"vertical-align:top;width:680px;" ><![endif]--><div class=3D"mj=
+-column-per-100 mj-outlook-group-fix" style=3D"font-size: 0px; direction: l=
+tr; display: inline-block; vertical-align: top; width: 100%;" align=3D"left=
+">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius: 0px; vertical-align: top; border-spacing: 0;" wi=
+dth=3D"100%">
+<tr>
+<td style=3D"font-size: 0px; word-break: break-word; padding: 0;">
+<div style=3D"line-height: 0px; height: 0px; mso-line-height-alt: 30px;" cl=
+ass=3D"height-30px line-height-30px">=C2=A0</div>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table><![endif]-->
+</td>
+</tr>
+</table>
+<!--[if mso]>
+</td>
+</tr><![endif]--><!--[if mso]>
+</table><![endif]-->
+</div>
+<img src=3D"https://u3445690.ct.sendgrid.net/wf/open?upn=3Du001.1MXHcLGzvnw=
+n3-2FTwTI5DfMxbKbB4Sl6dQmJBKAZIGoaTlMjcH8lyOnPN4LRVFoEV8-2BxIsAy1e1UihkUdCF=
+JyF8Jo-2BCUCBoyR9iIiRNFcFk2Y5xsEFK8ZrJdxvmU-2FFGSz-2BCPYAvdndtbLMsmqgEANa86=
+KMr0mn15wRUDKmTZ5udDb-2BQNhYl8gXtV-2FOoblDoESIZ9f6i11z9HJqC-2Fmic0l-2BgAzmz=
+wN9yfarnhSprY6Q8a-2ByOspK52A2yC9RUppNb2NhDdN3DUf3hRBoGxmB3Ht9Q-3D-3D" alt=
+=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"height:1px !important;=
+width:1px !important;border-width:0 !important;margin-top:0 !important;marg=
+in-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;p=
+adding-top:0 !important;padding-bottom:0 !important;padding-right:0 !import=
+ant;padding-left:0 !important;"/></body>
+</html>
+
+----==_mimepart_69e8e3bff1588_12b9e06640e0--

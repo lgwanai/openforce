@@ -1,0 +1,28 @@
+{
+  "message_id": "<SEZPR04MB815239A4AECFB437E28A0C09C45BA@SEZPR04MB8152.apcprd04.prod.outlook.com>",
+  "imap_uid": "3024",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "AQHcxmxb4g4O49pVGUikfT7LhGb907XUqxMQ",
+  "subject": "RE: [EXTERNAL] AI CAMP之GAIA知识库截图",
+  "sender": "Guantong.Liu@bmw-brilliance.cn",
+  "recipient": "sue@woshipm.com, Jiayang.Liu@bmw-brilliance.cn",
+  "cc": "wuliang@xiangzizai.com, daisy_yang@woshipm.com",
+  "date": "2026-04-08T05:57:49+00:00",
+  "body_text": "Hi Sue,\r\n\r\nGAIA后台配置的chunks是可以通过调整chunks大小来看回答的知识更发散还是更局限，请参考：\r\n[cid:image001.png@01DCC75F.72087650]\r\nBR,\r\nAndrea\r\n\r\nFrom: 周珊 <sue@woshipm.com>\r\nSent: Tuesday, April 7, 2026 4:56 PM\r\nTo: Liu Adah, BBH-1A-1 <Jiayang.Liu@bmw-brilliance.cn>; Liu Guantong, BBF-46 <Guantong.Liu@bmw-brilliance.cn>\r\nCc: 吴亮 <wuliang@xiangzizai.com>; 杨雨鑫 <daisy_yang@woshipm.com>\r\nSubject: [EXTERNAL] AI CAMP之GAIA知识库截图\r\n\r\n\r\nEXTERNAL SENDER - be CAUTIOUS, particularly with links and attachments.\r\n\r\n外部发件人 - 小心，此邮件来自BBA外部，请先核实发件人，再点击链接和附件。\r\n\r\n________________________________\r\nAdah，Guantong，\r\n\r\n           下午好呀，我们现在在整理AI CAMP的直播课件，关于GAIA课程部分因为会涉及到知识库，这个之前没有用过，想问问能否帮忙提供下【关于 GAIA 配置知识库切片和其他参数的界面】的截图给吴老师做参考呀，不胜感激！\r\n\r\n\r\n\r\n周珊丨 Sue\r\n\r\n职位：咨询顾问\r\n\r\nTEL：13265824185\r\n\r\n人人都是产品经理社区旗下品牌\r\n\r\n人人都是产品经理 | 起点课堂 | 运营派 | 秒聘网\r\n\r\n地址：广东省深圳市宝安区稻兴环球科创中心B座2007室\r\n\r\n\r\n\r\n",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "image001.png",
+      "content_type": "image/png",
+      "size": 16449,
+      "local_path": "./mail_data/attachments/<SEZPR04MB815239A4AECFB437E28A0C09C45BA@SEZPR04MB8152.apcprd04.prod.outlook.com>/image001.png"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/SEZPR04MB815239A4AECFB437E28A0C09C45BASEZPR04MB8152.apcprd04.prod.outlook.com.eml"
+}

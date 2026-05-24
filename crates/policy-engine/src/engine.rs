@@ -50,7 +50,7 @@ impl PolicyEngine {
             RuleCondition::TokenHasScope(scope) => ctx.capability_token.as_ref()
                 .map(|t| t.verify_scope(scope.clone())).unwrap_or(false),
             RuleCondition::FencingTokenValid => match (&ctx.capability_token, ctx.current_fencing_token) {
-                (Some(token), Some(current)) => token.fencing_token >= current,
+                (Some(token), Some(current)) => token.fencing_token == current,
                 _ => false,
             },
             RuleCondition::TenantOwnsSession => match (&ctx.tenant_id, &ctx.capability_token) {

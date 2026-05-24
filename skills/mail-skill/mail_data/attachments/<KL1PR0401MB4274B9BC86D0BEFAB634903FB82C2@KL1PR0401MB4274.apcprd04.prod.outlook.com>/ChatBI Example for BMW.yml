@@ -1,0 +1,1298 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: ChatBI Example for BMW
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: aopstudio/csv_sql_query:0.0.1@33c1703463b067fc9f72813c1124211d0cbb454878644d9c61d30981be1ea387
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.12@37699cc3d1ea9e006348a7273a514f3ddf60ffb0649dc735c594c8da6a80934b
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.47@1dc82901e33f15a28b28a8e4996dc222c99b85bda95f8224525875e5121fc21d
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: e887f992-7c0b-45eb-ac49-fef49d6e887b
+    name: schema_str
+    selector:
+    - env
+    - schema_str
+    value: 表结构
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1776661933088-source-1776662015984-target
+      source: '1776661933088'
+      sourceHandle: source
+      target: '1776662015984'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1776661933088-source-1776662027357-target
+      source: '1776661933088'
+      sourceHandle: source
+      target: '1776662027357'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1776661933088-source-1776662039123-target
+      source: '1776661933088'
+      sourceHandle: source
+      target: '1776662039123'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: knowledge-retrieval
+      id: 1776662015984-source-1776685040913-target
+      source: '1776662015984'
+      sourceHandle: source
+      target: '1776685040913'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1776662027357-source-1776685066075-target
+      source: '1776662027357'
+      sourceHandle: source
+      target: '1776685066075'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1776685040913-source-1776685122440-target
+      source: '1776685040913'
+      sourceHandle: source
+      target: '1776685122440'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1776685122440-source-1776685155922-target
+      source: '1776685122440'
+      sourceHandle: source
+      target: '1776685155922'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1776685066075-source-1776685155922-target
+      source: '1776685066075'
+      sourceHandle: source
+      target: '1776685155922'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: knowledge-retrieval
+      id: 1776685155922-source-1776685361277-target
+      source: '1776685155922'
+      sourceHandle: source
+      target: '1776685361277'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1776685361277-source-1776685386526-target
+      source: '1776685361277'
+      sourceHandle: source
+      target: '1776685386526'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1776685386526-source-1776685458125-target
+      source: '1776685386526'
+      sourceHandle: source
+      target: '1776685458125'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1776662039123-source-1776685458125-target
+      source: '1776662039123'
+      sourceHandle: source
+      target: '1776685458125'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: tool
+      id: 1776685458125-source-1776685589150-target
+      source: '1776685458125'
+      sourceHandle: source
+      target: '1776685589150'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1776685589150-source-1776685638935-target
+      source: '1776685589150'
+      sourceHandle: source
+      target: '1776685638935'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1776685638935-source-1776685704153-target
+      source: '1776685638935'
+      sourceHandle: source
+      target: '1776685704153'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions:
+          - .csv
+          allowed_file_types:
+          - custom
+          allowed_file_upload_methods:
+          - local_file
+          label: csv_file
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: csv_file
+        - label: query
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: query
+      height: 116
+      id: '1776661933088'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: b6ed0e79-665f-4648-b640-75fe8fc2db25
+          role: system
+          text: "# 角色\n你是一名严谨的数据分析师，专注于从业务需求中准确识别统计口径信息。\n\n# 背景\n用户会给你一段口语化的数据分析需求描述（例如：“统计上个月汽车销量”）。你需要从中提取出核心的统计口径关键词（如“销量”），并基于它生成一句知识库查询语句。\n\
+            \n# 任务\n1. 仔细阅读用户输入的原始需求文本。\n2. 识别并提取其中的统计口径关键词（通常是指标名称，如“销量”“用户数”“转化率”“GMV”等）。不要自行添加或修改口径，严格基于原文。\n\
+            3. 根据提取到的口径关键词，构造一句自然语言查询语句，用于向知识库查询该口径的详细定义。\n\n# 输出格式\n只输出一句话，格式如下：\n\
+            查询【提取到的口径关键词】口径信息\n\n# 注意事项\n- 绝对不能臆造口径关键词。如果用户输入中没有明确的口径词，则输出“未识别到口径关键词”。\n\
+            - 不要输出任何额外解释、标点符号（除了句号或必要的括号）或换行。\n- 示例：\n  用户输入：“统计上个月汽车销量”\n  输出：查询销量口径信息"
+        - id: 564b530a-09bd-49d0-a95c-2e5c556df44b
+          role: user
+          text: 请根据 {{#1776661933088.query#}}给出统计口径查询语句
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1776662015984'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - F2I8+9ff1fOcSqod8lzn0RVotQ4f609ueLSfc6MWoAX7DqxkaC0uNkCwqQ9Q6Rke
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: netease-youdao/bce-reranker-base_v1
+            provider: langgenius/siliconflow/siliconflow
+          top_k: 4
+        query_variable_selector:
+        - env
+        - schema_str
+        retrieval_mode: multiple
+        selected: false
+        title: 数据表结构检索
+        type: knowledge-retrieval
+      height: 92
+      id: '1776662027357'
+      position:
+        x: 384
+        y: 375
+      positionAbsolute:
+        x: 384
+        y: 375
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: '%Y-%m-%d %H:%M:%S'
+          form: form
+          human_description:
+            en_US: Time format in strftime standard.
+            ja_JP: Time format in strftime standard.
+            pt_BR: Time format in strftime standard.
+            zh_Hans: strftime 标准的时间格式。
+          label:
+            en_US: Format
+            ja_JP: Format
+            pt_BR: Format
+            zh_Hans: 格式
+          llm_description: null
+          max: null
+          min: null
+          name: format
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: UTC
+          form: form
+          human_description:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          label:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          llm_description: null
+          max: null
+          min: null
+          name: timezone
+          options:
+          - label:
+              en_US: UTC
+              ja_JP: UTC
+              pt_BR: UTC
+              zh_Hans: UTC
+            value: UTC
+          - label:
+              en_US: America/New_York
+              ja_JP: America/New_York
+              pt_BR: America/New_York
+              zh_Hans: 美洲/纽约
+            value: America/New_York
+          - label:
+              en_US: America/Los_Angeles
+              ja_JP: America/Los_Angeles
+              pt_BR: America/Los_Angeles
+              zh_Hans: 美洲/洛杉矶
+            value: America/Los_Angeles
+          - label:
+              en_US: America/Chicago
+              ja_JP: America/Chicago
+              pt_BR: America/Chicago
+              zh_Hans: 美洲/芝加哥
+            value: America/Chicago
+          - label:
+              en_US: America/Sao_Paulo
+              ja_JP: America/Sao_Paulo
+              pt_BR: América/São Paulo
+              zh_Hans: 美洲/圣保罗
+            value: America/Sao_Paulo
+          - label:
+              en_US: Asia/Shanghai
+              ja_JP: Asia/Shanghai
+              pt_BR: Asia/Shanghai
+              zh_Hans: 亚洲/上海
+            value: Asia/Shanghai
+          - label:
+              en_US: Asia/Ho_Chi_Minh
+              ja_JP: Asia/Ho_Chi_Minh
+              pt_BR: Ásia/Ho Chi Minh
+              zh_Hans: 亚洲/胡志明市
+            value: Asia/Ho_Chi_Minh
+          - label:
+              en_US: Asia/Tokyo
+              ja_JP: Asia/Tokyo
+              pt_BR: Asia/Tokyo
+              zh_Hans: 亚洲/东京
+            value: Asia/Tokyo
+          - label:
+              en_US: Asia/Dubai
+              ja_JP: Asia/Dubai
+              pt_BR: Asia/Dubai
+              zh_Hans: 亚洲/迪拜
+            value: Asia/Dubai
+          - label:
+              en_US: Asia/Kolkata
+              ja_JP: Asia/Kolkata
+              pt_BR: Asia/Kolkata
+              zh_Hans: 亚洲/加尔各答
+            value: Asia/Kolkata
+          - label:
+              en_US: Asia/Seoul
+              ja_JP: Asia/Seoul
+              pt_BR: Asia/Seoul
+              zh_Hans: 亚洲/首尔
+            value: Asia/Seoul
+          - label:
+              en_US: Asia/Singapore
+              ja_JP: Asia/Singapore
+              pt_BR: Asia/Singapore
+              zh_Hans: 亚洲/新加坡
+            value: Asia/Singapore
+          - label:
+              en_US: Europe/London
+              ja_JP: Europe/London
+              pt_BR: Europe/London
+              zh_Hans: 欧洲/伦敦
+            value: Europe/London
+          - label:
+              en_US: Europe/Berlin
+              ja_JP: Europe/Berlin
+              pt_BR: Europe/Berlin
+              zh_Hans: 欧洲/柏林
+            value: Europe/Berlin
+          - label:
+              en_US: Europe/Moscow
+              ja_JP: Europe/Moscow
+              pt_BR: Europe/Moscow
+              zh_Hans: 欧洲/莫斯科
+            value: Europe/Moscow
+          - label:
+              en_US: Australia/Sydney
+              ja_JP: Australia/Sydney
+              pt_BR: Australia/Sydney
+              zh_Hans: 澳大利亚/悉尼
+            value: Australia/Sydney
+          - label:
+              en_US: Pacific/Auckland
+              ja_JP: Pacific/Auckland
+              pt_BR: Pacific/Auckland
+              zh_Hans: 太平洋/奥克兰
+            value: Pacific/Auckland
+          - label:
+              en_US: Africa/Cairo
+              ja_JP: Africa/Cairo
+              pt_BR: Africa/Cairo
+              zh_Hans: 非洲/开罗
+            value: Africa/Cairo
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          format: ''
+          timezone: ''
+        provider_id: time
+        provider_name: time
+        provider_type: builtin
+        selected: false
+        title: 获取当前时间
+        tool_configurations:
+          format: '%Y-%m-%d %H:%M:%S'
+          timezone: Asia/Shanghai
+        tool_description: 一个用于获取当前时间的工具。
+        tool_label: 获取当前时间
+        tool_name: current_time
+        tool_parameters: {}
+        type: tool
+      height: 116
+      id: '1776662039123'
+      position:
+        x: 384
+        y: 468
+      positionAbsolute:
+        x: 384
+        y: 468
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - r4wWVEDG9ZdMbxI6Fzmc9qfKkE0Fr/l79pjgR35XXnQIgWyVJ9G338sIqIm7nr+E
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: netease-youdao/bce-reranker-base_v1
+            provider: langgenius/siliconflow/siliconflow
+          top_k: 4
+        query_variable_selector:
+        - '1776662015984'
+        - text
+        retrieval_mode: multiple
+        selected: false
+        title: 数据口径知识库检索
+        type: knowledge-retrieval
+      height: 92
+      id: '1776685040913'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(arg1: list):\n    \"\"\"\n    将输入的数组变量转换为完整的 Markdown 文本\n\
+          \    输入结构：result 为数组，每个元素包含 title、content 等字段\n    输出格式：# 标题 + 内容 拼接的 Markdown\n\
+          \    \"\"\"\n    # 第一步：解析输入的数组（arg1 为你的 result 数组变量）\n    # 这里直接使用 arg1\
+          \ 作为输入的 result 数组\n    result_array = arg1\n    \n    # 第二步：遍历数组，拼接 Markdown\
+          \ 内容\n    markdown_content = \"\"\n    for item in result_array:\n     \
+          \   # 提取每个对象的 title 和 content 字段\n        title = item.get(\"title\", \"\
+          \")\n        content = item.get(\"content\", \"\")\n        \n        #\
+          \ 按照 Markdown 格式拼接\n        markdown_content += f\"# {title}\\n\"\n    \
+          \    markdown_content += f\"{content}\\n\\n\"\n    \n    # 第三步：返回最终结果（去除末尾多余换行）\n\
+          \    return {\n        \"result\": markdown_content.strip(),\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 表结构内容格式化
+        type: code
+        variables:
+        - value_selector:
+          - '1776662027357'
+          - result
+          variable: arg1
+      height: 54
+      id: '1776685066075'
+      position:
+        x: 688
+        y: 375
+      positionAbsolute:
+        x: 688
+        y: 375
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(arg1: list):\n    \"\"\"\n    将输入的数组变量转换为完整的 Markdown 文本\n\
+          \    输入结构：result 为数组，每个元素包含 title、content 等字段\n    输出格式：# 标题 + 内容 拼接的 Markdown\n\
+          \    \"\"\"\n    # 第一步：解析输入的数组（arg1 为你的 result 数组变量）\n    # 这里直接使用 arg1\
+          \ 作为输入的 result 数组\n    result_array = arg1\n    \n    # 第二步：遍历数组，拼接 Markdown\
+          \ 内容\n    markdown_content = \"\"\n    for item in result_array:\n     \
+          \   # 提取每个对象的 title 和 content 字段\n        title = item.get(\"title\", \"\
+          \")\n        content = item.get(\"content\", \"\")\n        \n        #\
+          \ 按照 Markdown 格式拼接\n        markdown_content += f\"# {title}\\n\"\n    \
+          \    markdown_content += f\"{content}\\n\\n\"\n    \n    # 第三步：返回最终结果（去除末尾多余换行）\n\
+          \    return {\n        \"result\": markdown_content.strip(),\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 数据口径格式化
+        type: code
+        variables:
+        - value_selector:
+          - '1776685040913'
+          - result
+          variable: arg1
+      height: 54
+      id: '1776685122440'
+      position:
+        x: 992
+        y: 282
+      positionAbsolute:
+        x: 992
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: c04344eb-b4b3-49a9-b172-7a87b1eb782d
+          role: system
+          text: '# 角色
+
+            你是一位精通 SQL 编写与函数索引的分析专家。你的任务是根据给定的数据表结构、业务口径和用户统计需求，精准预测编写 SQL 时可能需要使用的函数类别，并生成一句用于
+            RAG 知识库检索的自然语言指令。
+
+
+            # 背景知识库范围
+
+            你的分析判断必须严格限定在以下 21 个函数类别清单内，不得超出此范围：
+
+            聚合函数、近似聚合函数、统计聚合函数、数值函数、文本/字符串函数、日期函数、时间函数、时间戳函数、时间间隔函数、窗口函数、列表函数、数组函数、Map函数、结构体函数、Union函数、位运算函数、Blob函数、枚举函数、Lambda函数、工具函数、日期格式函数。
+
+
+            # 任务步骤
+
+            1. **解析字段与口径**：阅读表结构中的 `data_type` 和 `description`，结合数据口径理解业务定义。
+
+            2. **拆解统计需求**：将自然语言需求转化为具体的 SQL 操作逻辑（如过滤、分组、排序、计算、格式转换等）。
+
+            3. **映射函数类别**：基于上述逻辑，从【背景知识库范围】中挑选出编写该 SQL 时**必然或极可能**依赖的函数类别。
+
+
+            # 输出格式（极其重要）
+
+            - **严格输出一句完整的话**，不得包含任何额外的分析过程、解释说明、列表符号或 Markdown 标记。
+
+            - **语句固定模板**：`请检索[类别A]、[类别B]、[类别C]类型函数定义说明。`
+
+            - 多个类别之间使用中文顿号 `、` 分隔。
+
+
+            # 示例
+
+            - 如果涉及按天统计销售额，需要转换日期格式并求和，应输出：
+
+            `请检索日期格式函数、聚合函数类型函数定义说明。`
+
+            - 如果涉及排名计算和字符串拼接，应输出：
+
+            `请检索窗口函数、文本/字符串函数类型函数定义说明。`
+
+
+            # 注意事项
+
+            - 只输出检索语句，严禁出现“根据分析”、“建议检索”等废话。
+
+            - 必须严格遵循 `请检索xxx、xxx类型函数定义说明。` 的句式结构。
+
+            '
+        - id: 358c211a-5b62-446c-ae8e-8c6b7f2dc31a
+          role: user
+          text: '# 输入参数
+
+            请根据以下三项输入进行分析：
+
+            1. **表结构**：
+
+            {{#1776685066075.result#}}
+
+            2. **数据口径**：
+
+            {{#1776685122440.result#}}
+
+            3. **用户需求**：
+
+            {{#1776661933088.query#}}'
+        selected: false
+        title: DUCKDB 函数推测
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1776685155922'
+      position:
+        x: 1296
+        y: 282
+      positionAbsolute:
+        x: 1296
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - eMqAC1Dou3e9uGM7mW39ZkvRv8o7JfyR87dMvQqG/UuY7BJG4VxHk+HZn0XNIS2h
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: netease-youdao/bce-reranker-base_v1
+            provider: langgenius/siliconflow/siliconflow
+          top_k: 4
+        query_variable_selector:
+        - '1776685155922'
+        - text
+        retrieval_mode: multiple
+        selected: false
+        title: DUCKDB 语法检索
+        type: knowledge-retrieval
+      height: 92
+      id: '1776685361277'
+      position:
+        x: 1600
+        y: 282
+      positionAbsolute:
+        x: 1600
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(arg1: list):\n    \"\"\"\n    将输入的数组变量转换为完整的 Markdown 文本\n\
+          \    输入结构：result 为数组，每个元素包含 title、content 等字段\n    输出格式：# 标题 + 内容 拼接的 Markdown\n\
+          \    \"\"\"\n    # 第一步：解析输入的数组（arg1 为你的 result 数组变量）\n    # 这里直接使用 arg1\
+          \ 作为输入的 result 数组\n    result_array = arg1\n    \n    # 第二步：遍历数组，拼接 Markdown\
+          \ 内容\n    markdown_content = \"\"\n    for item in result_array:\n     \
+          \   # 提取每个对象的 title 和 content 字段\n        title = item.get(\"title\", \"\
+          \")\n        content = item.get(\"content\", \"\")\n        \n        #\
+          \ 按照 Markdown 格式拼接\n        markdown_content += f\"# {title}\\n\"\n    \
+          \    markdown_content += f\"{content}\\n\\n\"\n    \n    # 第三步：返回最终结果（去除末尾多余换行）\n\
+          \    return {\n        \"result\": markdown_content.strip(),\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: DUCKDB 函数定义格式化
+        type: code
+        variables:
+        - value_selector:
+          - '1776685361277'
+          - result
+          variable: arg1
+      height: 54
+      id: '1776685386526'
+      position:
+        x: 1904
+        y: 282
+      positionAbsolute:
+        x: 1904
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 2fb33ba5-c385-4b9c-99e2-45a547d29238
+          role: system
+          text: "# 角色                                                            \
+            \                                                \n  你是一名资深的 DuckDB 数据分析师，擅长将复杂的业务口径转化为高效、准确的\
+            \ SQL 查询语句。                           \n                             \
+            \                                                                    \
+            \                   \n  # 任务                                         \
+            \                                                                   \n\
+            \  根据上述定义和需求，编写一条符合 DuckDB 语法的 SELECT 查询语句。                          \
+            \                        \n                                          \
+            \                                                                    \
+            \      \n  ## 数据约束                                                   \
+            \                                                    \n  - 表名固定为 `data`，这是唯一的数据表。\
+            \                                                                    \
+            \       \n  - **必须严格使用\"表格结构定义\"中给出的字段名**，不得自行编造或修改字段名。              \
+            \                          \n  - **必须准确体现\"统计口径定义\"中的计算逻辑**。         \
+            \                                                           \n       \
+            \                                                                    \
+            \                                         \n  ## 函数约束（严格遵守）          \
+            \                                                                    \
+            \             \n  - **只能使用\"可能使用到的 SQL 函数定义\"中列出的函数**。               \
+            \                                            \n  - **必须严格遵守函数文档中的签名格式**，包括参数顺序、参数类型。\
+            \                                                  \n  - **严禁使用未在函数定义中列出的函数**。\
+            \                                                                    \
+            \      \n  - **严禁使用函数定义中未提及的语法变体或别名**。                               \
+            \                                   \n  - 如果需要某个函数但未在定义中找到，使用基础函数组合实现，不要臆造。\
+            \                                              \n                    \
+            \                                                                    \
+            \                            \n  ## 禁止事项                             \
+            \                                                                    \
+            \      \n  - ❌ 禁止使用 `QUARTER`、`WEEK` 作为 INTERVAL 单位（DuckDB 不支持）。     \
+            \                                        \n  - ❌ 禁止使用错误的函数签名。        \
+            \                                                                    \
+            \         \n  - ❌ 禁止使用未定义的函数别名。                                      \
+            \                                             \n  - ❌ 禁止臆造函数参数类型。    \
+            \                                                                    \
+            \               \n                                                   \
+            \                                                                 \n \
+            \ # 输出格式                                                             \
+            \                                           \n  - **仅输出 SQL 语句**。    \
+            \                                                                    \
+            \                   \n  - 不得输出任何前缀、后缀、解释、注释或 Markdown 标记（如 ```sql）。  \
+            \                                             \n  - 语句必须是一行或多行纯文本 SQL\
+            \ 代码。                                                                \
+            \           \n                                                       \
+            \                                                             \n  # 时间识别与解析\
+            \                                                                    \
+            \                              \n  - 自动识别用户输入中的时间表达式：                \
+            \                                                                \n  \
+            \  - 绝对日期：\"2025年11月2日\"、\"2025-11-02\"、\"11月2日\"                    \
+            \                                        \n    - 相对日期：\"上周\"、\"上周三\"、\"\
+            三天前\"、\"本月\"、\"上季度\"                                                 \
+            \       \n    - 周次描述：\"第45周\"、\"上周周报\"                               \
+            \                                                 \n  - 需要以\"当前时间\"作为基准计算准确的时间\
+            \                                                                    \
+            \      \n  - 计算时间所属周次：                                               \
+            \                                               \n    - 以周一作为周开始，周日作为周结束\
+            \                                                                    \
+            \          \n                                                        \
+            \                                                            \n  # 常见陷阱警告\
+            \                                                                    \
+            \                                \n  1. **日期间隔操作**：                  \
+            \                                                                    \
+            \       \n     - 添加/减去间隔使用 `+` 和 `-` 操作符：`today() - INTERVAL 3 MONTH`\
+            \                                            \n     - DuckDB 不支持 `QUARTER`\
+            \ 和 `WEEK` 作为间隔单位                                                    \
+            \           \n     - 1季度 = 3 MONTH，1周 = 7 DAY                        \
+            \                                                         \n         \
+            \                                                                    \
+            \                                       \n  2. **date_sub 函数**：      \
+            \                                                                    \
+            \                  \n     - 正确签名：`date_sub(part, startdate, enddate)`\
+            \ - 计算两个日期之间的差异                                      \n     - ❌ 错误用法：`date_sub(today(),\
+            \ INTERVAL 1 MONTH)` - 这不是减去间隔！                                      \
+            \  \n     - ✅ 正确用法：`today() - INTERVAL 1 MONTH`                      \
+            \                                              \n                    \
+            \                                                                    \
+            \                            \n  3. **类型转换**：                        \
+            \                                                                    \
+            \     \n     - CSV 中的日期列可能被识别为 VARCHAR                               \
+            \                                            \n     - 需要使用 `CAST(column\
+            \ AS DATE)` 或 `column::DATE` 进行转换                                    \
+            \               \n     - 或使用 `strptime(string, format)` 解析日期字符串      \
+            \                                                       \n           \
+            \                                                                    \
+            \                                     \n  4. **date_trunc 函数**：      \
+            \                                                                    \
+            \                \n     - 正确签名：`date_trunc(part, date)` - 第二个参数必须是 DATE/TIMESTAMP\
+            \ 类型                                    \n     - ❌ 错误用法：`date_trunc('month',\
+            \ '2024-01-15')` - 字符串不能直接使用                                        \n\
+            \     - ✅ 正确用法：`date_trunc('month', CAST('2024-01-15' AS DATE))`     \
+            \                                          \n                        \
+            \                                                                    \
+            \                        \n  # 注意事项                                  \
+            \                                                                    \
+            \  \n  - 如果口语化需求存在歧义，请基于数据逻辑选择最合理的实现方式，不要询问用户，直接给出 SQL。              \
+            \          \n  - 确保 SQL 语法正确，可直接在 DuckDB 中运行。                        \
+            \                                             \n  - 生成的 SQL 必须能直接执行，不需要用户额外修改。"
+        - role: user
+          text: '# 背景与输入
+
+            请严格基于以下三段信息生成 SQL：
+
+
+            1. 统计口径定义：
+
+            {{#1776685122440.result#}}
+
+
+            2. 表格结构定义：
+
+            {{#1776685066075.result#}}
+
+
+            3. 查询需求：
+
+            {{#1776661933088.query#}}
+
+
+            4. 可能使用到的 SQL 函数定义：
+
+            {{#1776685386526.result#}}
+
+
+            5. 当前时间
+
+            {{#1776662039123.text#}}
+
+
+            请输出 SQL'
+        selected: false
+        title: SQL 生成 LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1776685458125'
+      position:
+        x: 2208
+        y: 282
+      positionAbsolute:
+        x: 2208
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Upload a CSV file
+            ja_JP: Upload a CSV file
+            pt_BR: Upload a CSV file
+            zh_Hans: 上传一个 CSV 文件
+          label:
+            en_US: CSV File
+            ja_JP: CSV File
+            pt_BR: CSV File
+            zh_Hans: CSV 文件
+          llm_description: Upload a CSV file to query with SQL
+          max: null
+          min: null
+          name: csv_file
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: file
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: SQL Query (use 'data' as table name)
+            ja_JP: SQL Query (use 'data' as table name)
+            pt_BR: SQL Query (use 'data' as table name)
+            zh_Hans: SQL 查询语句（使用 'data' 作为表名）
+          label:
+            en_US: SQL Query
+            ja_JP: SQL Query
+            pt_BR: SQL Query
+            zh_Hans: SQL 查询
+          llm_description: Write a SQL query.
+          max: null
+          min: null
+          name: sql_query
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: markdown
+          form: llm
+          human_description:
+            en_US: Output Format
+            ja_JP: Output Format
+            pt_BR: Output Format
+            zh_Hans: 输出格式
+          label:
+            en_US: Output Format
+            ja_JP: Output Format
+            pt_BR: Output Format
+            zh_Hans: 输出格式
+          llm_description: Output file format (json, markdown)
+          max: null
+          min: null
+          name: output_format
+          options:
+          - label:
+              en_US: json
+              ja_JP: json
+              pt_BR: json
+              zh_Hans: json
+            value: json
+          - label:
+              en_US: markdown
+              ja_JP: markdown
+              pt_BR: markdown
+              zh_Hans: markdown
+            value: markdown
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          csv_file: ''
+          output_format: ''
+          sql_query: ''
+        provider_id: aopstudio/csv_sql_query/csv_sql_query
+        provider_name: aopstudio/csv_sql_query/csv_sql_query
+        provider_type: builtin
+        selected: false
+        title: CSV SQL 查询工具
+        tool_configurations: {}
+        tool_description: 对上传的 CSV 文件执行 SQL 查询
+        tool_label: CSV SQL 查询工具
+        tool_name: csv_sql_query
+        tool_parameters:
+          csv_file:
+            type: variable
+            value:
+            - '1776662039123'
+            - files
+          output_format:
+            type: constant
+            value: markdown
+          sql_query:
+            type: mixed
+            value: '{{#1776685458125.text#}}'
+        type: tool
+      height: 54
+      id: '1776685589150'
+      position:
+        x: 2512
+        y: 282
+      positionAbsolute:
+        x: 2512
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 66787f43-e7bb-4fc2-b1ea-2a528cb90c63
+          role: system
+          text: '# 角色
+
+            你是一位资深的商业智能（BI）顾问，擅长将复杂的 SQL 查询结果转化为高层管理者一眼能看懂的商业洞察。你的报告风格专业、客观，且极具行动指导意义。
+
+
+            # 背景
+
+            本次分析基于业务方提出的具体需求，经过了严格的统计口径定义和 SQL 取数验证。你需要整合以下五个维度的输入信息，生成一份面向老板的高层摘要报告。
+
+
+
+            # 任务
+
+            请严格按照以下四个步骤处理上述输入信息，并生成最终报告：
+
+
+            **第一步：解析与验证**
+
+            1. 确认输入信息完整性。若“查询到的数据结果”为空集，**必须**在报告中醒目提示“⚠️ 本次查询无数据”，并结合“统计口径定义”和“数据表结构”推测可能的空值原因（例如：统计周期内无业务发生、关联字段丢失、口径条件过于严苛等）。
+
+            2. 若不为空，识别数据结果中的关键指标字段和维度字段。
+
+
+            **第二步：异常检测**
+
+            基于查询结果，执行严格的异常检测分析，重点关注：
+
+            - **极值**：是否有数值远超或远低于正常水平？
+
+            - **零值/空值**：关键指标是否出现不合常理的 0 或 Null？
+
+            - **趋势矛盾**：数据表现是否与用户需求的预期方向相反？
+
+
+            **第三步：商业洞察与建议**
+
+            结合用户原始需求和统计口径，提炼核心结论。必须输出具体的、基于数据的**业务建议**，而非对数据表象的简单复述。
+
+
+            **第四步：格式化输出**
+
+            将分析结果填入下方指定的格式结构中。
+
+
+            # 输出格式
+
+            请严格遵循以下 Markdown 结构输出，不要添加多余的开场白或结束语：
+
+
+            ---
+
+
+            ### 📋 分析背景
+
+            > **原始需求**：[在此处引用“用户分析数据需求”的原文]
+
+
+            ### 📊 数据快照（全部样本）
+
+            > 以下为基于统计口径查询结果的预览样本。
+
+            *[此处展示查询全部结果的 Markdown 表格，若为空则显示“无数据返回”]*
+
+
+            | 字段A | 字段B | 指标C |
+
+            | :--- | :--- | :--- |
+
+            | ... | ... | ... |
+
+
+            ### 🧠 商业智能洞察
+
+            #### 🚨 异常检测
+
+            - **发现1**：[描述具体异常点，例如：某渠道转化率骤降为0.5%，远低于大盘均值2.1%。]
+
+            - **发现2**：[描述具体异常点，若无异常则写明：数据表现平稳，核心指标在合理区间波动。]
+
+
+            #### 💡 业务建议
+
+            - **建议1**：[针对异常或机会点提出的具体执行动作，例如：建议运营部门立即暂停A渠道的预算投放，并核查落地页加载成功率。]
+
+            - **建议2**：[基于数据趋势提出的策略调整建议。]
+
+
+            ### 🔍 核查附录
+
+            <details>
+
+            <summary><b>查看统计口径定义及 SQL 源码</b></summary>
+
+
+            **统计口径说明**：
+
+            [在此处引用“统计口径定义”的内容]
+
+
+            **执行 SQL 语句**：
+
+            ```sql
+
+            [在此处引用“执行的 SQL 语句”代码，保持高亮格式]'
+        - id: 7c15eb6e-e07e-40fb-ab6b-42796d4492d2
+          role: user
+          text: '
+
+
+            **输入变量如下：**
+
+            1. **数据表结构**：{{#1776685066075.result#}}
+
+            2. **统计口径定义**：{{#1776685122440.result#}}
+
+            3. **用户分析数据需求**：{{#1776661933088.query#}}
+
+            4. **执行的 SQL 语句**：{{#1776685458125.text#}}
+
+            5. **查询到的数据结果**：{{#1776685589150.text#}}'
+        selected: true
+        title: 数据分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1776685638935'
+      position:
+        x: 2816
+        y: 282
+      positionAbsolute:
+        x: 2816
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1776685638935'
+          - text
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1776685704153'
+      position:
+        x: 3120
+        y: 282
+      positionAbsolute:
+        x: 3120
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -189.74469092100412
+      y: 125.23037981527978
+      zoom: 0.3052312437174164

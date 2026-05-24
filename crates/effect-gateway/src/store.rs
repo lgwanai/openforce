@@ -51,15 +51,18 @@ impl EffectStore {
     }
 
     pub async fn reject_effect(&self, effect_id: Uuid, rejected_by: &str, reason: &str) -> DomainResult<EffectState> {
+        let mut tx = self.pool.begin().await.map_err(|e| DomainError::ValidationFailed { detail: format!("begin tx: {e}") })?;
         let now = Utc::now();
         let rows = sqlx::query(
             "UPDATE effects SET status = $2, rejected_by = $3, rejection_reason = $4, updated_at = $5
              WHERE effect_id = $1 AND status = 'requested'"
         ).bind(effect_id).bind(EffectState::Rejected.as_str()).bind(rejected_by).bind(reason).bind(now)
-         .execute(&self.pool).await.map_err(|e| DomainError::ValidationFailed { detail: e.to_string() })?;
+         .execute(&mut *tx).await.map_err(|e| DomainError::ValidationFailed { detail: e.to_string() })?;
         if rows.rows_affected() == 0 {
+            tx.rollback().await.ok();
             return Err(DomainError::ValidationFailed { detail: "effect not in requested state".into() });
         }
+        tx.commit().await.map_err(|e| DomainError::ValidationFailed { detail: format!("commit tx: {e}") })?;
         Ok(EffectState::Rejected)
     }
 

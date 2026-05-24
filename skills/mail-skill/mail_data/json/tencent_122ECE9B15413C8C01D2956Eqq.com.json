@@ -1,0 +1,34 @@
+{
+  "message_id": "<tencent_122ECE9B15413C8C01D2956E@qq.com>",
+  "imap_uid": "3118",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "【宝马AI CAMP】GAIA课件",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "jiayang.liu@bmw-brilliance.cn",
+  "cc": "guantong.liu@bmw-brilliance.cn, sue@woshipm.com, wuliang@xiangzizai.com",
+  "date": "2026-04-20T18:19:31+08:00",
+  "body_text": "Dear&nbsp;all\r\n\r\n\r\n&nbsp;\r\n\r\n附件为直播课-GAIA课件的PPT与PDF版本，请查收\r\n\r\n\r\n\r\nDify与Copilot课件明早与大家同步\r\n\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n\r\n\r\n\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【宝马AI CAMP】第四课-GAIA.pdf",
+      "content_type": "application/octet-stream",
+      "size": 3093682,
+      "local_path": "./mail_data/attachments/<tencent_122ECE9B15413C8C01D2956E@qq.com>/【宝马AI CAMP】第四课-GAIA.pdf"
+    },
+    {
+      "filename": "【宝马AI CAMP】第四课-GAIA.pptx",
+      "content_type": "application/octet-stream",
+      "size": 3202457,
+      "local_path": "./mail_data/attachments/<tencent_122ECE9B15413C8C01D2956E@qq.com>/【宝马AI CAMP】第四课-GAIA.pptx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_122ECE9B15413C8C01D2956Eqq.com.eml"
+}

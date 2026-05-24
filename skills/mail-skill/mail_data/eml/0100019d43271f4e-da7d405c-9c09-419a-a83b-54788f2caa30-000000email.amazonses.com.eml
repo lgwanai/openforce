@@ -1,0 +1,1411 @@
+Arc-Authentication-Results: i=1; lms; spf=pass (client-ip:76.223.139.17)
+ smtp.mailfrom=0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@envelope.ollama.com;
+ dkim=pass header.b=ciJFN5e0KS header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=HrLgRxHUam header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Arc-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=larksuite.com; s=arc230412;
+ h=from:to:cc:subject:date:content-type:mime-version:message-id
+ :dkim-signature; bh=C48qe4IGS9wmgmEoFeKzbivD0nuiNvY1g+c5MZwJROk=;
+ b=Zq189diEOTH4ElrGlESH4ZNNbyQ87ustkoa+0TVtD9tmUsrmYgRqX1Z4j0lHxmmhOJe4OnA
+ 0IgldGmn5G62LwtxQGn59Aax9j97szKXnhwT+aYpskf/z2+9i/ewkX7pjXjWVoXCwfxopyNRO
+ mgA2A+nBPVo921bPjSBwguFdZ0p0sn1xFmZSSnnQaOZWvuHJq5DjS1OkwVw/xpIM1TRnINGud
+ eoblkR0muRBfen6H1E1dsJorPloChpPUrM4RVUdwLPBf8Tc9FCsUlrxrbFGAN1oCbHOiqQFWC
+ Btbvt72ohwsd91ge8rtgcvmiu7FvPy5u7iEcfA40UIIX2/vKLohQ==
+Arc-Seal: i=1; a=rsa-sha256; t=1774948138; d=larksuite.com; s=arc230412;
+ cv=none;
+ b=cThiOkDtPnQJtOu3aETFLGrNA0nHZ7GMMMuDWqdb8OaCMhnMI5DqR/rH9CBJZm9KeH2eqEp
+ ZVrUHEDZGb3kJi0zNdcjeS2WTZh1DIyQoPdYp1QeKB5NiUZQTe2K3sY1HUrc9MIIDjAniCzaH
+ ap9j0eTPuPMcDrUomlz4GW6yPIPzwcEVEQIWW16y1xivUkceAyoMXpw1x57H5fYRKwomX8on8
+ FhGxqTYu1ZghrpNfLRlfjUuXs/Yy5I/rbDW+sl1XVbmHN9QzBv6bGO02a/bl9KwUGtAL8qoH9
+ JoJDE2c1A3yGjX4t5sVap87jWnpaaVX7Uq/Mjgig4mDiUqeGm/cw==
+Authentication-Results: lms; spf=pass (client-ip:76.223.139.17)
+ smtp.mailfrom=0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@envelope.ollama.com;
+ dkim=pass header.b=ciJFN5e0KS header.i=@ollama.com
+ header.s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe;
+ dkim=pass header.b=HrLgRxHUam header.i=@amazonses.com
+ header.s=224i4yxa5dv7c2xz3womw6peuasteono;
+ dmarc=pass (p=quarantine sp=quarantine dis=none) header.from=ollama.com;
+ arc=none
+Cc: 
+Content-Type: multipart/alternative; boundary=cvzfldstn3
+Date: Tue, 31 Mar 2026 09:08:50 +0000
+Delivered-To: wuliang@xiangzizai.com
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=elfmudtlneeqwtkhh5dcvjpsfwxoewoe; d=ollama.com; t=1774948130;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type;
+ bh=fF93mdidUywXemmUeGOhxB//1/oGJ4d4CrnMziSXxJs=;
+ b=ciJFN5e0KS2B3JxgQ5+5JVirjFbl0Q4rDfZiasc4eIA9P1P5fbB+muiUf0EX6EQe
+ I7Ptu/2I+0Z9WUps2MUAEvTHzGX+Zr0WiTSXZjtDiZoImyk5WFQXM3VdwU6iFe7fm1H
+ U9mynnFOprAk5hTcuPQNyhEng00yIa8bEieD93utfiUl9qHnI1BKQ9fUKZBsTgg7OaR
+ Vr7coQv4lpvsLWWAfiVyTHpY2zjAlA6wKm3HbtMJ11ubhrjBxhCEkamdi+JR7TJbnfE
+ YaNFn7ebf1m3UO+1dZXe7bEoHl3QFVm2GchoKWv5pDS5TTi6iWDJ5XPqburY463ViML
+ siu8bFXjgA==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1774948130;
+ h=Date:From:Reply-To:To:Cc:Message-ID:Subject:MIME-Version:List-Unsubscribe:List-Unsubscribe-Post:List-ID:Content-Type:Feedback-ID;
+ bh=fF93mdidUywXemmUeGOhxB//1/oGJ4d4CrnMziSXxJs=;
+ b=HrLgRxHUamlu0JZI+DQTvqjRs7PwBD1k/FEEPzjK93wM7+JoAoOdqiB3YC6aFomJ
+ bhy7Ur9v3qGb3iHOhnyNwSCriz/4kGd3kx1vhMEf3y3B5xu6M2XxYbfsy2+81D0pSzs
+ yU0PXiW15wnPQoliuAyFFrWx2Lx6PY7YW5Swi3JM=
+Feedback-Id: 
+ :1.us-east-1.JDzjX75ORX7ZOlDQyH3e+sAhM8zXt0YcbCHaAUiTifupgpKOd0I9rAZkeLPRsSzJJxHTof/pHxfonOD0A05jDGayFrCfJJZf9pd+N1bB5d6OKiOV9J4UJMd5BbKaJxykDuLbmlFxDOt6RI624h7C+sx/dQ4pKDGs1SnKa2fxkKM=:1.us-east-1.1nRXWOT+ETvogqnAUaOa7HjKGx1p40xVES7T8DfH/Gc=:AmazonSES
+From: Ollama <hello@ollama.com>
+List-Id: "Ollama" <general.ollama.com>
+List-Unsubscribe: 
+ <mailto:cmneeaerp38ez0133gk9hce5x+b78509f26ba0a59be08425645b9ad9076111ce3a0e6274df1feb41684e08c24096c0b57e67e9d7c13119ab0ffc3f05322ee9629e7672815612b82e35@unsubscribe.loops.so?subject=unsubscribe>,<https://app.loops.so/unsubscribe/cmneeaerp38ez0133gk9hce5x/b78509f26ba0a59be08425645b9ad9076111ce3a0e6274df1feb41684e08c24096c0b57e67e9d7c13119ab0ffc3f05322ee9629e7672815612b82e35>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: 
+ <0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@email.amazonses.com>
+Mime-Version: 1.0
+Precedence: Bulk
+Received-Spf: pass (lms verify) identity=mailfrom; client-ip=76.223.139.17;
+ helo=c139-17.smtp-out.amazonses.com;
+ envelope-from=0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@envelope.ollama.com;
+ receiver=<UNKNOWN>;
+Reply-To: Ollama <hello@ollama.com>
+Subject: 
+ =?utf-8?B?T2xsYW1hIGlzIG5vdyB1cGRhdGVkIHRvIHJ1biB0aGUgZmFzdGVzdCBvbiBBcHBsZSBzaWxpY29uLCBwb3dlcmVkIGJ5IE1MWCwgQXBwbGUncyBtYWNoaW5lIGxlYXJuaW5nIGZyYW1ld29yaw==?=
+To: wuliang@xiangzizai.com
+X-Auto-Response-Suppress: All
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-Envelope: 
+ 1774948135/4flMjz14tzz1YVh7M/69CB8F27.001/76.223.139.17/c139-17.smtp-out.amazonses.com/localhost/<0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@envelope.ollama.com>
+X-Fangmail-Mid-Qid: 69CB8F27.001/4flMjz14tzz1YVh7M
+X-Fangmail-Miltered: at n151-177-067 with ID 69CB8F27.001 by FangMail
+ milter!
+X-Fangmail-Spf: pass
+X-Lms-Client-Ip: 76.223.139.17
+X-Lms-Egress-Gw: EgressFangMail
+X-Lms-Gw-Filter: true
+X-Lms-Mail-From: 
+ 0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000@envelope.ollama.com
+X-Lms-Pvf: 
+ MnwyfDF8fGZNMkqvi8kaaxedGwTSSPyqADxwCV0rSxn6BppqOfXCarDaVht1gQAt/DDXnf0OqW0BpEt9wX3ZnT2G8uewRNaiC7dYbpeWheHp5vPcOCVtkkVJSzSjLdZk72f47iQjkQ==
+X-Ses-Outgoing: 2026.03.31-76.223.139.17
+
+--cvzfldstn3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+
+
+https://ollama.com/blog/mlx
+
+=C2=A0
+Today, we're previewing the fastest =
+way to run Ollama on Apple silicon, powered by MLX, Apple's machine =
+learning framework.
+=C2=A0
+This change accelerates your most demanding work=
+ on macOS:
+
+
+ * Personal assistants like OpenClaw
+
+ * Coding agents like =
+Claude Code, OpenCode, or Codex
+
+
+
+Fastest performance on Apple silicon, =
+powered by MLX
+
+Ollama on Apple silicon is now built on top of =
+Apple=E2=80=99s machine learning framework, MLX, to take advantage of its =
+unified memory
+architecture.
+=C2=A0
+This results in a large speedup of =
+Ollama on all Apple Silicon devices. On Apple=E2=80=99s M5, M5 Pro and M5 =
+Max chips, Ollama leverages
+the new GPU Neural Accelerators to accelerate =
+both time to first token (TTFT) and generation speed (tokens per second).
+=C2=A0
+
+
+
+Testing was conducted using Alibaba=E2=80=99s Qwen3.5-35B-A3B =
+model quantized to NVFP4 and Ollama=E2=80=99s previous implementation =
+quantized to Q4_K_M using Ollama 0.18. Ollama 0.19 will see even higher =
+performance (1851 token/s prefill and 134 token/s decode) when running =
+withint4 quantization
+
+
+
+NVFP4 support: higher quality responses and =
+production parity
+
+Ollama now leverages NVIDIA=E2=80=99s NVFP4
+[https://developer.nvidia.com/blog/introducing-nvfp4-for-efficient-and-accu=
+rate-low-precision-inference/] format to maintain model
+accuracy while reducing memory bandwidth and storage requirements for =
+inference workloads.
+=C2=A0
+As more inference providers scale inference =
+using NVFP4 format, this allows Ollama users to share the same results as =
+they would
+in a production environment.
+=C2=A0
+It further opens up Ollama =
+to have the ability to run models optimized by NVIDIA=E2=80=99s model =
+optimizer
+[https://github.com/NVIDIA/Model-Optimizer]. Other precisions =
+will be made available based on the design and usage intent from
+Ollama=E2=80=99s research and hardware partners.
+=C2=A0
+
+
+Improved caching for more responsiveness
+
+Ollama=E2=80=99s cache has been =
+upgraded to make coding and agentic tasks more efficient.
+
+
+ * Lower memory utilization: Ollama will now reuse its cache across =
+conversations, meaning less memory utilization and more cache
+   hits when branching when using a shared system prompt with tools like =
+Claude Code.
+  =20
+  =20
+
+ * Intelligent checkpoints: Ollama will now store=
+ snapshots of its cache at intelligent locations in the prompt, resulting =
+in less
+   prompt processing and faster responses.
+  =20
+  =20
+
+ * Smarter eviction: shared prefixes survive longer even when older =
+branches are dropped.
+
+=C2=A0
+
+
+Get started
+
+Download Ollama =
+[https://ollama.com/download]
+
+=C2=A0
+This preview release of Ollama =
+accelerates the new Qwen3.5-35B-A3B [https://ollama.com/library/qwen3.5] =
+model, with sampling
+parameters tuned for coding tasks.
+=C2=A0
+Please make sure you have a Mac with more than 32GB of unified memory.
+=C2=A0
+Claude Code:
+=C2=A0
+ollama launch claude --model qwen3.=
+5:35b-a3b-coding-nvfp4
+=C2=A0
+OpenClaw:
+=C2=A0
+ollama launch openclaw =
+--model qwen3.5:35b-a3b-coding-nvfp4
+=C2=A0
+Chat with the model:
+=C2=A0
+ollama run qwen3.5:35b-a3b-coding-nvfp4
+=C2=A0
+
+
+Future models
+
+We are actively working to support future models. For users with custom =
+models fine-tuned on supported architectures, we will
+introduce an easier way to import models into Ollama. In the meantime, we =
+will expand the list of supported architectures.
+=C2=A0
+If you have any feedback, please directly reply to this email or join =
+Ollama's Discord channel
+[https://discord.com/invite/ollama].
+=C2=A0
+=E2=9D=A4=EF=B8=8F Ollama
+=C2=A0
+You are receiving this email because you =
+opted-in to receive updates from Ollama
+Ollama, 744 High Street, Palo Alto,=
+ CA 94301
+Unsubscribe [https://app.loops.so/unsubscribe/cmneeaerp38ez0133gk=
+9hce5x/b78509f26ba0a59be08425645b9ad9076111ce3a0e6274df1feb41684e08c24096c0=
+b57e67e9d7c13119ab0ffc3f05322ee9629e7672815612b82e35]
+
+--cvzfldstn3
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html>
+<html lang=3D"en" dir=3D"auto" xmlns=3D"http://www.w3.org/1999/xhtml" xmlns=
+:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:o=
+ffice:office" style=3D"background-color: #FFFFFF;">
+  <head>
+    <title>Ollama is now updated to run the fastest on Apple silicon, power=
+ed by MLX, Apple&#39;s machine learning framework</title>
+    <!--[if !mso]><!-->
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+    <!--<![endif]-->
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">
+    <style type=3D"text/css">
+      #outlook a { padding:0; }
+      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size=
+-adjust:100%; }
+      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-r=
+space:0pt; }
+      img { border:0;height:auto;line-height:100%; outline:none;text-decora=
+tion:none;-ms-interpolation-mode:bicubic; }
+      p { display:block;margin:13px 0; }
+    </style>
+    <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type=3D"text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+   =20
+   =20
+    <style type=3D"text/css">
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      }
+    </style>
+    <style media=3D"screen and (min-width:480px)">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width:=
+ 100%; }
+    </style>
+   =20
+   =20
+ =20
+   =20
+    <style type=3D"text/css">
+
+    @media only screen and (max-width:479px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+ =20
+    </style>
+    =20
+    <style type=3D"text/css">
+.wfix {
+          max-width: 600px !important;
+        }
+       =20
+        @media(max-width: 480px) {
+          .body-image-mobile-width-552 td { width: 552px !important; }
+          .body-image td  { max-width: 100% !important; }
+          .body-image img  { box-sizing: border-box; }
+          .social-icon-mobile-spacer {
+            display: inline-block !important;
+          }
+        }
+       =20
+    .mobile-only { display: none !important; } .desktop-only { display: blo=
+ck !important; }
+    @media(max-width: 480px) { .column-stack { width: 100% !important; max-=
+width: 100% !important; display: block !important; } .column-stack td,.colu=
+mn-stack th { padding-left: 0 !important; padding-right: 0 !important; } .m=
+obile-only { display: block !important; } .desktop-only { display: none !im=
+portant; } }
+    </style>
+    <style>
+          .wrapper {
+            padding: 0 12px;
+          }
+
+          /* Superhuman selector */
+          .ShadowHTML .wrapper {
+            padding: 0 !important;
+          }
+        =20
+        =20
+        =20
+        =20
+  .ShadowHTML :is(.styleUnquotedContent .unquoted-content, .styleUnquotedCo=
+ntent .sh-unquoted-content, .styleQuotedContent .sh-quoted-content, .sh-sig=
+nature, .Signature-settings) :is(td.column-container, div[class^=3D"mj-colu=
+mn-per-"]){font-size:0!important}
+  html.sh-color :is(td.column-container, div[class^=3D"mj-column-per-"], di=
+v.mj-column-per-100.mj-outlook-group-fix){font-size:0!important}
+  @media(max-width:480px){
+    html.sh-color .column-stack{width:100%!important;max-width:100%!importa=
+nt;display:block!important}
+    html.sh-color :is(.column-stack td,.column-stack th){padding-left:0!imp=
+ortant;padding-right:0!important;width:100%!important;max-width:100%!import=
+ant;display:block!important}
+    html.sh-color :is(.column-stack, .column-stack *){word-break:break-word=
+!important;overflow-wrap:anywhere!important}
+    html.sh-color :is(.column-persist, .column-persist *){word-break:break-=
+word!important;overflow-wrap:anywhere!important}
+  }
+  html.sh-color a[href^=3D"tel:"]{color:inherit!important;text-decoration:n=
+one!important;font-size:inherit!important;line-height:inherit!important;let=
+ter-spacing:inherit!important;vertical-align:baseline!important}
+
+        =20
+      .isMarketing { background-color: #FFFFFF !important; }
+      .isMarketing .styled-primary-column { background-color: transparent !=
+important; border-radius: 12px; }
+   =20
+        =20
+         [class~=3D"x_social-icon-dark-mode"] { display: none !important; m=
+so-hide:all;  width: 0px !important; padding: 0px !important; }
+
+          /* Gmail selectors */
+          u + .body .wrapper {
+            padding: 0 !important;
+          }
+          div > u + .body .wrapper {
+            padding: 0 !important;
+          }
+         =20
+    a { text-decoration: none; color: #2D2A2A; }
+   =20
+ =20
+         =20
+         =20
+          .link-unsubscribe { color: #9ca3af !important; }
+          </style>
+<meta name=3D"color-scheme" content=3D"light">
+          <meta name=3D"supported-color-schemes" content=3D"light">
+  </head>
+  <body class=3D"body" style=3D"word-spacing:normal;background-color:#FFFFF=
+F;">
+   =20
+   =20
+      <div aria-label=3D"Ollama is now updated to run the fastest on Apple =
+silicon, powered by MLX, Apple&#39;s machine learning framework" aria-roled=
+escription=3D"email" class=3D"email-body" style=3D"background-color:#FFFFFF=
+;" role=3D"article" lang=3D"en" dir=3D"auto">
+        <img alt=3D"" src=3D"http://c.vialoops.com/CI0/0100019d43271f4e-da7=
+d405c-9c09-419a-a83b-54788f2caa30-000000/tZvs9R_h1uCcAJn97cODfg3sKmT--rbB7m=
+-rOQx0e30=3D450" style=3D"display: none; width: 1px; height: 1px;">
+<!--[if mso]><style type=3D"text/css"> a { text-decoration: underline !impo=
+rtant; } .button a { text-decoration: none !important; } .outlook-list-fix =
+{ margin-left:4px !important; } .outlook-break-full-link { word-break: brea=
+k-all !important; } .outlook-hide-social-icon { display: none !important; m=
+so-hide:all; width: 0px !important; padding: 0px !important; } .outlook-hid=
+e-social-icon * { display: none !important; mso-hide:all; width: 0px !impor=
+tant; padding: 0px !important; } .outlook-hide-social-icon table { display:=
+ none !important; mso-hide:all; width: 0px !important; padding: 0px !import=
+ant; } .outlook-hide-social-icon tbody { display: none !important; mso-hide=
+:all; width: 0px !important; padding: 0px !important; } .outlook-hide-socia=
+l-icon tr { display: none !important; mso-hide:all; width: 0px !important; =
+padding: 0px !important; } .outlook-hide-social-icon td { display: none !im=
+portant; mso-hide:all; width: 0px !important; padding: 0px !important; } .o=
+utlook-hide-social-icon img { display: none !important; mso-hide:all; width=
+: 0px !important; padding: 0px !important; } .outlook-hide-social-icon a { =
+display: none !important; mso-hide:all; width: 0px !important; padding: 0px=
+ !important; }
+</style><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"wfix-outlook gmail-no-padding-outlook wrapper-outlook" role=
+=3D"presentation" style=3D"width:600px;" width=3D"600" ><tr><td style=3D"li=
+ne-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix gmail-no-padding wrapper" style=3D"margin:0px auto=
+;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-top:0;text-align:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"wfix-outlook" width=
+=3D"600px" ><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" class=3D"wfix-outlook" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div class=3D"wfix" style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"width:100%;">
+          <tbody>
+            <tr>
+              <td style=3D"direction:ltr;font-size:0px;padding:20px 0;paddi=
+ng-bottom:24px;padding-left:0px;padding-right:0px;padding-top:24px;text-ali=
+gn:center;">
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td align=3D"center" class=3D"wfix=
+-outlook rounded-corners-outlook styled-primary-column-outlook" style=3D"ve=
+rtical-align:top;width:600px;" ><![endif]-->
+           =20
+      <div class=3D"mj-column-per-100 mj-outlook-group-fix wfix rounded-cor=
+ners styled-primary-column" style=3D"font-size:0px;text-align:left;directio=
+n:ltr;display:inline-block;vertical-align:top;width:100%;">
+       =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" width=3D"100%" style=3D"border-collapse: separate;">
+        <tbody>
+          <tr>
+            <td style=3D"background-color:transparent;border-radius:12px;ve=
+rtical-align:top;border-collapse:separate;padding-top:4px;padding-right:24p=
+x;padding-bottom:4px;padding-left:24px;">
+             =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style width=3D"100%">
+        <tbody>
+         =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+        <a href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%2Fblog=
+%2Fmlx/1/0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000/wKZvF=
+ukoD5bQn36-o7gHDkAY64J2euGZ54vf6a9Yuto=3D450" target=3D"_blank" style=3D"te=
+xt-decoration: none; color: #2D2A2A;">
+         =20
+      <img alt src=3D"https://images.vialoops.com/cmndx1rbs01350iwbu063tmyn=
+/cmndx76ll0pu60h0r09kybr15.png" style=3D"border:0;border-radius:20px;displa=
+y:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:=
+13px;" width=3D"552" height=3D"auto">
+   =20
+        </a>
+     =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:12px;le=
+tter-spacing:0px;line-height:21px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Today, we're previewing the fastes=
+t way to run Ollama on Apple silicon, powered by MLX, Apple's machine learn=
+ing framework.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">This change </span><span style=3D"=
+font-weight: 600; font-size: 14px; white-space: pre-wrap; line-height: 25px=
+ !important; font-size: 14px !important;" class=3D"bold">accelerates your m=
+ost demanding work on macOS</span><span style=3D"line-height: 25px !importa=
+nt; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;">:<=
+/span><br><br></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"1" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">Personal assistants like OpenCla=
+w</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"2" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"line-height: 25px !important; font-size: 14px; font-size=
+: 14px !important; white-space: pre-wrap;">Coding agents like Claude Code, =
+OpenCode, or Codex</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><br><span style=3D"line-height: 32px !important; font-si=
+ze: 20px; font-size: 20px !important; white-space: pre-wrap;">Fastest perfo=
+rmance on Apple silicon, powered by MLX</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">Ollama on Apple silicon is now bui=
+lt on top of Apple=E2=80=99s machine learning framework, MLX, to take advan=
+tage of its unified memory architecture.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">This results in a large speedup o=
+f Ollama on all Apple Silicon devices. On Apple=E2=80=99s M5, M5 Pro and M5=
+ Max chips, Ollama leverages the new GPU Neural Accelerators to accelerate =
+both time to first token (TTFT) and generation speed (tokens per second).</=
+span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"body-image body-image-mobile-wi=
+dth-552" style=3D"font-size:0px;padding:10px 25px;padding-top:4px;padding-r=
+ight:0px;padding-bottom:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:collapse;border-spacing:0px;">
+        <tbody>
+          <tr>
+            <td style=3D"width:552px;">
+             =20
+      <img alt src=3D"https://images.vialoops.com/cmndx1rbs01350iwbu063tmyn=
+/cmneaoad128ws0i1uwkiflyk2.png" style=3D"border:0;border-radius:20px;displa=
+y:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:=
+13px;" width=3D"552" height=3D"auto">
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"code-node" style=3D"font-size:0=
+px;padding:10px 25px;padding-top:12px;padding-right:12px;padding-bottom:12p=
+x;padding-left:12px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><pre=
+ style=3D"margin:0; padding:12px 16px; background-color:#f4f4f5; border-rad=
+ius:6px; line-height: 21px !important; font-size: 12px; font-size: 12px !im=
+portant;"><code class=3D"code-node-content" style=3D"font-family:'SFMono-Re=
+gular',Consolas,'Liberation Mono',Menlo,monospace; font-size:13px; color:#0=
+00000 !important; white-space:pre-wrap; word-break:break-all;"><span style=
+=3D"line-height: 21px !important; font-size: 12px; font-size: 12px !importa=
+nt; white-space: pre-wrap;">Testing was conducted using Alibaba=E2=80=99s Q=
+wen3.5-35B-A3B model quantized to NVFP4 and Ollama=E2=80=99s previous imple=
+mentation quantized to Q4_K_M using Ollama 0.18. Ollama 0.19 will see even =
+higher performance (1851 token/s prefill and 134 token/s decode) when runni=
+ng with</span><span style=3D"font-family: monospace; background-color: rgb(=
+243, 244, 246, 0.75); padding: 1px 4px; font-size: 12px; white-space: pre-w=
+rap; line-height: 21px !important; font-size: 12px !important;" class=3D"co=
+de">int4 quantization</span></code></pre></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><br><span style=3D"line-height: 32px !important; font-si=
+ze: 20px; font-size: 20px !important; white-space: pre-wrap;">NVFP4 support=
+: higher quality responses and production parity</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">Ollama now leverages NVIDIA=E2=80=
+=99s </span><a target=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-=
+link dark-force" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fdeveloper.n=
+vidia.com%2Fblog%2Fintroducing-nvfp4-for-efficient-and-accurate-low-precisi=
+on-inference%2F/1/0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000=
+000/q_DMk-WDFsp4LPoyuKNXq8zcneodTZ5KuIfmptGsKH4=3D450" style=3D"text-decora=
+tion: none; color: #2D2A2A;"><span style=3D"font-size: 14px; white-space: p=
+re-wrap; text-decoration: underline !important; line-height: 25px !importan=
+t; font-size: 14px !important;" class=3D"underline">NVFP4</span></a><span s=
+tyle=3D"line-height: 25px !important; font-size: 14px; font-size: 14px !imp=
+ortant; white-space: pre-wrap;"> format to maintain model accuracy while re=
+ducing memory bandwidth and storage requirements for inference workloads.</=
+span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">As more inference providers scale=
+ inference using NVFP4 format, this allows Ollama users to share the same r=
+esults as they would in a production environment.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">It further opens up Ollama to hav=
+e the ability to run models optimized by NVIDIA=E2=80=99s </span><a target=
+=3D"_blank" rel=3D"noopener noreferrer" class=3D"body-link dark-force" href=
+=3D"https://c.vialoops.com/CL0/https:%2F%2Fgithub.com%2FNVIDIA%2FModel-Opti=
+mizer/1/0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000/soYxdi=
+OnF_Ss8C4y9D1UaDzPq5sWfpLx_gFEtVw-bpE=3D450" style=3D"text-decoration: none=
+; color: #2D2A2A;"><span style=3D"font-size: 14px; white-space: pre-wrap; t=
+ext-decoration: underline !important; line-height: 25px !important; font-si=
+ze: 14px !important;" class=3D"underline">model optimizer</span></a><span s=
+tyle=3D"line-height: 25px !important; font-size: 14px; font-size: 14px !imp=
+ortant; white-space: pre-wrap;">. Other precisions will be made available b=
+ased on the design and usage intent from Ollama=E2=80=99s research and hard=
+ware partners.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4p=
+x;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:start;color:#2D2A2A=
+;"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 50=
+0; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size=
+: 20px !important;"><span style=3D"line-height: 32px !important; font-size:=
+ 20px; font-size: 20px !important; white-space: pre-wrap;">Improved caching=
+ for more responsiveness</span></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">Ollama=E2=80=99s cache has been u=
+pgraded to make coding and agentic tasks more efficient.</span><br><br></di=
+v>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"1" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap=
+; line-height: 25px !important; font-size: 14px !important;" class=3D"bold"=
+>Lower memory utilization:</span><span style=3D"line-height: 25px !importan=
+t; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;"> Ol=
+lama will now reuse its cache across conversations, meaning less memory uti=
+lization and more cache hits when branching when using a shared system prom=
+pt with tools like Claude Code.</span><br><br>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"2" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap=
+; line-height: 25px !important; font-size: 14px !important;" class=3D"bold"=
+>Intelligent checkpoints:</span><span style=3D"line-height: 25px !important=
+; font-size: 14px; font-size: 14px !important; white-space: pre-wrap;"> Oll=
+ama will now store snapshots of its cache at intelligent locations in the p=
+rompt, resulting in less prompt processing and faster responses.</span><br>=
+<br>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:0;padding-top:0px;padding-right:0px;padding-left:6px;word-break=
+:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14.4px;=
+letter-spacing:0px;line-height:23.04px;text-align:left;color:#2D2A2A;"><mj-=
+raw>
+  <ul style=3D"list-style-type: disc; text-align: left; padding: 0; margin:=
+ 0px 0px 2px 26px;">
+    <li value=3D"3" class=3D"outlook-list-fix" style=3D"line-height: 25px !=
+important; font-size: 14px; font-size: 14px !important; margin: 0;">
+    <span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap=
+; line-height: 25px !important; font-size: 14px !important;" class=3D"bold"=
+>Smarter eviction:</span><span style=3D"line-height: 25px !important; font-=
+size: 14px; font-size: 14px !important; white-space: pre-wrap;"> shared pre=
+fixes survive longer even when older branches are dropped.</span>
+    </li>
+  </ul>
+  </mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:left;color:#2D2A2A;=
+"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 500=
+; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size:=
+ 20px !important;"><span style=3D"line-height: 32px !important; font-size: =
+20px; font-size: 20px !important; white-space: pre-wrap;">Get started </spa=
+n></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"button sh-button" style=3D"font=
+-size:0px;padding:10px 25px;padding-top:4px;padding-right:0px;padding-botto=
+m:4px;padding-left:0px;word-break:break-word;">
+                 =20
+      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"prese=
+ntation" style=3D"border-collapse:separate;line-height:100%;">
+        <tbody>
+          <tr>
+            <td align=3D"center" bgcolor=3D"#000000" role=3D"presentation" =
+style=3D"border:none;border-radius:100px;cursor:auto;mso-padding-alt:12px=
+=20
+  20px;background:#000000;" valign=3D"middle">
+              <a href=3D"https://c.vialoops.com/CL0/https:%2F%2Follama.com%=
+2Fdownload/1/0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000/S=
+zowmnvxG3gwI8j4g7HSWHgU_pqhtdJUG2dOceVOEn0=3D450" style=3D"display: inline-=
+block; background: #000000; color: #ffffff; font-family: ui-sans-serif, san=
+s-serif; font-weight: normal; margin: 0; text-decoration: none; text-transf=
+orm: none; padding: 12px=20
+  20px; mso-padding-alt: 0px; border-radius: 100px; font-size: 15px !import=
+ant; line-height: 15px !important;" target=3D"_blank" class=3D"sh-preserve-=
+color">
+                Download Ollama
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">This preview release of Ollama ac=
+celerates the new </span><a target=3D"_blank" rel=3D"noopener noreferrer" c=
+lass=3D"body-link dark-force" href=3D"https://c.vialoops.com/CL0/https:%2F%=
+2Follama.com%2Flibrary%2Fqwen3.5/1/0100019d43271f4e-da7d405c-9c09-419a-a83b=
+-54788f2caa30-000000/uxTMKp1rwaHvfaoAEiSY-1vPPUu-zHfNM8bv8AGT-do=3D450" sty=
+le=3D"text-decoration: none; color: #2D2A2A;"><span style=3D"font-size: 14p=
+x; white-space: pre-wrap; text-decoration: underline !important; line-heigh=
+t: 25px !important; font-size: 14px !important;" class=3D"underline">Qwen3.=
+5-35B-A3B</span></a><span style=3D"line-height: 25px !important; font-size:=
+ 14px; font-size: 14px !important; white-space: pre-wrap;"> model, with sam=
+pling parameters tuned for coding tasks.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"line-height: 25px !important; font-size: 14px; font-size:=
+ 14px !important; white-space: pre-wrap;">Please make sure you have a Mac w=
+ith more than 32GB of unified memory.</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap; =
+line-height: 25px !important; font-size: 14px !important;" class=3D"bold">C=
+laude Code: </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:15px;le=
+tter-spacing:0px;line-height:27px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; font-size: 15px; white-space: pre-wrap; line-he=
+ight: 27px !important; font-size: 15px !important;" class=3D"code">ollama l=
+aunch claude --model qwen3.5:35b-a3b-coding-nvfp4</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap;=
+ line-height: 25px !important; font-size: 14px !important;" class=3D"bold">=
+OpenClaw:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:15px;le=
+tter-spacing:0px;line-height:27px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; font-size: 15px; white-space: pre-wrap; line-he=
+ight: 27px !important; font-size: 15px !important;" class=3D"code">ollama l=
+aunch openclaw --model qwen3.5:35b-a3b-coding-nvfp4</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px=
+;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:start;color:#2D2A2A=
+;"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-weight: 600; font-size: 14px; white-space: pre-wrap; =
+line-height: 25px !important; font-size: 14px !important;" class=3D"bold">C=
+hat with the model:</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"border-radius-10" style=3D"bord=
+er-radius: 10px; overflow: hidden; background: #f3f3f3; font-size: 0px; pad=
+ding: 10px 25px; padding-top: 10px; padding-right: 20px; padding-bottom: 10=
+px; padding-left: 20px; word-break: break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:15px;le=
+tter-spacing:0px;line-height:27px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"font-family: monospace; background-color: rgb(243, 244, 24=
+6, 0.75); padding: 1px 4px; font-size: 15px; white-space: pre-wrap; line-he=
+ight: 27px !important; font-size: 15px !important;" class=3D"code">ollama r=
+un qwen3.5:35b-a3b-coding-nvfp4</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"start" class=3D"dark-force" style=3D"font-size=
+:0px;padding:10px 25px;padding-top:12px;padding-right:0px;padding-bottom:4p=
+x;padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:20px;le=
+tter-spacing:0px;line-height:32px !important;text-align:start;color:#2D2A2A=
+;"><h3 class=3D"dark-force" style=3D"padding: 0; margin: 0; font-weight: 50=
+0; color: #2D2A2A; font-size: 20px; line-height: 32px !important; font-size=
+: 20px !important;"><span style=3D"line-height: 32px !important; font-size:=
+ 20px; font-size: 20px !important; white-space: pre-wrap;">Future models</s=
+pan></h3></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">We are actively working to support=
+ future models. For users with custom models fine-tuned on supported archit=
+ectures, we will introduce an easier way to import models into Ollama. In t=
+he meantime, we will expand the list of supported architectures.</span></di=
+v>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">If you have any feedback, please d=
+irectly reply to this email or join Ollama's </span><a target=3D"_blank" re=
+l=3D"noopener noreferrer" class=3D"body-link dark-force" href=3D"https://c.=
+vialoops.com/CL0/https:%2F%2Fdiscord.com%2Finvite%2Follama/1/0100019d43271f=
+4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000/n2UArvZaFAMZMcTjT9MDzw5pzyhj=
+A75EqFcrXb2VfDs=3D450" style=3D"text-decoration: none; color: #2D2A2A;"><sp=
+an style=3D"font-size: 14px; white-space: pre-wrap; text-decoration: underl=
+ine !important; line-height: 25px !important; font-size: 14px !important;" =
+class=3D"underline">Discord channel</span></a><span style=3D"line-height: 2=
+5px !important; font-size: 14px; font-size: 14px !important; white-space: p=
+re-wrap;">. </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span style=3D"line-height: 25px !important; font-size: 14px; font-size: =
+14px !important; white-space: pre-wrap;">=E2=9D=A4=EF=B8=8F Ollama</span></=
+div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:0px;=
+padding-left:0px;word-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:14px;le=
+tter-spacing:0px;line-height:25px !important;text-align:left;color:#2D2A2A;=
+"><span>&nbsp;</span></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td align=3D"left" class=3D"dark-force" style=3D"font-size:=
+0px;padding:10px 25px;padding-top:24px;padding-right:0px;padding-left:0px;w=
+ord-break:break-word;">
+                 =20
+      <div style=3D"font-family:ui-sans-serif, sans-serif;font-size:12px;le=
+tter-spacing:0px;line-height:21px !important;text-align:left;color:#9ca3af;=
+"><span class=3D"opt-in-explanation" style=3D"color: #9ca3af !important; fo=
+nt-size: 12px !important; line-height: 21px !important;">
+  You are receiving this email because you opted-in to receive updates from=
+ Ollama<br>
+  Ollama, 744 High Street, Palo Alto, CA 94301<br>
+  <a style=3D"font-weight: 600; color: #9ca3af !important; text-decoration:=
+ none !important; font-size: 12px !important; line-height: 21px !important;=
+" href=3D"https://c.vialoops.com/CL0/https:%2F%2Fapp.loops.so%2Funsubscribe=
+%2Fcmneeaerp38ez0133gk9hce5x%2Fb78509f26ba0a59be08425645b9ad9076111ce3a0e62=
+74df1feb41684e08c24096c0b57e67e9d7c13119ab0ffc3f05322ee9629e7672815612b82e3=
+5/1/0100019d43271f4e-da7d405c-9c09-419a-a83b-54788f2caa30-000000/UVq5Q5Zowj=
+J5G112DWrRn83Jy4vUlnaI-5Kk_egHd2k=3D450" target=3D"_blank" rel=3D"noopener =
+noreferrer" class=3D"bold link-unsubscribe">
+  Unsubscribe
+  </a>
+  </span></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+   =20
+   =20
+      </div>
+   =20
+  </body>
+</html>
+ =20
+
+--cvzfldstn3--

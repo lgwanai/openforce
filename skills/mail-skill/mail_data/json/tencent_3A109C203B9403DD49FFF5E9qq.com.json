@@ -1,0 +1,32 @@
+{
+  "message_id": "<tencent_3A109C203B9403DD49FFF5E9@qq.com>",
+  "imap_uid": "3170",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "【AI CAMP】结营-讲师回顾部分PPT",
+  "sender": "daisy_yang@woshipm.com",
+  "recipient": "jiayang.liu@bmw-brilliance.cn",
+  "cc": "sue@woshipm.com, wuliang@xiangzizai.com",
+  "date": "2026-04-24T10:37:50+08:00",
+  "body_text": "Dear Adah,\r\n\r\n\r\n\r\n附件为本次吴老师在结营回顾部分使用的PPT，请您查收~&nbsp;\r\n另外也和您确认下吴老师的上线时间是否还是12点15分嘞？\r\n\r\n\r\n\r\nRegards,\r\n\r\nDaisy\r\n\r\n                        \r\n                                                                        人人都是产品经理                                                                                                                                                                          \r\n                                                                                                    杨雨鑫                                                          服务运营",
+  "has_attachment": true,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [],
+  "folder": "INBOX",
+  "attachments": [
+    {
+      "filename": "【AI CAMP结营】课程内容回顾.pdf",
+      "content_type": "application/octet-stream",
+      "size": 3024572,
+      "local_path": "./mail_data/attachments/<tencent_3A109C203B9403DD49FFF5E9@qq.com>/【AI CAMP结营】课程内容回顾.pdf"
+    },
+    {
+      "filename": "【AI CAMP结营】课程内容回顾.pptx",
+      "content_type": "application/octet-stream",
+      "size": 691757,
+      "local_path": "./mail_data/attachments/<tencent_3A109C203B9403DD49FFF5E9@qq.com>/【AI CAMP结营】课程内容回顾.pptx"
+    }
+  ],
+  "local_path_eml": "./mail_data/eml/tencent_3A109C203B9403DD49FFF5E9qq.com.eml"
+}

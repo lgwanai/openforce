@@ -1,0 +1,21 @@
+{
+  "message_id": "<0100019d3d242fff-008301bb-037c-4e82-ad23-5bcf919e4572-000000@email.amazonses.com>",
+  "imap_uid": "2949",
+  "account": "wuliang@xiangzizai.com",
+  "thread_id": "",
+  "subject": "Ollama launch Pi: the coding agent behind OpenClaw",
+  "sender": "hello@ollama.com",
+  "recipient": "wuliang@xiangzizai.com",
+  "cc": "",
+  "date": "2026-03-30T05:07:55+00:00",
+  "body_text": "\r\n\r\nhttps://docs.ollama.com/integrations/pi\r\n\r\n \r\nOllama can now launch Pi [https://pi.dev/], the coding agent that powers OpenClaw.\r\n \r\nPi is designed to be a minimal coding harness that can be adapted to your workflows to create your own coding agent.\r\n \r\nPi comes bundled with powerful primitives to build on, and can be extended with extensions [https://pi.dev/packages], skills,\r\nprompt templates, and themes.\r\n \r\n\r\n\r\nGet started\r\n\r\nStart by downloading the latest version of Ollama:\r\n \r\n\r\nDownload Ollama [https://ollama.com/download]\r\n\r\n \r\nNext, use Ollama to launch Pi with a model (e.g. Kimi-K2.5). This installs Pi and configures Ollama as a provider including web\r\ntools and multimodal support:\r\n \r\nollama launch pi --model kimi-k2.5:cloud\r\n \r\n\r\n\r\nCustomize Pi\r\n\r\nAll Pi packages [https://pi.dev/packages] work with Pi & Ollama, making it infinitely customizable for different tasks and use\r\ncases.\r\n \r\nSubagents\r\nFor tasks that involve multiple agents like deep research or large codebase refactors, use pi-subagents:\r\n \r\npi install npm:pi-subagents\r\n \r\nAutoresearch\r\nInspired by Andrej Karpathy’s Autoresearch, the pi-autoresearch extension gives Pi the tools and workflow to run autonomous\r\noptimization loops to solve hard problems:\r\n \r\npi install https://github.com/davebcn87/pi-autoresearch\r\n \r\nOnce installed, run ollama launch pi then start a loop with /autoresearch:\r\n \r\n/autoresearch optimize test runtime and monitor correctness\r\n \r\n\r\n\r\nWorks with local and cloud models\r\n\r\nPi’s minimal footprint makes it a great fit for running models on your own machine with Ollama. For harder tasks, your Ollama\r\naccount includes access to larger models on Ollama’s cloud.\r\n \r\nFor additional usage, Ollama’s Pro and Max [https://ollama.com/pricing] plans are available:\r\n \r\n\r\nUpgrade Ollama [https://ollama.com/upgrade]\r\n\r\n \r\nIf you have any feedback, please directly reply to this email or join Ollama's Discord channel\r\n[https://discord.com/invite/ollama].\r\n \r\n❤️ Ollama\r\n \r\nYou are receiving this email because you opted-in to receive updates from Ollama\r\nOllama, 744 High Street, Palo Alto, CA 94301\r\nUnsubscribe [https://app.loops.so/unsubscribe/cmncq8q2flpsx01462j9x56rh/53b6792f55a5f1bdd7bd5f6c27c3a3108bd4abe7a3d77ab39db37cf184472aafd8a5351fd2aa732053a8e02d812eee6261678c3668cd470ce741df54]\r\n",
+  "has_attachment": false,
+  "is_read": false,
+  "is_starred": false,
+  "labels": [
+    "\\Seen"
+  ],
+  "folder": "INBOX",
+  "attachments": [],
+  "local_path_eml": "./mail_data/eml/0100019d3d242fff-008301bb-037c-4e82-ad23-5bcf919e4572-000000email.amazonses.com.eml"
+}
