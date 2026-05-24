@@ -393,7 +393,7 @@ async fn main() -> Result<()> {
     let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(2_000_000);
 
     let system = if task.system_prompt.is_empty() {
-        format!("You are a {}. Use the provided tools. Do NOT describe tool calls in text. When done, use mark_all_done.", task.profile_name)
+        format!("You are a {}. Use the provided tools to complete subtasks. After each subtask, self-verify against its criterion and respond VERIFIED or FAILED.", task.profile_name)
     } else { task.system_prompt.clone() };
 
     // Discover skills
@@ -473,10 +473,21 @@ async fn main() -> Result<()> {
 
         for st_cycle in 0..max_st {
             cycles += 1;
-            if start.elapsed() > max_dur || tokens_used >= max_tokens {
+            if start.elapsed() > max_dur {
                 let d = executor.memory.subtasks.iter().filter(|t| t.status == "done").count();
-                write_output(&task, &serde_json::json!({"success":false,"action":"timeout","subtasks_done":d,"subtasks_total":subtask_count}));
+                write_output(&task, &serde_json::json!({"success":d>0,"action":if d>0{"completed_partial"}else{"timeout"},"subtasks_done":d,"subtasks_total":subtask_count}));
                 return Ok(());
+            }
+            if tokens_used >= max_tokens {
+                let d = executor.memory.subtasks.iter().filter(|t| t.status == "done").count();
+                write_output(&task, &serde_json::json!({"success":d>0,"action":if d>0{"completed_partial"}else{"token_budget"},"subtasks_done":d,"subtasks_total":subtask_count}));
+                return Ok(());
+            }
+
+            // Compact if conversation grows too large
+            if ctx_mgr.is_overflow(conversation.iter().map(|m| ContextManager::estimate_tokens(&m.content) + 100).sum()) {
+                conversation.clear();
+                conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!("[COMPACTED: {} subtasks done]", executor.memory.subtasks.iter().filter(|t| t.status == "done").count())));
             }
 
             let ctx = build_context_string(&executor);
