@@ -128,7 +128,7 @@ openforce sessions                       # 列出所有 Session
 | `skill_load_ref` | 加载 Skill 参考文件 |
 | `skill_exec_script` | 执行 Skill 脚本 |
 
-Worker 维护完整对话历史（user → assistant(tool_calls) → tool_results → ...），LLM 每次调用都能看到之前的工具执行结果。
+Worker 采用**验收标准驱动**的逐子任务执行：每个 subtask 有明确的 acceptance criterion，Worker 执行完自检，达标 (VERIFIED) 进入下一个，不达标 (FAILED) 最多 8 次重试。criteria met = done，不是死循环。
 
 ## Todo 追踪
 
@@ -141,27 +141,44 @@ session:{id}:todos → Redis JSON:
 Resume:     openforce continue → 加载 Redis Todo → 跳过已完成
 ```
 
-## 项目结构
+## 项目结构 — 24 Crate / 137 源文件
 
 ```
-openforce/
-├── skills/                          # 83 Skills (渐进式披露)
-├── experts/                         # 专家库 (SOP+Profile)
-├── crates/
-│   ├── openforce-cli/               # CLI + Planner
-│   │   ├── agents/                  # 198 Agent 角色
-│   │   └── src/
-│   │       ├── agent_registry.rs    # Agent 渐进式披露
-│   │       ├── planner_roundtable.rs # RoundTable
-│   │       ├── dag_executor.rs      # DAG+Wave
-│   │       └── skill_runner.rs      # Skill 发现
-│   ├── llm-client/                  # LLM: OpenAI+Anthropic
-│   │   └── src/ {tool,openai,anthropic,unified}.rs
-│   ├── worker/                      # Worker 独立 binary
-│   ├── skill/                       # Skill 系统
-│   ├── redis-session/               # Redis Session+Todo
-│   ├── knowledge-base/              # 语义分类
-│   └── ...                          # 基础设施
+┌──────────────────────────────────────────────────────────┐
+│                    【AI 引擎】                             │
+│  openforce-cli/  CLI + Planner + AgentRegistry + DAG     │
+│  llm-client/     OpenAI + Anthropic Function Calling     │
+│  knowledge-base/ 语义分类 (ExpertIndex)                   │
+│  skill/          SKILL.md: discovery→parser→executor     │
+├──────────────────────────────────────────────────────────┤
+│                    【控制面】                              │
+│  domain/         Session/Event(30)/Command(15)/Lease     │
+│  session-store/  Event Sourcing + CAS + Projection       │
+│  scheduler/      DAG + LeaseIssuer + CapabilityToken     │
+│  policy-engine/  三层授权 (mTLS+Token+业务)               │
+│  redis-session/  Redis Session + TodoList + Snapshot     │
+│  proto/          gRPC 服务定义                             │
+│  gateway/        REST→gRPC 代理                           │
+├──────────────────────────────────────────────────────────┤
+│                    【数据面】                               │
+│  worker/         criteria-driven tool calling (583行)     │
+│  node-daemon/    Worker 生命周期管理                      │
+│  cube-sandbox/   Firecracker MicroVM (9 文件)             │
+│  space-manager/  三层隔离 + WarmPool                      │
+├──────────────────────────────────────────────────────────┤
+│                    【安全基础设施】                         │
+│  mtls/           Ed25519 CA + SPIFFE + 证书轮换          │
+│  path-acl/       路径 ACL + 规范化防遍历                  │
+│  patch-classifier/ Patch 风险分级 (9 PCR)                │
+│  project-tools/  HITL 审批                               │
+│  effect-gateway/ 副作用网关 (幂等 + Outbox)               │
+├──────────────────────────────────────────────────────────┤
+│                    【进化面 + 多租户 + 监控】               │
+│  evolution/      Observer + Evaluator + Evolver          │
+│  launch-checker/ 上线验证 (ReleaseGate + RedTeam)         │
+│  tenant-governance/ BYOK + 配额 + 留存 + 离场             │
+│  tui-dashboard/  Ratatui 终端面板                         │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ## 技术栈
