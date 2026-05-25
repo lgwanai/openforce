@@ -128,7 +128,7 @@ pub async fn run_roundtable(
         for (dim_key, dim_desc) in chunk.to_vec() {
             let base = format!(
                 "你是{dim_desc}专家。\n\n任务: {task}\n{agents}\n项目结构:\n{dir}\n{skills}\n\n\
-                 从{dim_desc}维度分析并分解任务。每个子任务从上面 <available_agents> 中指定 EXACT agent name。标注信息缺口: [需询问用户: ...] 或 [需网络检索: ...]。",
+                 从{dim_desc}维度 MECE 分解。同一角色可有多个并行Worker（只要互不干扰）。子任务从 <available_agents> 指定 EXACT agent name。标注: [需询问用户: ...] [需网络检索: ...]。",
                 dim_desc = dim_desc, agents = agent_catalog, dir = dir_summary, skills = skill_summary
             );
             let client = planner.clone();
@@ -176,7 +176,7 @@ pub async fn run_roundtable(
 
     let review_prompt = format!(
         "你是项目审查员。\n{agents}\n\n原始任务: {task}\n\n各维度分析:\n{pr}\n\n信息缺口:\n{g}\n\n检索结果:\n{s}\n\n\
-         交叉审查: MECE重叠/遗漏检查, 优先级评估(high/medium/low), 输出最优合并列表。\n\
+         交叉审查: MECE检查(重叠?遗漏?), 确认同角色任务是否可并行, 优先级评估(high/medium/low), 输出最优合并列表。\n\
          每个子任务必须从 <available_agents> 中指定 EXACT agent name。格式: [Agent Name] 标题: 描述 | 优先级 | 依赖:[...] | 验收:[...]",
         agents = agent_catalog,
         pr = proposals_text,
