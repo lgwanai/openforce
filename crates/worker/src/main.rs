@@ -97,6 +97,8 @@ fn worker_tools() -> Vec<Tool> {
         Tool::new("shell_exec", "Execute a shell command (30s timeout)", serde_json::json!({
             "type": "object", "properties": {"command": {"type": "string"}}, "required": ["command"]
         })),
+        Tool::new("ask_user", "Ask user a question when information is insufficient. Use when ambiguity blocks progress.", serde_json::json!({"type":"object","properties":{"question":{"type":"string"},"options":{"type":"array","items":{"type":"string"}}},"required":["question"]})),
+        Tool::new("report_blocker", "Report a blocker that prevents completion. Stops execution and returns reason to Planner.", serde_json::json!({"type":"object","properties":{"reason":{"type":"string"},"suggestion":{"type":"string"}},"required":["reason"]})),
         Tool::bare("mark_all_done", "Mark all subtasks as completed"),
         Tool::new("record_finding", "Record a key finding", serde_json::json!({
             "type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]
@@ -145,6 +147,8 @@ impl ToolExecutor {
             "write_file" => self.execute_write(call),
             "shell_exec" => self.execute_shell(call).await,
             "record_finding" => self.execute_finding(call),
+            "ask_user" => self.execute_ask_user(call),
+            "report_blocker" => self.execute_report_blocker(call),
             "mark_all_done" => self.execute_all_done(call),
             "skill_load" => self.execute_skill_load(call),
             "skill_load_ref" => self.execute_skill_ref(call),
@@ -219,6 +223,23 @@ impl ToolExecutor {
         self.memory.add_finding(text);
         self.memory.add_decision(0, "FINDING", text);
         ToolResult::success(&call.id, &format!("Finding recorded: {text}"))
+    }
+
+    fn execute_ask_user(&mut self, call: &ToolCall) -> ToolResult {
+        let args = match parse_tool_args(call, &["question"]) { Ok(a) => a, Err(e) => return ToolResult::error(&call.id, &e) };
+        let q = &args["question"];
+        let opts = serde_json::from_str::<serde_json::Value>(&call.arguments).ok()
+            .and_then(|v| v.get("options").cloned())
+            .and_then(|v| v.as_array().map(|a| a.iter().filter_map(|x| x.as_str()).collect::<Vec<_>>().join(", ")));
+        self.memory.add_decision(0, "ASK_USER", q);
+        ToolResult::success(&call.id, &format!("QUESTION: {}{}", q, opts.map(|o| format!(" [Options: {o}]")).unwrap_or_default()))
+    }
+
+    fn execute_report_blocker(&mut self, call: &ToolCall) -> ToolResult {
+        let args = match parse_tool_args(call, &["reason"]) { Ok(a) => a, Err(e) => return ToolResult::error(&call.id, &e) };
+        let reason = &args["reason"];
+        self.memory.add_finding(&format!("BLOCKER: {reason}"));
+        ToolResult::success(&call.id, &format!("BLOCKER_REPORTED: {reason}"))
     }
 
     fn execute_all_done(&mut self, call: &ToolCall) -> ToolResult {

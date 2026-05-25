@@ -100,6 +100,47 @@ fn analysis_dimensions(categories: &[String]) -> Vec<(&'static str, &'static str
 
 // ── RoundTable with Dynamic Dimensions ──
 
+/// Pre-plan: analyze task for information gaps, return questions for user.
+/// Returns empty vec if information is sufficient.
+pub async fn pre_plan_clarify(
+    planner: &LlmClient, task: &str,
+) -> Result<Vec<InfoQuestion>, String> {
+    let prompt = format!(
+        "分析以下任务，判断信息是否充足。如果缺少关键信息导致无法准确规划，列出需要用户澄清的问题。\n\n任务: {task}\n\n\
+         输出JSON: {{\"sufficient\":true|false,\"questions\":[{{\"question\":\"...\",\"options\":[\"A\",\"B\"]}}]}}\n\
+         如果信息充足，返回 sufficient:true, questions:[]。仅JSON。"
+    );
+    let (json, _) = planner.chat("你是需求分析师。判断信息是否充足。", &prompt).await
+        .map_err(|e| format!("clarify: {e}"))?;
+    let cleaned = json.trim().trim_start_matches("```json").trim_start_matches("```").trim_end_matches("```").trim();
+    #[derive(Deserialize)] struct C { #[serde(default)] sufficient: bool, #[serde(default)] questions: Vec<InfoQuestion> }
+    let c: C = serde_json::from_str(cleaned).unwrap_or(C { sufficient: true, questions: vec![] });
+    Ok(if c.sufficient { vec![] } else { c.questions })
+}
+
+/// Re-plan failed tasks: analyze what went wrong and generate new task decomposition.
+pub async fn replan_failed(
+    planner: &LlmClient, original_task: &str,
+    failed_summary: &str, agent_catalog: &str,
+    skills_dir: &str, dir_summary: &str,
+) -> Result<TaskTree, String> {
+    let skill_runner = crate::skill_runner::SkillRunner::discover(skills_dir);
+    let prompt = format!(
+        "你是 Planner。之前的执行计划部分失败，需要重新规划。\n\n原始任务: {task}\n{agents}\n项目结构:\n{dir}\n{skills}\n\n\
+         失败原因汇总:\n{failed}\n\n\
+         分析根因，重新分解失败的任务。输出JSON:\n\
+         {{\"goal\":{{...}},\"tasks\":[{{\"role\":\"EXACT agent name(同一角色可多次)\",\"title\":\"...\",\
+         \"objective\":\"...\",\"acceptance_criteria\":[\"可量化指标\"],\
+         \"dependencies\":[\"其他任务title\"],\"priority\":\"high|medium|low\"}}],\
+         \"mece_validated\":true,\"confidence\":\"high|medium|low\"}}",
+        task=original_task, agents=agent_catalog, dir=dir_summary,
+        skills=skill_runner.skill_summary(), failed=failed_summary
+    );
+    let (json, _) = planner.chat("你是 Planner。分析失败原因并重新规划。仅输出JSON。", &prompt).await
+        .map_err(|e| format!("replan: {e}"))?;
+    parse_task_tree(&json)
+}
+
 pub async fn run_roundtable(
     planner: &LlmClient, task: &str,
     classification: &ClassificationResult,

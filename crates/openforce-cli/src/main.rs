@@ -399,6 +399,18 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     } else { String::new() };
 
     // ── Planner RoundTable: MECE-validated task decomposition ──
+    // Pre-plan: check information sufficiency
+    let questions = planner_roundtable::pre_plan_clarify(&planner, &task).await.unwrap_or_default();
+    if !questions.is_empty() {
+        println!("[Planner] ⚠ {} information gap(s) detected:", questions.len());
+        for (i, q) in questions.iter().enumerate() {
+            println!("  {}. {}", i+1, q.question);
+            if !q.options.is_empty() {
+                println!("     Options: {}", q.options.join(" | "));
+            }
+        }
+        println!("  → Consider: openforce continue to answer these questions");
+    }
     println!("[Planner] RoundTable...");
     let mut subtasks: Vec<(String, String, String, Vec<String>, Vec<String>)> = vec![]; // (role, title, desc, dependencies, files)
 
@@ -877,6 +889,23 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     // ── Re-plan if too many workers stalled ──
     if stalled_count > 0 && stalled_count * 2 > results.len() {
         println!("
+[!] Scheduler: {}/{} workers stalled/failed — triggering replan")
+    // Collect failure reasons for Planner
+    let failed_detail: String = results.iter()
+        .filter(|r| !r.2)
+        .map(|(i, pf, _, action, text)| format!("Worker-{} [{}] {}: {}", i, pf, action, text.chars().take(200).collect::<String>()))
+        .collect::<Vec<_>>().join(" || ");
+    println!("  [Replan] analyzing failures...");
+    match planner_roundtable::replan_failed(&planner, &task, &failed_detail, &agent_catalog, &skills_dir_str, &dir_summary).await {
+        Ok(new_tree) => {
+            println!("  [Replan] new plan: {} tasks", new_tree.tasks.len());
+            for t in &new_tree.tasks {
+                println!("    [{}] {}", t.role, t.title);
+            }
+        }
+        Err(e) => println!("  [Replan] failed: {e}"),
+    }
+    println!("
 [!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
         let failed_summary: String = results.iter()
             .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
