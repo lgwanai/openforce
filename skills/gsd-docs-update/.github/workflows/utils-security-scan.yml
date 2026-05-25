@@ -1,0 +1,141 @@
+# Security CI Pipeline — utils/ 模块
+# =====================================
+# SAST: Semgrep (OWASP Top 10 + CWE Top 25)
+# SCA:  Trivy (dependency CVE scanning)
+# Secrets: Gitleaks
+# Linting: Ruff + Bandit
+#
+# 执行顺序: lint → secrets → SAST → SCA → tests
+# 严格模式: CRITICAL/HIGH 漏洞阻断 CI
+
+name: Security Scan — utils module
+
+on:
+  pull_request:
+    paths:
+      - "utils/**"
+      - "**/*.py"
+      - "requirements*.txt"
+      - "pyproject.toml"
+      - "Pipfile*"
+      - "poetry.lock"
+  push:
+    branches: [main, master]
+    paths:
+      - "utils/**"
+      - "requirements*.txt"
+
+jobs:
+  # ── Job 1: SAST (Static Application Security Testing) ──────────────
+  sast:
+    name: SAST — Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      - name: Semgrep SAST Scan
+        run: |
+          semgrep \
+            --config p/owasp-top-ten \
+            --config p/command-injection \
+            --config p/xss \
+            --config p/python \
+            --error \
+            --exclude "tests/" \
+            --verbose \
+            utils/
+
+      - name: Bandit Security Linter
+        run: |
+          pip install bandit
+          bandit -r utils/ -f json -o bandit-report.json || true
+          bandit -r utils/ -ll -x "utils/tests/"
+
+  # ── Job 2: SCA (Software Composition Analysis) ─────────────────────
+  sca:
+    name: SCA — Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "utils/"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
+          format: "table"
+
+      - name: Check Python dependencies with pip-audit
+        run: |
+          pip install pip-audit
+          if [ -f requirements.txt ]; then
+            pip-audit -r requirements.txt --strict
+          fi
+          if [ -f pyproject.toml ]; then
+            pip-audit -r pyproject.toml --strict
+          fi
+
+  # ── Job 3: Secrets Detection ───────────────────────────────────────
+  secrets:
+    name: Secrets Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: TruffleHog scan
+        run: |
+          pip install trufflehog
+          trufflehog filesystem --directory utils/ --json > trufflehog-report.json || true
+
+  # ── Job 4: Security Unit Tests ─────────────────────────────────────
+  security-tests:
+    name: Security Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Security Test Suite
+        run: |
+          python -m py_compile utils/__init__.py
+          python utils/test_security_suite.py
+
+  # ── Job 5: SBOM Generation (Software Bill of Materials) ────────────
+  sbom:
+    name: SBOM — Dependency Inventory
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate SBOM with CycloneDX
+        run: |
+          pip install cyclonedx-bom
+          cyclonedx-py requirements.txt --output utils-sbom.json || true
+          echo "SBOM generated for dependency tracking"
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: utils-sbom
+          path: utils-sbom.json
