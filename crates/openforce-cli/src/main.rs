@@ -889,7 +889,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     // ── Re-plan if too many workers stalled ──
     if stalled_count > 0 && stalled_count * 2 > results.len() {
         println!("
-[!] Scheduler: {}/{} workers stalled/failed — triggering replan")
+[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
     // Collect failure reasons for Planner
     let failed_detail: String = results.iter()
         .filter(|r| !r.2)
