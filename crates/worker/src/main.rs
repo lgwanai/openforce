@@ -534,7 +534,7 @@ async fn main() -> Result<()> {
                         role: "assistant".into(), content: text.clone(),
                         tool_calls: None, tool_results: None, tool_call_id: None,
                     });
-                    let upper = text.to_uppercase();
+                    let upper = text.to_uppercase().replace("**", "");
                     if upper.contains("VERIFIED") || upper.contains("FINAL: PASS") {
                         executor.memory.subtasks[st_idx].status = "done".into();
                         executor.memory.subtasks[st_idx].output = text.clone();
@@ -561,7 +561,7 @@ async fn main() -> Result<()> {
     let vp = format!("{}\n\nFINAL: rate each criterion PASS/FAIL. End with: FINAL: PASS|FAIL", build_context_string(&executor));
     match client.chat(&system, &vp).await {
         Ok((text, _)) => {
-            let passed = text.to_uppercase().contains("FINAL: PASS");
+            let passed = text.to_uppercase().replace("**", "").contains("FINAL: PASS");
             write_output(&task, &build_worker_output(&executor, &task, cycles, tokens_used, &text, passed));
         }
         Err(e) => {
