@@ -469,8 +469,9 @@ async fn main() -> Result<()> {
         let criterion = criteria_list.get(st_idx).cloned().unwrap_or_else(|| "Complete".into());
         eprintln!("[Subtask {}/{}] {}", st_idx+1, subtask_count, truncate_str(&st_desc, 100));
 
-        let max_st = (max_cycles / subtask_count.max(1)).clamp(5, 20);
+        let max_st = (max_cycles / subtask_count.max(1)).clamp(1, 20);
 
+        let mut blocker_reasons: Vec<String> = Vec::new();
         for st_cycle in 0..max_st {
             cycles += 1;
             if start.elapsed() > max_dur {
@@ -485,20 +486,30 @@ async fn main() -> Result<()> {
             }
 
             // Compact if conversation grows too large
+            // Smart failure: 3x same blocker → give up, don't waste tokens
+            if blocker_reasons.len() >= 3 && (0..3).all(|i| blocker_reasons[blocker_reasons.len()-1-i] == blocker_reasons[blocker_reasons.len()-1]) {
+                eprintln!("  BLOCKED subtask {}/{}: same failure 3x", st_idx+1, subtask_count);
+                break;
+            }
+
             if ctx_mgr.is_overflow(conversation.iter().map(|m| ContextManager::estimate_tokens(&m.content) + 100).sum()) {
                 conversation.clear();
                 conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!("[COMPACTED: {} subtasks done]", executor.memory.subtasks.iter().filter(|t| t.status == "done").count())));
             }
 
             let ctx = build_context_string(&executor);
+            let todo_status: String = executor.memory.subtasks.iter().enumerate().map(|(i, s)| {
+                let icon = if i < st_idx { "✓" } else if i == st_idx { "▶" } else { "○" };
+                format!("{icon} {}. {}", i+1, truncate_str(&s.description, 60))
+            }).collect::<Vec<_>>().join("\n");
             let um = if st_cycle == 0 {
-                format!("{skill}Goal: {role} — {goal}\nSUBTASK #{n}/{t}: {st}\nCRITERION: {crit}\n\nFiles ({fc}):\n{files}\n\nComplete this subtask. When done, verify against the criterion above.\nIf criterion is met → respond: VERIFIED\nIf not met → respond: FAILED: <reason>, then retry.",
-                    skill=task.skill_metadata.as_deref().unwrap_or(""),
+                format!("{skill}TODO:\n{todos}\n\nGoal: {role} — {goal}\nSUBTASK #{n}/{t}: {st}\nCRITERION: {crit}\n\nFiles ({fc}):\n{files}\n\nComplete this subtask. When done, verify against the criterion above.\nIf criterion is met → respond: VERIFIED\nIf not met → respond: FAILED: <reason>, then retry.",
+                    skill=task.skill_metadata.as_deref().unwrap_or(""), todos=todo_status,
                     role=executor.memory.role, goal=executor.memory.goal, n=st_idx+1, t=subtask_count, st=st_desc, crit=criterion,
                     fc=executor.memory.files_available.len(),
                     files=executor.memory.files_available.iter().take(20).map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n"))
             } else {
-                format!("SUBTASK #{n}: {st}\nCriterion: {crit}\nRetry {rc}/{m}\nUse tools, fulfill the criterion, respond VERIFIED or FAILED.",
+                format!("SUBTASK #{n}: {st}\nCriterion: {crit}\nAttempt {rc}/{m}. Respond VERIFIED or FAILED: <reason>.",
                     n=st_idx+1, st=st_desc, crit=criterion, rc=st_cycle+1, m=max_st)
             };
 
@@ -530,6 +541,7 @@ async fn main() -> Result<()> {
                         eprintln!("  ✓ Subtask {}/{} PASS", st_idx+1, subtask_count);
                         continue 'subtask_loop;
                     } else if upper.contains("FAILED") {
+                        blocker_reasons.push(text.clone());
                         eprintln!("  ✗ Subtask {}/{} FAIL, retry {}/{}", st_idx+1, subtask_count, st_cycle+1, max_st);
                     } else {
                         executor.memory.add_decision(cycles, "WORKING", &truncate_str(text, 120));
@@ -543,7 +555,7 @@ async fn main() -> Result<()> {
             }
         }
         executor.memory.subtasks[st_idx].status = "failed".into();
-        executor.memory.subtasks[st_idx].output = format!("Retries exhausted ({})", max_st);
+        executor.memory.subtasks[st_idx].output = format!("BLOCKERS: {}", blocker_reasons.join(" | "));
     }
     // Phase 2: Verification
     let vp = format!("{}\n\nFINAL: rate each criterion PASS/FAIL. End with: FINAL: PASS|FAIL", build_context_string(&executor));

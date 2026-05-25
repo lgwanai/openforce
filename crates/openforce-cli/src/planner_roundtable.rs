@@ -189,11 +189,14 @@ pub async fn run_roundtable(
 
     // ── Round 3: Final Synthesis ──
     let synth_prompt = format!(
-        "你是最终决策者。\n{agents}\n\n任务: {task}\n审查结果:\n{review}\n\n输出JSON(仅JSON):\n\
+        "你是最终决策者。\n{agents}\n\n任务: {task}\n审查结果:\n{review}\n\nMECE分解: 同一角色可多次出现，互不干扰即可并行。\
+         每个任务的 acceptance_criteria 必须可量化(如: 生成3个文件/覆盖率>80%/0个高危漏洞)。\
+         \n\n输出JSON(仅JSON):\n\
          {{\"goal\":{{\"specific\":\"...\",\"measurable\":\"...\",\"achievable\":\"...\",\"relevant\":\"...\",\"time_bound\":\"...\"}},\
          \"data_sources\":[\"路径\"],\
-         \"tasks\":[{{\"role\":\"从 <available_agents> 中选EXACT name\",\"title\":\"标题\",\"objective\":\"目标\",\
-         \"files\":[\"文件\"],\"steps\":[\"步骤\"],\"acceptance_criteria\":[\"验收\"],\
+         \"tasks\":[{{\"role\":\"EXACT agent name\",\"title\":\"标题\",\"objective\":\"目标\",\
+         \"files\":[\"文件\"],\"steps\":[\"步骤\"],\
+         \"acceptance_criteria\":[\"可量化指标\"],\
          \"dependencies\":[\"其他任务title\"],\"priority\":\"high|medium|low\",\"estimated_cycles\":数字}}],\
          \"mece_validated\":true,\"confidence\":\"high|medium|low\",\
          \"plan_steps\":[{{\"phase\":\"阶段\",\"description\":\"描述\",\"tasks\":[\"任务title\"]}}]}}",
