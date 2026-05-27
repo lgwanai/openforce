@@ -2,11 +2,11 @@ use std::net::SocketAddr;
 use axum::Router;
 use tower::ServiceBuilder;
 use tower_http::cors::CorsLayer;
-use tower_http::trace::TraceLayer;
 use crate::middleware;
 use crate::handler;
 
 pub struct App {
+#[allow(dead_code)]
     pub addr: SocketAddr,
     pub session_store_addr: String,
     pub project_tools_addr: String,
@@ -55,6 +55,7 @@ impl App {
         }
     }
 
+#[allow(dead_code)]
     pub fn with_token_verifier(mut self, verifier: middleware::TokenVerifier) -> Self {
         self.token_verifier = Some(verifier);
         self

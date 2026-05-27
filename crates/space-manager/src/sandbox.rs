@@ -3,7 +3,7 @@ use uuid::Uuid;
 use tracing::info;
 
 use openforce_domain::sandbox_image::{SandboxImage, SandboxImageClass, VmState};
-use openforce_cube_sandbox::vm::{VmManager, SandboxVM};
+use openforce_cube_sandbox::vm::VmManager;
 use openforce_cube_sandbox::image::ImageManager;
 use openforce_cube_sandbox::config::VmConfig;
 use openforce_cube_sandbox::credentials::{CredentialInjector, TempCredential};

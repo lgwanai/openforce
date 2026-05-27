@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use crate::session_state::LocalSessionState;
 use crate::gate_handler::{GateHandler, GateResult};
-use openforce_domain::session_phase::{SessionPhase, ConfirmationGate};
+use openforce_domain::session_phase::ConfirmationGate;
 
 pub struct SessionRepl {
     pub session: LocalSessionState,

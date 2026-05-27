@@ -1,12 +1,12 @@
 use chrono::{DateTime, Utc};
-use sha2::Sha256;
+
 use sqlx::PgPool;
 use uuid::Uuid;
 use openforce_domain::error::{DomainError, DomainResult};
 use openforce_domain::approval::{ApprovalRequest, ApprovalToken, ApprovalStatus};
 use openforce_domain::patch::PatchClassification;
 use ring::rand::SystemRandom;
-use ring::signature::{Ed25519KeyPair, KeyPair};
+use ring::signature::Ed25519KeyPair;
 
 /// ApprovalStore manages HITL approval lifecycle (architecture doc section 6.6-6.8)
 pub struct ApprovalStore {
@@ -244,6 +244,7 @@ impl ApprovalStore {
 }
 
 #[derive(Debug, sqlx::FromRow)]
+#[allow(dead_code)]
 struct ApprovalRequestRow {
     approval_request_id: Uuid, session_id: Uuid, task_id: Uuid,
     task_attempt: i32, lease_id: Uuid, fencing_token: i64,
@@ -260,6 +261,7 @@ struct ApprovalTokenRow {
     lease_id: Uuid, fencing_token: i64, worker_spec_id: Uuid,
     tool_name: String, target_paths: serde_json::Value,
     base_snapshot_id: String, payload_sha256: String,
+#[allow(dead_code)]
     status: String, usage_limit: i32, usage_count: i32,
     issued_at: DateTime<Utc>, expires_at: DateTime<Utc>,
     approved_by: String, signature: Vec<u8>,

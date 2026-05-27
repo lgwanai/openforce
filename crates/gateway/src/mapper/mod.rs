@@ -2,6 +2,7 @@ use axum::http::StatusCode;
 
 pub mod error {
     use super::StatusCode;
+#[allow(dead_code)]
     pub fn tool_error_to_http(code: i32) -> StatusCode {
         match code {
             1 => StatusCode::CONFLICT,      // lease_invalid
@@ -19,6 +20,7 @@ pub mod error {
         }
     }
 
+#[allow(dead_code)]
     pub fn grpc_to_http(status: tonic::Code) -> StatusCode {
         match status {
             tonic::Code::InvalidArgument => StatusCode::BAD_REQUEST,

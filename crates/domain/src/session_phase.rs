@@ -1,6 +1,38 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
+/// Phase groups for progressive planning.
+///
+/// Design phases must all PASS before Implementation phases begin.
+/// The Planner RoundTable plans one group at a time:
+/// - **Design group**: tasks planned in full detail (concrete).
+/// - **Implementation group**: tasks sketched as placeholders until the design
+///   gate is approved, then replanned in detail with full architecture context.
+/// - **Report group**: wrap-up tasks planned in detail.
+///
+/// This enforces the principle that far-term tasks are inherently fuzzy —
+/// architecture must be complete before development tasks can be specified precisely.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum PhaseGroup {
+    /// understand → design → confirm_design → architecture
+    Design,
+    /// development → confirm_dev → test → fix → confirm_final
+    Implementation,
+    /// report → complete
+    Report,
+}
+
+impl PhaseGroup {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            PhaseGroup::Design => "design",
+            PhaseGroup::Implementation => "implementation",
+            PhaseGroup::Report => "report",
+        }
+    }
+
+}
+
 /// SessionPhase is now a string-based type so that pipeline authors can define
 /// arbitrary phases beyond the built-in software-engineering lifecycle.
 /// The built-in phases are provided as constants for backward compatibility,
@@ -33,6 +65,18 @@ impl SessionPhase {
     pub fn is_gate(&self) -> bool { self.0.starts_with("confirm_") || self.0 == "gate" }
 
     pub fn is_terminal(&self) -> bool { self.0 == "complete" }
+
+    /// Returns which phase group this phase belongs to.
+    /// Used by the Planner to scope RoundTable planning to the current group.
+    pub fn phase_group(&self) -> PhaseGroup {
+        match self.0.as_str() {
+            "understand" | "design" | "confirm_design" | "architecture" => PhaseGroup::Design,
+            "development" | "confirm_dev" | "test" | "fix" | "confirm_final" => PhaseGroup::Implementation,
+            "report" | "complete" => PhaseGroup::Report,
+            // Custom phases default to Design (conservative: plan in detail)
+            _ => PhaseGroup::Design,
+        }
+    }
 
     /// Returns the next phase in the default built-in pipeline.
     /// Returns `None` for custom phases or terminal phases — the pipeline
@@ -126,4 +170,71 @@ impl ConfirmationGate {
     }
 
     pub fn is_pending(&self) -> bool { matches!(self.status, GateStatus::Pending) }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_phase_group_mapping() {
+        assert_eq!(SessionPhase::understand().phase_group(), PhaseGroup::Design);
+        assert_eq!(SessionPhase::design().phase_group(), PhaseGroup::Design);
+        assert_eq!(SessionPhase::confirm_design().phase_group(), PhaseGroup::Design);
+        assert_eq!(SessionPhase::architecture().phase_group(), PhaseGroup::Design);
+
+        assert_eq!(SessionPhase::development().phase_group(), PhaseGroup::Implementation);
+        assert_eq!(SessionPhase::confirm_dev().phase_group(), PhaseGroup::Implementation);
+        assert_eq!(SessionPhase::test().phase_group(), PhaseGroup::Implementation);
+        assert_eq!(SessionPhase::fix().phase_group(), PhaseGroup::Implementation);
+        assert_eq!(SessionPhase::confirm_final().phase_group(), PhaseGroup::Implementation);
+
+        assert_eq!(SessionPhase::report().phase_group(), PhaseGroup::Report);
+        assert_eq!(SessionPhase::complete().phase_group(), PhaseGroup::Report);
+    }
+
+    #[test]
+    fn test_custom_phase_defaults_to_design() {
+        let custom = SessionPhase::custom("deploy_to_staging");
+        assert_eq!(custom.phase_group(), PhaseGroup::Design);
+    }
+
+    #[test]
+    fn test_phase_group_gate_detection() {
+        // confirm_design is in Design group and IS a gate
+        assert!(SessionPhase::confirm_design().is_gate());
+        assert_eq!(SessionPhase::confirm_design().phase_group(), PhaseGroup::Design);
+
+        // confirm_dev is in Implementation group and IS a gate
+        assert!(SessionPhase::confirm_dev().is_gate());
+        assert_eq!(SessionPhase::confirm_dev().phase_group(), PhaseGroup::Implementation);
+
+        // confirm_final is in Implementation group and IS a gate
+        assert!(SessionPhase::confirm_final().is_gate());
+        assert_eq!(SessionPhase::confirm_final().phase_group(), PhaseGroup::Implementation);
+
+        // architecture is in Design group but NOT a gate
+        assert!(!SessionPhase::architecture().is_gate());
+        assert_eq!(SessionPhase::architecture().phase_group(), PhaseGroup::Design);
+    }
+
+    #[test]
+    fn test_pipeline_transitions_cross_groups() {
+        // Design → Implementation transition happens at confirm_design gate
+        let design_gate = SessionPhase::confirm_design();
+        assert!(design_gate.is_gate());
+        let after_design_gate = design_gate.next_phase().unwrap();
+        assert_eq!(after_design_gate, SessionPhase::architecture());
+
+        // Implementation group starts at development
+        let dev = SessionPhase::development();
+        assert_eq!(dev.phase_group(), PhaseGroup::Implementation);
+
+        // Implementation → Report transition
+        let impl_gate = SessionPhase::confirm_final();
+        assert!(impl_gate.is_gate());
+        let after_impl_gate = impl_gate.next_phase().unwrap();
+        assert_eq!(after_impl_gate, SessionPhase::report());
+        assert_eq!(after_impl_gate.phase_group(), PhaseGroup::Report);
+    }
 }

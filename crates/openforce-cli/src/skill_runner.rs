@@ -13,6 +13,7 @@ pub struct SkillRunner {
     registry: SkillRegistry,
 }
 
+#[allow(dead_code)]
 impl SkillRunner {
     /// Discover skills in the given directory.
     pub fn discover(skills_dir: &str) -> Self {

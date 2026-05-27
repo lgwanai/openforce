@@ -3,14 +3,17 @@ use uuid::Uuid;
 use openforce_domain::task::TaskState;
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct DagNode {
     pub task_id: Uuid,
     pub upstream: HashSet<Uuid>,
     pub downstream: HashSet<Uuid>,
 }
 
+#[allow(dead_code)]
 pub struct Dag { nodes: HashMap<Uuid, DagNode> }
 
+#[allow(dead_code)]
 impl Dag {
     pub fn new() -> Self { Self { nodes: HashMap::new() } }
 

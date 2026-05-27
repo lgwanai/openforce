@@ -24,7 +24,7 @@ use std::backtrace::Backtrace;
 use std::collections::BTreeMap;
 use std::fmt;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
-use std::sync::{Arc, OnceLock, Mutex};
+use std::sync::{OnceLock, Mutex};
 use std::time::{Duration, Instant};
 
 use serde::Serialize;
@@ -104,7 +104,7 @@ pub fn sanitize_args<K: AsRef<str> + Serialize, V: Serialize>(args: &[(K, V)]) -
 /// lightweight fallback that works with any tracing subscriber.
 pub fn extract_trace_context() -> (Option<String>, Option<String>) {
     let span = Span::current();
-    let mut trace_id = None;
+    let trace_id = None;
     let mut span_id = None;
 
     // Attempt to read trace_id and span_id from the current span's fields.

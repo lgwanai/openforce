@@ -1,6 +1,6 @@
 use anyhow::Result;
 use openforce_llm_client::LlmClient;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs;
 use std::path::Path;

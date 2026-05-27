@@ -14,7 +14,7 @@
 //! or byte sequences that are not valid UTF-8).
 
 use std::fmt;
-use std::str::FromStr;
+
 
 // ---------------------------------------------------------------------------
 // Error Types
@@ -140,7 +140,7 @@ fn split_camel_case(word: &str) -> Vec<String> {
 
     let mut tokens: Vec<String> = Vec::new();
     let mut current = String::new();
-    let mut chars: Vec<char> = word.chars().collect();
+    let chars: Vec<char> = word.chars().collect();
     let len = chars.len();
 
     for i in 0..len {

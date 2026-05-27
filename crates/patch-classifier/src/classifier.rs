@@ -31,7 +31,7 @@ impl PatchClassifier {
     pub fn classify(
         &self,
         target_paths: &[String],
-        allowed_read_paths: &[String],
+        _allowed_read_paths: &[String],
         allowed_write_paths: &[String],
         forbidden_paths: &[String],
         lines_removed: usize,

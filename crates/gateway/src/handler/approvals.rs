@@ -4,11 +4,11 @@ use crate::handler::AppState;
 
 pub fn routes() -> Router<AppState> {
     Router::new()
-        .route(":request", post(create_approval))
+        .route("/request", post(create_approval))
         .route("/{id}", get(get_approval))
-        .route("/{id}:approve", post(approve_approval))
-        .route("/{id}:reject", post(reject_approval))
-        .route("/tokens:consume", post(consume_token))
+        .route("/{id}/approve", post(approve_approval))
+        .route("/{id}/reject", post(reject_approval))
+        .route("/tokens/consume", post(consume_token))
 }
 
 async fn create_approval(State(_s): State<AppState>, Json(_body): Json<Value>) -> Json<Value> {

@@ -1,4 +1,4 @@
-use crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use crossterm::event::{Event, KeyCode, KeyEventKind};
 use ratatui::{
     layout::{Constraint, Direction, Layout},
     Frame,
@@ -6,17 +6,17 @@ use ratatui::{
 use std::time::{Duration, Instant};
 use uuid::Uuid;
 use openforce_proto::swarmos::v1::{
-    scheduler_client::SchedulerClient,
-    approval_service_client::ApprovalServiceClient,
+    
+    
     CompilePlanRequest, CancelTaskRequest, LeaseTaskRequest,
     ApproveApprovalRequestRequest, RejectApprovalRequestRequest,
 };
-use tonic::transport::Channel;
+
 
 use crate::client::{self, GrpcClients, SessionSummary, build_command};
 use crate::components::status::{StatusPanel, TaskInfo};
 use crate::components::command::CommandPanel;
-use crate::components::approval::{ApprovalPanel, PendingApproval};
+use crate::components::approval::ApprovalPanel;
 use crate::components::plan_tree::PlanTreePanel;
 
 pub enum ActivePanel { Status, Command, Approval, PlanTree }

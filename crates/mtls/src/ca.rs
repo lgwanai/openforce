@@ -9,6 +9,7 @@ use crate::error::{MTLSError, MTLSResult};
 use openforce_domain::identity::{CertificateBundle, CertificateIdentity, ServiceRole};
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 struct IssuedCertificate {
     serial: String,
     role: ServiceRole,

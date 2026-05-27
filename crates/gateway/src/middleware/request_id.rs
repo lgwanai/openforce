@@ -7,6 +7,7 @@ use tower::{Layer, Service};
 use uuid::Uuid;
 
 #[derive(Clone)]
+#[allow(dead_code)]
 pub struct RequestIdLayer;
 
 impl<S> Layer<S> for RequestIdLayer {
@@ -15,6 +16,7 @@ impl<S> Layer<S> for RequestIdLayer {
 }
 
 #[derive(Clone)]
+#[allow(dead_code)]
 pub struct RequestIdService<S> { inner: S }
 
 impl<S, B> Service<Request<B>> for RequestIdService<S>
@@ -43,4 +45,5 @@ where
 }
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 pub struct RequestId(pub String);

@@ -1,7 +1,7 @@
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
-    text::{Line, Span, Text},
+    text::{Line, Span},
     widgets::{Block, Borders, Paragraph, List, ListItem},
     Frame,
 };
@@ -12,6 +12,7 @@ pub struct PendingApproval {
     pub tool: String,
     pub risk: String,
     pub paths: Vec<String>,
+    #[allow(dead_code)]
     pub created: String,
 }
 

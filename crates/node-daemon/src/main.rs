@@ -75,6 +75,7 @@ impl NodeDaemon for DaemonService {
         let model = req.model_name.clone();
         let system = req.system_prompt.clone();
         let task_type = req.task_type.clone();
+        #[allow(unused_variables)]
         let max_tokens = req.max_tokens;
         let max_calls = req.max_tool_calls;
 

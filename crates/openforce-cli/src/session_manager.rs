@@ -136,6 +136,7 @@ impl SessionManager {
         }
     }
 
+#[allow(dead_code)]
     pub async fn save(&mut self, s: &LocalSessionState) -> Result<(), String> {
         match &mut self.backend {
             Backend::Redis(redis) => {

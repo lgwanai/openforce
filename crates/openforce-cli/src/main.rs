@@ -1,3 +1,5 @@
+#![allow(unexpected_cfgs)]
+#![allow(dead_code)]
 use anyhow::Result;
 use openforce_llm_client::LlmClient;
 use openforce_knowledge_base::{KnowledgeBase, semantic_classify};
@@ -16,6 +18,7 @@ mod agent_registry;
 use session_manager::SessionManager;
 use repl::SessionRepl;
 use agent_registry::AgentRegistry;
+use openforce_domain::worker_folder::WorkerOutputFolder;
 
 #[derive(Debug, Deserialize)]
 struct Config { llm: LlmConfig, planner: PlannerConfig, workers: WorkersConfig }
@@ -242,7 +245,7 @@ async fn main() -> Result<()> {
     }
 
     // Default: "openforce new <task>" or legacy "openforce <task>"
-    let (workspace, task) = if (args[1] == "new" || args[1] == "--workspace" || args[1] == "-w") {
+    let (workspace, task) = if args[1] == "new" || args[1] == "--workspace" || args[1] == "-w" {
         parse_new_args(&args)
     } else {
         (std::env::current_dir().unwrap_or_default(), args[1..].join(" "))
@@ -292,7 +295,15 @@ fn print_usage() {
     eprintln!("  openforce /<partial-name> [<task>]           Fuzzy match skill name");
 }
 
-async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
+fn now() -> String { chrono::Local::now().format("%H:%M:%S").to_string() }
+fn since(start: std::time::Instant) -> String { format!("{:.0}s", start.elapsed().as_secs_f64()) }
+
+macro_rules! step {
+    ($($arg:tt)*) => { eprintln!("[{}] {}", now(), format!($($arg)*)) };
+}
+
+async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
+    let pipeline_start = std::time::Instant::now();
     let api_key = std::env::var("API_KEY").unwrap_or_default();
     if api_key.len() < 5 { return Err(anyhow::anyhow!("API_KEY not set")); }
     let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
@@ -336,7 +347,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     // Phase 1: Semantic classification (LLM-powered, NOT keyword matching)
     let planner = build_client(&config, &config.planner.provider, &config.planner.model);
-    println!("[Planner] Semantic classification...");
+    step!("Step 1/4: Classifying task...");
 
     let kb = KnowledgeBase::load("experts").unwrap_or_else(|_| KnowledgeBase {
         index: openforce_knowledge_base::ExpertIndex { version: "1.0".into(), categories: HashMap::new(), model_tiers: HashMap::new() },
@@ -375,8 +386,8 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     let dir_summary: String = by_dir.iter()
         .filter(|(_, fs)| fs.iter().any(|f| f.ext == "rs"))
-        .map(|(d, fs)| format!("  {d}/")).collect::<Vec<_>>().join("\n");
-    let src_display: String = source_snapshot; // full source — model has 1M context
+        .map(|(d, _fs)| format!("  {d}/")).collect::<Vec<_>>().join("\n");
+    let _src_display: String = source_snapshot; // full source — model has 1M context
 
     let available_roles: Vec<String> = {
         let mut seen = std::collections::HashSet::new();
@@ -398,28 +409,61 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         agent_registry.metadata_for_planner()
     } else { String::new() };
 
+    step!("Step 2/4: Pre-plan clarify...");
     // ── Planner RoundTable: MECE-validated task decomposition ──
-    // Pre-plan: check information sufficiency
+    // Pre-plan: check information sufficiency — interactive Q&A
     let questions = planner_roundtable::pre_plan_clarify(&planner, &task).await.unwrap_or_default();
+    let mut clarifications: Vec<String> = Vec::new();
     if !questions.is_empty() {
-        println!("[Planner] ⚠ {} information gap(s) detected:", questions.len());
+        println!("\n╔══════════════════════════════════════════╗");
+        println!("║  Planner needs your input — {} question(s)  ║", questions.len());
+        println!("╚══════════════════════════════════════════╝\n");
         for (i, q) in questions.iter().enumerate() {
-            println!("  {}. {}", i+1, q.question);
+            println!("  Q{}: {}", i+1, q.question);
             if !q.options.is_empty() {
                 println!("     Options: {}", q.options.join(" | "));
             }
+            print!("  → Your answer (enter to skip): ");
+            use std::io::Write;
+            let _ = std::io::stdout().flush();
+            let mut answer = String::new();
+            let _ = std::io::stdin().read_line(&mut answer);
+            let answer = answer.trim().to_string();
+            if !answer.is_empty() {
+                clarifications.push(format!("Q: {} → A: {}", q.question, answer));
+            }
         }
-        println!("  → Consider: openforce continue to answer these questions");
+        if !clarifications.is_empty() {
+            let ctx = clarifications.join("\n");
+            println!("\n  ✅ {} clarification(s) collected — feeding back to Planner\n", clarifications.len());
+            // Inject clarifications into task for RoundTable
+            task = format!("{task}\n\n## User Clarifications\n{ctx}");
+        }
     }
-    println!("[Planner] RoundTable...");
+    let current_phase = session.as_ref().map(|s| s.current_phase.clone());
+    let phase_group_label = current_phase.as_ref()
+        .map(|p| format!("{}", p.phase_group().as_str()))
+        .unwrap_or_else(|| "all (no phase constraint)".into());
+    println!("[Planner] RoundTable (phase group: {})...", phase_group_label);
     let mut subtasks: Vec<(String, String, String, Vec<String>, Vec<String>)> = vec![]; // (role, title, desc, dependencies, files)
+    let mut sketched_count = 0usize;
+
+    // Load previous phase folders for Planner context
+    let previous_folders: Vec<WorkerOutputFolder> = session.as_ref()
+        .map(|s| s.phase_results.iter().flat_map(|pr| pr.folders.clone()).collect())
+        .unwrap_or_default();
+    if !previous_folders.is_empty() {
+        println!("  {} previous folder(s) loaded for context", previous_folders.len());
+    }
 
     let skills_dir_path = workspace.join("skills");
     let skills_dir_str = skills_dir_path.to_str().unwrap_or("skills").to_string();
-    match planner_roundtable::run_roundtable(&planner, &task, &classification, &available_roles,
+    match planner_roundtable::run_roundtable_phased(&planner, &task, &classification, &available_roles,
         &agent_catalog,
         &skills_dir_str,
-        &format!("{bound_skill_hint}--- Project Structure ---\n{dir_summary}")).await {
+        &format!("{bound_skill_hint}--- Project Structure ---\n{dir_summary}"),
+        current_phase.as_ref(),
+        &previous_folders).await {
         Ok(tree) => {
             println!("  MECE: {}, confidence: {}", tree.mece_validated, tree.confidence);
             if !tree.needs_info.is_empty() {
@@ -428,13 +472,35 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             if !tree.goal.specific.is_empty() {
                 println!("  SMART: {}", tree.goal.specific.chars().take(100).collect::<String>());
             }
+            // Collect sketched task titles so we can prune cross-group deps
+            let sketched_titles: std::collections::HashSet<String> = tree.tasks.iter()
+                .filter(|t| t.sketched)
+                .map(|t| t.title.clone())
+                .collect();
+
             for t in &tree.tasks {
+                if t.sketched {
+                    sketched_count += 1;
+                    continue; // skip sketched tasks — they will be replanned in detail later
+                }
+                // Prune dependencies that reference sketched (cross-group) tasks
+                let mut clean_deps = t.dependencies.clone();
+                let pruned: Vec<_> = clean_deps.iter()
+                    .filter(|d| sketched_titles.contains(d.as_str()))
+                    .cloned().collect();
+                if !pruned.is_empty() {
+                    eprintln!("  [DAG] task '{}': pruning cross-group deps → {:?}", t.title, pruned);
+                    clean_deps.retain(|d| !sketched_titles.contains(d.as_str()));
+                }
                 let desc = if t.acceptance_criteria.is_empty() {
                     t.objective.clone()
                 } else {
                     format!("{} | 验收: {}", t.objective, t.acceptance_criteria.first().unwrap_or(&String::new()))
                 };
-                subtasks.push((t.role.clone(), t.title.clone(), desc, t.dependencies.clone(), t.files.clone()));
+                subtasks.push((t.role.clone(), t.title.clone(), desc, clean_deps, t.files.clone()));
+            }
+            if sketched_count > 0 {
+                println!("  {} tasks sketched (deferred to later phase group)", sketched_count);
             }
         }
         Err(e) => {
@@ -470,6 +536,44 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
             let desc = if i == 0 { task.clone() } else { format!("{task} (independent verification)") };
             subtasks.push((role.clone(), format!("{role}: {desc}"), String::new(), vec![], vec![]));
         }
+    }
+
+    // ── Plan review: ask for human confirmation ──
+    println!("\n╔══════════════════════════════════════════╗");
+    println!("║  PLAN REVIEW — {} task(s) to execute      ║", subtasks.len());
+    println!("╠══════════════════════════════════════════╣");
+    for (i, (role, name, _desc, deps, _)) in subtasks.iter().enumerate() {
+        let dep_str = if deps.is_empty() { String::new() } else { format!(" (→ {})", deps.join(", ")) };
+        println!("║  {}. [{}] {}{}", i+1, role, name, dep_str);
+    }
+    if sketched_count > 0 {
+        println!("╠══════════════════════════════════════════╣");
+        println!("║  + {} task(s) sketched for later phase   ║", sketched_count);
+    }
+    println!("╚══════════════════════════════════════════╝");
+    print!("  Proceed? [y]es / [n]o / [m]odify: ");
+    use std::io::Write;
+    let _ = std::io::stdout().flush();
+    let mut confirm = String::new();
+    let _ = std::io::stdin().read_line(&mut confirm);
+    match confirm.trim().to_lowercase().as_str() {
+        "n" | "no" => {
+            step!("Cancelled — session saved. Resume: openforce continue");
+            if let Some(mut sess) = session { sess.save().map_err(|e| anyhow::anyhow!("{e}"))?; }
+            return Ok(());
+        }
+        "m" | "modify" => {
+            print!("  → Feedback: ");
+            let _ = std::io::stdout().flush();
+            let mut feedback = String::new();
+            let _ = std::io::stdin().read_line(&mut feedback);
+            if !feedback.trim().is_empty() {
+                task = format!("{task}\n\n## User Feedback — re-plan accordingly\n{}", feedback.trim());
+                if let Some(mut sess) = session { sess.save().map_err(|e| anyhow::anyhow!("{e}"))?; }
+                return Err(anyhow::anyhow!("Re-plan with feedback. Run: openforce continue"));
+            }
+        }
+        _ => { step!("Proceeding..."); }
     }
 
     let mut ri = 0usize;
@@ -565,10 +669,16 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     let max_concurrent = plan.max_concurrent;
 
+    // Use temp_dir + session_id subdir to isolate concurrent invocations
+    let wd = std::env::temp_dir().join(format!("openforce_{}", session_id.as_deref().unwrap_or("unknown")));
+    let _ = std::fs::create_dir_all(&wd);
+    let wd = wd.display().to_string();
+
     let mut results: Vec<(usize,String,bool,String,String)> = vec![];
     let mut failed_titles: std::collections::HashSet<String> = std::collections::HashSet::new();
+    step!("Step 3/4: Executing {} worker(s) in {} wave(s)...", subtasks.len(), waves.len());
     for (wave_num, wave) in waves.iter().enumerate() {
-        if waves.len() > 1 { println!("\n[Wave {}/{}] {} workers (max concurrent: {max_concurrent})", wave_num+1, waves.len(), wave.len()); }
+        if waves.len() > 1 { println!("  ══ Wave {}/{} ({} worker(s)) ══", wave_num+1, waves.len(), wave.len()); }
         let mut wave_handles = vec![];
 
         // Chunk wave into batches of max_concurrent to avoid resource exhaustion
@@ -683,12 +793,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let session_map_c = session_map.clone();
 
         if use_process {
+            let wd_c = wd.clone();
+            println!("    ▶ worker-{idx} [{}]: {} ...", pnc, name_c);
             wave_handles.push(tokio::spawn(async move {
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
                     "provider": provider_c, "model": model, "system_prompt": sp,
                     "api_key": api_key_c, "base_url": base_url_c,
-                    "output_file": format!("/tmp/worker_{idx}_output.json"),
+                    "output_file": format!("{}/worker_{idx}_output.json", wd_c),
                     "review_paths": review_paths_c,
                     "project_tools_addr": tools_addr,
                     "session_id": session_id_c,
@@ -697,7 +809,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     "skills_dir": workspace_c.join("skills").to_str().unwrap_or("skills").to_string(),
                     "bound_skill": bound_skill_for_task,
                 });
-                let task_file = format!("/tmp/openforce_worker_{idx}.json");
+                let task_file = format!("{}/openforce_worker_{idx}.json", wd_c);
                 let _ = std::fs::write(&task_file, serde_json::to_string(&task_json).unwrap_or_default());
                 let start = std::time::Instant::now();
                 match tokio::process::Command::new(&wb).arg("--task-file").arg(&task_file)
@@ -706,7 +818,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     Ok(mut child) => match child.wait().await {
                         Ok(_) => {
                             let elapsed = start.elapsed().as_secs();
-                            let out_file = format!("/tmp/worker_{idx}_output.json");
+                            let out_file = format!("{}/worker_{idx}_output.json", wd_c);
                             if let Ok(data) = std::fs::read_to_string(&out_file) {
                                 if let Ok(v) = serde_json::from_str::<serde_json::Value>(&data) {
                                     let success = v["success"].as_bool().unwrap_or(false);
@@ -762,6 +874,45 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     // Sort results by original task index for consistent display
     results.sort_by_key(|r| r.0);
 
+    // ── Build WorkerOutputFolders from output JSON files ──
+    let mut folders: Vec<WorkerOutputFolder> = Vec::new();
+    for (result_idx, pf, success, action, text) in &results {
+        let wid = format!("worker-{result_idx}");
+        let output_path = format!("{}/worker_{}_output.json", wd, *result_idx);
+        let output_path = if std::path::Path::new(&output_path).exists() { output_path } else { String::new() };
+        let title = subtasks
+            .get(result_idx.saturating_sub(1))
+            .map(|(_, t, _, _, _)| t.clone())
+            .unwrap_or_else(|| format!("task-{}", result_idx));
+        let objective = subtasks
+            .get(result_idx.saturating_sub(1))
+            .map(|(_, _, desc, _, _)| desc.as_str());
+        let cycles = if !output_path.is_empty() {
+            std::fs::read_to_string(&output_path).ok()
+                .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
+                .and_then(|v| v["cycles"].as_u64())
+                .unwrap_or(0) as usize
+        } else { 0 };
+        let folder = if !output_path.is_empty() {
+            planner_roundtable::summarize_worker_output_from_file(
+                &planner, &wid, pf, &title, objective,
+                &output_path, *success, action, cycles,
+            ).await
+        } else {
+            planner_roundtable::summarize_worker_output_from_text(
+                &planner, &wid, pf, &title, objective,
+                text, *success, action, cycles,
+            ).await
+        };
+        folders.push(folder);
+    }
+    println!("  [Folders] {} worker folders built", folders.len());
+    // Clean up temp worker files — output is now in session
+    for (result_idx, _, _, _, _) in &results {
+        let path = format!("{wd}/worker_{result_idx}_output.json");
+        let _ = std::fs::remove_file(&path);
+    }
+
     // ── Update Todo & Persist worker snapshots to Redis ──
     let mut todo_updated = false;
     if let Some(ref mut tl) = todo_list {
@@ -784,7 +935,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                         let caller = openforce_redis_session::store::Caller::Scheduler { session_id: sid_uuid };
                         for (idx, pf, success, _, text) in &results {
                             let (memory_subs, _memory_findings) = {
-                                let of = format!("/tmp/worker_{idx}_output.json");
+                                let of = format!("{}/worker_{idx}_output.json", wd);
                                 std::fs::read_to_string(&of).ok()
                                     .and_then(|d| serde_json::from_str::<serde_json::Value>(&d).ok())
                                     .and_then(|v| {
@@ -849,6 +1000,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let stalled_count = results.iter().filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error").count();
 
     let ok = results.iter().filter(|r| r.2).count();
+    step!("Step 4/4: Results — {}/{} workers completed", ok, results.len());
     println!("\n===== Results: {}/{} =====\n", ok, results.len());
 
     // ── [DONE:n] Detection ──
@@ -878,7 +1030,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
     let mut report = format!("# OpenForce Report\n\nTask: {task}\nRoles: {:?}\nWorkers: {}/{}\n",
         classification.suggested_roles, ok, results.len());
 
-    for (idx, pf, success, action, text) in &results {
+    for (idx, pf, success, _action, text) in &results {
         let s = if *success { "OK" } else { "FAIL" };
         println!("Worker-{idx} [{pf}] [{s}]:");
         report.push_str(&format!("\n## Worker-{idx} [{pf}]\n"));
@@ -888,32 +1040,29 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
 
     // ── Re-plan if too many workers stalled ──
     if stalled_count > 0 && stalled_count * 2 > results.len() {
-        println!("
-[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
-    // Collect failure reasons for Planner
-    let failed_detail: String = results.iter()
-        .filter(|r| !r.2)
-        .map(|(i, pf, _, action, text)| format!("Worker-{} [{}] {}: {}", i, pf, action, text.chars().take(200).collect::<String>()))
-        .collect::<Vec<_>>().join(" || ");
-    println!("  [Replan] analyzing failures...");
-    match planner_roundtable::replan_failed(&planner, &task, &failed_detail, &agent_catalog, &skills_dir_str, &dir_summary).await {
-        Ok(new_tree) => {
-            println!("  [Replan] new plan: {} tasks", new_tree.tasks.len());
-            for t in &new_tree.tasks {
-                println!("    [{}] {}", t.role, t.title);
-            }
-        }
-        Err(e) => println!("  [Replan] failed: {e}"),
-    }
-    println!("
-[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
+        let failed_detail: String = results.iter()
+            .filter(|r| !r.2)
+            .map(|(i, pf, _, action, text)| format!("Worker-{} [{}] {}: {}", i, pf, action, text.chars().take(200).collect::<String>()))
+            .collect::<Vec<_>>().join(" || ");
         let failed_summary: String = results.iter()
             .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
-            .map(|(i, pf, _, action, text)| {
-                format!("Worker-{i} [{pf}] {action}: {}", text.to_string())
-            })
+            .map(|(i, pf, _, action, text)| format!("Worker-{i} [{pf}] {action}: {}", text))
             .collect::<Vec<_>>().join(" | ");
+        println!("[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
         println!("  Reason: {failed_summary}");
+        println!("  [Replan] analyzing failures...");
+        let failed_folders: Vec<WorkerOutputFolder> = folders.iter()
+            .filter(|f| f.status != openforce_domain::worker_folder::WorkerStatus::Completed)
+            .cloned().collect();
+        match planner_roundtable::replan_failed(&planner, &task, &failed_detail, &agent_catalog, &skills_dir_str, &dir_summary, &failed_folders).await {
+            Ok(new_tree) => {
+                println!("  [Replan] new plan: {} tasks", new_tree.tasks.len());
+                for t in &new_tree.tasks {
+                    println!("    [{}] {}", t.role, t.title);
+                }
+            }
+            Err(e) => println!("  [Replan] failed: {e}"),
+        }
         report.push_str(&format!("\n## Re-plan Required\n{}/{} workers stalled: {}\n",
             stalled_count, results.len(), failed_summary));
         report.push_str("\nRun: openforce continue <session-id> to re-plan and re-execute\n");
@@ -935,7 +1084,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         let _ = std::fs::write(&ep, serde_json::to_string_pretty(&exp).unwrap_or_default());
     }
 
-    // Persist planner decomposition to Redis
+    // Persist planner decomposition and folders to Redis
     if let Some(ref sess) = session {
         if !redis_url.is_empty() {
             if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
@@ -944,6 +1093,14 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                     &subtasks.iter().map(|(r,n,_,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
                     &classification.suggested_roles,
                 ).await;
+                // Persist worker output folders for Planner context on resume
+                if !folders.is_empty() {
+                    if let Err(e) = store.add_folders(&sess.session_id, sess.plan_epoch, &folders).await {
+                        eprintln!("  [redis] folders save failed: {e}");
+                    } else {
+                        eprintln!("  [redis] {} folders saved for epoch {}", folders.len(), sess.plan_epoch);
+                    }
+                }
             }
         }
     }
@@ -962,6 +1119,7 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
                 status: if *success { "ok".into() } else { "failed".into() },
                 output: text.to_string(),
             }).collect(),
+            folders: folders.clone(),
             plan_epoch: sess.plan_epoch,
         });
         sess.last_summary = Some(format!("{}/{} workers completed", ok, results.len()));
@@ -989,12 +1147,13 @@ async fn run_pipeline(workspace: PathBuf, task: String, session: Option<session_
         sess.save().map_err(|e| anyhow::anyhow!("session save: {e}"))?;
     }
 
-    let rp = format!("/tmp/openforce_report_{report_prefix}.md");
+    let rp = format!("{}/openforce_report_{report_prefix}.md", wd);
     std::fs::write(&rp, &report)?;
     println!("
 
 ╔══════════════════════════════════════╗");
     println!("║  Report: {}", rp);
+    println!("║  Total time: {:.0}s", pipeline_start.elapsed().as_secs_f64());
     println!("╚══════════════════════════════════════╝
 ");
     Ok(())

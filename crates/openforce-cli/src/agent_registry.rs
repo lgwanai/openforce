@@ -161,6 +161,7 @@ impl AgentRegistry {
     }
 
     /// Load agent system prompt for Worker use — Level 2 disclosure.
+#[allow(dead_code)]
     pub fn load_for_worker(&self, name: &str) -> Option<String> {
         self.get(name).map(|a| a.system_prompt.clone())
     }
@@ -184,6 +185,7 @@ impl AgentRegistry {
     // ── Query APIs ──
 
     /// List all agents in a domain.
+#[allow(dead_code)]
     pub fn list_by_domain(&self, domain: &str) -> Vec<&AgentProfile> {
         self.by_domain.get(domain)
             .map(|indices| indices.iter().map(|&i| &self.agents[i]).collect())
@@ -198,6 +200,7 @@ impl AgentRegistry {
     }
 
     /// Count agents per domain (for display).
+#[allow(dead_code)]
     pub fn domain_counts(&self) -> Vec<(&str, usize)> {
         let mut counts: Vec<(&str, usize)> = self.by_domain.iter()
             .map(|(k, v)| (k.as_str(), v.len()))
@@ -207,6 +210,7 @@ impl AgentRegistry {
     }
 
     /// Search agents by keywords (for interactive exploration, NOT for planner).
+#[allow(dead_code)]
     pub fn search(&self, query: &str) -> Vec<&AgentProfile> {
         let q = query.to_lowercase();
         self.agents.iter()

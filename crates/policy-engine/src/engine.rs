@@ -4,6 +4,7 @@ use openforce_domain::identity::CertificateIdentity;
 use openforce_domain::token::CapabilityToken;
 
 /// Context for an authorization decision (architecture doc section 22).
+#[allow(non_snake_case)]
 pub struct AuthzContext {
     pub mTLS_identity: Option<CertificateIdentity>,
     pub capability_token: Option<CapabilityToken>,

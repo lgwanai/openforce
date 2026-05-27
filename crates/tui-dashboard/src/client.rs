@@ -6,8 +6,8 @@ use openforce_proto::swarmos::v1::{
     project_tool_service_client::ProjectToolServiceClient,
     approval_service_client::ApprovalServiceClient,
     GetSessionRequest, ListTasksRequest,
-    CompilePlanRequest, CancelTaskRequest, LeaseTaskRequest,
-    ApproveApprovalRequestRequest, RejectApprovalRequestRequest,
+    
+    
     Command as ProtoCommand, ProducerIdentity,
 };
 use serde::{Deserialize, Serialize};
@@ -16,6 +16,7 @@ use std::path::PathBuf;
 pub struct GrpcClients {
     pub session_store: SessionStoreClient<Channel>,
     pub scheduler: SchedulerClient<Channel>,
+    #[allow(dead_code)]
     pub project_tools: ProjectToolServiceClient<Channel>,
     pub approval: ApprovalServiceClient<Channel>,
 }

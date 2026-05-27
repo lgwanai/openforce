@@ -21,11 +21,13 @@ impl CapabilityTokenIssuer {
         Ok(Self { signing_key, issued: Arc::new(DashMap::new()), revoked: Arc::new(DashMap::new()) })
     }
 
+#[allow(dead_code)]
     pub fn generate_key() -> Vec<u8> {
         let rng = SystemRandom::new();
         Ed25519KeyPair::generate_pkcs8(&rng).expect("CRNG").as_ref().to_vec()
     }
 
+#[allow(dead_code)]
     pub fn public_key_bytes(&self) -> Vec<u8> {
         self.signing_key.public_key().as_ref().to_vec()
     }
@@ -55,6 +57,7 @@ impl CapabilityTokenIssuer {
         self.encode_token(&token)
     }
 
+#[allow(dead_code)]
     pub fn verify(&self, encoded: &str) -> Result<CapabilityToken, String> {
         let token = self.decode_token(encoded)?;
         if self.revoked.contains_key(&token.jti) { return Err("token revoked".into()); }
@@ -63,12 +66,14 @@ impl CapabilityTokenIssuer {
         Ok(token)
     }
 
+#[allow(dead_code)]
     pub fn revoke(&self, jti: Uuid, reason: &str) {
         self.revoked.insert(jti, reason.into());
         self.issued.remove(&jti);
         warn!("token revoked: jti={jti} reason={reason}");
     }
 
+#[allow(dead_code)]
     pub fn revoke_by_lease(&self, lease_id: Uuid) {
         let jtis: Vec<Uuid> = self.issued.iter()
             .filter_map(|e| if e.lease_id == lease_id { Some(e.jti) } else { None })
@@ -76,6 +81,7 @@ impl CapabilityTokenIssuer {
         for jti in jtis { self.revoke(jti, "lease cancelled"); }
     }
 
+#[allow(dead_code)]
     fn sign_canonical(&self, token: &CapabilityToken) -> Vec<u8> {
         let json = token.canonical_json().to_string();
         self.signing_key.sign(json.as_bytes()).as_ref().to_vec()
@@ -106,6 +112,7 @@ impl CapabilityTokenIssuer {
     }
 
     /// Parse token without cryptographic verification (for extracting claims).
+#[allow(dead_code)]
     pub fn decode_only(encoded: &str) -> Result<CapabilityToken, String> {
         use base64::Engine;
         let bytes = base64::engine::general_purpose::URL_SAFE_NO_PAD

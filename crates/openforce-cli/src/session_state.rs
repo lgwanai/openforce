@@ -3,6 +3,7 @@ use std::path::PathBuf;
 use uuid::Uuid;
 use openforce_domain::session::SessionState;
 use openforce_domain::session_phase::{SessionPhase, ConfirmationGate};
+use openforce_domain::worker_folder::WorkerOutputFolder;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkerOutput {
@@ -12,7 +13,10 @@ pub struct WorkerOutput {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PhaseResult {
     pub phase: SessionPhase, pub tasks_total: usize, pub tasks_ok: usize,
-    pub worker_outputs: Vec<WorkerOutput>, pub plan_epoch: i32,
+    pub worker_outputs: Vec<WorkerOutput>,
+    #[serde(default)]
+    pub folders: Vec<WorkerOutputFolder>,
+    pub plan_epoch: i32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -114,6 +118,7 @@ impl LocalSessionState {
 
     pub fn abort(&mut self) { self.state = SessionState::Aborted; self.updated_at = chrono::Utc::now(); }
 
+#[allow(dead_code)]
     pub fn is_active(&self) -> bool { matches!(self.state, SessionState::Active) }
 
     pub fn is_at_gate(&self) -> bool { self.pending_gate.is_some() }

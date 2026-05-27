@@ -5,6 +5,7 @@ use uuid::Uuid;
 use tracing::info;
 use openforce_domain::session::SessionState;
 use openforce_domain::session_phase::{SessionPhase, ConfirmationGate, GateStatus};
+use openforce_domain::worker_folder::WorkerOutputFolder;
 
 /// Who is making the session operation — used for access control.
 #[derive(Debug, Clone)]
@@ -162,6 +163,7 @@ impl RedisSessionStore {
     fn sk(id: &Uuid) -> String { format!("session:{id}") }
     fn rk(id: &Uuid) -> String { format!("session:{id}:results") }
     fn tk(id: &Uuid) -> String { format!("session:{id}:todos") }
+#[allow(dead_code)]
     fn wk(sid: &Uuid, wid: &str) -> String { format!("session:{sid}:worker:{wid}") }
     fn gk(id: &Uuid) -> String { format!("gate:{id}") }
     const AK: &'static str = "sessions:active";
@@ -174,7 +176,7 @@ impl RedisSessionStore {
             current_phase: SessionPhase::understand(), plan_version: 0, plan_epoch: 1,
             workspace: ws.into(), pending_gate_id: None, created_at: now, updated_at: now };
         self.write(&s).await?;
-        let _ =self.conn.sadd(Self::AK, id.to_string()).await.map_err(|e| format!("sadd: {e}"))?;
+        let _: () =self.conn.sadd(Self::AK, id.to_string()).await.map_err(|e| format!("sadd: {e}"))?;
         self.ttl(&id).await?;
         Ok(s)
     }
@@ -249,7 +251,7 @@ impl RedisSessionStore {
             ("status", "pending".into()), ("artifact_summary", summary.into()),
             ("plan_epoch", plan_epoch.to_string()), ("created_at", gate.created_at.to_rfc3339()),
         ];
-        let _ =self.conn.hset_multiple(Self::gk(&gate.gate_id), &f).await.map_err(|e| format!("hset: {e}"))?;
+        let _: () =self.conn.hset_multiple(Self::gk(&gate.gate_id), &f).await.map_err(|e| format!("hset: {e}"))?;
         if let Some(mut s) = self.load(&sid).await? {
             s.pending_gate_id = Some(gate.gate_id); s.updated_at = chrono::Utc::now();
             self.write(&s).await?;
@@ -311,8 +313,31 @@ impl RedisSessionStore {
 
     pub async fn add_result(&mut self, sid: &Uuid, r: &PhaseResultEntry) -> Result<(), String> {
         let j = serde_json::to_string(r).map_err(|e| format!("json: {e}"))?;
-        let _ =self.conn.rpush(Self::rk(sid), j).await.map_err(|e| format!("rpush: {e}"))?;
+        let _: () =self.conn.rpush(Self::rk(sid), j).await.map_err(|e| format!("rpush: {e}"))?;
         Ok(())
+    }
+
+    // ── Worker Output Folders ──
+
+    pub async fn add_folders(
+        &mut self, sid: &Uuid, epoch: i32, folders: &[WorkerOutputFolder],
+    ) -> Result<(), String> {
+        let key = format!("session:{}:folders:{}", sid, epoch);
+        let json = serde_json::to_string(folders).map_err(|e| format!("json: {e}"))?;
+        let _: () = self.conn.set(&key, &json).await.map_err(|e| format!("set folders: {e}"))?;
+        self.ttl_key(&key).await?;
+        Ok(())
+    }
+
+    pub async fn get_folders(
+        &mut self, sid: &Uuid, epoch: i32,
+    ) -> Result<Vec<WorkerOutputFolder>, String> {
+        let key = format!("session:{}:folders:{}", sid, epoch);
+        let data: Option<String> = self.conn.get(&key).await.map_err(|e| format!("get folders: {e}"))?;
+        match data {
+            Some(json) => serde_json::from_str(&json).map_err(|e| format!("parse folders: {e}")),
+            None => Ok(vec![]),
+        }
     }
 
     // ── Planner Snapshot ──
@@ -323,7 +348,7 @@ impl RedisSessionStore {
             ("classification", classification.into()), ("decomposition", decomposition.into()),
             ("roles", roles.join(",")), ("epoch", chrono::Utc::now().to_rfc3339()),
         ];
-        let _ =self.conn.hset_multiple(&key, &f).await.map_err(|e| format!("hset: {e}"))?;
+        let _: () =self.conn.hset_multiple(&key, &f).await.map_err(|e| format!("hset: {e}"))?;
         Ok(())
     }
 
@@ -331,14 +356,19 @@ impl RedisSessionStore {
 
     /// Worker updates its OWN snapshot. Fails if caller is not the worker itself.
     pub async fn set_worker_snapshot(&mut self, caller: &Caller, sn: &WorkerSnapshot) -> Result<(), String> {
-        if !caller.is_worker() { return Err("access denied: only the worker can update its own data".into()); }
-        if let Caller::Worker { worker_id, session_id } = caller {
-            if &sn.worker_id != worker_id { return Err(format!("access denied: worker {worker_id} cannot write as {}", sn.worker_id)); }
-            let key = format!("session:{session_id}:worker:{worker_id}");
-            let j = serde_json::to_string(sn).map_err(|e| format!("json: {e}"))?;
-            let _: bool = self.conn.hset(&key, "snapshot", j).await.map_err(|e| format!("{e}")).unwrap_or(false);
-            Ok(())
-        } else { Err("access denied".into()) }
+        let session_id = caller.session_id();
+        let key = format!("session:{session_id}:worker:{}", sn.worker_id);
+        // Worker must write its own snapshot; Scheduler can write any
+        if caller.is_worker() {
+            if let Caller::Worker { worker_id, .. } = caller {
+                if &sn.worker_id != worker_id {
+                    return Err(format!("access denied: worker {worker_id} cannot write as {}", sn.worker_id));
+                }
+            }
+        }
+        let j = serde_json::to_string(sn).map_err(|e| format!("json: {e}"))?;
+        let _: bool = self.conn.hset(&key, "snapshot", &j).await.map_err(|e| format!("hset worker snapshot: {e}"))?;
+        Ok(())
     }
 
     /// Read any worker's snapshot (no restriction).
@@ -371,7 +401,7 @@ impl RedisSessionStore {
 
     pub async fn set_todo_list(&mut self, sid: &Uuid, todos: &SessionTodoList) -> Result<(), String> {
         let json = serde_json::to_string(todos).map_err(|e| format!("json: {e}"))?;
-        let _ = self.conn.set(Self::tk(sid), &json).await.map_err(|e| format!("set todos: {e}"))?;
+        let _: () = self.conn.set(Self::tk(sid), &json).await.map_err(|e| format!("set todos: {e}"))?;
         self.ttl_key(&Self::tk(sid)).await
     }
 
@@ -416,7 +446,7 @@ impl RedisSessionStore {
             if &a.created_by != worker_id { return Err(format!("access denied: {worker_id} cannot create as {}", a.created_by)); }
             let key = format!("session:{session_id}:artifacts");
             let j = serde_json::to_string(a).map_err(|e| format!("json: {e}"))?;
-            let _ =self.conn.rpush(&key, j).await.map_err(|e| format!("rpush: {e}"))?;
+            let _: () =self.conn.rpush(&key, j).await.map_err(|e| format!("rpush: {e}"))?;
             Ok(())
         } else { Err("access denied".into()) }
     }
@@ -475,7 +505,7 @@ impl RedisSessionStore {
     pub async fn add_instruction(&mut self, sid: &Uuid, text: &str) -> Result<(), String> {
         let key = format!("session:{sid}:instructions");
         let entry = format!("{}|{}", chrono::Utc::now().to_rfc3339(), text);
-        let _ =self.conn.rpush(&key, entry).await.map_err(|e| format!("rpush: {e}"))?;
+        let _: () =self.conn.rpush(&key, entry).await.map_err(|e| format!("rpush: {e}"))?;
         Ok(())
     }
 
@@ -495,7 +525,7 @@ impl RedisSessionStore {
             ("pending_gate_id", s.pending_gate_id.map(|i| i.to_string()).unwrap_or_default()),
             ("created_at", s.created_at.to_rfc3339()), ("updated_at", chrono::Utc::now().to_rfc3339()),
         ];
-        let _ =self.conn.hset_multiple(Self::sk(&s.session_id), &f).await.map_err(|e| format!("hset: {e}"))?;
+        let _: () =self.conn.hset_multiple(Self::sk(&s.session_id), &f).await.map_err(|e| format!("hset: {e}"))?;
         Ok(())
     }
 

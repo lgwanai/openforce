@@ -29,6 +29,7 @@ use crate::approval_store::ApprovalStore;
 
 #[derive(Clone)]
 pub struct ProjectToolServiceImpl {
+    #[allow(dead_code)]
     pub pool: PgPool,
 }
 
@@ -46,6 +47,7 @@ impl ProjectToolService for ProjectToolServiceImpl {
         &self, r: Request<ReadProjectFileRequest>,
     ) -> Result<Response<ReadProjectFileResponse>, Status> {
         let req = r.into_inner();
+#[allow(unused_variables)]
         let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
         let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
 
@@ -100,6 +102,7 @@ impl ProjectToolService for ProjectToolServiceImpl {
         &self, r: Request<SubmitProjectPatchRequest>,
     ) -> Result<Response<SubmitProjectPatchResponse>, Status> {
         let req = r.into_inner();
+#[allow(unused_variables)]
         let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
         let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
         let patch = req.patch.ok_or(Status::invalid_argument("patch required"))?;
@@ -228,7 +231,9 @@ impl ApprovalService for ApprovalServiceImpl {
         &self, r: Request<CreateApprovalRequestRequest>,
     ) -> Result<Response<CreateApprovalRequestResponse>, Status> {
         let req = r.into_inner();
+#[allow(unused_variables)]
         let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
+#[allow(unused_variables)]
         let class = req.classification.ok_or(Status::invalid_argument("classification required"))?;
 
         let domain_class = openforce_domain::patch::PatchClassification {
@@ -303,6 +308,7 @@ impl ApprovalService for ApprovalServiceImpl {
         &self, r: Request<ConsumeApprovalTokenRequest>,
     ) -> Result<Response<ConsumeApprovalTokenResponse>, Status> {
         let req = r.into_inner();
+#[allow(unused_variables)]
         let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
 
         let token = self.approval_store.consume_token(

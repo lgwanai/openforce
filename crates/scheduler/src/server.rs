@@ -22,6 +22,7 @@ use crate::capability_token::CapabilityTokenIssuer;
 #[derive(Clone)]
 pub struct SchedulerService {
     pub session_store_addr: String,
+    #[allow(dead_code)]
     pub instance_id: String,
     pub token_issuer: Option<Arc<CapabilityTokenIssuer>>,
     /// Reused gRPC connection — established once, shared across requests.

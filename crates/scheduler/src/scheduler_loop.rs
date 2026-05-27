@@ -10,6 +10,7 @@ use openforce_proto::swarmos::v1::{
 };
 use crate::dag::Dag;
 
+#[allow(dead_code)]
 pub struct SchedulerRuntime {
     client: SessionStoreClient<tonic::transport::Channel>,
     instance_id: String,
@@ -17,6 +18,7 @@ pub struct SchedulerRuntime {
     session_ids: Vec<Uuid>,
 }
 
+#[allow(dead_code)]
 impl SchedulerRuntime {
     pub fn new(client: SessionStoreClient<tonic::transport::Channel>) -> Self {
         Self { client, instance_id: Uuid::now_v7().to_string(), dag_cache: HashMap::new(), session_ids: vec![] }

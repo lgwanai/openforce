@@ -14,6 +14,7 @@ pub mod token;
 pub mod identity;
 pub mod sandbox_image;
 pub mod session_phase;
+pub mod worker_folder;
 mod token_tests;
 
 pub use error::DomainError;
@@ -31,4 +32,5 @@ pub use effect::{EffectType, EffectId, IdempotencyKey, EffectState};
 pub use token::{CapabilityToken, TokenScope};
 pub use identity::{CertificateIdentity, CertificateBundle, ServiceRole};
 pub use sandbox_image::{SandboxImage, SandboxImageClass, VmState};
-pub use session_phase::{SessionPhase, ConfirmationGate, GateStatus};
+pub use session_phase::{SessionPhase, ConfirmationGate, GateStatus, PhaseGroup};
+pub use worker_folder::{WorkerOutputFolder, WorkerStatus, OutputRef};

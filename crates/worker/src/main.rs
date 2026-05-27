@@ -64,6 +64,7 @@ impl AgentMemory {
         if !self.key_findings.contains(&s) { self.key_findings.push(s); }
     }
 
+#[allow(dead_code)]
     fn all_done(&self) -> bool { self.subtasks.iter().all(|t| t.status == "done") }
 }
 
@@ -103,6 +104,7 @@ fn worker_tools() -> Vec<Tool> {
         Tool::new("record_finding", "Record a key finding", serde_json::json!({
             "type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]
         })),
+        Tool::bare("compress_context", "Compress conversation history to preserve context. Use when you notice the conversation is getting long or you need to free up context for more work. Returns a structured summary of progress, decisions, and next steps."),
         Tool::new("skill_load", "Load a skill's instructions", serde_json::json!({
             "type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]
         })),
@@ -315,9 +317,9 @@ impl ContextManager {
         for (prefix, limit) in MODEL_LIMITS { if self.model.contains(prefix) { return *limit; } }
         128_000
     }
-    fn reserved_tokens(&self) -> usize { 20_000 }
-    fn usable_tokens(&self) -> usize { (self.context_limit() - self.reserved_tokens()).max(4_000) }
-    fn is_overflow(&self, total_tokens: usize) -> bool { total_tokens >= self.usable_tokens() }
+    fn is_overflow(&self, total_tokens: usize) -> bool {
+        total_tokens >= self.context_limit() * 80 / 100
+    }
     fn estimate_tokens(text: &str) -> usize { text.len() / 4 }
 }
 
@@ -409,7 +411,7 @@ async fn main() -> Result<()> {
     let max_dur = Duration::from_secs(
         std::env::var("WORKER_MAX_SECS").ok().and_then(|s| s.parse().ok()).unwrap_or(1200));
     let max_cycles: usize = std::env::var("WORKER_MAX_CYCLES").ok().and_then(|s| s.parse().ok()).unwrap_or(40);
-    let max_no_prog: usize = std::env::var("WORKER_MAX_NO_PROGRESS").ok().and_then(|s| s.parse().ok()).unwrap_or(8);
+    let _max_no_prog: usize = std::env::var("WORKER_MAX_NO_PROGRESS").ok().and_then(|s| s.parse().ok()).unwrap_or(8);
     let mut tokens_used: usize = 0;
     let max_tokens: usize = std::env::var("WORKER_MAX_TOKENS").ok().and_then(|s| s.parse().ok()).unwrap_or(2_000_000);
 
@@ -513,12 +515,33 @@ async fn main() -> Result<()> {
                 break;
             }
 
-            if ctx_mgr.is_overflow(conversation.iter().map(|m| ContextManager::estimate_tokens(&m.content) + 100).sum()) {
-                conversation.clear();
-                conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!("[COMPACTED: {} subtasks done]", executor.memory.subtasks.iter().filter(|t| t.status == "done").count())));
+            // Auto-compact: LLM-summarized context preservation at 80% threshold
+            let est_tokens: usize = conversation.iter().map(|m| ContextManager::estimate_tokens(&m.content) + 100).sum();
+            if ctx_mgr.is_overflow(est_tokens) {
+                eprintln!("  [Compaction] context {est_tokens}/{} tokens → compressing", ctx_mgr.context_limit());
+                let history_text: String = conversation.iter()
+                    .map(|m| format!("[{}]: {}", if m.role.contains("assistant") {"ASSISTANT"} else {"USER"}, m.content.chars().take(2000).collect::<String>()))
+                    .collect::<Vec<_>>().join("\n");
+                match perform_compaction(&client, &system, &history_text).await {
+                    Ok(summary) => {
+                        conversation.clear();
+                        conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!(
+                            "[CONTEXT COMPACTED — preserved below]\n\n{summary}",
+                        )));
+                        eprintln!("  [Compaction] done — summary {} chars", summary.len());
+                    }
+                    Err(e) => {
+                        eprintln!("  [Compaction] failed: {e} — falling back to simple compaction");
+                        conversation.clear();
+                        conversation.push(openforce_llm_client::unified::ToolMessage::user(&format!(
+                            "[COMPACTED: {} subtasks done]",
+                            executor.memory.subtasks.iter().filter(|t| t.status == "done").count()
+                        )));
+                    }
+                }
             }
 
-            let ctx = build_context_string(&executor);
+            let _ctx = build_context_string(&executor);
             let todo_status: String = executor.memory.subtasks.iter().enumerate().map(|(i, s)| {
                 let icon = if i < st_idx { "✓" } else if i == st_idx { "▶" } else { "○" };
                 format!("{icon} {}. {}", i+1, truncate_str(&s.description, 60))
@@ -543,9 +566,27 @@ async fn main() -> Result<()> {
                         conversation.push(openforce_llm_client::unified::ToolMessage::assistant_with_tools(&response.text, &response.tool_calls));
                         let mut tr = Vec::new();
                         for tc in &response.tool_calls {
-                            let r = executor.execute(tc).await;
-                            eprintln!("    {} {}", if r.success {"✓"} else {"✗"}, tc.name);
-                            tr.push(r);
+                            if tc.name == "compress_context" {
+                                // LLM-summarize conversation, return summary as tool result.
+                                // Does NOT clear conversation — auto-compaction at 80% handles that.
+                                eprintln!("    ↻ compress_context");
+                                let history_text: String = conversation.iter()
+                                    .map(|m| format!("[{}]: {}", if m.role.contains("assistant") {"A"} else {"U"}, truncate_str(&m.content, 1500)))
+                                    .collect::<Vec<_>>().join("\n");
+                                match perform_compaction(&client, &system, &history_text).await {
+                                    Ok(summary) => {
+                                        executor.memory.add_finding(&format!("[compacted] {summary}"));
+                                        tr.push(ToolResult::success(&tc.id, &format!("Compacted context summary:\n\n{summary}")));
+                                    }
+                                    Err(e) => {
+                                        tr.push(ToolResult::error(&tc.id, &format!("compaction failed: {e}")));
+                                    }
+                                }
+                            } else {
+                                let r = executor.execute(tc).await;
+                                eprintln!("    {} {}", if r.success {"✓"} else {"✗"}, tc.name);
+                                tr.push(r);
+                            }
                         }
                         conversation.push(openforce_llm_client::unified::ToolMessage::tool_results(&tr));
                         continue;
@@ -556,7 +597,7 @@ async fn main() -> Result<()> {
                         tool_calls: None, tool_results: None, tool_call_id: None,
                     });
                     let upper = text.to_uppercase().replace("**", "");
-                    if upper.contains("VERIFIED") || upper.contains("FINAL: PASS") {
+                    if (upper.contains("VERIFIED") && !upper.contains("NOT VERIFIED") && !upper.contains("UNVERIFIED")) || upper.contains("FINAL: PASS") {
                         executor.memory.subtasks[st_idx].status = "done".into();
                         executor.memory.subtasks[st_idx].output = text.clone();
                         eprintln!("  ✓ Subtask {}/{} PASS", st_idx+1, subtask_count);

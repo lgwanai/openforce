@@ -14,6 +14,7 @@ pub struct TaskInfo {
     pub state: String,
     pub attempt: i32,
     pub fencing: u64,
+    #[allow(dead_code)]
     pub lease_id: String,
 }
 

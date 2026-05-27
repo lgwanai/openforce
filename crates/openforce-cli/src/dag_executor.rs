@@ -254,7 +254,7 @@ pub fn compute_waves(
                     graph[di].push(i);
                     in_degree[i] += 1;
                 }
-                Some(&di) => {
+                Some(&_di) => {
                     // Self-reference — already caught in validation but be safe
                     tracing::warn!(
                         task.id = %task.id,

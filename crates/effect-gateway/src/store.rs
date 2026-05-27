@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::Utc;
 use sqlx::PgPool;
 use uuid::Uuid;
 use openforce_domain::error::{DomainError, DomainResult};
@@ -66,6 +66,7 @@ impl EffectStore {
         Ok(EffectState::Rejected)
     }
 
+#[allow(dead_code)]
     pub async fn commit_effect(&self, effect_id: Uuid, execution_ref: &str) -> DomainResult<EffectState> {
         let now = Utc::now();
         sqlx::query(
