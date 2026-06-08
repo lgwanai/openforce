@@ -1,1 +1,3 @@
-fn main() { println!("space-manager ready"); }
+fn main() {
+    println!("space-manager ready");
+}

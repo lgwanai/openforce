@@ -1,3 +1,4 @@
+use crate::components::status::TaskInfo;
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
@@ -5,7 +6,6 @@ use ratatui::{
     widgets::{Block, Borders, List, ListItem, Paragraph},
     Frame,
 };
-use crate::components::status::TaskInfo;
 
 pub struct PlanTreePanel {
     pub tasks: Vec<TaskInfo>,
@@ -15,7 +15,11 @@ pub struct PlanTreePanel {
 
 impl PlanTreePanel {
     pub fn new() -> Self {
-        Self { tasks: vec![], plan_epoch: 0, selected_idx: 0 }
+        Self {
+            tasks: vec![],
+            plan_epoch: 0,
+            selected_idx: 0,
+        }
     }
 
     pub fn update_from_tasks(&mut self, tasks: &[TaskInfo]) {
@@ -32,16 +36,15 @@ impl PlanTreePanel {
     pub fn render(&self, f: &mut Frame, area: Rect) {
         let chunks = Layout::default()
             .direction(Direction::Vertical)
-            .constraints([
-                Constraint::Length(1),
-                Constraint::Min(1),
-            ])
+            .constraints([Constraint::Length(1), Constraint::Min(1)])
             .split(area);
 
         let header = Paragraph::new(Line::from(vec![
             Span::styled(
                 format!("  Epoch {}  ", self.plan_epoch),
-                Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .fg(Color::Cyan)
+                    .add_modifier(Modifier::BOLD),
             ),
             Span::raw(format!("{} tasks", self.tasks.len())),
         ]))
@@ -76,21 +79,34 @@ impl PlanTreePanel {
 
             let mut spans = vec![
                 Span::styled(prefix, style),
-                Span::styled(format!("[{}] ", task.task_id.chars().take(10).collect::<String>()), style),
+                Span::styled(
+                    format!("[{}] ", task.task_id.chars().take(10).collect::<String>()),
+                    style,
+                ),
                 Span::styled(&task.task_type, style.add_modifier(Modifier::BOLD)),
                 Span::styled(format!(" ({})", task.state), style),
             ];
             if task.attempt > 0 {
-                spans.push(Span::styled(format!(" attempt#{}", task.attempt), Style::default().fg(Color::DarkGray)));
+                spans.push(Span::styled(
+                    format!(" attempt#{}", task.attempt),
+                    Style::default().fg(Color::DarkGray),
+                ));
             }
             if task.fencing > 0 {
-                spans.push(Span::styled(format!(" fence#{}", task.fencing), Style::default().fg(Color::DarkGray)));
+                spans.push(Span::styled(
+                    format!(" fence#{}", task.fencing),
+                    Style::default().fg(Color::DarkGray),
+                ));
             }
             items.push(ListItem::new(Line::from(spans)));
         }
 
         let list = List::new(items)
-            .block(Block::default().borders(Borders::ALL).title("Task Decomposition"))
+            .block(
+                Block::default()
+                    .borders(Borders::ALL)
+                    .title("Task Decomposition"),
+            )
             .highlight_style(Style::default().add_modifier(Modifier::REVERSED));
         f.render_widget(list, chunks[1]);
     }

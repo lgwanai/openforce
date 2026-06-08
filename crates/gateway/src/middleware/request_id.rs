@@ -12,12 +12,16 @@ pub struct RequestIdLayer;
 
 impl<S> Layer<S> for RequestIdLayer {
     type Service = RequestIdService<S>;
-    fn layer(&self, inner: S) -> Self::Service { RequestIdService { inner } }
+    fn layer(&self, inner: S) -> Self::Service {
+        RequestIdService { inner }
+    }
 }
 
 #[derive(Clone)]
 #[allow(dead_code)]
-pub struct RequestIdService<S> { inner: S }
+pub struct RequestIdService<S> {
+    inner: S,
+}
 
 impl<S, B> Service<Request<B>> for RequestIdService<S>
 where
@@ -34,7 +38,9 @@ where
     }
 
     fn call(&mut self, mut req: Request<B>) -> Self::Future {
-        let request_id = req.headers().get("x-request-id")
+        let request_id = req
+            .headers()
+            .get("x-request-id")
             .and_then(|v| v.to_str().ok())
             .map(|s| s.to_string())
             .unwrap_or_else(|| Uuid::now_v7().to_string());

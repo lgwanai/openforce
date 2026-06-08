@@ -1,6 +1,10 @@
-use axum::{routing::{get, post}, Router, Json, extract::{State, Path}};
-use serde_json::{json, Value};
 use crate::handler::AppState;
+use axum::{
+    extract::{Path, State},
+    routing::{get, post},
+    Json, Router,
+};
+use serde_json::{json, Value};
 
 pub fn routes() -> Router<AppState> {
     Router::new()
@@ -15,6 +19,10 @@ async fn request_effect(State(_s): State<AppState>, Json(_body): Json<Value>) ->
 async fn get_effect(State(_s): State<AppState>, Path(_id): Path<String>) -> Json<Value> {
     Json(json!({"data": {"status": "delegated"}}))
 }
-async fn approve_effect(State(_s): State<AppState>, Path(_id): Path<String>, Json(_body): Json<Value>) -> Json<Value> {
+async fn approve_effect(
+    State(_s): State<AppState>,
+    Path(_id): Path<String>,
+    Json(_body): Json<Value>,
+) -> Json<Value> {
     Json(json!({"data": {"status": "delegated"}}))
 }

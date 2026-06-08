@@ -1,18 +1,23 @@
+use openforce_domain::session::SessionState;
+use openforce_domain::session_phase::{ConfirmationGate, SessionPhase};
+use openforce_domain::worker_folder::WorkerOutputFolder;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use uuid::Uuid;
-use openforce_domain::session::SessionState;
-use openforce_domain::session_phase::{SessionPhase, ConfirmationGate};
-use openforce_domain::worker_folder::WorkerOutputFolder;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkerOutput {
-    pub worker_id: String, pub role: String, pub status: String, pub output: String,
+    pub worker_id: String,
+    pub role: String,
+    pub status: String,
+    pub output: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PhaseResult {
-    pub phase: SessionPhase, pub tasks_total: usize, pub tasks_ok: usize,
+    pub phase: SessionPhase,
+    pub tasks_total: usize,
+    pub tasks_ok: usize,
     pub worker_outputs: Vec<WorkerOutput>,
     #[serde(default)]
     pub folders: Vec<WorkerOutputFolder>,
@@ -21,37 +26,62 @@ pub struct PhaseResult {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PendingGate {
-    pub gate_id: Uuid, pub phase: SessionPhase,
-    pub artifact_summary: String, pub created_at: chrono::DateTime<chrono::Utc>,
+    pub gate_id: Uuid,
+    pub phase: SessionPhase,
+    pub artifact_summary: String,
+    pub created_at: chrono::DateTime<chrono::Utc>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LocalSessionState {
-    pub session_id: Uuid, pub goal: String, pub state: SessionState,
-    pub current_phase: SessionPhase, pub plan_version: i32, pub plan_epoch: i32,
-    pub workspace: PathBuf, pub pending_gate: Option<PendingGate>,
-    pub phase_results: Vec<PhaseResult>, pub last_summary: Option<String>,
+    pub session_id: Uuid,
+    pub goal: String,
+    pub state: SessionState,
+    pub current_phase: SessionPhase,
+    pub plan_version: i32,
+    pub plan_epoch: i32,
+    pub workspace: PathBuf,
+    pub pending_gate: Option<PendingGate>,
+    pub phase_results: Vec<PhaseResult>,
+    pub last_summary: Option<String>,
     pub bound_skill: Option<String>,
-    pub created_at: chrono::DateTime<chrono::Utc>, pub updated_at: chrono::DateTime<chrono::Utc>,
+    pub created_at: chrono::DateTime<chrono::Utc>,
+    pub updated_at: chrono::DateTime<chrono::Utc>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SessionSummary {
-    pub session_id: Uuid, pub goal: String, pub state: SessionState,
-    pub current_phase: SessionPhase, pub created_at: chrono::DateTime<chrono::Utc>,
+    pub session_id: Uuid,
+    pub goal: String,
+    pub state: SessionState,
+    pub current_phase: SessionPhase,
+    pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
 }
 
 impl LocalSessionState {
     pub fn create(goal: String, workspace: PathBuf) -> Self {
         let now = chrono::Utc::now();
-        Self { session_id: Uuid::now_v7(), goal, state: SessionState::Active,
-            current_phase: SessionPhase::understand(), plan_version: 0, plan_epoch: 1,
-            workspace, pending_gate: None, phase_results: vec![], last_summary: None,
-            bound_skill: None, created_at: now, updated_at: now }
+        Self {
+            session_id: Uuid::now_v7(),
+            goal,
+            state: SessionState::Active,
+            current_phase: SessionPhase::understand(),
+            plan_version: 0,
+            plan_epoch: 1,
+            workspace,
+            pending_gate: None,
+            phase_results: vec![],
+            last_summary: None,
+            bound_skill: None,
+            created_at: now,
+            updated_at: now,
+        }
     }
 
-    fn state_dir(workspace: &PathBuf) -> PathBuf { workspace.join(".openforce").join("sessions") }
+    fn state_dir(workspace: &PathBuf) -> PathBuf {
+        workspace.join(".openforce").join("sessions")
+    }
 
     fn state_path(workspace: &PathBuf, sid: &Uuid) -> PathBuf {
         Self::state_dir(workspace).join(format!("{sid}.json"))
@@ -73,53 +103,81 @@ impl LocalSessionState {
 
     pub fn list_sessions(workspace: &PathBuf) -> Result<Vec<SessionSummary>, String> {
         let dir = Self::state_dir(workspace);
-        if !dir.exists() { return Ok(vec![]); }
+        if !dir.exists() {
+            return Ok(vec![]);
+        }
         let mut out = vec![];
         for e in std::fs::read_dir(&dir).map_err(|e| format!("dir: {e}"))? {
             let e = e.map_err(|e| format!("entry: {e}"))?;
             if let Ok(json) = std::fs::read_to_string(e.path()) {
                 if let Ok(s) = serde_json::from_str::<LocalSessionState>(&json) {
-                    out.push(SessionSummary { session_id: s.session_id, goal: s.goal,
-                        state: s.state, current_phase: s.current_phase,
-                        created_at: s.created_at, updated_at: s.updated_at });
+                    out.push(SessionSummary {
+                        session_id: s.session_id,
+                        goal: s.goal,
+                        state: s.state,
+                        current_phase: s.current_phase,
+                        created_at: s.created_at,
+                        updated_at: s.updated_at,
+                    });
                 }
             }
         }
-        out.sort_by_key(|s| s.updated_at); out.reverse();
+        out.sort_by_key(|s| s.updated_at);
+        out.reverse();
         Ok(out)
     }
 
     pub fn find_latest(workspace: &PathBuf) -> Result<Option<Self>, String> {
         if let Some(s) = Self::list_sessions(workspace)?.first() {
             Self::load(workspace, &s.session_id).map(Some)
-        } else { Ok(None) }
+        } else {
+            Ok(None)
+        }
     }
 
     pub fn add_phase_result(&mut self, r: PhaseResult) {
-        self.phase_results.push(r); self.updated_at = chrono::Utc::now();
+        self.phase_results.push(r);
+        self.updated_at = chrono::Utc::now();
     }
 
     pub fn set_gate(&mut self, gate: &ConfirmationGate) {
         self.current_phase = gate.phase.clone();
-        self.pending_gate = Some(PendingGate { gate_id: gate.gate_id, phase: gate.phase.clone(),
+        self.pending_gate = Some(PendingGate {
+            gate_id: gate.gate_id,
+            phase: gate.phase.clone(),
             artifact_summary: gate.artifact_summary.clone().unwrap_or_default(),
-            created_at: gate.created_at });
+            created_at: gate.created_at,
+        });
         self.updated_at = chrono::Utc::now();
     }
 
-    pub fn clear_gate(&mut self) { self.pending_gate = None; self.updated_at = chrono::Utc::now(); }
+    pub fn clear_gate(&mut self) {
+        self.pending_gate = None;
+        self.updated_at = chrono::Utc::now();
+    }
 
-    pub fn advance_phase(&mut self, next: SessionPhase) { self.current_phase = next; self.updated_at = chrono::Utc::now(); }
+    pub fn advance_phase(&mut self, next: SessionPhase) {
+        self.current_phase = next;
+        self.updated_at = chrono::Utc::now();
+    }
 
     pub fn complete(&mut self) {
-        self.state = SessionState::Completed; self.current_phase = SessionPhase::complete();
+        self.state = SessionState::Completed;
+        self.current_phase = SessionPhase::complete();
         self.updated_at = chrono::Utc::now();
     }
 
-    pub fn abort(&mut self) { self.state = SessionState::Aborted; self.updated_at = chrono::Utc::now(); }
+    pub fn abort(&mut self) {
+        self.state = SessionState::Aborted;
+        self.updated_at = chrono::Utc::now();
+    }
 
-#[allow(dead_code)]
-    pub fn is_active(&self) -> bool { matches!(self.state, SessionState::Active) }
+    #[allow(dead_code)]
+    pub fn is_active(&self) -> bool {
+        matches!(self.state, SessionState::Active)
+    }
 
-    pub fn is_at_gate(&self) -> bool { self.pending_gate.is_some() }
+    pub fn is_at_gate(&self) -> bool {
+        self.pending_gate.is_some()
+    }
 }

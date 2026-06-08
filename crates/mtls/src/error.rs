@@ -19,7 +19,10 @@ pub enum MTLSError {
     #[error("rotation error: {detail}")]
     RotationError { detail: String },
     #[error("io error: {source}")]
-    IoError { #[from] source: std::io::Error },
+    IoError {
+        #[from]
+        source: std::io::Error,
+    },
 }
 
 pub type MTLSResult<T> = Result<T, MTLSError>;

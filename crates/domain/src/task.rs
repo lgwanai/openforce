@@ -8,11 +8,15 @@ use crate::error::{DomainError, DomainResult};
 pub struct TaskId(pub Uuid);
 
 impl TaskId {
-    pub fn new() -> Self { Self(Uuid::now_v7()) }
+    pub fn new() -> Self {
+        Self(Uuid::now_v7())
+    }
 }
 
 impl From<Uuid> for TaskId {
-    fn from(id: Uuid) -> Self { Self(id) }
+    fn from(id: Uuid) -> Self {
+        Self(id)
+    }
 }
 
 impl std::fmt::Display for TaskId {
@@ -222,17 +226,23 @@ mod tests {
 
     #[test]
     fn test_pending_to_ready_valid() {
-        assert!(TaskState::Pending.can_transition_to(TaskState::Ready).is_ok());
+        assert!(TaskState::Pending
+            .can_transition_to(TaskState::Ready)
+            .is_ok());
     }
 
     #[test]
     fn test_running_to_succeeded_valid() {
-        assert!(TaskState::Running.can_transition_to(TaskState::Succeeded).is_ok());
+        assert!(TaskState::Running
+            .can_transition_to(TaskState::Succeeded)
+            .is_ok());
     }
 
     #[test]
     fn test_timedout_to_ready_valid() {
-        assert!(TaskState::TimedOut.can_transition_to(TaskState::Ready).is_ok());
+        assert!(TaskState::TimedOut
+            .can_transition_to(TaskState::Ready)
+            .is_ok());
     }
 
     #[test]
@@ -242,19 +252,26 @@ mod tests {
 
     #[test]
     fn test_pending_to_succeeded_invalid() {
-        assert!(TaskState::Pending.can_transition_to(TaskState::Succeeded).is_err());
+        assert!(TaskState::Pending
+            .can_transition_to(TaskState::Succeeded)
+            .is_err());
     }
 
     #[test]
     fn test_pending_to_running_invalid() {
-        assert!(TaskState::Pending.can_transition_to(TaskState::Running).is_err());
+        assert!(TaskState::Pending
+            .can_transition_to(TaskState::Running)
+            .is_err());
     }
 
     #[test]
     fn test_succeeded_to_any_invalid() {
         for next in &[TaskState::Ready, TaskState::Running, TaskState::Failed] {
-            assert!(TaskState::Succeeded.can_transition_to(*next).is_err(),
-                "Succeeded -> {:?} should be invalid", next);
+            assert!(
+                TaskState::Succeeded.can_transition_to(*next).is_err(),
+                "Succeeded -> {:?} should be invalid",
+                next
+            );
         }
     }
 

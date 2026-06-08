@@ -1,6 +1,6 @@
-use openforce_domain::identity::{CertificateIdentity, ServiceRole};
 use crate::ca::CertificateAuthority;
 use crate::error::{MTLSError, MTLSResult};
+use openforce_domain::identity::{CertificateIdentity, ServiceRole};
 
 /// Verifies peer certificates from mTLS handshakes with optional role allowlisting.
 pub struct CertificateVerifier {
@@ -10,7 +10,10 @@ pub struct CertificateVerifier {
 
 impl CertificateVerifier {
     pub fn new(ca: CertificateAuthority) -> Self {
-        Self { ca, allowed_roles: vec![] }
+        Self {
+            ca,
+            allowed_roles: vec![],
+        }
     }
 
     pub fn with_allowed_roles(mut self, roles: Vec<ServiceRole>) -> Self {
@@ -29,5 +32,7 @@ impl CertificateVerifier {
         Ok(identity)
     }
 
-    pub fn ca_cert_pem(&self) -> &[u8] { self.ca.ca_cert_pem() }
+    pub fn ca_cert_pem(&self) -> &[u8] {
+        self.ca.ca_cert_pem()
+    }
 }

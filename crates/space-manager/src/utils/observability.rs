@@ -24,7 +24,7 @@ use std::backtrace::Backtrace;
 use std::collections::BTreeMap;
 use std::fmt;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
-use std::sync::{OnceLock, Mutex};
+use std::sync::{Mutex, OnceLock};
 use std::time::{Duration, Instant};
 
 use serde::Serialize;
@@ -147,9 +147,28 @@ pub fn emit_log(entry: LogEntry) {
 
 /// Fixed latency histogram bucket boundaries in seconds.
 const HISTOGRAM_BUCKETS: &[f64] = &[
-    0.000_001, 0.000_002_5, 0.000_005, 0.000_01, 0.000_025, 0.000_05,
-    0.000_1, 0.000_25, 0.000_5, 0.001, 0.002_5, 0.005, 0.01, 0.025,
-    0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0,
+    0.000_001,
+    0.000_002_5,
+    0.000_005,
+    0.000_01,
+    0.000_025,
+    0.000_05,
+    0.000_1,
+    0.000_25,
+    0.000_5,
+    0.001,
+    0.002_5,
+    0.005,
+    0.01,
+    0.025,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    2.5,
+    5.0,
+    10.0,
 ];
 
 /// Per-function metric snapshot.
@@ -189,7 +208,13 @@ impl CloneableAtomicU64 {
         self.0.fetch_add(val, order)
     }
 
-    fn compare_exchange_weak(&self, current: u64, new: u64, success: Ordering, failure: Ordering) -> Result<u64, u64> {
+    fn compare_exchange_weak(
+        &self,
+        current: u64,
+        new: u64,
+        success: Ordering,
+        failure: Ordering,
+    ) -> Result<u64, u64> {
         self.0.compare_exchange_weak(current, new, success, failure)
     }
 }
@@ -249,7 +274,13 @@ impl MetricsRegistry {
     }
 
     /// Record a call outcome.
-    pub fn record(&self, fn_name: &str, success: bool, error_type: Option<&str>, latency_secs: f64) {
+    pub fn record(
+        &self,
+        fn_name: &str,
+        success: bool,
+        error_type: Option<&str>,
+        latency_secs: f64,
+    ) {
         self.ensure_fn(fn_name);
 
         if let Some(ct) = self.calls_total.lock().unwrap().get(fn_name) {
@@ -396,7 +427,9 @@ pub fn init_metrics() -> &'static MetricsRegistry {
 
 /// Access the global metrics registry.
 pub fn metrics() -> &'static MetricsRegistry {
-    METRICS.get().expect("metrics not initialised – call init_metrics first")
+    METRICS
+        .get()
+        .expect("metrics not initialised – call init_metrics first")
 }
 
 // =========================================================================
@@ -634,7 +667,8 @@ pub fn init_slo() -> &'static ErrorBudget {
 
 /// Access the global SLO tracker.
 pub fn slo() -> &'static ErrorBudget {
-    SLO.get().expect("SLO tracker not initialised – call init_slo first")
+    SLO.get()
+        .expect("SLO tracker not initialised – call init_slo first")
 }
 
 // =========================================================================
@@ -740,18 +774,20 @@ pub fn track_result<E: fmt::Display>(
             Ok(val)
         }
         Err(err) => {
-            record_failure(fn_name, args_json, start.elapsed(), &err.to_string(), ErrorClass::Expected);
+            record_failure(
+                fn_name,
+                args_json,
+                start.elapsed(),
+                &err.to_string(),
+                ErrorClass::Expected,
+            );
             Err(err)
         }
     }
 }
 
 /// Instrument an infallible function.
-pub fn track_infallible(
-    fn_name: &str,
-    args: &[(&str, JsonValue)],
-    result: JsonValue,
-) -> JsonValue {
+pub fn track_infallible(fn_name: &str, args: &[(&str, JsonValue)], result: JsonValue) -> JsonValue {
     let start = Instant::now();
     let args_json = build_args_json(args);
     record_success(fn_name, args_json, start.elapsed(), result.clone());
@@ -770,11 +806,7 @@ use std::panic::UnwindSafe;
 ///
 /// # Returns
 /// `Ok(T)` on success, `Err(String)` if the closure panicked.
-pub fn recover_panic<F, T>(
-    fn_name: &str,
-    args: &[(&str, JsonValue)],
-    f: F,
-) -> Result<T, String>
+pub fn recover_panic<F, T>(fn_name: &str, args: &[(&str, JsonValue)], f: F) -> Result<T, String>
 where
     F: FnOnce() -> T,
     F: UnwindSafe,
@@ -800,7 +832,13 @@ where
             let backtrace = Backtrace::capture();
             let full_msg = format!("panic: {}\nstack trace:\n{}", panic_msg, backtrace);
 
-            record_failure(fn_name, args_json, start.elapsed(), &full_msg, ErrorClass::Unexpected);
+            record_failure(
+                fn_name,
+                args_json,
+                start.elapsed(),
+                &full_msg,
+                ErrorClass::Unexpected,
+            );
             Err(full_msg)
         }
     }

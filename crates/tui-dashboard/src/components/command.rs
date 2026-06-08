@@ -2,7 +2,7 @@ use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
     style::{Color, Style},
     text::{Line, Span},
-    widgets::{Block, Borders, Paragraph, List, ListItem},
+    widgets::{Block, Borders, List, ListItem, Paragraph},
     Frame,
 };
 
@@ -36,10 +36,7 @@ impl CommandPanel {
     pub fn render(&self, f: &mut Frame, area: Rect) {
         let chunks = Layout::default()
             .direction(Direction::Vertical)
-            .constraints([
-                Constraint::Length(3),
-                Constraint::Min(1),
-            ])
+            .constraints([Constraint::Length(3), Constraint::Min(1)])
             .split(area);
 
         // Input area
@@ -52,7 +49,10 @@ impl CommandPanel {
         let display = if self.input.is_empty() {
             Line::from(vec![
                 Span::styled("> ", Style::default().fg(Color::Green)),
-                Span::styled("输入指令 (Tab 切换面板)...", Style::default().fg(Color::DarkGray)),
+                Span::styled(
+                    "输入指令 (Tab 切换面板)...",
+                    Style::default().fg(Color::DarkGray),
+                ),
             ])
         } else {
             Line::from(vec![
@@ -62,17 +62,22 @@ impl CommandPanel {
         };
 
         let input_widget = Paragraph::new(display)
-            .block(Block::default().borders(Borders::ALL)
-                .title(format!(" {} Mode [Enter 执行] [Esc 清空] ", self.mode)))
+            .block(
+                Block::default()
+                    .borders(Borders::ALL)
+                    .title(format!(" {} Mode [Enter 执行] [Esc 清空] ", self.mode)),
+            )
             .style(Style::default().fg(Color::White));
         f.render_widget(input_widget, chunks[0]);
 
         // Suggestions / History
-        let items: Vec<ListItem> = self.suggestions.iter()
+        let items: Vec<ListItem> = self
+            .suggestions
+            .iter()
             .map(|s| ListItem::new(Span::styled(s, Style::default().fg(Color::DarkGray))))
             .collect();
-        let suggestions = List::new(items)
-            .block(Block::default().borders(Borders::ALL).title("Commands"));
+        let suggestions =
+            List::new(items).block(Block::default().borders(Borders::ALL).title("Commands"));
         f.render_widget(suggestions, chunks[1]);
     }
 

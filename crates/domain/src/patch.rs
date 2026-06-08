@@ -35,26 +35,52 @@ pub struct PatchReasonCode(String);
 
 impl PatchReasonCode {
     // Built-in reason codes (architecture doc section 6.5, PCR rules)
-    pub fn delete_equivalent_patch() -> Self { Self("delete_equivalent_patch".into()) }
-    pub fn touches_core_route() -> Self { Self("touches_core_route".into()) }
-    pub fn touches_auth_logic() -> Self { Self("touches_auth_logic".into()) }
-    pub fn touches_migration() -> Self { Self("touches_migration".into()) }
-    pub fn touches_prod_config() -> Self { Self("touches_prod_config".into()) }
-    pub fn batch_delete() -> Self { Self("batch_delete".into()) }
-    pub fn file_truncation() -> Self { Self("file_truncation".into()) }
-    pub fn cross_scope_write() -> Self { Self("cross_scope_write".into()) }
-    pub fn rename_with_wide_impact() -> Self { Self("rename_with_wide_impact".into()) }
+    pub fn delete_equivalent_patch() -> Self {
+        Self("delete_equivalent_patch".into())
+    }
+    pub fn touches_core_route() -> Self {
+        Self("touches_core_route".into())
+    }
+    pub fn touches_auth_logic() -> Self {
+        Self("touches_auth_logic".into())
+    }
+    pub fn touches_migration() -> Self {
+        Self("touches_migration".into())
+    }
+    pub fn touches_prod_config() -> Self {
+        Self("touches_prod_config".into())
+    }
+    pub fn batch_delete() -> Self {
+        Self("batch_delete".into())
+    }
+    pub fn file_truncation() -> Self {
+        Self("file_truncation".into())
+    }
+    pub fn cross_scope_write() -> Self {
+        Self("cross_scope_write".into())
+    }
+    pub fn rename_with_wide_impact() -> Self {
+        Self("rename_with_wide_impact".into())
+    }
 
     /// Create a custom reason code from any string
-    pub fn custom(code: &str) -> Self { Self(code.into()) }
+    pub fn custom(code: &str) -> Self {
+        Self(code.into())
+    }
 
-    pub fn as_str(&self) -> &str { &self.0 }
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
 
-    pub fn from_str(s: &str) -> Option<Self> { Some(Self(s.into())) }
+    pub fn from_str(s: &str) -> Option<Self> {
+        Some(Self(s.into()))
+    }
 }
 
 impl std::fmt::Display for PatchReasonCode {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { write!(f, "{}", self.0) }
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
 }
 
 /// Classification result for a submitted patch

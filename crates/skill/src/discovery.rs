@@ -45,9 +45,7 @@ impl SkillRegistry {
                 Ok(content) => {
                     if let Some(fm) = parser::parse_frontmatter(&content) {
                         let body = parser::extract_body(&content);
-                        let enabled = config
-                            .map(|c| c.is_enabled(&fm.name))
-                            .unwrap_or(true);
+                        let enabled = config.map(|c| c.is_enabled(&fm.name)).unwrap_or(true);
 
                         if enabled {
                             tracing::info!(
@@ -86,14 +84,23 @@ impl SkillRegistry {
     /// Only includes name + description of enabled skills (~100 tokens/skill).
     pub fn metadata_prompt(&self) -> String {
         let enabled: Vec<&Skill> = self.skills.values().filter(|s| s.enabled).collect();
-        if enabled.is_empty() { return String::new(); }
+        if enabled.is_empty() {
+            return String::new();
+        }
         let mut s = format!("<available_skills total=\"{}\">\n", enabled.len());
         for sk in &enabled {
             let desc: String = sk.frontmatter.description.chars().take(150).collect();
             s.push_str(&format!(
                 "  <skill name=\"{}\">{}</skill>\n",
-                sk.frontmatter.name.replace('&',"&amp;").replace('<',"&lt;").replace('>',"&gt;").replace('"',"&quot;"),
-                desc.replace('&',"&amp;").replace('<',"&lt;").replace('>',"&gt;")
+                sk.frontmatter
+                    .name
+                    .replace('&', "&amp;")
+                    .replace('<', "&lt;")
+                    .replace('>', "&gt;")
+                    .replace('"', "&quot;"),
+                desc.replace('&', "&amp;")
+                    .replace('<', "&lt;")
+                    .replace('>', "&gt;")
             ));
         }
         s.push_str("</available_skills>\n");
@@ -103,10 +110,7 @@ impl SkillRegistry {
 
     /// Check if a skill is available and enabled by name.
     pub fn has(&self, name: &str) -> bool {
-        self.skills
-            .get(name)
-            .map(|s| s.enabled)
-            .unwrap_or(false)
+        self.skills.get(name).map(|s| s.enabled).unwrap_or(false)
     }
 
     /// Load a skill's full body (Level 2 — instructions for the LLM to execute).
@@ -235,7 +239,10 @@ mod tests {
         assert_eq!(registry.len(), 1);
         assert!(registry.has("full-skill"));
         let skill = registry.get("full-skill").unwrap();
-        assert_eq!(skill.frontmatter.allowed_tools.as_deref(), Some(&["web_search".to_string(), "web_fetch".to_string()][..]));
+        assert_eq!(
+            skill.frontmatter.allowed_tools.as_deref(),
+            Some(&["web_search".to_string(), "web_fetch".to_string()][..])
+        );
         assert_eq!(skill.frontmatter.version.as_deref(), Some("2.0"));
         assert_eq!(skill.frontmatter.author.as_deref(), Some("test-author"));
         assert_eq!(skill.frontmatter.license.as_deref(), Some("Apache-2.0"));

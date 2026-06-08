@@ -2,8 +2,8 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::event::ProducerIdentity;
 use crate::error::DomainResult;
+use crate::event::ProducerIdentity;
 
 /// Command types that drive all state transitions (architecture doc section 21)
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

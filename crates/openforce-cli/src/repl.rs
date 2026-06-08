@@ -1,7 +1,7 @@
-use std::path::PathBuf;
-use crate::session_state::LocalSessionState;
 use crate::gate_handler::{GateHandler, GateResult};
+use crate::session_state::LocalSessionState;
 use openforce_domain::session_phase::ConfirmationGate;
+use std::path::PathBuf;
 
 pub struct SessionRepl {
     pub session: LocalSessionState,
@@ -11,20 +11,28 @@ pub struct SessionRepl {
 
 impl SessionRepl {
     pub fn new(session: LocalSessionState, workspace: PathBuf, interactive: bool) -> Self {
-        Self { session, workspace, interactive }
+        Self {
+            session,
+            workspace,
+            interactive,
+        }
     }
 
     pub async fn run(&mut self) -> Result<(), String> {
         loop {
             let next = match self.session.current_phase.next_phase() {
                 Some(p) => p,
-                None => { println!("Session complete."); break; }
+                None => {
+                    println!("Session complete.");
+                    break;
+                }
             };
 
             if next.is_gate() {
                 self.session.advance_phase(next.clone());
                 let gate = ConfirmationGate::new(
-                    self.session.session_id, next.clone(),
+                    self.session.session_id,
+                    next.clone(),
                     format!("Phase {} completed", self.session.current_phase.as_str()),
                     self.session.plan_epoch,
                 );
@@ -35,9 +43,16 @@ impl SessionRepl {
                 match result {
                     GateResult::Approve => {
                         self.session.clear_gate();
-                        if let Some(after) = next.next_phase() { self.session.advance_phase(after); }
+                        if let Some(after) = next.next_phase() {
+                            self.session.advance_phase(after);
+                        }
                         self.session.save()?;
-                        println!("Gate approved → {}", next.next_phase().map(|p| p.as_str().to_string()).unwrap_or_default());
+                        println!(
+                            "Gate approved → {}",
+                            next.next_phase()
+                                .map(|p| p.as_str().to_string())
+                                .unwrap_or_default()
+                        );
                     }
                     GateResult::Reject(fb) => {
                         self.session.clear_gate();
@@ -46,13 +61,24 @@ impl SessionRepl {
                         self.session.save()?;
                         println!("Rejected. Epoch {} — replan.", self.session.plan_epoch);
                     }
-                    GateResult::Cancel => { self.session.abort(); self.session.save()?; break; }
+                    GateResult::Cancel => {
+                        self.session.abort();
+                        self.session.save()?;
+                        break;
+                    }
                 }
             } else {
                 self.session.advance_phase(next.clone());
                 self.session.save()?;
-                println!("Phase → {} | continue with: openforce continue", next.as_str());
-                if next.is_terminal() { self.session.complete(); self.session.save()?; break; }
+                println!(
+                    "Phase → {} | continue with: openforce continue",
+                    next.as_str()
+                );
+                if next.is_terminal() {
+                    self.session.complete();
+                    self.session.save()?;
+                    break;
+                }
             }
         }
         Ok(())

@@ -1,5 +1,5 @@
-use chrono::{DateTime, Utc, Duration};
-use serde::{Serialize, Deserialize};
+use chrono::{DateTime, Duration, Utc};
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// Data retention policy per tenant (architecture doc section 28.2)
@@ -30,7 +30,9 @@ impl Default for RetentionPolicy {
 
 impl RetentionPolicy {
     pub fn expires_at(&self, created_at: DateTime<Utc>, data_type: &str) -> DateTime<Utc> {
-        if self.legal_hold { return DateTime::<Utc>::MAX_UTC; }
+        if self.legal_hold {
+            return DateTime::<Utc>::MAX_UTC;
+        }
         let days = match data_type {
             "event_log" => self.event_log_retention_days,
             "artifact" => self.artifact_retention_days,

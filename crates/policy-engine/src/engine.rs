@@ -1,7 +1,7 @@
-use tracing::info;
-use crate::rules::{PolicyEffect, PolicyRule, RuleCondition, default_rules};
+use crate::rules::{default_rules, PolicyEffect, PolicyRule, RuleCondition};
 use openforce_domain::identity::CertificateIdentity;
 use openforce_domain::token::CapabilityToken;
+use tracing::info;
 
 /// Context for an authorization decision (architecture doc section 22).
 #[allow(non_snake_case)]
@@ -24,9 +24,13 @@ pub struct PolicyEngine {
 }
 
 impl PolicyEngine {
-    pub fn new(rules: Vec<PolicyRule>) -> Self { Self { rules } }
+    pub fn new(rules: Vec<PolicyRule>) -> Self {
+        Self { rules }
+    }
 
-    pub fn with_defaults() -> Self { Self::new(default_rules()) }
+    pub fn with_defaults() -> Self {
+        Self::new(default_rules())
+    }
 
     /// Evaluate authorization context. Rules evaluated in priority order.
     /// First match wins. Default: Deny.
@@ -39,21 +43,32 @@ impl PolicyEngine {
                 return rule.effect.clone();
             }
         }
-        PolicyEffect::Deny { reason: "no matching policy rule".into() }
+        PolicyEffect::Deny {
+            reason: "no matching policy rule".into(),
+        }
     }
 
     fn evaluate_condition(&self, c: &RuleCondition, ctx: &AuthzContext) -> bool {
         match c {
-            RuleCondition::RoleIs(role) => ctx.mTLS_identity.as_ref()
-                .map(|id| id.role == *role).unwrap_or(false),
-            RuleCondition::ActionOn(action, res) =>
-                ctx.requested_action == *action && ctx.resource_type == *res,
-            RuleCondition::TokenHasScope(scope) => ctx.capability_token.as_ref()
-                .map(|t| t.verify_scope(scope.clone())).unwrap_or(false),
-            RuleCondition::FencingTokenValid => match (&ctx.capability_token, ctx.current_fencing_token) {
-                (Some(token), Some(current)) => token.fencing_token == current,
-                _ => false,
-            },
+            RuleCondition::RoleIs(role) => ctx
+                .mTLS_identity
+                .as_ref()
+                .map(|id| id.role == *role)
+                .unwrap_or(false),
+            RuleCondition::ActionOn(action, res) => {
+                ctx.requested_action == *action && ctx.resource_type == *res
+            }
+            RuleCondition::TokenHasScope(scope) => ctx
+                .capability_token
+                .as_ref()
+                .map(|t| t.verify_scope(scope.clone()))
+                .unwrap_or(false),
+            RuleCondition::FencingTokenValid => {
+                match (&ctx.capability_token, ctx.current_fencing_token) {
+                    (Some(token), Some(current)) => token.fencing_token == current,
+                    _ => false,
+                }
+            }
             RuleCondition::TenantOwnsSession => match (&ctx.tenant_id, &ctx.capability_token) {
                 (Some(tid), Some(token)) => token.tenant_id == *tid,
                 _ => false,

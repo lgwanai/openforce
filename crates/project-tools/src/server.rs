@@ -1,29 +1,24 @@
+use digest::Digest;
+use sha2::Sha256;
 use sqlx::PgPool;
 use tonic::{Request, Response, Status};
 use uuid::Uuid;
-use sha2::Sha256; use digest::Digest;
 
 use openforce_proto::swarmos::v1::{
-    project_tool_service_server::ProjectToolService,
-    approval_service_server::ApprovalService,
-    ReadProjectFileRequest, ReadProjectFileResponse,
-    ReadProjectTreeRequest, ReadProjectTreeResponse,
-    ReadProjectTreeSuccess,
-    SubmitProjectPatchRequest, SubmitProjectPatchResponse,
-    SubmitProjectPatchSuccess,
-    DeleteProjectFileRequest, DeleteProjectFileResponse,
-    DeleteProjectFileSuccess,
-    CreateApprovalRequestRequest, CreateApprovalRequestResponse,
+    approval_service_server::ApprovalService, project_tool_service_server::ProjectToolService,
+    ApproveApprovalRequestRequest, ApproveApprovalRequestResponse, ConsumeApprovalTokenRequest,
+    ConsumeApprovalTokenResponse, CreateApprovalRequestRequest, CreateApprovalRequestResponse,
+    DeleteProjectFileRequest, DeleteProjectFileResponse, DeleteProjectFileSuccess,
     GetApprovalRequestRequest, GetApprovalRequestResponse,
-    ApproveApprovalRequestRequest, ApproveApprovalRequestResponse,
-    RejectApprovalRequestRequest, RejectApprovalRequestResponse,
-    ConsumeApprovalTokenRequest, ConsumeApprovalTokenResponse,
-    ProjectFile, PatchClassification as ProtoClassification,
-    ToolError, ToolErrorCode, PatchRiskLevel,
+    PatchClassification as ProtoClassification, PatchRiskLevel, ProjectFile,
+    ReadProjectFileRequest, ReadProjectFileResponse, ReadProjectTreeRequest,
+    ReadProjectTreeResponse, ReadProjectTreeSuccess, RejectApprovalRequestRequest,
+    RejectApprovalRequestResponse, SubmitProjectPatchRequest, SubmitProjectPatchResponse,
+    SubmitProjectPatchSuccess, ToolError, ToolErrorCode,
 };
 
-use openforce_path_acl::PathAcl;
 use openforce_patch_classifier::PatchClassifier;
+use openforce_path_acl::PathAcl;
 
 use crate::approval_store::ApprovalStore;
 
@@ -38,25 +33,40 @@ fn parse_uuid(s: &str) -> Result<Uuid, Status> {
 }
 
 fn tool_err(code: ToolErrorCode, msg: &str) -> ToolError {
-    ToolError { code: code as i32, message: msg.into(), details: vec![] }
+    ToolError {
+        code: code as i32,
+        message: msg.into(),
+        details: vec![],
+    }
 }
 
 #[tonic::async_trait]
 impl ProjectToolService for ProjectToolServiceImpl {
     async fn read_project_file(
-        &self, r: Request<ReadProjectFileRequest>,
+        &self,
+        r: Request<ReadProjectFileRequest>,
     ) -> Result<Response<ReadProjectFileResponse>, Status> {
         let req = r.into_inner();
-#[allow(unused_variables)]
-        let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
-        let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
+        #[allow(unused_variables)]
+        let worker = req
+            .worker
+            .ok_or(Status::invalid_argument("worker required"))?;
+        let caps = req
+            .capabilities
+            .ok_or(Status::invalid_argument("capabilities required"))?;
 
-        let acl = PathAcl::new(&caps.allowed_read_paths, &caps.allowed_write_paths, &caps.forbidden_paths);
+        let acl = PathAcl::new(
+            &caps.allowed_read_paths,
+            &caps.allowed_write_paths,
+            &caps.forbidden_paths,
+        );
         if !acl.can_read(&req.path) {
             return Ok(Response::new(ReadProjectFileResponse {
-                result: Some(openforce_proto::swarmos::v1::read_project_file_response::Result::Error(
-                    tool_err(ToolErrorCode::PathNotAllowed, "read path not allowed"),
-                )),
+                result: Some(
+                    openforce_proto::swarmos::v1::read_project_file_response::Result::Error(
+                        tool_err(ToolErrorCode::PathNotAllowed, "read path not allowed"),
+                    ),
+                ),
             }));
         }
 
@@ -65,57 +75,89 @@ impl ProjectToolService for ProjectToolServiceImpl {
         let sha = hex::encode(Sha256::digest(&content));
 
         Ok(Response::new(ReadProjectFileResponse {
-            result: Some(openforce_proto::swarmos::v1::read_project_file_response::Result::File(
-                ProjectFile {
-                    path: req.path,
-                    content,
-                    sha256: sha,
-                    snapshot_id: worker.command_id,
-                },
-            )),
+            result: Some(
+                openforce_proto::swarmos::v1::read_project_file_response::Result::File(
+                    ProjectFile {
+                        path: req.path,
+                        content,
+                        sha256: sha,
+                        snapshot_id: worker.command_id,
+                    },
+                ),
+            ),
         }))
     }
 
     async fn read_project_tree(
-        &self, r: Request<ReadProjectTreeRequest>,
+        &self,
+        r: Request<ReadProjectTreeRequest>,
     ) -> Result<Response<ReadProjectTreeResponse>, Status> {
         let req = r.into_inner();
-        let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
-        let acl = PathAcl::new(&caps.allowed_read_paths, &caps.allowed_write_paths, &caps.forbidden_paths);
+        let caps = req
+            .capabilities
+            .ok_or(Status::invalid_argument("capabilities required"))?;
+        let acl = PathAcl::new(
+            &caps.allowed_read_paths,
+            &caps.allowed_write_paths,
+            &caps.forbidden_paths,
+        );
         if !acl.can_read(&req.root_path) {
             return Ok(Response::new(ReadProjectTreeResponse {
-                result: Some(openforce_proto::swarmos::v1::read_project_tree_response::Result::Error(
-                    tool_err(ToolErrorCode::PathNotAllowed, "read path not allowed"),
-                )),
+                result: Some(
+                    openforce_proto::swarmos::v1::read_project_tree_response::Result::Error(
+                        tool_err(ToolErrorCode::PathNotAllowed, "read path not allowed"),
+                    ),
+                ),
             }));
         }
 
         // In production, fetch from VFS
         Ok(Response::new(ReadProjectTreeResponse {
-            result: Some(openforce_proto::swarmos::v1::read_project_tree_response::Result::Success(
-                ReadProjectTreeSuccess { nodes: vec![], snapshot_id: "current".into() },
-            )),
+            result: Some(
+                openforce_proto::swarmos::v1::read_project_tree_response::Result::Success(
+                    ReadProjectTreeSuccess {
+                        nodes: vec![],
+                        snapshot_id: "current".into(),
+                    },
+                ),
+            ),
         }))
     }
 
     async fn submit_project_patch(
-        &self, r: Request<SubmitProjectPatchRequest>,
+        &self,
+        r: Request<SubmitProjectPatchRequest>,
     ) -> Result<Response<SubmitProjectPatchResponse>, Status> {
         let req = r.into_inner();
-#[allow(unused_variables)]
-        let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
-        let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
-        let patch = req.patch.ok_or(Status::invalid_argument("patch required"))?;
+        #[allow(unused_variables)]
+        let worker = req
+            .worker
+            .ok_or(Status::invalid_argument("worker required"))?;
+        let caps = req
+            .capabilities
+            .ok_or(Status::invalid_argument("capabilities required"))?;
+        let patch = req
+            .patch
+            .ok_or(Status::invalid_argument("patch required"))?;
 
-        let acl = PathAcl::new(&caps.allowed_read_paths, &caps.allowed_write_paths, &caps.forbidden_paths);
+        let acl = PathAcl::new(
+            &caps.allowed_read_paths,
+            &caps.allowed_write_paths,
+            &caps.forbidden_paths,
+        );
 
         // Check write permissions for each target path
         for path in &patch.target_paths {
             if !acl.can_write(path) {
                 return Ok(Response::new(SubmitProjectPatchResponse {
-                    result: Some(openforce_proto::swarmos::v1::submit_project_patch_response::Result::Error(
-                        tool_err(ToolErrorCode::PathNotAllowed, &format!("write path not allowed: {path}")),
-                    )),
+                    result: Some(
+                        openforce_proto::swarmos::v1::submit_project_patch_response::Result::Error(
+                            tool_err(
+                                ToolErrorCode::PathNotAllowed,
+                                &format!("write path not allowed: {path}"),
+                            ),
+                        ),
+                    ),
                 }));
             }
         }
@@ -127,15 +169,19 @@ impl ProjectToolService for ProjectToolServiceImpl {
             &caps.allowed_read_paths,
             &caps.allowed_write_paths,
             &caps.forbidden_paths,
-            0, 0, 0, // lines removed/added/files deleted
+            0,
+            0,
+            0, // lines removed/added/files deleted
         );
 
         // Reject patches that cannot proceed (forbidden paths, etc.)
         if !classification.can_proceed() {
             return Ok(Response::new(SubmitProjectPatchResponse {
-                result: Some(openforce_proto::swarmos::v1::submit_project_patch_response::Result::Error(
-                    tool_err(ToolErrorCode::PatchRejected, "patch classified as Reject"),
-                )),
+                result: Some(
+                    openforce_proto::swarmos::v1::submit_project_patch_response::Result::Error(
+                        tool_err(ToolErrorCode::PatchRejected, "patch classified as Reject"),
+                    ),
+                ),
             }));
         }
 
@@ -161,32 +207,47 @@ impl ProjectToolService for ProjectToolServiceImpl {
         }
 
         Ok(Response::new(SubmitProjectPatchResponse {
-            result: Some(openforce_proto::swarmos::v1::submit_project_patch_response::Result::Success(
-                SubmitProjectPatchSuccess {
-                    merge_commit_id: Uuid::now_v7().to_string(),
-                    new_snapshot_id: Uuid::now_v7().to_string(),
-                    classification: Some(ProtoClassification {
-                        risk_level: classification.risk_level as i32,
-                        reason_codes: classification.reason_codes.iter().map(|r| r.as_str().to_string()).collect(),
-                        requires_approval: classification.requires_approval,
-                    }),
-                },
-            )),
+            result: Some(
+                openforce_proto::swarmos::v1::submit_project_patch_response::Result::Success(
+                    SubmitProjectPatchSuccess {
+                        merge_commit_id: Uuid::now_v7().to_string(),
+                        new_snapshot_id: Uuid::now_v7().to_string(),
+                        classification: Some(ProtoClassification {
+                            risk_level: classification.risk_level as i32,
+                            reason_codes: classification
+                                .reason_codes
+                                .iter()
+                                .map(|r| r.as_str().to_string())
+                                .collect(),
+                            requires_approval: classification.requires_approval,
+                        }),
+                    },
+                ),
+            ),
         }))
     }
 
     async fn delete_project_file(
-        &self, r: Request<DeleteProjectFileRequest>,
+        &self,
+        r: Request<DeleteProjectFileRequest>,
     ) -> Result<Response<DeleteProjectFileResponse>, Status> {
         let req = r.into_inner();
-        let caps = req.capabilities.ok_or(Status::invalid_argument("capabilities required"))?;
-        let acl = PathAcl::new(&caps.allowed_read_paths, &caps.allowed_write_paths, &caps.forbidden_paths);
+        let caps = req
+            .capabilities
+            .ok_or(Status::invalid_argument("capabilities required"))?;
+        let acl = PathAcl::new(
+            &caps.allowed_read_paths,
+            &caps.allowed_write_paths,
+            &caps.forbidden_paths,
+        );
 
         if !acl.can_delete(&req.target_path) {
             return Ok(Response::new(DeleteProjectFileResponse {
-                result: Some(openforce_proto::swarmos::v1::delete_project_file_response::Result::Error(
-                    tool_err(ToolErrorCode::PathNotAllowed, "delete path not allowed"),
-                )),
+                result: Some(
+                    openforce_proto::swarmos::v1::delete_project_file_response::Result::Error(
+                        tool_err(ToolErrorCode::PathNotAllowed, "delete path not allowed"),
+                    ),
+                ),
             }));
         }
 
@@ -210,12 +271,14 @@ impl ProjectToolService for ProjectToolServiceImpl {
         }
 
         Ok(Response::new(DeleteProjectFileResponse {
-            result: Some(openforce_proto::swarmos::v1::delete_project_file_response::Result::Success(
-                DeleteProjectFileSuccess {
-                    deleted_path: req.target_path,
-                    new_snapshot_id: Uuid::now_v7().to_string(),
-                },
-            )),
+            result: Some(
+                openforce_proto::swarmos::v1::delete_project_file_response::Result::Success(
+                    DeleteProjectFileSuccess {
+                        deleted_path: req.target_path,
+                        new_snapshot_id: Uuid::now_v7().to_string(),
+                    },
+                ),
+            ),
         }))
     }
 }
@@ -228,13 +291,18 @@ pub struct ApprovalServiceImpl {
 #[tonic::async_trait]
 impl ApprovalService for ApprovalServiceImpl {
     async fn create_approval_request(
-        &self, r: Request<CreateApprovalRequestRequest>,
+        &self,
+        r: Request<CreateApprovalRequestRequest>,
     ) -> Result<Response<CreateApprovalRequestResponse>, Status> {
         let req = r.into_inner();
-#[allow(unused_variables)]
-        let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
-#[allow(unused_variables)]
-        let class = req.classification.ok_or(Status::invalid_argument("classification required"))?;
+        #[allow(unused_variables)]
+        let worker = req
+            .worker
+            .ok_or(Status::invalid_argument("worker required"))?;
+        #[allow(unused_variables)]
+        let class = req
+            .classification
+            .ok_or(Status::invalid_argument("classification required"))?;
 
         let domain_class = openforce_domain::patch::PatchClassification {
             risk_level: openforce_domain::patch::PatchRiskLevel::Sensitive,
@@ -242,14 +310,24 @@ impl ApprovalService for ApprovalServiceImpl {
             requires_approval: true,
         };
 
-        let ar = self.approval_store.create_approval_request(
-            parse_uuid(&worker.session_id)?, parse_uuid(&worker.task_id)?,
-            worker.task_attempt as i32, parse_uuid(&worker.lease_id)?,
-            worker.fencing_token, parse_uuid(&worker.worker_spec_id)?,
-            "write_project_patch", &req.target_paths,
-            &req.base_snapshot_id, &req.payload_sha256,
-            &domain_class, 30,
-        ).await.map_err(|e| Status::internal(e.to_string()))?;
+        let ar = self
+            .approval_store
+            .create_approval_request(
+                parse_uuid(&worker.session_id)?,
+                parse_uuid(&worker.task_id)?,
+                worker.task_attempt as i32,
+                parse_uuid(&worker.lease_id)?,
+                worker.fencing_token,
+                parse_uuid(&worker.worker_spec_id)?,
+                "write_project_patch",
+                &req.target_paths,
+                &req.base_snapshot_id,
+                &req.payload_sha256,
+                &domain_class,
+                30,
+            )
+            .await
+            .map_err(|e| Status::internal(e.to_string()))?;
 
         Ok(Response::new(CreateApprovalRequestResponse {
             result: Some(openforce_proto::swarmos::v1::create_approval_request_response::Result::ApprovalRequest(
@@ -263,18 +341,26 @@ impl ApprovalService for ApprovalServiceImpl {
     }
 
     async fn get_approval_request(
-        &self, _r: Request<GetApprovalRequestRequest>,
+        &self,
+        _r: Request<GetApprovalRequestRequest>,
     ) -> Result<Response<GetApprovalRequestResponse>, Status> {
         Err(Status::unimplemented("get_approval_request"))
     }
 
     async fn approve_approval_request(
-        &self, r: Request<ApproveApprovalRequestRequest>,
+        &self,
+        r: Request<ApproveApprovalRequestRequest>,
     ) -> Result<Response<ApproveApprovalRequestResponse>, Status> {
         let req = r.into_inner();
-        let token = self.approval_store.approve_request(
-            parse_uuid(&req.approval_request_id)?, &req.approver_id, req.usage_limit,
-        ).await.map_err(|e| Status::internal(e.to_string()))?;
+        let token = self
+            .approval_store
+            .approve_request(
+                parse_uuid(&req.approval_request_id)?,
+                &req.approver_id,
+                req.usage_limit,
+            )
+            .await
+            .map_err(|e| Status::internal(e.to_string()))?;
 
         Ok(Response::new(ApproveApprovalRequestResponse {
             result: Some(openforce_proto::swarmos::v1::approve_approval_request_response::Result::ApprovalToken(
@@ -299,25 +385,36 @@ impl ApprovalService for ApprovalServiceImpl {
     }
 
     async fn reject_approval_request(
-        &self, _r: Request<RejectApprovalRequestRequest>,
+        &self,
+        _r: Request<RejectApprovalRequestRequest>,
     ) -> Result<Response<RejectApprovalRequestResponse>, Status> {
         Err(Status::unimplemented("reject_approval_request"))
     }
 
     async fn consume_approval_token(
-        &self, r: Request<ConsumeApprovalTokenRequest>,
+        &self,
+        r: Request<ConsumeApprovalTokenRequest>,
     ) -> Result<Response<ConsumeApprovalTokenResponse>, Status> {
         let req = r.into_inner();
-#[allow(unused_variables)]
-        let worker = req.worker.ok_or(Status::invalid_argument("worker required"))?;
+        #[allow(unused_variables)]
+        let worker = req
+            .worker
+            .ok_or(Status::invalid_argument("worker required"))?;
 
-        let token = self.approval_store.consume_token(
-            parse_uuid(&req.approval_token)?,
-            parse_uuid(&worker.session_id)?, parse_uuid(&worker.task_id)?,
-            worker.task_attempt as i32, parse_uuid(&worker.lease_id)?,
-            worker.fencing_token,
-            &req.base_snapshot_id, &req.payload_sha256,
-        ).await.map_err(|e| Status::internal(e.to_string()))?;
+        let token = self
+            .approval_store
+            .consume_token(
+                parse_uuid(&req.approval_token)?,
+                parse_uuid(&worker.session_id)?,
+                parse_uuid(&worker.task_id)?,
+                worker.task_attempt as i32,
+                parse_uuid(&worker.lease_id)?,
+                worker.fencing_token,
+                &req.base_snapshot_id,
+                &req.payload_sha256,
+            )
+            .await
+            .map_err(|e| Status::internal(e.to_string()))?;
 
         Ok(Response::new(ConsumeApprovalTokenResponse {
             result: Some(openforce_proto::swarmos::v1::consume_approval_token_response::Result::ApprovalBinding(

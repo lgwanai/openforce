@@ -1,6 +1,6 @@
+use openforce_domain::task::TaskState;
 use std::collections::{HashMap, HashSet};
 use uuid::Uuid;
-use openforce_domain::task::TaskState;
 
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -11,52 +11,84 @@ pub struct DagNode {
 }
 
 #[allow(dead_code)]
-pub struct Dag { nodes: HashMap<Uuid, DagNode> }
+pub struct Dag {
+    nodes: HashMap<Uuid, DagNode>,
+}
 
 #[allow(dead_code)]
 impl Dag {
-    pub fn new() -> Self { Self { nodes: HashMap::new() } }
+    pub fn new() -> Self {
+        Self {
+            nodes: HashMap::new(),
+        }
+    }
 
     pub fn add_node(&mut self, tid: Uuid, upstream: Vec<Uuid>) {
         let entry = self.nodes.entry(tid).or_insert_with(|| DagNode {
-            task_id: tid, upstream: HashSet::new(), downstream: HashSet::new(),
+            task_id: tid,
+            upstream: HashSet::new(),
+            downstream: HashSet::new(),
         });
         let up_copy: Vec<Uuid> = upstream.iter().copied().collect();
-        for u in &up_copy { entry.upstream.insert(*u); }
         for u in &up_copy {
-            self.nodes.entry(*u).or_insert_with(|| DagNode {
-                task_id: *u, upstream: HashSet::new(), downstream: HashSet::new(),
-            }).downstream.insert(tid);
+            entry.upstream.insert(*u);
+        }
+        for u in &up_copy {
+            self.nodes
+                .entry(*u)
+                .or_insert_with(|| DagNode {
+                    task_id: *u,
+                    upstream: HashSet::new(),
+                    downstream: HashSet::new(),
+                })
+                .downstream
+                .insert(tid);
         }
     }
 
     /// Only Succeeded unblocks downstream. Failed/Cancelled keep downstream blocked.
     pub fn dependencies_satisfied(&self, tid: Uuid, states: &HashMap<Uuid, TaskState>) -> bool {
         self.nodes.get(&tid).map_or(true, |n| {
-            n.upstream.iter().all(|u| states.get(u).map_or(false, |s| *s == TaskState::Succeeded))
+            n.upstream
+                .iter()
+                .all(|u| states.get(u).map_or(false, |s| *s == TaskState::Succeeded))
         })
     }
 
     /// Pending tasks whose upstream deps are all Succeeded.
     pub fn ready_tasks(&self, states: &HashMap<Uuid, TaskState>) -> Vec<Uuid> {
-        states.iter()
+        states
+            .iter()
             .filter(|(_, s)| **s == TaskState::Pending)
             .filter(|(id, _)| self.dependencies_satisfied(**id, states))
-            .map(|(id, _)| *id).collect()
+            .map(|(id, _)| *id)
+            .collect()
     }
 
     /// Pending tasks blocked by Failed upstream — need human intervention.
     pub fn blocked_tasks(&self, states: &HashMap<Uuid, TaskState>) -> Vec<Uuid> {
-        let failed: HashSet<Uuid> = states.iter()
-            .filter(|(_, s)| **s == TaskState::Failed).map(|(id, _)| *id).collect();
-        states.iter()
+        let failed: HashSet<Uuid> = states
+            .iter()
+            .filter(|(_, s)| **s == TaskState::Failed)
+            .map(|(id, _)| *id)
+            .collect();
+        states
+            .iter()
             .filter(|(_, s)| **s == TaskState::Pending)
-            .filter(|(id, _)| self.nodes.get(id).map_or(false, |n| n.upstream.iter().any(|u| failed.contains(u))))
-            .map(|(id, _)| *id).collect()
+            .filter(|(id, _)| {
+                self.nodes
+                    .get(id)
+                    .map_or(false, |n| n.upstream.iter().any(|u| failed.contains(u)))
+            })
+            .map(|(id, _)| *id)
+            .collect()
     }
 
     pub fn downstream_of(&self, tid: Uuid) -> Vec<Uuid> {
-        self.nodes.get(&tid).map(|n| n.downstream.iter().copied().collect()).unwrap_or_default()
+        self.nodes
+            .get(&tid)
+            .map(|n| n.downstream.iter().copied().collect())
+            .unwrap_or_default()
     }
 }
 
@@ -79,8 +111,10 @@ mod tests {
 
         // Phase 1: 只有架构 ready
         let s1 = HashMap::from([
-            (arch, TaskState::Pending), (backend, TaskState::Pending),
-            (frontend, TaskState::Pending), (testing, TaskState::Pending),
+            (arch, TaskState::Pending),
+            (backend, TaskState::Pending),
+            (frontend, TaskState::Pending),
+            (testing, TaskState::Pending),
         ]);
         assert_eq!(dag.ready_tasks(&s1), vec![arch]);
 
@@ -93,7 +127,10 @@ mod tests {
         let r2 = dag.ready_tasks(&s2);
         assert_eq!(r2.len(), 2);
         assert!(r2.contains(&backend) && r2.contains(&frontend));
-        assert!(!r2.contains(&testing), "测试不应 ready — 后端前端都还没完成");
+        assert!(
+            !r2.contains(&testing),
+            "测试不应 ready — 后端前端都还没完成"
+        );
 
         // Phase 3: 后端完成，前端还在跑 → 测试仍 pending
         let mut s3 = HashMap::new();

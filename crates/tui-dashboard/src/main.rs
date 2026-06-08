@@ -1,16 +1,16 @@
-use std::io;
-use std::time::{Duration, Instant};
 use crossterm::{
-    event::{self, EnableMouseCapture, DisableMouseCapture},
+    event::{self, DisableMouseCapture, EnableMouseCapture},
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
 use ratatui::backend::CrosstermBackend;
 use ratatui::Terminal;
+use std::io;
+use std::time::{Duration, Instant};
 
+mod app;
 mod client;
 mod components;
-mod app;
 
 use app::App;
 
@@ -22,16 +22,19 @@ async fn main() -> anyhow::Result<()> {
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    let session_store_addr = std::env::var("SESSION_STORE_ADDR")
-        .unwrap_or_else(|_| "127.0.0.1:50051".into());
-    let scheduler_addr = std::env::var("SCHEDULER_ADDR")
-        .unwrap_or_else(|_| "127.0.0.1:50052".into());
-    let project_tools_addr = std::env::var("PROJECT_TOOLS_ADDR")
-        .unwrap_or_else(|_| "127.0.0.1:50053".into());
+    let session_store_addr =
+        std::env::var("SESSION_STORE_ADDR").unwrap_or_else(|_| "127.0.0.1:50051".into());
+    let scheduler_addr =
+        std::env::var("SCHEDULER_ADDR").unwrap_or_else(|_| "127.0.0.1:50052".into());
+    let project_tools_addr =
+        std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
     let workspace = std::env::current_dir().unwrap_or_default();
 
     let mut app = App::new(
-        session_store_addr, scheduler_addr, project_tools_addr, workspace,
+        session_store_addr,
+        scheduler_addr,
+        project_tools_addr,
+        workspace,
     );
 
     let tick_rate = Duration::from_millis(250);

@@ -1,14 +1,13 @@
-use std::collections::HashMap;
-use tokio::time::{interval, Duration};
-use uuid::Uuid;
-use tracing::{info, warn};
+use crate::dag::Dag;
 use openforce_domain::task::TaskState;
 use openforce_proto::swarmos::v1::{
-    session_store_client::SessionStoreClient,
-    ExecuteCommandRequest, ListTasksRequest,
-    Command as ProtoCommand,
+    session_store_client::SessionStoreClient, Command as ProtoCommand, ExecuteCommandRequest,
+    GetSessionRequest, ListTasksRequest,
 };
-use crate::dag::Dag;
+use std::collections::HashMap;
+use tokio::time::{interval, Duration};
+use tracing::{info, warn};
+use uuid::Uuid;
 
 #[allow(dead_code)]
 pub struct SchedulerRuntime {
@@ -21,21 +20,35 @@ pub struct SchedulerRuntime {
 #[allow(dead_code)]
 impl SchedulerRuntime {
     pub fn new(client: SessionStoreClient<tonic::transport::Channel>) -> Self {
-        Self { client, instance_id: Uuid::now_v7().to_string(), dag_cache: HashMap::new(), session_ids: vec![] }
+        Self {
+            client,
+            instance_id: Uuid::now_v7().to_string(),
+            dag_cache: HashMap::new(),
+            session_ids: vec![],
+        }
     }
 
-    pub fn register_session(&mut self, sid: Uuid) { self.session_ids.push(sid); }
+    pub fn register_session(&mut self, sid: Uuid) {
+        self.session_ids.push(sid);
+    }
 
     pub async fn run(&mut self) {
         let mut tick = interval(Duration::from_millis(500));
         info!("Scheduler started: strict upstream→downstream ordering enforced");
-        loop { tick.tick().await; if let Err(e) = self.tick().await { warn!("tick: {e}"); } }
+        loop {
+            tick.tick().await;
+            if let Err(e) = self.tick().await {
+                warn!("tick: {e}");
+            }
+        }
     }
 
     async fn tick(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         for sid in &self.session_ids.clone() {
             let tasks = self.fetch_states(*sid).await?;
-            if tasks.is_empty() { continue; }
+            if tasks.is_empty() {
+                continue;
+            }
             let dag = self.dag_cache.entry(*sid).or_insert_with(Dag::new);
 
             // Collect ready tasks first (avoid double borrow on dag)
@@ -45,8 +58,9 @@ impl SchedulerRuntime {
 
             for tid in &ready {
                 info!("{sid}: {tid} unblocked → Ready");
-                self.mark_ready(*sid, *tid).await;
-                self.lease(*sid, *tid).await;
+                if let Some(version) = self.mark_ready(*sid, *tid).await {
+                    self.lease(*sid, *tid, version).await;
+                }
             }
             for tid in &blocked {
                 warn!("{sid}: {tid} BLOCKED by failed upstream");
@@ -55,29 +69,98 @@ impl SchedulerRuntime {
         Ok(())
     }
 
-    async fn fetch_states(&mut self, sid: Uuid) -> Result<HashMap<Uuid, TaskState>, Box<dyn std::error::Error>> {
-        let resp = self.client.list_tasks(ListTasksRequest { session_id: sid.to_string(), state_filter: String::new() }).await?;
+    async fn fetch_states(
+        &mut self,
+        sid: Uuid,
+    ) -> Result<HashMap<Uuid, TaskState>, Box<dyn std::error::Error>> {
+        let resp = self
+            .client
+            .list_tasks(ListTasksRequest {
+                session_id: sid.to_string(),
+                state_filter: String::new(),
+            })
+            .await?;
         let mut states = HashMap::new();
         for t in resp.into_inner().tasks {
-            if let (Ok(tid), Some(s)) = (Uuid::parse_str(&t.task_id), TaskState::from_str(&t.state)) {
+            if let (Ok(tid), Some(s)) = (Uuid::parse_str(&t.task_id), TaskState::from_str(&t.state))
+            {
                 states.insert(tid, s);
-                let ups: Vec<Uuid> = t.upstream_task_ids.iter().filter_map(|id| Uuid::parse_str(id).ok()).collect();
-                if !ups.is_empty() { self.dag_cache.entry(sid).or_insert_with(Dag::new).add_node(tid, ups); }
+                let ups: Vec<Uuid> = t
+                    .upstream_task_ids
+                    .iter()
+                    .filter_map(|id| Uuid::parse_str(id).ok())
+                    .collect();
+                if !ups.is_empty() {
+                    self.dag_cache
+                        .entry(sid)
+                        .or_insert_with(Dag::new)
+                        .add_node(tid, ups);
+                }
             }
         }
         Ok(states)
     }
 
-    async fn mark_ready(&mut self, sid: Uuid, tid: Uuid) {
-        let cmd = ProtoCommand { command_id: Uuid::now_v7().to_string(), command_type: "MarkTaskReady".into(), tenant_id: Uuid::nil().to_string(), session_id: sid.to_string(), task_id: tid.to_string(), expected_version: 0, ..Default::default() };
-        let _ = self.client.execute_command(ExecuteCommandRequest { command: Some(cmd) }).await;
+    async fn current_session_version(&mut self, sid: Uuid) -> Option<i64> {
+        self.client
+            .get_session(GetSessionRequest {
+                session_id: sid.to_string(),
+            })
+            .await
+            .ok()
+            .map(|r| r.into_inner().session_version)
     }
 
-    async fn lease(&mut self, sid: Uuid, tid: Uuid) {
-        let cmd = ProtoCommand { command_id: Uuid::now_v7().to_string(), command_type: "LeaseTask".into(), tenant_id: Uuid::nil().to_string(), session_id: sid.to_string(), task_id: tid.to_string(), expected_version: 0, ..Default::default() };
-        if let Ok(r) = self.client.execute_command(ExecuteCommandRequest { command: Some(cmd) }).await {
-            let result: serde_json::Value = serde_json::from_slice(&r.into_inner().result).unwrap_or_default();
-            info!("leased {tid}: fencing={}", result.get("fencing_token").and_then(|v| v.as_u64()).unwrap_or(0));
+    async fn mark_ready(&mut self, sid: Uuid, tid: Uuid) -> Option<i64> {
+        let expected_version = self.current_session_version(sid).await?;
+        let cmd = ProtoCommand {
+            command_id: Uuid::now_v7().to_string(),
+            command_type: "MarkTaskReady".into(),
+            tenant_id: Uuid::nil().to_string(),
+            session_id: sid.to_string(),
+            task_id: tid.to_string(),
+            expected_version,
+            ..Default::default()
+        };
+        match self
+            .client
+            .execute_command(ExecuteCommandRequest { command: Some(cmd) })
+            .await
+        {
+            Ok(r) => Some(r.into_inner().new_session_version),
+            Err(e) => {
+                warn!("{sid}: mark ready failed for {tid}: {e}");
+                None
+            }
+        }
+    }
+
+    async fn lease(&mut self, sid: Uuid, tid: Uuid, expected_version: i64) {
+        let cmd = ProtoCommand {
+            command_id: Uuid::now_v7().to_string(),
+            command_type: "LeaseTask".into(),
+            tenant_id: Uuid::nil().to_string(),
+            session_id: sid.to_string(),
+            task_id: tid.to_string(),
+            expected_version,
+            ..Default::default()
+        };
+        if let Ok(r) = self
+            .client
+            .execute_command(ExecuteCommandRequest { command: Some(cmd) })
+            .await
+        {
+            let result: serde_json::Value =
+                serde_json::from_slice(&r.into_inner().result).unwrap_or_default();
+            info!(
+                "leased {tid}: fencing={}",
+                result
+                    .get("fencing_token")
+                    .and_then(|v| v.as_u64())
+                    .unwrap_or(0)
+            );
+        } else {
+            warn!("{sid}: lease failed for {tid}");
         }
     }
 }

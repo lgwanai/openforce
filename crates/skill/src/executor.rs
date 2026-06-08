@@ -28,9 +28,7 @@ impl<'a> SkillExecutor<'a> {
             .any(|prefix| relative_path.starts_with(prefix));
 
         if !is_allowed {
-            tracing::warn!(
-                "skill reference path not under allowed dirs: {relative_path}"
-            );
+            tracing::warn!("skill reference path not under allowed dirs: {relative_path}");
             return None;
         }
 
@@ -72,9 +70,7 @@ impl<'a> SkillExecutor<'a> {
 
         // Must be under scripts/
         if !script_path.starts_with("scripts/") {
-            return Err(format!(
-                "script path must be under scripts/: {script_path}"
-            ));
+            return Err(format!("script path must be under scripts/: {script_path}"));
         }
 
         let full_path = skill.dir.join(script_path);
@@ -83,10 +79,9 @@ impl<'a> SkillExecutor<'a> {
         }
 
         // Validate path stays within skill dir
-        if let (Ok(canonical_target), Ok(canonical_skill)) = (
-            full_path.canonicalize(),
-            skill.dir.canonicalize(),
-        ) {
+        if let (Ok(canonical_target), Ok(canonical_skill)) =
+            (full_path.canonicalize(), skill.dir.canonicalize())
+        {
             if !canonical_target.starts_with(&canonical_skill) {
                 return Err(format!("script path escapes skill dir: {script_path}"));
             }
@@ -129,10 +124,7 @@ impl<'a> SkillExecutor<'a> {
         let stderr = String::from_utf8_lossy(&output.stderr).to_string();
 
         if !output.status.success() {
-            return Err(format!(
-                "script exited with {}: {stderr}",
-                output.status
-            ));
+            return Err(format!("script exited with {}: {stderr}", output.status));
         }
 
         Ok(stdout)
@@ -169,9 +161,8 @@ impl<'a> SkillExecutor<'a> {
             return Err(format!("no adapter.py for skill: {skill_name}"));
         }
 
-        let input =
-            serde_json::to_string(&serde_json::json!({"tool": tool_name, "args": args}))
-                .unwrap_or_default();
+        let input = serde_json::to_string(&serde_json::json!({"tool": tool_name, "args": args}))
+            .unwrap_or_default();
 
         let mut child = tokio::process::Command::new("python3")
             .arg(&adapter)

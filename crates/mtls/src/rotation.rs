@@ -16,7 +16,11 @@ pub struct RotatingCertificateManager {
 impl RotatingCertificateManager {
     pub fn new(ca: Arc<CertificateAuthority>, current: CertificateBundle) -> Self {
         let instance_id = current.instance_id.clone();
-        Self { ca, instance_id, current: RwLock::new(current) }
+        Self {
+            ca,
+            instance_id,
+            current: RwLock::new(current),
+        }
     }
 
     pub async fn current_bundle(&self) -> CertificateBundle {

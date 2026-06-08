@@ -12,11 +12,15 @@ pub struct LoggingLayer;
 
 impl<S> Layer<S> for LoggingLayer {
     type Service = LoggingService<S>;
-    fn layer(&self, inner: S) -> Self::Service { LoggingService { inner } }
+    fn layer(&self, inner: S) -> Self::Service {
+        LoggingService { inner }
+    }
 }
 
 #[derive(Clone)]
-pub struct LoggingService<S> { inner: S }
+pub struct LoggingService<S> {
+    inner: S,
+}
 
 impl<S, B> Service<Request<B>> for LoggingService<S>
 where

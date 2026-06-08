@@ -1,13 +1,27 @@
-use openforce_domain::session_phase::{SessionPhase, ConfirmationGate};
+use openforce_domain::session_phase::{ConfirmationGate, SessionPhase};
 
-pub enum GateResult { Approve, Reject(String), Cancel }
+pub enum GateResult {
+    Approve,
+    Reject(String),
+    Cancel,
+}
 
 pub struct GateHandler;
 
 impl GateHandler {
-    pub async fn handle(gate: &ConfirmationGate, ok: usize, total: usize, interactive: bool) -> GateResult {
+    pub async fn handle(
+        gate: &ConfirmationGate,
+        ok: usize,
+        total: usize,
+        interactive: bool,
+    ) -> GateResult {
         Self::print_summary(gate, ok, total);
-        if interactive { Self::prompt().await } else { println!("  openforce approve/continue | reject \"feedback\""); GateResult::Approve }
+        if interactive {
+            Self::prompt().await
+        } else {
+            println!("  openforce approve/continue | reject \"feedback\"");
+            GateResult::Approve
+        }
     }
 
     fn print_summary(gate: &ConfirmationGate, ok: usize, total: usize) {
@@ -24,14 +38,23 @@ impl GateHandler {
         use tokio::io::AsyncBufReadExt;
         let mut lines = tokio::io::BufReader::new(tokio::io::stdin()).lines();
         loop {
-            print!("> "); let _ = std::io::Write::flush(&mut std::io::stdout());
+            print!("> ");
+            let _ = std::io::Write::flush(&mut std::io::stdout());
             if let Ok(Some(line)) = lines.next_line().await {
                 let l = line.trim().to_lowercase();
-                if matches!(l.as_str(), "approve" | "yes" | "y") { return GateResult::Approve; }
-                if l.starts_with("reject ") { return GateResult::Reject(line[7..].into()); }
-                if matches!(l.as_str(), "cancel" | "quit") { return GateResult::Cancel; }
+                if matches!(l.as_str(), "approve" | "yes" | "y") {
+                    return GateResult::Approve;
+                }
+                if l.starts_with("reject ") {
+                    return GateResult::Reject(line[7..].into());
+                }
+                if matches!(l.as_str(), "cancel" | "quit") {
+                    return GateResult::Cancel;
+                }
                 println!("  approve | reject <reason> | cancel");
-            } else { return GateResult::Cancel; }
+            } else {
+                return GateResult::Cancel;
+            }
         }
     }
 }

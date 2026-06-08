@@ -112,7 +112,6 @@ impl ToolChatResponse {
     /// Whether the LLM is finished (not requesting tool calls).
     pub fn is_finished(&self) -> bool {
         let fr = self.finish_reason.to_lowercase();
-        self.tool_calls.is_empty()
-            && (fr == "stop" || fr == "end_turn" || fr == "completed")
+        self.tool_calls.is_empty() && (fr == "stop" || fr == "end_turn" || fr == "completed")
     }
 }

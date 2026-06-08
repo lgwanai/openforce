@@ -12,8 +12,8 @@
 
 use std::collections::{HashMap, VecDeque};
 use std::fmt;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::Arc;
 use std::time::Duration;
 
 // ---------------------------------------------------------------------------
@@ -24,25 +24,15 @@ use std::time::Duration;
 #[derive(Debug, Clone)]
 pub enum DagError {
     /// A task depends on another task that does not exist.
-    UnresolvedDependency {
-        task_id: String,
-        dep_name: String,
-    },
+    UnresolvedDependency { task_id: String, dep_name: String },
     /// A cycle was detected in the dependency graph (after best-effort sorting).
-    CircularDependency {
-        unresolved_count: usize,
-    },
+    CircularDependency { unresolved_count: usize },
     /// Input validation failure.
     InvalidInput(String),
     /// A task exceeded its configured timeout.
-    TaskTimeout {
-        task_id: String,
-        duration: Duration,
-    },
+    TaskTimeout { task_id: String, duration: Duration },
     /// A task was cancelled by the global context.
-    Cancelled {
-        task_id: String,
-    },
+    Cancelled { task_id: String },
     /// A task failed after exhausting all retry attempts.
     TaskFailed {
         task_id: String,
@@ -50,20 +40,25 @@ pub enum DagError {
         last_error: String,
     },
     /// The DAG is too large to process.
-    DagTooLarge {
-        size: usize,
-        limit: usize,
-    },
+    DagTooLarge { size: usize, limit: usize },
 }
 
 impl fmt::Display for DagError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             DagError::UnresolvedDependency { task_id, dep_name } => {
-                write!(f, "task '{}' depends on unresolvable '{}'", task_id, dep_name)
+                write!(
+                    f,
+                    "task '{}' depends on unresolvable '{}'",
+                    task_id, dep_name
+                )
             }
             DagError::CircularDependency { unresolved_count } => {
-                write!(f, "circular dependency detected ({} tasks unresolved)", unresolved_count)
+                write!(
+                    f,
+                    "circular dependency detected ({} tasks unresolved)",
+                    unresolved_count
+                )
             }
             DagError::InvalidInput(msg) => write!(f, "invalid input: {}", msg),
             DagError::TaskTimeout { task_id, duration } => {
@@ -72,8 +67,16 @@ impl fmt::Display for DagError {
             DagError::Cancelled { task_id } => {
                 write!(f, "task '{}' was cancelled", task_id)
             }
-            DagError::TaskFailed { task_id, attempts, last_error } => {
-                write!(f, "task '{}' failed after {} attempts: {}", task_id, attempts, last_error)
+            DagError::TaskFailed {
+                task_id,
+                attempts,
+                last_error,
+            } => {
+                write!(
+                    f,
+                    "task '{}' failed after {} attempts: {}",
+                    task_id, attempts, last_error
+                )
             }
             DagError::DagTooLarge { size, limit } => {
                 write!(f, "DAG with {} tasks exceeds limit of {}", size, limit)
@@ -113,12 +116,12 @@ impl Default for DagConfig {
     fn default() -> Self {
         Self {
             max_tasks: 10_000,
-            task_timeout: Duration::from_secs(300),    // 5 minutes
+            task_timeout: Duration::from_secs(300), // 5 minutes
             max_retries: 3,
             retry_base_delay: Duration::from_secs(1),
             retry_max_delay: Duration::from_secs(60),
             retry_jitter: true,
-            dag_timeout: Duration::from_secs(3600),    // 1 hour
+            dag_timeout: Duration::from_secs(3600), // 1 hour
             max_concurrent: 8,
         }
     }
@@ -194,23 +197,26 @@ fn validate_tasks(tasks: &[DagTask], config: &DagConfig) -> Result<(), DagError>
     let mut seen = HashMap::new();
     for task in tasks {
         if task.title.is_empty() {
-            return Err(DagError::InvalidInput(
-                format!("task '{}' has empty title", task.id),
-            ));
+            return Err(DagError::InvalidInput(format!(
+                "task '{}' has empty title",
+                task.id
+            )));
         }
         if let Some(prev) = seen.get(task.title.as_str()) {
-            return Err(DagError::InvalidInput(
-                format!("duplicate task title '{}' (tasks {} and {})", task.title, prev, task.id),
-            ));
+            return Err(DagError::InvalidInput(format!(
+                "duplicate task title '{}' (tasks {} and {})",
+                task.title, prev, task.id
+            )));
         }
         seen.insert(task.title.as_str(), task.id.as_str());
 
         // Check for self-referencing dependencies
         for dep in &task.depends_on {
             if dep == &task.title {
-                return Err(DagError::InvalidInput(
-                    format!("task '{}' depends on itself", task.id),
-                ));
+                return Err(DagError::InvalidInput(format!(
+                    "task '{}' depends on itself",
+                    task.id
+                )));
             }
         }
     }
@@ -238,7 +244,9 @@ pub fn compute_waves(
     let n = tasks.len();
 
     // Build exact title → index map for O(1) lookups
-    let idx: HashMap<&str, usize> = tasks.iter().enumerate()
+    let idx: HashMap<&str, usize> = tasks
+        .iter()
+        .enumerate()
         .map(|(i, t)| (t.title.as_str(), i))
         .collect();
 
@@ -279,7 +287,8 @@ pub fn compute_waves(
             );
         }
         if let Some(m) = metrics {
-            m.unresolved_deps.fetch_add(unresolved.len() as u64, Ordering::Relaxed);
+            m.unresolved_deps
+                .fetch_add(unresolved.len() as u64, Ordering::Relaxed);
         }
         // Fail fast: return the first unresolved dependency as an error
         let (tid, dep) = unresolved.into_iter().next().unwrap();
@@ -350,7 +359,10 @@ pub fn compute_waves(
         );
     }
 
-    Ok(ExecutionPlan { waves, max_concurrent })
+    Ok(ExecutionPlan {
+        waves,
+        max_concurrent,
+    })
 }
 
 fn priority_val(p: &str) -> usize {
@@ -456,7 +468,8 @@ pub fn build_dag(
     validate_tasks(&result, config)?;
 
     if let Some(m) = metrics {
-        m.tasks_planned.fetch_add(result.len() as u64, Ordering::Relaxed);
+        m.tasks_planned
+            .fetch_add(result.len() as u64, Ordering::Relaxed);
     }
 
     Ok(result)
@@ -491,7 +504,9 @@ pub fn retry_delay(
     let max_ns = max_delay.as_nanos() as u64;
 
     // 2^attempt, saturating at u64::MAX to avoid overflow
-    let multiplier = (1u64).checked_shl(attempt.min(63) as u32).unwrap_or(u64::MAX);
+    let multiplier = (1u64)
+        .checked_shl(attempt.min(63) as u32)
+        .unwrap_or(u64::MAX);
     let raw = base_ns.saturating_mul(multiplier);
     let clamped = raw.min(max_ns);
 
@@ -781,10 +796,24 @@ mod tests {
     #[test]
     fn test_waves_linear() {
         let t = vec![
-            DagTask { id: "1".into(), role: "Architect".into(), title: "Design".into(),
-                description: "".into(), depends_on: vec![], priority: "high".into(), files: vec![] },
-            DagTask { id: "2".into(), role: "Developer".into(), title: "Implement".into(),
-                description: "".into(), depends_on: vec!["Design".into()], priority: "high".into(), files: vec![] },
+            DagTask {
+                id: "1".into(),
+                role: "Architect".into(),
+                title: "Design".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "high".into(),
+                files: vec![],
+            },
+            DagTask {
+                id: "2".into(),
+                role: "Developer".into(),
+                title: "Implement".into(),
+                description: "".into(),
+                depends_on: vec!["Design".into()],
+                priority: "high".into(),
+                files: vec![],
+            },
         ];
         let config = DagConfig::default();
         let plan = compute_waves(&t, &config, None).unwrap();
@@ -796,12 +825,33 @@ mod tests {
     #[test]
     fn test_waves_parallel() {
         let t = vec![
-            DagTask { id: "1".into(), role: "dev".into(), title: "A".into(),
-                description: "".into(), depends_on: vec![], priority: "high".into(), files: vec![] },
-            DagTask { id: "2".into(), role: "dev".into(), title: "B".into(),
-                description: "".into(), depends_on: vec![], priority: "medium".into(), files: vec![] },
-            DagTask { id: "3".into(), role: "dev".into(), title: "C".into(),
-                description: "".into(), depends_on: vec![], priority: "high".into(), files: vec![] },
+            DagTask {
+                id: "1".into(),
+                role: "dev".into(),
+                title: "A".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "high".into(),
+                files: vec![],
+            },
+            DagTask {
+                id: "2".into(),
+                role: "dev".into(),
+                title: "B".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "medium".into(),
+                files: vec![],
+            },
+            DagTask {
+                id: "3".into(),
+                role: "dev".into(),
+                title: "C".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "high".into(),
+                files: vec![],
+            },
         ];
         let config = DagConfig::default();
         let plan = compute_waves(&t, &config, None).unwrap();
@@ -813,10 +863,15 @@ mod tests {
 
     #[test]
     fn test_unresolved_dependency_returns_error() {
-        let t = vec![
-            DagTask { id: "1".into(), role: "dev".into(), title: "A".into(),
-                description: "".into(), depends_on: vec!["Nonexistent".into()], priority: "high".into(), files: vec![] },
-        ];
+        let t = vec![DagTask {
+            id: "1".into(),
+            role: "dev".into(),
+            title: "A".into(),
+            description: "".into(),
+            depends_on: vec!["Nonexistent".into()],
+            priority: "high".into(),
+            files: vec![],
+        }];
         let config = DagConfig::default();
         let err = compute_waves(&t, &config, None).unwrap_err();
         assert!(matches!(err, DagError::UnresolvedDependency { .. }));
@@ -833,10 +888,24 @@ mod tests {
     fn test_circular_dependency_returns_error() {
         // A depends on B, B depends on A
         let t = vec![
-            DagTask { id: "1".into(), role: "dev".into(), title: "A".into(),
-                description: "".into(), depends_on: vec!["B".into()], priority: "high".into(), files: vec![] },
-            DagTask { id: "2".into(), role: "dev".into(), title: "B".into(),
-                description: "".into(), depends_on: vec!["A".into()], priority: "high".into(), files: vec![] },
+            DagTask {
+                id: "1".into(),
+                role: "dev".into(),
+                title: "A".into(),
+                description: "".into(),
+                depends_on: vec!["B".into()],
+                priority: "high".into(),
+                files: vec![],
+            },
+            DagTask {
+                id: "2".into(),
+                role: "dev".into(),
+                title: "B".into(),
+                description: "".into(),
+                depends_on: vec!["A".into()],
+                priority: "high".into(),
+                files: vec![],
+            },
         ];
         let config = DagConfig::default();
         let err = compute_waves(&t, &config, None).unwrap_err();
@@ -846,10 +915,24 @@ mod tests {
     #[test]
     fn test_duplicate_title_returns_error() {
         let t = vec![
-            DagTask { id: "1".into(), role: "dev".into(), title: "Same".into(),
-                description: "".into(), depends_on: vec![], priority: "high".into(), files: vec![] },
-            DagTask { id: "2".into(), role: "dev".into(), title: "Same".into(),
-                description: "".into(), depends_on: vec![], priority: "medium".into(), files: vec![] },
+            DagTask {
+                id: "1".into(),
+                role: "dev".into(),
+                title: "Same".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "high".into(),
+                files: vec![],
+            },
+            DagTask {
+                id: "2".into(),
+                role: "dev".into(),
+                title: "Same".into(),
+                description: "".into(),
+                depends_on: vec![],
+                priority: "medium".into(),
+                files: vec![],
+            },
         ];
         let config = DagConfig::default();
         let err = compute_waves(&t, &config, None).unwrap_err();
@@ -868,8 +951,20 @@ mod tests {
     #[test]
     fn test_build_dag_basic() {
         let input = vec![
-            ("Arch".into(), "Design".into(), "critical design".into(), vec![], vec![]),
-            ("Dev".into(), "Impl".into(), "implement it".into(), vec!["Design".into()], vec![]),
+            (
+                "Arch".into(),
+                "Design".into(),
+                "critical design".into(),
+                vec![],
+                vec![],
+            ),
+            (
+                "Dev".into(),
+                "Impl".into(),
+                "implement it".into(),
+                vec!["Design".into()],
+                vec![],
+            ),
         ];
         let config = DagConfig::default();
         let tasks = build_dag(&input, &config, None).unwrap();

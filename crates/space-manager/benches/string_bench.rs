@@ -14,8 +14,7 @@
 //!   - Memory allocation stable across 10 runs (variance < 10 %)
 
 use criterion::{
-    black_box, criterion_group, criterion_main, BenchmarkId, Criterion, SamplingMode,
-    Throughput,
+    black_box, criterion_group, criterion_main, BenchmarkId, Criterion, SamplingMode, Throughput,
 };
 use openforce_space_manager::utils::str::*;
 
@@ -54,10 +53,9 @@ fn path_string(n: usize) -> String {
 fn bench_join_small(c: &mut Criterion) {
     let parts: Vec<&str> = vec!["hello", "world", "foo", "bar"];
     let sep = ", ";
-    c.bench_with_input(
-        BenchmarkId::new("join_strings", "small"), &parts,
-        |b, p| b.iter(|| join_strings(black_box(p), black_box(sep))),
-    );
+    c.bench_with_input(BenchmarkId::new("join_strings", "small"), &parts, |b, p| {
+        b.iter(|| join_strings(black_box(p), black_box(sep)))
+    });
 }
 
 fn bench_join_large(c: &mut Criterion) {
@@ -67,10 +65,9 @@ fn bench_join_large(c: &mut Criterion) {
     let mut group = c.benchmark_group("join_strings_large");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Elements(refs.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("join_strings", "10k"), &refs,
-        |b, p| b.iter(|| join_strings(black_box(p), black_box(sep))),
-    );
+    group.bench_with_input(BenchmarkId::new("join_strings", "10k"), &refs, |b, p| {
+        b.iter(|| join_strings(black_box(p), black_box(sep)))
+    });
     group.finish();
 }
 
@@ -81,7 +78,8 @@ fn bench_join_large(c: &mut Criterion) {
 fn bench_split_small(c: &mut Criterion) {
     let input = "a,b,c,d,e";
     c.bench_with_input(
-        BenchmarkId::new("split_by_char", "small-CSV"), &input,
+        BenchmarkId::new("split_by_char", "small-CSV"),
+        &input,
         |b, s| b.iter(|| split_by_char(black_box(s), ',')),
     );
 }
@@ -92,7 +90,8 @@ fn bench_split_large_csv(c: &mut Criterion) {
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(input.len() as u64));
     group.bench_with_input(
-        BenchmarkId::new("split_by_char", "5k-CSV"), &input,
+        BenchmarkId::new("split_by_char", "5k-CSV"),
+        &input,
         |b, s| b.iter(|| split_by_char(black_box(s), ',')),
     );
     group.finish();
@@ -101,7 +100,8 @@ fn bench_split_large_csv(c: &mut Criterion) {
 fn bench_split_consecutive_delimiters(c: &mut Criterion) {
     let input = "a,,b,,,c,d,,e,,,,f";
     c.bench_with_input(
-        BenchmarkId::new("split_by_char", "consecutive"), &input,
+        BenchmarkId::new("split_by_char", "consecutive"),
+        &input,
         |b, s| b.iter(|| split_by_char(black_box(s), ',')),
     );
 }
@@ -109,7 +109,8 @@ fn bench_split_consecutive_delimiters(c: &mut Criterion) {
 fn bench_split_unicode_delimiter(c: &mut Criterion) {
     let input = unicode_string(1_000).chars().collect::<String>();
     c.bench_with_input(
-        BenchmarkId::new("split_by_char", "unicode-delim"), &input,
+        BenchmarkId::new("split_by_char", "unicode-delim"),
+        &input,
         |b, s| b.iter(|| split_by_char(black_box(s), '😀')),
     );
 }
@@ -152,10 +153,9 @@ fn bench_trim_large(c: &mut Criterion) {
     let mut group = c.benchmark_group("trim_whitespace_large");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(s.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("trim_whitespace", "100k"), &s,
-        |b, s| b.iter(|| trim_whitespace(black_box(s))),
-    );
+    group.bench_with_input(BenchmarkId::new("trim_whitespace", "100k"), &s, |b, s| {
+        b.iter(|| trim_whitespace(black_box(s)))
+    });
     group.finish();
 }
 
@@ -171,14 +171,18 @@ fn bench_to_snake_case_short(c: &mut Criterion) {
 }
 
 fn bench_to_snake_case_long(c: &mut Criterion) {
-    let s = format!("{} - {} - {}", ascii_string(1_000), unicode_string(500), "END");
+    let s = format!(
+        "{} - {} - {}",
+        ascii_string(1_000),
+        unicode_string(500),
+        "END"
+    );
     let mut group = c.benchmark_group("to_snake_case_long");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(s.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("to_snake_case", "1.5k"), &s,
-        |b, s| b.iter(|| to_snake_case(black_box(s))),
-    );
+    group.bench_with_input(BenchmarkId::new("to_snake_case", "1.5k"), &s, |b, s| {
+        b.iter(|| to_snake_case(black_box(s)))
+    });
     group.finish();
 }
 
@@ -208,10 +212,9 @@ fn bench_truncate_long(c: &mut Criterion) {
     let mut group = c.benchmark_group("truncate_long");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(s.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("truncate", "10k-unicode"), &s,
-        |b, s| b.iter(|| truncate_with_ellipsis(black_box(s), 50)),
-    );
+    group.bench_with_input(BenchmarkId::new("truncate", "10k-unicode"), &s, |b, s| {
+        b.iter(|| truncate_with_ellipsis(black_box(s), 50))
+    });
     group.finish();
 }
 
@@ -226,7 +229,8 @@ fn bench_highrisk_huge_csv(c: &mut Criterion) {
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(input.len() as u64));
     group.bench_with_input(
-        BenchmarkId::new("split_by_char", "100k-cols"), &input,
+        BenchmarkId::new("split_by_char", "100k-cols"),
+        &input,
         |b, s| b.iter(|| split_by_char(black_box(s), ',')),
     );
     group.finish();
@@ -238,18 +242,15 @@ fn bench_highrisk_deep_path(c: &mut Criterion) {
     let mut group = c.benchmark_group("highrisk_deep_path");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(input.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("roundtrip", "10k-path"), &input,
-        |b, s| {
-            b.iter(|| {
-                let parts = split_by_char(black_box(s), '/');
-                let _joined = join_strings(
-                    &parts.iter().map(|s| s.as_str()).collect::<Vec<&str>>(),
-                    "/",
-                );
-            })
-        },
-    );
+    group.bench_with_input(BenchmarkId::new("roundtrip", "10k-path"), &input, |b, s| {
+        b.iter(|| {
+            let parts = split_by_char(black_box(s), '/');
+            let _joined = join_strings(
+                &parts.iter().map(|s| s.as_str()).collect::<Vec<&str>>(),
+                "/",
+            );
+        })
+    });
     group.finish();
 }
 
@@ -263,20 +264,14 @@ fn bench_highrisk_alloc_stress(c: &mut Criterion) {
     let mut group = c.benchmark_group("highrisk_alloc_stress");
     group.sampling_mode(SamplingMode::Auto);
     group.throughput(Throughput::Bytes(raw.len() as u64));
-    group.bench_with_input(
-        BenchmarkId::new("trim+split+join", "5k"), &raw,
-        |b, s| {
-            b.iter(|| {
-                let trimmed = trim_whitespace(black_box(s));
-                let parts = split_by_char(&trimmed, ',');
-                let trimmed_parts: Vec<&str> = parts
-                    .iter()
-                    .map(|p| p.trim())
-                    .collect();
-                let _result = join_strings(&trimmed_parts, "|");
-            })
-        },
-    );
+    group.bench_with_input(BenchmarkId::new("trim+split+join", "5k"), &raw, |b, s| {
+        b.iter(|| {
+            let trimmed = trim_whitespace(black_box(s));
+            let parts = split_by_char(&trimmed, ',');
+            let trimmed_parts: Vec<&str> = parts.iter().map(|p| p.trim()).collect();
+            let _result = join_strings(&trimmed_parts, "|");
+        })
+    });
     group.finish();
 }
 
@@ -286,7 +281,8 @@ fn bench_highrisk_truncation_edge_cases(c: &mut Criterion) {
     let mut group = c.benchmark_group("highrisk_truncation_edges");
     for max_len in [0, 1, 2, 3, 4, 5, 10, 15, 20, 26, 30] {
         group.bench_with_input(
-            BenchmarkId::new("truncate", max_len), &(s, max_len),
+            BenchmarkId::new("truncate", max_len),
+            &(s, max_len),
             |b, (s, max)| b.iter(|| truncate_with_ellipsis(black_box(s), *max)),
         );
     }
@@ -332,4 +328,10 @@ criterion_group! {
               bench_highrisk_alloc_stress, bench_highrisk_truncation_edge_cases
 }
 
-criterion_main!(concatenation, splitting, search_check, formatting, high_risk);
+criterion_main!(
+    concatenation,
+    splitting,
+    search_check,
+    formatting,
+    high_risk
+);

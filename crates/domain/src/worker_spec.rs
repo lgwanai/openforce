@@ -5,7 +5,9 @@ use uuid::Uuid;
 pub struct WorkerSpecId(pub Uuid);
 
 impl WorkerSpecId {
-    pub fn new() -> Self { Self(Uuid::now_v7()) }
+    pub fn new() -> Self {
+        Self(Uuid::now_v7())
+    }
 }
 
 /// A frozen Worker Spec — the immutable execution contract for a single task attempt.

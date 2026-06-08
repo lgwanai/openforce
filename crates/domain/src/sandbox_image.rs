@@ -8,18 +8,30 @@ pub struct SandboxImageClass(String);
 impl SandboxImageClass {
     // Built-in sandbox classes (architecture doc section 10)
     /// Minimal agent runtime (Python/Node/Go + tool support)
-    pub fn agent_space() -> Self { Self("agent-space".into()) }
+    pub fn agent_space() -> Self {
+        Self("agent-space".into())
+    }
     /// Full integration target (Node + Go + DB drivers + test frameworks)
-    pub fn target_fullstack() -> Self { Self("target-fullstack".into()) }
+    pub fn target_fullstack() -> Self {
+        Self("target-fullstack".into())
+    }
     /// GPU-accelerated target (CUDA + ML frameworks)
-    pub fn target_gpu() -> Self { Self("target-gpu".into()) }
+    pub fn target_gpu() -> Self {
+        Self("target-gpu".into())
+    }
 
     /// Create a custom image class from any string
-    pub fn custom(name: &str) -> Self { Self(name.to_lowercase()) }
+    pub fn custom(name: &str) -> Self {
+        Self(name.to_lowercase())
+    }
 
-    pub fn as_str(&self) -> &str { &self.0 }
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
 
-    pub fn from_str(s: &str) -> Option<Self> { Some(Self(s.to_lowercase())) }
+    pub fn from_str(s: &str) -> Option<Self> {
+        Some(Self(s.to_lowercase()))
+    }
 
     /// Pool key for WarmPool lookups.
     pub fn pool_key(&self) -> &str {
@@ -33,11 +45,15 @@ impl SandboxImageClass {
 }
 
 impl Default for SandboxImageClass {
-    fn default() -> Self { Self::agent_space() }
+    fn default() -> Self {
+        Self::agent_space()
+    }
 }
 
 impl std::fmt::Display for SandboxImageClass {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { write!(f, "{}", self.0) }
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
 }
 
 /// Immutable reference to a sandbox image (architecture doc section 22.8).
@@ -52,7 +68,10 @@ pub struct SandboxImage {
 
 impl SandboxImage {
     pub fn canonical_ref(&self) -> String {
-        format!("{}/{}@{}", self.registry, self.rootfs_image, self.image_digest)
+        format!(
+            "{}/{}@{}",
+            self.registry, self.rootfs_image, self.image_digest
+        )
     }
 }
 

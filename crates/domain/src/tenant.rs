@@ -4,7 +4,9 @@ use serde::{Deserialize, Serialize};
 pub struct TenantId(pub uuid::Uuid);
 
 impl TenantId {
-    pub fn new() -> Self { Self(uuid::Uuid::now_v7()) }
+    pub fn new() -> Self {
+        Self(uuid::Uuid::now_v7())
+    }
 }
 
 impl std::fmt::Display for TenantId {
@@ -14,7 +16,9 @@ impl std::fmt::Display for TenantId {
 }
 
 impl From<uuid::Uuid> for TenantId {
-    fn from(id: uuid::Uuid) -> Self { Self(id) }
+    fn from(id: uuid::Uuid) -> Self {
+        Self(id)
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

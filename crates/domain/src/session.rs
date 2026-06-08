@@ -3,8 +3,8 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::error::DomainError;
-use crate::tenant::TenantPolicy;
 use crate::session_phase::SessionPhase;
+use crate::tenant::TenantPolicy;
 
 /// Session aggregate root (architecture doc section 3)
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -125,7 +125,9 @@ impl Session {
 
     pub fn advance_phase(&mut self, next: SessionPhase) -> Result<(), DomainError> {
         if next == self.current_phase {
-            return Err(DomainError::ValidationFailed { detail: "phase unchanged".into() });
+            return Err(DomainError::ValidationFailed {
+                detail: "phase unchanged".into(),
+            });
         }
         self.current_phase = next;
         self.updated_at = Utc::now();

@@ -7,13 +7,19 @@ pub struct CanaryRelease {
     pub canary_id: Uuid,
     pub stable_version: ArtifactVersion,
     pub canary_version: ArtifactVersion,
-    pub traffic_split_pct: u8,  // percentage going to canary
+    pub traffic_split_pct: u8, // percentage going to canary
     pub active: bool,
 }
 
 impl CanaryRelease {
     pub fn new(stable: ArtifactVersion, canary: ArtifactVersion, split_pct: u8) -> Self {
-        Self { canary_id: Uuid::now_v7(), stable_version: stable, canary_version: canary, traffic_split_pct: split_pct, active: true }
+        Self {
+            canary_id: Uuid::now_v7(),
+            stable_version: stable,
+            canary_version: canary,
+            traffic_split_pct: split_pct,
+            active: true,
+        }
     }
 
     pub fn promote_canary(&mut self, mut canary: ArtifactVersion) {
@@ -29,7 +35,9 @@ impl CanaryRelease {
     }
 
     pub fn route_to_canary(&self, request_id: Uuid) -> bool {
-        if !self.active { return false; }
+        if !self.active {
+            return false;
+        }
         // Deterministic routing based on request_id for consistent A/B
         let bytes = request_id.as_bytes();
         let bucket = bytes[0] as u16;

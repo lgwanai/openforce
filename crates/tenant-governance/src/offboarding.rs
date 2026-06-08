@@ -26,18 +26,30 @@ struct OffboardingStep {
 impl OffboardingFlow {
     pub fn new(tenant_id: Uuid) -> Self {
         let steps = vec![
-            "freeze_new_tasks", "export_data", "stop_observer_sampling",
-            "delete_online_objects", "clean_staging_outbox",
-            "clean_backups", "destroy_tenant_key",
+            "freeze_new_tasks",
+            "export_data",
+            "stop_observer_sampling",
+            "delete_online_objects",
+            "clean_staging_outbox",
+            "clean_backups",
+            "destroy_tenant_key",
         ];
         Self {
             tenant_id,
             state: OffboardingState::Active,
-            steps: steps.into_iter().map(|s| OffboardingStep { name: s.into(), completed: false }).collect(),
+            steps: steps
+                .into_iter()
+                .map(|s| OffboardingStep {
+                    name: s.into(),
+                    completed: false,
+                })
+                .collect(),
         }
     }
 
-    pub fn start(&mut self) { self.state = OffboardingState::Frozen; }
+    pub fn start(&mut self) {
+        self.state = OffboardingState::Frozen;
+    }
 
     pub fn complete_step(&mut self, step_name: &str) {
         if let Some(s) = self.steps.iter_mut().find(|s| s.name == step_name) {

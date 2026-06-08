@@ -1,17 +1,13 @@
-use tonic::transport::Channel;
-use uuid::Uuid;
 use openforce_proto::swarmos::v1::{
-    session_store_client::SessionStoreClient,
-    scheduler_client::SchedulerClient,
-    project_tool_service_client::ProjectToolServiceClient,
     approval_service_client::ApprovalServiceClient,
-    GetSessionRequest, ListTasksRequest,
-    
-    
-    Command as ProtoCommand, ProducerIdentity,
+    project_tool_service_client::ProjectToolServiceClient, scheduler_client::SchedulerClient,
+    session_store_client::SessionStoreClient, Command as ProtoCommand, GetSessionRequest,
+    ListTasksRequest, ProducerIdentity,
 };
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
+use tonic::transport::Channel;
+use uuid::Uuid;
 
 pub struct GrpcClients {
     pub session_store: SessionStoreClient<Channel>,
@@ -23,22 +19,33 @@ pub struct GrpcClients {
 
 impl GrpcClients {
     pub async fn connect(
-        ss_addr: &str, sched_addr: &str, pt_addr: &str,
+        ss_addr: &str,
+        sched_addr: &str,
+        pt_addr: &str,
     ) -> Result<Self, tonic::transport::Error> {
         let ss = SessionStoreClient::connect(format!("http://{ss_addr}")).await?;
         let sched = SchedulerClient::connect(format!("http://{sched_addr}")).await?;
         let pt = ProjectToolServiceClient::connect(format!("http://{pt_addr}")).await?;
         let ap = ApprovalServiceClient::connect(format!("http://{pt_addr}")).await?;
-        Ok(Self { session_store: ss, scheduler: sched, project_tools: pt, approval: ap })
+        Ok(Self {
+            session_store: ss,
+            scheduler: sched,
+            project_tools: pt,
+            approval: ap,
+        })
     }
 }
 
 pub async fn fetch_session_info(
-    client: &mut SessionStoreClient<Channel>, session_id: &Uuid,
+    client: &mut SessionStoreClient<Channel>,
+    session_id: &Uuid,
 ) -> Result<serde_json::Value, String> {
-    let resp = client.get_session(GetSessionRequest {
-        session_id: session_id.to_string(),
-    }).await.map_err(|e| e.to_string())?;
+    let resp = client
+        .get_session(GetSessionRequest {
+            session_id: session_id.to_string(),
+        })
+        .await
+        .map_err(|e| e.to_string())?;
     let inner = resp.into_inner();
     Ok(serde_json::json!({
         "session_id": inner.session_id,
@@ -51,23 +58,32 @@ pub async fn fetch_session_info(
 }
 
 pub async fn fetch_tasks(
-    client: &mut SessionStoreClient<Channel>, session_id: &Uuid,
+    client: &mut SessionStoreClient<Channel>,
+    session_id: &Uuid,
 ) -> Result<Vec<serde_json::Value>, String> {
-    let resp = client.list_tasks(ListTasksRequest {
-        session_id: session_id.to_string(),
-        state_filter: String::new(),
-    }).await.map_err(|e| e.to_string())?;
-
-    let tasks: Vec<serde_json::Value> = resp.into_inner().tasks.iter().map(|t| {
-        serde_json::json!({
-            "task_id": t.task_id.clone(),
-            "task_type": t.task_type.clone(),
-            "state": t.state.clone(),
-            "attempt": t.task_attempt,
-            "fencing": t.current_fencing_token,
-            "lease_id": t.current_lease_id.clone(),
+    let resp = client
+        .list_tasks(ListTasksRequest {
+            session_id: session_id.to_string(),
+            state_filter: String::new(),
         })
-    }).collect();
+        .await
+        .map_err(|e| e.to_string())?;
+
+    let tasks: Vec<serde_json::Value> = resp
+        .into_inner()
+        .tasks
+        .iter()
+        .map(|t| {
+            serde_json::json!({
+                "task_id": t.task_id.clone(),
+                "task_type": t.task_type.clone(),
+                "state": t.state.clone(),
+                "attempt": t.task_attempt,
+                "fencing": t.current_fencing_token,
+                "lease_id": t.current_lease_id.clone(),
+            })
+        })
+        .collect();
     Ok(tasks)
 }
 
@@ -83,7 +99,9 @@ pub struct SessionSummary {
 /// List sessions from local .openforce/sessions/ directory
 pub fn list_sessions(workspace: &PathBuf) -> Vec<SessionSummary> {
     let dir = workspace.join(".openforce").join("sessions");
-    if !dir.exists() { return vec![]; }
+    if !dir.exists() {
+        return vec![];
+    }
     let mut out = vec![];
     for entry in std::fs::read_dir(&dir).into_iter().flatten().flatten() {
         if let Ok(json) = std::fs::read_to_string(entry.path()) {
@@ -94,7 +112,10 @@ pub fn list_sessions(workspace: &PathBuf) -> Vec<SessionSummary> {
                             session_id: id,
                             goal: goal.to_string(),
                             state: v["state"].as_str().unwrap_or("Active").to_string(),
-                            current_phase: v["current_phase"].as_str().unwrap_or("Understand").to_string(),
+                            current_phase: v["current_phase"]
+                                .as_str()
+                                .unwrap_or("Understand")
+                                .to_string(),
                             created_at: v["created_at"].as_str().unwrap_or("").to_string(),
                         });
                     }
@@ -109,13 +130,23 @@ pub fn list_sessions(workspace: &PathBuf) -> Vec<SessionSummary> {
 pub fn producer_identity(component: &str) -> ProducerIdentity {
     ProducerIdentity {
         component: component.to_string(),
-        instance_id: format!("tui-{}", uuid::Uuid::now_v7().to_string().chars().take(8).collect::<String>()),
+        instance_id: format!(
+            "tui-{}",
+            uuid::Uuid::now_v7()
+                .to_string()
+                .chars()
+                .take(8)
+                .collect::<String>()
+        ),
         region: "local".to_string(),
     }
 }
 
 pub fn build_command(
-    command_type: &str, session_id: &Uuid, task_id: Option<&str>, payload: Vec<u8>,
+    command_type: &str,
+    session_id: &Uuid,
+    task_id: Option<&str>,
+    payload: Vec<u8>,
 ) -> ProtoCommand {
     ProtoCommand {
         command_id: uuid::Uuid::now_v7().to_string(),

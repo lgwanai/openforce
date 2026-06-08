@@ -81,7 +81,11 @@ pub fn parse_frontmatter(content: &str) -> Option<SkillFrontmatter> {
             description_lines.push(trimmed.to_string());
         } else if allowed_tools.is_some() && trimmed.starts_with("- ") {
             // YAML list item for allowed-tools
-            let tool = trimmed.trim_start_matches("- ").trim().trim_matches('"').to_string();
+            let tool = trimmed
+                .trim_start_matches("- ")
+                .trim()
+                .trim_matches('"')
+                .to_string();
             if let Some(ref mut tools) = allowed_tools {
                 tools.push(tool);
             }
@@ -166,14 +170,21 @@ mod tests {
         assert_eq!(fm.version.as_deref(), Some("1.0"));
         assert_eq!(fm.author.as_deref(), Some("openforce"));
         assert_eq!(fm.license.as_deref(), Some("MIT"));
-        assert_eq!(fm.allowed_tools.as_deref(), Some(&["web_search".to_string(), "web_fetch".to_string()][..]));
+        assert_eq!(
+            fm.allowed_tools.as_deref(),
+            Some(&["web_search".to_string(), "web_fetch".to_string()][..])
+        );
     }
 
     #[test]
     fn test_parse_multiline_allowed_tools() {
-        let content = "---\nname: test\ndescription: test\nallowed-tools:\n  - tool_a\n  - tool_b\n---\nBody";
+        let content =
+            "---\nname: test\ndescription: test\nallowed-tools:\n  - tool_a\n  - tool_b\n---\nBody";
         let fm = parse_frontmatter(content).expect("should parse");
-        assert_eq!(fm.allowed_tools.as_deref(), Some(&["tool_a".to_string(), "tool_b".to_string()][..]));
+        assert_eq!(
+            fm.allowed_tools.as_deref(),
+            Some(&["tool_a".to_string(), "tool_b".to_string()][..])
+        );
     }
 
     #[test]

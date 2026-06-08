@@ -192,11 +192,9 @@ pub fn safe_write(path: impl AsRef<Path>, content: impl AsRef<[u8]>) -> Result<(
     let content = content.as_ref();
 
     // Determine the parent directory for the temp file.
-    let parent = path
-        .parent()
-        .ok_or_else(|| FsError::NoParentDirectory {
-            path: path.to_path_buf(),
-        })?;
+    let parent = path.parent().ok_or_else(|| FsError::NoParentDirectory {
+        path: path.to_path_buf(),
+    })?;
 
     // Generate a temporary file path in the same directory.
     let temp_filename = format!(
@@ -219,10 +217,11 @@ pub fn safe_write(path: impl AsRef<Path>, content: impl AsRef<[u8]>) -> Result<(
             source,
         })?;
 
-        file.write_all(content).map_err(|source| FsError::WriteFile {
-            path: path.to_path_buf(),
-            source,
-        })?;
+        file.write_all(content)
+            .map_err(|source| FsError::WriteFile {
+                path: path.to_path_buf(),
+                source,
+            })?;
 
         file.sync_all().map_err(|source| FsError::WriteFile {
             path: path.to_path_buf(),
@@ -265,15 +264,22 @@ pub fn safe_write(path: impl AsRef<Path>, content: impl AsRef<[u8]>) -> Result<(
 /// high-resolution timestamp. This avoids pulling in external dependencies
 /// like `rand` or `uuid` for a single utility crate.
 fn fast_random_u64() -> u64 {
+    use std::sync::atomic::{AtomicU64, Ordering};
     use std::time::{SystemTime, UNIX_EPOCH};
 
+    static TEMP_COUNTER: AtomicU64 = AtomicU64::new(0);
+
     let pid = std::process::id() as u64;
+    let sequence = TEMP_COUNTER.fetch_add(1, Ordering::Relaxed);
     let nanos = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_nanos() as u64;
 
-    let mut state = pid.wrapping_mul(6364136223846793005).wrapping_add(nanos);
+    let mut state = pid
+        .wrapping_mul(6364136223846793005)
+        .wrapping_add(nanos)
+        .wrapping_add(sequence.rotate_left(17));
 
     // One round of xorshift64*.
     state ^= state >> 12;
@@ -327,8 +333,14 @@ mod tests {
         let _ = fs::remove_dir_all(dir);
 
         assert!(ensure_dir(dir).is_ok(), "first call should succeed");
-        assert!(ensure_dir(dir).is_ok(), "second call (idempotent) should succeed");
-        assert!(ensure_dir(dir).is_ok(), "third call (idempotent) should succeed");
+        assert!(
+            ensure_dir(dir).is_ok(),
+            "second call (idempotent) should succeed"
+        );
+        assert!(
+            ensure_dir(dir).is_ok(),
+            "third call (idempotent) should succeed"
+        );
         assert!(dir.exists());
         let _ = fs::remove_dir_all(dir);
     }
@@ -340,7 +352,11 @@ mod tests {
         fs::create_dir_all(dir).expect("setup: create dir");
 
         let result = ensure_dir(dir);
-        assert!(result.is_ok(), "ensure_dir on existing directory should succeed: {:?}", result);
+        assert!(
+            result.is_ok(),
+            "ensure_dir on existing directory should succeed: {:?}",
+            result
+        );
         let _ = fs::remove_dir_all(dir);
     }
 
@@ -363,7 +379,11 @@ mod tests {
                 .expect("setup: set read-only (r-x)");
 
             let result = ensure_dir(&child);
-            assert!(result.is_err(), "expected Err when parent is read-only, got: {:?}", result);
+            assert!(
+                result.is_err(),
+                "expected Err when parent is read-only, got: {:?}",
+                result
+            );
 
             if let Err(FsError::CreateDir { path, source }) = result {
                 assert_eq!(path, child);
@@ -390,7 +410,11 @@ mod tests {
         let _ = fs::remove_dir_all("/tmp/openforce-test/a");
 
         let result = ensure_dir(dir);
-        assert!(result.is_ok(), "deeply nested path should be created: {:?}", result);
+        assert!(
+            result.is_ok(),
+            "deeply nested path should be created: {:?}",
+            result
+        );
         assert!(dir.exists(), "deeply nested dir should exist");
         let _ = fs::remove_dir_all("/tmp/openforce-test/a");
     }
@@ -401,7 +425,11 @@ mod tests {
         let _ = fs::remove_dir_all(&pathbuf);
 
         let result = ensure_dir(pathbuf.as_path());
-        assert!(result.is_ok(), "PathBuf reference should work: {:?}", result);
+        assert!(
+            result.is_ok(),
+            "PathBuf reference should work: {:?}",
+            result
+        );
         let _ = fs::remove_dir_all("/tmp/openforce-test/ensure-dir-pathbuf");
     }
 
@@ -440,7 +468,10 @@ mod tests {
             assert!(result.is_ok(), "thread {} should succeed: {:?}", i, result);
         }
 
-        assert!(dir.exists(), "directory should exist after concurrent ensure_dir");
+        assert!(
+            dir.exists(),
+            "directory should exist after concurrent ensure_dir"
+        );
         let _ = fs::remove_dir_all("/tmp/openforce-test/ensure-dir-concurrent");
     }
 
@@ -460,7 +491,11 @@ mod tests {
 
         for h in handles {
             let result = h.join().expect("thread panicked");
-            assert!(result.is_ok(), "concurrent ensure_dir should succeed: {:?}", result);
+            assert!(
+                result.is_ok(),
+                "concurrent ensure_dir should succeed: {:?}",
+                result
+            );
         }
 
         assert!(dir.exists());
@@ -539,7 +574,10 @@ mod tests {
         let result = safe_write(&path, "");
         assert!(result.is_ok(), "empty write should succeed: {:?}", result);
         assert!(path.exists(), "file should exist after empty write");
-        assert!(fs::read_to_string(&path).unwrap().is_empty(), "file should be empty");
+        assert!(
+            fs::read_to_string(&path).unwrap().is_empty(),
+            "file should be empty"
+        );
         let _ = fs::remove_dir_all(&dir);
     }
 
@@ -549,7 +587,10 @@ mod tests {
         let _ = fs::remove_dir_all("/tmp/openforce-test/safe-write-nonexistent");
 
         let result = safe_write(&path, "content");
-        assert!(result.is_err(), "expected Err for nonexistent parent directory");
+        assert!(
+            result.is_err(),
+            "expected Err for nonexistent parent directory"
+        );
         assert!(matches!(result, Err(FsError::WriteFile { .. })));
     }
 
@@ -713,7 +754,10 @@ mod tests {
             // Original file should be untouched
             assert!(path.exists(), "original file should still exist");
             let content = fs::read_to_string(&path).expect("read file");
-            assert_eq!(content, "original content", "original content should be preserved");
+            assert_eq!(
+                content, "original content",
+                "original content should be preserved"
+            );
 
             // Cleanup: restore permissions and remove
             fs::set_permissions(dir, std::fs::Permissions::from_mode(0o755))
@@ -743,13 +787,20 @@ mod tests {
 
         for h in handles {
             let result = h.join().expect("thread panicked");
-            assert!(result.is_ok(), "concurrent write should succeed: {:?}", result);
+            assert!(
+                result.is_ok(),
+                "concurrent write should succeed: {:?}",
+                result
+            );
         }
 
         // The file must exist and contain valid (non-garbled) content
         assert!(path.exists(), "file should exist after concurrent writes");
         let final_content = fs::read_to_string(path.as_ref()).expect("read final content");
-        assert!(!final_content.is_empty(), "final content should not be empty");
+        assert!(
+            !final_content.is_empty(),
+            "final content should not be empty"
+        );
         // Content should start with a known prefix
         assert!(
             final_content.starts_with("writer-"),
@@ -779,7 +830,12 @@ mod tests {
 
         for (idx, h) in handles.into_iter().enumerate() {
             let result = h.join().expect("thread panicked");
-            assert!(result.is_ok(), "thread {} write should succeed: {:?}", idx, result);
+            assert!(
+                result.is_ok(),
+                "thread {} write should succeed: {:?}",
+                idx,
+                result
+            );
         }
 
         // Verify each file exists with correct content

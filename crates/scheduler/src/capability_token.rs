@@ -1,9 +1,9 @@
-use std::sync::Arc;
+use dashmap::DashMap;
 use ring::rand::SystemRandom;
 use ring::signature::{Ed25519KeyPair, KeyPair};
-use dashmap::DashMap;
-use uuid::Uuid;
+use std::sync::Arc;
 use tracing::{info, warn};
+use uuid::Uuid;
 
 use openforce_domain::token::{CapabilityToken, TokenScope};
 
@@ -18,24 +18,37 @@ impl CapabilityTokenIssuer {
     pub fn new(pkcs8_der: &[u8]) -> Result<Self, String> {
         let signing_key = Ed25519KeyPair::from_pkcs8(pkcs8_der)
             .map_err(|e| format!("invalid ed25519 key: {e}"))?;
-        Ok(Self { signing_key, issued: Arc::new(DashMap::new()), revoked: Arc::new(DashMap::new()) })
+        Ok(Self {
+            signing_key,
+            issued: Arc::new(DashMap::new()),
+            revoked: Arc::new(DashMap::new()),
+        })
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn generate_key() -> Vec<u8> {
         let rng = SystemRandom::new();
-        Ed25519KeyPair::generate_pkcs8(&rng).expect("CRNG").as_ref().to_vec()
+        Ed25519KeyPair::generate_pkcs8(&rng)
+            .expect("CRNG")
+            .as_ref()
+            .to_vec()
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn public_key_bytes(&self) -> Vec<u8> {
         self.signing_key.public_key().as_ref().to_vec()
     }
 
     pub fn issue(
-        &self, tenant_id: Uuid, session_id: Uuid, task_id: Uuid,
-        task_attempt: i32, lease_id: Uuid, fencing_token: u64,
-        plan_epoch: i32, scopes: Vec<TokenScope>,
+        &self,
+        tenant_id: Uuid,
+        session_id: Uuid,
+        task_id: Uuid,
+        task_attempt: i32,
+        lease_id: Uuid,
+        fencing_token: u64,
+        plan_epoch: i32,
+        scopes: Vec<TokenScope>,
     ) -> Result<String, String> {
         let jti = Uuid::now_v7();
         let exp = chrono::Utc::now() + chrono::Duration::seconds(300);
@@ -43,9 +56,17 @@ impl CapabilityTokenIssuer {
         let mut token = CapabilityToken {
             iss: "scheduler.swarmos.internal".into(),
             sub: format!("worker:{}", jti),
-            tenant_id, session_id, task_id, task_attempt,
-            lease_id, fencing_token, plan_epoch,
-            scope: scopes, jti, token_epoch: 1, exp,
+            tenant_id,
+            session_id,
+            task_id,
+            task_attempt,
+            lease_id,
+            fencing_token,
+            plan_epoch,
+            scope: scopes,
+            jti,
+            token_epoch: 1,
+            exp,
             signature: vec![],
         };
 
@@ -57,31 +78,45 @@ impl CapabilityTokenIssuer {
         self.encode_token(&token)
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn verify(&self, encoded: &str) -> Result<CapabilityToken, String> {
         let token = self.decode_token(encoded)?;
-        if self.revoked.contains_key(&token.jti) { return Err("token revoked".into()); }
-        if token.is_expired() { return Err("token expired".into()); }
+        if self.revoked.contains_key(&token.jti) {
+            return Err("token revoked".into());
+        }
+        if token.is_expired() {
+            return Err("token expired".into());
+        }
         self.verify_signature(&token)?;
         Ok(token)
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn revoke(&self, jti: Uuid, reason: &str) {
         self.revoked.insert(jti, reason.into());
         self.issued.remove(&jti);
         warn!("token revoked: jti={jti} reason={reason}");
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn revoke_by_lease(&self, lease_id: Uuid) {
-        let jtis: Vec<Uuid> = self.issued.iter()
-            .filter_map(|e| if e.lease_id == lease_id { Some(e.jti) } else { None })
+        let jtis: Vec<Uuid> = self
+            .issued
+            .iter()
+            .filter_map(|e| {
+                if e.lease_id == lease_id {
+                    Some(e.jti)
+                } else {
+                    None
+                }
+            })
             .collect();
-        for jti in jtis { self.revoke(jti, "lease cancelled"); }
+        for jti in jtis {
+            self.revoke(jti, "lease cancelled");
+        }
     }
 
-#[allow(dead_code)]
+    #[allow(dead_code)]
     fn sign_canonical(&self, token: &CapabilityToken) -> Vec<u8> {
         let json = token.canonical_json().to_string();
         self.signing_key.sign(json.as_bytes()).as_ref().to_vec()
@@ -93,7 +128,8 @@ impl CapabilityTokenIssuer {
             &ring::signature::ED25519,
             self.signing_key.public_key().as_ref(),
         );
-        pk.verify(json.as_bytes(), &token.signature).map_err(|_| "invalid signature".into())
+        pk.verify(json.as_bytes(), &token.signature)
+            .map_err(|_| "invalid signature".into())
     }
 
     fn encode_token(&self, token: &CapabilityToken) -> Result<String, String> {
@@ -112,7 +148,7 @@ impl CapabilityTokenIssuer {
     }
 
     /// Parse token without cryptographic verification (for extracting claims).
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn decode_only(encoded: &str) -> Result<CapabilityToken, String> {
         use base64::Engine;
         let bytes = base64::engine::general_purpose::URL_SAFE_NO_PAD

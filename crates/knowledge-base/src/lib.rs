@@ -73,32 +73,51 @@ impl KnowledgeBase {
             for entry in fs::read_dir(&profiles_dir)? {
                 let entry = entry?;
                 if entry.path().extension().map_or(false, |e| e == "json") {
-                    if let Ok(profile) = serde_json::from_str::<RoleProfile>(
-                        &fs::read_to_string(entry.path())?
-                    ) {
+                    if let Ok(profile) =
+                        serde_json::from_str::<RoleProfile>(&fs::read_to_string(entry.path())?)
+                    {
                         profiles.insert(profile.name.clone(), profile);
                     }
                 }
             }
         }
 
-        Ok(Self { index, profiles, base_dir: base_dir.to_string() })
+        Ok(Self {
+            index,
+            profiles,
+            base_dir: base_dir.to_string(),
+        })
     }
 
     /// Get all profiles for a list of role names
     pub fn get_profiles(&self, roles: &[String]) -> Vec<RoleProfile> {
-        roles.iter()
+        roles
+            .iter()
             .filter_map(|name| self.profiles.get(name).cloned())
             .collect()
     }
 
     /// Get all category names for the LLM to use in classification
     pub fn category_summary(&self) -> String {
-        self.index.categories.iter()
+        self.index
+            .categories
+            .iter()
             .map(|(name, cat)| {
-                format!("- {name}: {} (roles: {})",
-                    cat.keywords.iter().take(3).map(|k| k.as_str()).collect::<Vec<_>>().join(", "),
-                    cat.profiles.iter().take(3).map(|p| p.as_str()).collect::<Vec<_>>().join(", "))
+                format!(
+                    "- {name}: {} (roles: {})",
+                    cat.keywords
+                        .iter()
+                        .take(3)
+                        .map(|k| k.as_str())
+                        .collect::<Vec<_>>()
+                        .join(", "),
+                    cat.profiles
+                        .iter()
+                        .take(3)
+                        .map(|p| p.as_str())
+                        .collect::<Vec<_>>()
+                        .join(", ")
+                )
             })
             .collect::<Vec<_>>()
             .join("\n")
@@ -150,11 +169,16 @@ pub async fn semantic_classify(
     let json_str = if let Some(start) = response.find('{') {
         if let Some(end) = response.rfind('}') {
             &response[start..=end]
-        } else { &response }
-    } else { return Err(anyhow::anyhow!("No JSON in LLM response: {response:.200}")) };
+        } else {
+            &response
+        }
+    } else {
+        return Err(anyhow::anyhow!("No JSON in LLM response: {response:.200}"));
+    };
 
-    let classification: ClassificationResult = serde_json::from_str(json_str)
-        .map_err(|e| anyhow::anyhow!("Failed to parse classification JSON: {e}\nResponse: {json_str:.200}"))?;
+    let classification: ClassificationResult = serde_json::from_str(json_str).map_err(|e| {
+        anyhow::anyhow!("Failed to parse classification JSON: {e}\nResponse: {json_str:.200}")
+    })?;
 
     Ok(classification)
 }

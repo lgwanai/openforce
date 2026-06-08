@@ -23,7 +23,9 @@ impl SkillRunner {
     }
 
     /// Get the Level 1 metadata prompt (replaces old skill_summary).
-    pub fn has_skills(&self) -> bool { !self.registry.is_empty() }
+    pub fn has_skills(&self) -> bool {
+        !self.registry.is_empty()
+    }
 
     pub fn skill_summary(&self) -> String {
         self.registry.metadata_prompt()
@@ -40,7 +42,12 @@ impl SkillRunner {
     }
 
     /// Invoke a tool via a skill's adapter.py (Level 3).
-    pub async fn invoke_tool(&self, skill_name: &str, tool_name: &str, args: &serde_json::Value) -> String {
+    pub async fn invoke_tool(
+        &self,
+        skill_name: &str,
+        tool_name: &str,
+        args: &serde_json::Value,
+    ) -> String {
         let executor = SkillExecutor::new(&self.registry);
         match executor.invoke_tool(skill_name, tool_name, args).await {
             Ok(result) => result,

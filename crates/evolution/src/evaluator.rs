@@ -12,11 +12,17 @@ impl Default for Evaluator {
     fn default() -> Self {
         Self {
             latency_p50_threshold_ms: std::env::var("EVAL_P50_THRESHOLD_MS")
-                .ok().and_then(|v| v.parse().ok()).unwrap_or(5000.0),
+                .ok()
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(5000.0),
             latency_p95_threshold_ms: std::env::var("EVAL_P95_THRESHOLD_MS")
-                .ok().and_then(|v| v.parse().ok()).unwrap_or(30000.0),
+                .ok()
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(30000.0),
             success_rate_threshold: std::env::var("EVAL_SUCCESS_RATE_THRESHOLD")
-                .ok().and_then(|v| v.parse().ok()).unwrap_or(0.95),
+                .ok()
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(0.95),
         }
     }
 }
@@ -33,17 +39,31 @@ impl Evaluator {
         let mut issues = vec![];
         let total = observations.len() as f64;
         if total == 0.0 {
-            return EvaluationResult { passed: true, score: 1.0, issues };
+            return EvaluationResult {
+                passed: true,
+                score: 1.0,
+                issues,
+            };
         }
 
-        let successes: f64 = observations.iter().filter(|o| o.value > 0.5 && o.metric_type == "success").count() as f64;
+        let successes: f64 = observations
+            .iter()
+            .filter(|o| o.value > 0.5 && o.metric_type == "success")
+            .count() as f64;
         let success_rate = if total > 0.0 { successes / total } else { 0.0 };
         if success_rate < self.success_rate_threshold {
-            issues.push(format!("success rate {:.2} below threshold {:.2}", success_rate, self.success_rate_threshold));
+            issues.push(format!(
+                "success rate {:.2} below threshold {:.2}",
+                success_rate, self.success_rate_threshold
+            ));
         }
 
         let passed = issues.is_empty();
         let score = if total > 0.0 { successes / total } else { 1.0 };
-        EvaluationResult { passed, score, issues }
+        EvaluationResult {
+            passed,
+            score,
+            issues,
+        }
     }
 }

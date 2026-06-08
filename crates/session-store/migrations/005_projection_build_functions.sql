@@ -37,15 +37,37 @@ DECLARE
     rec RECORD;
 BEGIN
     DELETE FROM task_projection WHERE session_id = session_uuid;
-    FOR rec IN SELECT DISTINCT task_id FROM event_log
-        WHERE session_id = session_uuid AND task_id IS NOT NULL
+    FOR rec IN
+        WITH compiled_tasks AS (
+            SELECT
+                (task_def->>'task_id')::UUID AS task_id,
+                COALESCE(task_def->>'task_type', '') AS task_type,
+                (payload->>'plan_epoch')::INTEGER AS plan_epoch
+            FROM event_log,
+                 jsonb_array_elements(COALESCE(payload->'tasks', '[]'::JSONB)) AS task_def
+            WHERE session_id = session_uuid
+              AND event_type = 'PlanCompiled'
+              AND task_def ? 'task_id'
+        ),
+        event_tasks AS (
+            SELECT DISTINCT task_id, ''::TEXT AS task_type, 0::INTEGER AS plan_epoch
+            FROM event_log
+            WHERE session_id = session_uuid AND task_id IS NOT NULL
+        )
+        SELECT DISTINCT ON (task_id) task_id, task_type, plan_epoch
+        FROM (
+            SELECT * FROM compiled_tasks
+            UNION ALL
+            SELECT * FROM event_tasks
+        ) all_tasks
+        ORDER BY task_id, plan_epoch DESC
     LOOP
         INSERT INTO task_projection (
             session_id, task_id, task_type, state, task_attempt,
             current_lease_id, current_fencing_token, current_worker_spec_id,
-            plan_epoch, replan_disposition
+            plan_epoch, replan_disposition, dependency_ids, downstream_ids
         ) VALUES (
-            session_uuid, rec.task_id, '',
+            session_uuid, rec.task_id, rec.task_type,
             COALESCE((SELECT CASE
                 WHEN event_type = 'TaskSucceeded' THEN 'Succeeded'
                 WHEN event_type = 'TaskFailed' THEN 'Failed'
@@ -61,7 +83,24 @@ BEGIN
             (SELECT (payload->>'lease_id')::UUID FROM event_log WHERE session_id = session_uuid AND task_id = rec.task_id AND event_type = 'TaskLeased' ORDER BY session_version DESC LIMIT 1),
             COALESCE((SELECT (payload->>'fencing_token')::BIGINT FROM event_log WHERE session_id = session_uuid AND task_id = rec.task_id AND event_type = 'TaskLeased' ORDER BY session_version DESC LIMIT 1), 0),
             (SELECT (payload->>'worker_spec_id')::UUID FROM event_log WHERE session_id = session_uuid AND task_id = rec.task_id AND event_type = 'TaskLeased' ORDER BY session_version DESC LIMIT 1),
-            0, 'active'
+            COALESCE((SELECT MAX(plan_epoch) FROM event_log WHERE session_id = session_uuid AND task_id = rec.task_id), rec.plan_epoch, 0),
+            'active',
+            COALESCE((
+                SELECT jsonb_agg(edge->>'from_task_id')
+                FROM event_log,
+                     jsonb_array_elements(COALESCE(payload->'dag_edges', '[]'::JSONB)) AS edge
+                WHERE session_id = session_uuid
+                  AND event_type = 'PlanCompiled'
+                  AND edge->>'to_task_id' = rec.task_id::TEXT
+            ), '[]'::JSONB),
+            COALESCE((
+                SELECT jsonb_agg(edge->>'to_task_id')
+                FROM event_log,
+                     jsonb_array_elements(COALESCE(payload->'dag_edges', '[]'::JSONB)) AS edge
+                WHERE session_id = session_uuid
+                  AND event_type = 'PlanCompiled'
+                  AND edge->>'from_task_id' = rec.task_id::TEXT
+            ), '[]'::JSONB)
         ) ON CONFLICT (session_id, task_id) DO NOTHING;
     END LOOP;
 END;

@@ -1,45 +1,87 @@
 #![allow(unexpected_cfgs)]
 #![allow(dead_code)]
 use anyhow::Result;
+use openforce_knowledge_base::{semantic_classify, KnowledgeBase};
 use openforce_llm_client::LlmClient;
-use openforce_knowledge_base::{KnowledgeBase, semantic_classify};
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::path::PathBuf;
 
-mod session_state;
-mod session_manager;
-mod gate_handler;
-mod repl;
-mod planner_roundtable;
-mod skill_runner;
-mod dag_executor;
 mod agent_registry;
-use session_manager::SessionManager;
-use repl::SessionRepl;
+mod dag_executor;
+mod gate_handler;
+mod planner_roundtable;
+mod repl;
+mod session_manager;
+mod session_state;
+mod skill_runner;
 use agent_registry::AgentRegistry;
 use openforce_domain::worker_folder::WorkerOutputFolder;
+use repl::SessionRepl;
+use session_manager::SessionManager;
 
 #[derive(Debug, Deserialize)]
-struct Config { llm: LlmConfig, planner: PlannerConfig, workers: WorkersConfig }
+struct Config {
+    llm: LlmConfig,
+    planner: PlannerConfig,
+    workers: WorkersConfig,
+}
 #[derive(Debug, Deserialize)]
-struct LlmConfig { provider: String, api_base: Option<String> }
+struct LlmConfig {
+    provider: String,
+    api_base: Option<String>,
+}
 #[derive(Debug, Deserialize)]
-struct PlannerConfig { provider: String, model: String, max_tokens: u32, temperature: f64, system_prompt: String }
+struct PlannerConfig {
+    provider: String,
+    model: String,
+    max_tokens: u32,
+    temperature: f64,
+    system_prompt: String,
+}
 #[derive(Debug, Deserialize)]
-struct WorkersConfig { default: WorkerProfile, profiles: HashMap<String, WorkerProfile> }
+struct WorkersConfig {
+    default: WorkerProfile,
+    profiles: HashMap<String, WorkerProfile>,
+}
 #[derive(Debug, Clone, Deserialize)]
-struct WorkerProfile { provider: String, model: String, max_tokens: u32, temperature: f64, #[serde(default)] system_prompt: String }
+struct WorkerProfile {
+    provider: String,
+    model: String,
+    max_tokens: u32,
+    temperature: f64,
+    #[serde(default)]
+    system_prompt: String,
+}
 
 #[derive(Debug, Clone)]
-struct DirEntry { path: String, is_dir: bool, size: u64, ext: String }
+struct DirEntry {
+    path: String,
+    is_dir: bool,
+    size: u64,
+    ext: String,
+}
+
+#[derive(Debug, Clone)]
+struct PlannedSubtask {
+    role: String,
+    title: String,
+    description: String,
+    dependencies: Vec<String>,
+    files: Vec<String>,
+    skill: Option<String>,
+}
 
 fn build_client(config: &Config, provider: &str, model: &str) -> LlmClient {
     let api_key = std::env::var("API_KEY").unwrap_or_default();
     let api_base = config.llm.api_base.clone();
     match provider {
         "anthropic" => LlmClient::anthropic(api_key, api_base).with_model(model),
-        _ => LlmClient::openai(api_key, api_base.unwrap_or("https://api.openai.com/v1".into()), model.to_string())
+        _ => LlmClient::openai(
+            api_key,
+            api_base.unwrap_or("https://api.openai.com/v1".into()),
+            model.to_string(),
+        ),
     }
 }
 
@@ -64,20 +106,44 @@ fn scan_done_marker(line: &str) -> Option<usize> {
 }
 
 fn truncate_at_char(s: &str, max_chars: usize) -> String {
-    s.char_indices().nth(max_chars).map(|(i, _)| s[..i].to_string()).unwrap_or_else(|| s.to_string())
+    s.char_indices()
+        .nth(max_chars)
+        .map(|(i, _)| s[..i].to_string())
+        .unwrap_or_else(|| s.to_string())
 }
 
 fn read_directory(root: &PathBuf, max_depth: usize) -> Vec<DirEntry> {
     let mut entries = vec![];
-    for e in walkdir::WalkDir::new(root).max_depth(max_depth).into_iter().filter_map(|r| r.ok())
+    for e in walkdir::WalkDir::new(root)
+        .max_depth(max_depth)
+        .into_iter()
+        .filter_map(|r| r.ok())
         .filter(|e| !e.path().to_string_lossy().contains("/target/"))
-        .filter(|e| !e.path().to_string_lossy().contains("/.git/")).take(2000)
+        .filter(|e| !e.path().to_string_lossy().contains("/.git/"))
+        .take(2000)
     {
         let path = e.path();
-        let rel = path.strip_prefix(root).unwrap_or(path).display().to_string();
-        let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_string();
-        let size = if path.is_file() { std::fs::metadata(path).map(|m| m.len()).unwrap_or(0) } else { 0 };
-        entries.push(DirEntry { path: rel, is_dir: path.is_dir(), size, ext });
+        let rel = path
+            .strip_prefix(root)
+            .unwrap_or(path)
+            .display()
+            .to_string();
+        let ext = path
+            .extension()
+            .and_then(|e| e.to_str())
+            .unwrap_or("")
+            .to_string();
+        let size = if path.is_file() {
+            std::fs::metadata(path).map(|m| m.len()).unwrap_or(0)
+        } else {
+            0
+        };
+        entries.push(DirEntry {
+            path: rel,
+            is_dir: path.is_dir(),
+            size,
+            ext,
+        });
     }
     entries
 }
@@ -85,7 +151,10 @@ fn read_directory(root: &PathBuf, max_depth: usize) -> Vec<DirEntry> {
 #[tokio::main]
 async fn main() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() < 2 { print_usage(); std::process::exit(1); }
+    if args.len() < 2 {
+        print_usage();
+        std::process::exit(1);
+    }
 
     // Subcommand routing for multi-turn session support
     let subcmd = args[1].as_str();
@@ -101,13 +170,18 @@ async fn main() -> Result<()> {
             // Also collect remaining args (args[2..]) as part of the task
             let from_split = parts.next().unwrap_or("").trim().to_string();
             let from_args = args.get(2..).map(|a| a.join(" ")).unwrap_or_default();
-            let task = if from_args.is_empty() { from_split } else { from_args };
+            let task = if from_args.is_empty() {
+                from_split
+            } else {
+                from_args
+            };
             (name, task)
         };
         let workspace = resolve_workspace(&args);
         let skills_dir = workspace.join("skills");
         let registry = openforce_skill::SkillRegistry::discover_with_config(
-            skills_dir.to_str().unwrap_or("skills"), None,
+            skills_dir.to_str().unwrap_or("skills"),
+            None,
         );
 
         // Resolve skill name (exact or fuzzy)
@@ -115,16 +189,25 @@ async fn main() -> Result<()> {
             Some(skill_name.clone())
         } else {
             let names = registry.enabled_skill_names();
-            let matches: Vec<&String> = names.iter()
-                .filter(|n| n.contains(&skill_name) || n.to_lowercase().contains(&skill_name.to_lowercase()))
+            let matches: Vec<&String> = names
+                .iter()
+                .filter(|n| {
+                    n.contains(&skill_name) || n.to_lowercase().contains(&skill_name.to_lowercase())
+                })
                 .collect();
             if matches.len() == 1 {
                 Some(matches[0].clone())
             } else if matches.is_empty() {
-                eprintln!("Skill '{skill_name}' not found. Available: {}", names.join(", "));
+                eprintln!(
+                    "Skill '{skill_name}' not found. Available: {}",
+                    names.join(", ")
+                );
                 std::process::exit(1);
             } else {
-                eprintln!("Multiple matches for '{skill_name}': {:?}. Be more specific.", matches);
+                eprintln!(
+                    "Multiple matches for '{skill_name}': {:?}. Be more specific.",
+                    matches
+                );
                 std::process::exit(1);
             }
         };
@@ -133,13 +216,19 @@ async fn main() -> Result<()> {
             // Task goes through semantic classification + Planner normally.
             // The skill is injected as metadata — Worker loads body on-demand.
             let task = if user_task.is_empty() {
-                format!("Execute the '{}' skill workflow on the current project", name)
+                format!(
+                    "Execute the '{}' skill workflow on the current project",
+                    name
+                )
             } else {
                 user_task.clone()
             };
             println!("[/{name}] skill bound — task will be semantically classified first");
             let mut mgr = SessionManager::new(workspace.clone()).await;
-            let mut session = mgr.create(&task).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            let mut session = mgr
+                .create(&task)
+                .await
+                .map_err(|e| anyhow::anyhow!("{e}"))?;
             session.bound_skill = Some(name.clone());
             session.save().map_err(|e| anyhow::anyhow!("{e}"))?;
             return run_pipeline(workspace, task, Some(session)).await;
@@ -151,7 +240,8 @@ async fn main() -> Result<()> {
             let ws = resolve_workspace(&args);
             let skills_dir = ws.join("skills");
             let registry = openforce_skill::SkillRegistry::discover_with_config(
-                skills_dir.to_str().unwrap_or("skills"), None,
+                skills_dir.to_str().unwrap_or("skills"),
+                None,
             );
             let names = registry.enabled_skill_names();
             println!("Available skills ({} total):", names.len());
@@ -159,8 +249,15 @@ async fn main() -> Result<()> {
                 if let Some(body) = registry.load_skill_body(name) {
                     let first_line = body.lines().next().unwrap_or("");
                     let desc = if let Some(skill) = registry.get(name) {
-                        skill.frontmatter.description.chars().take(100).collect::<String>()
-                    } else { first_line.chars().take(80).collect::<String>() };
+                        skill
+                            .frontmatter
+                            .description
+                            .chars()
+                            .take(100)
+                            .collect::<String>()
+                    } else {
+                        first_line.chars().take(80).collect::<String>()
+                    };
                     println!("  /{name} — {desc}");
                 } else {
                     println!("  /{name}");
@@ -170,7 +267,11 @@ async fn main() -> Result<()> {
         }
         "sessions" => {
             let ws = resolve_workspace(&args);
-            return SessionManager::new(ws).await.list().await.map_err(|e| anyhow::anyhow!("{e}"));
+            return SessionManager::new(ws)
+                .await
+                .list()
+                .await
+                .map_err(|e| anyhow::anyhow!("{e}"));
         }
         "continue" => {
             let ws = resolve_workspace(&args);
@@ -185,14 +286,23 @@ async fn main() -> Result<()> {
             let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
             if !redis_url.is_empty() {
                 if let Ok(sid_uuid) = uuid::Uuid::parse_str(&session.session_id.to_string()) {
-                    if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
+                    if let Ok(mut store) =
+                        openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await
+                    {
                         if let Ok(Some(tl)) = store.get_todo_list(&sid_uuid).await {
                             println!("[Todo] {}", tl.progress_str());
                             for item in &tl.items {
                                 let icon = match item.status.as_str() {
-                                    "completed" => "✓", "in_progress" => "▶", "failed" => "✗", _ => "○"
+                                    "completed" => "✓",
+                                    "in_progress" => "▶",
+                                    "failed" => "✗",
+                                    _ => "○",
                                 };
-                                println!("  [{icon}] #{:02} {}", item.id, item.content.chars().take(80).collect::<String>());
+                                println!(
+                                    "  [{icon}] #{:02} {}",
+                                    item.id,
+                                    item.content.chars().take(80).collect::<String>()
+                                );
                             }
                         }
                     }
@@ -210,7 +320,10 @@ async fn main() -> Result<()> {
             let mut mgr = SessionManager::new(ws.clone()).await;
             let session = mgr.approve(sid).await.map_err(|e| anyhow::anyhow!("{e}"))?;
             let goal = session.goal.clone();
-            println!("Continuing from {} phase...", session.current_phase.as_str());
+            println!(
+                "Continuing from {} phase...",
+                session.current_phase.as_str()
+            );
             return run_pipeline(ws, goal, Some(session)).await;
         }
         "reject" => {
@@ -218,26 +331,46 @@ async fn main() -> Result<()> {
             let feedback = args.get(2).cloned().unwrap_or_default();
             let sid = args.get(3).map(|s| s.as_str());
             let mut mgr = SessionManager::new(ws.clone()).await;
-            let session = mgr.reject(sid, &feedback).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            let session = mgr
+                .reject(sid, &feedback)
+                .await
+                .map_err(|e| anyhow::anyhow!("{e}"))?;
             let goal = format!("{}. User feedback: {feedback}", session.goal);
             return run_pipeline(ws, goal, Some(session)).await;
         }
         "cancel" => {
-            if args.len() < 3 { eprintln!("Usage: openforce cancel <session-id>"); std::process::exit(1); }
+            if args.len() < 3 {
+                eprintln!("Usage: openforce cancel <session-id>");
+                std::process::exit(1);
+            }
             let ws = resolve_workspace(&args);
-            return SessionManager::new(ws).await.cancel(&args[2]).await.map_err(|e| anyhow::anyhow!("{e}"));
+            return SessionManager::new(ws)
+                .await
+                .cancel(&args[2])
+                .await
+                .map_err(|e| anyhow::anyhow!("{e}"));
         }
         "terminate" => {
-            if args.len() < 4 { eprintln!("Usage: openforce terminate <session-id> <worker-id>"); std::process::exit(1); }
+            if args.len() < 4 {
+                eprintln!("Usage: openforce terminate <session-id> <worker-id>");
+                std::process::exit(1);
+            }
             let _ws = resolve_workspace(&args);
             let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
-            if redis_url.is_empty() { return Err(anyhow::anyhow!("REDIS_URL required for terminate")); }
-            let sid = uuid::Uuid::parse_str(&args[2]).map_err(|e| anyhow::anyhow!("invalid session id: {e}"))?;
+            if redis_url.is_empty() {
+                return Err(anyhow::anyhow!("REDIS_URL required for terminate"));
+            }
+            let sid = uuid::Uuid::parse_str(&args[2])
+                .map_err(|e| anyhow::anyhow!("invalid session id: {e}"))?;
             let wid = &args[3];
-            let mut store = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await
+            let mut store = openforce_redis_session::store::RedisSessionStore::connect(&redis_url)
+                .await
                 .map_err(|e| anyhow::anyhow!("redis: {e}"))?;
             let caller = openforce_redis_session::store::Caller::Scheduler { session_id: sid };
-            store.terminate_worker(&caller, wid).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+            store
+                .terminate_worker(&caller, wid)
+                .await
+                .map_err(|e| anyhow::anyhow!("{e}"))?;
             println!("Worker {wid} terminated in session {sid}");
             return Ok(());
         }
@@ -248,11 +381,17 @@ async fn main() -> Result<()> {
     let (workspace, task) = if args[1] == "new" || args[1] == "--workspace" || args[1] == "-w" {
         parse_new_args(&args)
     } else {
-        (std::env::current_dir().unwrap_or_default(), args[1..].join(" "))
+        (
+            std::env::current_dir().unwrap_or_default(),
+            args[1..].join(" "),
+        )
     };
 
     let mut mgr = SessionManager::new(workspace.clone()).await;
-    let session = mgr.create(&task).await.map_err(|e| anyhow::anyhow!("{e}"))?;
+    let session = mgr
+        .create(&task)
+        .await
+        .map_err(|e| anyhow::anyhow!("{e}"))?;
     run_pipeline(workspace, task, Some(session)).await
 }
 
@@ -271,12 +410,28 @@ fn parse_new_args(args: &[String]) -> (PathBuf, String) {
     let mut i = 1;
     while i < args.len() {
         match args[i].as_str() {
-            "new" => { i += 1; continue; }
-            "--workspace" | "-w" => { if i + 1 < args.len() { ws = PathBuf::from(&args[i + 1]); i += 2; } else { i += 1; } }
-            _ => { task = args[i..].join(" "); break; }
+            "new" => {
+                i += 1;
+                continue;
+            }
+            "--workspace" | "-w" => {
+                if i + 1 < args.len() {
+                    ws = PathBuf::from(&args[i + 1]);
+                    i += 2;
+                } else {
+                    i += 1;
+                }
+            }
+            _ => {
+                task = args[i..].join(" ");
+                break;
+            }
         }
     }
-    if task.is_empty() { eprintln!("Usage: openforce new <task> [--workspace <path>]"); std::process::exit(1); }
+    if task.is_empty() {
+        eprintln!("Usage: openforce new <task> [--workspace <path>]");
+        std::process::exit(1);
+    }
     (ws, task)
 }
 
@@ -295,29 +450,61 @@ fn print_usage() {
     eprintln!("  openforce /<partial-name> [<task>]           Fuzzy match skill name");
 }
 
-fn now() -> String { chrono::Local::now().format("%H:%M:%S").to_string() }
-fn since(start: std::time::Instant) -> String { format!("{:.0}s", start.elapsed().as_secs_f64()) }
+fn now() -> String {
+    chrono::Local::now().format("%H:%M:%S").to_string()
+}
+fn since(start: std::time::Instant) -> String {
+    format!("{:.0}s", start.elapsed().as_secs_f64())
+}
 
 macro_rules! step {
     ($($arg:tt)*) => { eprintln!("[{}] {}", now(), format!($($arg)*)) };
 }
 
-async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<session_state::LocalSessionState>) -> Result<()> {
+async fn run_pipeline(
+    workspace: PathBuf,
+    mut task: String,
+    session: Option<session_state::LocalSessionState>,
+) -> Result<()> {
     let pipeline_start = std::time::Instant::now();
     let api_key = std::env::var("API_KEY").unwrap_or_default();
-    if api_key.len() < 5 { return Err(anyhow::anyhow!("API_KEY not set")); }
+    if api_key.len() < 5 {
+        return Err(anyhow::anyhow!("API_KEY not set"));
+    }
     let redis_url = std::env::var("REDIS_URL").unwrap_or_default();
     let session_id = session.as_ref().map(|s| s.session_id.to_string());
 
-    let config: Config = toml::from_str(&std::fs::read_to_string("openforce.toml").unwrap_or_default())
-        .unwrap_or_else(|_| Config {
-            llm: LlmConfig { provider: "openai".into(), api_base: Some("https://api.deepseek.com".into()) },
-            planner: PlannerConfig { provider: "openai".into(), model: "deepseek-v4-flash".into(), max_tokens: 16000, temperature: 0.2, system_prompt: "Planner".into() },
-            workers: WorkersConfig { default: WorkerProfile { provider: "openai".into(), model: "deepseek-v4-flash".into(), max_tokens: 8000, temperature: 0.1, system_prompt: String::new() }, profiles: HashMap::new() },
-        });
+    let config: Config =
+        toml::from_str(&std::fs::read_to_string("openforce.toml").unwrap_or_default())
+            .unwrap_or_else(|_| Config {
+                llm: LlmConfig {
+                    provider: "openai".into(),
+                    api_base: Some("https://api.deepseek.com".into()),
+                },
+                planner: PlannerConfig {
+                    provider: "openai".into(),
+                    model: "deepseek-v4-flash".into(),
+                    max_tokens: 16000,
+                    temperature: 0.2,
+                    system_prompt: "Planner".into(),
+                },
+                workers: WorkersConfig {
+                    default: WorkerProfile {
+                        provider: "openai".into(),
+                        model: "deepseek-v4-flash".into(),
+                        max_tokens: 8000,
+                        temperature: 0.1,
+                        system_prompt: String::new(),
+                    },
+                    profiles: HashMap::new(),
+                },
+            });
 
     // Phase 0: Tool — Read directory
-    println!("OpenForce v5.1 | {} | {}", config.llm.provider, config.planner.model);
+    println!(
+        "OpenForce v5.1 | {} | {}",
+        config.llm.provider, config.planner.model
+    );
     println!("[ReadDirectory] {}\n", workspace.display());
     let entries = read_directory(&workspace, 6);
     let files: Vec<&DirEntry> = entries.iter().filter(|e| !e.is_dir).collect();
@@ -325,23 +512,36 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     let mut by_dir: HashMap<String, Vec<&DirEntry>> = HashMap::new();
     for f in &files {
         let parts: Vec<&str> = f.path.split('/').collect();
-        let group = if parts.len() >= 2 && parts[0] == "crates" { format!("crates/{}", parts[1]) }
-            else if parts.len() >= 1 { parts[0].to_string() } else { "root".to_string() };
+        let group = if parts.len() >= 2 && parts[0] == "crates" {
+            format!("crates/{}", parts[1])
+        } else if parts.len() >= 1 {
+            parts[0].to_string()
+        } else {
+            "root".to_string()
+        };
         by_dir.entry(group).or_default().push(f);
     }
 
     let mut source_snapshot = String::new();
     let mut total = 0usize;
     // Read ALL source files (model has 1M context — no need to truncate early)
-    for f in files.iter().filter(|f| matches!(f.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")) {
+    for f in files
+        .iter()
+        .filter(|f| matches!(f.ext.as_str(), "rs" | "toml" | "proto" | "sql" | "md"))
+    {
         if let Ok(c) = std::fs::read_to_string(workspace.join(&f.path)) {
-            if total + c.len() < 500_000 { source_snapshot.push_str(&format!("\n=== {} ===\n{}", f.path, c)); total += c.len(); }
+            if total + c.len() < 500_000 {
+                source_snapshot.push_str(&format!("\n=== {} ===\n{}", f.path, c));
+                total += c.len();
+            }
         }
     }
 
     for (d, ents) in by_dir.iter().take(20) {
         let n = ents.iter().filter(|f| f.ext == "rs").count();
-        if n > 0 { println!("  {d}/ — {n} rs, {} files", ents.len()); }
+        if n > 0 {
+            println!("  {d}/ — {n} rs, {} files", ents.len());
+        }
     }
     println!("  {} files, {}B source\n", files.len(), total);
 
@@ -350,22 +550,42 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     step!("Step 1/4: Classifying task...");
 
     let kb = KnowledgeBase::load("experts").unwrap_or_else(|_| KnowledgeBase {
-        index: openforce_knowledge_base::ExpertIndex { version: "1.0".into(), categories: HashMap::new(), model_tiers: HashMap::new() },
-        profiles: HashMap::new(), base_dir: String::new(),
+        index: openforce_knowledge_base::ExpertIndex {
+            version: "1.0".into(),
+            categories: HashMap::new(),
+            model_tiers: HashMap::new(),
+        },
+        profiles: HashMap::new(),
+        base_dir: String::new(),
     });
 
     // Load Agent Registry (~184 agent roles from agency-agents)
     let agents_path = workspace.join("crates/openforce-cli/agents");
-    let agent_registry = AgentRegistry::load(&if agents_path.exists() { agents_path } else { PathBuf::from("crates/openforce-cli/agents") })
-        .unwrap_or_else(|e| { eprintln!("  [AgentRegistry] {e} — continuing without"); AgentRegistry::empty() });
+    let agent_registry = AgentRegistry::load(&if agents_path.exists() {
+        agents_path
+    } else {
+        PathBuf::from("crates/openforce-cli/agents")
+    })
+    .unwrap_or_else(|e| {
+        eprintln!("  [AgentRegistry] {e} — continuing without");
+        AgentRegistry::empty()
+    });
     if !agent_registry.is_empty() {
-        println!("[AgentRegistry] {} agents in {} domains", agent_registry.len(), agent_registry.domains().len());
+        println!(
+            "[AgentRegistry] {} agents in {} domains",
+            agent_registry.len(),
+            agent_registry.domains().len()
+        );
     }
 
     let classification = semantic_classify(&planner, &task, &kb).await?;
     let matched_profiles = kb.get_profiles(&classification.suggested_roles);
     println!("  categories: {:?}", classification.categories);
-    println!("  roles: {:?} ({} matches)", classification.suggested_roles, matched_profiles.len());
+    println!(
+        "  roles: {:?} ({} matches)",
+        classification.suggested_roles,
+        matched_profiles.len()
+    );
     println!("  complexity: {}", classification.complexity);
 
     // Build context
@@ -381,45 +601,67 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     }
     let mut profile_ctx = String::new();
     for p in &matched_profiles {
-        profile_ctx.push_str(&format!("\n[{}] ({}): {}", p.name, p.default_model, p.system_prompt.chars().take(200).collect::<String>()));
+        profile_ctx.push_str(&format!(
+            "\n[{}] ({}): {}",
+            p.name,
+            p.default_model,
+            p.system_prompt.chars().take(200).collect::<String>()
+        ));
     }
 
-    let dir_summary: String = by_dir.iter()
+    let dir_summary: String = by_dir
+        .iter()
         .filter(|(_, fs)| fs.iter().any(|f| f.ext == "rs"))
-        .map(|(d, _fs)| format!("  {d}/")).collect::<Vec<_>>().join("\n");
+        .map(|(d, _fs)| format!("  {d}/"))
+        .collect::<Vec<_>>()
+        .join("\n");
     let _src_display: String = source_snapshot; // full source — model has 1M context
 
     let available_roles: Vec<String> = {
         let mut seen = std::collections::HashSet::new();
-        classification.suggested_roles.iter()
+        classification
+            .suggested_roles
+            .iter()
             .chain(matched_profiles.iter().map(|p| &p.name))
             .filter(|r| seen.insert(r.to_string()))
-            .cloned().collect()
+            .cloned()
+            .collect()
     };
 
     // Build bound skill hint for Planner context
-    let bound_skill_hint = if let Some(ref bs) = session.as_ref().and_then(|s| s.bound_skill.as_ref()) {
+    let bound_skill_hint = if let Some(ref bs) =
+        session.as_ref().and_then(|s| s.bound_skill.as_ref())
+    {
         format!(
             "<bound_skill name=\"{bs}\">The user activated this skill via /{bs}. Use skill_load to get its full instructions when relevant to the task.</bound_skill>\n\n"
         )
-    } else { String::new() };
+    } else {
+        String::new()
+    };
 
     // Build agent registry metadata for Planner context (progressive disclosure Level 1)
     let agent_catalog = if !agent_registry.is_empty() {
         agent_registry.metadata_for_planner()
-    } else { String::new() };
+    } else {
+        String::new()
+    };
 
     step!("Step 2/4: Pre-plan clarify...");
     // ── Planner RoundTable: MECE-validated task decomposition ──
     // Pre-plan: check information sufficiency — interactive Q&A
-    let questions = planner_roundtable::pre_plan_clarify(&planner, &task).await.unwrap_or_default();
+    let questions = planner_roundtable::pre_plan_clarify(&planner, &task)
+        .await
+        .unwrap_or_default();
     let mut clarifications: Vec<String> = Vec::new();
     if !questions.is_empty() {
         println!("\n╔══════════════════════════════════════════╗");
-        println!("║  Planner needs your input — {} question(s)  ║", questions.len());
+        println!(
+            "║  Planner needs your input — {} question(s)  ║",
+            questions.len()
+        );
         println!("╚══════════════════════════════════════════╝\n");
         for (i, q) in questions.iter().enumerate() {
-            println!("  Q{}: {}", i+1, q.question);
+            println!("  Q{}: {}", i + 1, q.question);
             if !q.options.is_empty() {
                 println!("     Options: {}", q.options.join(" | "));
             }
@@ -435,45 +677,79 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
         }
         if !clarifications.is_empty() {
             let ctx = clarifications.join("\n");
-            println!("\n  ✅ {} clarification(s) collected — feeding back to Planner\n", clarifications.len());
+            println!(
+                "\n  ✅ {} clarification(s) collected — feeding back to Planner\n",
+                clarifications.len()
+            );
             // Inject clarifications into task for RoundTable
             task = format!("{task}\n\n## User Clarifications\n{ctx}");
         }
     }
     let current_phase = session.as_ref().map(|s| s.current_phase.clone());
-    let phase_group_label = current_phase.as_ref()
+    let phase_group_label = current_phase
+        .as_ref()
         .map(|p| format!("{}", p.phase_group().as_str()))
         .unwrap_or_else(|| "all (no phase constraint)".into());
-    println!("[Planner] RoundTable (phase group: {})...", phase_group_label);
-    let mut subtasks: Vec<(String, String, String, Vec<String>, Vec<String>)> = vec![]; // (role, title, desc, dependencies, files)
+    println!(
+        "[Planner] RoundTable (phase group: {})...",
+        phase_group_label
+    );
+    let mut subtasks: Vec<PlannedSubtask> = vec![];
     let mut sketched_count = 0usize;
 
     // Load previous phase folders for Planner context
-    let previous_folders: Vec<WorkerOutputFolder> = session.as_ref()
-        .map(|s| s.phase_results.iter().flat_map(|pr| pr.folders.clone()).collect())
+    let previous_folders: Vec<WorkerOutputFolder> = session
+        .as_ref()
+        .map(|s| {
+            s.phase_results
+                .iter()
+                .flat_map(|pr| pr.folders.clone())
+                .collect()
+        })
         .unwrap_or_default();
     if !previous_folders.is_empty() {
-        println!("  {} previous folder(s) loaded for context", previous_folders.len());
+        println!(
+            "  {} previous folder(s) loaded for context",
+            previous_folders.len()
+        );
     }
 
     let skills_dir_path = workspace.join("skills");
     let skills_dir_str = skills_dir_path.to_str().unwrap_or("skills").to_string();
-    match planner_roundtable::run_roundtable_phased(&planner, &task, &classification, &available_roles,
+    match planner_roundtable::run_roundtable_phased(
+        &planner,
+        &task,
+        &classification,
+        &available_roles,
         &agent_catalog,
         &skills_dir_str,
         &format!("{bound_skill_hint}--- Project Structure ---\n{dir_summary}"),
         current_phase.as_ref(),
-        &previous_folders).await {
+        &previous_folders,
+    )
+    .await
+    {
         Ok(tree) => {
-            println!("  MECE: {}, confidence: {}", tree.mece_validated, tree.confidence);
+            println!(
+                "  MECE: {}, confidence: {}",
+                tree.mece_validated, tree.confidence
+            );
             if !tree.needs_info.is_empty() {
-                println!("  ⚠ 信息缺口 ({} 项): 运行 'openforce research' 补充", tree.needs_info.len());
+                println!(
+                    "  ⚠ 信息缺口 ({} 项): 运行 'openforce research' 补充",
+                    tree.needs_info.len()
+                );
             }
             if !tree.goal.specific.is_empty() {
-                println!("  SMART: {}", tree.goal.specific.chars().take(100).collect::<String>());
+                println!(
+                    "  SMART: {}",
+                    tree.goal.specific.chars().take(100).collect::<String>()
+                );
             }
             // Collect sketched task titles so we can prune cross-group deps
-            let sketched_titles: std::collections::HashSet<String> = tree.tasks.iter()
+            let sketched_titles: std::collections::HashSet<String> = tree
+                .tasks
+                .iter()
                 .filter(|t| t.sketched)
                 .map(|t| t.title.clone())
                 .collect();
@@ -485,22 +761,41 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                 }
                 // Prune dependencies that reference sketched (cross-group) tasks
                 let mut clean_deps = t.dependencies.clone();
-                let pruned: Vec<_> = clean_deps.iter()
+                let pruned: Vec<_> = clean_deps
+                    .iter()
                     .filter(|d| sketched_titles.contains(d.as_str()))
-                    .cloned().collect();
+                    .cloned()
+                    .collect();
                 if !pruned.is_empty() {
-                    eprintln!("  [DAG] task '{}': pruning cross-group deps → {:?}", t.title, pruned);
+                    eprintln!(
+                        "  [DAG] task '{}': pruning cross-group deps → {:?}",
+                        t.title, pruned
+                    );
                     clean_deps.retain(|d| !sketched_titles.contains(d.as_str()));
                 }
                 let desc = if t.acceptance_criteria.is_empty() {
                     t.objective.clone()
                 } else {
-                    format!("{} | 验收: {}", t.objective, t.acceptance_criteria.first().unwrap_or(&String::new()))
+                    format!(
+                        "{} | 验收: {}",
+                        t.objective,
+                        t.acceptance_criteria.first().unwrap_or(&String::new())
+                    )
                 };
-                subtasks.push((t.role.clone(), t.title.clone(), desc, clean_deps, t.files.clone()));
+                subtasks.push(PlannedSubtask {
+                    role: t.role.clone(),
+                    title: t.title.clone(),
+                    description: desc,
+                    dependencies: clean_deps,
+                    files: t.files.clone(),
+                    skill: t.skill.clone(),
+                });
             }
             if sketched_count > 0 {
-                println!("  {} tasks sketched (deferred to later phase group)", sketched_count);
+                println!(
+                    "  {} tasks sketched (deferred to later phase group)",
+                    sketched_count
+                );
             }
         }
         Err(e) => {
@@ -511,17 +806,35 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                  Decompose into specific subtasks. Format:\n1. [role] Title: description",
                 roles = available_roles.join(", ")
             );
-            if let Ok((plan_text, _)) = planner.chat(&config.planner.system_prompt, &plan_prompt).await {
+            if let Ok((plan_text, _)) = planner
+                .chat(&config.planner.system_prompt, &plan_prompt)
+                .await
+            {
                 for line in plan_text.lines() {
                     let t = line.trim();
-                    if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) { continue; }
-                    let stripped = t.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ' ' || c == '-' || c == '*');
+                    if t.is_empty() || !t.chars().next().map_or(false, |c| c.is_ascii_digit()) {
+                        continue;
+                    }
+                    let stripped = t.trim_start_matches(|c: char| {
+                        c.is_ascii_digit() || c == '.' || c == ' ' || c == '-' || c == '*'
+                    });
                     if let Some(idx) = stripped.find(']') {
                         if stripped.starts_with('[') {
                             let role = stripped[1..idx].to_string();
-                            let desc = stripped[idx+1..].trim().trim_start_matches(':').trim().to_string();
+                            let desc = stripped[idx + 1..]
+                                .trim()
+                                .trim_start_matches(':')
+                                .trim()
+                                .to_string();
                             if !role.is_empty() && !desc.is_empty() {
-                                subtasks.push((role, desc, String::new(), vec![], vec![]));
+                                subtasks.push(PlannedSubtask {
+                                    role,
+                                    title: desc,
+                                    description: String::new(),
+                                    dependencies: vec![],
+                                    files: vec![],
+                                    skill: session.as_ref().and_then(|s| s.bound_skill.clone()),
+                                });
                             }
                         }
                     }
@@ -533,22 +846,55 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     // Last resort: one task per role
     if subtasks.is_empty() && !classification.suggested_roles.is_empty() {
         for (i, role) in classification.suggested_roles.iter().enumerate() {
-            let desc = if i == 0 { task.clone() } else { format!("{task} (independent verification)") };
-            subtasks.push((role.clone(), format!("{role}: {desc}"), String::new(), vec![], vec![]));
+            let desc = if i == 0 {
+                task.clone()
+            } else {
+                format!("{task} (independent verification)")
+            };
+            subtasks.push(PlannedSubtask {
+                role: role.clone(),
+                title: format!("{role}: {desc}"),
+                description: String::new(),
+                dependencies: vec![],
+                files: vec![],
+                skill: session.as_ref().and_then(|s| s.bound_skill.clone()),
+            });
         }
     }
 
     // ── Plan review: ask for human confirmation ──
     println!("\n╔══════════════════════════════════════════╗");
-    println!("║  PLAN REVIEW — {} task(s) to execute      ║", subtasks.len());
+    println!(
+        "║  PLAN REVIEW — {} task(s) to execute      ║",
+        subtasks.len()
+    );
     println!("╠══════════════════════════════════════════╣");
-    for (i, (role, name, _desc, deps, _)) in subtasks.iter().enumerate() {
-        let dep_str = if deps.is_empty() { String::new() } else { format!(" (→ {})", deps.join(", ")) };
-        println!("║  {}. [{}] {}{}", i+1, role, name, dep_str);
+    for (i, subtask) in subtasks.iter().enumerate() {
+        let dep_str = if subtask.dependencies.is_empty() {
+            String::new()
+        } else {
+            format!(" (→ {})", subtask.dependencies.join(", "))
+        };
+        let skill_str = subtask
+            .skill
+            .as_ref()
+            .map(|s| format!(" /{s}"))
+            .unwrap_or_default();
+        println!(
+            "║  {}. [{}] {}{}{}",
+            i + 1,
+            subtask.role,
+            subtask.title,
+            dep_str,
+            skill_str
+        );
     }
     if sketched_count > 0 {
         println!("╠══════════════════════════════════════════╣");
-        println!("║  + {} task(s) sketched for later phase   ║", sketched_count);
+        println!(
+            "║  + {} task(s) sketched for later phase   ║",
+            sketched_count
+        );
     }
     println!("╚══════════════════════════════════════════╝");
     print!("  Proceed? [y]es / [n]o / [m]odify: ");
@@ -559,7 +905,9 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     match confirm.trim().to_lowercase().as_str() {
         "n" | "no" => {
             step!("Cancelled — session saved. Resume: openforce continue");
-            if let Some(mut sess) = session { sess.save().map_err(|e| anyhow::anyhow!("{e}"))?; }
+            if let Some(sess) = session {
+                sess.save().map_err(|e| anyhow::anyhow!("{e}"))?;
+            }
             return Ok(());
         }
         "m" | "modify" => {
@@ -568,23 +916,38 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
             let mut feedback = String::new();
             let _ = std::io::stdin().read_line(&mut feedback);
             if !feedback.trim().is_empty() {
-                task = format!("{task}\n\n## User Feedback — re-plan accordingly\n{}", feedback.trim());
-                if let Some(mut sess) = session { sess.save().map_err(|e| anyhow::anyhow!("{e}"))?; }
-                return Err(anyhow::anyhow!("Re-plan with feedback. Run: openforce continue"));
+                if let Some(mut sess) = session {
+                    sess.last_summary =
+                        Some(format!("Plan modification requested: {}", feedback.trim()));
+                    sess.plan_epoch += 1;
+                    sess.save().map_err(|e| anyhow::anyhow!("{e}"))?;
+                }
+                return Err(anyhow::anyhow!(
+                    "Re-plan with feedback. Run: openforce continue"
+                ));
             }
         }
-        _ => { step!("Proceeding..."); }
+        _ => {
+            step!("Proceeding...");
+        }
     }
 
     let mut ri = 0usize;
     println!("\n  Workers:");
-    for (pf, name, _, _, _) in &subtasks {
+    for subtask in &subtasks {
+        let pf = &subtask.role;
         let ef = if pf == "default" && ri < classification.suggested_roles.len() {
-            let r = classification.suggested_roles[ri].clone(); ri += 1; r
+            let r = classification.suggested_roles[ri].clone();
+            ri += 1;
+            r
         } else if pf == "default" && ri < matched_profiles.len() {
-            let r = matched_profiles[ri].name.clone(); ri += 1; r
-        } else { pf.clone() };
-        println!("    [{ef}] {name}");
+            let r = matched_profiles[ri].name.clone();
+            ri += 1;
+            r
+        } else {
+            pf.clone()
+        };
+        println!("    [{ef}] {}", subtask.title);
     }
     println!();
 
@@ -602,10 +965,21 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                             todo_list = existing;
                         } else {
                             // Build fresh todo list from subtasks
-                            let todos: Vec<(String, String, String, Vec<String>)> = subtasks.iter()
-                                .map(|(role, title, desc, deps, _files)| (role.clone(), title.clone(), desc.clone(), deps.clone()))
+                            let todos: Vec<(String, String, String, Vec<String>)> = subtasks
+                                .iter()
+                                .map(|subtask| {
+                                    (
+                                        subtask.role.clone(),
+                                        subtask.title.clone(),
+                                        subtask.description.clone(),
+                                        subtask.dependencies.clone(),
+                                    )
+                                })
                                 .collect();
-                            let tl = openforce_redis_session::store::SessionTodoList::from_task_tree(sid, &todos);
+                            let tl =
+                                openforce_redis_session::store::SessionTodoList::from_task_tree(
+                                    sid, &todos,
+                                );
                             if let Err(e) = store.set_todo_list(&sid_uuid, &tl).await {
                                 eprintln!("  [Todo] save failed: {e}");
                             } else {
@@ -623,46 +997,107 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     // Phase 2: Build dir→files map
     let mut dir_files: HashMap<String, String> = HashMap::new();
     for (dn, ents) in &by_dir {
-        let t: String = ents.iter().filter(|e| matches!(e.ext.as_str(), "rs"|"toml"|"proto"|"sql"|"md")).take(25)
+        let t: String = ents
+            .iter()
+            .filter(|e| matches!(e.ext.as_str(), "rs" | "toml" | "proto" | "sql" | "md"))
+            .take(25)
             .map(|e| {
                 let c = std::fs::read_to_string(workspace.join(&e.path)).unwrap_or_default();
-                format!("\n=== {} ===\n{}", e.path, if c.len()>15000 {truncate_at_char(&c, 15000)+"\n..."} else {c})
-            }).collect::<Vec<_>>().join("\n");
+                format!(
+                    "\n=== {} ===\n{}",
+                    e.path,
+                    if c.len() > 15000 {
+                        truncate_at_char(&c, 15000) + "\n..."
+                    } else {
+                        c
+                    }
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
         dir_files.insert(dn.clone(), t);
     }
 
     // Phase 3: Workers — DAG wave execution (Scheduler-style)
-    let worker_bin = std::env::current_exe().unwrap_or_else(|_| PathBuf::from("target/debug/openforce"))
-        .parent().map(|p| p.join("worker")).unwrap_or_else(|| PathBuf::from("target/debug/worker"));
+    let worker_bin = std::env::current_exe()
+        .unwrap_or_else(|_| PathBuf::from("target/debug/openforce"))
+        .parent()
+        .map(|p| p.join("worker"))
+        .unwrap_or_else(|| PathBuf::from("target/debug/worker"));
     let use_process = worker_bin.exists();
-    if use_process { println!("[Workers] DAG waves (独立进程): {worker_bin:?}"); }
-    else { println!("[Workers] In-process fallback"); }
+    if use_process {
+        println!("[Workers] DAG waves (独立进程): {worker_bin:?}");
+    } else {
+        println!("[Workers] In-process fallback");
+    }
 
     // Build DAG and compute execution waves
-    let dag_tasks = dag_executor::build_dag(&subtasks, &Default::default(), None).unwrap_or_else(|e| {
-        eprintln!("[DAG] build_dag failed: {e:?} — empty DAG");
-        vec![]
-    });
-    let plan = dag_executor::compute_waves(&dag_tasks, &Default::default(), None).unwrap_or_else(|e| {
-        eprintln!("[DAG] compute_waves failed: {e:?} — falling back to single wave");
-        dag_executor::ExecutionPlan { waves: vec![(0..dag_tasks.len()).collect()], max_concurrent: 1 }
-    });
+    let dag_inputs: Vec<dag_executor::DagInput> = subtasks
+        .iter()
+        .map(|subtask| {
+            (
+                subtask.role.clone(),
+                subtask.title.clone(),
+                subtask.description.clone(),
+                subtask.dependencies.clone(),
+                subtask.files.clone(),
+            )
+        })
+        .collect();
+    let dag_tasks =
+        dag_executor::build_dag(&dag_inputs, &Default::default(), None).unwrap_or_else(|e| {
+            eprintln!("[DAG] build_dag failed: {e:?} — empty DAG");
+            vec![]
+        });
+    let plan =
+        dag_executor::compute_waves(&dag_tasks, &Default::default(), None).unwrap_or_else(|e| {
+            eprintln!("[DAG] compute_waves failed: {e:?} — falling back to single wave");
+            dag_executor::ExecutionPlan {
+                waves: vec![(0..dag_tasks.len()).collect()],
+                max_concurrent: 1,
+            }
+        });
     let waves = &plan.waves;
-    if waves.len() > 1 { println!("[DAG] {} waves (max concurrent: {}): {}", waves.len(), plan.max_concurrent, waves.iter().map(|w| w.len().to_string()).collect::<Vec<_>>().join(" → ")); }
+    if waves.len() > 1 {
+        println!(
+            "[DAG] {} waves (max concurrent: {}): {}",
+            waves.len(),
+            plan.max_concurrent,
+            waves
+                .iter()
+                .map(|w| w.len().to_string())
+                .collect::<Vec<_>>()
+                .join(" → ")
+        );
+    }
 
     // Collect all role names from subtasks and resolve against agent registry
-    let planner_roles: Vec<&str> = subtasks.iter().map(|(pn, _, _, _, _)| pn.as_str()).collect();
+    let planner_roles: Vec<&str> = subtasks
+        .iter()
+        .map(|subtask| subtask.role.as_str())
+        .collect();
     let (found_agents, missing_roles) = agent_registry.resolve_exact(
-        &planner_roles.iter().map(|s| s.to_string()).collect::<Vec<_>>()
+        &planner_roles
+            .iter()
+            .map(|s| s.to_string())
+            .collect::<Vec<_>>(),
     );
     if !found_agents.is_empty() {
-        println!("[Agents] {} roles resolved: {}",
+        println!(
+            "[Agents] {} roles resolved: {}",
             found_agents.len(),
-            found_agents.iter().map(|a| format!("{}{}", a.emoji.as_deref().unwrap_or(""), a.name)).collect::<Vec<_>>().join(", ")
+            found_agents
+                .iter()
+                .map(|a| format!("{}{}", a.emoji.as_deref().unwrap_or(""), a.name))
+                .collect::<Vec<_>>()
+                .join(", ")
         );
     }
     for m in &missing_roles {
-        println!("  ⚠ role '{}' not in agent registry — using default config", m);
+        println!(
+            "  ⚠ role '{}' not in agent registry — using default config",
+            m
+        );
     }
 
     let bound_skill_for_worker = session.as_ref().and_then(|s| s.bound_skill.clone());
@@ -670,132 +1105,243 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     let max_concurrent = plan.max_concurrent;
 
     // Use temp_dir + session_id subdir to isolate concurrent invocations
-    let wd = std::env::temp_dir().join(format!("openforce_{}", session_id.as_deref().unwrap_or("unknown")));
+    let wd = std::env::temp_dir().join(format!(
+        "openforce_{}",
+        session_id.as_deref().unwrap_or("unknown")
+    ));
     let _ = std::fs::create_dir_all(&wd);
     let wd = wd.display().to_string();
 
-    let mut results: Vec<(usize,String,bool,String,String)> = vec![];
+    let mut results: Vec<(usize, String, bool, String, String)> = vec![];
     let mut failed_titles: std::collections::HashSet<String> = std::collections::HashSet::new();
-    step!("Step 3/4: Executing {} worker(s) in {} wave(s)...", subtasks.len(), waves.len());
+    step!(
+        "Step 3/4: Executing {} worker(s) in {} wave(s)...",
+        subtasks.len(),
+        waves.len()
+    );
     for (wave_num, wave) in waves.iter().enumerate() {
-        if waves.len() > 1 { println!("  ══ Wave {}/{} ({} worker(s)) ══", wave_num+1, waves.len(), wave.len()); }
+        if waves.len() > 1 {
+            println!(
+                "  ══ Wave {}/{} ({} worker(s)) ══",
+                wave_num + 1,
+                waves.len(),
+                wave.len()
+            );
+        }
         let mut wave_handles = vec![];
 
         // Chunk wave into batches of max_concurrent to avoid resource exhaustion
         for chunk in wave.chunks(max_concurrent) {
-        for &task_idx in chunk {
-            let bound_skill_for_task = bound_skill_for_worker.clone();
-            let redis_url_c = redis_url.clone();
-            // ── Skip if upstream dependency failed ──
-            let deps_blocked = dag_tasks.get(task_idx).map(|dt| dt.depends_on.iter().any(|d| failed_titles.contains(d.as_str()))).unwrap_or(false);
-            if deps_blocked {
-                let (pn, name, _, _, _) = &subtasks[task_idx];
-                println!("  [DAG] task-{} '[{}] {}' BLOCKED — upstream failed", task_idx+1, pn, name);
-                results.push((task_idx+1, pn.clone(), false, "blocked".into(), "Upstream dependency failed".into()));
-                failed_titles.insert(name.clone()); // cascade: downstream-of-blocked also blocked
-                continue;
-            }
-            // ── Resume: skip already-completed tasks ──
-            if let Some(ref tl) = todo_list {
-                if let Some(item) = tl.items.get(task_idx) {
-                    if item.is_done() {
-                        println!("  [Todo] task-{} '{}' already done — skipped", item.id, item.content.chars().take(60).collect::<String>());
-                        results.push((task_idx + 1, item.agent.clone(), true, "completed".into(), format!("(resumed) {}", item.content)));
-                        continue;
+            for &task_idx in chunk {
+                let bound_skill_for_task = subtasks
+                    .get(task_idx)
+                    .and_then(|subtask| subtask.skill.clone())
+                    .or_else(|| bound_skill_for_worker.clone());
+                let redis_url_c = redis_url.clone();
+                // ── Skip if upstream dependency failed ──
+                let deps_blocked = dag_tasks
+                    .get(task_idx)
+                    .map(|dt| {
+                        dt.depends_on
+                            .iter()
+                            .any(|d| failed_titles.contains(d.as_str()))
+                    })
+                    .unwrap_or(false);
+                if deps_blocked {
+                    let subtask = &subtasks[task_idx];
+                    println!(
+                        "  [DAG] task-{} '[{}] {}' BLOCKED — upstream failed",
+                        task_idx + 1,
+                        subtask.role,
+                        subtask.title
+                    );
+                    results.push((
+                        task_idx + 1,
+                        subtask.role.clone(),
+                        false,
+                        "blocked".into(),
+                        "Upstream dependency failed".into(),
+                    ));
+                    failed_titles.insert(subtask.title.clone()); // cascade: downstream-of-blocked also blocked
+                    continue;
+                }
+                // ── Resume: skip already-completed tasks ──
+                if let Some(ref tl) = todo_list {
+                    if let Some(item) = tl.items.get(task_idx) {
+                        if item.is_done() {
+                            println!(
+                                "  [Todo] task-{} '{}' already done — skipped",
+                                item.id,
+                                item.content.chars().take(60).collect::<String>()
+                            );
+                            results.push((
+                                task_idx + 1,
+                                item.agent.clone(),
+                                true,
+                                "completed".into(),
+                                format!("(resumed) {}", item.content),
+                            ));
+                            continue;
+                        }
                     }
                 }
-            }
 
-            let (pn, name, _desc, _deps, rt_files) = &subtasks[task_idx];
-            let i = task_idx;
-            // Resolve agent system prompt: registry > knowledge base > config profiles > default
-            let (provider, model, sp) = if let Some(ap) = agent_registry.get(pn) {
-                // Agent registry: use full agent personality as system prompt
-                (config.workers.default.provider.clone(),
-                 config.workers.default.model.clone(),
-                 ap.system_prompt.clone())
-            } else if let Some(kp) = kb.profiles.get(pn) {
-                ("openai".to_string(), kp.default_model.clone(), kp.system_prompt.clone())
-            } else if let Some(cp) = config.workers.profiles.get(pn) {
-                (cp.provider.clone(), cp.model.clone(), cp.system_prompt.clone())
-            } else { (config.workers.default.provider.clone(), config.workers.default.model.clone(), config.workers.default.system_prompt.clone()) };
-            let idx = i+1; let pnc = pn.clone(); let provider_c = provider.clone();
-        let task_c = task.clone(); let name_c = name.clone();
-        let workspace_c = workspace.clone();
-        let api_key_c = api_key.clone();
-        let base_url_c = config.llm.api_base.clone().unwrap_or_else(|| "https://api.deepseek.com".into());
-        let wb = worker_bin.clone();
-        let tools_addr = std::env::var("PROJECT_TOOLS_ADDR").unwrap_or_else(|_| "127.0.0.1:50053".into());
-        let session_id_c = session_id.clone();
+                let subtask = &subtasks[task_idx];
+                let pn = &subtask.role;
+                let name = &subtask.title;
+                let rt_files = &subtask.files;
+                let i = task_idx;
+                // Resolve agent system prompt: registry > knowledge base > config profiles > default
+                let (provider, model, sp) = if let Some(ap) = agent_registry.get(pn) {
+                    // Agent registry: use full agent personality as system prompt
+                    (
+                        config.workers.default.provider.clone(),
+                        config.workers.default.model.clone(),
+                        ap.system_prompt.clone(),
+                    )
+                } else if let Some(kp) = kb.profiles.get(pn) {
+                    (
+                        "openai".to_string(),
+                        kp.default_model.clone(),
+                        kp.system_prompt.clone(),
+                    )
+                } else if let Some(cp) = config.workers.profiles.get(pn) {
+                    (
+                        cp.provider.clone(),
+                        cp.model.clone(),
+                        cp.system_prompt.clone(),
+                    )
+                } else {
+                    (
+                        config.workers.default.provider.clone(),
+                        config.workers.default.model.clone(),
+                        config.workers.default.system_prompt.clone(),
+                    )
+                };
+                let idx = i + 1;
+                let pnc = pn.clone();
+                let provider_c = provider.clone();
+                let task_c = task.clone();
+                let name_c = name.clone();
+                let workspace_c = workspace.clone();
+                let api_key_c = api_key.clone();
+                let base_url_c = config
+                    .llm
+                    .api_base
+                    .clone()
+                    .unwrap_or_else(|| "https://api.deepseek.com".into());
+                let wb = worker_bin.clone();
+                let tools_addr = std::env::var("PROJECT_TOOLS_ADDR")
+                    .unwrap_or_else(|_| "127.0.0.1:50053".into());
+                let session_id_c = session_id.clone();
 
-        // Use RoundTable's file list if provided, validate existence, fallback to matching
-        let review_paths: Vec<String> = if !rt_files.is_empty() {
-            let all_files: Vec<String> = by_dir.iter()
-                .flat_map(|(_, ents)| ents.iter().map(|e| workspace_c.join(&e.path).display().to_string()))
-                .collect();
-            rt_files.iter().map(|f| {
-                let p = std::path::Path::new(f);
-                let resolved = if p.is_absolute() { f.clone() } else { workspace_c.join(f).display().to_string() };
-                // If file exists, use it directly
-                if std::path::Path::new(&resolved).exists() {
-                    return resolved;
-                }
-                // Try matching by filename in available files
-                let file_name = p.file_name().and_then(|n| n.to_str()).unwrap_or(f);
-                if let Some(matched) = all_files.iter().find(|af| af.ends_with(file_name)) {
-                    return matched.clone();
-                }
-                // Try matching by parent dir
-                let parent = p.parent().and_then(|d| d.file_name()).and_then(|n| n.to_str()).unwrap_or("");
-                if !parent.is_empty() {
-                    if let Some(matched) = all_files.iter().find(|af| af.contains(parent)) {
-                        return matched.clone();
+                // Use RoundTable's file list if provided, validate existence, fallback to matching
+                let review_paths: Vec<String> = if !rt_files.is_empty() {
+                    let all_files: Vec<String> = by_dir
+                        .iter()
+                        .flat_map(|(_, ents)| {
+                            ents.iter()
+                                .map(|e| workspace_c.join(&e.path).display().to_string())
+                        })
+                        .collect();
+                    rt_files
+                        .iter()
+                        .map(|f| {
+                            let p = std::path::Path::new(f);
+                            let resolved = if p.is_absolute() {
+                                f.clone()
+                            } else {
+                                workspace_c.join(f).display().to_string()
+                            };
+                            // If file exists, use it directly
+                            if std::path::Path::new(&resolved).exists() {
+                                return resolved;
+                            }
+                            // Try matching by filename in available files
+                            let file_name = p.file_name().and_then(|n| n.to_str()).unwrap_or(f);
+                            if let Some(matched) =
+                                all_files.iter().find(|af| af.ends_with(file_name))
+                            {
+                                return matched.clone();
+                            }
+                            // Try matching by parent dir
+                            let parent = p
+                                .parent()
+                                .and_then(|d| d.file_name())
+                                .and_then(|n| n.to_str())
+                                .unwrap_or("");
+                            if !parent.is_empty() {
+                                if let Some(matched) =
+                                    all_files.iter().find(|af| af.contains(parent))
+                                {
+                                    return matched.clone();
+                                }
+                            }
+                            // Last resort: return original (worker will try its own fallback)
+                            resolved
+                        })
+                        .collect()
+                } else {
+                    // Fallback: keyword matching
+                    let task_lower = task.to_lowercase();
+                    let name_lower = name.to_lowercase();
+                    let mut paths: Vec<String> = by_dir
+                        .iter()
+                        .filter(|(k, _)| {
+                            let k_lower = k.to_lowercase();
+                            name_lower.contains(&k_lower)
+                                || k_lower.split('/').any(|seg| name_lower.contains(seg))
+                                || task_lower.contains(&k_lower)
+                        })
+                        .flat_map(|(_, ents)| {
+                            let w = workspace_c.clone();
+                            ents.iter()
+                                .map(move |e| w.join(&e.path).display().to_string())
+                        })
+                        .take(50)
+                        .collect();
+                    if paths.is_empty() {
+                        paths = by_dir
+                            .iter()
+                            .flat_map(|(_, ents)| {
+                                let w = workspace_c.clone();
+                                ents.iter()
+                                    .map(move |e| w.join(&e.path).display().to_string())
+                            })
+                            .take(50)
+                            .collect();
                     }
-                }
-                // Last resort: return original (worker will try its own fallback)
-                resolved
-            }).collect()
-        } else {
-            // Fallback: keyword matching
-            let task_lower = task.to_lowercase();
-            let name_lower = name.to_lowercase();
-            let mut paths: Vec<String> = by_dir.iter()
-                .filter(|(k,_)| {
-                    let k_lower = k.to_lowercase();
-                    name_lower.contains(&k_lower) || k_lower.split('/').any(|seg| name_lower.contains(seg))
-                        || task_lower.contains(&k_lower)
-                })
-                .flat_map(|(_, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
-                .take(50)
-                .collect();
-            if paths.is_empty() {
-                paths = by_dir.iter()
-                    .flat_map(|(_, ents)| { let w = workspace_c.clone(); ents.iter().map(move |e| w.join(&e.path).display().to_string()) })
-                    .take(50)
-                    .collect();
-            }
-            paths
-        };
-        let review_paths_c = review_paths.clone();
+                    paths
+                };
+                let review_paths_c = review_paths.clone();
 
-        // Build session map for worker context
-        let session_map = if let Some(ref sid) = session_id_c {
-            if !redis_url.is_empty() {
-                match openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
-                    Ok(mut store) => store.get_session_map(
-                        &uuid::Uuid::parse_str(sid).unwrap_or(uuid::Uuid::nil()),
-                        &format!("worker-{idx}")
-                    ).await.unwrap_or_default(),
-                    Err(_) => String::new(),
-                }
-            } else { String::new() }
-        } else { String::new() };
-        let session_map_c = session_map.clone();
+                // Build session map for worker context
+                let session_map = if let Some(ref sid) = session_id_c {
+                    if !redis_url.is_empty() {
+                        match openforce_redis_session::store::RedisSessionStore::connect(&redis_url)
+                            .await
+                        {
+                            Ok(mut store) => store
+                                .get_session_map(
+                                    &uuid::Uuid::parse_str(sid).unwrap_or(uuid::Uuid::nil()),
+                                    &format!("worker-{idx}"),
+                                )
+                                .await
+                                .unwrap_or_default(),
+                            Err(_) => String::new(),
+                        }
+                    } else {
+                        String::new()
+                    }
+                } else {
+                    String::new()
+                };
+                let session_map_c = session_map.clone();
 
-        if use_process {
-            let wd_c = wd.clone();
-            println!("    ▶ worker-{idx} [{}]: {} ...", pnc, name_c);
-            wave_handles.push(tokio::spawn(async move {
+                if use_process {
+                    let wd_c = wd.clone();
+                    println!("    ▶ worker-{idx} [{}]: {} ...", pnc, name_c);
+                    wave_handles.push(tokio::spawn(async move {
                 let task_json = serde_json::json!({
                     "task": task_c, "subtask": name_c, "profile_name": pnc,
                     "provider": provider_c, "model": model, "system_prompt": sp,
@@ -806,6 +1352,7 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                     "session_id": session_id_c,
                     "session_map": session_map_c,
                     "redis_url": redis_url_c,
+                    "workspace_root": workspace_c.display().to_string(),
                     "skills_dir": workspace_c.join("skills").to_str().unwrap_or("skills").to_string(),
                     "bound_skill": bound_skill_for_task,
                 });
@@ -839,35 +1386,51 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                     Err(e) => (idx, pnc, false, "error".into(), format!("Worker-{idx} spawn error: {e}")),
                 }
             }));
-        } else {
-            // Fallback: in-process LLM call (same tool-based approach with session context)
-            let worker = build_client(&config, &provider, &model);
-            let system = if sp.is_empty() { format!("Worker: {name}") } else { sp };
-            let paths_list = review_paths.iter().map(|p| format!("  {p}")).collect::<Vec<_>>().join("\n");
-            let session_block = if !session_map.is_empty() { format!("\n\nSESSION CONTEXT:\n{session_map}") } else { String::new() };
-            let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}{session_block}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
-            wave_handles.push(tokio::spawn(async move {
-                match worker.chat(&system, &prompt).await {
-                    Ok((text,_)) => (idx, pnc, true, "completed".into(), text),
-                    Err(e) => (idx, pnc, false, "error".into(), format!("Error: {e}")),
+                } else {
+                    // Fallback: in-process LLM call (same tool-based approach with session context)
+                    let worker = build_client(&config, &provider, &model);
+                    let system = if sp.is_empty() {
+                        format!("Worker: {name}")
+                    } else {
+                        sp
+                    };
+                    let paths_list = review_paths
+                        .iter()
+                        .map(|p| format!("  {p}"))
+                        .collect::<Vec<_>>()
+                        .join("\n");
+                    let session_block = if !session_map.is_empty() {
+                        format!("\n\nSESSION CONTEXT:\n{session_map}")
+                    } else {
+                        String::new()
+                    };
+                    let prompt = format!("Task: {task}\nSubtask: {name}\n\nFiles to review:\n{paths_list}{session_block}\n\nUse read_file() tool to access source files. Produce detailed review with specific file references.");
+                    wave_handles.push(tokio::spawn(async move {
+                        match worker.chat(&system, &prompt).await {
+                            Ok((text, _)) => (idx, pnc, true, "completed".into(), text),
+                            Err(e) => (idx, pnc, false, "error".into(), format!("Error: {e}")),
+                        }
+                    }));
                 }
-            }));
-        }
-    } // end for task_idx in wave
+            } // end for task_idx in wave
 
-        // Wait for all workers in this chunk to complete (parallel within chunk)
-        let chunk_results: Vec<(usize,String,bool,String,String)> = futures::future::join_all(wave_handles).await
-            .into_iter().filter_map(|r| r.ok()).collect();
-        // Track failed task titles so downstream tasks get blocked
-        for (ri, _, success, _, _) in &chunk_results {
-            if !success {
-                if let Some((_, title, _, _, _)) = subtasks.get(ri.saturating_sub(1)) {
-                    failed_titles.insert(title.clone());
+            // Wait for all workers in this chunk to complete (parallel within chunk)
+            let chunk_results: Vec<(usize, String, bool, String, String)> =
+                futures::future::join_all(wave_handles)
+                    .await
+                    .into_iter()
+                    .filter_map(|r| r.ok())
+                    .collect();
+            // Track failed task titles so downstream tasks get blocked
+            for (ri, _, success, _, _) in &chunk_results {
+                if !success {
+                    if let Some(subtask) = subtasks.get(ri.saturating_sub(1)) {
+                        failed_titles.insert(subtask.title.clone());
+                    }
                 }
             }
-        }
-        results.extend(chunk_results);
-        wave_handles = vec![]; // reset for next chunk
+            results.extend(chunk_results);
+            wave_handles = vec![]; // reset for next chunk
         } // end for chunk in wave.chunks
     } // end for wave in waves
 
@@ -879,30 +1442,45 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     for (result_idx, pf, success, action, text) in &results {
         let wid = format!("worker-{result_idx}");
         let output_path = format!("{}/worker_{}_output.json", wd, *result_idx);
-        let output_path = if std::path::Path::new(&output_path).exists() { output_path } else { String::new() };
+        let output_path = if std::path::Path::new(&output_path).exists() {
+            output_path
+        } else {
+            String::new()
+        };
         let title = subtasks
             .get(result_idx.saturating_sub(1))
-            .map(|(_, t, _, _, _)| t.clone())
+            .map(|subtask| subtask.title.clone())
             .unwrap_or_else(|| format!("task-{}", result_idx));
         let objective = subtasks
             .get(result_idx.saturating_sub(1))
-            .map(|(_, _, desc, _, _)| desc.as_str());
+            .map(|subtask| subtask.description.as_str());
         let cycles = if !output_path.is_empty() {
-            std::fs::read_to_string(&output_path).ok()
+            std::fs::read_to_string(&output_path)
+                .ok()
                 .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
                 .and_then(|v| v["cycles"].as_u64())
                 .unwrap_or(0) as usize
-        } else { 0 };
+        } else {
+            0
+        };
         let folder = if !output_path.is_empty() {
             planner_roundtable::summarize_worker_output_from_file(
-                &planner, &wid, pf, &title, objective,
-                &output_path, *success, action, cycles,
-            ).await
+                &planner,
+                &wid,
+                pf,
+                &title,
+                objective,
+                &output_path,
+                *success,
+                action,
+                cycles,
+            )
+            .await
         } else {
             planner_roundtable::summarize_worker_output_from_text(
-                &planner, &wid, pf, &title, objective,
-                text, *success, action, cycles,
-            ).await
+                &planner, &wid, pf, &title, objective, text, *success, action, cycles,
+            )
+            .await
         };
         folders.push(folder);
     }
@@ -918,7 +1496,7 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
     if let Some(ref mut tl) = todo_list {
         for (idx, _pf, success, _action, _text) in &results {
             if *success {
-                tl.mark_done(*idx, None);  // idx is already 1-based (task_idx+1)
+                tl.mark_done(*idx, None); // idx is already 1-based (task_idx+1)
             } else {
                 tl.mark_failed(*idx);
             }
@@ -932,7 +1510,9 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
             if let Ok(sid_uuid) = uuid::Uuid::parse_str(sid) {
                 match openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
                     Ok(mut store) => {
-                        let caller = openforce_redis_session::store::Caller::Scheduler { session_id: sid_uuid };
+                        let caller = openforce_redis_session::store::Caller::Scheduler {
+                            session_id: sid_uuid,
+                        };
                         for (idx, pf, success, _, text) in &results {
                             let (memory_subs, _memory_findings) = {
                                 let of = format!("{}/worker_{idx}_output.json", wd);
@@ -953,10 +1533,17 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                             let snapshot = openforce_redis_session::store::WorkerSnapshot {
                                 worker_id: format!("worker-{idx}"),
                                 role: pf.clone(),
-                                task: subtasks.get(*idx).map(|(_,t,_,_,_)| t.clone()).unwrap_or_default(),
+                                task: subtasks
+                                    .get(idx.saturating_sub(1))
+                                    .map(|subtask| subtask.title.clone())
+                                    .unwrap_or_default(),
                                 subtasks: memory_subs,
                                 acceptance_criteria: vec![],
-                                progress: if *success { "completed".into() } else { "failed".into() },
+                                progress: if *success {
+                                    "completed".into()
+                                } else {
+                                    "failed".into()
+                                },
                                 inputs: vec![],
                                 outputs: vec![text.clone()],
                                 intermediate_artifacts: vec![],
@@ -970,11 +1557,24 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                             }
                         }
                         // Persist phase result
-                        let phase_summary = results.iter().map(|(i, pf, ok, action, text)| {
-                            format!("Worker-{} [{}] {}: {}", i, pf, if *ok {"OK"} else {action}, text)
-                        }).collect::<Vec<_>>().join(" | ");
+                        let phase_summary = results
+                            .iter()
+                            .map(|(i, pf, ok, action, text)| {
+                                format!(
+                                    "Worker-{} [{}] {}: {}",
+                                    i,
+                                    pf,
+                                    if *ok { "OK" } else { action },
+                                    text
+                                )
+                            })
+                            .collect::<Vec<_>>()
+                            .join(" | ");
                         let phase_result = openforce_redis_session::store::PhaseResultEntry {
-                            phase: session.as_ref().map(|s| s.current_phase.as_str().to_string()).unwrap_or_default(),
+                            phase: session
+                                .as_ref()
+                                .map(|s| s.current_phase.as_str().to_string())
+                                .unwrap_or_default(),
                             tasks_total: results.len(),
                             tasks_ok: results.iter().filter(|r| r.2).count(),
                             plan_epoch: session.as_ref().map(|s| s.plan_epoch).unwrap_or(1),
@@ -997,10 +1597,17 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
         }
     }
 
-    let stalled_count = results.iter().filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error").count();
+    let stalled_count = results
+        .iter()
+        .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
+        .count();
 
     let ok = results.iter().filter(|r| r.2).count();
-    step!("Step 4/4: Results — {}/{} workers completed", ok, results.len());
+    step!(
+        "Step 4/4: Results — {}/{} workers completed",
+        ok,
+        results.len()
+    );
     println!("\n===== Results: {}/{} =====\n", ok, results.len());
 
     // ── [DONE:n] Detection ──
@@ -1013,7 +1620,14 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
         }
     }
     if !done_markers.is_empty() {
-        println!("  [DONE markers]: {}", done_markers.iter().map(|(w,n)| format!("{w}→#{n}")).collect::<Vec<_>>().join(", "));
+        println!(
+            "  [DONE markers]: {}",
+            done_markers
+                .iter()
+                .map(|(w, n)| format!("{w}→#{n}"))
+                .collect::<Vec<_>>()
+                .join(", ")
+        );
     }
 
     // ── Progress visualization ──
@@ -1021,40 +1635,85 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
         println!("  [Progress] {}", tl.progress_str());
         for item in &tl.items {
             let icon = match item.status.as_str() {
-                "completed" => "✓", "in_progress" => "▶", "failed" => "✗", _ => "○"
+                "completed" => "✓",
+                "in_progress" => "▶",
+                "failed" => "✗",
+                _ => "○",
             };
-            println!("    [{icon}] #{:02} [{}] {}", item.id, item.priority, item.content.chars().take(80).collect::<String>());
+            println!(
+                "    [{icon}] #{:02} [{}] {}",
+                item.id,
+                item.priority,
+                item.content.chars().take(80).collect::<String>()
+            );
         }
     }
 
-    let mut report = format!("# OpenForce Report\n\nTask: {task}\nRoles: {:?}\nWorkers: {}/{}\n",
-        classification.suggested_roles, ok, results.len());
+    let mut report = format!(
+        "# OpenForce Report\n\nTask: {task}\nRoles: {:?}\nWorkers: {}/{}\n",
+        classification.suggested_roles,
+        ok,
+        results.len()
+    );
 
     for (idx, pf, success, _action, text) in &results {
         let s = if *success { "OK" } else { "FAIL" };
         println!("Worker-{idx} [{pf}] [{s}]:");
         report.push_str(&format!("\n## Worker-{idx} [{pf}]\n"));
-        for line in text.lines() { println!("  {line}"); report.push_str(line); report.push('\n'); }
-        report.push('\n'); println!();
+        for line in text.lines() {
+            println!("  {line}");
+            report.push_str(line);
+            report.push('\n');
+        }
+        report.push('\n');
+        println!();
     }
 
     // ── Re-plan if too many workers stalled ──
     if stalled_count > 0 && stalled_count * 2 > results.len() {
-        let failed_detail: String = results.iter()
+        let failed_detail: String = results
+            .iter()
             .filter(|r| !r.2)
-            .map(|(i, pf, _, action, text)| format!("Worker-{} [{}] {}: {}", i, pf, action, text.chars().take(200).collect::<String>()))
-            .collect::<Vec<_>>().join(" || ");
-        let failed_summary: String = results.iter()
+            .map(|(i, pf, _, action, text)| {
+                format!(
+                    "Worker-{} [{}] {}: {}",
+                    i,
+                    pf,
+                    action,
+                    text.chars().take(200).collect::<String>()
+                )
+            })
+            .collect::<Vec<_>>()
+            .join(" || ");
+        let failed_summary: String = results
+            .iter()
             .filter(|r| r.3 == "stalled" || r.3 == "timeout" || r.3 == "error")
             .map(|(i, pf, _, action, text)| format!("Worker-{i} [{pf}] {action}: {}", text))
-            .collect::<Vec<_>>().join(" | ");
-        println!("[!] Scheduler: {}/{} workers stalled/failed", stalled_count, results.len());
+            .collect::<Vec<_>>()
+            .join(" | ");
+        println!(
+            "[!] Scheduler: {}/{} workers stalled/failed",
+            stalled_count,
+            results.len()
+        );
         println!("  Reason: {failed_summary}");
         println!("  [Replan] analyzing failures...");
-        let failed_folders: Vec<WorkerOutputFolder> = folders.iter()
+        let failed_folders: Vec<WorkerOutputFolder> = folders
+            .iter()
             .filter(|f| f.status != openforce_domain::worker_folder::WorkerStatus::Completed)
-            .cloned().collect();
-        match planner_roundtable::replan_failed(&planner, &task, &failed_detail, &agent_catalog, &skills_dir_str, &dir_summary, &failed_folders).await {
+            .cloned()
+            .collect();
+        match planner_roundtable::replan_failed(
+            &planner,
+            &task,
+            &failed_detail,
+            &agent_catalog,
+            &skills_dir_str,
+            &dir_summary,
+            &failed_folders,
+        )
+        .await
+        {
             Ok(new_tree) => {
                 println!("  [Replan] new plan: {} tasks", new_tree.tasks.len());
                 for t in &new_tree.tasks {
@@ -1063,8 +1722,12 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
             }
             Err(e) => println!("  [Replan] failed: {e}"),
         }
-        report.push_str(&format!("\n## Re-plan Required\n{}/{} workers stalled: {}\n",
-            stalled_count, results.len(), failed_summary));
+        report.push_str(&format!(
+            "\n## Re-plan Required\n{}/{} workers stalled: {}\n",
+            stalled_count,
+            results.len(),
+            failed_summary
+        ));
         report.push_str("\nRun: openforce continue <session-id> to re-plan and re-execute\n");
     }
 
@@ -1080,32 +1743,58 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                 "id":i,"profile":p,"success":s,"summary":t.chars().take(500).collect::<String>()
             })).collect::<Vec<_>>()
         });
-        let ep = format!("experts/experience/session_{}.json", uuid::Uuid::now_v7().to_string().chars().take(8).collect::<String>());
+        let ep = format!(
+            "experts/experience/session_{}.json",
+            uuid::Uuid::now_v7()
+                .to_string()
+                .chars()
+                .take(8)
+                .collect::<String>()
+        );
         let _ = std::fs::write(&ep, serde_json::to_string_pretty(&exp).unwrap_or_default());
     }
 
     // Persist planner decomposition and folders to Redis
     if let Some(ref sess) = session {
         if !redis_url.is_empty() {
-            if let Ok(mut store) = openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await {
-                let _ = store.set_planner(&sess.session_id,
-                    &format!("{:?}", classification.categories),
-                    &subtasks.iter().map(|(r,n,_,_,_)| format!("[{r}] {n}")).collect::<Vec<_>>().join("; "),
-                    &classification.suggested_roles,
-                ).await;
+            if let Ok(mut store) =
+                openforce_redis_session::store::RedisSessionStore::connect(&redis_url).await
+            {
+                let _ = store
+                    .set_planner(
+                        &sess.session_id,
+                        &format!("{:?}", classification.categories),
+                        &subtasks
+                            .iter()
+                            .map(|subtask| format!("[{}] {}", subtask.role, subtask.title))
+                            .collect::<Vec<_>>()
+                            .join("; "),
+                        &classification.suggested_roles,
+                    )
+                    .await;
                 // Persist worker output folders for Planner context on resume
                 if !folders.is_empty() {
-                    if let Err(e) = store.add_folders(&sess.session_id, sess.plan_epoch, &folders).await {
+                    if let Err(e) = store
+                        .add_folders(&sess.session_id, sess.plan_epoch, &folders)
+                        .await
+                    {
                         eprintln!("  [redis] folders save failed: {e}");
                     } else {
-                        eprintln!("  [redis] {} folders saved for epoch {}", folders.len(), sess.plan_epoch);
+                        eprintln!(
+                            "  [redis] {} folders saved for epoch {}",
+                            folders.len(),
+                            sess.plan_epoch
+                        );
                     }
                 }
             }
         }
     }
 
-    let report_prefix = session.as_ref().map(|s| s.session_id.to_string().chars().take(8).collect::<String>()).unwrap_or_else(|| "latest".into());
+    let report_prefix = session
+        .as_ref()
+        .map(|s| s.session_id.to_string().chars().take(8).collect::<String>())
+        .unwrap_or_else(|| "latest".into());
 
     // Persist session state for multi-turn support
     if let Some(mut sess) = session {
@@ -1113,12 +1802,21 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
             phase: sess.current_phase.clone(),
             tasks_total: results.len(),
             tasks_ok: ok,
-            worker_outputs: results.iter().map(|(i, pf, success, _action, text)| session_state::WorkerOutput {
-                worker_id: format!("worker-{i}"),
-                role: pf.clone(),
-                status: if *success { "ok".into() } else { "failed".into() },
-                output: text.to_string(),
-            }).collect(),
+            worker_outputs: results
+                .iter()
+                .map(
+                    |(i, pf, success, _action, text)| session_state::WorkerOutput {
+                        worker_id: format!("worker-{i}"),
+                        role: pf.clone(),
+                        status: if *success {
+                            "ok".into()
+                        } else {
+                            "failed".into()
+                        },
+                        output: text.to_string(),
+                    },
+                )
+                .collect(),
             folders: folders.clone(),
             plan_epoch: sess.plan_epoch,
         });
@@ -1130,8 +1828,14 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
             if n.is_gate() {
                 sess.advance_phase(n.clone());
                 let gate = openforce_domain::session_phase::ConfirmationGate::new(
-                    sess.session_id, n.clone(),
-                    format!("Phase {} completed: {}/{} tasks OK", sess.current_phase.as_str(), ok, results.len()),
+                    sess.session_id,
+                    n.clone(),
+                    format!(
+                        "Phase {} completed: {}/{} tasks OK",
+                        sess.current_phase.as_str(),
+                        ok,
+                        results.len()
+                    ),
                     sess.plan_epoch,
                 );
                 sess.set_gate(&gate);
@@ -1141,20 +1845,31 @@ async fn run_pipeline(workspace: PathBuf, mut task: String, session: Option<sess
                 println!("    openforce reject \"<feedback>\" — to modify");
             } else {
                 sess.advance_phase(n.clone());
-                println!("\n[Phase → {}] Auto-advancing. Continue with: openforce continue", n.as_str());
+                println!(
+                    "\n[Phase → {}] Auto-advancing. Continue with: openforce continue",
+                    n.as_str()
+                );
             }
         }
-        sess.save().map_err(|e| anyhow::anyhow!("session save: {e}"))?;
+        sess.save()
+            .map_err(|e| anyhow::anyhow!("session save: {e}"))?;
     }
 
     let rp = format!("{}/openforce_report_{report_prefix}.md", wd);
     std::fs::write(&rp, &report)?;
-    println!("
+    println!(
+        "
 
-╔══════════════════════════════════════╗");
+╔══════════════════════════════════════╗"
+    );
     println!("║  Report: {}", rp);
-    println!("║  Total time: {:.0}s", pipeline_start.elapsed().as_secs_f64());
-    println!("╚══════════════════════════════════════╝
-");
+    println!(
+        "║  Total time: {:.0}s",
+        pipeline_start.elapsed().as_secs_f64()
+    );
+    println!(
+        "╚══════════════════════════════════════╝
+"
+    );
     Ok(())
 }

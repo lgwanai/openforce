@@ -1,12 +1,19 @@
-use serde::{Deserialize, Serialize};
-use openforce_domain::token::TokenScope;
 use openforce_domain::identity::ServiceRole;
+use openforce_domain::token::TokenScope;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum PolicyEffect {
-    Allow { reason: String },
-    Deny { reason: String },
-    Escalate { reason: String, approval_url: String },
+    Allow {
+        reason: String,
+    },
+    Deny {
+        reason: String,
+    },
+    Escalate {
+        reason: String,
+        approval_url: String,
+    },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32,21 +39,40 @@ pub enum RuleCondition {
 }
 
 impl PolicyRule {
-    pub fn new(rule_id: &str, priority: i32, condition: RuleCondition, effect: PolicyEffect, description: &str) -> Self {
-        Self { rule_id: rule_id.into(), priority, condition, effect, description: description.into() }
+    pub fn new(
+        rule_id: &str,
+        priority: i32,
+        condition: RuleCondition,
+        effect: PolicyEffect,
+        description: &str,
+    ) -> Self {
+        Self {
+            rule_id: rule_id.into(),
+            priority,
+            condition,
+            effect,
+            description: description.into(),
+        }
     }
 }
 
 pub fn default_rules() -> Vec<PolicyRule> {
     vec![
-        PolicyRule::new("scheduler_lease_task", 100,
+        PolicyRule::new(
+            "scheduler_lease_task",
+            100,
             RuleCondition::AllOf(vec![
                 RuleCondition::RoleIs(ServiceRole::scheduler()),
                 RuleCondition::ActionOn("LeaseTask".into(), "Task".into()),
             ]),
-            PolicyEffect::Allow { reason: "scheduler authorized".into() },
-            "Scheduler is authorized to issue leases and capability tokens"),
-        PolicyRule::new("worker_submit_artifact", 90,
+            PolicyEffect::Allow {
+                reason: "scheduler authorized".into(),
+            },
+            "Scheduler is authorized to issue leases and capability tokens",
+        ),
+        PolicyRule::new(
+            "worker_submit_artifact",
+            90,
             RuleCondition::AllOf(vec![
                 RuleCondition::RoleIs(ServiceRole::worker()),
                 RuleCondition::ActionOn("SubmitArtifact".into(), "Artifact".into()),
@@ -54,32 +80,50 @@ pub fn default_rules() -> Vec<PolicyRule> {
                 RuleCondition::FencingTokenValid,
                 RuleCondition::TenantOwnsSession,
             ]),
-            PolicyEffect::Allow { reason: "worker authorized with token".into() },
-            "Worker with valid capability token can submit artifacts"),
-        PolicyRule::new("node_daemon_spawn", 100,
+            PolicyEffect::Allow {
+                reason: "worker authorized with token".into(),
+            },
+            "Worker with valid capability token can submit artifacts",
+        ),
+        PolicyRule::new(
+            "node_daemon_spawn",
+            100,
             RuleCondition::AllOf(vec![
                 RuleCondition::RoleIs(ServiceRole::node_daemon()),
                 RuleCondition::ActionOn("SpawnWorker".into(), "Resource".into()),
             ]),
-            PolicyEffect::Allow { reason: "node daemon authorized".into() },
-            "Node Daemon is authorized to spawn worker VMs"),
-        PolicyRule::new("worker_effect_request", 85,
+            PolicyEffect::Allow {
+                reason: "node daemon authorized".into(),
+            },
+            "Node Daemon is authorized to spawn worker VMs",
+        ),
+        PolicyRule::new(
+            "worker_effect_request",
+            85,
             RuleCondition::AllOf(vec![
                 RuleCondition::RoleIs(ServiceRole::worker()),
                 RuleCondition::ActionOn("RequestEffect".into(), "Effect".into()),
                 RuleCondition::TokenHasScope(TokenScope::effect_request()),
                 RuleCondition::FencingTokenValid,
             ]),
-            PolicyEffect::Allow { reason: "worker effect authorized".into() },
-            "Worker can request side effects with capability token"),
-        PolicyRule::new("worker_submit_patch", 85,
+            PolicyEffect::Allow {
+                reason: "worker effect authorized".into(),
+            },
+            "Worker can request side effects with capability token",
+        ),
+        PolicyRule::new(
+            "worker_submit_patch",
+            85,
             RuleCondition::AllOf(vec![
                 RuleCondition::RoleIs(ServiceRole::worker()),
                 RuleCondition::ActionOn("SubmitPatch".into(), "Patch".into()),
                 RuleCondition::TokenHasScope(TokenScope::patch_submit()),
                 RuleCondition::FencingTokenValid,
             ]),
-            PolicyEffect::Allow { reason: "worker patch authorized".into() },
-            "Worker with valid token can submit patches"),
+            PolicyEffect::Allow {
+                reason: "worker patch authorized".into(),
+            },
+            "Worker with valid token can submit patches",
+        ),
     ]
 }

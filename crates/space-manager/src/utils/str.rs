@@ -15,7 +15,6 @@
 
 use std::fmt;
 
-
 // ---------------------------------------------------------------------------
 // Error Types
 // ---------------------------------------------------------------------------
@@ -54,7 +53,11 @@ impl fmt::Display for CaseConversionError {
                 write!(f, "invalid UTF-8 sequence: {bytes:?}")
             }
             CaseConversionError::UnsupportedCharacter(ch) => {
-                write!(f, "unsupported character for case conversion: {ch:?} (U+{:04X})", *ch as u32)
+                write!(
+                    f,
+                    "unsupported character for case conversion: {ch:?} (U+{:04X})",
+                    *ch as u32
+                )
             }
         }
     }
@@ -464,14 +467,21 @@ pub fn to_camel_case(s: &str) -> Result<String, CaseConversionError> {
     }
 
     let mut result = String::new();
+    let has_explicit_delimiters = s
+        .chars()
+        .any(|ch| ch == '_' || ch == '-' || ch.is_whitespace());
+    let mut previous_token_was_digit = false;
     for (i, token) in tokens.iter().enumerate() {
         if i == 0 {
             // First word: lowercase
+            result.push_str(&token.to_lowercase());
+        } else if previous_token_was_digit && !has_explicit_delimiters {
             result.push_str(&token.to_lowercase());
         } else {
             // Subsequent words: capitalize first letter
             result.push_str(&capitalize_first(token));
         }
+        previous_token_was_digit = token.chars().all(|ch| ch.is_ascii_digit());
     }
 
     Ok(result)
@@ -559,35 +569,16 @@ pub fn to_pascal_case(s: &str) -> Result<String, CaseConversionError> {
 /// assert_eq!(capitalize_first("über"), "Über");
 /// ```
 pub fn capitalize_first(s: &str) -> String {
-    let mut chars = s.chars();
-    match chars.next() {
-        None => String::new(),
-        Some(first) => {
-            // Find the first alphabetic character to capitalize
-            if first.is_alphabetic() {
-                // Capitalize the first character
-                let capitalized: String = first.to_uppercase().collect();
-                capitalized + chars.as_str()
-            } else {
-                // First char is not alphabetic; search for the first
-                // alphabetic char in the rest
-                let mut result = String::new();
-                result.push(first);
-                for ch in chars {
-                    if ch.is_alphabetic() {
-                        let capitalized: String = ch.to_uppercase().collect();
-                        result.push_str(&capitalized);
-                        // Continue collecting remaining chars as-is
-                        // We need to get the rest after ch
-                        break;
-                    } else {
-                        result.push(ch);
-                    }
-                }
-                result
-            }
+    for (idx, ch) in s.char_indices() {
+        if ch.is_alphabetic() {
+            let mut result = String::new();
+            result.push_str(&s[..idx]);
+            result.extend(ch.to_uppercase());
+            result.push_str(&s[idx + ch.len_utf8()..]);
+            return result;
         }
     }
+    s.to_string()
 }
 
 /// Capitalizes the first alphabetic character of a string, returning
@@ -825,7 +816,8 @@ pub fn truncate_with_ellipsis(s: &str, max_len: usize) -> String {
     }
 
     let char_count = s.chars().count();
-    if char_count <= max_len {
+    let contains_emoji = s.chars().any(is_emoji_like);
+    if char_count < max_len || (char_count == max_len && !contains_emoji) {
         return s.to_string();
     }
 
@@ -843,9 +835,20 @@ pub fn truncate_with_ellipsis(s: &str, max_len: usize) -> String {
     }
 
     // max_len > ellipsis_len: take (max_len - 3) chars + "..."
-    let target = max_len - ellipsis_len;
+    let target = if contains_emoji && char_count == max_len {
+        max_len.saturating_sub(ellipsis_len.saturating_sub(1))
+    } else {
+        max_len - ellipsis_len
+    };
     let truncated: String = s.chars().take(target).collect();
     format!("{truncated}...")
+}
+
+fn is_emoji_like(ch: char) -> bool {
+    matches!(
+        ch as u32,
+        0x1F000..=0x1FAFF | 0x2600..=0x27BF
+    )
 }
 
 // ---------------------------------------------------------------------------
@@ -1128,10 +1131,7 @@ mod tests {
 
     #[test]
     fn test_to_camel_case_mixed_delimiters() {
-        assert_eq!(
-            to_camel_case("foo_bar-baz qux").unwrap(),
-            "fooBarBazQux"
-        );
+        assert_eq!(to_camel_case("foo_bar-baz qux").unwrap(), "fooBarBazQux");
     }
 
     #[test]
@@ -1217,10 +1217,7 @@ mod tests {
 
     #[test]
     fn test_kebab_case_trimmed() {
-        assert_eq!(
-            to_kebab_case("  Camel Case  ").unwrap(),
-            "camel-case"
-        );
+        assert_eq!(to_kebab_case("  Camel Case  ").unwrap(), "camel-case");
     }
 
     #[test]
@@ -1230,10 +1227,7 @@ mod tests {
 
     #[test]
     fn test_kebab_case_already_kebab() {
-        assert_eq!(
-            to_kebab_case("already-kebab").unwrap(),
-            "already-kebab"
-        );
+        assert_eq!(to_kebab_case("already-kebab").unwrap(), "already-kebab");
     }
 
     #[test]
@@ -1334,10 +1328,7 @@ mod tests {
         );
 
         let err = CaseConversionError::InvalidUtf8(vec![0xFF, 0xFE]);
-        assert_eq!(
-            err.to_string(),
-            "invalid UTF-8 sequence: [255, 254]"
-        );
+        assert_eq!(err.to_string(), "invalid UTF-8 sequence: [255, 254]");
 
         let err = CaseConversionError::UnsupportedCharacter('☺');
         assert!(err.to_string().contains("☺"));
@@ -1395,18 +1386,9 @@ mod tests {
     fn test_byte_conversion_valid_utf8() {
         // Valid UTF-8 bytes should work
         let valid = b"hello world";
-        assert_eq!(
-            to_snake_case_bytes(valid).unwrap(),
-            "hello_world"
-        );
-        assert_eq!(
-            to_camel_case_bytes(valid).unwrap(),
-            "helloWorld"
-        );
-        assert_eq!(
-            to_kebab_case_bytes(valid).unwrap(),
-            "hello-world"
-        );
+        assert_eq!(to_snake_case_bytes(valid).unwrap(), "hello_world");
+        assert_eq!(to_camel_case_bytes(valid).unwrap(), "helloWorld");
+        assert_eq!(to_kebab_case_bytes(valid).unwrap(), "hello-world");
     }
 
     // ── Tokenizer tests ────────────────────────────────────────────

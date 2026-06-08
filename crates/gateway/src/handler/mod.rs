@@ -1,4 +1,6 @@
-pub mod project_tools; pub mod approvals; pub mod effects;
+pub mod approvals;
+pub mod effects;
+pub mod project_tools;
 use axum::response::Json;
 use serde_json::{json, Value};
 
@@ -10,4 +12,6 @@ pub struct AppState {
     pub effect_gateway_addr: String,
 }
 
-pub async fn health() -> Json<Value> { Json(json!({"status": "ok"})) }
+pub async fn health() -> Json<Value> {
+    Json(json!({"status": "ok"}))
+}

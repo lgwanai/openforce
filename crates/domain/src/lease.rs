@@ -10,15 +10,23 @@ use crate::error::{DomainError, DomainResult};
 pub struct FencingToken(pub u64);
 
 impl FencingToken {
-    pub fn new() -> Self { Self(1) }
+    pub fn new() -> Self {
+        Self(1)
+    }
 
-    pub fn next(self) -> Self { Self(self.0 + 1) }
+    pub fn next(self) -> Self {
+        Self(self.0 + 1)
+    }
 
-    pub fn value(&self) -> u64 { self.0 }
+    pub fn value(&self) -> u64 {
+        self.0
+    }
 }
 
 impl Default for FencingToken {
-    fn default() -> Self { Self(1) }
+    fn default() -> Self {
+        Self(1)
+    }
 }
 
 impl std::fmt::Display for FencingToken {
@@ -124,7 +132,8 @@ impl Lease {
     pub fn renew(&mut self, extension: Duration) -> DomainResult<()> {
         self.verify_active()?;
         self.expire_at = Utc::now() + extension;
-        self.renewal_deadline = Some(self.expire_at - Duration::seconds(self.heartbeat_interval_sec as i64 * 2));
+        self.renewal_deadline =
+            Some(self.expire_at - Duration::seconds(self.heartbeat_interval_sec as i64 * 2));
         self.state = LeaseState::Renewed;
         self.updated_at = Utc::now();
         Ok(())

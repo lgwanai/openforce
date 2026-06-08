@@ -11,7 +11,13 @@ pub struct PoolConfig {
 }
 
 impl Default for PoolConfig {
-    fn default() -> Self { Self { agent_count: 5, target_fullstack_count: 3, target_gpu_count: 1 } }
+    fn default() -> Self {
+        Self {
+            agent_count: 5,
+            target_fullstack_count: 3,
+            target_gpu_count: 1,
+        }
+    }
 }
 
 pub struct WarmPool {
@@ -23,7 +29,12 @@ pub struct WarmPool {
 
 impl WarmPool {
     pub fn new(config: PoolConfig) -> Self {
-        Self { config, agent_pool: VecDeque::new(), fullstack_pool: VecDeque::new(), gpu_pool: VecDeque::new() }
+        Self {
+            config,
+            agent_pool: VecDeque::new(),
+            fullstack_pool: VecDeque::new(),
+            gpu_pool: VecDeque::new(),
+        }
     }
 
     pub fn add(&mut self, class: &str, sandbox_id: Uuid) {

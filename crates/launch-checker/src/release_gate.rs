@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// Release Gate Checklist — automated validation before launch.
 /// Architecture doc section 29: emergency breakers, incident response.
@@ -21,20 +21,61 @@ impl ReleaseGate {
         Self {
             version: "5.1".into(),
             checks: vec![
-                GateCheck { name: "all_unit_tests_pass".into(), category: "test".into(), passed: None, required: true },
-                GateCheck { name: "integration_tests_pass".into(), category: "test".into(), passed: None, required: true },
-                GateCheck { name: "red_team_scenarios_clear".into(), category: "security".into(), passed: None, required: true },
-                GateCheck { name: "migrations_reversible".into(), category: "data".into(), passed: None, required: true },
-                GateCheck { name: "kill_switch_verified".into(), category: "ops".into(), passed: None, required: true },
-                GateCheck { name: "approval_flow_tested".into(), category: "compliance".into(), passed: None, required: true },
-                GateCheck { name: "tenant_isolation_verified".into(), category: "security".into(), passed: None, required: true },
-                GateCheck { name: "effect_gateway_tested".into(), category: "integration".into(), passed: None, required: true },
+                GateCheck {
+                    name: "all_unit_tests_pass".into(),
+                    category: "test".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "integration_tests_pass".into(),
+                    category: "test".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "red_team_scenarios_clear".into(),
+                    category: "security".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "migrations_reversible".into(),
+                    category: "data".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "kill_switch_verified".into(),
+                    category: "ops".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "approval_flow_tested".into(),
+                    category: "compliance".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "tenant_isolation_verified".into(),
+                    category: "security".into(),
+                    passed: None,
+                    required: true,
+                },
+                GateCheck {
+                    name: "effect_gateway_tested".into(),
+                    category: "integration".into(),
+                    passed: None,
+                    required: true,
+                },
             ],
         }
     }
 
     pub fn all_required_passed(&self) -> bool {
-        self.checks.iter()
+        self.checks
+            .iter()
             .filter(|c| c.required)
             .all(|c| c.passed == Some(true))
     }

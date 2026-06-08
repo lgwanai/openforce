@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// Bring Your Own Key — tenant-managed encryption keys (architecture doc section 28.6)
@@ -35,10 +35,13 @@ pub struct ByokManager;
 impl ByokManager {
     pub fn create_key(tenant_id: Uuid, mode: KeyManagementMode) -> EncryptionKey {
         EncryptionKey {
-            key_id: Uuid::now_v7(), tenant_id, mode,
+            key_id: Uuid::now_v7(),
+            tenant_id,
+            mode,
             state: KeyState::Active,
             created_at: chrono::Utc::now(),
-            rotated_at: None, destroyed_at: None,
+            rotated_at: None,
+            destroyed_at: None,
         }
     }
 

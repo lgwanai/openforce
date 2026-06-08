@@ -6,12 +6,18 @@ use uuid::Uuid;
 pub struct PlanVersion(pub i32);
 
 impl Default for PlanVersion {
-    fn default() -> Self { Self(0) }
+    fn default() -> Self {
+        Self(0)
+    }
 }
 
 impl PlanVersion {
-    pub fn next(self) -> Self { Self(self.0 + 1) }
-    pub fn value(&self) -> i32 { self.0 }
+    pub fn next(self) -> Self {
+        Self(self.0 + 1)
+    }
+    pub fn value(&self) -> i32 {
+        self.0
+    }
 }
 
 /// PlanEpoch is the logical boundary of a compiled plan (architecture doc section 23)
@@ -19,12 +25,18 @@ impl PlanVersion {
 pub struct PlanEpoch(pub i32);
 
 impl Default for PlanEpoch {
-    fn default() -> Self { Self(0) }
+    fn default() -> Self {
+        Self(0)
+    }
 }
 
 impl PlanEpoch {
-    pub fn next(self) -> Self { Self(self.0 + 1) }
-    pub fn value(&self) -> i32 { self.0 }
+    pub fn next(self) -> Self {
+        Self(self.0 + 1)
+    }
+    pub fn value(&self) -> i32 {
+        self.0
+    }
 }
 
 /// A node in the execution DAG
@@ -47,11 +59,7 @@ pub struct Plan {
 }
 
 impl Plan {
-    pub fn new(
-        plan_version: PlanVersion,
-        plan_epoch: PlanEpoch,
-        session_id: Uuid,
-    ) -> Self {
+    pub fn new(plan_version: PlanVersion, plan_epoch: PlanEpoch, session_id: Uuid) -> Self {
         Self {
             plan_version,
             plan_epoch,

@@ -10,7 +10,12 @@ pub struct MachineConfig {
 
 impl Default for MachineConfig {
     fn default() -> Self {
-        Self { vcpu_count: 2, mem_size_mib: 4096, smt: false, track_dirty_pages: false }
+        Self {
+            vcpu_count: 2,
+            mem_size_mib: 4096,
+            smt: false,
+            track_dirty_pages: false,
+        }
     }
 }
 
@@ -79,24 +84,41 @@ pub struct VmConfig {
 
 impl VmConfig {
     pub fn new(
-        vm_id: String, session_id: String, task_id: String, sandbox_class: String,
-        kernel_path: &str, rootfs_path: &str, tap_device: &str, mac: &str,
+        vm_id: String,
+        session_id: String,
+        task_id: String,
+        sandbox_class: String,
+        kernel_path: &str,
+        rootfs_path: &str,
+        tap_device: &str,
+        mac: &str,
     ) -> Self {
         let socket_path = format!("/var/run/swarmos/vms/{vm_id}.sock");
         let log_path = format!("/var/log/swarmos/vms/{vm_id}.log");
         Self {
-            vm_id, session_id, task_id, sandbox_class,
+            vm_id,
+            session_id,
+            task_id,
+            sandbox_class,
             machine: MachineConfig::default(),
             boot_source: BootSource::new(kernel_path),
             root_drive: Drive {
-                drive_id: "rootfs".into(), path_on_host: rootfs_path.into(),
-                is_root_device: true, is_read_only: true, partuuid: None, rate_limiter: None,
+                drive_id: "rootfs".into(),
+                path_on_host: rootfs_path.into(),
+                is_root_device: true,
+                is_read_only: true,
+                partuuid: None,
+                rate_limiter: None,
             },
             net_iface: NetworkInterface {
-                iface_id: "eth0".into(), host_dev_name: tap_device.into(),
-                guest_mac: mac.into(), rx_rate_limiter: None, tx_rate_limiter: None,
+                iface_id: "eth0".into(),
+                host_dev_name: tap_device.into(),
+                guest_mac: mac.into(),
+                rx_rate_limiter: None,
+                tx_rate_limiter: None,
             },
-            socket_path, log_path,
+            socket_path,
+            log_path,
         }
     }
 }

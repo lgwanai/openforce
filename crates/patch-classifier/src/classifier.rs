@@ -1,4 +1,4 @@
-use openforce_domain::patch::{PatchClassification, PatchRiskLevel, PatchReasonCode};
+use openforce_domain::patch::{PatchClassification, PatchReasonCode, PatchRiskLevel};
 
 /// PatchClassifier implements the 9 semantic risk classification rules
 /// from architecture doc section 6.5 (PCR-001 through PCR-009).
@@ -24,7 +24,9 @@ impl Default for PatchClassifier {
 }
 
 impl PatchClassifier {
-    pub fn new() -> Self { Self::default() }
+    pub fn new() -> Self {
+        Self::default()
+    }
 
     /// Classify a patch based on target paths and diff summary.
     /// Returns a classification with risk level and reason codes.
@@ -107,44 +109,60 @@ impl PatchClassifier {
     }
 
     fn determine_risk(reasons: &[PatchReasonCode]) -> PatchRiskLevel {
-        let has_reject = reasons.iter().any(|r| *r == PatchReasonCode::cross_scope_write());
-        if has_reject { return PatchRiskLevel::Reject; }
+        let has_reject = reasons
+            .iter()
+            .any(|r| *r == PatchReasonCode::cross_scope_write());
+        if has_reject {
+            return PatchRiskLevel::Reject;
+        }
 
-        let has_sensitive = reasons.iter().any(|r|
+        let has_sensitive = reasons.iter().any(|r| {
             *r == PatchReasonCode::delete_equivalent_patch()
-            || *r == PatchReasonCode::touches_auth_logic()
-            || *r == PatchReasonCode::touches_migration()
-            || *r == PatchReasonCode::batch_delete()
-            || *r == PatchReasonCode::touches_prod_config()
-        );
-        if has_sensitive { return PatchRiskLevel::Sensitive; }
+                || *r == PatchReasonCode::touches_auth_logic()
+                || *r == PatchReasonCode::touches_migration()
+                || *r == PatchReasonCode::batch_delete()
+                || *r == PatchReasonCode::touches_prod_config()
+        });
+        if has_sensitive {
+            return PatchRiskLevel::Sensitive;
+        }
 
-        let has_moderate = reasons.iter().any(|r|
+        let has_moderate = reasons.iter().any(|r| {
             *r == PatchReasonCode::touches_core_route()
-            || *r == PatchReasonCode::file_truncation()
-            || *r == PatchReasonCode::rename_with_wide_impact()
-        );
-        if has_moderate { return PatchRiskLevel::Moderate; }
+                || *r == PatchReasonCode::file_truncation()
+                || *r == PatchReasonCode::rename_with_wide_impact()
+        });
+        if has_moderate {
+            return PatchRiskLevel::Moderate;
+        }
 
         PatchRiskLevel::Safe
     }
 
     fn is_sensitive_path(&self, path: &str) -> bool {
         self.sensitive_patterns.iter().any(|p| {
-            glob::Pattern::new(p).map(|pat| pat.matches(path)).unwrap_or(false)
+            glob::Pattern::new(p)
+                .map(|pat| pat.matches(path))
+                .unwrap_or(false)
         })
     }
 
     fn path_in_scope(path: &str, allowed: &[String]) -> bool {
-        if allowed.is_empty() { return true; }
+        if allowed.is_empty() {
+            return true;
+        }
         allowed.iter().any(|p| {
-            glob::Pattern::new(p).map(|pat| pat.matches(path)).unwrap_or(false)
+            glob::Pattern::new(p)
+                .map(|pat| pat.matches(path))
+                .unwrap_or(false)
         })
     }
 
     fn path_matches_any(path: &str, patterns: &[String]) -> bool {
         patterns.iter().any(|p| {
-            glob::Pattern::new(p).map(|pat| pat.matches(path)).unwrap_or(false)
+            glob::Pattern::new(p)
+                .map(|pat| pat.matches(path))
+                .unwrap_or(false)
         })
     }
 }
@@ -158,7 +176,12 @@ mod tests {
         let c = PatchClassifier::new();
         let result = c.classify(
             &["frontend/src/components/button.tsx".into()],
-            &[], &[], &[], 3, 10, 0,
+            &[],
+            &[],
+            &[],
+            3,
+            10,
+            0,
         );
         assert_eq!(result.risk_level, PatchRiskLevel::Safe);
     }
@@ -166,23 +189,21 @@ mod tests {
     #[test]
     fn test_delete_equivalent_detected() {
         let c = PatchClassifier::new();
-        let result = c.classify(
-            &["src/old_file.rs".into()],
-            &[], &[], &[], 100, 0, 0,
-        );
+        let result = c.classify(&["src/old_file.rs".into()], &[], &[], &[], 100, 0, 0);
         assert_eq!(result.risk_level, PatchRiskLevel::Sensitive);
-        assert!(result.reason_codes.contains(&PatchReasonCode::delete_equivalent_patch()));
+        assert!(result
+            .reason_codes
+            .contains(&PatchReasonCode::delete_equivalent_patch()));
     }
 
     #[test]
     fn test_auth_touch_is_sensitive() {
         let c = PatchClassifier::new();
-        let result = c.classify(
-            &["backend/auth/service.go".into()],
-            &[], &[], &[], 5, 10, 0,
-        );
+        let result = c.classify(&["backend/auth/service.go".into()], &[], &[], &[], 5, 10, 0);
         assert_eq!(result.risk_level, PatchRiskLevel::Sensitive);
-        assert!(result.reason_codes.contains(&PatchReasonCode::touches_auth_logic()));
+        assert!(result
+            .reason_codes
+            .contains(&PatchReasonCode::touches_auth_logic()));
     }
 
     #[test]
@@ -190,7 +211,12 @@ mod tests {
         let c = PatchClassifier::new();
         let result = c.classify(
             &["infra/prod/deploy.yaml".into()],
-            &[], &[], &["infra/prod/**".into()], 1, 1, 0,
+            &[],
+            &[],
+            &["infra/prod/**".into()],
+            1,
+            1,
+            0,
         );
         assert_eq!(result.risk_level, PatchRiskLevel::Reject);
     }

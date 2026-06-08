@@ -1,28 +1,37 @@
+use openforce_proto::swarmos::v1::effect_gateway_server::EffectGatewayServer;
+use sqlx::postgres::PgPoolOptions;
 use std::net::SocketAddr;
 use std::sync::Arc;
-use sqlx::postgres::PgPoolOptions;
 use tonic::transport::Server;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use openforce_proto::swarmos::v1::effect_gateway_server::EffectGatewayServer;
 
-mod store; mod server; mod outbox;
-use store::EffectStore;
-use server::EffectGatewayService;
+mod outbox;
+mod server;
+mod store;
 use outbox::OutboxDispatcher;
+use server::EffectGatewayService;
+use store::EffectStore;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::try_from_default_env()
-            .unwrap_or_else(|_| "effect_gateway=debug,info".into()))
-        .with(tracing_subscriber::fmt::layer()).init();
+        .with(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| "effect_gateway=debug,info".into()),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .init();
 
     let database_url = std::env::var("DATABASE_URL")
         .unwrap_or_else(|_| "postgres://swarmos:swarmos@localhost:5432/swarmos".into());
     let grpc_addr: SocketAddr = std::env::var("GRPC_ADDR")
-        .unwrap_or_else(|_| "0.0.0.0:50054".into()).parse()?;
+        .unwrap_or_else(|_| "0.0.0.0:50054".into())
+        .parse()?;
 
-    let pool = PgPoolOptions::new().max_connections(10).connect(&database_url).await?;
+    let pool = PgPoolOptions::new()
+        .max_connections(10)
+        .connect(&database_url)
+        .await?;
 
     // Ensure tables
     for ddl in &[
@@ -40,23 +49,33 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             status VARCHAR(32) NOT NULL DEFAULT 'pending',
             created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
             dispatched_at TIMESTAMPTZ)",
-    ] { sqlx::query(ddl).execute(&pool).await?; }
+    ] {
+        sqlx::query(ddl).execute(&pool).await?;
+    }
 
     let store = Arc::new(EffectStore::new(pool.clone()));
     let svc = EffectGatewayService { store };
 
     // Spawn outbox dispatcher
     let dispatcher = OutboxDispatcher::new(pool.clone());
-    tokio::spawn(async move { dispatcher.run().await; });
+    tokio::spawn(async move {
+        dispatcher.run().await;
+    });
 
     let (mut hr, health) = tonic_health::server::health_reporter();
-    hr.set_serving::<EffectGatewayServer<EffectGatewayService>>().await;
+    hr.set_serving::<EffectGatewayServer<EffectGatewayService>>()
+        .await;
 
     let reflection = tonic_reflection::server::Builder::configure()
-        .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET).build_v1()?;
+        .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET)
+        .build_v1()?;
 
     tracing::info!("Effect Gateway on {grpc_addr}");
-    Server::builder().add_service(health).add_service(reflection)
-        .add_service(EffectGatewayServer::new(svc)).serve(grpc_addr).await?;
+    Server::builder()
+        .add_service(health)
+        .add_service(reflection)
+        .add_service(EffectGatewayServer::new(svc))
+        .serve(grpc_addr)
+        .await?;
     Ok(())
 }

@@ -1,7 +1,7 @@
-use openforce_llm_client::LlmClient;
+use openforce_domain::session_phase::{PhaseGroup, SessionPhase};
+use openforce_domain::worker_folder::{OutputRef, WorkerOutputFolder, WorkerStatus};
 use openforce_knowledge_base::ClassificationResult;
-use openforce_domain::session_phase::{SessionPhase, PhaseGroup};
-use openforce_domain::worker_folder::{WorkerOutputFolder, WorkerStatus, OutputRef};
+use openforce_llm_client::LlmClient;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -20,15 +20,23 @@ pub struct TaskTree {
 
 #[derive(Debug, Clone)]
 pub struct SmartGoal {
-    pub specific: String, pub measurable: String, pub achievable: String,
-    pub relevant: String, pub time_bound: String,
+    pub specific: String,
+    pub measurable: String,
+    pub achievable: String,
+    pub relevant: String,
+    pub time_bound: String,
 }
 
 #[derive(Debug, Clone)]
 pub struct DecomposedTask {
-    pub role: String, pub title: String, pub objective: String,
-    pub files: Vec<String>, pub steps: Vec<String>,
-    pub acceptance_criteria: Vec<String>, pub dependencies: Vec<String>,
+    pub role: String,
+    pub title: String,
+    pub objective: String,
+    pub files: Vec<String>,
+    pub steps: Vec<String>,
+    pub acceptance_criteria: Vec<String>,
+    pub dependencies: Vec<String>,
+    pub skill: Option<String>,
     pub priority: String,
     pub estimated_cycles: usize,
     pub sketched: bool,
@@ -59,7 +67,10 @@ pub struct InfoQuestion {
 
 // ── Dynamic Analysis Dimensions (Phase-Group-Aware) ──
 
-fn analysis_dimensions(categories: &[String], phase_group: PhaseGroup) -> Vec<(&'static str, &'static str)> {
+fn analysis_dimensions(
+    categories: &[String],
+    phase_group: PhaseGroup,
+) -> Vec<(&'static str, &'static str)> {
     let mut dims = Vec::new();
     match phase_group {
         PhaseGroup::Design => {
@@ -78,14 +89,20 @@ fn analysis_dimensions(categories: &[String], phase_group: PhaseGroup) -> Vec<(&
                         dims.push(("data_integrity", "Data integrity, migrations & consistency"));
                     }
                     "security" | "auth" => {
-                        dims.push(("security_review", "Authentication, authorization & threat model"));
+                        dims.push((
+                            "security_review",
+                            "Authentication, authorization & threat model",
+                        ));
                     }
                     _ => {}
                 }
             }
         }
         PhaseGroup::Implementation => {
-            dims.push(("implementation", "Implementation approach & coding strategy"));
+            dims.push((
+                "implementation",
+                "Implementation approach & coding strategy",
+            ));
             dims.push(("test_strategy", "Test coverage, E2E flows & edge cases"));
             for cat in categories {
                 match cat.as_str() {
@@ -131,13 +148,20 @@ fn analysis_dimensions(categories: &[String], phase_group: PhaseGroup) -> Vec<(&
 
 #[derive(Debug, Deserialize)]
 struct FolderSummary {
-    #[serde(default)] one_line_summary: String,
-    #[serde(default)] key_findings: Vec<String>,
+    #[serde(default)]
+    one_line_summary: String,
+    #[serde(default)]
+    key_findings: Vec<String>,
 }
 
 async fn summarize_with_llm(
-    llm: &LlmClient, worker_id: &str, role: &str, title: &str,
-    task_objective: Option<&str>, output_text: &str, success: bool,
+    llm: &LlmClient,
+    worker_id: &str,
+    role: &str,
+    title: &str,
+    task_objective: Option<&str>,
+    output_text: &str,
+    success: bool,
 ) -> Result<FolderSummary, String> {
     let success_str = if success { "success" } else { "failed" };
     let objective = task_objective.unwrap_or("(unspecified)");
@@ -152,9 +176,19 @@ async fn summarize_with_llm(
          3. matches_objective: whether output aligns with assigned objective (true/false)\n\n\
          JSON only: {{\"one_line_summary\":\"...\",\"key_findings\":[\"...\"],\"matches_objective\":bool}}"
     );
-    let (json, _) = llm.chat("You are a result summarizer. Extract key information from worker output. JSON only.", &prompt).await
+    let (json, _) = llm
+        .chat(
+            "You are a result summarizer. Extract key information from worker output. JSON only.",
+            &prompt,
+        )
+        .await
         .map_err(|e| format!("summarize llm: {e}"))?;
-    let cleaned = json.trim().trim_start_matches("```json").trim_start_matches("```").trim_end_matches("```").trim();
+    let cleaned = json
+        .trim()
+        .trim_start_matches("```json")
+        .trim_start_matches("```")
+        .trim_end_matches("```")
+        .trim();
     serde_json::from_str(cleaned).map_err(|e| format!("parse summary: {e} | JSON: {cleaned:.200}"))
 }
 
@@ -164,8 +198,14 @@ fn read_folder_metadata(output_path: &str) -> (usize, usize, Vec<String>, String
         if let Ok(v) = serde_json::from_str::<serde_json::Value>(&s) {
             done = v["subtasks_completed"].as_u64().unwrap_or(0) as usize;
             total = v["subtasks_total"].as_u64().unwrap_or(0) as usize;
-            findings = v["memory_snapshot"]["key_findings"].as_array()
-                .map(|a| a.iter().filter_map(|f| f.as_str().map(String::from)).take(5).collect())
+            findings = v["memory_snapshot"]["key_findings"]
+                .as_array()
+                .map(|a| {
+                    a.iter()
+                        .filter_map(|f| f.as_str().map(String::from))
+                        .take(5)
+                        .collect()
+                })
                 .unwrap_or_default();
             output = v["output"].as_str().unwrap_or("").to_string();
         }
@@ -174,36 +214,65 @@ fn read_folder_metadata(output_path: &str) -> (usize, usize, Vec<String>, String
 }
 
 fn fallback_one_liner(text: &str, done: usize, total: usize) -> String {
-    text.lines().map(|l| l.trim())
-        .filter(|l| !l.is_empty() && l.len() > 5
-            && !l.starts_with('#') && !l.starts_with("---")
-            && !l.starts_with("===") && !l.starts_with("Error:")
-            && !l.starts_with("|") && !l.starts_with("```"))
+    text.lines()
+        .map(|l| l.trim())
+        .filter(|l| {
+            !l.is_empty()
+                && l.len() > 5
+                && !l.starts_with('#')
+                && !l.starts_with("---")
+                && !l.starts_with("===")
+                && !l.starts_with("Error:")
+                && !l.starts_with("|")
+                && !l.starts_with("```")
+        })
         .next()
         .map(|l| truncate_str(l, 120))
         .unwrap_or_else(|| format!("Completed {done}/{total} subtasks"))
 }
 
 fn truncate_str(s: &str, max: usize) -> String {
-    if s.len() <= max { return s.to_string(); }
+    if s.len() <= max {
+        return s.to_string();
+    }
     let end = s.char_indices().nth(max).map(|(i, _)| i).unwrap_or(s.len());
     format!("{}...", &s[..end])
 }
 
 pub async fn summarize_worker_output_from_file(
-    llm: &LlmClient, worker_id: &str, role: &str, title: &str,
-    task_objective: Option<&str>, output_path: &str,
-    success: bool, action: &str, cycles: usize,
+    llm: &LlmClient,
+    worker_id: &str,
+    role: &str,
+    title: &str,
+    task_objective: Option<&str>,
+    output_path: &str,
+    success: bool,
+    action: &str,
+    cycles: usize,
 ) -> WorkerOutputFolder {
     let (done, total, file_findings, output_text) = read_folder_metadata(output_path);
     let (one_liner, key_notes) = match summarize_with_llm(
-        llm, worker_id, role, title, task_objective, &output_text, success,
-    ).await {
+        llm,
+        worker_id,
+        role,
+        title,
+        task_objective,
+        &output_text,
+        success,
+    )
+    .await
+    {
         Ok(s) => {
             let line = if s.one_line_summary.is_empty() {
                 fallback_one_liner(&output_text, done, total)
-            } else { truncate_str(&s.one_line_summary, 120) };
-            let notes = if s.key_findings.is_empty() { file_findings } else { s.key_findings };
+            } else {
+                truncate_str(&s.one_line_summary, 120)
+            };
+            let notes = if s.key_findings.is_empty() {
+                file_findings
+            } else {
+                s.key_findings
+            };
             (line, notes)
         }
         Err(e) => {
@@ -212,26 +281,47 @@ pub async fn summarize_worker_output_from_file(
         }
     };
     WorkerOutputFolder {
-        worker_id: worker_id.to_string(), role: role.to_string(), title: title.to_string(),
+        worker_id: worker_id.to_string(),
+        role: role.to_string(),
+        title: title.to_string(),
         status: WorkerStatus::from_status_and_action(success, action),
-        one_liner, key_notes,
+        one_liner,
+        key_notes,
         output_ref: OutputRef::file(output_path),
-        subtasks_done: done, subtasks_total: total, cycles,
+        subtasks_done: done,
+        subtasks_total: total,
+        cycles,
     }
 }
 
 pub async fn summarize_worker_output_from_text(
-    llm: &LlmClient, worker_id: &str, role: &str, title: &str,
-    task_objective: Option<&str>, output_text: &str,
-    success: bool, action: &str, cycles: usize,
+    llm: &LlmClient,
+    worker_id: &str,
+    role: &str,
+    title: &str,
+    task_objective: Option<&str>,
+    output_text: &str,
+    success: bool,
+    action: &str,
+    cycles: usize,
 ) -> WorkerOutputFolder {
     let (one_liner, key_notes) = match summarize_with_llm(
-        llm, worker_id, role, title, task_objective, output_text, success,
-    ).await {
+        llm,
+        worker_id,
+        role,
+        title,
+        task_objective,
+        output_text,
+        success,
+    )
+    .await
+    {
         Ok(s) => {
             let line = if s.one_line_summary.is_empty() {
                 fallback_one_liner(output_text, 0, 0)
-            } else { truncate_str(&s.one_line_summary, 120) };
+            } else {
+                truncate_str(&s.one_line_summary, 120)
+            };
             (line, s.key_findings)
         }
         Err(e) => {
@@ -240,11 +330,16 @@ pub async fn summarize_worker_output_from_text(
         }
     };
     WorkerOutputFolder {
-        worker_id: worker_id.to_string(), role: role.to_string(), title: title.to_string(),
+        worker_id: worker_id.to_string(),
+        role: role.to_string(),
+        title: title.to_string(),
         status: WorkerStatus::from_status_and_action(success, action),
-        one_liner, key_notes,
+        one_liner,
+        key_notes,
         output_ref: OutputRef::file(""),
-        subtasks_done: 0, subtasks_total: 0, cycles,
+        subtasks_done: 0,
+        subtasks_total: 0,
+        cycles,
     }
 }
 
@@ -255,13 +350,16 @@ pub async fn expand_folder(
 ) -> Result<String, String> {
     match &folder.output_ref {
         OutputRef::File(path) if !path.is_empty() => {
-            let json_str = std::fs::read_to_string(path)
-                .map_err(|e| format!("read file {path}: {e}"))?;
-            let v: serde_json::Value = serde_json::from_str(&json_str)
-                .map_err(|e| format!("parse json: {e}"))?;
+            let json_str =
+                std::fs::read_to_string(path).map_err(|e| format!("read file {path}: {e}"))?;
+            let v: serde_json::Value =
+                serde_json::from_str(&json_str).map_err(|e| format!("parse json: {e}"))?;
             Ok(v["output"].as_str().unwrap_or("(no output)").to_string())
         }
-        OutputRef::Redis { session_id, worker_id } => match redis_store {
+        OutputRef::Redis {
+            session_id,
+            worker_id,
+        } => match redis_store {
             Some(store) => {
                 let sid = uuid::Uuid::parse_str(session_id)
                     .map_err(|e| format!("parse session_id: {e}"))?;
@@ -279,25 +377,45 @@ pub async fn expand_folder(
 // ── RoundTable: Phase-Aware Progressive Planning ──
 
 pub async fn pre_plan_clarify(
-    planner: &LlmClient, task: &str,
+    planner: &LlmClient,
+    task: &str,
 ) -> Result<Vec<InfoQuestion>, String> {
     let prompt = format!(
         "分析以下任务，判断信息是否充足。如果缺少关键信息导致无法准确规划，列出需要用户澄清的问题。\n\n任务: {task}\n\n\
          输出JSON: {{\"sufficient\":true|false,\"questions\":[{{\"question\":\"...\",\"options\":[\"A\",\"B\"]}}]}}\n\
          如果信息充足，返回 sufficient:true, questions:[]。仅JSON。"
     );
-    let (json, _) = planner.chat("你是需求分析师。判断信息是否充足。", &prompt).await
+    let (json, _) = planner
+        .chat("你是需求分析师。判断信息是否充足。", &prompt)
+        .await
         .map_err(|e| format!("clarify: {e}"))?;
-    let cleaned = json.trim().trim_start_matches("```json").trim_start_matches("```").trim_end_matches("```").trim();
-    #[derive(Deserialize)] struct C { #[serde(default)] sufficient: bool, #[serde(default)] questions: Vec<InfoQuestion> }
-    let c: C = serde_json::from_str(cleaned).unwrap_or(C { sufficient: true, questions: vec![] });
+    let cleaned = json
+        .trim()
+        .trim_start_matches("```json")
+        .trim_start_matches("```")
+        .trim_end_matches("```")
+        .trim();
+    #[derive(Deserialize)]
+    struct C {
+        #[serde(default)]
+        sufficient: bool,
+        #[serde(default)]
+        questions: Vec<InfoQuestion>,
+    }
+    let c: C = serde_json::from_str(cleaned).unwrap_or(C {
+        sufficient: true,
+        questions: vec![],
+    });
     Ok(if c.sufficient { vec![] } else { c.questions })
 }
 
 pub async fn replan_failed(
-    planner: &LlmClient, original_task: &str,
-    failed_summary: &str, agent_catalog: &str,
-    skills_dir: &str, dir_summary: &str,
+    planner: &LlmClient,
+    original_task: &str,
+    failed_summary: &str,
+    agent_catalog: &str,
+    skills_dir: &str,
+    dir_summary: &str,
     folders: &[WorkerOutputFolder],
 ) -> Result<TaskTree, String> {
     let skill_runner = crate::skill_runner::SkillRunner::discover(skills_dir);
@@ -309,45 +427,75 @@ pub async fn replan_failed(
          分析根因，重新分解失败的任务。输出JSON:\n\
          {{\"goal\":{{...}},\"tasks\":[{{\"role\":\"EXACT agent name\",\"title\":\"...\",\
          \"objective\":\"...\",\"acceptance_criteria\":[\"可量化指标\"],\
-         \"dependencies\":[\"其他任务title\"],\"priority\":\"high|medium|low\"}}],\
+         \"dependencies\":[\"其他任务title\"],\"skill\":\"skill-name-or-null\",\
+         \"priority\":\"high|medium|low\"}}],\
          \"mece_validated\":true,\"confidence\":\"high|medium|low\"}}",
         task=original_task, agents=agent_catalog, dir=dir_summary,
         skills=skill_runner.skill_summary(), failed=failed_summary,
         folders=folder_context,
     );
-    let (json, _) = planner.chat("你是 Planner。分析失败原因并重新规划。仅输出JSON。", &prompt).await
+    let (json, _) = planner
+        .chat(
+            "你是 Planner。分析失败原因并重新规划。仅输出JSON。",
+            &prompt,
+        )
+        .await
         .map_err(|e| format!("replan: {e}"))?;
     parse_task_tree(&json)
 }
 
 #[allow(dead_code)]
 pub async fn run_roundtable(
-    planner: &LlmClient, task: &str,
+    planner: &LlmClient,
+    task: &str,
     classification: &ClassificationResult,
-    _available_roles: &[String], agent_catalog: &str,
-    skills_dir: &str, dir_summary: &str,
+    _available_roles: &[String],
+    agent_catalog: &str,
+    skills_dir: &str,
+    dir_summary: &str,
 ) -> Result<TaskTree, String> {
-    run_roundtable_phased(planner, task, classification, _available_roles, agent_catalog, skills_dir, dir_summary, None, &[]).await
+    run_roundtable_phased(
+        planner,
+        task,
+        classification,
+        _available_roles,
+        agent_catalog,
+        skills_dir,
+        dir_summary,
+        None,
+        &[],
+    )
+    .await
 }
 
 pub async fn run_roundtable_phased(
-    planner: &LlmClient, task: &str,
+    planner: &LlmClient,
+    task: &str,
     classification: &ClassificationResult,
-    _available_roles: &[String], agent_catalog: &str,
-    skills_dir: &str, dir_summary: &str,
+    _available_roles: &[String],
+    agent_catalog: &str,
+    skills_dir: &str,
+    dir_summary: &str,
     current_phase: Option<&SessionPhase>,
     previous_folders: &[WorkerOutputFolder],
 ) -> Result<TaskTree, String> {
     let skill_runner = crate::skill_runner::SkillRunner::discover(skills_dir);
     let skill_summary = if skill_runner.has_skills() {
         format!("Available Skills:\n{}", skill_runner.skill_summary())
-    } else { String::new() };
+    } else {
+        String::new()
+    };
     let previous_context = WorkerOutputFolder::format_for_prompt(previous_folders);
     let mut needs_info: Vec<String> = vec![];
 
     let pg = current_phase.map(|p| p.phase_group());
-    let dimensions = analysis_dimensions(&classification.categories, pg.unwrap_or(PhaseGroup::Design));
-    eprintln!("  Phase group: {:?}, dimensions: {}", pg.unwrap_or(PhaseGroup::Design).as_str(), dimensions.len());
+    let dimensions =
+        analysis_dimensions(&classification.categories, pg.unwrap_or(PhaseGroup::Design));
+    eprintln!(
+        "  Phase group: {:?}, dimensions: {}",
+        pg.unwrap_or(PhaseGroup::Design).as_str(),
+        dimensions.len()
+    );
 
     let phase_instruction = match pg {
         Some(PhaseGroup::Design) => format!(
@@ -374,16 +522,23 @@ pub async fn run_roundtable_phased(
     };
 
     let mut proposals: HashMap<String, String> = HashMap::new();
-    let owned_dims: Vec<(String, String)> = dimensions.iter()
-        .map(|(a, b)| (a.to_string(), b.to_string())).collect();
+    let owned_dims: Vec<(String, String)> = dimensions
+        .iter()
+        .map(|(a, b)| (a.to_string(), b.to_string()))
+        .collect();
 
-    eprintln!("  Round 1/3: {} analysis dimensions in {} parallel chunks...", owned_dims.len(), (owned_dims.len() + 2) / 3);
+    eprintln!(
+        "  Round 1/3: {} analysis dimensions in {} parallel chunks...",
+        owned_dims.len(),
+        (owned_dims.len() + 2) / 3
+    );
     for chunk in owned_dims.chunks(3) {
         let mut futures = Vec::new();
         for (dim_key, dim_desc) in chunk.to_vec() {
             let base = format!(
                 "{phase_instruction}\n\n{previous}\n你是{dim_desc}专家。\n\n任务: {task}\n{agents}\n项目结构:\n{dir}\n{skills}\n\n\
-                 从{dim_desc}维度 MECE 分解。同一角色可有多个并行Worker。子任务从 <available_agents> 指定 EXACT agent name。标注: [需询问用户: ...] [需网络检索: ...]。",
+                 从{dim_desc}维度 MECE 分解。同一角色可有多个并行Worker。子任务从 <available_agents> 指定 EXACT agent name。\
+                 如果某个子任务明显适合 Available Skills 中的技能，标注推荐 skill 名称；否则为 null。标注: [需询问用户: ...] [需网络检索: ...]。",
                 phase_instruction = phase_instruction, previous = previous_context,
                 dim_desc = dim_desc, agents = agent_catalog, dir = dir_summary, skills = skill_summary
             );
@@ -398,15 +553,20 @@ pub async fn run_roundtable_phased(
             }));
         }
         for f in futures {
-            if let Ok((k, v)) = f.await { proposals.insert(k, v); }
+            if let Ok((k, v)) = f.await {
+                proposals.insert(k, v);
+            }
         }
     }
-    if proposals.is_empty() { return Err("RoundTable: all proposals failed".into()); }
+    if proposals.is_empty() {
+        return Err("RoundTable: all proposals failed".into());
+    }
 
     for text in proposals.values() {
         for line in text.lines() {
             let t = line.trim();
-            if t.contains("[需询问用户:") || t.contains("[需网络检索:") || t.contains("[QUESTION:") {
+            if t.contains("[需询问用户:") || t.contains("[需网络检索:") || t.contains("[QUESTION:")
+            {
                 needs_info.push(t.to_string());
             }
         }
@@ -415,15 +575,22 @@ pub async fn run_roundtable_phased(
     let mut search_results = String::new();
     for info in &needs_info {
         if info.contains("[需网络检索:") {
-            if let Some(q) = info.split("[需网络检索:").nth(1).and_then(|s| s.split(']').next()) {
+            if let Some(q) = info
+                .split("[需网络检索:")
+                .nth(1)
+                .and_then(|s| s.split(']').next())
+            {
                 let result = skill_runner.resolve_search(q).await;
                 search_results.push_str(&format!("\nSearch '{q}':\n{result}\n"));
             }
         }
     }
 
-    let proposals_text: String = proposals.iter()
-        .map(|(k, v)| format!("\n=== {k} ===\n{v}\n")).collect::<Vec<_>>().join("\n");
+    let proposals_text: String = proposals
+        .iter()
+        .map(|(k, v)| format!("\n=== {k} ===\n{v}\n"))
+        .collect::<Vec<_>>()
+        .join("\n");
 
     eprintln!("  Round 2/3: Cross-review...");
     let review_prompt = format!(
@@ -435,8 +602,10 @@ pub async fn run_roundtable_phased(
         g = needs_info.iter().take(10).map(|s| s.as_str()).collect::<Vec<_>>().join("\n"),
         s = search_results
     );
-    let (review_text, _) = planner.chat("你是资深审查员。交叉验证各维度方案。", &review_prompt)
-        .await.map_err(|e| format!("cross-review: {e}"))?;
+    let (review_text, _) = planner
+        .chat("你是资深审查员。交叉验证各维度方案。", &review_prompt)
+        .await
+        .map_err(|e| format!("cross-review: {e}"))?;
 
     eprintln!("  Round 3/3: Final synthesis...");
     let synth_prompt = format!(
@@ -447,14 +616,17 @@ pub async fn run_roundtable_phased(
          \"data_sources\":[\"路径\"],\
          \"tasks\":[{{\"role\":\"EXACT agent name\",\"title\":\"标题\",\"objective\":\"目标\",\
          \"files\":[\"文件\"],\"steps\":[\"步骤\"],\"acceptance_criteria\":[\"可量化指标\"],\
-         \"dependencies\":[\"其他任务title\"],\"priority\":\"high|medium|low\",\"estimated_cycles\":数字}}],\
+         \"dependencies\":[\"其他任务title\"],\"skill\":\"匹配的skill名称或null\",\
+         \"priority\":\"high|medium|low\",\"estimated_cycles\":数字}}],\
          \"mece_validated\":true,\"confidence\":\"high|medium|low\",\
          \"plan_steps\":[{{\"phase\":\"阶段\",\"description\":\"描述\",\"tasks\":[\"任务title\"],\
          \"phase_group\":\"design|implementation|report\"}}]}}",
         phase_instruction = phase_instruction, agents = agent_catalog, review = review_text
     );
-    let (final_json, _) = planner.chat("你是决策者。仅输出JSON。", &synth_prompt)
-        .await.map_err(|e| format!("synthesize: {e}"))?;
+    let (final_json, _) = planner
+        .chat("你是决策者。仅输出JSON。", &synth_prompt)
+        .await
+        .map_err(|e| format!("synthesize: {e}"))?;
 
     let mut tree = parse_task_tree(&final_json)?;
     tree.needs_info = needs_info;
@@ -473,7 +645,9 @@ pub async fn run_roundtable_phased(
         Some(PhaseGroup::Implementation) | Some(PhaseGroup::Report) => {
             if has_sketched {
                 eprintln!("  [Planner] warning: forcing sketched=false in concrete phase");
-                for t in &mut tree.tasks { t.sketched = false; }
+                for t in &mut tree.tasks {
+                    t.sketched = false;
+                }
             }
         }
         None => {}
@@ -490,15 +664,32 @@ pub fn extract_questions(needs_info: &[String]) -> Vec<InfoQuestion> {
     for info in needs_info {
         let t = info.trim();
         if t.contains("[需询问用户:") {
-            if let Some(q) = t.split("[需询问用户:").nth(1).and_then(|s| s.split(']').next()) {
-                questions.push(InfoQuestion { question: q.trim().to_string(), category: "user_intent".into(), options: vec![] });
+            if let Some(q) = t
+                .split("[需询问用户:")
+                .nth(1)
+                .and_then(|s| s.split(']').next())
+            {
+                questions.push(InfoQuestion {
+                    question: q.trim().to_string(),
+                    category: "user_intent".into(),
+                    options: vec![],
+                });
             }
         }
         if t.contains("[需确认:") || t.contains("[QUESTION:") {
-            let q_text = t.split("[需确认:").nth(1).or_else(|| t.split("[QUESTION:").nth(1))
-                .and_then(|s| s.split(']').next()).unwrap_or("").trim();
+            let q_text = t
+                .split("[需确认:")
+                .nth(1)
+                .or_else(|| t.split("[QUESTION:").nth(1))
+                .and_then(|s| s.split(']').next())
+                .unwrap_or("")
+                .trim();
             if !q_text.is_empty() {
-                questions.push(InfoQuestion { question: q_text.to_string(), category: "architecture".into(), options: vec![] });
+                questions.push(InfoQuestion {
+                    question: q_text.to_string(),
+                    category: "architecture".into(),
+                    options: vec![],
+                });
             }
         }
     }
@@ -507,12 +698,37 @@ pub fn extract_questions(needs_info: &[String]) -> Vec<InfoQuestion> {
 
 #[allow(dead_code)]
 pub fn check_plan_mode_tool(tool_name: &str, args: &str) -> Option<String> {
-    let readonly_tools = &["read_file", "grep", "glob", "web_search", "fetch", "list_files", "read", "find"];
-    if readonly_tools.iter().any(|t| tool_name.contains(t)) { return None; }
+    let readonly_tools = &[
+        "read_file",
+        "grep",
+        "glob",
+        "web_search",
+        "fetch",
+        "list_files",
+        "read",
+        "find",
+    ];
+    if readonly_tools.iter().any(|t| tool_name.contains(t)) {
+        return None;
+    }
     let destructive = &[
-        "rm ", "mv ", "cp ", "mkdir", "touch", "npm install", "pip install",
-        "git add", "git commit", "git push", "sudo ", "kill ", "chmod",
-        "delete", "remove", "drop ", "truncate",
+        "rm ",
+        "mv ",
+        "cp ",
+        "mkdir",
+        "touch",
+        "npm install",
+        "pip install",
+        "git add",
+        "git commit",
+        "git push",
+        "sudo ",
+        "kill ",
+        "chmod",
+        "delete",
+        "remove",
+        "drop ",
+        "truncate",
     ];
     for p in destructive {
         if tool_name.contains(p) || args.to_lowercase().contains(p) {
@@ -520,35 +736,165 @@ pub fn check_plan_mode_tool(tool_name: &str, args: &str) -> Option<String> {
         }
     }
     if tool_name == "shell_exec" || tool_name == "bash" {
-        let safe = &["cat ", "head ", "tail ", "grep ", "find ", "ls ", "pwd ", "wc ",
-            "sort ", "uniq ", "diff ", "file ", "which ", "git status", "git log", "git diff"];
-        if safe.iter().any(|p| args.trim().starts_with(p)) { return None; }
+        let safe = &[
+            "cat ",
+            "head ",
+            "tail ",
+            "grep ",
+            "find ",
+            "ls ",
+            "pwd ",
+            "wc ",
+            "sort ",
+            "uniq ",
+            "diff ",
+            "file ",
+            "which ",
+            "git status",
+            "git log",
+            "git diff",
+        ];
+        if safe.iter().any(|p| args.trim().starts_with(p)) {
+            return None;
+        }
         return Some(format!("Plan Mode: shell may modify state"));
     }
-    Some(format!("Plan Mode: '{tool_name}' not in read-only allowlist"))
+    Some(format!(
+        "Plan Mode: '{tool_name}' not in read-only allowlist"
+    ))
 }
 
 fn parse_task_tree(json_str: &str) -> Result<TaskTree, String> {
-    let json = json_str.trim().trim_start_matches("```json").trim_start_matches("```").trim_end_matches("```").trim();
-    #[derive(Deserialize)] struct R { goal: G, #[serde(default)] data_sources: Vec<String>, tasks: Vec<T>, #[serde(default)] mece_validated: bool, #[serde(default)] confidence: String, #[serde(default)] plan_steps: Vec<S> }
-    #[derive(Deserialize)] struct G { #[serde(default)] specific: String, #[serde(default)] measurable: String, #[serde(default)] achievable: String, #[serde(default)] relevant: String, #[serde(default)] time_bound: String }
-    #[derive(Deserialize)] struct T { #[serde(default)] role: String, #[serde(default)] title: String, #[serde(default)] objective: String, #[serde(default)] files: Vec<String>, #[serde(default)] steps: Vec<String>, #[serde(default)] acceptance_criteria: Vec<String>, #[serde(default)] dependencies: Vec<String>, #[serde(default)] priority: String, #[serde(default)] estimated_cycles: usize, #[serde(default)] sketched: bool }
-    #[derive(Deserialize)] struct S { #[serde(default)] phase: String, #[serde(default)] description: String, #[serde(default)] tasks: Vec<String>, #[serde(default)] phase_group: String }
+    let json = json_str
+        .trim()
+        .trim_start_matches("```json")
+        .trim_start_matches("```")
+        .trim_end_matches("```")
+        .trim();
+    #[derive(Deserialize)]
+    struct R {
+        goal: G,
+        #[serde(default)]
+        data_sources: Vec<String>,
+        tasks: Vec<T>,
+        #[serde(default)]
+        mece_validated: bool,
+        #[serde(default)]
+        confidence: String,
+        #[serde(default)]
+        plan_steps: Vec<S>,
+    }
+    #[derive(Deserialize)]
+    struct G {
+        #[serde(default)]
+        specific: String,
+        #[serde(default)]
+        measurable: String,
+        #[serde(default)]
+        achievable: String,
+        #[serde(default)]
+        relevant: String,
+        #[serde(default)]
+        time_bound: String,
+    }
+    #[derive(Deserialize)]
+    struct T {
+        #[serde(default)]
+        role: String,
+        #[serde(default)]
+        title: String,
+        #[serde(default)]
+        objective: String,
+        #[serde(default)]
+        files: Vec<String>,
+        #[serde(default)]
+        steps: Vec<String>,
+        #[serde(default)]
+        acceptance_criteria: Vec<String>,
+        #[serde(default)]
+        dependencies: Vec<String>,
+        #[serde(default)]
+        skill: Option<String>,
+        #[serde(default)]
+        priority: String,
+        #[serde(default)]
+        estimated_cycles: usize,
+        #[serde(default)]
+        sketched: bool,
+    }
+    #[derive(Deserialize)]
+    struct S {
+        #[serde(default)]
+        phase: String,
+        #[serde(default)]
+        description: String,
+        #[serde(default)]
+        tasks: Vec<String>,
+        #[serde(default)]
+        phase_group: String,
+    }
     let r: R = serde_json::from_str(json).map_err(|e| format!("parse: {e} | JSON: {json:.300}"))?;
     Ok(TaskTree {
-        goal: SmartGoal { specific: r.goal.specific, measurable: r.goal.measurable, achievable: r.goal.achievable, relevant: r.goal.relevant, time_bound: r.goal.time_bound },
+        goal: SmartGoal {
+            specific: r.goal.specific,
+            measurable: r.goal.measurable,
+            achievable: r.goal.achievable,
+            relevant: r.goal.relevant,
+            time_bound: r.goal.time_bound,
+        },
         data_sources: r.data_sources,
-        tasks: r.tasks.into_iter().map(|t| DecomposedTask {
-            role: t.role, title: t.title, objective: t.objective, files: t.files, steps: t.steps,
-            acceptance_criteria: t.acceptance_criteria, dependencies: t.dependencies,
-            priority: if t.priority.is_empty() { "medium".into() } else { t.priority },
-            estimated_cycles: if t.estimated_cycles == 0 { 5 } else { t.estimated_cycles },
-            sketched: t.sketched,
-        }).collect(),
+        tasks: r
+            .tasks
+            .into_iter()
+            .map(|t| DecomposedTask {
+                role: t.role,
+                title: t.title,
+                objective: t.objective,
+                files: t.files,
+                steps: t.steps,
+                acceptance_criteria: t.acceptance_criteria,
+                dependencies: t.dependencies,
+                skill: t.skill.and_then(|s| {
+                    let skill = s.trim();
+                    if skill.is_empty()
+                        || skill.eq_ignore_ascii_case("null")
+                        || skill.eq_ignore_ascii_case("none")
+                    {
+                        None
+                    } else {
+                        Some(skill.to_string())
+                    }
+                }),
+                priority: if t.priority.is_empty() {
+                    "medium".into()
+                } else {
+                    t.priority
+                },
+                estimated_cycles: if t.estimated_cycles == 0 {
+                    5
+                } else {
+                    t.estimated_cycles
+                },
+                sketched: t.sketched,
+            })
+            .collect(),
         mece_validated: r.mece_validated,
-        confidence: if r.confidence.is_empty() { "medium".into() } else { r.confidence },
+        confidence: if r.confidence.is_empty() {
+            "medium".into()
+        } else {
+            r.confidence
+        },
         needs_info: vec![],
-        plan_steps: r.plan_steps.into_iter().map(|s| PlanStep { phase: s.phase, description: s.description, tasks: s.tasks, phase_group: s.phase_group }).collect(),
+        plan_steps: r
+            .plan_steps
+            .into_iter()
+            .map(|s| PlanStep {
+                phase: s.phase,
+                description: s.description,
+                tasks: s.tasks,
+                phase_group: s.phase_group,
+            })
+            .collect(),
     })
 }
 
@@ -574,7 +920,10 @@ mod tests {
 
     #[test]
     fn test_analysis_dimensions_impl_group() {
-        let dims = analysis_dimensions(&["backend".into(), "testing".into()], PhaseGroup::Implementation);
+        let dims = analysis_dimensions(
+            &["backend".into(), "testing".into()],
+            PhaseGroup::Implementation,
+        );
         assert!(dims.iter().any(|(k, _)| *k == "implementation"));
         assert!(dims.iter().any(|(k, _)| *k == "test_strategy"));
         assert!(!dims.iter().any(|(k, _)| *k == "architecture"));
@@ -583,14 +932,20 @@ mod tests {
 
     #[test]
     fn test_analysis_dimensions_impl_with_devops() {
-        let dims = analysis_dimensions(&["devops".into(), "deployment".into()], PhaseGroup::Implementation);
+        let dims = analysis_dimensions(
+            &["devops".into(), "deployment".into()],
+            PhaseGroup::Implementation,
+        );
         assert!(dims.iter().any(|(k, _)| *k == "deployment"));
         assert!(dims.iter().any(|(k, _)| *k == "monitoring"));
     }
 
     #[test]
     fn test_analysis_dimensions_impl_with_storage() {
-        let dims = analysis_dimensions(&["database".into(), "storage".into()], PhaseGroup::Implementation);
+        let dims = analysis_dimensions(
+            &["database".into(), "storage".into()],
+            PhaseGroup::Implementation,
+        );
         assert!(dims.iter().any(|(k, _)| *k == "data_integrity"));
         assert!(dims.iter().any(|(k, _)| *k == "query_performance"));
     }
@@ -644,7 +999,8 @@ mod tests {
 
     #[test]
     fn test_folder_summary_deserialization() {
-        let json = r#"{"one_line_summary":"All 4 AC passed","key_findings":["AC met","Output matches"]}"#;
+        let json =
+            r#"{"one_line_summary":"All 4 AC passed","key_findings":["AC met","Output matches"]}"#;
         let s: FolderSummary = serde_json::from_str(json).expect("should parse");
         assert_eq!(s.one_line_summary, "All 4 AC passed");
         assert_eq!(s.key_findings.len(), 2);

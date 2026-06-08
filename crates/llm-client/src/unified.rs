@@ -1,7 +1,7 @@
-use anyhow::Result;
 use crate::anthropic::AnthropicClient;
 use crate::openai::OpenAiClient;
 use crate::tool::{Tool, ToolChatResponse, ToolResult};
+use anyhow::Result;
 
 #[derive(Clone)]
 pub enum LlmClient {
@@ -47,22 +47,37 @@ impl LlmClient {
     }
 
     pub async fn chat_with_tools(
-        &self, system: &str, messages: &[ToolMessage], tools: &[Tool],
+        &self,
+        system: &str,
+        messages: &[ToolMessage],
+        tools: &[Tool],
     ) -> Result<ToolChatResponse> {
         match self {
-            Self::Anthropic(c) => c.chat_with_tools(system, &convert_anthropic(messages), tools).await,
-            Self::OpenAI(c) => c.chat_with_tools(system, &convert_openai(messages), tools).await,
+            Self::Anthropic(c) => {
+                c.chat_with_tools(system, &convert_anthropic(messages), tools)
+                    .await
+            }
+            Self::OpenAI(c) => {
+                c.chat_with_tools(system, &convert_openai(messages), tools)
+                    .await
+            }
         }
     }
 
     pub fn build_tool_results(
-        &self, _calls: &[crate::tool::ToolCall], results: &[ToolResult],
+        &self,
+        _calls: &[crate::tool::ToolCall],
+        results: &[ToolResult],
     ) -> Vec<ToolMessage> {
         vec![ToolMessage::tool_results(results)]
     }
 
-    pub fn is_anthropic(&self) -> bool { matches!(self, Self::Anthropic(_)) }
-    pub fn is_openai(&self) -> bool { matches!(self, Self::OpenAI(_)) }
+    pub fn is_anthropic(&self) -> bool {
+        matches!(self, Self::Anthropic(_))
+    }
+    pub fn is_openai(&self) -> bool {
+        matches!(self, Self::OpenAI(_))
+    }
 }
 
 /// Unified tool-calling message with role tracking for multi-turn conversations.
@@ -77,15 +92,33 @@ pub struct ToolMessage {
 
 impl ToolMessage {
     pub fn user(content: &str) -> Self {
-        Self { role: "user".into(), content: content.into(), tool_calls: None, tool_results: None, tool_call_id: None }
+        Self {
+            role: "user".into(),
+            content: content.into(),
+            tool_calls: None,
+            tool_results: None,
+            tool_call_id: None,
+        }
     }
 
     pub fn assistant_with_tools(content: &str, calls: &[crate::tool::ToolCall]) -> Self {
-        Self { role: "assistant".into(), content: content.into(), tool_calls: Some(calls.to_vec()), tool_results: None, tool_call_id: None }
+        Self {
+            role: "assistant".into(),
+            content: content.into(),
+            tool_calls: Some(calls.to_vec()),
+            tool_results: None,
+            tool_call_id: None,
+        }
     }
 
     pub fn tool_results(results: &[crate::tool::ToolResult]) -> Self {
-        Self { role: "user".into(), content: String::new(), tool_calls: None, tool_results: Some(results.to_vec()), tool_call_id: None }
+        Self {
+            role: "user".into(),
+            content: String::new(),
+            tool_calls: None,
+            tool_results: Some(results.to_vec()),
+            tool_call_id: None,
+        }
     }
 }
 

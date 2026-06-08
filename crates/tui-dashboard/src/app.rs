@@ -1,25 +1,27 @@
 use crossterm::event::{Event, KeyCode, KeyEventKind};
+use openforce_proto::swarmos::v1::{
+    ApproveApprovalRequestRequest, CancelTaskRequest, CompilePlanRequest, LeaseTaskRequest,
+    RejectApprovalRequestRequest,
+};
 use ratatui::{
     layout::{Constraint, Direction, Layout},
     Frame,
 };
 use std::time::{Duration, Instant};
 use uuid::Uuid;
-use openforce_proto::swarmos::v1::{
-    
-    
-    CompilePlanRequest, CancelTaskRequest, LeaseTaskRequest,
-    ApproveApprovalRequestRequest, RejectApprovalRequestRequest,
-};
 
-
-use crate::client::{self, GrpcClients, SessionSummary, build_command};
-use crate::components::status::{StatusPanel, TaskInfo};
-use crate::components::command::CommandPanel;
+use crate::client::{self, build_command, GrpcClients, SessionSummary};
 use crate::components::approval::ApprovalPanel;
+use crate::components::command::CommandPanel;
 use crate::components::plan_tree::PlanTreePanel;
+use crate::components::status::{StatusPanel, TaskInfo};
 
-pub enum ActivePanel { Status, Command, Approval, PlanTree }
+pub enum ActivePanel {
+    Status,
+    Command,
+    Approval,
+    PlanTree,
+}
 
 pub struct App {
     pub status: StatusPanel,
@@ -49,12 +51,18 @@ impl App {
     ) -> Self {
         let sessions = client::list_sessions(&workspace);
         let has_sessions = !sessions.is_empty();
-        let sid = sessions.first().map(|s| s.session_id).unwrap_or(Uuid::nil());
+        let sid = sessions
+            .first()
+            .map(|s| s.session_id)
+            .unwrap_or(Uuid::nil());
 
         let mut status = StatusPanel::new();
         if has_sessions {
             status.sessions = sessions.clone();
-            status.add_log(&format!("发现 {} 个活跃 Session，输入 session <序号> 切换", sessions.len()));
+            status.add_log(&format!(
+                "发现 {} 个活跃 Session，输入 session <序号> 切换",
+                sessions.len()
+            ));
         } else {
             status.add_log("无活跃 Session — 使用 openforce CLI 创建新任务");
         }
@@ -82,10 +90,7 @@ impl App {
     pub fn render(&mut self, f: &mut Frame) {
         let chunks = Layout::default()
             .direction(Direction::Vertical)
-            .constraints([
-                Constraint::Min(10),
-                Constraint::Length(10),
-            ])
+            .constraints([Constraint::Min(10), Constraint::Length(10)])
             .split(f.area());
 
         let main = Layout::default()
@@ -102,12 +107,16 @@ impl App {
         self.approval.render(f, main[2]);
         self.command.render(f, chunks[1]);
 
-        self.status.table_state.select(Some(self.status.selected_idx));
+        self.status
+            .table_state
+            .select(Some(self.status.selected_idx));
     }
 
     pub fn handle_event(&mut self, ev: Event) {
         if let Event::Key(key) = ev {
-            if key.kind == KeyEventKind::Release { return; }
+            if key.kind == KeyEventKind::Release {
+                return;
+            }
             match key.code {
                 KeyCode::Tab => self.cycle_panel(),
                 KeyCode::Up => self.move_selection(-1),
@@ -115,7 +124,9 @@ impl App {
                 KeyCode::Backspace => self.command.backspace(),
                 KeyCode::Enter => {
                     let cmd = self.command.submit();
-                    if !cmd.is_empty() { self.execute_command(&cmd); }
+                    if !cmd.is_empty() {
+                        self.execute_command(&cmd);
+                    }
                 }
                 KeyCode::Esc => self.command.clear(),
                 KeyCode::Char('q') => self.running = false,
@@ -141,13 +152,15 @@ impl App {
             ActivePanel::Status => {
                 let len = self.status.tasks.len() as i32;
                 if len > 0 {
-                    self.status.selected_idx = ((self.status.selected_idx as i32 + delta).rem_euclid(len)) as usize;
+                    self.status.selected_idx =
+                        ((self.status.selected_idx as i32 + delta).rem_euclid(len)) as usize;
                 }
             }
             ActivePanel::Approval => {
                 let len = self.approval.pending.len() as i32;
                 if len > 0 {
-                    self.approval.selected_idx = ((self.approval.selected_idx as i32 + delta).rem_euclid(len)) as usize;
+                    self.approval.selected_idx =
+                        ((self.approval.selected_idx as i32 + delta).rem_euclid(len)) as usize;
                 }
             }
             ActivePanel::PlanTree => {
@@ -170,7 +183,8 @@ impl App {
                         if n >= 1 && n <= self.sessions.len() {
                             let s = &self.sessions[n - 1];
                             self.session_id = s.session_id;
-                            self.status.add_log(&format!("切换到 Session {}: {}", n, s.goal));
+                            self.status
+                                .add_log(&format!("切换到 Session {}: {}", n, s.goal));
                             self.needs_connect = true;
                             self.trigger_refresh();
                             return;
@@ -185,9 +199,16 @@ impl App {
                 } else {
                     self.sessions = client::list_sessions(&self.workspace);
                     self.status.sessions = self.sessions.clone();
-                    self.status.add_log(&format!("共 {} 个 Session:", self.sessions.len()));
+                    self.status
+                        .add_log(&format!("共 {} 个 Session:", self.sessions.len()));
                     for (i, s) in self.sessions.iter().enumerate() {
-                        self.status.add_log(&format!("  {}. [{}] {} — phase={}", i+1, s.state, s.goal.chars().take(60).collect::<String>(), s.current_phase));
+                        self.status.add_log(&format!(
+                            "  {}. [{}] {} — phase={}",
+                            i + 1,
+                            s.state,
+                            s.goal.chars().take(60).collect::<String>(),
+                            s.current_phase
+                        ));
                     }
                 }
             }
@@ -209,39 +230,76 @@ impl App {
                 self.status.add_log(&format!("→ 提交计划: {desc}"));
             }
             _ => {
-                self.status.add_log(&format!("未知: {cmd} (可用: status|session|lease|cancel|plan|a批准|r拒绝)"));
+                self.status.add_log(&format!(
+                    "未知: {cmd} (可用: status|session|lease|cancel|plan|a批准|r拒绝)"
+                ));
             }
         }
     }
 
     fn approve_selected(&mut self) {
-        if let Some(a) = self.approval.pending.get(self.approval.selected_idx).cloned() {
+        if let Some(a) = self
+            .approval
+            .pending
+            .get(self.approval.selected_idx)
+            .cloned()
+        {
             self.pending_action = Some(format!("approve:{}", a.id));
-            self.status.add_log(&format!("→ 批准: {} (tool={})", &a.id[..12.min(a.id.len())], a.tool));
+            self.status.add_log(&format!(
+                "→ 批准: {} (tool={})",
+                &a.id[..12.min(a.id.len())],
+                a.tool
+            ));
         }
     }
 
     fn reject_selected(&mut self) {
-        if let Some(a) = self.approval.pending.get(self.approval.selected_idx).cloned() {
+        if let Some(a) = self
+            .approval
+            .pending
+            .get(self.approval.selected_idx)
+            .cloned()
+        {
             self.pending_action = Some(format!("reject:{}:manual reject", a.id));
-            self.status.add_log(&format!("→ 拒绝: {} (tool={})", &a.id[..12.min(a.id.len())], a.tool));
+            self.status.add_log(&format!(
+                "→ 拒绝: {} (tool={})",
+                &a.id[..12.min(a.id.len())],
+                a.tool
+            ));
         }
     }
 
-    pub fn has_pending_action(&self) -> bool { self.pending_action.is_some() }
+    pub fn has_pending_action(&self) -> bool {
+        self.pending_action.is_some()
+    }
 
     /// Execute the pending action via gRPC. Called from the async event loop.
     pub async fn execute_pending_action(&mut self) {
-        let action = match self.pending_action.take() { Some(a) => a, None => return };
+        let action = match self.pending_action.take() {
+            Some(a) => a,
+            None => return,
+        };
         if self.session_id.is_nil() {
             self.status.add_log("错误: 未选择 Session");
             return;
         }
         // Ensure connected
         if self.clients.is_none() {
-            match GrpcClients::connect(&self.session_store_addr, &self.scheduler_addr, &self.project_tools_addr).await {
-                Ok(c) => { self.clients = Some(c); self.needs_connect = false; }
-                Err(e) => { self.status.add_log(&format!("gRPC 连接失败: {e}")); return; }
+            match GrpcClients::connect(
+                &self.session_store_addr,
+                &self.scheduler_addr,
+                &self.project_tools_addr,
+            )
+            .await
+            {
+                Ok(c) => {
+                    self.clients = Some(c);
+                    self.needs_connect = false;
+                }
+                Err(e) => {
+                    self.status.add_log(&format!("gRPC 连接失败: {e}"));
+                    return;
+                }
             }
         }
         let clients = self.clients.as_mut().unwrap();
@@ -252,12 +310,20 @@ impl App {
             "lease" => {
                 let task_id = parts.next().unwrap_or("");
                 let req = LeaseTaskRequest {
-                    command: Some(build_command("LeaseTask", &self.session_id, Some(task_id), vec![])),
+                    command: Some(build_command(
+                        "LeaseTask",
+                        &self.session_id,
+                        Some(task_id),
+                        vec![],
+                    )),
                 };
                 match clients.scheduler.lease_task(req).await {
                     Ok(resp) => {
                         let r = resp.into_inner();
-                        self.status.add_log(&format!("✓ 租出成功: lease={:.12} fence={}", r.lease_id, r.fencing_token));
+                        self.status.add_log(&format!(
+                            "✓ 租出成功: lease={:.12} fence={}",
+                            r.lease_id, r.fencing_token
+                        ));
                         self.trigger_refresh();
                     }
                     Err(e) => self.status.add_log(&format!("✗ 租出失败: {e}")),
@@ -266,7 +332,12 @@ impl App {
             "cancel" => {
                 let task_id = parts.next().unwrap_or("");
                 let req = CancelTaskRequest {
-                    command: Some(build_command("CancelTask", &self.session_id, Some(task_id), vec![])),
+                    command: Some(build_command(
+                        "CancelTask",
+                        &self.session_id,
+                        Some(task_id),
+                        vec![],
+                    )),
                     task_id: task_id.to_string(),
                     reason: "TUI manual cancel".to_string(),
                 };
@@ -281,12 +352,20 @@ impl App {
             "plan" => {
                 let desc = parts.next().unwrap_or("");
                 let req = CompilePlanRequest {
-                    command: Some(build_command("CompilePlan", &self.session_id, None, desc.as_bytes().to_vec())),
+                    command: Some(build_command(
+                        "CompilePlan",
+                        &self.session_id,
+                        None,
+                        desc.as_bytes().to_vec(),
+                    )),
                 };
                 match clients.scheduler.compile_plan(req).await {
                     Ok(resp) => {
                         let r = resp.into_inner();
-                        self.status.add_log(&format!("✓ 计划提交: plan_v{} epoch#{}", r.plan_version, r.plan_epoch));
+                        self.status.add_log(&format!(
+                            "✓ 计划提交: plan_v{} epoch#{}",
+                            r.plan_version, r.plan_epoch
+                        ));
                         self.trigger_refresh();
                     }
                     Err(e) => self.status.add_log(&format!("✗ 计划失败: {e}")),
@@ -297,12 +376,16 @@ impl App {
                 let req = ApproveApprovalRequestRequest {
                     approval_request_id: approval_id.to_string(),
                     approver_id: "tui-operator".to_string(),
-                    approved_at: Some(prost_types::Timestamp { seconds: chrono::Utc::now().timestamp(), nanos: 0 }),
+                    approved_at: Some(prost_types::Timestamp {
+                        seconds: chrono::Utc::now().timestamp(),
+                        nanos: 0,
+                    }),
                     usage_limit: 1,
                 };
                 match clients.approval.approve_approval_request(req).await {
                     Ok(_) => {
-                        self.status.add_log(&format!("✓ 已批准: {:.12}", approval_id));
+                        self.status
+                            .add_log(&format!("✓ 已批准: {:.12}", approval_id));
                         self.approval.pending.retain(|a| a.id != approval_id);
                         self.trigger_refresh();
                     }
@@ -316,11 +399,15 @@ impl App {
                     approval_request_id: approval_id.to_string(),
                     approver_id: "tui-operator".to_string(),
                     reason: reason.to_string(),
-                    rejected_at: Some(prost_types::Timestamp { seconds: chrono::Utc::now().timestamp(), nanos: 0 }),
+                    rejected_at: Some(prost_types::Timestamp {
+                        seconds: chrono::Utc::now().timestamp(),
+                        nanos: 0,
+                    }),
                 };
                 match clients.approval.reject_approval_request(req).await {
                     Ok(_) => {
-                        self.status.add_log(&format!("✓ 已拒绝: {:.12}", approval_id));
+                        self.status
+                            .add_log(&format!("✓ 已拒绝: {:.12}", approval_id));
                         self.approval.pending.retain(|a| a.id != approval_id);
                         self.trigger_refresh();
                     }
@@ -351,8 +438,12 @@ impl App {
 
         if self.clients.is_none() || self.needs_connect {
             match GrpcClients::connect(
-                &self.session_store_addr, &self.scheduler_addr, &self.project_tools_addr,
-            ).await {
+                &self.session_store_addr,
+                &self.scheduler_addr,
+                &self.project_tools_addr,
+            )
+            .await
+            {
                 Ok(c) => {
                     self.clients = Some(c);
                     self.needs_connect = false;
@@ -380,14 +471,17 @@ impl App {
 
         match client::fetch_tasks(&mut clients.session_store, &self.session_id).await {
             Ok(tasks) => {
-                self.status.tasks = tasks.iter().map(|t| TaskInfo {
-                    task_id: t["task_id"].as_str().unwrap_or("?").to_string(),
-                    task_type: t["task_type"].as_str().unwrap_or("?").to_string(),
-                    state: t["state"].as_str().unwrap_or("?").to_string(),
-                    attempt: t["attempt"].as_i64().unwrap_or(0) as i32,
-                    fencing: t["fencing"].as_u64().unwrap_or(0),
-                    lease_id: t["lease_id"].as_str().unwrap_or("-").to_string(),
-                }).collect();
+                self.status.tasks = tasks
+                    .iter()
+                    .map(|t| TaskInfo {
+                        task_id: t["task_id"].as_str().unwrap_or("?").to_string(),
+                        task_type: t["task_type"].as_str().unwrap_or("?").to_string(),
+                        state: t["state"].as_str().unwrap_or("?").to_string(),
+                        attempt: t["attempt"].as_i64().unwrap_or(0) as i32,
+                        fencing: t["fencing"].as_u64().unwrap_or(0),
+                        lease_id: t["lease_id"].as_str().unwrap_or("-").to_string(),
+                    })
+                    .collect();
                 self.plan_tree.update_from_tasks(&self.status.tasks);
             }
             Err(e) => self.status.add_log(&format!("获取任务失败: {e}")),

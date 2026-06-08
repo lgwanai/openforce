@@ -1,34 +1,40 @@
+use sqlx::postgres::PgPoolOptions;
 use std::net::SocketAddr;
 use std::sync::Arc;
-use sqlx::postgres::PgPoolOptions;
 use tonic::transport::Server;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 use openforce_proto::swarmos::v1::{
-    project_tool_service_server::ProjectToolServiceServer,
     approval_service_server::ApprovalServiceServer,
+    project_tool_service_server::ProjectToolServiceServer,
 };
 
-mod server;
 mod approval_store;
+mod server;
 
-use server::{ProjectToolServiceImpl, ApprovalServiceImpl};
 use approval_store::ApprovalStore;
+use server::{ApprovalServiceImpl, ProjectToolServiceImpl};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::try_from_default_env()
-            .unwrap_or_else(|_| "project_tools=debug,info".into()))
+        .with(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| "project_tools=debug,info".into()),
+        )
         .with(tracing_subscriber::fmt::layer())
         .init();
 
     let database_url = std::env::var("DATABASE_URL")
         .unwrap_or_else(|_| "postgres://swarmos:swarmos@localhost:5432/swarmos".into());
     let grpc_addr: SocketAddr = std::env::var("GRPC_ADDR")
-        .unwrap_or_else(|_| "0.0.0.0:50053".into()).parse()?;
+        .unwrap_or_else(|_| "0.0.0.0:50053".into())
+        .parse()?;
 
-    let pool = PgPoolOptions::new().max_connections(20).connect(&database_url).await?;
+    let pool = PgPoolOptions::new()
+        .max_connections(20)
+        .connect(&database_url)
+        .await?;
 
     // Run migrations for approval tables
     sqlx::query(
@@ -43,8 +49,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
             expires_at TIMESTAMPTZ NOT NULL,
             resolved_at TIMESTAMPTZ, approved_by TEXT, rejected_by TEXT, rejected_reason TEXT
-        )"
-    ).execute(&pool).await?;
+        )",
+    )
+    .execute(&pool)
+    .await?;
 
     sqlx::query(
         "CREATE TABLE IF NOT EXISTS approval_tokens (
@@ -59,15 +67,19 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             issued_at TIMESTAMPTZ NOT NULL DEFAULT now(),
             expires_at TIMESTAMPTZ NOT NULL,
             approved_by TEXT NOT NULL, signature BYTEA NOT NULL
-        )"
-    ).execute(&pool).await?;
+        )",
+    )
+    .execute(&pool)
+    .await?;
 
     let approval_store = Arc::new(ApprovalStore::new(pool.clone()));
     let tool_service = ProjectToolServiceImpl { pool };
     let approval_service = ApprovalServiceImpl { approval_store };
 
     let (mut health_reporter, health_service) = tonic_health::server::health_reporter();
-    health_reporter.set_serving::<ProjectToolServiceServer<ProjectToolServiceImpl>>().await;
+    health_reporter
+        .set_serving::<ProjectToolServiceServer<ProjectToolServiceImpl>>()
+        .await;
 
     let reflection_service = tonic_reflection::server::Builder::configure()
         .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET)
@@ -79,7 +91,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .add_service(reflection_service)
         .add_service(ProjectToolServiceServer::new(tool_service))
         .add_service(ApprovalServiceServer::new(approval_service))
-        .serve(grpc_addr).await?;
+        .serve(grpc_addr)
+        .await?;
 
     Ok(())
 }

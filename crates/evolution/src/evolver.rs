@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 /// Evolver produces versioned candidates — never silently mutates production.
@@ -34,18 +34,34 @@ pub enum VersionStatus {
 pub struct Evolver;
 
 impl Evolver {
-    pub fn create_candidate(artifact_type: ArtifactType, current_version: u32, sha256: &str) -> ArtifactVersion {
+    pub fn create_candidate(
+        artifact_type: ArtifactType,
+        current_version: u32,
+        sha256: &str,
+    ) -> ArtifactVersion {
         ArtifactVersion {
-            artifact_id: Uuid::now_v7(), artifact_type, version: current_version + 1,
-            sha256: sha256.into(), status: VersionStatus::Candidate,
+            artifact_id: Uuid::now_v7(),
+            artifact_type,
+            version: current_version + 1,
+            sha256: sha256.into(),
+            status: VersionStatus::Candidate,
         }
     }
 
-    pub fn promote(candidate: &mut ArtifactVersion) { candidate.status = VersionStatus::Promoted; }
-    pub fn freeze(candidate: &mut ArtifactVersion) { candidate.status = VersionStatus::Frozen; }
-    pub fn rollback(candidate: &mut ArtifactVersion) { candidate.status = VersionStatus::RolledBack; }
+    pub fn promote(candidate: &mut ArtifactVersion) {
+        candidate.status = VersionStatus::Promoted;
+    }
+    pub fn freeze(candidate: &mut ArtifactVersion) {
+        candidate.status = VersionStatus::Frozen;
+    }
+    pub fn rollback(candidate: &mut ArtifactVersion) {
+        candidate.status = VersionStatus::RolledBack;
+    }
 
     pub fn is_safe_to_use(status: &VersionStatus) -> bool {
-        matches!(status, VersionStatus::Promoted | VersionStatus::CanaryActive)
+        matches!(
+            status,
+            VersionStatus::Promoted | VersionStatus::CanaryActive
+        )
     }
 }

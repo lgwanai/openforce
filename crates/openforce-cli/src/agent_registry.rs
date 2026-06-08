@@ -1,7 +1,7 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};
-use serde::{Deserialize, Serialize};
 
 // ── Agent Profile ──
 
@@ -66,17 +66,20 @@ impl AgentRegistry {
             };
 
             let (frontmatter, body) = parse_frontmatter(&content);
-            let domain = path.file_name()
+            let domain = path
+                .file_name()
                 .and_then(|n| n.to_str())
                 .map(|n| n.split('_').next().unwrap_or("unknown"))
                 .unwrap_or("unknown")
                 .to_string();
 
-            let name = frontmatter.get("name")
+            let name = frontmatter
+                .get("name")
                 .cloned()
                 .unwrap_or_else(|| "Unknown Agent".into());
 
-            let description = frontmatter.get("description")
+            let description = frontmatter
+                .get("description")
                 .cloned()
                 .unwrap_or_else(|| "No description".into());
 
@@ -100,8 +103,16 @@ impl AgentRegistry {
             by_domain.entry(domain).or_default().push(idx);
         }
 
-        eprintln!("[AgentRegistry] {} agents in {} domains", agents.len(), by_domain.len());
-        Ok(Self { agents, by_domain, by_name })
+        eprintln!(
+            "[AgentRegistry] {} agents in {} domains",
+            agents.len(),
+            by_domain.len()
+        );
+        Ok(Self {
+            agents,
+            by_domain,
+            by_name,
+        })
     }
 
     // ── Progressive Disclosure: Level 1 — Metadata for Planner ──
@@ -125,7 +136,9 @@ impl AgentRegistry {
         for domain in domains {
             out.push_str(&format!("  <domain name=\"{domain}\">\n"));
 
-            let agent_indices = self.by_domain.get(domain)
+            let agent_indices = self
+                .by_domain
+                .get(domain)
                 .map(|v| v.as_slice())
                 .unwrap_or(&[]);
 
@@ -147,7 +160,9 @@ impl AgentRegistry {
         }
 
         out.push_str("</available_agents>\n");
-        out.push_str("\nSelect EXACT agent names from the catalog above. Do not invent or modify names.\n");
+        out.push_str(
+            "\nSelect EXACT agent names from the catalog above. Do not invent or modify names.\n",
+        );
         out
     }
 
@@ -161,7 +176,7 @@ impl AgentRegistry {
     }
 
     /// Load agent system prompt for Worker use — Level 2 disclosure.
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn load_for_worker(&self, name: &str) -> Option<String> {
         self.get(name).map(|a| a.system_prompt.clone())
     }
@@ -185,9 +200,10 @@ impl AgentRegistry {
     // ── Query APIs ──
 
     /// List all agents in a domain.
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn list_by_domain(&self, domain: &str) -> Vec<&AgentProfile> {
-        self.by_domain.get(domain)
+        self.by_domain
+            .get(domain)
             .map(|indices| indices.iter().map(|&i| &self.agents[i]).collect())
             .unwrap_or_default()
     }
@@ -200,9 +216,11 @@ impl AgentRegistry {
     }
 
     /// Count agents per domain (for display).
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn domain_counts(&self) -> Vec<(&str, usize)> {
-        let mut counts: Vec<(&str, usize)> = self.by_domain.iter()
+        let mut counts: Vec<(&str, usize)> = self
+            .by_domain
+            .iter()
             .map(|(k, v)| (k.as_str(), v.len()))
             .collect();
         counts.sort_by(|a, b| b.1.cmp(&a.1));
@@ -210,10 +228,11 @@ impl AgentRegistry {
     }
 
     /// Search agents by keywords (for interactive exploration, NOT for planner).
-#[allow(dead_code)]
+    #[allow(dead_code)]
     pub fn search(&self, query: &str) -> Vec<&AgentProfile> {
         let q = query.to_lowercase();
-        self.agents.iter()
+        self.agents
+            .iter()
             .filter(|a| {
                 a.name.to_lowercase().contains(&q)
                     || a.description.to_lowercase().contains(&q)
@@ -223,11 +242,19 @@ impl AgentRegistry {
     }
 
     pub fn empty() -> Self {
-        Self { agents: vec![], by_domain: HashMap::new(), by_name: HashMap::new() }
+        Self {
+            agents: vec![],
+            by_domain: HashMap::new(),
+            by_name: HashMap::new(),
+        }
     }
 
-    pub fn len(&self) -> usize { self.agents.len() }
-    pub fn is_empty(&self) -> bool { self.agents.is_empty() }
+    pub fn len(&self) -> usize {
+        self.agents.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.agents.is_empty()
+    }
 }
 
 // ── YAML Frontmatter Parser ──
@@ -239,9 +266,17 @@ fn parse_frontmatter(content: &str) -> (HashMap<String, String>, &str) {
         if let Some(end) = after_first.find("\n---") {
             let fm = &after_first[..end];
             parse_yaml_kv(fm, &mut map);
-            if end + 4 < after_first.len() { end + 5 } else { content.len() }
-        } else { 0 }
-    } else { 0 };
+            if end + 4 < after_first.len() {
+                end + 5
+            } else {
+                content.len()
+            }
+        } else {
+            0
+        }
+    } else {
+        0
+    };
     let body = &content[body_start..];
     (map, body.trim())
 }
@@ -249,7 +284,9 @@ fn parse_frontmatter(content: &str) -> (HashMap<String, String>, &str) {
 fn parse_yaml_kv(yaml: &str, map: &mut HashMap<String, String>) {
     for line in yaml.lines() {
         let trimmed = line.trim();
-        if trimmed.is_empty() || trimmed.starts_with('#') { continue; }
+        if trimmed.is_empty() || trimmed.starts_with('#') {
+            continue;
+        }
         if let Some(idx) = trimmed.find(':') {
             let key = trimmed[..idx].trim().to_string();
             let value = trimmed[idx + 1..].trim().to_string();
@@ -259,13 +296,19 @@ fn parse_yaml_kv(yaml: &str, map: &mut HashMap<String, String>) {
 }
 
 fn escape_xml(s: &str) -> String {
-    s.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;")
-        .replace('"', "&quot;").replace('\'', "&apos;")
+    s.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
+        .replace('\'', "&apos;")
 }
 
 fn truncate_str(s: &str, max_len: usize) -> String {
-    if s.len() <= max_len { s.to_string() }
-    else { format!("{}...", &s[..max_len]) }
+    if s.len() <= max_len {
+        s.to_string()
+    } else {
+        format!("{}...", &s[..max_len])
+    }
 }
 
 #[cfg(test)]

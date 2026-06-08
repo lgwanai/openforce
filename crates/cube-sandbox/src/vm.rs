@@ -29,7 +29,10 @@ pub struct VmManager {
 
 impl VmManager {
     pub fn new(firecracker_binary: &str) -> Self {
-        Self { firecracker_binary: firecracker_binary.into(), active: Arc::new(RwLock::new(HashMap::new())) }
+        Self {
+            firecracker_binary: firecracker_binary.into(),
+            active: Arc::new(RwLock::new(HashMap::new())),
+        }
     }
 
     pub async fn create(&self, config: VmConfig) -> SandboxResult<SandboxVM> {
@@ -38,23 +41,32 @@ impl VmManager {
         let _ = std::fs::remove_file(&socket_path);
 
         let child = Command::new(&self.firecracker_binary)
-            .arg("--api-sock").arg(&socket_path)
-            .arg("--log-path").arg(&log_path)
-            .arg("--level").arg("Info")
+            .arg("--api-sock")
+            .arg(&socket_path)
+            .arg("--log-path")
+            .arg(&log_path)
+            .arg("--level")
+            .arg("Info")
             .stdout(Stdio::null())
             .stderr(Stdio::null())
             .kill_on_drop(true)
             .spawn()
-            .map_err(|e| SandboxError::ApiError { detail: format!("spawn firecracker: {e}") })?;
+            .map_err(|e| SandboxError::ApiError {
+                detail: format!("spawn firecracker: {e}"),
+            })?;
 
         let pid = child.id().expect("child must have pid");
 
         // Wait for API socket
         let mut attempts = 0u32;
         loop {
-            if std::path::Path::new(&socket_path).exists() { break; }
+            if std::path::Path::new(&socket_path).exists() {
+                break;
+            }
             if attempts > 100 {
-                return Err(SandboxError::Timeout { detail: "firecracker socket timeout".into() });
+                return Err(SandboxError::Timeout {
+                    detail: "firecracker socket timeout".into(),
+                });
             }
             tokio::time::sleep(std::time::Duration::from_millis(50)).await;
             attempts += 1;
@@ -86,14 +98,20 @@ impl VmManager {
         let client = FirecrackerClient::new(&vm.socket_path);
         client.instance_start().await?;
         let mut active = self.active.write().await;
-        if let Some(v) = active.get_mut(vm_id) { v.state = VmState::Running; }
+        if let Some(v) = active.get_mut(vm_id) {
+            v.state = VmState::Running;
+        }
         info!("VM started: {vm_id}");
         Ok(VmState::Running)
     }
 
     pub async fn destroy(&self, vm_id: &str) -> SandboxResult<()> {
         let vm = self.get(vm_id).await?;
-        if let Some(pid) = vm.pid { unsafe { libc::kill(pid as i32, libc::SIGTERM); } }
+        if let Some(pid) = vm.pid {
+            unsafe {
+                libc::kill(pid as i32, libc::SIGTERM);
+            }
+        }
         let _ = std::fs::remove_file(&vm.socket_path);
         self.active.write().await.remove(vm_id);
         info!("VM destroyed: {vm_id}");
@@ -101,8 +119,14 @@ impl VmManager {
     }
 
     pub async fn get(&self, vm_id: &str) -> SandboxResult<SandboxVM> {
-        self.active.read().await.get(vm_id).cloned()
-            .ok_or_else(|| SandboxError::VmNotFound { vm_id: vm_id.into() })
+        self.active
+            .read()
+            .await
+            .get(vm_id)
+            .cloned()
+            .ok_or_else(|| SandboxError::VmNotFound {
+                vm_id: vm_id.into(),
+            })
     }
 
     pub async fn list(&self) -> Vec<SandboxVM> {

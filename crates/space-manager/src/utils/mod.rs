@@ -6,5 +6,5 @@
 //! logging, metrics, SLO tracking).
 
 pub mod fs;
-pub mod str;
 pub mod observability;
+pub mod str;

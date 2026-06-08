@@ -19,7 +19,10 @@ pub enum SandboxError {
     #[error("snapshot error: {detail}")]
     SnapshotError { detail: String },
     #[error("io error: {source}")]
-    IoError { #[from] source: std::io::Error },
+    IoError {
+        #[from]
+        source: std::io::Error,
+    },
     #[error("timeout: {detail}")]
     Timeout { detail: String },
 }
